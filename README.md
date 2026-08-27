@@ -19,8 +19,8 @@ em `POLITICA.md`.
 
 **Alberto.** Dobra o trabalho sobre si mesmo, em quatro níveis: formal, numérica,
 categorial e textual. Serve em qualquer momento, porque não depende de haver
-argumento pronto. Programas acham os candidatos em segundos, e a leitura julga
-cada um, porque nenhum programa distingue mudança declarada de deslize nem
+argumento pronto. Programas levantam as suspeitas em segundos, e a leitura julga
+cada uma, porque nenhum programa distingue mudança declarada de deslize nem
 categoria bem usada de categoria inconsistente. **Confere consistência, e só:**
 o nome não avisa isso, e por isso está dito aqui.
 
