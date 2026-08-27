@@ -2,7 +2,7 @@
 
 A versão rápida e barata, para rodar em plano gratuito. O ATA completo continua sendo outra coisa.
 
-**O nome é a ressalva.** "Analisador" faria o estudante pensar que a dissertação foi analisada. "Analisador de consistência" diz o que foi conferido e, ao dizer, diz o que não foi. Isto não é detalhe de redação: medimos em 14/08 que ressalva global é ignorada e que registro por item não é, e o nome é o registro que ninguém pula.
+**O nome é a ressalva.** "Analisador" faria o estudante pensar que a dissertação foi analisada. "Alberto" diz o que foi conferido e, ao dizer, diz o que não foi. Isto não é detalhe de redação: medimos em 14/08 que ressalva global é ignorada e que registro por item não é, e o nome é o registro que ninguém pula.
 
 ---
 

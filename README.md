@@ -4,9 +4,10 @@ Ferramentas de leitura automática de trabalhos acadêmicos, para quem orienta.
 Desenvolvidas por Alexandre Araújo Costa, Faculdade de Direito da UnB, com
 assistência do Claude Opus em Claude Code.
 
-O assistente se chama **Luis**, em homenagem a Luis Alberto Warat. Durante quase
-uma década ele desconstruía os rascunhos do autor e apontava o rumo de
-construções mais robustas, que é o que estas ferramentas tentam fazer.
+Os dois assistentes se chamam **Alberto** e **Luis**, que juntos são o nome de
+Luis Alberto Warat. Durante quase uma década ele desconstruía os rascunhos do
+autor e apontava o rumo de construções mais robustas, que é o que estas
+ferramentas tentam fazer.
 
 Este repositório traz **a maquinaria, e nunca o material**. Não há aqui trabalho
 de estudante, relatório sobre pessoa nomeada nem extração de texto de terceiro.
@@ -16,10 +17,12 @@ em `POLITICA.md`.
 
 ## As três ferramentas
 
-**Analisador de consistência.** Confere o trabalho contra ele mesmo, em quatro
-níveis: formal, numérica, categorial e textual. Serve em qualquer momento, porque
-dobra o trabalho sobre si mesmo e não depende de haver argumento pronto. A metade
-mecânica é programa e não custa nada; a metade que julga os candidatos é leitura.
+**Alberto.** Dobra o trabalho sobre si mesmo, em quatro níveis: formal, numérica,
+categorial e textual. Serve em qualquer momento, porque não depende de haver
+argumento pronto. Programas acham os candidatos em segundos, e a leitura julga
+cada um, porque nenhum programa distingue mudança declarada de deslize nem
+categoria bem usada de categoria inconsistente. **Confere consistência, e só:**
+o nome não avisa isso, e por isso está dito aqui.
 
 **Luis.** A leitura que julga o argumento, em quatro passos: consistência, a
 cadeia do marco e do método, o cotejo adversarial de cada apontamento, e o
