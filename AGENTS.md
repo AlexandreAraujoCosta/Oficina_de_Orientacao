@@ -39,6 +39,13 @@ Se o seletor de modelos oferecer Claude Opus, é ele. Sonnet funciona e rende
 menos, na proporção acima. Qualquer outro é uso não testado, e o relatório deve
 dizer no cabeçalho com que modelo foi produzido.
 
+**Evite o modo automático de escolha de modelo.** Modelo escolhido pelo serviço é
+modelo desconhecido, e relatório de modelo desconhecido não se compara com nenhum
+outro, nem com o mesmo trabalho na semana passada. Para esta oficina, isso é pior
+que um modelo reconhecidamente menor: ali ao menos se sabe o que esperar. Se a sua
+assinatura só oferecer o modo automático, diga isso no cabeçalho do relatório em
+lugar do nome do modelo.
+
 **Sobre consumo:** o Alberto cabe folgado em qualquer plano, porque os programas
 não usam modelo nenhum e a leitura julga algumas dezenas de trechos já
 localizados. A cadeia completa do Luis, não: são cerca de 560 mil tokens numa
