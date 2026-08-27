@@ -1,0 +1,25 @@
+# Este repositório traz a maquinaria, e nunca o material.
+# O que fica de fora é trabalho de terceiro, e a política está em POLITICA.md.
+
+# Trabalhos e o que deles se extrai
+*.docx
+*.doc
+*.odt
+*.pdf
+extracao/
+relatorios/
+corpus/
+paginas-*/
+tmp-*/
+
+# Rastro de sessão
+*.bak
+*.bak-*
+*.orig
+__pycache__/
+*.py[cod]
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini

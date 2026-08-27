@@ -1,0 +1,87 @@
+% Template pandoc, tema classico: margens normais, itens do relatorio em nota de
+% rodape. Compila com xelatex.
+%
+% E a alternativa segura ao tema Tufte. Com muitos paragrafos citados seguidos,
+% ou com varios itens por paragrafo, a nota de margem colide e o Tufte perde; a
+% nota de rodape sempre cabe. Perde-se a leitura lado a lado e ganha-se robustez.
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{portuguese}
+
+\usepackage{geometry}
+\geometry{a4paper, top=2.6cm, bottom=2.4cm, left=2.4cm, right=2.4cm}
+
+\usepackage{xcolor}
+\definecolor{unbAzul}{HTML}{003366}
+\definecolor{unbVerde}{HTML}{006633}
+\definecolor{margemCor}{HTML}{55524D}
+\definecolor{realce}{HTML}{33477E}
+
+\usepackage{titlesec}
+\titleformat{\section}{\color{unbAzul}\bfseries\Large}{}{0pt}{}
+\titleformat{\subsection}{\color{unbAzul}\bfseries\large}{}{0pt}{}
+\titleformat{\subsubsection}{\color{unbAzul!85!black}\bfseries\normalsize}{}{0pt}{}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{margemCor}$if(title)$$title$$endif$}
+\fancyfoot[C]{\footnotesize\color{margemCor}\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\headrule}{\vskip2pt{\color{unbVerde}\hrule height 0.8pt}}
+
+\usepackage{longtable,booktabs,array}
+% calc define o \real das larguras de coluna que o pandoc emite para
+% tabela de markdown. Sem ele o xelatex para em Missing number no
+% primeiro \begin{longtable}. So apareceu em 23/08, no primeiro
+% relatorio com tabela no corpo.
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=unbAzul, urlcolor=unbAzul,
+            pdftitle={$if(title)$$title$$endif$}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 2pt}
+
+% A citacao inserida e material de consulta, e nao de leitura corrida: quem
+% confere um apontamento olha o trecho e volta. Compo-la no corpo do texto
+% dobra a espessura do documento sem servir a ninguem. Mas o aperto tem
+% limite: com parsep de 2pt os paragrafos citados corriam juntos, e a
+% economia de papel nao paga a perda de legibilidade. Margem dos dois lados
+% porque o corpo menor alonga a linha, e linha longa em corpo pequeno e o
+% pior dos dois mundos.
+\renewenvironment{quote}
+  {\begin{list}{}{\leftmargin=2.2em\rightmargin=2.2em\topsep=7pt\partopsep=0pt%
+                  \parsep=6pt\listparindent=0pt\itemindent=0pt}%
+   \item\relax\small\linespread{0.95}\selectfont}
+  {\end{list}}
+\usepackage{setspace}
+\onehalfspacing
+
+% No tema classico o localizador fica visivel no corpo, porque sem ele o leitor
+% perderia a referencia; os itens que o citam vao para o rodape.
+\newcommand{\citado}[2]{{\bfseries\color{realce}#1}\footnote{Citado por: #2}\quad}
+\newcommand{\numero}[1]{{\bfseries\color{margemCor}#1}\quad}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+
+$if(title)$
+{\color{unbAzul}\bfseries\LARGE $title$\par}
+\vspace{4pt}
+{\color{unbVerde}\hrule height 1pt}
+\vspace{14pt}
+$endif$
+
+$body$
+
+\end{document}

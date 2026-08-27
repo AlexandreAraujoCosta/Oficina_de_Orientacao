@@ -1,0 +1,538 @@
+<title>Pré-banca: cinco leituras independentes</title>
+
+<style>
+  :root {
+    --paper:      #eef0ef;
+    --paper-sunk: #e4e7e5;
+    --ink:        #141c24;
+    --ink-soft:   #46515c;
+    --ink-faint:  #7c868f;
+    --rule:       #c9cfce;
+    --rule-firm:  #a8b1b0;
+    --correcao:   #a32b23;
+    --medida:     #3e6b7a;
+    --conforme:   #4a7a52;
+    --serif: Constantia, Cambria, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --sans:  "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono:  "Cascadia Mono", Consolas, "SF Mono", ui-monospace, Menlo, monospace;
+    --measure: 68ch;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#10161b; --paper-sunk:#171f26; --ink:#e3e8ea; --ink-soft:#9daab1;
+      --ink-faint:#6b767d; --rule:#2a343c; --rule-firm:#3c4850;
+      --correcao:#e07a6e; --medida:#74aabb; --conforme:#7fb287; }
+  }
+  :root[data-theme="dark"] { --paper:#10161b; --paper-sunk:#171f26; --ink:#e3e8ea; --ink-soft:#9daab1;
+    --ink-faint:#6b767d; --rule:#2a343c; --rule-firm:#3c4850;
+    --correcao:#e07a6e; --medida:#74aabb; --conforme:#7fb287; }
+  :root[data-theme="light"] { --paper:#eef0ef; --paper-sunk:#e4e7e5; --ink:#141c24; --ink-soft:#46515c;
+    --ink-faint:#7c868f; --rule:#c9cfce; --rule-firm:#a8b1b0;
+    --correcao:#a32b23; --medida:#3e6b7a; --conforme:#4a7a52; }
+
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans);
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
+
+  header.top { border-bottom: 2px solid var(--ink); padding-bottom: 1.3rem; margin-bottom: 2rem; }
+  .eyebrow { font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--medida); margin-bottom:.7rem; }
+  h1 { font-family:var(--serif); font-size:clamp(1.9rem,4vw,2.6rem); font-weight:600; line-height:1.12;
+    letter-spacing:-.015em; margin:0 0 .5rem; text-wrap:balance; }
+  header.top p { margin:0 0 .8rem; max-width:var(--measure); color:var(--ink-soft); }
+  header.top p.convite { font-family:var(--serif); font-size:1.15rem; color:var(--ink); line-height:1.5; }
+  .quando { font-family:var(--mono); font-size:.74rem; letter-spacing:.04em; color:var(--correcao); margin:0; }
+
+  h2 { font-family:var(--serif); font-size:1.5rem; font-weight:600; margin:0 0 .7rem; }
+  h3 { font-family:var(--mono); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-faint); font-weight:600; margin:2rem 0 .7rem; }
+  p { max-width: var(--measure); }
+
+  section.regras, section.calibragem { border-bottom: 1px solid var(--rule); padding-bottom: 1.6rem; margin-bottom: 2.2rem; }
+  section.calibragem h2 { font-family:var(--serif); font-size:1.5rem; font-weight:600; margin:0 0 .7rem; }
+  section.calibragem .chamada { font-family:var(--serif); font-size:1.1rem; color:var(--ink); max-width:var(--measure); margin:0 0 1rem; }
+  section.calibragem > p { color:var(--ink-soft); }
+  dl.horizontes { margin:1.4rem 0; }
+  dl.horizontes dt {
+    font-family:var(--mono); font-size:.75rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--medida); font-weight:600; margin-top:1rem; padding-top:.8rem; border-top:1px solid var(--rule);
+  }
+  dl.horizontes dt:first-child { border-top:0; padding-top:0; margin-top:0; }
+  dl.horizontes dd { margin:.3rem 0 0; color:var(--ink-soft); font-size:.95rem; max-width:var(--measure); }
+  dl.horizontes dd strong { color:var(--ink); }
+  ol.passos { margin:0; padding-left:1.3rem; max-width:var(--measure); }
+  ol.passos li { margin-bottom:.6rem; color:var(--ink-soft); }
+  ol.passos strong { color:var(--ink); }
+  ol.passos li::marker { font-family:var(--mono); font-size:.85rem; color:var(--medida); }
+
+  .aviso { border-left:2px solid var(--correcao); padding-left:1rem; margin:1.4rem 0 0; max-width:var(--measure); }
+  ol.passos .aviso { margin:.7rem 0 .2rem; font-size:.93rem; }
+  .aviso strong { color: var(--ink); }
+
+  article.membro { border-top: 1px solid var(--rule); padding-top: 1.5rem; margin-top: 2rem; }
+  article.membro:first-of-type { border-top: 2px solid var(--ink); }
+  .cab { display:flex; align-items:baseline; gap:.8rem; flex-wrap:wrap; margin-bottom:.3rem; }
+  .cab .num { font-family:var(--mono); font-size:.78rem; color:var(--ink-faint); letter-spacing:.06em; }
+  .cab h2 { margin:0; }
+  .lente { font-family:var(--serif); font-style:italic; font-size:1.08rem; color:var(--ink);
+    border-left:2px solid var(--medida); padding-left:.9rem; margin:.6rem 0 .9rem; max-width:var(--measure); }
+  .escopo { display:grid; grid-template-columns:auto 1fr; gap:.35rem 1rem; margin:0 0 1.1rem; max-width:var(--measure); }
+  .escopo dt { font-family:var(--mono); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-faint); padding-top:.22rem; white-space:nowrap; }
+  .escopo dd { margin:0; font-size:.93rem; color:var(--ink-soft); }
+
+  .barra { display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+    border:1px solid var(--rule-firm); border-bottom:0; padding:.7rem .9rem; background:var(--paper-sunk); }
+  .barra .lbl { flex:1; min-width:12rem; font-family:var(--mono); font-size:.7rem;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
+  button.copiar { font-family:var(--sans); font-size:.86rem; font-weight:600;
+    background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+    padding:.42rem 1rem; cursor:pointer; white-space:nowrap; }
+  button.copiar[data-estado="feito"] { background:var(--conforme); border-color:var(--conforme); }
+  textarea.prompt { display:block; width:100%; height:15rem; resize:vertical;
+    border:1px solid var(--rule-firm); background:var(--paper-sunk); color:var(--ink);
+    font-family:var(--mono); font-size:.78rem; line-height:1.6; padding:.9rem; white-space:pre-wrap; }
+
+  .cab .so { font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--correcao); border:1px solid currentColor; padding:.1rem .4rem; }
+  article.membro.tese { border-top-style: dashed; }
+  section.variantes { border-top:1px solid var(--rule); margin-top:2.2rem; padding-top:1.5rem; }
+  section.variantes h2 { font-family:var(--serif); font-size:1.5rem; font-weight:600; margin:0 0 .7rem; }
+  section.variantes > p { color:var(--ink-soft); }
+  textarea.prompt.curta { height:9rem; }
+  section.variantes .barra { margin-top:1.3rem; }
+
+  article.sintese { border-top: 2px solid var(--ink); margin-top: 3rem; padding-top: 1.6rem; }
+  article.sintese .lente { border-left-color: var(--correcao); }
+
+  footer.colofao { margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--rule);
+    font-size:.86rem; color:var(--ink-faint); max-width:var(--measure); }
+  footer.colofao p { margin:0 0 .6rem; max-width:none; }
+  footer.colofao strong { color:var(--ink-soft); font-weight:600; }
+  header.top .experimental {
+    margin:1.1rem 0 0; max-width:var(--measure);
+    border-left:2px solid var(--conforme); padding-left:.9rem;
+    font-size:.9rem; color:var(--ink-soft);
+  }
+  .experimental p { margin:0 0 .55rem; max-width:none; }
+  .experimental p:last-child { margin-bottom:0; }
+  a { color:var(--medida); text-decoration:underline; text-underline-offset:2px; }
+  a:hover, a:focus-visible { color:var(--ink); }
+  :focus-visible { outline:2px solid var(--medida); outline-offset:2px; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Análise de dissertações e teses · leitura em painel</div>
+    <h1>Pré-banca</h1>
+    <p class="convite">Como uma banca responderia ao seu trabalho, no estágio em que ele está hoje?</p>
+    <p>Cinco leituras independentes examinam o mesmo texto, cada uma com uma pergunta única e um método próprio, e uma sexta reúne o que elas viram. O que sai não é uma nota: são as perguntas que você vai ouvir, a melhor resposta que o seu texto hoje permite dar, e o mapa do que ainda não sustenta pergunta nenhuma. Serve para o que uma leitura só não alcança, porque cada uma enxerga o que as outras deixam passar, e a divergência entre elas é informação.</p>
+    <p class="quando">Para a qualificação e a véspera do depósito. Não para cada versão.</p>
+    <div class="experimental">
+      <p>Estes assistentes foram desenvolvidos pelo Prof. Alexandre Araújo Costa prioritariamente para uso dos seus estudantes e orientandos, na graduação e na pós-graduação da Faculdade de Direito da UnB. A princípio podem servir a outras abordagens, especialmente no direito e nas demais ciências sociais, mas só testes mais amplos permitirão medir a qualidade das respostas, nessas áreas e fora delas.</p>
+      <p>Por isso a abordagem é experimental, está em fase de testes, e o retorno importa. Quem quiser relatar um resultado, apontar um erro ou sugerir um ajuste pode usar <a href="https://forms.gle/BHhKZSQiRq1JUgsE8">este formulário</a>, feito para colher resultados e comentários.</p>
+    </div>
+  </header>
+
+  <section class="calibragem">
+    <h2>Antes de ler o que sair daqui</h2>
+    <p class="chamada">Ninguém espera que um trabalho feche todas as pontas. Pesquisa tem prazo, e chega uma hora em que defender vale mais do que polir. Um ótimo trabalho tem pontas soltas, e o que distingue um bom autor não é não tê-las: é saber quais deixou e por quê.</p>
+
+    <p><strong>Esta leitura é mais minuciosa e mais rígida do que qualquer examinador vai ser, e isso é deliberado.</strong> Ela existe para encontrar tudo o que pode melhorar, e não para prever o que vai acontecer na sessão. São coisas diferentes, e confundi-las produz susto sem informação. Um examinador real lê para entender, tem tempo contado, escolhe dois ou três pontos, vai fundo neles e acredita nos seus números até algo destoar. As perguntas dele existem para você enxergar limites e corrigir o que dá na janela entre a defesa e o depósito, e não para derrubar o trabalho: quem tem uma contribuição, ainda que modesta, é aprovado ou aprovado com modificações.</p>
+
+    <p>Vale dizer isto porque quem chega aqui está quase sempre no fim de um processo longo, e ler trinta apontamentos nesse estado assusta mais do que informa. Por isso a lista vem ordenada por prazo, e vem com o que é melhor deixar de lado. <strong>Comece pelo plano, não pela lista.</strong></p>
+
+    <p>Vale também saber como se lê uma banca. <strong>Examinador só pergunta duramente a quem ele acha que pode responder</strong>: apertar custa tempo e expõe quem pergunta, e ninguém gasta uma rodada nisso com um trabalho que já desenganou. A sessão difícil é a que reconhece que há alguém do outro lado capaz de sustentar o que escreveu. O sinal ruim é o inverso, e quase ninguém o lê assim: o examinador que se declara satisfeito sem ter apertado em lugar nenhum e sem apontar nada específico do texto.</p>
+
+    <p>E uma palavra sobre a ansiedade, porque ela é parte do quadro e fingir que não é não ajuda ninguém. Quem está a poucas semanas de depositar costuma estar exausto, e nesse estado uma lista longa se lê como sentença. Três coisas ajudam mais do que qualquer consolo. A primeira é que <strong>a defesa não é o último momento</strong>: há uma janela entre ela e o depósito final, e muita gente chega à sessão acreditando que tudo precisa estar resolvido no dia. A segunda é que o desgaste vem menos do conserto e mais da dúvida sobre o que se deve consertar, e é por isso que a lista do que esquecer vale tanto quanto a do que fazer. A terceira é que este relatório abre pelo que se sustenta, e isso não é cortesia de abertura: é a parte que você vai defender, e convém saber qual é antes de olhar o resto.</p>
+    <p>Doutorado fecha melhor que mestrado, e a razão é aritmética: teve o dobro do tempo. A régua muda com o grau, e não com a severidade de quem lê.</p>
+    <p class="aviso"><strong>Esta análise não é realista, e não deve ser.</strong> A banca real lê para entender, não para destruir, e as perguntas dela existem para que o autor enxergue limites, corte o que sobra e corrija o que dá, na janela de trinta dias entre a defesa e o depósito. Trabalho com contribuição, ainda que modesta, é aprovado ou aprovado com modificações. Reformulação fica para o que não se repara nesse prazo, e reprovação é raríssima. Aqui é diferente de propósito: esta leitura aponta tudo o que pode melhorar, sem filtrar pelo que é exigível, porque a escolha do que fazer é de quem escreve e de quem orienta, e essa escolha só se faz vendo o conjunto. Um relatório duro aqui não é prognóstico de sessão dura lá.</p>
+
+    <p class="aviso"><strong>E há uma assimetria entre este instrumento e quem vai avaliar de verdade.</strong> Ele refaz todas as contas, confere cada denominador, persegue cada referência e não cansa. Um examinador humano se concentra em poucos tópicos, vai fundo neles, e em geral acredita nos números do candidato, a menos que perceba alguma incongruência que o faça desconfiar. Cinco leituras especializadas produzem uma lista que nenhuma banca produziria. Trinta apontamentos aqui não são trinta perguntas na defesa.</p>
+    <p>Use o que sair como <strong>mapa de exposição</strong>, e não como lista de dívidas. Ele existe porque você não sabe quais dois tópicos o seu examinador vai escolher. Por isso a síntese termina com quatro planos, e o que muda entre eles não é a quantidade de trabalho: é o tipo.</p>
+
+    <dl class="horizontes">
+      <dt>Uma semana</dt>
+      <dd>Só o que um leitor tropeça no primeiro contato, mais o que já está escrito e apenas precisa ser posto no lugar. Peça faltando, resumo, legenda que contradiz o texto, número que aparece diferente em dois pontos, termo do título nunca definido. Nada de recálculo que possa mudar uma conclusão. Para o resto, prepare a resposta oral: reconhecer um limite e devolvê-lo à agenda futura é resposta legítima, e soa melhor do que a maioria imagina.</dd>
+
+      <dt>Um mês</dt>
+      <dd>O acima, mais os recálculos que usam dado já existente na base, como denominador trocado e taxa-base, e os parágrafos que faltam e não dependem de medição nova. Cabe um corte estrutural, se ele já estiver identificado. Não cabe coleta.</dd>
+
+      <dt>Três meses</dt>
+      <dd>O acima, mais <strong>uma</strong> operação metodológica nova, e uma só: a verificação por amostra que falta, ou a estratificação que falta. Três meses dão para fazer uma bem-feita e reescrever o que ela desarrumar, e não dão para duas. Cabe também a reorganização estrutural inteira.</dd>
+
+      <dt>Seis meses</dt>
+      <dd>O acima, mais o que muda o que o trabalho pode afirmar: a medida que a base permite e nunca foi feita, a tradução empírica do capítulo que ficou só argumentativo. Aqui o trabalho para de ser defendido e passa a ser melhorado.</dd>
+
+      <dt>Mais que isso</dt>
+      <dd>Não é hora de perguntar sobre resultado de banca. É hora de trabalhar, e voltar quando o horizonte for real.</dd>
+    </dl>
+
+    <p class="aviso"><strong>Um critério atravessa os quatro, e é o que torna a escolha não trivial: algumas correções são tudo ou nada.</strong> Recalcular um número que sustenta uma conclusão obriga a reescrever tudo o que vem depois dele, e quem não tem tempo para a reescrita não deve começar o recálculo: fica pior do que estava, com o texto afirmando uma coisa e o apêndice outra. Antes de puxar qualquer fio, pergunte quanto do trabalho vem junto.</p>
+
+    <p>Decidir o que não fazer no tempo disponível é parte do trabalho, e não é falha.</p>
+  </section>
+
+  <section class="regras">
+    <h2>Como rodar</h2>
+    <ol class="passos">
+      <li>
+        <strong>Uma sessão nova para cada membro, sem exceção.</strong> O que está em jogo é impedir que o conhecimento de um interfira no do outro. Dentro de uma mesma conversa, o que o primeiro membro escreveu passa a fazer parte do que o segundo lê, e ele deixa de examinar o trabalho para reagir ao colega: confirma, evita repetir, defere. A independência é o mecanismo inteiro do painel, e é ela que faz cinco leituras valerem mais do que cinco vezes a mesma leitura.
+        <p class="aviso"><strong>Com agentes independentes é melhor. Com chat funciona.</strong> Se você tiver como disparar cinco agentes que não compartilham contexto entre si, prefira: o isolamento passa a ser garantido pela construção em vez de depender da sua disciplina, as cinco leituras correm em paralelo, os textos chegam inteiros sem transporte manual, e a ficha de proveniência descrita na síntese sai de graça, porque quem disparou já sabe que capacidades cada leitura tinha e em que ordem chegaram.</p>
+        <p class="aviso">No chat a diferença é menor do que parece, e é sobretudo de comodidade: o requisito real não é a ferramenta, é o isolamento, e uma aba nova entrega isolamento igual. O que você perde é tempo e margem de erro, porque a disciplina passa a ser sua. Os dois lugares onde se escorrega são conhecidos: resumir a resposta de um membro em vez de guardá-la inteira, o que apaga o trecho citado que é a prova do achado, e adiantar a síntese antes de todas terem chegado. Evitados esses dois, o resultado é praticamente o mesmo.</p>
+      </li>
+      <li><strong>Anexe o trabalho e cole o prompt. Nada além disso.</strong> Não explique o que você quis dizer, não diga qual é a tese, não conte o que já foi corrigido. O valor da leitura vem da ignorância, e cada frase de contexto que você acrescenta é justamente o contexto que a banca não terá.</li>
+      <li>
+        <strong>Recolha as cinco respostas inteiras, sem editar e sem resumir.</strong> Resumo apaga o trecho citado, que é a prova de cada achado, e achado sem prova não sobrevive à síntese.
+        <p class="aviso"><strong>Com agentes, o cuidado muda de lugar.</strong> Peça que cada um grave a resposta completa em arquivo próprio, e recolha os arquivos. O que não serve é o relato que o orquestrador faz do que os agentes disseram: ele já é um resumo, feito por quem não leu o trabalho e não tem acesso às passagens citadas. Confira também se o seu ambiente não trunca retornos longos por padrão, porque a resposta cortada perde justamente o fim, onde ficam os achados de menor gravidade e o "fora da minha alçada".</p>
+      </li>
+      <li><strong>Rode a síntese por último</strong>, numa sexta sessão ou numa sexta chamada, recebendo as cinco respostas na íntegra. Só depois de ter todas: síntese parcial ancora no que já chegou e trata o que falta como se não existisse.</li>
+    </ol>
+  </section>
+
+  <article class="membro">
+    <div class="cab"><span class="num">Membro 01</span><h2>Desenho da pesquisa</h2></div>
+    <p class="lente">Este desenho é capaz de produzir a resposta que o trabalho afirma ter produzido?</p>
+    <dl class="escopo">
+      <dt>Olha</dt><dd>unidade de análise, recorte, seleção, confundidores, condição de refutação, distância entre o método declarado e o aplicado, repetibilidade</dd>
+      <dt>Ignora</dt><dd>redação, formatação, bibliografia, e o mérito substantivo das conclusões</dd>
+    </dl>
+    <div class="barra"><span class="lbl">Prompt · cole inteiro</span><button class="copiar" type="button" data-alvo="p1">Copiar</button></div>
+    <textarea class="prompt" id="p1" readonly spellcheck="false"></textarea>
+  </article>
+
+  <article class="membro">
+    <div class="cab"><span class="num">Membro 02</span><h2>Os números</h2></div>
+    <p class="lente">Cada número sustenta a frase a que está preso?</p>
+    <dl class="escopo">
+      <dt>Olha</dt><dd>aritmética, taxas-base, denominadores, propagação de erro, intervalos ausentes, o mesmo número em lugares diferentes, e a distância entre o que o dado mostra e o que a frase afirma</dd>
+      <dt>Ignora</dt><dd>tudo o que não tem número</dd>
+    </dl>
+    <div class="barra"><span class="lbl">Prompt · cole inteiro</span><button class="copiar" type="button" data-alvo="p2">Copiar</button></div>
+    <textarea class="prompt" id="p2" readonly spellcheck="false"></textarea>
+  </article>
+
+  <article class="membro">
+    <div class="cab"><span class="num">Membro 03</span><h2>O argumento</h2></div>
+    <p class="lente">A conclusão decorre do que foi demonstrado?</p>
+    <dl class="escopo">
+      <dt>Olha</dt><dd>conceitos usados em dois sentidos, termos centrais nunca definidos, demonstração circular, asserção sem antecedente, achado que não chega à conclusão, promessa de capítulo não cumprida</dd>
+      <dt>Ignora</dt><dd>números, formatação e bibliografia</dd>
+    </dl>
+    <div class="barra"><span class="lbl">Prompt · cole inteiro</span><button class="copiar" type="button" data-alvo="p3">Copiar</button></div>
+    <textarea class="prompt" id="p3" readonly spellcheck="false"></textarea>
+  </article>
+
+  <article class="membro">
+    <div class="cab"><span class="num">Membro 04</span><h2>O examinador hostil</h2></div>
+    <p class="lente">Qual é a única pergunta que derruba este trabalho?</p>
+    <dl class="escopo">
+      <dt>Olha</dt><dd>o ponto mais fraco de todo o trabalho, e só ele</dd>
+      <dt>Ignora</dt><dd>tudo o mais. Não produz lista, não faz inventário, não é revisor</dd>
+    </dl>
+    <div class="barra"><span class="lbl">Prompt · cole inteiro</span><button class="copiar" type="button" data-alvo="p4">Copiar</button></div>
+    <textarea class="prompt" id="p4" readonly spellcheck="false"></textarea>
+  </article>
+
+  <article class="membro">
+    <div class="cab"><span class="num">Membro 05</span><h2>A defesa</h2></div>
+    <p class="lente">Qual é o melhor caso que se pode fazer a favor deste trabalho, com o que está escrito nele?</p>
+    <dl class="escopo">
+      <dt>Olha</dt><dd>a contribuição efetiva, o que o trabalho sustenta e a literatura citada não sustentava, e o que ele precisaria para poder afirmar mais</dd>
+      <dt>Ignora</dt><dd>defeitos, salvo quando limitam o alcance do que se pode afirmar</dd>
+    </dl>
+    <p>Este é o membro que ninguém pensa em incluir, e é o que o autor mais precisa: sem ele, o painel produz cinco listas de problemas e nenhuma formulação da tese que o trabalho pode defender. A regra que o mantém honesto é uma só: argumentar do que está no texto, nunca do que poderia estar.</p>
+    <div class="barra"><span class="lbl">Prompt · cole inteiro</span><button class="copiar" type="button" data-alvo="p5">Copiar</button></div>
+    <textarea class="prompt" id="p5" readonly spellcheck="false"></textarea>
+  </article>
+
+  <article class="membro tese">
+    <div class="cab"><span class="num">Membro 06</span><h2>Originalidade</h2><span class="so">só para tese de doutorado</span></div>
+    <p class="lente">Qual é a tese, e de que tipo é a originalidade que ela alega?</p>
+    <dl class="escopo">
+      <dt>Olha</dt><dd>a proposição que o trabalho defende, o tipo de novidade alegada e o ônus de prova correspondente, a autonomia em relação ao referencial adotado, e se o conceito criado, havendo um, faz trabalho</dd>
+      <dt>Ignora</dt><dd>tudo o que as outras leituras já cobrem</dd>
+    </dl>
+    <p>Este membro não entra em dissertação de mestrado, e a razão não é indulgência: no mestrado a contribuição própria é um item entre outros, e na tese ela é o critério. Um doutorado que aplica competentemente um referencial existente é uma boa dissertação longa, e é essa distinção que esta leitura existe para fazer.</p>
+    <p><strong>O critério de originalidade que esta lente aplica é estreito e vale enunciar antes:</strong> uma tese não vale por mostrar melhor nem por agregar mais dados. Vale por mudar o modo como se vê alguma coisa, ainda que pontualmente. É mudança de lente, não de quantidade. Medir mais, medir com mais rigor ou cobrir um período maior são méritos reais e não são, sozinhos, originalidade de tese. A pergunta que decide é: depois de ler isto, o que se enxerga de outro jeito, que antes não se enxergava assim? Se a resposta for a mesma coisa com mais precisão, o trabalho é uma dissertação forte feita em escala de doutorado, e essa é a constatação mais útil que esta leitura pode entregar.</p>
+    <div class="barra"><span class="lbl">Prompt · cole inteiro</span><button class="copiar" type="button" data-alvo="p6">Copiar</button></div>
+    <textarea class="prompt" id="p6" readonly spellcheck="false"></textarea>
+  </article>
+
+  <section class="variantes" id="variantes">
+    <h2>Trocar um membro pela disciplina</h2>
+    <p>O membro 3, do argumento, pode ser rodado por uma lente disciplinar quando o trabalho pede. Não acrescente: substitua, porque cada membro novo multiplica o custo da síntese e, passado certo ponto, você está fundindo ruído.</p>
+    <p class="aviso"><strong>A regra que torna isso seguro.</strong> A persona disciplinar entra pela pergunta que a disciplina faz, nunca pela erudição que ela alegaria ter. "O que este texto está pressupondo?" é pergunta e opera sobre o que está escrito. "A doutrina majoritária sustenta que" é afirmação sobre o mundo, e é exatamente ali que um modelo inventa com fluência. Toda objeção da lente disciplinar precisa estar ancorada num trecho do trabalho: se ela não conseguir apontar a passagem, a objeção não entra.</p>
+    <p>Para usar, copie o prompt do membro 3 e substitua a lista numerada pelo bloco escolhido abaixo, mantendo o preâmbulo e as regras de escrita.</p>
+
+    <div class="barra"><span class="lbl">Lente dogmática</span><button class="copiar" type="button" data-alvo="v1">Copiar</button></div>
+    <textarea class="prompt curta" id="v1" readonly spellcheck="false"></textarea>
+
+    <div class="barra"><span class="lbl">Lente filosófica</span><button class="copiar" type="button" data-alvo="v2">Copiar</button></div>
+    <textarea class="prompt curta" id="v2" readonly spellcheck="false"></textarea>
+
+    <div class="barra"><span class="lbl">Lente da ciência política</span><button class="copiar" type="button" data-alvo="v3">Copiar</button></div>
+    <textarea class="prompt curta" id="v3" readonly spellcheck="false"></textarea>
+  </section>
+
+  <article class="sintese">
+    <div class="cab"><span class="num">Sexta sessão</span><h2>Síntese</h2></div>
+    <p class="lente">O que os cinco viram, o que só um viu, e onde eles discordam.</p>
+    <p>É aqui que o valor se concentra, e é a única etapa que não pode ser pulada. Um achado que apareceu em uma leitura entre cinco não vale menos que um achado unânime: com frequência vale mais, porque o unânime costuma ser o óbvio.</p>
+
+    <p class="aviso"><strong>Observação para quem rodou com agentes.</strong> Quem disparou as cinco leituras viu o processo, e o processo é informação que a síntese não tem. Vale entregar junto uma ficha curta de proveniência: que capacidades cada leitura tinha, sobretudo se alguma teve acesso à web; se elas foram de fato isoladas; em que ordem chegaram e quanto cada uma custou; e se existe relatório anterior sobre o mesmo trabalho. Sem isso a síntese erra em três lugares previsíveis. Convergência entre leituras só conta como sinal se elas estavam isoladas, e sem saber disso ela pode estar somando eco. Silêncio sobre referências não significa nada quando nenhuma leitura tinha web, e sem o aviso vira "conferido". E sem conhecer o relatório anterior, a síntese escreve um segundo relatório inteiro em vez do que mudou.</p>
+
+    <p class="aviso"><strong>E entregue isso como dado, não como parecer.</strong> Quem acompanhou o processo é o leitor mais ancorado disponível: já tem posição formada e chega com pauta. O ganho dele é de ponderação, porque sabe quem viu o quê e com que instrumento, e não de julgamento. Ficha de proveniência ao lado dos cinco textos, e a leitura de mérito continua com quem não participou.</p>
+    <div class="barra"><span class="lbl">Prompt · cole inteiro, com as cinco respostas</span><button class="copiar" type="button" data-alvo="ps">Copiar</button></div>
+    <textarea class="prompt" id="ps" readonly spellcheck="false"></textarea>
+  </article>
+
+  <footer class="colofao">
+    <p><strong>Concepção, critérios e prompts:</strong> Prof. Alexandre Araújo Costa, Universidade de Brasília. Desenvolvido com apoio do modelo Opus, da Anthropic, no Claude Code.</p>
+    Nenhum destes prompts atribui competência de domínio a quem lê. Cada membro é definido por um método e uma pergunta, e não por um personagem, porque persona de especialista convida à afirmação confiante sobre fatos que estão fora do texto. Quando um deles precisar de uma informação que o trabalho não traz, a instrução é dizer que não sabe.
+  </footer>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const COMUM = `Você não sabe nada sobre este trabalho além do que está no arquivo anexado. Não pergunte ao autor o que ele quis dizer, e não use nada que não esteja escrito: a sua utilidade vem justamente de ler como lerá quem nunca acompanhou a pesquisa.
+
+Regras que valem para tudo o que você escrever:
+- Todo apontamento traz a localização (seção, e o número do parágrafo se houver) e o trecho citado entre aspas, transcrito literalmente, com a pontuação e os erros que estiverem lá. Nunca corrija em silêncio: trecho retocado não serve de prova.
+- Quando não conseguir verificar alguma coisa, escreva que não conseguiu, em vez de supor.
+- Nunca invente referência, número, citação ou fato sobre a área. Se precisar de informação que o trabalho não traz, diga que não sabe.
+- Fique dentro da sua alçada. Se notar algo relevante fora dela, registre em uma linha, no fim, sob o título "fora da minha alçada", sem desenvolver. Outra pessoa está olhando para isso.
+- Escreva direto, sem elogio protocolar de abertura e sem crueldade. Evite travessão, conectivo de arremate ("além disso", "em suma", "por fim"), tríade por reflexo e negrito decorativo.
+- Máximo de 900 palavras.
+
+`;
+
+  const P = {
+    p1: COMUM + `A SUA PERGUNTA, E VOCÊ SÓ RESPONDE A ELA: este desenho de pesquisa é capaz de produzir a resposta que o trabalho afirma ter produzido?
+
+Examine, nesta ordem:
+
+1. O problema. É pergunta específica e investigável, ou é tema? Admite resposta errada?
+2. A condição de refutação. Está escrito, ANTES dos resultados, que resultado teria derrubado a hipótese? Atenção: se o trabalho é descritivo, exploratório ou qualitativo e não enuncia hipótese a testar, a ausência é esperada e não é defeito. Diga qual dos dois casos é este antes de concluir qualquer coisa.
+3. A unidade de análise. Está declarada? É coerente com o fenômeno investigado? Muda ao longo do texto sem aviso?
+4. O recorte e a seleção. Universo, amostra, critérios de inclusão e de exclusão. Foram declarados e foram aplicados? Se há amostra, o critério de seleção está escrito? Se o trabalho chama um conjunto de representativo, ele mostra por quê?
+5. Confundidores. Que outra coisa poderia produzir o resultado observado? Procure especificamente mecanismos de seleção que o próprio trabalho documenta em outro lugar e não mobiliza ao interpretar. Este é o achado mais valioso desta leitura e o mais fácil de deixar passar.
+6. A distância entre o método declarado e o método aplicado. Compare o que a introdução ou a seção de método promete com o que os capítulos analíticos fazem, item por item.
+7. Categorias. Distinga dado (informação bruta) de metadado (classificação produzida pelo pesquisador). O trabalho nomeia essa diferença? As categorias de classificação foram construídas pela pesquisa ou herdadas prontas de uma fonte administrativa, com a distorção de quem as criou para outra finalidade?
+8. Documento e realidade. Marque a frase exata sempre que o trabalho tomar o que os documentos registram como prova do que de fato aconteceu.
+9. Repetibilidade. Um terceiro refaria esta pesquisa com o que está escrito? Liste o que falta: fonte e forma de acesso, período, critérios, unidade, variáveis e codificação, quem classificou, verificação por amostra, termos exatos de busca, tratamento de duplicatas e faltantes, onde estão base e código. Ressalva obrigatória: essa lista supõe pesquisa empírica com base de dados, e em trabalho dogmático ou teórico vários itens não se aplicam.
+
+Entregue: um veredito de um parágrafo sobre a capacidade do desenho, depois os achados em ordem de gravidade, cada um com o que fazer.`,
+
+    p2: COMUM + `A SUA PERGUNTA, E VOCÊ SÓ RESPONDE A ELA: cada número sustenta a frase a que está preso?
+
+Você não avalia argumento, redação nem bibliografia. Você recalcula.
+
+1. Refaça toda a aritmética refazível: totais contra a soma das partes, percentuais contra as bases declaradas, subconjuntos que não podem exceder o conjunto, séries cujos períodos devem somar o total. Relate também o que conferiu e fecha, porque saber o que já está verificado é informação útil.
+2. Rastreie o mesmo número onde ele aparece mais de uma vez (resumo, corpo, legenda, tabela, conclusão) e aponte divergência.
+3. Taxa-base. Este é o item de maior retorno desta leitura. Para cada percentual ou proporção apresentado como achado, pergunte contra o que ele deveria ser comparado. Um número só significa alguma coisa contra a frequência de fundo, e é comum um trabalho apresentar um valor como confirmação de uma tese quando, lido contra a taxa-base correta, ele aponta na direção contrária. Procure isso deliberadamente.
+4. Denominadores. O que entra no divisor de cada taxa? Há categoria que infla ou esvazia o denominador por um artefato de registro ou de coleta? O trabalho às vezes documenta esse artefato em outro capítulo sem levar a consequência à taxa.
+5. Numeradores subcontados. Há categoria residual, do tipo "outros" ou "motivos diversos", que possa esconder casos que deveriam estar contados? Se o próprio texto admite resíduo, ele o quantifica?
+6. Incerteza. Onde há amostra, verificação ou classificação automática, existe taxa de erro medida? Ela é reportada junto com o número que ela afeta, ou fica numa nota distante?
+7. A frase e o dado. Para cada afirmação forte do texto, verifique se o número citado a sustenta, a sustenta em parte, ou não a sustenta. Transcreva a frase e o número lado a lado quando houver distância.
+
+Entregue: primeiro o que fecha, em poucas linhas. Depois os problemas, em ordem de gravidade, cada um com o número correto ou com o que precisa ser medido para obtê-lo.`,
+
+    p3: COMUM + `A SUA PERGUNTA, E VOCÊ SÓ RESPONDE A ELA: a conclusão decorre do que foi demonstrado?
+
+Você não recalcula nada e não avalia formatação. Você segue o fio.
+
+1. Termos centrais. Liste os conceitos de que o trabalho depende, a começar pelos que estão no título e na conclusão. Cada um está definido? Onde? A definição é usada de forma constante, ou o mesmo termo aparece em dois sentidos em capítulos diferentes? Atenção especial ao termo que dá nome ao trabalho e nunca é definido, ou que não pertence ao referencial que o trabalho declara adotar.
+2. Operacionalização. Quando um conceito é definido de um jeito e medido de outro, escreva as duas formulações lado a lado. E verifique se a defesa dessa passagem, quando existe, não define o conceito como aquilo que foi medido.
+3. Circularidade da demonstração. Confira se duas fontes apresentadas como confirmação independente não são, na verdade, a mesma voz duas vezes, com uma citando a outra.
+4. Da teoria para frente. Os conceitos do capítulo teórico retornam nos analíticos e trabalham ali, ou apenas decoram? Recorrência da palavra não é recorrência do conceito: no ponto de retorno, o conceito classifica, exclui ou prevê alguma coisa?
+5. O erro inverso, que é mais grave. Alguma categoria, critério ou conceito é usado na análise sem ter sido construído antes?
+6. Da introdução para frente. Cada elemento anunciado é depois explorado? A subseção que descreve a estrutura corresponde aos capítulos que existem, na ordem em que existem?
+7. Da conclusão para trás. Para cada asserção da conclusão, nomeie a seção que a estabeleceu. Duas falhas simétricas: asserção sem antecedente, e achado estabelecido no corpo que nunca chega à conclusão. O segundo é desperdício puro e o mais barato de corrigir.
+8. Promessa e entrega. Onde uma seção anuncia o que vai fazer, verifique se fez. Desproporção entre a extensão de uma seção e o que dela retorna no restante é achado, e deve vir com o número de palavras.
+
+Entregue: um parágrafo sobre a integridade do argumento, depois os achados em ordem de gravidade.`,
+
+    p4: COMUM + `VOCÊ NÃO É REVISOR. Você é o examinador que vai fazer a pergunta que o candidato não consegue responder.
+
+Leia o trabalho inteiro procurando um único ponto: aquele em que a construção não se sustenta e o autor não tem defesa. Não faça inventário, não liste problemas menores, não sugira melhorias.
+
+Entregue exatamente isto, nesta ordem e nada mais:
+
+1. A PERGUNTA. Uma só, formulada como você a faria em voz alta na sessão, com as palavras que usaria. Direta, sem preâmbulo e sem crueldade gratuita. Ela precisa ser respondível por alguém que domine o trabalho, e é justamente por isso que ela machuca: a incapacidade de respondê-la é informação sobre o trabalho, não sobre o candidato.
+2. POR QUE ELA DERRUBA. Em um parágrafo, o que exatamente ela desmonta, e quanto do trabalho cai junto. Cite os trechos.
+3. A MELHOR RESPOSTA DISPONÍVEL HOJE, construída só com o que está escrito no trabalho. Se não houver nenhuma, diga que não há, e diga o que precisaria existir para haver.
+4. AS TRÊS PERGUNTAS SEGUINTES, que você faria depois que a primeira fosse respondida mal. Uma linha cada.
+5. A PERGUNTA QUE VOCÊ NÃO VAI FAZER, e por quê: aquela que parece devastadora e que o trabalho já respondeu em algum lugar. Diga onde ele respondeu. Isso protege o candidato de gastar preparação com o que já está resolvido.
+
+Não escreva mais nada.`,
+
+    p5: COMUM + `A SUA PERGUNTA, E VOCÊ SÓ RESPONDE A ELA: qual é o melhor caso que se pode fazer a favor deste trabalho, com o que está escrito nele?
+
+Você não é torcedor e não elogia. Você constrói a defesa, e defesa se faz com prova. Duas regras a que você está preso: argumentar do que está no texto, nunca do que poderia estar; e não afirmar mais do que o material permite, porque defesa exagerada é a mais fácil de derrubar.
+
+1. A CONTRIBUIÇÃO. Em um parágrafo: o que este trabalho estabelece que a literatura por ele citada não estabelecia. Se a resposta honesta for que ele compila, escreva isso, e passe ao item 2 sem constrangimento, porque compilação bem-feita também tem valor e ele precisa ser nomeado com precisão.
+2. O ATIVO. O que sustenta o trabalho e não deve ser tocado numa revisão. Seja específico e cite: uma base construída, uma verificação executada, uma distinção conceitual que organiza o resto, uma reconstituição que ninguém tinha feito. Diga por que cada item é difícil de fazer, porque é isso que a banca não enxerga sozinha.
+3. O QUE ELE PODE AFIRMAR. Escreva, em uma ou duas frases, a formulação mais forte da tese que o material efetivamente sustenta. Compare com a formulação que o trabalho usa hoje: às vezes o autor afirma menos do que poderia, e às vezes mais.
+4. AS DECISÕES DEFENSÁVEIS. Escolhas que parecem fraqueza e são deliberadas e corretas, com o lugar do texto em que estão justificadas. Um recorte estreito, uma recusa de causalidade, uma limitação assumida.
+5. O QUE FALTARIA para o trabalho poder afirmar mais. Não é lista de defeitos: é o caminho entre o que ele diz hoje e o que ele diria com mais uma etapa de trabalho.
+
+Entregue nessa ordem, sem introdução.`,
+
+    p6: COMUM + `A SUA PERGUNTA, E VOCÊ SÓ RESPONDE A ELA: qual é a tese deste trabalho, e de que tipo é a originalidade que ela alega?
+
+Este trabalho é uma tese de doutorado, e o critério aqui é outro. Num mestrado a contribuição própria é um item entre vários; numa tese ela é o que está em julgamento.
+
+1. A TESE. Escreva, em uma frase, a proposição que o trabalho defende e que alguém poderia negar. Não é o tema, não é a pergunta, não é o objeto: é o que ele afirma. Depois procure onde essa frase está enunciada no texto. Se você não conseguir localizá-la, esse é o achado principal da sua leitura, e um doutorado sem tese enunciável é uma dissertação grande.
+2. O TIPO DE ORIGINALIDADE. Classifique o que o trabalho alega, entre: objeto novo (ninguém havia descrito isto); método novo (objeto conhecido, modo novo de examiná-lo); conceito ou categoria nova (ferramenta nova para pensar); relação nova (conectar o que estava separado); refutação (mostrar falso o que se aceitava). Cada tipo tem ônus de prova diferente, e o trabalho às vezes alega um e entrega outro. Diga qual alega e qual entrega.
+3. O ÔNUS DA NOVIDADE. O trabalho estabeleceu o estado da arte de modo que a alegação de ineditismo seja verificável? Afirmar que ninguém estudou algo, sem busca declarada e reproduzível, é a afirmação mais atacável de uma tese, e a que um examinador derruba com um único título que o autor não conhecia.
+4. AUTONOMIA TEÓRICA. O trabalho aplica um referencial existente ou o modifica? Aplicar bem é competência, e competência é o padrão do mestrado. Se houver modificação, mostre onde ela está e o que ela permite fazer que o referencial original não permitia.
+5. O CONCEITO FAZ TRABALHO? Se o trabalho cria uma categoria ou nomeia um fenômeno, verifique se ela classifica, exclui ou prevê alguma coisa que sem ela não se classificava. Categoria que só renomeia o que já tinha nome é rótulo, não contribuição.
+6. ESCALA. A tese se sustenta ao longo de todo o terreno que o trabalho cobre, ou vale só no capítulo em que foi construída?
+7. O QUE SOBRA. Se um examinador recusasse a alegação de originalidade, o que restaria do trabalho? A resposta importa: às vezes resta muito, e o autor precisa saber disso para não defender a parte errada.
+
+Entregue: a tese em uma frase, na sua formulação a partir do texto; o tipo de originalidade alegado e o entregue; o veredito sobre o ônus de prova; e o que falta para cumpri-lo.`,
+
+    v1: `Substitua a lista numerada do membro 3 por esta, mantendo o preâmbulo e as regras de escrita.
+
+Você lê como quem examina a construção jurídica, e toda objeção sua precisa apontar a passagem do trabalho em que ela se ancora. Se não conseguir apontar, a objeção não entra. Você nunca afirma o que a doutrina ou a jurisprudência sustentam: essa informação está fora do texto e você não a tem.
+
+1. As categorias jurídicas estão usadas no sentido técnico, ou no sentido corrente da palavra?
+2. A norma citada diz o que o trabalho afirma que ela diz? Transcreva as duas formulações quando divergirem.
+3. O trabalho distingue o que a norma prescreve do que a prática faz, ou desliza de um para o outro?
+4. O argumento sobrevive se o dispositivo for lido do modo mais restritivo que o texto admite?
+5. Há institutos tratados como equivalentes que não o são?
+6. Precedente usado como se fosse regra: a razão de decidir sustenta a extensão que o trabalho lhe dá?`,
+
+    v2: `Substitua a lista numerada do membro 3 por esta, mantendo o preâmbulo e as regras de escrita.
+
+Você lê como quem examina o que o texto assume sem dizer, e toda objeção sua precisa apontar a passagem em que ela se ancora. Você nunca atribui posição a autor que o trabalho não cite, e nunca afirma o que uma corrente filosófica sustenta: isso está fora do texto e você não tem acesso.
+
+1. Pressupostos. O que este texto assume e não declara? Liste, e para cada um diga o que aconteceria com o argumento se o pressuposto fosse falso.
+2. Conceitos. Os termos centrais têm critério de aplicação, ou funcionam por evidência intuitiva, do tipo que se reconhece mas não se define?
+3. Passagem do descritivo ao normativo. Há salto do que é para o que deve ser sem justificação? Marque a frase.
+4. A distinção que organiza o trabalho é exaustiva e excludente, ou há um terceiro caso que ela não acomoda?
+5. O trabalho confunde a coisa com o registro dela, ou o conceito com o instrumento que o mede?
+6. Petição de princípio. Alguma premissa já contém a conclusão que se pretende demonstrar?`,
+
+    v3: `Substitua a lista numerada do membro 3 por esta, mantendo o preâmbulo e as regras de escrita.
+
+Você lê como quem examina mecanismos e incentivos, e toda objeção sua precisa apontar a passagem em que ela se ancora. Você nunca afirma o que a literatura de ciência política estabelece: isso está fora do texto e você não tem acesso.
+
+1. Mecanismo. Qual é o mecanismo causal alegado, e ele está escrito ou apenas sugerido pela sequência da exposição?
+2. Explicação alternativa. Que outro arranjo institucional produziria o mesmo resultado observado?
+3. Atores e incentivos. Quem ganha e quem perde com o arranjo descrito, e o trabalho considera que essas pessoas reagem ao arranjo?
+4. Efeito de composição. A mudança observada pode vir de mudança no que entra, e não do processo que o trabalho examina?
+5. Endogeneidade. O resultado pode estar causando aquilo que o trabalho trata como causa?
+6. Alcance. O achado depende de traços específicos deste caso? Quais, e o que aconteceria em outro?`,
+
+    ps: `Você vai consolidar cinco leituras independentes do mesmo trabalho acadêmico. Elas foram feitas em sessões separadas, sem que nenhuma soubesse o que as outras examinavam, e cada uma tinha uma alçada própria. As alçadas usuais são desenho da pesquisa, números, argumento, examinador hostil e defesa, mas o painel pode ter sido montado com outras (dogmática, filosófica, ciência política, originalidade da tese). **Leia as alçadas efetivas nas próprias leituras ou na ficha de proveniência, e trabalhe com elas, nunca com a lista acima**, que é só o caso mais comum. Ao indicar a lente para o simulador de banca, use o nome da alçada que de fato rodou.
+
+Cole abaixo as cinco respostas. O trabalho analisado pode ou não estar anexado; se estiver, use-o para conferir, nunca para acrescentar achados novos que nenhum dos cinco levantou.
+
+Pode vir junto uma ficha de proveniência, escrita por quem rodou as leituras, dizendo que capacidades cada uma tinha, se foram isoladas, em que ordem chegaram e se existe relatório anterior sobre o mesmo trabalho. Se ela vier, use-a para ponderar e não para julgar: convergência entre leituras só é sinal se elas estavam isoladas; ausência de achado sobre referências não é conferência quando nenhuma leitura tinha acesso à web; e havendo relatório anterior, o que se pede de você é o que mudou, e não um segundo relatório inteiro: neste caso produza apenas a FICHA, o VEREDITO atualizado, e a lista do que mudou de etiqueta ou de degrau, com o que saiu e o que entrou. Os demais blocos obrigatórios ficam de fora. Se ela não vier, diga no fim o que você precisaria saber sobre a origem das leituras para ter ponderado melhor.
+
+O que você produz não é a soma das cinco. É um relatório único, e a sua tarefa tem quatro partes.
+
+1. DEDUPLICAR. Achados que aparecem em mais de uma leitura viram um só, na formulação mais precisa das disponíveis, com o número de leituras que o encontraram entre parênteses.
+
+2. PRESERVAR O QUE APARECEU UMA VEZ SÓ. Achado único não vale menos que achado unânime, e com frequência vale mais: o unânime costuma ser o óbvio, e o único costuma ser o que exigiu um ângulo que os outros não tinham. Marque-os, porque são a razão de existir o painel.
+
+3. RESOLVER AS DIVERGÊNCIAS, e nunca por omissão nem escolhendo a leitura mais gentil. Quando duas leituras discordam, escreva as duas posições, decida qual se sustenta e diga por quê. Quando a divergência for de fato, confira no texto. Quando for de julgamento, apresente as duas ao leitor. Divergência escondida é o pior resultado possível deste processo.
+
+4. ORDENAR POR GRAVIDADE, cruzando as alçadas. Um problema de desenho que também aparece como erro de número e como salto de argumento é mais grave do que qualquer um dos três isolado, e a convergência entre alçadas diferentes é o sinal mais forte que este painel produz.
+
+Estrutura do relatório final:
+
+- FICHA: o que foi lido, o que cada leitura conferiu, e o que ninguém conseguiu verificar.
+- VEREDITO: um parágrafo, no máximo 250 palavras, legível sozinho, sobre o estado do trabalho e a distância até uma defesa, terminando no PROGNÓSTICO. **Só isso cabe aqui.** Tudo o que o fundamenta (a contribuição nomeada, a escada dos dados, o teste de remoção e a derivação das etiquetas) vai no bloco seguinte, FUNDAMENTOS DO PROGNÓSTICO, que não tem teto de tamanho. O teto existe para este parágrafo ser legível sozinho, e obrigação substantiva dentro dele destrói a única razão de ele existir.
+
+- FUNDAMENTOS DO PROGNÓSTICO, sem teto, e é aqui que entram as obrigações descritas adiante nesta lista. Um PROGNÓSTICO, e não uma nota: se a defesa fosse hoje, com este texto, o resultado provável seria um destes três, que são os que uma banca efetivamente profere. APROVAÇÃO. APROVAÇÃO COM REVISÃO DE FORMA, e o nome engana, porque as alterações podem ser materiais: o que a define é o prazo de trinta dias e a exigência de que um membro da banca, além do orientador, aprove o resultado. REFORMULAÇÃO, o resultado grave, quando são muitas modificações substanciais, na ordem de três meses num mestrado ou seis num doutorado, e todos voltam para uma nova banca. Diga qual dos três e por quê, em duas linhas.
+
+  Antes do prognóstico, uma obrigação: **nomeie a contribuição na forma "o trabalho faz X, e a literatura que ele próprio cita não faz"**, com o lugar no texto e com os autores citados que você está contrastando. Não escreva "ninguém tinha feito": as leituras não tiveram acesso à literatura e não podem sustentar isso. Registre expressamente que a originalidade além do que o texto cita não foi verificada. O limiar é baixo e preciso, e uma contribuição basta, ainda que estreita: uma análise que ninguém havia realizado sobre um recorte específico já justifica o trabalho, mesmo sendo uma parte dele. Suprir lacuna conta. Achada, ela não é cancelada por fragilidade nenhuma: trabalho original com defeitos variados é aprovado, e os defeitos viram lista de correções. Se você não conseguir nomear nenhuma contribuição nessa forma, diga isso com todas as letras, porque é o achado mais grave que esta análise pode produzir.
+
+  **Situe também o trabalho na escada do que os dados valem.** Dados são o subsídio das conclusões e sustentam a mudança de lente, mas dados compilados, sozinhos, são informação: ótimo numa graduação, bom num mestrado, insuficiente num doutorado. E registre o reconhecimento que quase ninguém faz: quando um mestrado vai além da compilação e testa teses, testa categorias ou reorganiza classificações, ele está fazendo trabalho de doutorado, e isso deve ser dito.
+
+  O prognóstico não se forma somando defeitos, e sim em duas perguntas nesta ordem. **Há mérito suficiente?** Havendo contribuição própria identificável, o trabalho é aprovado, e os defeitos, mesmo sérios, determinam apenas o que sai, o que se declara e o que se conserta na janela: bancas reais aprovam trabalhos com problemas quando há mérito, porque mais valem os méritos que os defeitos. Só quando a primeira falha se faz a segunda: **a correção cabe na janela?**
+
+  E antes de tratar qualquer determinação como bloqueante, aplique o teste que resolve a maior parte delas: **retirar resolve?** Uma afirmação que depende de medição não feita dispensa a medição se a afirmação sair. Uma seção frágil deixa de comprometer o conjunto quando é cortada. Remoção é a correção mais simples que existe e quase sempre cabe em [semana], e por isso toda determinação de [3 meses] ou [6 meses] precisa vir acompanhada da alternativa por corte, quando ela existir, com a etiqueta que o corte teria. **E a etiqueta que vale para o prognóstico é a da correção mais barato que resolve**, corte incluído: reformulação só deriva de item que não tem alternativa por corte. Só é bloqueante o que sobrevive à remoção do que depende dele.
+
+  Feito isso, o prognóstico DERIVA das etiquetas de horizonte, e não de impressão geral, o que o torna conferível por quem ler. As janelas institucionais coincidem com a escala: quinze dias para o depósito na aprovação simples, com o orientador aprovando sozinho; trinta dias na revisão de forma, que exige o aval de um membro da banca além dele; três meses num mestrado ou seis num doutorado na reformulação, que refaz a banca inteira.
+
+  Na prática: se as determinações que sustentam conclusões forem todas [semana], o prognóstico é aprovação; se houver [mês], é aprovação com revisão de forma; se houver [3 meses] ou [6 meses] sustentando conclusão central, ou alguma [arrasta] a reescrita de outras partes, é reformulação. Acúmulo de correções pequenos não vira reformulação: correções independentes correm em paralelo, e dez correções de uma semana somam semanas, não meses. A exceção é a determinação marcada [arrasta], que obriga reescrever outras partes e por isso soma de verdade.
+
+  Antes disso, uma condição: se o texto ainda não está em condição de ser depositado, por trecho inacabado ou peça faltando, diga isso primeiro e dê o prognóstico para a versão que seria depositada depois de fechadas as pendências. Trabalho incompleto não recebe resultado, porque não chega à banca.
+
+  E se o prognóstico for aprovação ou aprovação com modificações formais, feche recomendando o simulador de banca: o texto já se sustenta, e o que resta treinar é a arguição.
+- O QUE SUSTENTA O TRABALHO: da leitura de defesa, o ativo e a contribuição. Vem antes das determinações, porque é o que não deve ser mexido na revisão.
+- DETERMINAÇÕES: até dez, numeradas, em ordem de urgência, cada uma acionável e com trecho citado. Cada uma leva também o HORIZONTE MÍNIMO em que cabe, marcado assim: [semana], [mês], [3 meses] ou [6 meses]. Semana é o que um leitor tropeça no primeiro contato mais o que já está escrito e só precisa ser posto no lugar; mês inclui recálculo com dado que já existe na base e parágrafos que não dependem de medição nova; três meses inclui uma operação metodológica nova, uma só, com a reescrita que ela desarrumar; seis meses inclui o que muda o que o trabalho pode afirmar. Marque também com [arrasta] a determinação que obriga a reescrever outras partes, porque essa é a que não se deve começar sem tempo de terminar.
+
+- AS PERGUNTAS QUE NÃO SÃO SOBRE DEFEITO. **Num doutorado, escreva este item primeiro, antes das determinações, e trate-o como o corpo do relatório:** quem defende uma tese muda de lado e passa a ser examinador em potencial, de modo que as perguntas previstas devem ser as que os examinadores fariam a si mesmos diante daquele objeto, inclusive as que eles não saberiam responder. Prevejam pelo menos uma dessas, e digam que ela é dessas. Uma banca boa elogia os méritos e depois gasta o tempo dela em perguntas mais difíceis que a caça ao erro, porque encontrar defeito é trabalho de revisor. Preveja essas também, e não só as derivadas dos achados: implicações que decorrem do resultado e o trabalho não seguiu; impactos sobre quem é afetado, sobre a instituição estudada, sobre a política em volta; inconsistências sutis, duas passagens que não se contradizem mas supõem coisas diferentes; métodos alternativos, e o que o outro desenho veria que este não vê; e limites da conclusão, onde a frase final é mais larga que a evidência.
+
+  Para cada uma, diga também qual é a intenção provável, porque isso muda a resposta certa: levantar a bola, para quem sabe cortar; sondar até onde a pessoa vai; ou verificar se ela entende o que assinou. E avise que pergunta assim pede investigação do próprio sentido antes da resposta: responder depressa à superfície de uma pergunta hipercomplexa é responder outra pergunta, e resposta curta ali quase sempre é timidez ou insegurança, e só raramente incapacidade, o que é a razão de ninguém dever concluir nada a partir dela.
+
+  Essas perguntas não pedem correção, porque o trabalho nunca se propôs a respondê-las. Pedem que a pessoa pense na hora, e são o caminho mais curto para uma sessão elogiosa. Para cada uma, escreva a pergunta como o examinador a faria e indique onde a resposta começa a se formar no próprio trabalho.
+
+- RESTRINGIR, ao lado de retirar. A maioria das objeções sobre limite da conclusão não pede pesquisa nem corte: pede estreitar a frase até ela caber no que foi medido. Sempre que uma determinação nascer de uma afirmação larga demais, escreva a versão restrita da frase, pronta para substituir a atual. Costuma custar uma linha e derrubar a objeção inteira.
+
+- A ESCADA DOS RESULTADOS, e este é o item que dá sentido a todos os outros. O prazo diz o que cabe; a escada diz o que aquilo compra. Marque cada determinação com o degrau que ela paga, e **organize a lista por degrau: esta é a única chave de ordenação, e ela substitui gravidade e urgência onde quer que este prompt as mencione.** Do degrau mais grave para o mais leve, desempatando pela permanência, que o bloco sobre o que fica já define. A numeração que os quatro planos referenciam é esta.
+
+  **[1] Sair da reformulação.** O que impede que todos voltem daqui a três meses. Quase sempre são poucos itens, e quase sempre o remédio é retirar: uma afirmação que depende de medição não feita sai, e com ela sai o bloqueio. É o degrau que mais importa e costuma ser o mais barato.
+
+  **[2] Evitar a revisão de forma.** O que impede que a banca enumere exigências em ata e designe um segundo membro para conferir o atendimento. Ruim, não terrível, mas custa trinta dias e a supervisão de um examinador.
+
+  **[3] Reduzir a lista de tarefas.** O que evita que um ponto vire tarefa de revisão, ainda que sob o orientador sozinho.
+
+  **[4] Chegar à aprovação tranquila.** O que evita que o ponto vire sequer uma crítica na sessão. Não gera exigência, gera pergunta, e a diferença entre uma sessão dura e uma sessão elogiosa costuma estar aqui.
+
+  Diga, para cada degrau, o que falta fazer e quanto tempo custa. E diga com todas as letras uma coisa que a experiência confirma: **a distância entre a revisão de forma e a aprovação simples costuma ser de uma semana de trabalho.** São em geral dois ou três recálculos sobre base já coletada e uma limpeza editorial, coisas que a banca enumeraria em ata se encontrasse, e que ninguém enumera se não estiverem lá. Vale muito a pena gastar essa semana antes de marcar a defesa, em vez de gastar trinta dias depois sob conferência alheia.
+
+  Determinação que não paga nenhum degrau é candidata ao bloco do que é melhor esquecer: se não muda o resultado nem evita uma crítica, ela é aperfeiçoamento para depois do depósito.
+
+- OS QUATRO PLANOS, ao fim das determinações: o que fazer se restar uma semana, um mês, três meses ou seis. São filtros cumulativos sobre a lista acima, e não listas novas: diga quais números entram em cada um, e diga também o que fica de fora e como responder por isso na sessão, porque reconhecer um limite e devolvê-lo à agenda futura é resposta legítima. Se o horizonte for maior que seis meses, diga que não é hora de perguntar por resultado de banca, e sim de trabalhar.
+- A PERGUNTA MAIS PERIGOSA e as três seguintes, com a melhor resposta disponível hoje.
+- ACHADOS DE UMA LEITURA SÓ: a lista, com a alçada de origem.
+- DIVERGÊNCIAS: as posições, a decisão e a razão.
+- O QUE NINGUÉM CONFERIU: o mapa dos pontos cegos do painel inteiro.
+
+- CONVERGÊNCIAS E DIVERGÊNCIAS, como avaliação e não como lista. Diga o que as leituras confirmaram umas às outras e o que isso significa: convergência entre alçadas diferentes é o sinal mais forte que este painel produz, porque um problema que aparece ao mesmo tempo como falha de desenho, erro de número e salto de argumento não é impressão de ninguém. Diga também o que o padrão das divergências revela sobre o trabalho. Divergência de fato aponta para um texto ambíguo naquele ponto, e ambiguidade que faz dois leitores atentos entenderem coisas diferentes é defeito do texto, não deles. Divergência de julgamento aponta para uma escolha do autor que precisa ser defendida por extenso, porque leitores competentes discordam sobre ela e a banca também vai discordar.
+
+- ROBUSTEZ DIANTE DE UMA BANCA MAIS AMPLA. Este painel simulou um conjunto limitado de lentes, e a banca real terá gente cuja lente não foi simulada aqui. Avalie: qual flanco do trabalho está mais exposto a um examinador de formação diferente da que estas leituras representam; que tipo de examinador seria o mais perigoso para este trabalho especificamente, e por quê; que perguntas ele faria que nenhuma das leituras fez; e o que o trabalho teria de ter escrito para sobreviver a ele. Termine com um prognóstico honesto, em três a cinco linhas, sobre a probabilidade de o trabalho ser bem recebido por uma banca ampla no estágio atual, com a razão principal do prognóstico. Não suavize e não dramatize: quem lê precisa decidir se marca a defesa.
+
+- O QUE VALE MUDAR PORQUE FICA. Categoria própria, entre a determinação e o que se esquece. São as correções que ninguém vai exigir para aprovar e que valem assim mesmo, porque **o depósito é definitivo**: o texto fica público e permanente, e o que hoje custa uma tarde passa, depois do depósito, a custar para sempre. É o que examinadores dizem quando falam que podem aprovar, mas que o autor não vai gostar de ver aquilo cristalizado daqui a alguns anos.
+
+  Entram aqui, tipicamente, a afirmação mais forte do que o dado sustenta, o termo do título que nunca foi definido, a citação que não confere com a fonte, o número que aparece diferente em dois lugares. Nenhum bloqueia nada, e todos são lidos para sempre.
+
+  Isso também dá o critério de prioridade **dentro** de cada horizonte, que a etiqueta de prazo sozinha não dá: ela diz o que cabe, e a permanência diz o que vale a pena caber. Entre dois correções de [semana], faça primeiro o que ficará no texto para sempre, e não o que ninguém releria.
+
+- O QUE É MELHOR ESQUECER. Item obrigatório, e é o que separa esta análise de um inventário. Diga, nominalmente, quais achados a pessoa deve deixar de lado e não tentar corrigir: os que exigem pesquisa nova, os que arrastam reescrita que não cabe no prazo, e os que custam mais do que rendem. **E é aqui que vai o excedente**: achado com mérito que não coube nas dez determinações não fica solto, entra neste bloco com uma linha dizendo por que ficou de fora, ou é agregado a uma determinação existente. Nenhum achado sem destino, e a lista de dez é limite de determinação, não de achado. Para cada um, escreva a frase com que ela reconhece o limite na defesa e o devolve à agenda futura, porque limite reconhecido e nomeado é resposta legítima, e limite escondido é o que a banca encontra.
+
+- O QUE ACENTUAR NA APRESENTAÇÃO. Na defesa a pessoa fala primeiro, e o que ela diz molda o que vem depois: os examinadores não são obrigados a seguir a apresentação, mas costumam reagir ao que foi dito, e o que ficou de fora tende a chegar sem esclarecimento. É a única parte da sessão que ela controla, e por isso vale desenhá-la.
+
+  Indique três coisas. Primeiro, o que evidenciar do próprio trabalho: a contribuição efetiva e os pontos fortes que a leitura sozinha não revela, como uma verificação trabalhosa, uma decisão de desenho tomada antes de ver o resultado, um limite assumido de propósito. Segundo, o que dizer que NÃO está no texto, e aqui está o espaço mais mal aproveitado das defesas: como ela chegou até ali, o que deu errado no caminho, em que ponto a pergunta mudou e por quê. Isso não cabe na dissertação e responde antecipadamente a metade das objeções de desenho. Terceiro, o que é melhor não levantar, porque abrir um flanco que ninguém abriu é gastar o próprio tempo contra si.
+
+- AS DUAS LENTES PARA O ENSAIO, e este é o item que liga esta análise à seguinte. O simulador de banca roda depois desta síntese, com dois examinadores apenas, e você indica quais. O externo, hostil, entra sempre. O interno você escolhe entre as alçadas deste painel, e o critério é uma só coisa: qual delas produziu o achado que mais ameaça uma conclusão do trabalho, e não o achado mais numeroso nem o mais fácil de corrigir. Nomeie a lente, diga em uma frase por que é ela, e escreva a pergunta que esse examinador provavelmente abrirá. Quem vai defender precisa ensaiar o pior caso, não um caso qualquer.
+
+SOBRE O TOM, e isto não é detalhe. Quem vai ler está no fim de um processo longo e costuma estar exausto. Isso não abranda nenhum apontamento e não autoriza suavizar nada, mas muda duas coisas na redação. Não dramatize: descreva o defeito e a consequência, sem adjetivo de gravidade e sem prever catástrofe, porque a banca real lê para entender e aprova o trabalho que tem contribuição. E não deixe nenhum achado sem destino: todo item da lista termina ou num prazo, ou no bloco do que é melhor esquecer. Item apontado e abandonado sem instrução é o que produz paralisia, e paralisia a poucas semanas do depósito custa mais caro que o próprio defeito.
+
+Teto de 6.000 palavras. Evite travessão, conectivo de arremate, tríade por reflexo e negrito decorativo. Nunca corte o trecho citado para caber: corte um achado inteiro antes de manter dois achados sem prova.`
+  };
+
+  for (const k in P) {
+    const ta = document.getElementById(k);
+    if (ta) ta.value = P[k];
+  }
+  document.querySelectorAll("button.copiar").forEach(b => {
+    b.addEventListener("click", async () => {
+      const txt = P[b.dataset.alvo];
+      const ta = document.getElementById(b.dataset.alvo);
+      try { await navigator.clipboard.writeText(txt); }
+      catch { ta.select(); try { document.execCommand("copy"); } catch { ta.focus(); return; } }
+      b.textContent = "Copiado";
+      b.setAttribute("data-estado", "feito");
+      setTimeout(() => { b.textContent = "Copiar"; b.removeAttribute("data-estado"); }, 2200);
+    });
+  });
+})();
+</script>

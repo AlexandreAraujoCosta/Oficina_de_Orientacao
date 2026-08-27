@@ -1,0 +1,1460 @@
+<title>Analisador de dissertações e teses</title>
+
+<style>
+  :root {
+    --paper:      #eef0ef;
+    --paper-sunk: #e4e7e5;
+    --ink:        #141c24;
+    --ink-soft:   #4a5560;
+    --ink-faint:  #7c868f;
+    --rule:       #c9cfce;
+    --rule-firm:  #a8b1b0;
+    --correcao:   #a32b23;
+    --medida:     #3e6b7a;
+    --conforme:   #4a7a52;
+
+    --serif: Constantia, Cambria, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --sans:  "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono:  "Cascadia Mono", Consolas, "SF Mono", ui-monospace, Menlo, monospace;
+
+    --measure: 66ch;
+    --gap: 1.5rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:      #10161b;
+      --paper-sunk: #171f26;
+      --ink:        #e3e8ea;
+      --ink-soft:   #9aa6ad;
+      --ink-faint:  #6b767d;
+      --rule:       #2a343c;
+      --rule-firm:  #3c4850;
+      --correcao:   #e07a6e;
+      --medida:     #74aabb;
+      --conforme:   #7fb287;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #10161b;
+    --paper-sunk: #171f26;
+    --ink:        #e3e8ea;
+    --ink-soft:   #9aa6ad;
+    --ink-faint:  #6b767d;
+    --rule:       #2a343c;
+    --rule-firm:  #3c4850;
+    --correcao:   #e07a6e;
+    --medida:     #74aabb;
+    --conforme:   #7fb287;
+  }
+  :root[data-theme="light"] {
+    --paper:      #eef0ef;
+    --paper-sunk: #e4e7e5;
+    --ink:        #141c24;
+    --ink-soft:   #4a5560;
+    --ink-faint:  #7c868f;
+    --rule:       #c9cfce;
+    --rule-firm:  #a8b1b0;
+    --correcao:   #a32b23;
+    --medida:     #3e6b7a;
+    --conforme:   #4a7a52;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* ---------------------------------------------------------- cabeçalho */
+  .top { border-bottom: 2px solid var(--ink); padding-bottom: 1.1rem; margin-bottom: 2rem; }
+  .top h1 {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 4vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin: 0 0 .4rem;
+    text-wrap: balance;
+  }
+  .top p { margin: 0; max-width: var(--measure); color: var(--ink-soft); }
+  .top .ressalva {
+    margin: .9rem 0 0; max-width: var(--measure);
+    border-left: 2px solid var(--correcao); padding-left: .9rem;
+    font-size: .93rem; color: var(--ink-soft);
+  }
+  .top .privacidade {
+    margin-top: .85rem;
+    font-family: var(--mono);
+    font-size: .74rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--medida);
+  }
+
+  /* ---------------------------------------------------------- estrutura */
+  .cols { display: grid; grid-template-columns: 19rem 1fr; gap: 2.5rem; align-items: start; }
+  @media (max-width: 900px) { .cols { grid-template-columns: 1fr; gap: 1.75rem; } }
+
+  .rail { position: sticky; top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  @media (max-width: 900px) { .rail { position: static; } }
+
+  /* ---------------------------------------------------------- entrada */
+  .solta {
+    border: 1px dashed var(--rule-firm);
+    background: var(--paper-sunk);
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .12s, background .12s;
+  }
+  .solta:hover, .solta:focus-visible { border-color: var(--medida); }
+  .solta.ativa { border-color: var(--medida); background: color-mix(in srgb, var(--medida) 10%, var(--paper-sunk)); }
+  .solta strong { display: block; font-family: var(--serif); font-size: 1.1rem; margin-bottom: .3rem; }
+  .solta span { font-size: .82rem; color: var(--ink-soft); }
+  .solta input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+
+  /* ---------------------------------------------------------- ficha */
+  .ficha { border-top: 1px solid var(--ink); padding-top: .75rem; }
+  .ficha h2, .indice h2 {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 .6rem;
+    font-weight: 600;
+  }
+  .ficha dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: .28rem .8rem; }
+  .ficha dt { color: var(--ink-soft); font-size: .85rem; }
+  .ficha dd {
+    margin: 0;
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: .85rem;
+    text-align: right;
+  }
+
+  .indice { border-top: 1px solid var(--rule); padding-top: .75rem; }
+  .indice ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+  .indice a {
+    display: flex; justify-content: space-between; gap: .6rem;
+    color: var(--ink-soft); text-decoration: none;
+    font-size: .87rem; padding: .18rem 0;
+    border-bottom: 1px solid transparent;
+  }
+  .indice a:hover, .indice a:focus-visible { color: var(--ink); border-bottom-color: var(--rule-firm); }
+  .indice .marca { font-family: var(--mono); font-size: .74rem; }
+
+  .acoes { display: flex; flex-direction: column; gap: .5rem; }
+  .acoes .ajuda { margin: 0; font-size: .8rem; line-height: 1.45; color: var(--ink-faint); }
+  button.acao.destaque { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 600; text-align: center; }
+  button.acao.destaque:disabled { background: transparent; color: var(--ink); border-color: var(--rule-firm); font-weight: 400; }
+  button.acao.destaque[data-estado="feito"] { background: var(--conforme); border-color: var(--conforme); }
+  .acoes details summary { font-size: .82rem; color: var(--ink-soft); cursor: pointer; }
+  .acoes details textarea {
+    width: 100%; height: 11rem; margin-top: .5rem; resize: vertical;
+    border: 1px solid var(--rule-firm); background: var(--paper-sunk); color: var(--ink);
+    font-family: var(--mono); font-size: .72rem; line-height: 1.5; padding: .6rem;
+  }
+  button.acao {
+    font-family: var(--sans); font-size: .88rem;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--rule-firm); padding: .5rem .8rem;
+    cursor: pointer; text-align: left;
+    transition: border-color .12s, color .12s;
+  }
+  button.acao:hover:not(:disabled), button.acao:focus-visible:not(:disabled) { border-color: var(--ink); }
+  button.acao:disabled { opacity: .4; cursor: default; }
+
+  /* ---------------------------------------------------------- resultados */
+  .painel { min-width: 0; }
+
+  .abertura { max-width: var(--measure); }
+  .abertura h2 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin: 0 0 .6rem; }
+  .abertura p { color: var(--ink-soft); margin: 0 0 1.1rem; }
+  .abertura ul { margin: 0 0 1.4rem; padding-left: 1.1rem; color: var(--ink-soft); }
+  .abertura li { margin-bottom: .3rem; }
+  .abertura .aviso {
+    border-left: 2px solid var(--correcao);
+    padding-left: .9rem;
+    color: var(--ink);
+  }
+
+  .bloco { border-top: 1px solid var(--rule); padding: 1.6rem 0 .4rem; scroll-margin-top: 1rem; }
+  .bloco:first-of-type { border-top: 2px solid var(--ink); }
+  .bloco > h2 {
+    font-family: var(--serif);
+    font-size: 1.3rem; font-weight: 600;
+    margin: 0 0 .2rem; letter-spacing: -.01em;
+  }
+  .bloco > h2 .num {
+    font-family: var(--mono); font-size: .78rem; color: var(--ink-faint);
+    margin-right: .55rem; letter-spacing: .04em;
+  }
+  .bloco > .nota { margin: 0 0 1rem; color: var(--ink-soft); font-size: .92rem; max-width: var(--measure); }
+
+  /* números destacados */
+  .metricas { display: flex; flex-wrap: wrap; gap: 1.75rem; margin: 0 0 1.1rem; }
+  .metrica { display: flex; flex-direction: column; gap: .1rem; }
+  .metrica .v {
+    font-family: var(--mono); font-variant-numeric: tabular-nums;
+    font-size: 1.65rem; line-height: 1; color: var(--medida);
+  }
+  .metrica .v.alerta { color: var(--correcao); }
+  .metrica .v.bom { color: var(--conforme); }
+  .metrica .r {
+    font-size: .74rem; text-transform: uppercase; letter-spacing: .07em;
+    color: var(--ink-faint); font-family: var(--mono);
+  }
+
+  .chip {
+    display: inline-block; font-family: var(--mono);
+    font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
+    padding: .1rem .4rem; border: 1px solid currentColor; margin-right: .5rem;
+    vertical-align: .08em;
+  }
+  .chip.grave { color: var(--correcao); }
+  .chip.atencao { color: var(--medida); }
+  .chip.ok { color: var(--conforme); }
+
+  .achado { border-top: 1px solid var(--rule); padding: .8rem 0; }
+  .achado:last-child { border-bottom: 1px solid var(--rule); }
+  .achado .cab { display: flex; align-items: baseline; gap: .1rem; flex-wrap: wrap; }
+  .achado .titulo { font-weight: 600; }
+  .achado .detalhe { color: var(--ink-soft); font-size: .92rem; margin: .25rem 0 0; max-width: var(--measure); }
+  .achado ul.ex { margin: .5rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .25rem; }
+  .achado ul.ex li {
+    font-size: .85rem; color: var(--ink-soft);
+    padding-left: 3.6rem; text-indent: -3.6rem;
+  }
+  .par {
+    font-family: var(--mono); font-size: .78rem; color: var(--medida);
+    letter-spacing: .02em;
+  }
+  .assinatura { font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); }
+
+  table.dados { width: 100%; border-collapse: collapse; font-size: .87rem; }
+  .rolagem { overflow-x: auto; }
+  table.dados th, table.dados td { text-align: left; padding: .34rem .7rem .34rem 0; border-bottom: 1px solid var(--rule); }
+  table.dados th {
+    font-family: var(--mono); font-size: .7rem; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--ink-faint); font-weight: 600; white-space: nowrap;
+  }
+  table.dados td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  table.dados td.marca { color: var(--correcao); font-family: var(--mono); font-size: .78rem; white-space: nowrap; }
+
+  /* faixa de ritmo */
+  .faixa { margin: .2rem 0 1rem; }
+  .faixa canvas { width: 100%; height: 132px; display: block; }
+  .faixa .legenda {
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
+    font-family: var(--mono); font-size: .72rem; color: var(--ink-faint);
+    letter-spacing: .04em; margin-top: .4rem;
+  }
+  .faixa .legenda i { display: inline-block; width: .7rem; height: .7rem; margin-right: .35rem; vertical-align: -.05em; }
+
+  .erro { border-left: 2px solid var(--correcao); padding-left: .9rem; color: var(--ink); max-width: var(--measure); }
+  .vazio { color: var(--ink-faint); font-style: italic; }
+
+  :focus-visible { outline: 2px solid var(--medida); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  /* ---------------------------------------------------------- cuidados */
+  .cuidados { border-top: 2px solid var(--ink); margin-top: 3.5rem; padding-top: 1.6rem; }
+  .cuidados h2 { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; margin: 0 0 .5rem; }
+  .cuidados h3 {
+    font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 600; margin: 2rem 0 .7rem;
+  }
+  .cuidados .chamada { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .cuidados > p { max-width: var(--measure); color: var(--ink-soft); }
+
+  .modos { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
+  @media (max-width: 760px) { .modos { grid-template-columns: 1fr; } }
+  .modo { padding: 1rem 1.5rem 1.2rem 0; border-bottom: 1px solid var(--rule); }
+  .modos .modo + .modo { padding-left: 1.5rem; border-left: 1px solid var(--rule); }
+  @media (max-width: 760px) { .modos .modo + .modo { padding-left: 0; border-left: 0; } }
+  .modo .rot {
+    display: block; font-family: var(--mono); font-size: .7rem; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--medida); margin-bottom: .5rem;
+  }
+  .modo p { margin: 0; font-size: .93rem; color: var(--ink-soft); }
+  .modo strong { color: var(--ink); }
+
+  dl.falhas { margin: 0; }
+  dl.falhas dt {
+    font-weight: 600; margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--rule);
+  }
+  dl.falhas dt:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+  dl.falhas dd { margin: .25rem 0 0; color: var(--ink-soft); font-size: .93rem; max-width: var(--measure); }
+
+  ol.fazer { margin: 0; padding-left: 1.3rem; max-width: var(--measure); }
+  ol.fazer li { margin-bottom: .7rem; color: var(--ink-soft); }
+  ol.fazer strong { color: var(--ink); }
+  ol.fazer li::marker { font-family: var(--mono); font-size: .82rem; color: var(--medida); }
+
+  /* ---------------------------------------------------------- prompts */
+  .prompts { border-top: 1px solid var(--rule); margin-top: 3rem; padding-top: 1.6rem; }
+  .prompts h2 { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; margin: 0 0 .5rem; }
+  .prompts > p { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1rem; }
+  .prompts ol.passos { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1.4rem; padding-left: 1.2rem; }
+  .prompts ol.passos li { margin-bottom: .3rem; }
+  .prompts ol.passos strong { color: var(--ink); }
+
+  .escolha { display: flex; gap: 0; margin-bottom: 1rem; flex-wrap: wrap; }
+  .escolha button {
+    font-family: var(--sans); font-size: .9rem; cursor: pointer;
+    background: transparent; color: var(--ink-soft);
+    border: 1px solid var(--rule-firm); border-right-width: 0;
+    padding: .55rem 1rem;
+  }
+  .escolha button:last-child { border-right-width: 1px; }
+  .escolha button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .barra {
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    border: 1px solid var(--rule-firm); border-bottom: 0;
+    padding: .8rem 1rem; background: var(--paper-sunk);
+  }
+  .barra .desc { flex: 1; min-width: 14rem; font-size: .88rem; color: var(--ink-soft); }
+  button.copiar {
+    font-family: var(--sans); font-size: .9rem; font-weight: 600;
+    background: var(--ink); color: var(--paper); border: 1px solid var(--ink);
+    padding: .5rem 1.1rem; cursor: pointer; white-space: nowrap;
+  }
+  button.copiar[data-estado="feito"] { background: var(--conforme); border-color: var(--conforme); }
+
+  textarea.prompt {
+    display: block; width: 100%; height: 22rem; resize: vertical;
+    border: 1px solid var(--rule-firm); background: var(--paper-sunk); color: var(--ink);
+    font-family: var(--mono); font-size: .8rem; line-height: 1.62;
+    padding: 1rem; white-space: pre-wrap;
+  }
+  .prompts .rodape { margin-top: 1rem; max-width: var(--measure); font-size: .9rem; color: var(--ink-soft); border-left: 2px solid var(--medida); padding-left: .9rem; }
+
+  footer.creditos {
+    margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+    font-size: .86rem; color: var(--ink-faint); max-width: var(--measure);
+  }
+  footer.creditos p { margin: 0 0 .5rem; }
+  footer.creditos strong { color: var(--ink-soft); font-weight: 600; }
+  .top .experimental {
+    margin: 1.1rem 0 0; max-width: var(--measure);
+    border-left: 2px solid var(--conforme); padding-left: .9rem;
+    font-size: .9rem; color: var(--ink-soft);
+  }
+  .experimental p { margin: 0 0 .55rem; }
+  .experimental p:last-child { margin-bottom: 0; }
+  a { color: var(--medida); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover, a:focus-visible { color: var(--ink); }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Analisador de dissertações e teses</h1>
+    <p>A metade mecânica da análise: o que se confere sem discutir e se corrige sem negociar. Abre o <code>.docx</code>, resolve a herança de estilos e mede forma, ritmo, aparato gráfico e higiene bibliográfica. Não julga o argumento, e nenhuma medida daqui é medida de qualidade.</p>
+    <p class="ressalva">Nenhuma medida desta página é, por si, um defeito. O que uma medida significa depende do gênero do trabalho, e essa é uma decisão de leitura: um número alto de parágrafos curtos é defeito em prosa argumentativa e é a forma certa num capítulo de catálogo; a ausência de condição de refutação é grave em pesquisa que testa hipótese e é esperada em pesquisa descritiva.</p>
+    <p class="privacidade">O arquivo é lido no seu navegador e não sai da máquina</p>
+    <div class="experimental">
+      <p>Estes assistentes foram desenvolvidos pelo Prof. Alexandre Araújo Costa prioritariamente para uso dos seus estudantes e orientandos, na graduação e na pós-graduação da Faculdade de Direito da UnB. A princípio podem servir a outras abordagens, especialmente no direito e nas demais ciências sociais, mas só testes mais amplos permitirão medir a qualidade das respostas, nessas áreas e fora delas.</p>
+      <p>Por isso a abordagem é experimental, está em fase de testes, e o retorno importa. Quem quiser relatar um resultado, apontar um erro ou sugerir um ajuste pode usar <a href="https://forms.gle/BHhKZSQiRq1JUgsE8">este formulário</a>, feito para colher resultados e comentários.</p>
+    </div>
+  </header>
+
+  <div class="cols">
+    <aside class="rail">
+      <label class="solta" id="solta" tabindex="0">
+        <strong>Escolher arquivo .docx</strong>
+        <span>ou arraste até aqui</span>
+        <input type="file" id="entrada" accept=".docx" />
+      </label>
+
+      <div class="ficha" id="ficha" hidden>
+        <h2>Ficha</h2>
+        <dl id="fichaDl"></dl>
+      </div>
+
+      <nav class="indice" id="indice" hidden>
+        <h2>Diagnóstico</h2>
+        <ol id="indiceOl"></ol>
+      </nav>
+
+      <div class="acoes">
+        <button class="acao destaque" id="copiarMedidas" disabled>Copiar as medidas</button>
+        <p class="ajuda">Copia, em Markdown, tudo o que esta página apurou. Cole no assistente junto com o trabalho e o prompt.</p>
+        <details id="verMedidas" hidden>
+          <summary>Ver e selecionar à mão</summary>
+          <textarea id="areaMedidas" readonly spellcheck="false"></textarea>
+        </details>
+      </div>
+    </aside>
+
+    <main class="painel" id="painel">
+      <div class="abertura">
+        <h2>O que este instrumento mede</h2>
+        <p>Dez blocos, todos apurados a partir do XML do próprio arquivo, sem inferência e sem amostragem.</p>
+        <ul>
+          <li>Formatação do corpo de texto: padrão dominante e cada desvio, com exemplo localizado</li>
+          <li>Hierarquia de títulos: coerência dentro de cada nível e saltos de nível</li>
+          <li>Pseudo-títulos, isto é, parágrafos formatados à mão como título</li>
+          <li>Ritmo dos parágrafos, com o piso de dez linhas convertido a partir da mancha real da página</li>
+          <li>Sequências em staccato, onde a ligação entre as frases costuma não ter sido feita</li>
+          <li>Gráficos e tabelas: numeração, elementos órfãos e blocos que só descrevem</li>
+          <li>Balanço de capítulos e de subseções, para decidir fusão, fissão e corte</li>
+          <li>Citações do corpo confrontadas com a lista de referências</li>
+          <li>Sujeira tipográfica</li>
+          <li>Marcas de escrita que hoje fazem um texto parecer gerado</li>
+        </ul>
+        <p class="aviso">O que este instrumento não faz é a parte que decide: se o problema de pesquisa se sustenta, se o método aplicado é o método declarado, se a conclusão excede a evidência. Isso exige leitura, e leitura é a outra metade.</p>
+      </div>
+    </main>
+  </div>
+
+  <section class="cuidados" id="cuidados">
+    <h2>Cuidados na aplicação</h2>
+    <p class="chamada">Há duas maneiras de rodar a análise, elas enxergam coisas diferentes, e a diferença não é de qualidade: é de posição. Quem usa só uma das duas perde exatamente o que a outra veria.</p>
+
+    <div class="modos">
+      <div class="modo">
+        <span class="rot">Leitura fria</span>
+        <p>Sessão nova, só o arquivo, nenhum histórico. Não sabe nada do processo, e é isso que a torna útil: <strong>é a condição da banca</strong>, que também não sabe o que você quis dizer. Com acesso à web, é a única que confere se as obras citadas existem e se as citações diretas batem com a fonte.</p>
+      </div>
+      <div class="modo">
+        <span class="rot">Dentro da sessão de desenvolvimento</span>
+        <p>O assistente tem as versões anteriores, as decisões tomadas, o material de origem, os dados. Enxerga o que o texto final não mostra: divergência entre o notebook e o número impresso, item que sumiu do material de origem para o capítulo, conteúdo de imagem que nenhuma busca textual alcança.</p>
+      </div>
+    </div>
+
+    <h3>Onde o uso dentro da sessão falha</h3>
+    <p>Os quatro modos de falha abaixo não são defeito do modelo. São consequência da posição, e por isso nenhum deles se resolve pedindo mais rigor.</p>
+    <dl class="falhas">
+      <dt>Contaminação por contexto</dt>
+      <dd>O assistente sabe o que você quis dizer e lê preenchendo as lacunas com a memória da conversa. Julga claro o que é claro para ele. É a falha mais perigosa porque é invisível: ninguém percebe estar completando um texto.</dd>
+
+      <dt>Deriva para advogado de defesa</dt>
+      <dd>Numa sessão longa o assistente ajudou a construir a coisa, e criticá-la é criticar trabalho de que ele participou. Aparece como explicação onde deveria haver medida.</dd>
+
+      <dt>Conformidade no lugar de qualidade</dt>
+      <dd>Conferir se o que foi determinado na rodada anterior foi executado mede execução, não mérito. É excelente nisso, e o risco é que substitua a releitura: "fizemos o que foi determinado" não é "o texto está bom".</dd>
+
+      <dt>Cegueira à pauta</dt>
+      <dd>O que nunca entrou na conversa não entra no relatório. Um erro de inferência num parágrafo que nunca foi discutido permanece invisível, por melhor que seja o assistente. A leitura fria não tem pauta.</dd>
+    </dl>
+
+    <h3>O que fazer</h3>
+    <ol class="fazer">
+      <li><strong>Rode as duas, e nunca só a de dentro.</strong> A de dentro para acompanhar execução e para o que só se vê com o material na mão; a fria para o que a banca vai ver.</li>
+      <li><strong>Não explique o trabalho para a leitura fria.</strong> É a instrução mais contraintuitiva e a mais importante: o valor dela vem da ignorância. Anexe o arquivo, cole o prompt, e mais nada. Toda frase de contexto que você acrescentar é justamente o contexto que a banca não terá, devolvido ao leitor que existe para simular a falta dele.</li>
+      <li><strong>Peça, na sessão de desenvolvimento, a lista do que você contou e não está escrito.</strong> Literalmente: "liste tudo o que eu disse ao longo da sessão que não está no texto". Cada item ali é uma lacuna que a banca vai encontrar, e é o único diagnóstico que só o assistente contaminado consegue produzir.</li>
+      <li><strong>Tire dele o bloco de pontos de atenção.</strong> Ninguém é testemunha do próprio caso. Esse bloco vem da leitura fria ou de quem orienta.</li>
+      <li><strong>Separe conformidade de mérito em dois pedidos.</strong> Um relatório de execução e um de leitura, sem misturar, porque misturados o primeiro engole o segundo.</li>
+      <li><strong>Trate a divergência entre os dois relatórios como o achado principal.</strong> Onde eles discordam é onde olhar, e a regra é não resolver escolhendo o mais gentil.</li>
+    </ol>
+  </section>
+
+  <section class="prompts" id="prompts">
+    <h2>A outra metade: o prompt</h2>
+    <p>Esta página mede, e a medida não lê o argumento. Quem decide se o problema de pesquisa se sustenta, se o método aplicado é o método declarado e se a conclusão excede a evidência é a leitura, e ela vai aqui, em formato portátil: não é site nem aplicativo, é apenas um texto que se cola em qualquer assistente de IA gratuito.</p>
+    <ol class="passos">
+      <li><strong>Copie as medidas</strong> no botão da coluna ao lado, depois de carregar o arquivo. É tudo o que esta página apurou, em Markdown.</li>
+      <li><strong>Copie</strong> o prompt abaixo e cole como primeira mensagem num assistente.</li>
+      <li><strong>Anexe o .docx</strong> (ou cole o texto do trabalho) junto com as medidas copiadas.</li>
+      <li>O assistente devolve o relatório. Se ele pedir upgrade no meio, é só o limite gratuito: abra conversa nova, cole o prompt outra vez e reenvie os arquivos.</li>
+    </ol>
+
+    <div class="barra">
+      <span class="desc" id="descPrompt">Um relatório só, com veredito, determinações, metodologia, arquitetura do argumento e as perguntas que a banca vai fazer.</span>
+      <button type="button" class="copiar" id="copiar">Copiar prompt</button>
+    </div>
+    <textarea class="prompt" id="textoPrompt" readonly spellcheck="false"></textarea>
+
+    <p class="rodape" id="rodapePrompt">O mesmo relatório serve a quem escreve e a quem orienta, e o ideal é que quem escreve rode primeiro. Por isso ele não traz especulação sobre autoria: o que entra é o que se confere (referência que não se confirma, citação que não bate com a fonte, número que não fecha), e não impressão sobre quem escreveu o quê.</p>
+  </section>
+
+  <footer class="creditos">
+    <p><strong>Concepção, critérios e prompts:</strong> Prof. Alexandre Araújo Costa, Universidade de Brasília. Desenvolvido com apoio do modelo Opus, da Anthropic, no Claude Code.</p>
+    <p>As medições desta página são executadas pelo seu próprio navegador, sem modelo de linguagem envolvido e sem que o arquivo saia da sua máquina. O que exige leitura é a outra metade, e está no prompt acima.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+  const TWIP_CM = 566.929, TWIP_PT = 20;
+
+  /* ------------------------------------------------------------------ zip */
+
+  async function lerZip(buf) {
+    const dv = new DataView(buf), n = buf.byteLength;
+    let eocd = -1;
+    for (let i = n - 22; i >= Math.max(0, n - 66000); i--) {
+      if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+    }
+    if (eocd < 0) throw new Error("Arquivo não parece um .docx (diretório zip não encontrado).");
+    const total = dv.getUint16(eocd + 10, true);
+    let off = dv.getUint32(eocd + 16, true);
+    const dec = new TextDecoder();
+    const itens = new Map();
+    for (let i = 0; i < total; i++) {
+      if (dv.getUint32(off, true) !== 0x02014b50) break;
+      const metodo = dv.getUint16(off + 10, true);
+      const comp = dv.getUint32(off + 20, true);
+      const nomeLen = dv.getUint16(off + 28, true);
+      const extraLen = dv.getUint16(off + 30, true);
+      const comentLen = dv.getUint16(off + 32, true);
+      const local = dv.getUint32(off + 42, true);
+      const nome = dec.decode(new Uint8Array(buf, off + 46, nomeLen));
+      itens.set(nome, { metodo, comp, local });
+      off += 46 + nomeLen + extraLen + comentLen;
+    }
+    return { buf, dv, itens };
+  }
+
+  async function extrair(zip, nome) {
+    const it = zip.itens.get(nome);
+    if (!it) return null;
+    const { dv, buf } = zip;
+    if (dv.getUint32(it.local, true) !== 0x04034b50) return null;
+    const nomeLen = dv.getUint16(it.local + 26, true);
+    const extraLen = dv.getUint16(it.local + 28, true);
+    const ini = it.local + 30 + nomeLen + extraLen;
+    const bruto = new Uint8Array(buf, ini, it.comp);
+    if (it.metodo === 0) return new TextDecoder().decode(bruto);
+    if (it.metodo !== 8) throw new Error("Compressão não suportada dentro do .docx.");
+    if (typeof DecompressionStream === "undefined") {
+      throw new Error("Este navegador não descompacta zip nativamente. Use uma versão recente do Chrome, Edge ou Firefox.");
+    }
+    const fluxo = new Blob([bruto]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+    return new TextDecoder().decode(await new Response(fluxo).arrayBuffer());
+  }
+
+  const parseXml = (t) => new DOMParser().parseFromString(t, "application/xml");
+  const filhos = (el, nome) => el ? Array.from(el.children).filter(c => c.localName === nome) : [];
+  const filho = (el, nome) => el ? Array.from(el.children).find(c => c.localName === nome) || null : null;
+  const attr = (el, nome) => el ? (el.getAttributeNS(W, nome) ?? el.getAttribute("w:" + nome)) : null;
+  const inteiro = (v) => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : null; };
+  const ligado = (el) => { if (!el) return null; const v = attr(el, "val"); return !(v === "0" || v === "false" || v === "off"); };
+
+  /* ---------------------------------------------------------- propriedades */
+
+  function lerRpr(rpr) {
+    const d = {};
+    if (!rpr) return d;
+    const f = filho(rpr, "rFonts");
+    if (f) { const v = attr(f, "ascii") || attr(f, "hAnsi") || attr(f, "cs"); if (v) d.font = v; }
+    const sz = inteiro(attr(filho(rpr, "sz"), "val"));
+    if (sz) d.size = sz / 2;
+    for (const [t, k] of [["b", "bold"], ["i", "italic"], ["caps", "caps"], ["smallCaps", "vers"], ["u", "sub"]]) {
+      const e = filho(rpr, t); if (e) d[k] = ligado(e);
+    }
+    const c = filho(rpr, "color");
+    if (c) { const v = attr(c, "val"); if (v && v !== "auto" && v !== "000000") d.color = v; }
+    const h = filho(rpr, "highlight");
+    if (h && attr(h, "val") && attr(h, "val") !== "none") d.marca = attr(h, "val");
+    const rs = filho(rpr, "rStyle");
+    if (rs) d.rstyle = attr(rs, "val");
+    return d;
+  }
+
+  function lerPpr(ppr) {
+    const d = {};
+    if (!ppr) return d;
+    const sp = filho(ppr, "spacing");
+    if (sp) {
+      const line = inteiro(attr(sp, "line"));
+      if (line !== null) { d.line = line; d.lineRule = attr(sp, "lineRule") || "auto"; }
+      const b = inteiro(attr(sp, "before")); if (b !== null) d.before = b;
+      const a = inteiro(attr(sp, "after")); if (a !== null) d.after = a;
+    }
+    const ind = filho(ppr, "ind");
+    if (ind) {
+      for (const [a, k] of [["left", "il"], ["start", "il"], ["right", "ir"], ["end", "ir"], ["firstLine", "i1"], ["hanging", "ih"]]) {
+        const v = inteiro(attr(ind, a)); if (v !== null) d[k] = v;
+      }
+    }
+    const jc = filho(ppr, "jc"); if (jc) d.align = attr(jc, "val");
+    const ol = filho(ppr, "outlineLvl"); if (ol) d.outline = inteiro(attr(ol, "val"));
+    if (filho(ppr, "numPr")) d.num = true;
+    const ps = filho(ppr, "pStyle"); if (ps) d.style = attr(ps, "val");
+    return d;
+  }
+
+  const juntar = (...ds) => {
+    const o = {};
+    for (const d of ds) if (d) for (const k in d) if (d[k] !== null && d[k] !== undefined) o[k] = d[k];
+    return o;
+  };
+
+  function montarEstilos(doc) {
+    const E = { bruto: new Map(), nomes: new Map(), base: new Map(), padraoP: {}, padraoR: {}, padrao: null, memo: new Map() };
+    if (!doc) return E;
+    const raiz = doc.documentElement;
+    const dd = filho(raiz, "docDefaults");
+    if (dd) {
+      const rd = filho(dd, "rPrDefault"); if (rd) E.padraoR = lerRpr(filho(rd, "rPr"));
+      const pd = filho(dd, "pPrDefault"); if (pd) E.padraoP = lerPpr(filho(pd, "pPr"));
+    }
+    for (const st of filhos(raiz, "style")) {
+      const id = attr(st, "styleId"); if (!id) continue;
+      E.bruto.set(id, [lerPpr(filho(st, "pPr")), lerRpr(filho(st, "rPr"))]);
+      E.nomes.set(id, attr(filho(st, "name"), "val") || id);
+      const bo = filho(st, "basedOn"); if (bo) E.base.set(id, attr(bo, "val"));
+      if ((attr(st, "default") === "1" || attr(st, "default") === "true") && attr(st, "type") === "paragraph") E.padrao = id;
+    }
+    return E;
+  }
+
+  function resolver(E, id) {
+    if (!id) return [{}, {}];
+    if (E.memo.has(id)) return E.memo.get(id);
+    const cadeia = []; const visto = new Set(); let cur = id;
+    while (cur && E.bruto.has(cur) && !visto.has(cur)) { visto.add(cur); cadeia.push(cur); cur = E.base.get(cur); }
+    let p = {}, r = {};
+    for (let i = cadeia.length - 1; i >= 0; i--) { const [pp, rr] = E.bruto.get(cadeia[i]); p = juntar(p, pp); r = juntar(r, rr); }
+    const par = [p, r]; E.memo.set(id, par); return par;
+  }
+
+  /* ---------------------------------------------------------- parágrafos */
+
+  const RE_TIT = /^(heading|t[ií]tulo)\s*(\d)/i;
+  const RE_NUM = /^\s*(\d+(?:[.\-]\d+)*)[.\-)]?\s+\S/;
+
+  function montarParagrafo(p, E, idx, emTabela) {
+    const o = { idx, emTabela, notas: [], quebras: 0, texto: "" };
+    const ppr = filho(p, "pPr");
+    const dp = lerPpr(ppr);
+    o.estilo = dp.style || E.padrao;
+    o.estiloNome = E.nomes.get(o.estilo) || o.estilo || "";
+    const [sp, sr] = resolver(E, o.estilo);
+    o.pp = juntar(E.padraoP, sp, dp);
+
+    const m = RE_TIT.exec(o.estiloNome || "");
+    if (m) o.nivel = +m[2];
+    else if (o.pp.outline !== undefined && o.pp.outline !== null && o.pp.outline < 9) o.nivel = o.pp.outline + 1;
+    else o.nivel = null;
+
+    const partes = [], pesos = [];
+    const anda = (no) => {
+      for (const c of Array.from(no.children)) {
+        if (c.localName === "r") {
+          const dr = lerRpr(filho(c, "rPr"));
+          let ef = juntar(E.padraoR, sr, dr);
+          if (dr.rstyle) { const [, cr] = resolver(E, dr.rstyle); ef = juntar(E.padraoR, sr, cr, dr); }
+          let t = "";
+          for (const x of Array.from(c.children)) {
+            if (x.localName === "t") t += x.textContent || "";
+            else if (x.localName === "tab") t += "\t";
+            else if (x.localName === "br") { if (attr(x, "type") !== "page") o.quebras++; t += "\n"; }
+          }
+          if (t) { partes.push(t); pesos.push([Math.max(t.trim().length, 1), ef]); }
+        } else if (c.localName === "footnoteReference") {
+          const id = attr(c, "id"); if (id) { o.notas.push(id); partes.push("[nota " + id + "]"); }
+        } else if (c.localName === "hyperlink" || c.localName === "smartTag" || c.localName === "ins") {
+          anda(c);
+        }
+      }
+    };
+    anda(p);
+    o.texto = partes.join("");
+
+    if (pesos.length) {
+      const cont = new Map();
+      for (const [n, ef] of pesos) {
+        const k = [ef.font, ef.size, !!ef.bold, !!ef.italic, !!(ef.caps || ef.vers)].join("|");
+        cont.set(k, (cont.get(k) || 0) + n);
+      }
+      let melhor = null, max = -1;
+      for (const [k, v] of cont) if (v > max) { max = v; melhor = k; }
+      const [font, size, bold, italic, caps] = melhor.split("|");
+      o.rp = { font: font || null, size: size ? +size : null, bold: bold === "true", italic: italic === "true", caps: caps === "true" };
+      const cor = pesos.find(([, e]) => e.color); if (cor) o.rp.color = cor[1].color;
+      const mk = pesos.find(([, e]) => e.marca); if (mk) o.rp.marca = mk[1].marca;
+    } else {
+      o.rp = juntar(E.padraoR, sr, ppr ? lerRpr(filho(ppr, "rPr")) : {});
+    }
+    return o;
+  }
+
+  function coletar(corpo, E) {
+    const saida = []; let n = 0;
+    const anda = (no, emTabela) => {
+      for (const c of Array.from(no.children)) {
+        if (c.localName === "p") saida.push(montarParagrafo(c, E, ++n, emTabela));
+        else if (c.localName === "tbl") anda(c, true);
+        else if (["sdt", "sdtContent", "tr", "tc", "customXml"].includes(c.localName)) anda(c, emTabela);
+      }
+    };
+    anda(corpo, false);
+    return saida;
+  }
+
+  /* ---------------------------------------------------------- descrições */
+
+  const cm = (t) => t / TWIP_CM;
+  const nfmt = (n, d = 0) => n.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d });
+
+  function descLinha(p) {
+    if (p.pp.line === undefined) return "simples";
+    if ((p.pp.lineRule || "auto") === "auto") return nfmt(p.pp.line / 240, 2).replace(/,?0+$/, "");
+    return "exato " + nfmt(p.pp.line / TWIP_PT, 0) + "pt";
+  }
+  function descRecuo(p) {
+    const q = [];
+    if (p.pp.il) q.push("esq " + nfmt(cm(p.pp.il), 2));
+    if (p.pp.ir) q.push("dir " + nfmt(cm(p.pp.ir), 2));
+    if (p.pp.i1) q.push("1ª " + nfmt(cm(p.pp.i1), 2));
+    if (p.pp.ih) q.push("desl " + nfmt(cm(p.pp.ih), 2));
+    return q.length ? "recuo " + q.join(" / ") + " cm" : "sem recuo";
+  }
+  function descFonte(p) {
+    let s = (p.rp.font || "herdada") + " " + (p.rp.size ? nfmt(p.rp.size, 1).replace(",0", "") : "?") + "pt";
+    if (p.rp.bold) s += " negrito";
+    if (p.rp.italic) s += " itálico";
+    if (p.rp.caps) s += " versal";
+    return s;
+  }
+  const descAlinha = (p) => ({ both: "justificado", left: "esquerda", right: "direita", center: "centralizado", start: "esquerda", end: "direita" })[p.pp.align] || "esquerda";
+  const assinatura = (p) => descFonte(p) + " | entrel " + descLinha(p) + " | antes " + nfmt((p.pp.before || 0) / TWIP_PT) + " / depois " + nfmt((p.pp.after || 0) / TWIP_PT) + " pt | " + descRecuo(p) + " | " + descAlinha(p);
+  const trecho = (p, n = 88) => { const t = p.texto.replace(/\s+/g, " ").trim(); return t.length > n ? t.slice(0, n) + "…" : t; };
+
+  /* ---------------------------------------------------------- classificação */
+
+  const RE_SUM = /[\t.…]\s*\d{1,4}\s*$/;
+  const RE_CODIGO = /^\s*(import |from \w+ import|def |class |print\(|#|\/\/|<\?|\{|\})/;
+  const RE_LEGENDA = /^\s*(Gr[áa]fico|Tabela|Figura|Quadro|Esquema|Imagem)\s*n?[.º°]?\s*(\d+)/i;
+  const RE_FONTE = /^\s*(Fonte|Nota|Legenda|Obs)\b/i;
+  const RE_ITEM = /^\s*([-•–]|\(?[a-z]\)|\(?[ivx]+\)|\d+[.)])\s+/i;
+  const RE_FIM = /^\s*(REFER[ÊE]NCIAS?|BIBLIOGRAFIA|OBRAS CITADAS|AP[ÊE]NDICES?|ANEXOS?)\b/i;
+  const RE_PRE = /^\s*(SUM[ÁA]RIO|[ÍI]NDICE|LISTA DE|RESUMO|ABSTRACT|AGRADECIMENTOS?|DEDICAT[ÓO]RIA|EP[ÍI]GRAFE)/i;
+
+  const eCorpo = (p) => p.nivel === null && !p.emTabela && p.texto.trim().length > 60;
+  function eSumario(p) {
+    const nome = (p.estiloNome || "").toLowerCase();
+    if (nome.startsWith("toc") || nome.includes("sumário") || nome.includes("sumario")) return true;
+    const t = p.texto.replace(/[.…_]{4,}/g, " ").trim();
+    return !!t && t.length < 200 && RE_SUM.test(t);
+  }
+  function eCodigo(p) {
+    const t = p.texto.trim(); if (!t) return false;
+    if (RE_CODIGO.test(t)) return true;
+    let s = 0; for (const c of t) if ("{}[]()=;<>_|/\\`".includes(c)) s++;
+    return s / t.length > 0.06;
+  }
+  function ePseudo(p, base) {
+    const t = p.texto.trim();
+    if (p.nivel !== null || !t || t.length > 130 || p.emTabela) return false;
+    if (eSumario(p) || eCodigo(p)) return false;
+    if (/[.;,:]$/.test(t) && !RE_NUM.test(t)) return false;
+    const marcado = p.rp.bold || p.rp.caps || (base && p.rp.size && p.rp.size > base);
+    return !!marcado || (RE_NUM.test(t) && t.length < 90);
+  }
+  function eCitacao(p, base, ini) {
+    if (p.nivel !== null || !p.texto.trim() || p.emTabela || p.idx < ini || eCodigo(p)) return false;
+    const esq = p.pp.il || 0;
+    const menor = base && p.rp.size && p.rp.size < base;
+    return (esq >= 1500 && p.texto.trim().length > 120) || (!!menor && esq > 500);
+  }
+  function eProsa(p, base) {
+    const t = p.texto.trim();
+    if (!eCorpo(p) || p.emTabela) return false;
+    if (eSumario(p) || eCodigo(p) || ePseudo(p, base)) return false;
+    if (RE_LEGENDA.test(t) || RE_FONTE.test(t) || RE_ITEM.test(t)) return false;
+    return !t.endsWith(":");
+  }
+
+  const RE_ABREV = /\b(art|arts|inc|p|pp|n|no|cf|op|cit|ed|orgs?|coord|s[ée]c|vol|fl|fls|Dr|Dra|Sr|Sra|Prof|Min|Rel|Ex)\./gi;
+  function frases(t) {
+    let s = t.replace(RE_ABREV, "ABREV").replace(/(?<=\d)[.,](?=\d)/g, "");
+    const partes = s.trim().split(/(?<=[.!?])[\s”")]+(?=[A-ZÀ-ÝÁÉÍÓÚÂÊÔÃÕÇ“(\d])/);
+    return Math.max(partes.filter(x => x.trim().length > 3).length, 1);
+  }
+
+  const RE_CIT_ANO = /\b([A-ZÀ-Ý][A-Za-zÀ-ÿ'’\-]{2,})\s*(?:et\s+al\.?)?\s*\((\d{4})[a-z]?/g;
+  const RE_CIT_PAR = /\(\s*([A-ZÀ-Ý][A-Za-zÀ-ÿ'’\-]{2,})[^)]{0,60}?,\s*(\d{4})[a-z]?/g;
+  const NAO_AUTOR = new Set(["ANO","ART","ARTS","LEI","EMENDA","RESOLUCAO","TEMA","ADI","ADC","ADPF","MS","HC","TABELA","GRAFICO","FIGURA","QUADRO","ESQUEMA","ANEXO","APENDICE","EM","NO","NA","DE","DO","DA","PARA","POR","COMO","SEGUNDO","CONFORME","ENTRE","ATE","DESDE","AINDA","APENAS","ASSIM","ESSE","ESSA","ESTE","ESTA","TODOS","AMBOS","OUTRO","DURANTE","APOS","ANTES","SOBRE","COM","SEM","SOB","ANOS","DIAS","MESES","PERIODO","CAPITULO","SECAO","ITEM","NOTA","FONTE","PAGINA","VOLUME"]);
+  const semAcento = (s) => s.toUpperCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+
+  const RE_INFER = /\b(portanto|logo|por isso|de modo que|raz[ãa]o pela qual|(isso|o que|que)\s+(indica|sugere|revela|significa|explica|demonstra|evidencia|confirma|contraria|implica|permite)|conclui-se|depreende-se|infere-se|explica-se|decorre|corrobora|permite\s+(afirmar|concluir|supor)|na medida em que|uma vez que|porque|dado que|visto que|contraintuitiv|surpreend|chama a aten[çc][ãa]o)/i;
+  const RE_ROTULO = /(gr[áa]ficos?|tabelas?|figuras?|quadros?|esquemas?)\s*n?[.º°]?\s*(\d+(?:\s*(?:,|e|a|at[ée])\s*\d+)*)/gi;
+
+  function densidadeNum(t) {
+    const toks = t.split(/\s+/).filter(Boolean);
+    if (!toks.length) return 0;
+    let n = 0;
+    for (const x of toks) if (/^[(\[]?[R$€]?\s?\d[\d.,]*\s?%?[)\]]?[.,;:]?$/.test(x)) n++;
+    return n / toks.length;
+  }
+
+  /* ---------------------------------------------------------- análise */
+
+  function analisar(pars, geo, notas, imagens) {
+    const R = { blocos: [], ficha: {}, md: [] };
+    const tallySize = new Map();
+    for (const p of pars) if (eCorpo(p) && p.rp.size) tallySize.set(p.rp.size, (tallySize.get(p.rp.size) || 0) + 1);
+    let base = null, maxc = -1;
+    for (const [k, v] of tallySize) if (v > maxc) { maxc = v; base = k; }
+
+    const titulos = pars.filter(p => p.nivel !== null && p.texto.trim());
+    let ini = 0;
+    for (const h of titulos) if (/^\s*\d/.test(h.texto.trim())) { ini = h.idx; break; }
+    if (!ini) { const h = titulos.find(x => !RE_PRE.test(x.texto.trim())); ini = h ? h.idx : (titulos[0] ? titulos[0].idx : 1); }
+    let fim = pars.length + 1;
+    for (const p of pars) {
+      const t = p.texto.trim();
+      if (p.idx <= ini || !t || eSumario(p)) continue;
+      if (RE_FIM.test(t) && (p.nivel !== null || t.length < 60)) { fim = p.idx; break; }
+    }
+
+    const palavras = (t) => t.split(/\s+/).filter(x => x.replace(/[.,;:()\[\]—-]/g, "").length).length;
+    const wTotal = pars.reduce((a, p) => a + palavras(p.texto), 0);
+    const principal = pars.filter(p => p.idx >= ini && p.idx < fim);
+    const wPrinc = Math.max(principal.reduce((a, p) => a + palavras(p.texto), 0), 1);
+
+    R.ficha = {
+      "Palavras": nfmt(wTotal),
+      "Texto principal": nfmt(wPrinc),
+      "Parágrafos": nfmt(pars.length),
+      "Títulos": nfmt(titulos.length),
+      "Notas de rodapé": nfmt(notas.length),
+      "Imagens": nfmt(imagens),
+      "Em tabela": nfmt(pars.filter(p => p.emTabela).length)
+    };
+
+    const B = (id, titulo, nota) => { const b = { id, titulo, nota, metricas: [], achados: [], html: [] }; R.blocos.push(b); return b; };
+
+    /* 1. corpo */
+    {
+      const b = B("forma", "Formatação do corpo de texto", "O critério é coerência interna, sem comparação com norma externa. Variante com função é escolha (legenda em corpo menor, citação recuada); variante que aparece uma vez só costuma ser descuido. Quem separa as duas é a leitura.");
+      const corpos = pars.filter(eCorpo);
+      const sig = new Map();
+      for (const p of corpos) { const s = assinatura(p); if (!sig.has(s)) sig.set(s, []); sig.get(s).push(p); }
+      const ord = [...sig.entries()].sort((a, c) => c[1].length - a[1].length);
+      if (!ord.length) { b.achados.push({ vazio: "Nenhum parágrafo de corpo identificado." }); }
+      else {
+        const [domS, domP] = ord[0];
+        const pctDom = 100 * domP.length / corpos.length;
+        b.metricas.push({ r: "no padrão dominante", v: nfmt(pctDom, 0) + "%", tom: pctDom >= 80 ? "bom" : pctDom >= 55 ? "" : "alerta" });
+        b.metricas.push({ r: "formatações distintas", v: nfmt(ord.length), tom: ord.length > 12 ? "alerta" : "" });
+        b.achados.push({ chip: "padrão", tom: "ok", titulo: domP.length + " de " + corpos.length + " parágrafos", detalheMono: domS });
+        for (const [s, ps] of ord.slice(1, 11)) {
+          b.achados.push({ chip: ps.length + "×", tom: "", titulo: "variante", detalheMono: s, exemplos: ps.slice(0, 3) });
+        }
+        if (ord.length > 11) b.achados.push({ vazio: "mais " + (ord.length - 11) + " variantes não listadas" });
+      }
+    }
+
+    /* 2. títulos */
+    {
+      const b = B("titulos", "Hierarquia de títulos", "Nível formatado de maneiras diferentes indica hierarquia montada à mão, e costuma vir junto com hierarquia lógica frouxa.");
+      if (!titulos.length) b.achados.push({ vazio: "Nenhum título com estilo de título. Ver o bloco de pseudo-títulos." });
+      else {
+        const porNivel = new Map();
+        for (const h of titulos) { if (!porNivel.has(h.nivel)) porNivel.set(h.nivel, new Map()); const m = porNivel.get(h.nivel); const s = assinatura(h); if (!m.has(s)) m.set(s, []); m.get(s).push(h); }
+        let incoerentes = 0;
+        for (const [, m] of porNivel) if (m.size > 1) incoerentes++;
+        b.metricas.push({ r: "títulos", v: nfmt(titulos.length) });
+        b.metricas.push({ r: "níveis incoerentes", v: nfmt(incoerentes), tom: incoerentes ? "alerta" : "bom" });
+        const saltos = [];
+        let ant = null;
+        for (const h of titulos) { if (ant !== null && h.nivel > ant + 1) saltos.push([h, ant]); ant = h.nivel; }
+        if (saltos.length) b.achados.push({ chip: "salto", tom: "grave", titulo: saltos.length + " título(s) pulam um degrau da hierarquia", exemplos: saltos.slice(0, 4).map(([h]) => h) });
+        for (const nivel of [...porNivel.keys()].sort()) {
+          const m = porNivel.get(nivel);
+          const vars = [...m.entries()].sort((a, c) => c[1].length - a[1].length);
+          if (vars.length === 1) b.achados.push({ chip: "N" + nivel, tom: "ok", titulo: "uniforme, " + vars[0][1].length + " título(s)", detalheMono: vars[0][0] });
+          else {
+            b.achados.push({ chip: "N" + nivel, tom: "grave", titulo: vars.length + " formatações diferentes no mesmo nível",
+              sublistas: vars.map(([s, hs]) => ({ mono: "[" + hs.length + "×] " + s, exemplos: hs.slice(0, 2) })) });
+          }
+        }
+      }
+    }
+
+    /* 3. pseudo-títulos */
+    {
+      const b = B("pseudo", "Pseudo-títulos", "Parágrafos formatados à mão como título não entram no sumário automático nem no mapa do documento.");
+      const todos = pars.filter(p => ePseudo(p, base));
+      const corpo = todos.filter(p => p.idx >= ini);
+      b.metricas.push({ r: "no corpo do texto", v: nfmt(corpo.length), tom: corpo.length ? "alerta" : "bom" });
+      b.metricas.push({ r: "pré-textuais", v: nfmt(todos.length - corpo.length) });
+      if (!corpo.length) b.achados.push({ vazio: "Nenhum no corpo do texto. Os pré-textuais quase nunca importam." });
+      else b.achados.push({ chip: "à mão", tom: "atencao", titulo: corpo.length + " parágrafo(s) no corpo parecem título", exemplos: corpo.slice(0, 10) });
+    }
+
+    /* 4. ritmo */
+    {
+      const b = B("ritmo", "Ritmo dos parágrafos", "O piso de dez linhas sai da mancha real da página, mas é preferência de quem montou este instrumento, não padrão da área: dissertações aprovadas ficam rotineiramente abaixo dele. O que a medida serve para localizar são as sequências em staccato, e nelas o defeito nunca é o comprimento, é a relação entre as frases que ficou implícita. Em capítulo descritivo ou de catálogo, onde cada parágrafo esgota um caso, o parágrafo curto é a forma certa. E nunca se resolve fundindo parágrafos.");
+      const prosa = pars.filter(p => eProsa(p, base) && p.idx >= ini && p.idx < fim);
+      let cpl = 78;
+      if (geo && base) { const util = (geo.w || 21) - (geo.left || 3) - (geo.right || 2); if (util > 1) cpl = util / (base * 0.01764); }
+      const piso = 10 * cpl;
+      if (!prosa.length) b.achados.push({ vazio: "Nenhum parágrafo de prosa argumentativa isolado." });
+      else {
+        const comps = prosa.map(p => p.texto.trim().length);
+        const ordC = [...comps].sort((a, c) => a - c);
+        const med = ordC[ordC.length >> 1];
+        const fr = prosa.map(p => frases(p.texto));
+        const curtos = prosa.filter(p => p.texto.trim().length < piso);
+        const uma = fr.filter(f => f === 1).length;
+        const media = comps.reduce((a, c) => a + c, 0) / comps.length;
+        const dp = Math.sqrt(comps.reduce((a, c) => a + (c - media) ** 2, 0) / comps.length);
+        b.metricas.push({ r: "mediana em linhas", v: nfmt(med / cpl, 1), tom: med / cpl >= 10 ? "bom" : "alerta" });
+        b.metricas.push({ r: "abaixo do piso", v: nfmt(100 * curtos.length / prosa.length, 0) + "%", tom: curtos.length / prosa.length > 0.6 ? "alerta" : "" });
+        b.metricas.push({ r: "de frase única", v: nfmt(100 * uma / prosa.length, 0) + "%", tom: uma / prosa.length > 0.2 ? "alerta" : "" });
+        b.metricas.push({ r: "piso de 10 linhas", v: nfmt(piso, 0) + " car." });
+        b.faixa = { prosa, cpl, piso };
+
+        const curtoSet = new Set(curtos.map(p => p.idx));
+        const corta = new Set(pars.filter(p => p.nivel !== null || RE_LEGENDA.test(p.texto.trim())).map(p => p.idx));
+        const runs = []; let atual = [];
+        for (const p of prosa) {
+          let emenda = !atual.length;
+          if (atual.length) {
+            const a = atual[atual.length - 1].idx;
+            emenda = (p.idx - a <= 3);
+            if (emenda) for (let j = a + 1; j < p.idx; j++) if (corta.has(j)) { emenda = false; break; }
+          }
+          if (curtoSet.has(p.idx) && emenda) atual.push(p);
+          else { if (atual.length >= 3) runs.push(atual); atual = curtoSet.has(p.idx) ? [p] : []; }
+        }
+        if (atual.length >= 3) runs.push(atual);
+        runs.sort((a, c) => c.length - a.length);
+        b.metricas.push({ r: "trechos em staccato", v: nfmt(runs.length), tom: runs.length > 10 ? "alerta" : "" });
+        for (const r of runs.slice(0, 6)) {
+          const mediaR = Math.round(r.reduce((a, x) => a + x.texto.trim().length, 0) / r.length);
+          b.achados.push({ chip: "P" + r[0].idx + "–P" + r[r.length - 1].idx, tom: "atencao",
+            titulo: r.length + " parágrafos curtos seguidos, média de " + nfmt(mediaR / cpl, 1) + " linhas",
+            detalhe: "Leia o trecho e nomeie a relação que ficou implícita entre as frases: oposição, consequência, exemplificação, ressalva.",
+            exemplos: r.slice(0, 3) });
+        }
+        if (runs.length > 6) b.achados.push({ vazio: "mais " + (runs.length - 6) + " sequências não listadas" });
+      }
+    }
+
+    /* 5. gráficos */
+    {
+      const b = B("graficos", "Gráficos e tabelas", "A pergunta que decide cada elemento: o que mudaria no argumento se ele saísse?");
+      const legendas = pars.filter(p => RE_LEGENDA.test(p.texto.trim()) && !eSumario(p) && p.idx >= ini);
+      const textoCorpo = pars.filter(p => eProsa(p, base) && p.idx < fim).map(p => p.texto).join(" ");
+      const chamados = new Set();
+      let mm;
+      RE_ROTULO.lastIndex = 0;
+      while ((mm = RE_ROTULO.exec(textoCorpo))) {
+        const tipo = semAcento(mm[1]).slice(0, 5).replace(/S$/, "");
+        const nums = (mm[2].match(/\d+/g) || []).map(Number);
+        const faixa = /\b(a|at[ée])\b/i.test(mm[2]) && nums.length === 2;
+        const lista = faixa ? Array.from({ length: Math.max(...nums) - Math.min(...nums) + 1 }, (_, i) => Math.min(...nums) + i) : nums;
+        for (const n of lista) chamados.add(tipo + "|" + n);
+      }
+      if (!legendas.length) b.achados.push({ vazio: "Nenhuma legenda identificada." });
+      else {
+        const mapa = new Map(pars.map(p => [p.idx, p]));
+        const orfas = [], soDescreve = [];
+        let comInf = 0, blocos = 0;
+        for (const leg of legendas) {
+          const m = RE_LEGENDA.exec(leg.texto.trim());
+          const chave = semAcento(m[1]).slice(0, 5).replace(/S$/, "") + "|" + (+m[2]);
+          if (!chamados.has(chave)) orfas.push(leg);
+          const bloco = []; let j = leg.idx + 1;
+          while (j <= pars.length && bloco.length < 6) {
+            const q = mapa.get(j); j++;
+            if (!q || q.nivel !== null || RE_LEGENDA.test(q.texto.trim())) break;
+            if (eProsa(q, base)) bloco.push(q);
+          }
+          if (bloco.length) {
+            blocos++;
+            const t = bloco.map(x => x.texto).join(" ");
+            if (RE_INFER.test(t)) comInf++;
+            else if (densidadeNum(t) >= 0.06) soDescreve.push([leg, bloco, densidadeNum(t)]);
+          }
+        }
+        b.metricas.push({ r: "elementos", v: nfmt(legendas.length) });
+        b.metricas.push({ r: "órfãos", v: nfmt(orfas.length), tom: orfas.length ? "alerta" : "bom" });
+        b.metricas.push({ r: "blocos com inferência", v: blocos ? nfmt(100 * comInf / blocos, 0) + "%" : "—", tom: blocos && comInf / blocos < 0.5 ? "alerta" : "bom" });
+        if (orfas.length) b.achados.push({ chip: "sem chamada", tom: "", titulo: orfas.length + " elemento(s) cujo rótulo não foi encontrado no corpo do texto", detalhe: "A busca cobre plural e enumeração (\"nos gráficos 8 e 9\"), mas não pega chamada indireta do tipo \"o gráfico acima\". Confirme lendo. Se de fato nunca for chamado, a pergunta a fazer é o que mudaria no argumento se o elemento saísse.", exemplos: orfas.slice(0, 8) });
+        soDescreve.sort((a, c) => c[2] - a[2]);
+        for (const [leg, bloco, d] of soDescreve.slice(0, 6)) {
+          b.achados.push({ chip: nfmt(100 * d, 0) + "% números", tom: "atencao", titulo: trecho(leg, 70),
+            detalhe: "O bloco que segue não traz marca de inferência. Verifique se ele apenas narra o que o gráfico já mostra.", exemplos: bloco.slice(0, 2) });
+        }
+      }
+    }
+
+    /* 6. capítulos */
+    {
+      const b = B("estrutura", "Balanço de capítulos e subseções", "O número não decide nada sozinho. Decide a unidade de argumento: qual asserção única a seção estabelece, e se a seguinte depende dela.");
+      const caps = titulos.filter(h => h.nivel === 1 && h.idx >= ini && h.idx < fim);
+      if (caps.length < 2) b.achados.push({ vazio: "Menos de dois capítulos no texto principal." });
+      else {
+        const lim = caps.map(c => c.idx).concat([fim]);
+        const linhas = caps.map((c, i) => {
+          const w = pars.slice(lim[i] - 1, lim[i + 1] - 1).reduce((a, p) => a + palavras(p.texto), 0);
+          const subs = titulos.filter(h => h.nivel === 2 && h.idx > lim[i] && h.idx < lim[i + 1]).length;
+          return { c, w, subs };
+        });
+        const total = linhas.reduce((a, x) => a + x.w, 0) || 1;
+        const ws = linhas.map(x => x.w).sort((a, c) => a - c);
+        const mediana = ws[ws.length >> 1];
+        const maior = Math.max(...linhas.map(x => x.w));
+        b.metricas.push({ r: "capítulos", v: nfmt(caps.length) });
+        b.metricas.push({ r: "maior capítulo", v: nfmt(100 * maior / total, 0) + "%", tom: maior / total > 0.35 ? "alerta" : "" });
+        b.tabela = {
+          cab: ["Capítulo", "Palavras", "%", "Subseções", "Sinal"],
+          linhas: linhas.map(x => {
+            let sinal = "";
+            if (x.w < 0.4 * mediana) sinal = "magro";
+            else if (x.w > 2.2 * mediana) sinal = nfmt(x.w / mediana, 1) + "× a mediana";
+            if (x.subs === 1) sinal = (sinal ? sinal + "; " : "") + "subseção única";
+            return [trecho(x.c, 58), nfmt(x.w), nfmt(100 * x.w / total, 1) + "%", x.subs || "—", sinal];
+          })
+        };
+        const marcos = [...new Set(titulos.filter(h => (h.nivel === 1 || h.nivel === 2) && h.idx >= ini && h.idx < fim).map(h => h.idx).concat([fim]))].sort((a, c) => a - c);
+        const tamSub = [];
+        for (let i = 0; i < marcos.length - 1; i++) {
+          const h = titulos.find(x => x.idx === marcos[i]);
+          if (!h || h.nivel !== 2) continue;
+          tamSub.push({ h, w: pars.slice(marcos[i] - 1, marcos[i + 1] - 1).reduce((a, p) => a + palavras(p.texto), 0) });
+        }
+        if (tamSub.length >= 3) {
+          const ordS = tamSub.map(x => x.w).sort((a, c) => a - c);
+          const medS = ordS[ordS.length >> 1];
+          const extremos = tamSub.filter(x => x.w < 0.4 * medS || x.w > 2.5 * medS);
+          if (extremos.length) b.achados.push({ chip: "subseções", tom: "atencao",
+            titulo: extremos.length + " fora de proporção, mediana de " + nfmt(medS) + " palavras",
+            detalhe: "Subseção magra ao lado de irmãs normais costuma ser assunto que cabia num parágrafo do texto corrido.",
+            exemplos: extremos.slice(0, 8).map(x => x.h), rotulos: extremos.slice(0, 8).map(x => nfmt(x.w) + " pal.") });
+        }
+      }
+    }
+
+    /* 7. metodologia e repetibilidade */
+    {
+      const b = B("metodo", "Metodologia e repetibilidade",
+        "Presença de vocabulário não é presença da coisa. Este bloco localiza a seção e diz o que não foi sequer nomeado. Se um item aparece, ainda é preciso ler para saber se foi de fato definido.");
+      const RE_MET = /^\s*(\d+(\.\d+)*\.?\s*)?(metodolog|m[ée]todo|procedimentos?\b|desenho da pesquisa|percurso metodol|nota metodol|considera[çc][õo]es metodol|estrat[ée]gia de pesquisa)/i;
+      const secoes = titulos.filter(h => RE_MET.test(h.texto.trim()));
+      const marcos = titulos.map(h => h.idx).concat([fim]).sort((a, c) => a - c);
+      let wMet = 0;
+      for (const s of secoes) {
+        const prox = marcos.find(x => x > s.idx) || fim;
+        wMet += pars.slice(s.idx - 1, prox - 1).reduce((a, p) => a + palavras(p.texto), 0);
+      }
+      b.metricas.push({ r: "seções de método", v: nfmt(secoes.length), tom: secoes.length === 0 ? "alerta" : secoes.length > 2 ? "alerta" : "bom" });
+      b.metricas.push({ r: "palavras em método", v: nfmt(wMet) });
+      b.metricas.push({ r: "do texto principal", v: nfmt(100 * wMet / wPrinc, 1) + "%", tom: wMet / wPrinc < 0.04 ? "alerta" : "" });
+
+      if (!secoes.length) {
+        b.achados.push({ chip: "ausente", tom: "", titulo: "Nenhuma seção de metodologia identificada pelo título",
+          detalhe: "Três leituras possíveis, e só a leitura decide: a seção existe com outro nome; o método está diluído no texto, o que é comum e corrigível; ou o trabalho é dogmático e não tem método empírico a declarar, caso em que não há nada a exigir." });
+      } else if (secoes.length > 2) {
+        b.achados.push({ chip: "espalhado", tom: "atencao", titulo: secoes.length + " seções tratam de método, em pontos diferentes do trabalho",
+          detalhe: "Método espalhado é o caso mais comum e o mais fácil de corrigir: o material costuma estar todo escrito, em lugares errados.", exemplos: secoes.slice(0, 6) });
+      } else {
+        b.achados.push({ chip: "localizado", tom: "ok", titulo: "Método em seção própria", exemplos: secoes });
+      }
+
+      const textoPrinc = principal.map(p => p.texto).join(" ");
+      const itens = [
+        ["fonte dos dados e forma de acesso", /\b(fonte dos dados|base de dados|banco de dados|acervo|extra[íi]d[oa]s?\s+d[eoa]|coletad[oa]s?\s+(n[oa]|em)|obtid[oa]s?\s+(n[oa]|em)|painel de|consulta p[úu]blica|API)\b/i],
+        ["recorte temporal declarado", /\b(recorte temporal|per[íi]odo\s+(de|entre|compreendido)|entre\s+\d{4}\s+e\s+\d{4}|de\s+\d{4}\s+a\s+\d{4}|at[ée]\s+\d{1,2}\/\d{1,2}\/\d{4})/i],
+        ["universo ou população", /\b(universo\s+(da|de|pesquisad)|popula[çc][ãa]o\s+(de|total|pesquisad)|totalidade\s+d[oa]s)\b/i],
+        ["amostra e critério de seleção", /\b(amostra|amostragem|sorteio|aleat[óo]ri[ao]|censit[áa]ri[ao]|selecionad[oa]s?\s+(a partir|segundo|conforme))\b/i],
+        ["critério de inclusão", /\b(crit[ée]rios?\s+de\s+inclus[ãa]o|foram\s+inclu[íi]d|inclu[íi]ram-se)/i],
+        ["critério de exclusão", /\b(crit[ée]rios?\s+de\s+exclus[ãa]o|foram\s+exclu[íi]d|exclu[íi]ram-se|descartad[oa]s?)/i],
+        ["unidade de análise", /\bunidade\s+de\s+an[áa]lise\b/i],
+        ["variáveis, categorias ou codificação", /\b(vari[áa]ve(l|is)|categorias?\s+de\s+an[áa]lise|codifica[çc][ãa]o|classificad[oa]s?\s+(em|como|segundo))\b/i],
+        ["termos exatos de busca", /\b(termos?\s+de\s+(busca|pesquisa)|express[ãa]o\s+de\s+busca|filtro\s+de\s+busca|operadores?\s+booleanos?|palavras?-chave\s+(utilizad|de busca))\b/i],
+        ["duplicatas, ambíguos e faltantes", /\b(duplic|casos?\s+amb[íi]guos?|dados?\s+faltantes?|registros?\s+repetid|omiss[õo]es)\b/i],
+        ["verificação ou validação por amostra", /\b(valida[çc][ãa]o|confer[êe]ncia\s+(por|de)|verifica[çc][ãa]o\s+(por|de|amostr)|dupla\s+codifica|checagem\s+manual)\b/i],
+        ["dados ou código disponíveis", /\b(dispon[íi]ve(l|is)\s+em|reposit[óo]rio|github|c[óo]digo\s+(utilizado|est[áa]|dispon)|planilha\s+dispon)/i]
+      ];
+      const faltando = [], presentes = [];
+      for (const [nome, re] of itens) (re.test(textoPrinc) ? presentes : faltando).push(nome);
+      b.metricas.push({ r: "itens de repetibilidade", v: presentes.length + "/" + itens.length, tom: faltando.length > 4 ? "alerta" : faltando.length ? "" : "bom" });
+      if (faltando.length) b.achados.push({ chip: "não nomeado", tom: "",
+        titulo: faltando.length + " item(ns) de repetibilidade não aparecem em lugar nenhum do texto principal",
+        detalhe: "Duas ressalvas antes de exigir qualquer um deles. A lista supõe pesquisa empírica com base de dados: em trabalho dogmático, teórico ou qualitativo, vários itens simplesmente não se aplicam, e a ausência não é falta. E o item pode estar dito com outras palavras, que a busca por termo não pega.",
+        lista: faltando });
+      if (presentes.length) b.achados.push({ chip: "nomeado", tom: "ok", titulo: presentes.length + " item(ns) aparecem, e ainda precisam ser lidos para saber se foram definidos", lista: presentes });
+
+      const falsea = /\b(refut|falsea|falsific|hip[óo]tese\s+(seria|teria\s+sido|poderia\s+ser)\s+(rejeitada|refutada|afastada)|contrari(a|aria)\s+a\s+hip[óo]tese|resultado\s+que\s+afastaria)/i.test(textoPrinc);
+      b.achados.push(falsea
+        ? { chip: "falseamento", tom: "ok", titulo: "O texto menciona refutação, falseamento ou hipótese rejeitada",
+            detalhe: "Confirme lendo se a condição está declarada antes dos resultados. Declarada depois, não vale." }
+        : { chip: "falseamento", tom: "", titulo: "Nenhuma menção a refutação, falseamento ou hipótese rejeitada",
+            detalhe: "Isto não é defeito por si. Só significa alguma coisa em trabalho que enuncia hipótese a testar: ali a ausência levanta a pergunta de qual resultado a teria refutado, e a falta de resposta é sinal de circularidade. Em pesquisa descritiva, exploratória ou qualitativa, que não testa hipótese, a ausência é esperada e não diz nada. Veja qual dos dois casos é o seu antes de concluir." });
+    }
+
+    /* 8. referências */
+    {
+      const b = B("referencias", "Citações do corpo e lista de referências", "O modo de falha mais comum de referência inventada é a entrada com sobrenome e ano certos, mas obra inteiramente diversa. Ela passa por qualquer conferência superficial.");
+      let refIni = null;
+      for (const p of pars) {
+        const t = p.texto.trim();
+        if (p.idx > ini && t && /^\s*(REFER[ÊE]NCIAS?|BIBLIOGRAFIA|OBRAS CITADAS)\b/i.test(t) && (p.nivel !== null || t.length < 60) && !eSumario(p)) { refIni = p.idx; break; }
+      }
+      if (!refIni) b.achados.push({ vazio: "Lista de referências não localizada." });
+      else {
+        let refFim = pars.length + 1;
+        for (const p of pars) { const t = p.texto.trim(); if (p.idx > refIni && t && /^\s*(AP[ÊE]NDICES?|ANEXOS?)\b/i.test(t)) { refFim = p.idx; break; } }
+        const entradas = new Map();
+        for (const p of pars.slice(refIni, refFim - 1)) {
+          const t = p.texto.trim();
+          if (t.length < 40 || eSumario(p)) continue;
+          const sobre = new Set((t.slice(0, 260).match(/([A-ZÀ-Ý][A-ZÀ-Ý'\-]{2,})\s*,/g) || []).map(x => semAcento(x.replace(/\s*,$/, ""))));
+          const ano = /\b((?:19|20)\d{2})/.exec(t);
+          if (!sobre.size || !ano) continue;
+          for (const s of sobre) { const k = s + "|" + ano[1]; if (!entradas.has(k)) entradas.set(k, []); entradas.get(k).push(p); }
+        }
+        const citacoes = new Map();
+        for (const p of pars) {
+          if (p.idx < ini || p.idx >= refIni || eCodigo(p) || eSumario(p)) continue;
+          for (const re of [RE_CIT_ANO, RE_CIT_PAR]) {
+            re.lastIndex = 0; let m;
+            while ((m = re.exec(p.texto))) {
+              const nome = semAcento(m[1]);
+              if (NAO_AUTOR.has(nome) || nome.length < 3) continue;
+              const k = nome + "|" + m[2];
+              if (!citacoes.has(k)) citacoes.set(k, []);
+              citacoes.get(k).push(p);
+            }
+          }
+        }
+        const ambiguos = [...entradas.entries()].filter(([, v]) => v.length > 1);
+        const semEntrada = [...citacoes.keys()].filter(k => !entradas.has(k));
+        const naoCitadas = [...entradas.keys()].filter(k => !citacoes.has(k));
+        b.metricas.push({ r: "entradas", v: nfmt(entradas.size) });
+        b.metricas.push({ r: "pares ambíguos", v: nfmt(ambiguos.length), tom: ambiguos.length ? "alerta" : "bom" });
+        b.metricas.push({ r: "nunca citadas", v: nfmt(naoCitadas.length), tom: naoCitadas.length ? "atencao" : "bom" });
+        for (const [k, ps] of ambiguos.slice(0, 8)) {
+          const [s, a] = k.split("|");
+          b.achados.push({ chip: "ambíguo", tom: "grave",
+            titulo: s.charAt(0) + s.slice(1).toLowerCase() + " (" + a + "): " + ps.length + " entradas para o mesmo par autor-ano",
+            detalhe: "Citado " + (citacoes.get(k) || []).length + " vez(es) no corpo. Não há como saber qual obra sustenta a afirmação. Exige inicial ou nome completo.",
+            exemplos: ps.slice(0, 3) });
+        }
+        if (semEntrada.length) b.achados.push({ chip: "sem entrada", tom: "atencao",
+          titulo: semEntrada.length + " par(es) autor-ano citados e ausentes da lista",
+          detalhe: "Parte costuma ser artefato de citação conjunta (dois autores citados juntos, um só indexado). Confira antes de exigir correção.",
+          lista: semEntrada.slice(0, 24).map(k => { const [s, a] = k.split("|"); return s.charAt(0) + s.slice(1).toLowerCase() + " " + a; }) });
+        if (naoCitadas.length) b.achados.push({ chip: "não citada", tom: "atencao",
+          titulo: naoCitadas.length + " entrada(s) da lista nunca aparecem no corpo",
+          lista: naoCitadas.slice(0, 24).map(k => { const [s, a] = k.split("|"); return s.charAt(0) + s.slice(1).toLowerCase() + " " + a; }) });
+      }
+    }
+
+    /* 8. sujeira */
+    {
+      const b = B("sujeira", "Sujeira tipográfica", "Baixa prioridade, resolve-se numa passada. Linhas de sumário e blocos de código ficam de fora da contagem.");
+      const limpos = pars.filter(p => p.texto.trim() && !eSumario(p) && !eCodigo(p));
+      const testes = [
+        ["espaço duplo ou mais", /\S {2,}\S/],
+        ["espaço antes de pontuação", /\s[,.;:!?](\s|$)/],
+        ["falta espaço depois de pontuação", /[,;:][A-Za-zÀ-ÿ]/],
+        ["hífen usado como travessão", /\s-{1,2}\s/],
+        ["três pontos em vez de reticências", /\.\.\./],
+        ["aspas retas", /"/],
+        ["tabulação no meio do texto", /\t/]
+      ];
+      let achou = false;
+      for (const [nome, re] of testes) {
+        const hits = limpos.filter(p => re.test(p.texto));
+        if (hits.length) { achou = true; b.achados.push({ chip: nfmt(hits.length) + "×", tom: "atencao", titulo: nome, exemplos: hits.slice(0, 2) }); }
+      }
+      const desbal = limpos.filter(p => (p.texto.match(/\(/g) || []).length !== (p.texto.match(/\)/g) || []).length);
+      if (desbal.length) { achou = true; b.achados.push({ chip: nfmt(desbal.length) + "×", tom: "grave", titulo: "parênteses desbalanceados", exemplos: desbal.slice(0, 3) }); }
+      const aspas = limpos.filter(p => (p.texto.match(/“/g) || []).length !== (p.texto.match(/”/g) || []).length);
+      if (aspas.length) { achou = true; b.achados.push({ chip: nfmt(aspas.length) + "×", tom: "grave", titulo: "aspas curvas desbalanceadas", detalhe: "Pode haver citação aberta e nunca fechada.", exemplos: aspas.slice(0, 3) }); }
+      const vazios = pars.filter(p => !p.texto.trim()).length;
+      if (vazios) { achou = true; b.achados.push({ chip: nfmt(vazios) + "×", tom: "atencao", titulo: "parágrafos vazios", detalhe: "Espaçamento feito com Enter em vez de espaçamento de parágrafo." }); }
+      const quebras = limpos.filter(p => p.quebras);
+      if (quebras.length) { achou = true; b.achados.push({ chip: nfmt(quebras.length) + "×", tom: "atencao", titulo: "quebra manual de linha", exemplos: quebras.slice(0, 2) }); }
+      const realce = limpos.filter(p => p.rp.marca || p.rp.color);
+      if (realce.length) { achou = true; b.achados.push({ chip: nfmt(realce.length) + "×", tom: "", titulo: "texto realçado ou colorido", detalhe: "Pode ser ênfase deliberada. Costuma ser anotação de trabalho esquecida no corpo, e por isso vale abrir cada um.", exemplos: realce.slice(0, 4) }); }
+      if (!achou) b.achados.push({ vazio: "Nada relevante encontrado." });
+    }
+
+    /* 9. marcas de escrita */
+    {
+      const b = B("escrita", "Marcas de escrita que parecem de IA", "Não são prova de nada. São traços que hoje fazem um texto humano parecer gerado, e que prejudicam o autor na banca sem que ele perceba.");
+      const prosa = pars.filter(p => eProsa(p, base) && p.idx >= ini && p.idx < fim);
+      const w = Math.max(prosa.reduce((a, p) => a + palavras(p.texto), 0), 1);
+      const texto = prosa.map(p => p.texto).join(" ");
+      const marcas = [
+        ["travessão e meio-travessão", /[—–]/g],
+        ["'não X, mas Y'", /\bn[ãa]o\s+(?:apenas|s[óo]|somente)?[^,.;:]{2,45},?\s+mas\b/gi],
+        ["conectivo de arremate", /\b(al[ée]m disso|ademais|outrossim|em suma|em [úu]ltima an[áa]lise|por fim|dessa forma|dessa maneira)\b/gi],
+        ["fórmula de anúncio", /\b(vale|cumpre|importa|conv[ée]m)\s+(notar|ressaltar|destacar|mencionar|observar|frisar|salientar)\b/gi],
+        ["elogio abstrato sem medida", /\b(robust[oa]s?|significativ[oa]s?|relevant[ee]s?|cruciais?|essenciais?|ineg[áa]vel|not[áa]vel)\b/gi]
+      ];
+      b.tabela = { cab: ["Marca", "Ocorrências", "Por mil palavras"], linhas: [] };
+      for (const [nome, re] of marcas) {
+        const n = (texto.match(re) || []).length;
+        b.tabela.linhas.push([nome, nfmt(n), nfmt(1000 * n / w, 2)]);
+      }
+      if (prosa.length) {
+        const comps = prosa.map(p => p.texto.trim().length);
+        const media = comps.reduce((a, c) => a + c, 0) / comps.length;
+        const cv = Math.sqrt(comps.reduce((a, c) => a + (c - media) ** 2, 0) / comps.length) / media;
+        b.metricas.push({ r: "variação de comprimento", v: nfmt(cv, 2), tom: cv < 0.45 ? "alerta" : "bom" });
+        b.achados.push(cv < 0.45
+          ? { chip: "baixa variação", tom: "", titulo: "Parágrafos de tamanho parecido demais ao longo do texto", detalhe: "É um dos traços que hoje fazem um leitor desconfiar, e vale corrigir por isso, não porque prove coisa alguma. Texto de catálogo, com entradas de tamanho semelhante por natureza, produz o mesmo número sem nada de errado." }
+          : { chip: "normal", tom: "ok", titulo: "O ritmo do texto não chama atenção por esse lado." });
+      }
+    }
+
+    return R;
+  }
+
+  /* ---------------------------------------------------------- desenho */
+
+  const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  function achadoHtml(a) {
+    if (a.vazio) return '<p class="vazio">' + esc(a.vazio) + "</p>";
+    let h = '<div class="achado"><div class="cab">';
+    if (a.chip) h += '<span class="chip ' + (a.tom || "atencao") + '">' + esc(a.chip) + "</span>";
+    h += '<span class="titulo">' + esc(a.titulo || "") + "</span></div>";
+    if (a.detalheMono) h += '<p class="detalhe assinatura">' + esc(a.detalheMono) + "</p>";
+    if (a.detalhe) h += '<p class="detalhe">' + esc(a.detalhe) + "</p>";
+    if (a.sublistas) for (const s of a.sublistas) {
+      h += '<p class="detalhe assinatura">' + esc(s.mono) + "</p><ul class=\"ex\">";
+      for (const p of s.exemplos) h += '<li><span class="par">P' + p.idx + "</span> " + esc(trecho(p, 76)) + "</li>";
+      h += "</ul>";
+    }
+    if (a.exemplos && a.exemplos.length) {
+      h += '<ul class="ex">';
+      a.exemplos.forEach((p, i) => {
+        const rot = a.rotulos && a.rotulos[i] ? " <span class=\"assinatura\">(" + esc(a.rotulos[i]) + ")</span>" : "";
+        h += '<li><span class="par">P' + p.idx + "</span> " + esc(trecho(p, 76)) + rot + "</li>";
+      });
+      h += "</ul>";
+    }
+    if (a.lista) h += '<p class="detalhe assinatura">' + esc(a.lista.join("; ")) + (a.lista.length >= 24 ? " …" : "") + "</p>";
+    return h + "</div>";
+  }
+
+  function desenharFaixa(cv, dados) {
+    const { prosa, cpl, piso } = dados;
+    const dpr = window.devicePixelRatio || 1;
+    const L = cv.clientWidth, A = 132;
+    cv.width = L * dpr; cv.height = A * dpr;
+    const g = cv.getContext("2d");
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.clearRect(0, 0, L, A);
+    const est = getComputedStyle(document.documentElement);
+    const cAlerta = est.getPropertyValue("--correcao").trim();
+    const cMedida = est.getPropertyValue("--medida").trim();
+    const cRule = est.getPropertyValue("--rule").trim();
+    const n = prosa.length;
+    if (!n) return;
+    const maxL = Math.max(18, ...prosa.map(p => p.texto.trim().length / cpl));
+    const larg = Math.max(L / n, 0.6);
+    const escala = (A - 22) / maxL;
+    prosa.forEach((p, i) => {
+      const lin = p.texto.trim().length / cpl;
+      const h = Math.max(lin * escala, 1);
+      g.fillStyle = p.texto.trim().length < piso ? cAlerta : cMedida;
+      g.globalAlpha = p.texto.trim().length < piso ? 0.55 : 0.9;
+      g.fillRect(i * larg, A - 14 - h, Math.max(larg - 0.5, 0.6), h);
+    });
+    g.globalAlpha = 1;
+    const y = A - 14 - 10 * escala;
+    g.strokeStyle = cRule; g.lineWidth = 1; g.setLineDash([4, 3]);
+    g.beginPath(); g.moveTo(0, y); g.lineTo(L, y); g.stroke();
+    g.setLineDash([]);
+    g.fillStyle = est.getPropertyValue("--ink-faint").trim();
+    g.font = "10px Consolas, monospace";
+    g.fillText("piso de 10 linhas", 2, Math.max(y - 4, 9));
+    g.strokeStyle = est.getPropertyValue("--rule-firm").trim();
+    g.beginPath(); g.moveTo(0, A - 13.5); g.lineTo(L, A - 13.5); g.stroke();
+  }
+
+  function montarMd(R, nome) {
+    const L = ["# Diagnóstico mecânico", "", "Arquivo: " + nome, ""];
+    for (const k in R.ficha) L.push("- " + k + ": " + R.ficha[k]);
+    for (const b of R.blocos) {
+      L.push("", "## " + b.titulo, "");
+      if (b.metricas.length) L.push(b.metricas.map(m => m.r + ": " + m.v).join(" | "), "");
+      for (const a of b.achados) {
+        if (a.vazio) { L.push(a.vazio); continue; }
+        L.push("- [" + (a.chip || "") + "] " + (a.titulo || ""));
+        if (a.detalheMono) L.push("      " + a.detalheMono);
+        if (a.detalhe) L.push("      " + a.detalhe);
+        if (a.sublistas) for (const s of a.sublistas) { L.push("      " + s.mono); for (const p of s.exemplos) L.push("        P" + p.idx + ": " + trecho(p, 90)); }
+        if (a.exemplos) for (const p of a.exemplos) L.push("        P" + p.idx + ": " + trecho(p, 90));
+        if (a.lista) L.push("      " + a.lista.join("; "));
+      }
+      if (b.tabela) { L.push(""); L.push(b.tabela.cab.join(" | ")); for (const l of b.tabela.linhas) L.push(l.join(" | ")); }
+    }
+    return L.join("\n");
+  }
+
+  /* ---------------------------------------------------------- ligação */
+
+  const painel = document.getElementById("painel");
+  const solta = document.getElementById("solta");
+  const entrada = document.getElementById("entrada");
+  const baixar = document.getElementById("copiarMedidas");
+  const verMedidas = document.getElementById("verMedidas");
+  const areaMedidas = document.getElementById("areaMedidas");
+  let md = "", nomeArq = "";
+
+  function render(R, nome) {
+    const fichaDl = document.getElementById("fichaDl");
+    fichaDl.innerHTML = Object.entries(R.ficha).map(([k, v]) => "<dt>" + esc(k) + "</dt><dd>" + esc(v) + "</dd>").join("");
+    document.getElementById("ficha").hidden = false;
+    const ol = document.getElementById("indiceOl");
+    ol.innerHTML = R.blocos.map((b, i) => {
+      const graves = b.achados.filter(a => a.tom === "grave").length;
+      return '<li><a href="#' + b.id + '">' + esc(b.titulo) + '<span class="marca">' + (graves ? graves + "!" : "") + "</span></a></li>";
+    }).join("");
+    document.getElementById("indice").hidden = false;
+
+    painel.innerHTML = R.blocos.map((b, i) => {
+      let h = '<section class="bloco" id="' + b.id + '"><h2><span class="num">' + String(i + 1).padStart(2, "0") + "</span>" + esc(b.titulo) + "</h2>";
+      if (b.nota) h += '<p class="nota">' + esc(b.nota) + "</p>";
+      if (b.metricas.length) h += '<div class="metricas">' + b.metricas.map(m => '<div class="metrica"><span class="v ' + (m.tom || "") + '">' + esc(m.v) + '</span><span class="r">' + esc(m.r) + "</span></div>").join("") + "</div>";
+      if (b.faixa) h += '<div class="faixa"><canvas id="cv-' + b.id + '"></canvas><div class="legenda"><span><i style="background:var(--medida)"></i>no piso ou acima</span><span><i style="background:var(--correcao);opacity:.55"></i>abaixo do piso</span><span>cada barra é um parágrafo do texto principal</span></div></div>';
+      if (b.tabela) {
+        h += '<div class="rolagem"><table class="dados"><thead><tr>' + b.tabela.cab.map(c => "<th>" + esc(c) + "</th>").join("") + "</tr></thead><tbody>";
+        for (const l of b.tabela.linhas) h += "<tr>" + l.map((c, j) => j === 0 ? "<td>" + esc(c) + "</td>" : (j === l.length - 1 && b.tabela.cab[j] === "Sinal" ? '<td class="marca">' + esc(c) + "</td>" : '<td class="n">' + esc(c) + "</td>")).join("") + "</tr>";
+        h += "</tbody></table></div>";
+      }
+      h += b.achados.map(achadoHtml).join("");
+      return h + "</section>";
+    }).join("");
+
+    for (const b of R.blocos) if (b.faixa) {
+      const cv = document.getElementById("cv-" + b.id);
+      if (cv) { desenharFaixa(cv, b.faixa); window.addEventListener("resize", () => desenharFaixa(cv, b.faixa)); }
+    }
+    md = montarMd(R, nome);
+    areaMedidas.value = md;
+    verMedidas.hidden = false;
+    baixar.disabled = false;
+  }
+
+  async function processar(file) {
+    nomeArq = file.name;
+    painel.innerHTML = '<p class="vazio">Lendo o arquivo…</p>';
+    try {
+      if (!/\.docx$/i.test(file.name)) throw new Error("Este instrumento lê apenas .docx. Para .doc, .odt ou PDF, converta antes.");
+      const zip = await lerZip(await file.arrayBuffer());
+      const docTxt = await extrair(zip, "word/document.xml");
+      if (!docTxt) throw new Error("O arquivo não contém word/document.xml. Pode estar corrompido ou não ser um documento do Word.");
+      const E = montarEstilos(parseXml(await extrair(zip, "word/styles.xml") || "<x/>"));
+      const doc = parseXml(docTxt);
+      const corpo = filho(doc.documentElement, "body");
+      const pars = coletar(corpo, E);
+
+      const notas = [];
+      const fnTxt = await extrair(zip, "word/footnotes.xml");
+      if (fnTxt) {
+        const fn = parseXml(fnTxt);
+        for (const f of filhos(fn.documentElement, "footnote")) {
+          const tipo = attr(f, "type");
+          if (tipo === "separator" || tipo === "continuationSeparator" || tipo === "continuationNotice") continue;
+          notas.push(f.textContent || "");
+        }
+      }
+      let geo = null;
+      const sect = filhos(corpo, "sectPr").pop();
+      if (sect) {
+        const mar = filho(sect, "pgMar"), sz = filho(sect, "pgSz");
+        geo = {};
+        if (mar) for (const a of ["top", "right", "bottom", "left"]) { const v = inteiro(attr(mar, a)); if (v !== null) geo[a] = cm(v); }
+        if (sz) { geo.w = cm(inteiro(attr(sz, "w")) || 11906); geo.h = cm(inteiro(attr(sz, "h")) || 16838); }
+      }
+      const imagens = [...zip.itens.keys()].filter(k => k.startsWith("word/media/")).length;
+      render(analisar(pars, geo, notas, imagens), file.name);
+    } catch (e) {
+      painel.innerHTML = '<div class="erro"><p><strong>Não foi possível analisar.</strong></p><p>' + esc(e.message) + "</p></div>";
+      baixar.disabled = true;
+    }
+  }
+
+  entrada.addEventListener("change", () => { if (entrada.files[0]) processar(entrada.files[0]); });
+  solta.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); entrada.click(); } });
+  for (const ev of ["dragenter", "dragover"]) solta.addEventListener(ev, (e) => { e.preventDefault(); solta.classList.add("ativa"); });
+  for (const ev of ["dragleave", "drop"]) solta.addEventListener(ev, (e) => { e.preventDefault(); solta.classList.remove("ativa"); });
+  solta.addEventListener("drop", (e) => { const f = e.dataTransfer.files[0]; if (f) processar(f); });
+
+  /* ---------------------------------------------------------- prompts */
+
+  const P_UNICO = `Você vai analisar um trabalho acadêmico (dissertação, tese, TCC ou artigo). Quem roda isto pode ser quem escreveu ou quem orienta, e o relatório é o mesmo para os dois: o ideal é que quem escreveu rode primeiro, corrija o que dá para corrigir sozinho, e só então mostre o trabalho ao orientador. Vão lhe entregar o texto e, possivelmente, um diagnóstico mecânico em Markdown com medidas de formatação, ritmo, elementos gráficos e bibliografia. Use o diagnóstico como ponto de partida e confirme tudo lendo: ele produz falsos positivos, e descartá-los é parte do seu trabalho.
+
+O produto é um relatório que permite decidir, em poucos minutos, o que precisa ser refeito. Quem lê conhece a área e não precisa de contextualização.
+
+POSTURA. Crítica dura, não avaliação equilibrada com elogio na abertura e ressalva no rodapé. Mas dureza não é destruição: cada apontamento tem que ser executável e dizer o que está em jogo se ficar como está. Toda crítica vem com localização e trecho citado literalmente, com a pontuação e os erros que estiverem lá; nunca corrija em silêncio, porque prova retocada não vale nada. Separe defeito de preferência, e mande a preferência para o fim. Não invente ponto forte: se uma seção não tem nenhum relevante, escreva isso e siga. Reconhecimento específico e verificável é informação, porque marca o que não deve ser mexido na revisão. Quando o próprio texto se declarar inacabado, registre o estado e não gaste o relatório criticando o que ainda não foi escrito, com uma exceção que você deve procurar ativamente: quando o fragmento inacabado revela risco sobre parte já pronta.
+
+ESTRUTURA DO RELATÓRIO, com os tetos. Total de 6.000 palavras, sendo no máximo 1.500 na abertura somada e 600 por seção analisada. O teto por seção é o mesmo para todas, de propósito: um capítulo de 14 mil palavras recebe o mesmo espaço que um de 3 mil, o que obriga a hierarquizar em vez de inventariar. Se estourar, corte enumeração de ocorrências (três exemplos e a contagem bastam), números que você está só repetindo sem interpretar, e o que já foi dito em outro ponto. Nunca corte o trecho citado.
+
+1. FICHA. Arquivo, extensão, o que foi lido integralmente, o que foi amostrado, e o que você não conseguiu avaliar (o conteúdo das imagens, a exatidão dos dados de origem, a literatura que você não domina).
+
+2. VEREDITO. Um parágrafo, no máximo 250 palavras, legível sozinho, sobre o estado do trabalho e a distância que falta para uma defesa. Ao final, um prognóstico, e não uma nota: se a defesa fosse hoje, com este texto, o resultado provável seria um destes três, que são os que uma banca efetivamente profere. APROVAÇÃO. APROVAÇÃO COM REVISÃO DE FORMA, e o nome engana, porque as alterações podem ser materiais: o que a define é o prazo de trinta dias e a exigência de que um membro da banca, além do orientador, aprove o resultado. REFORMULAÇÃO, o resultado grave, quando são muitas modificações substanciais, na ordem de três meses num mestrado ou seis num doutorado, e todos voltam para uma nova banca. Diga qual e por quê, em duas linhas. Se o texto ainda não estiver em condição de ser depositado, diga isso primeiro e dê o prognóstico para a versão que seria depositada depois de fechadas as pendências, porque trabalho incompleto não recebe resultado: não chega à banca.
+
+3. DETERMINAÇÕES PRIORITÁRIAS. Até dez itens numerados, em ordem de urgência, cada um acionável e com referência à seção. Cada um leva o HORIZONTE MÍNIMO em que cabe, marcado assim: [semana], [mês], [3 meses] ou [6 meses]. Semana é o que um leitor tropeça no primeiro contato mais o que já está escrito e só precisa ser posto no lugar; mês inclui recálculo com dado que já existe na base e parágrafos que não dependem de medição nova; três meses inclui uma operação metodológica nova, uma só, com a reescrita que ela desarrumar; seis meses inclui o que muda o que o trabalho pode afirmar. Marque com [arrasta] a determinação que obriga a reescrever outras partes: é a que não se deve começar sem tempo de terminar, porque um número recalculado e um texto não reescrito é pior que o estado anterior.
+
+   Feche a seção com os QUATRO PLANOS, que são filtros cumulativos sobre esta lista e não listas novas: uma semana, um mês, três meses, seis meses. Diga quais números entram em cada um e o que fica de fora, com a resposta oral para o que ficar. E uma advertência que precisa estar escrita: ninguém espera que um trabalho feche todas as pontas, um ótimo trabalho tem pontas soltas, e este relatório enxerga mais do que qualquer banca enxergará, porque refaz todas as contas e não cansa, enquanto um examinador humano se concentra em poucos tópicos e acredita nos números do candidato até algo destoar. A lista é mapa de exposição, não lista de dívidas.
+
+4. O QUE A BANCA VAI PERGUNTAR. Três grupos. Inevitáveis (decorrem de escolhas estruturais e serão feitas mesmo com tudo corrigido; para cada uma, escreva a melhor resposta disponível hoje com o material do trabalho). Evitáveis, se corrigidas agora, cada uma remetendo à determinação correspondente. Fatais, se não corrigidas, com a razão, sem dramatizar. No máximo doze perguntas no total, formuladas como um examinador competente e hostil as faria.
+
+5. METODOLOGIA E REPETIBILIDADE. Existe seção de método, onde está, quanto ocupa, está consolidada ou espalhada? Os quatro elementos do planejamento (lacuna, problema, metodologia, referencial teórico) estão presentes e articulados, e as tensões entre eles são reconhecidas? Um terceiro refaria a pesquisa: fonte e acesso, recorte, universo e amostra, critérios de inclusão e exclusão, unidade de análise, variáveis e codificação, verificação por amostra, termos de busca, duplicatas e faltantes, base e código. Três defeitos bloqueiam e não são acabamento: circularidade (que resultado teria refutado a hipótese?), confusão entre pesquisa documental e realidade (ementa não é comportamento do tribunal, norma não é prática), e pergunta normativa pura vestida de empírica. Nomeie o viés de seleção e cobre a mitigação (amostragem aleatória, censo, ampliar ou diversificar, ajustar o universo aos dados disponíveis), com a ressalva honesta de que pesquisa jurídica raramente o elimina. Verifique se as categorias foram herdadas prontas da dogmática ou da administração judiciária e adotadas como naturais. E diga que uso dos dados o trabalho declara e qual entrega, entre descritivo, explicativo, preditivo e prescritivo: conclusão prescritiva sobre base descritiva é o desvio mais caro.
+
+6. FORMA. Coerência interna, sem norma externa. Distinga variação com função de variação por descuido. Feche com um veredito curto: o documento está diagramado ou remendado.
+
+7. ANÁLISE POR SEÇÃO. Para cada uma: função declarada e função cumprida (a distância entre as duas costuma ser o achado principal); até três pontos fortes específicos; pontos fracos em ordem de gravidade, com trecho citado; e uma a três exigências concretas. Procure especificamente: afirmação relevante sem fonte ou com fonte que não a sustenta; descrição que se apresenta como análise; conclusão parcial que excede a evidência; conceito usado em dois sentidos; citação de autoridade no lugar de argumento; autor citado na revisão e nunca mobilizado; seção que não serve à pergunta de pesquisa; nota de rodapé substantiva que deveria estar no corpo; salto lógico em transição de subseção.
+
+8. ARQUITETURA DO ARGUMENTO. Três provas que são a mesma em direções diferentes. Da teoria para frente: os conceitos do capítulo teórico retornam e trabalham nos analíticos, ou apenas decoram? O erro inverso é mais grave: categoria usada na análise sem ter sido construída antes. Da introdução para frente: cada elemento anunciado é depois explorado, e a subseção que descreve a estrutura corresponde aos capítulos que existem? Da conclusão para trás: para cada asserção, nomeie a seção que a estabeleceu; aponte asserção sem antecedente e, simetricamente, achado órfão, resultado estabelecido no corpo que nunca chega à conclusão.
+
+9. ESTRUTURA E ECONOMIA. Fusão, fissão, encolhimento, corte e apêndice, sempre com o número de palavras recuperadas. O critério é a unidade de argumento, não o tamanho. Acrescente o teste de posição: capítulo que poderia ser movido para qualquer lugar sem perda não está fazendo trabalho argumentativo.
+
+10. VERIFICAÇÕES TRANSVERSAIS. Aritmética recalculada (relate inclusive o que fecha). Correspondência entre citações e lista, nos dois sentidos. Citações diretas conferidas contra a fonte caractere a caractere, porque alteração de uma preposição continua sendo citação errada. Existência das obras citadas, se você tiver acesso à web: classifique cada uma como confirmada, divergente, não localizada ou com sinais de inexistência, e nunca escreva que uma referência é falsa, porque ausência de resultado não é prova de inexistência. Atenção ao modo de falha mais comum: entrada com sobrenome e ano certos, mas obra inteiramente diversa da que sustenta a afirmação.
+
+11. PONTOS DE ATENÇÃO. Não é crítica nem acusação, e você não conclui nada sobre autoria. São passagens capazes de gerar dúvida em quem lê, e essa dúvida costuma não ser dita: vira uma pergunta na banca ou, pior, um preconceito que ninguém enuncia e que por isso não pode ser respondido. Como não há defesa contra o que não foi dito, a saída é retirar o gatilho, e isso vale independentemente de ter havido ou não uso de ferramenta. Divida em dois grupos. O primeiro é o que se confere e portanto se corrige: referência que não existe ou não se confirma; citação direta que não bate com a fonte; afirmação sobre gráfico que não confere com os números do próprio trabalho; erro que um especialista não cometeria, como tese atribuída ao autor errado, versão errada de norma ou ementa que não corresponde ao julgado; ausência sistemática de detalhe verificável, como citação sem página. O segundo é o que não se confere e ainda assim chama atenção: trecho cujo vocabulário e ritmo destoam do resto, sobretudo quando coincide com descontinuidade de formatação; parágrafos de comprimento uniforme demais ao longo de um capítulo; concentração anormal de conectivos de arremate num trecho isolado. Para cada item do segundo grupo, escreva ao lado a explicação inocente, que quase sempre existe, e a instrução prática, que é sempre a mesma: reescrever o trecho na própria voz resolve.
+
+12. LIMPEZA DE ESTILO. Traços que hoje fazem um texto parecer gerado por máquina mesmo quando não é: travessão em excesso, conectivo de arremate ("além disso", "ademais", "em suma", "por fim", "dessa forma"), fórmula de anúncio ("vale ressaltar", "cumpre notar", "é importante destacar"), elogio abstrato sem medida ("robusto", "significativo", "crucial"), tríade por reflexo, negrito decorativo, abertura de seção por definição genérica. Sobre a construção "não X, mas Y": é legítima quando explora uma tensão real, e só vira defeito quando se acumula num mesmo trecho ou quando serve apenas para dar ênfase sem contraste argumentado; aponte o acúmulo, não a construção. Encerre com a lista de conferência a fazer antes de entregar o trabalho: abrir cada referência citada e confirmar que a obra trata do assunto para o qual foi citada, porque o erro mais comum não é a obra inexistente, é a entrada com sobrenome e ano certos e obra diversa; conferir precedente no site do tribunal (número, relator, data, e se a ementa diz o que se afirma); conferir norma no texto consolidado, com as alterações posteriores; garantir que todo número seja rastreável a uma célula da própria base ou a uma página de uma fonte; e citar a origem mesmo quando a ideia foi reformulada.
+
+COMO ESCREVER. Evite travessão, use parênteses, vírgula, dois-pontos ou duas frases. Sem conectivo de arremate, sem tríade por reflexo, sem negrito decorativo, sem hipérbole e sem eufemismo. Frases diretas, comprimento variado. Redação se avalia à parte do mérito: texto malescrito com pesquisa boa exige revisão de escrita, não reformulação, e o relatório precisa dizer qual dos dois casos é.`;
+
+  const areaPrompt = document.getElementById("textoPrompt");
+  const btnCopiar = document.getElementById("copiar");
+  areaPrompt.value = P_UNICO;
+  btnCopiar.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(P_UNICO); }
+    catch { areaPrompt.select(); document.execCommand("copy"); }
+    btnCopiar.textContent = "Copiado";
+    btnCopiar.setAttribute("data-estado", "feito");
+    setTimeout(() => { btnCopiar.textContent = "Copiar prompt"; btnCopiar.removeAttribute("data-estado"); }, 2200);
+  });
+
+  baixar.addEventListener("click", async () => {
+    if (!md) return;
+    try { await navigator.clipboard.writeText(md); }
+    catch {
+      areaMedidas.select();
+      try { document.execCommand("copy"); }
+      catch {
+        verMedidas.open = true;
+        baixar.textContent = "Selecione e copie abaixo";
+        return;
+      }
+    }
+    baixar.textContent = "Medidas copiadas";
+    baixar.setAttribute("data-estado", "feito");
+    setTimeout(() => { baixar.textContent = "Copiar as medidas"; baixar.removeAttribute("data-estado"); }, 2400);
+  });
+})();
+</script>
