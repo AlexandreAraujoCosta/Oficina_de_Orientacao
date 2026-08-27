@@ -1,0 +1,78 @@
+% Template pandoc, tema Tufte: margem larga a direita, itens do relatorio ao
+% lado do paragrafo que citam. Compila com xelatex.
+%
+% E o formato natural para o caderno de conferencia, porque o caderno e texto
+% anotado: o paragrafo fica na coluna principal e a anotacao ao lado dele, sem
+% empurrar a leitura para o pe da pagina. O risco e colisao quando muitos itens
+% caem em paragrafos vizinhos; nesse caso use o tema classico.
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{portuguese}
+
+\usepackage{geometry}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.2cm, right=6.8cm,
+          marginparwidth=5.4cm, marginparsep=0.6cm}
+
+\usepackage{xcolor}
+\definecolor{unbAzul}{HTML}{003366}
+\definecolor{unbVerde}{HTML}{006633}
+\definecolor{margemCor}{HTML}{55524D}
+\definecolor{realce}{HTML}{33477E}
+
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\footnotesize\color{margemCor}}
+
+\usepackage{titlesec}
+\titleformat{\section}{\color{unbAzul}\bfseries\Large}{}{0pt}{}
+\titleformat{\subsection}{\color{unbAzul}\bfseries\large}{}{0pt}{}
+\titleformat{\subsubsection}{\color{unbAzul!85!black}\bfseries\normalsize}{}{0pt}{}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{margemCor}$if(title)$$title$$endif$}
+\fancyfoot[R]{\footnotesize\color{margemCor}\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\headrule}{\vskip2pt{\color{unbVerde}\hrule height 0.8pt}}
+
+\usepackage{longtable,booktabs,array}
+% calc define o \real das larguras de coluna que o pandoc emite para
+% tabela de markdown. Sem ele o xelatex para em Missing number no
+% primeiro \begin{longtable}. So apareceu em 23/08, no primeiro
+% relatorio com tabela no corpo.
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=unbAzul, urlcolor=unbAzul,
+            pdftitle={$if(title)$$title$$endif$}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt}
+\usepackage{setspace}
+\onehalfspacing
+
+% \citado{P20}{2.3, 3.4} poe o localizador e os itens na margem.
+\newcommand{\citado}[2]{\marginnote{\textbf{\color{realce}#1}\\ #2}}
+\newcommand{\numero}[1]{\marginnote{\textbf{#1}}}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+
+$if(title)$
+{\color{unbAzul}\bfseries\LARGE $title$\par}
+\vspace{4pt}
+{\color{unbVerde}\hrule height 1pt}
+\vspace{14pt}
+$endif$
+
+$body$
+
+\end{document}
