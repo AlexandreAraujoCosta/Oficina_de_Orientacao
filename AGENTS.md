@@ -193,31 +193,39 @@ desfaz, e o material é de terceiro.
 
 Para atualizar a maquinaria, `git pull` é seguro, porque não envia nada.
 
-## O formato do anexo, e ele não admite variação
+## O formato dos itens, e ele é lido por programa
 
-O relatório é prosa livre. **O anexo não é:** ele é lido por programa, e o
-programa reconhece exatamente esta forma, item por item.
+O corpo do relatório é prosa livre. **Os itens do anexo não são:** um programa os
+percorre para montar os comentários do Word, e reconhece duas formas, ambas
+válidas:
 
 ```markdown
-## D1
-**Aponta:** o que se aponta, em prosa, numa linha só.
-**Abrir:** [P1191] [P1190]
+### D1. Nome curto do item
+### SC3. Legendas sem forma assentada
 ```
 
-O código é uma ou duas letras maiúsculas seguidas de número, e a convenção é
-**D** para defeito, **S** para sugestão. As duas linhas seguintes começam
-exatamente com `**Aponta:**` e `**Abrir:**`, nessa ordem. Em `Abrir:` vão os
-localizadores entre colchetes, separados por espaço; o primeiro é onde o
-comentário será ancorado no `.docx`, e os demais entram no texto do comentário.
+ou, dentro de uma lista:
 
-**Item sem localizador é descartado em silêncio**, e item fora dessa forma
-também. Se `montar_entrega.py` disser que leu zero itens, o defeito está no
-anexo, e não no trabalho.
+```markdown
+**D1. Nome curto do item**
+```
 
-**Não escreva o trecho do trabalho no anexo.** Você indica o parágrafo; um
-programa copia o texto do arquivo e o insere depois.
+O código é uma ou duas letras maiúsculas seguidas de número. As letras que o
+programa executa são **D** (defeito), **S** (sugestão) e **SC** (sugestão de
+correção); qualquer outra letra é ignorada, o que serve para os itens que existem
+só para leitura humana.
 
-## O que nunca entra neste repositório
+**O localizador vai na prosa do item**, entre colchetes, como `[P1191]`. **Item
+sem nenhum localizador é descartado em silêncio**, porque não há onde ancorar o
+comentário. O primeiro localizador do item é a âncora; os demais entram no texto
+do comentário.
+
+**Não escreva o trecho do trabalho.** Você indica o parágrafo; um programa copia o
+texto do arquivo e o insere depois. **Isso inclui paráfrase entre aspas**, que tem
+a aparência de citação e é a violação que ninguém percebe lendo o relatório. Se
+for parafrasear, parafraseie sem aspas.
+
+## O que nunca entra neste repositório## O que nunca entra neste repositório
 
 Trabalho de estudante, relatório sobre pessoa nomeada, extração de texto de
 terceiro. O `.gitignore` bloqueia `*.docx`, `*.pdf`, `extracao/` e `relatorios/`,
