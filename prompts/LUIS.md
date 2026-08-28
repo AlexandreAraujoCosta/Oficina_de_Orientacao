@@ -471,7 +471,7 @@ Quatro respostas, e escolhe-se uma:
 
 **O veredicto é sobre o que este relatório examinou, e diz isso.** A ferramenta não lê o mérito da tese nem confronta o trabalho com as fontes, e por isso não sabe se o trabalho é bom: sabe o que encontrou. A formulação honesta liga as duas coisas, como em "nada aqui pede refazer desenho, porque nenhum dos apontamentos retidos ataca a construção do censo". **Veredicto sem essa amarra vira nota de banca dada por programa**, que é exatamente o que a ressalva de abertura nega.
 
-**Depois do veredicto, nomeie os itens que concentram o risco de arguição.** É a parte mais útil da seção e a que mais acerta, porque as seis leituras acabaram de fazer, sobre o texto, o que um examinador faria: procurar onde a afirmação excede o que a medição sustenta. Três a cinco itens, nomeados pelo código, com uma linha dizendo por que a banca chegaria neles antes dos outros. Não é o mesmo que os itens mais trabalhosos de reparar: um erro de dígito dá trabalho para achar e nenhum para arguir, e um enunciado largo demais é o contrário.
+**Depois do veredicto, nomeie os itens que concentram o risco de arguição.** É a parte mais útil da seção e a que mais acerta, porque os passos anteriores acabaram de fazer, sobre o texto, o que um examinador faria: procurar onde a afirmação excede o que a medição sustenta. Três a cinco itens, nomeados pelo código, com uma linha dizendo por que a banca chegaria neles antes dos outros. Não é o mesmo que os itens mais trabalhosos de reparar: um erro de dígito dá trabalho para achar e nenhum para arguir, e um enunciado largo demais é o contrário.
 
 **Diga quais itens condicionam a versão final**, nomeados, e trate o resto coma correção com prazo. É a lista que o orientador usa para decidir o que exigir antes e o que aceitar depois.
 
@@ -521,7 +521,7 @@ Quatro degraus, e cada um se sustenta dizendo o que o parecerista encontraria:
 
 **Por complexidade, e não por assunto.** O que é organização vem separado do que é redimensionamento. Alinhar um parágrafo ao que o texto já diz noutro lugar não pede dado novo nem análise nova, e é o que o autor faz sozinho numa tarde.
 
-**O relatório conta defeitos, não comentários.** Um defeito visto por cinco vozes é um defeito, e diz-se que cinco o viram, o que informa sobre a robustez do achado e não sobre a quantidade de problemas. Em 14/08, treze de cinquenta hipóteses eram a mesma coisa dita por outra voz, concentradas em três achados.
+**O relatório conta defeitos, não comentários.** Um defeito que os dois passos de levantamento acharam por caminhos distintos é um defeito, e diz-se que os dois o viram, o que informa sobre a robustez do achado e não sobre a quantidade de problemas. Em 14/08, treze de cinquenta hipóteses eram a mesma coisa dita por outra voz, concentradas em três achados.
 
 ## A legibilidade do relatório
 

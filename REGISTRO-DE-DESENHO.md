@@ -159,7 +159,16 @@ precisa parecer parágrafo.
 - **A leitura examina o trabalho por dentro e não valida nada por fora**, e isso
   vai no início: coerência interna perfeita convive com codificação errada.
 
-## As cinco ferramentas publicadas, atualizadas em 25/08
+## As ferramentas publicadas, atualizadas em 25/08
+
+**Duas destas cinco saíram do catálogo em 27/08/2026, e a tabela as mantém porque
+o registro é histórico.** O **Corretor** foi aposentado quando o `.docx` anotado
+passou a fazer o que ele fazia, com a vantagem de o comentário ficar no arquivo e
+o orientador poder responder ali. A **Pré-banca** saiu porque as vozes que ela
+reunia entraram no próprio Luis, como os passos 1 a 3, e a comparação item a item
+mostrou que onze dos doze apontamentos dela já apareciam no relatório. A doutrina
+das duas não se perdeu: a do Corretor está em `prompts/corretor.md`, e a da
+Pré-banca segue sem casa nova.
 
 Todas passaram pela mesma varredura: **nenhuma manda transcrever**, e cada uma diz
 como a prova viaja no seu desenho.
