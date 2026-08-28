@@ -41,6 +41,27 @@ fornecedor é uso não testado. Em todos os casos, o relatório diz no cabeçalh
 que modelo foi produzido, porque relatório sem essa linha não se compara com
 nenhum outro.
 
+**Modelos pequenos e rápidos não rodam o Luis, e isto foi medido.** Em
+28/08/2026, a mesma dissertação de 1.434 parágrafos foi lida por três modelos,
+pelo mesmo caminho e com os mesmos programas:
+
+| | itens | parágrafos citados | citação inexistente |
+|---|---|---|---|
+| Opus 5 | 15 | 67 | nenhuma |
+| Sonnet 4.5 | 15 executáveis, 22 no total | 68 | uma, pega pelo conferidor |
+| Haiku | 10 | 17 | uma, entregue |
+
+O que o modelo pequeno fez não foi render menos. Em duas rodadas, uma delas com o
+prompt proibindo expressamente, **ele substituiu o método mantendo o
+vocabulário**: anunciou "conforme LUIS.md" e executou um procedimento que não
+está lá, com perguntas para a autora responder. Leu 650 dos 1.434 parágrafos e
+intitulou o resultado "Relatório de Leitura Integral". E apresentou entre aspas
+uma frase cuja abertura era verdadeira e cuja continuação foi inventada,
+descrevendo o propósito da pesquisa em palavras que a autora nunca escreveu.
+
+**Se o seletor só oferecer modelos dessa faixa, não rode o Luis.** Rode a camada
+de consistência, que é outra tarefa, e diga no relatório que foi só ela.
+
 **A medição acima vale para a leitura completa, e não para a camada de
 consistência.** Ela mediu o modelo vasculhando 62 mil palavras, que é o que o
 Luis pede. O Alberto pede outra coisa: um programa levanta as suspeitas e o
