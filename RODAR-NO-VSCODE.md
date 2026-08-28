@@ -46,35 +46,19 @@ com `git pull`, que não envia nada. O `AGENTS.md` proíbe o assistente de rodar
 essa é uma trava de instrução, e trava de instrução se contorna sozinha quando o
 modelo é outro.
 
-## 2. O resto, peça ao Copilot
+## 2. Confirmar o Python, e mais nada
 
-Faltam quatro coisas, e nenhuma delas você precisa procurar sozinho. Abra o chat
-do Copilot **em modo agente**, na pasta clonada, e cole isto:
+Abra o chat do Copilot **em modo agente**, na pasta que você descompactou, e cole:
 
-> Confira o que está instalado nesta máquina e me diga o resultado item a item,
-> antes de instalar qualquer coisa:
->
-> 1. **git** — para atualizar este repositório. Se faltar, dá para viver sem:
->    baixa-se o zip pelo GitHub.
-> 2. **PyMuPDF** (`python -c "import fitz"`) — necessário para ler PDF. Sem ele,
->    os quatro programas que abrem PDF não rodam e o caminho do `.docx` roda
->    inteiro. Instala-se com `pip install pymupdf`.
-> 3. **pandoc** — gera o relatório em PDF e em HTML.
-> 4. **xelatex** — o motor que o pandoc usa para o PDF. É a instalação mais
->    pesada da lista, algumas centenas de megabytes.
->
-> Sobre 3 e 4: **eles são opcionais.** Sem eles o relatório sai em markdown, que
-> abre em qualquer editor, e a montagem funciona com a opção `--sem-pdf`. Me
-> diga quanto ocupam antes de instalar, e **pergunte antes de instalar qualquer
-> um dos quatro**, porque instalar programa é decisão minha e não sua.
->
-> Depois de conferir, diga em uma linha o que dá para fazer com o que já existe.
+> Rode `python --version` e me diga o que respondeu. Preciso de 3.11 ou mais
+> novo. Se o comando não for encontrado, o Python não está no PATH, e me diga
+> como resolver na minha máquina.
 
-**Por que este passo existe separado.** Pandoc e xelatex eram a instalação mais
-chata do conjunto, serviam só ao PDF, e ninguém descobria sozinho que a opção
-`--sem-pdf` resolve. Passar a conferência ao assistente tira isso do seu caminho,
-e a exigência de perguntar antes de instalar impede que ele baixe meio gigabyte
-de LaTeX porque você disse "sim" a uma pergunta que não leu.
+**Não instale mais nada agora.** As outras duas dependências entram só quando
+fizerem falta, cada uma no passo em que faz: o PyMuPDF apenas se o trabalho for
+PDF, e o pandoc com o xelatex apenas se você quiser o relatório em PDF. Quem está
+só experimentando não precisa de nenhuma das duas, e não faz sentido baixar meio
+gigabyte de LaTeX antes de saber se a ferramenta serve.
 
 ## 3. Escolher o modelo, e este é o primeiro ponto de medição
 
@@ -112,8 +96,12 @@ Estes cinco não usam inteligência artificial, não consomem cota e não erram 
 julgamento. Eles levantam **suspeitas**, e não apontamentos: nenhum deles
 distingue mudança declarada de deslize. Silêncio de um programa não é aprovação.
 
-**Se algum quebrar, o problema é ambiente, não trabalho.** Anote a mensagem: é
-informação sobre a portabilidade, que é o que este teste procura.
+**Se o trabalho for PDF e aparecer `No module named 'fitz'`**, é o PyMuPDF que
+falta. Peça ao Copilot: *instale o PyMuPDF com `pip install pymupdf` e rode de
+novo*. Com `.docx` isso nunca acontece, porque nenhum dos cinco abre PDF.
+
+**Se algum quebrar por outra razão, o problema é ambiente, não trabalho.** Anote a
+mensagem: é informação sobre a portabilidade, que é o que este teste procura.
 
 ## 6. A leitura, que é onde o Copilot entra
 
@@ -146,7 +134,11 @@ anotado e o relatório**: cada apontamento vira comentário do Word na margem do
 parágrafo que o exibe, e os comentários que já estavam no arquivo são preservados.
 Vindo de PDF, sai o `.md` em CriticMarkup no lugar do `.docx` comentado.
 
-Se faltar pandoc ou xelatex, acrescente `--sem-pdf`.
+**O PDF é a única coisa que precisa de instalação pesada, e ela é opcional.** Se o
+comando reclamar de pandoc ou de xelatex, você tem duas saídas, nesta ordem de
+esforço: acrescentar `--sem-pdf`, e o relatório sai em markdown, que abre em
+qualquer editor; ou pedir ao Copilot que instale os dois, avisando que são
+algumas centenas de megabytes. Só instale se for entregar o PDF a alguém.
 
 ## 8. Conferir o que o modelo escreveu
 
@@ -168,10 +160,12 @@ Escrito antes do teste, para valer como previsão e não como explicação depoi
 2. **A leitura completa não cabe.** 26 mil tokens de instrução mais o trabalho
    inteiro, em dezenas de passos. Se travar aqui, o Alberto ainda funciona, e ele
    é a porta de entrada de qualquer modo.
-3. **O Copilot instalar sem perguntar, ou não conseguir instalar.** O passo 2
-   delega a ele a conferência e pede que pergunte antes de baixar qualquer coisa.
-   Se ele baixar meio gigabyte de LaTeX sem perguntar, ou travar tentando, é
-   achado sobre o assistente e não sobre a oficina. Anote qual dos dois foi.
+3. **O Copilot não saber reagir à falta.** Nada é instalado de antemão, então as
+   dependências aparecem como mensagem de erro no meio do caminho: `No module
+   named 'fitz'` no passo 5, a reclamação do pandoc no passo 7. A pergunta é se
+   ele reconhece o que falta e propõe a instalação, ou se apenas repassa o erro.
+   E se instalar meio gigabyte de LaTeX sem perguntar, isso é achado sobre o
+   assistente, e não sobre a oficina.
 4. **O trabalho fora da raiz.** Se o arquivo estiver noutra pasta, o assistente
    não o acha sozinho, porque a regra que ele segue é "o único `.docx` ou `.pdf`
    na raiz". Ele deveria perguntar em vez de inventar, e é isso que o teste
