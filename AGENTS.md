@@ -35,9 +35,20 @@ aproveitáveis, com quase o dobro da taxa de erro, dentro da mesma família.**
 Nenhum modelo de outro fornecedor foi testado, e não há razão para esperar que um
 salto maior custe menos.
 
-Se o seletor de modelos oferecer Claude Opus, é ele. Sonnet funciona e rende
-menos, na proporção acima. Qualquer outro é uso não testado, e o relatório deve
-dizer no cabeçalho com que modelo foi produzido.
+**Escolha o melhor modelo que a sua assinatura oferecer.** Entre os Claude, a
+ordem é Opus, depois Sonnet, depois os menores. Qualquer modelo de outro
+fornecedor é uso não testado. Em todos os casos, o relatório diz no cabeçalho com
+que modelo foi produzido, porque relatório sem essa linha não se compara com
+nenhum outro.
+
+**A medição acima vale para a leitura completa, e não para a camada de
+consistência.** Ela mediu o modelo vasculhando 62 mil palavras, que é o que o
+Luis pede. O Alberto pede outra coisa: um programa levanta as suspeitas e o
+modelo julga algumas dezenas de trechos já localizados. Para essa tarefa não há
+medida, e é razoável esperar que um modelo menor a sustente melhor do que
+sustentou a busca. **Razoável não é medido**, e quem rodar num modelo pequeno faz
+bem em conferir se ele está julgando cada suspeita ou apenas repetindo a lista do
+programa com um comentário.
 
 **Evite o modo automático de escolha de modelo.** Modelo escolhido pelo serviço é
 modelo desconhecido, e relatório de modelo desconhecido não se compara com nenhum
