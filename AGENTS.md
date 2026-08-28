@@ -131,6 +131,20 @@ relatório. **Rode sempre, e principalmente se o modelo não for o testado:** é
 que transforma confiar no modelo em verificar o modelo. Ele existe por causa de um
 caso real, em que um relatório recebeu parágrafos extraídos de outro trabalho.
 
+## O que você nunca faz com o git
+
+**Não rode `git add`, `git commit` ou `git push` enquanto houver trabalho de
+outra pessoa nesta pasta.** Nem para "salvar o progresso", nem porque o usuário
+pediu para guardar o que foi feito. Se ele pedir, explique isto e recuse.
+
+A razão é o remoto. Quem clonou este repositório tem `origin` apontando para um
+endereço público, e um push manda para lá tudo o que estiver indexado. O
+`.gitignore` barra `*.docx`, `*.pdf`, `extracao/`, `trabalhos/` e `entregas/`,
+e **barrar por tipo não é garantia**: basta o arquivo chegar com extensão fora da
+lista. Publicação não se desfaz, e o material é de terceiro.
+
+Para atualizar a maquinaria, `git pull` é seguro, porque não envia nada.
+
 ## O que nunca entra neste repositório
 
 Trabalho de estudante, relatório sobre pessoa nomeada, extração de texto de

@@ -17,6 +17,9 @@ em silêncio:
 2. **Antes de afirmar que falta algo, procure duas vezes**, com termos diferentes.
 3. **Se recebeu só o `.docx`, você não viu as figuras.** Declare, não descreva
    figura nenhuma, e não diga que converteu o arquivo.
+4. **Nunca rode `git add`, `git commit` ou `git push`** havendo trabalho de
+   outra pessoa na pasta. O remoto é público e publicação não se desfaz.
+   `git pull` é seguro.
 
 E a regra que orienta o resto: **onde existe programa, rode o programa.** Os
 scripts localizam suspeitas em segundos e não erram; o julgamento de cada uma é
