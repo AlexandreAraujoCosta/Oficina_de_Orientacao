@@ -85,7 +85,7 @@ def main():
         todos += [x for x in ler(a.anexo, "anexo") if x[0] not in vistos]
 
     if not todos:
-        sys.exit("nenhum item reconhecido no anexo." + '\n\n' + "Cada item precisa desta forma, e o programa nao aceita variacao:" + '\n\n' + "## D1" + '\n' + "**Aponta:** o que se aponta, numa linha." + '\n' + "**Abrir:** [P123] [P456]" + '\n\n' + "O codigo e uma ou duas maiusculas mais numero. Item sem localizador" + '\n' + "entre colchetes tambem e descartado.")
+        sys.exit("nenhum item reconhecido." + '\n\n' + "Cada item precisa abrir com um codigo, numa destas duas formas:" + '\n\n' + "### D1. Nome curto do item" + '\n' + "**D1. Nome curto do item**" + '\n\n' + "O codigo e uma ou duas maiusculas mais numero, e as executaveis sao" + '\n' + "D, S e SC. Item sem localizador [Pxxx] na prosa tambem e descartado.")
 
     def chave(t):
         cod = t[0]
