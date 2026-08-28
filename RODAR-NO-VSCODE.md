@@ -201,24 +201,42 @@ mensagem: é informação sobre a portabilidade, que é o que este teste procura
 
 ## 6. A leitura, que é onde o Copilot entra
 
-No mesmo chat do passo 2, ainda em modo agente, cole:
+Os programas levantaram suspeitas. Julgá-las é leitura, e daqui saem duas coisas
+diferentes conforme até onde você quiser ir.
+
+**A leitura completa é o Luis**, e é ela que vale como uso normal da oficina. São
+quatro passos sobre o mesmo trabalho: a consistência, a cadeia do marco e do
+método, o cotejo em que cada apontamento é testado contra o texto antes de sair,
+e o relatório. No mesmo chat, ainda em modo agente:
 
 ```
-Leia o AGENTS.md na raiz e siga o que ele manda. O trabalho é o único .docx ou
-.pdf na raiz desta pasta. Rode a análise de consistência: execute os programas,
-julgue cada suspeita que eles levantaram contra o parágrafo citado, e escreva o
-relatório. Me diga em qual passo está e o que cada programa devolveu.
+Leia prompts/LUIS.md e siga os quatro passos sobre este trabalho. As suspeitas
+dos programas estão em SUSPEITAS-<nome>.md e na extração em extracao/. Escreva
+RELATORIO.md e ANEXO.md, com o anexo na forma que o AGENTS.md descreve. Não
+digite trecho do trabalho: indique o parágrafo pelo número.
 ```
 
-**Comece pelo Alberto, e não pelo Luis.** A camada de consistência julga algumas
-dezenas de trechos já localizados, o que cabe em qualquer contexto. A leitura
-completa do Luis é outra ordem de grandeza: o prompt tem 103 KB, cerca de 26 mil
-tokens, e o trabalho inteiro entra junto. **Esse é o segundo ponto de medição**, e
-é onde eu esperaria a primeira parede: ou o contexto não comporta, ou a cota
-acaba. Se acontecer, anote em que passo parou.
+**E parar no Alberto é uso legítimo, não meia análise.** O Alberto é a camada de
+consistência sozinha: dobra o trabalho sobre si mesmo em quatro níveis, formal,
+numérico, categorial e textual, e não julga argumento. Ele serve em qualquer
+momento da escrita, inclusive quando ainda não há argumento pronto, e é o que
+cabe folgado numa assinatura modesta. Para ficar por aí:
 
-Para a leitura completa, quando quiser tentar, o prompt é `prompts/LUIS.md`, e a
-versão que cabe numa conversa só é `prompts/ANALISADOR-PORTATIL.md`.
+```
+Julgue as suspeitas de SUSPEITAS-<nome>.md e da extração, uma a uma, abrindo o
+parágrafo citado para decidir se é deslize ou decisão do autor. Não digite
+trecho: indique o parágrafo pelo número. Diga quantas descartou e por quê.
+```
+
+**O que decide entre os dois é o estado do trabalho**, e não o gosto. O Luis pede
+desenvolvimento argumentativo suficiente, com resultados apresentados e
+conclusões escritas: rodado antes disso, ele julga o que ainda não existe. O
+Alberto não pede nada disso.
+
+**Este é o segundo ponto de medição.** A cadeia do Luis é outra ordem de grandeza:
+o prompt tem cerca de 26 mil tokens e o trabalho inteiro entra junto, em vários
+passos. É onde eu esperaria a primeira parede, por contexto ou por cota. Se
+parar, anote em que passo, e note que o Alberto continua funcionando.
 
 ## 7. Montar a entrega
 
