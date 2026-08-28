@@ -1,0 +1,26 @@
+{
+  // Comandos que nunca sao aprovados automaticamente, por mais frouxo que
+  // esteja o modo de aprovacao do agente.
+  //
+  // POR QUE ISTO EXISTE
+  //
+  // O AGENTS.md proibe o assistente de usar git havendo trabalho de terceiro
+  // nesta pasta. Isso e trava de instrucao, e trava de instrucao se contorna
+  // sozinha quando o modelo e outro. A segunda guarda era a aprovacao humana,
+  // e ela so protege quem de fato aprova comando a comando, o que quase
+  // ninguem faz depois da terceira vez.
+  //
+  // Uma regra `false` aqui vale contra qualquer permissao mais frouxa: o
+  // comando volta a exigir confirmacao explicita, inclusive em Autopilot.
+  //
+  // RESSALVA: ha relato aberto no VS Code de que as regras por expressao
+  // regular nem sempre sao aplicadas. Isto e uma guarda a mais, e nao uma
+  // garantia. A protecao que nao depende de software e nao guardar trabalho
+  // de terceiro dentro de um clone com remoto de escrita.
+  "chat.tools.terminal.autoApprove": {
+      "/^git\\s+(push|commit|add|remote|tag)\\b/": false,
+      "/^gh\\s+(repo|release|pr)\\b/": false,
+      "/^(rm|rmdir|del|Remove-Item)\\b/": false,
+      "/^(mv|move|Move-Item)\\b/": false
+  }
+}
