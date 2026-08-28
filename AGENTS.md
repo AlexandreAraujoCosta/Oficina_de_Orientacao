@@ -138,7 +138,13 @@ python scripts/conferir_consistencia.py tudo ARQUIVO   # números, listas, termo
 python scripts/conferir_interno.py extracao/ARQUIVO.txt  # remissões, numeração, contas
 ```
 
-Os quatro devolvem **suspeitas**, e não apontamentos. Nenhum deles julga: eles
+A saída de todos fica em **`SUSPEITAS-<nome>.md`**, gravado na pasta. **É esse
+arquivo, e não a sua memória do terminal, a entrada de quem julga.** Junto com
+ele conta a extração em `extracao/`, onde legendas e pseudo-títulos vêm marcados
+por comentário; as duas fontes formam o conjunto, e nenhuma delas sozinha é o
+conjunto.
+
+Os programas devolvem **suspeitas**, e não apontamentos. Nenhum deles julga: eles
 localizam o que merece ser olhado, e a leitura decide caso a caso se é mudança
 declarada ou deslize. Silêncio de um programa não é aprovação: significa que nada
 do que ele sabe procurar apareceu.

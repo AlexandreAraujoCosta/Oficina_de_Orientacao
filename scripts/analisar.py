@@ -69,14 +69,19 @@ def escolher(pasta):
     return escolhido
 
 
+COLHIDO = []
+
+
 def rodar(programa, *args):
     print("\n" + "=" * 68)
-    print("### %s %s" % (programa, " ".join(str(a) for a in args)))
+    cabeca = "%s %s" % (programa, " ".join(str(a) for a in args))
+    print(cabeca)
     print("=" * 68)
     r = subprocess.run([sys.executable, str(RAIZ / programa)] + [str(a) for a in args],
                        capture_output=True, text=True, encoding="utf-8", errors="replace")
-    saida = (r.stdout or "").rstrip()
-    print(saida if saida else (r.stderr or "").rstrip()[-800:])
+    saida = (r.stdout or "").rstrip() or (r.stderr or "").rstrip()[-800:]
+    print(saida)
+    COLHIDO.append("## " + cabeca + chr(10) + chr(10) + "```" + chr(10) + saida + chr(10) + "```")
     return r.returncode
 
 
@@ -102,10 +107,22 @@ def main():
         rodar("conferir_consistencia.py", "tudo", alvo)
     rodar("conferir_interno.py", Path("extracao") / (alvo.stem + ".txt"))
 
+    destino = Path("SUSPEITAS-" + alvo.stem + ".md")
+    cabecalho = (
+        "# Suspeitas levantadas em " + alvo.name + chr(10) + chr(10) +
+        "Isto e a saida bruta dos programas, e nao um relatorio. Sao SUSPEITAS:" + chr(10) +
+        "nenhum programa distingue mudanca declarada de deslize. Julgue cada uma" + chr(10) +
+        "abrindo o paragrafo citado, e nao digite trecho do trabalho." + chr(10) + chr(10) +
+        "As legendas e pseudo-titulos marcados dentro de extracao/" + alvo.stem +
+        ".txt fazem parte do conjunto e nao estao repetidos aqui." + chr(10) + chr(10))
+    destino.write_text(cabecalho + (chr(10) * 2).join(COLHIDO) + chr(10), encoding="utf-8")
+
     print("\n" + "=" * 68)
     print("Os programas terminaram. Eles levantaram SUSPEITAS, e nao apontamentos:")
     print("nenhum deles distingue mudanca declarada de deslize. O julgamento de")
     print("cada uma e a proxima etapa, e e leitura.")
+    print("")
+    print("A saida ficou em %s, que e a entrada de quem julga." % destino.name)
     return 0
 
 
