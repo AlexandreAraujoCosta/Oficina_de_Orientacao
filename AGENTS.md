@@ -165,6 +165,17 @@ relatório. **Rode sempre, e principalmente se o modelo não for o testado:** é
 que transforma confiar no modelo em verificar o modelo. Ele existe por causa de um
 caso real, em que um relatório recebeu parágrafos extraídos de outro trabalho.
 
+## Uma armadilha do Windows, e ela custa uma rodada
+
+**Não redirecione saída com `>` no PowerShell.** Ele grava em UTF-16 com BOM, e
+não em UTF-8; quem tentar ler aquilo depois encontra um arquivo que parece
+corrompido e gasta uma rodada descobrindo por quê. Não é preciso redirecionar
+nada: `analisar.py` grava sozinho o `SUSPEITAS-<nome>.md` em UTF-8, e todos os
+programas da oficina escrevem em UTF-8 explícito.
+
+Se precisar mesmo capturar algo, use `| Out-File -Encoding utf8`, ou faça o
+programa gravar.
+
 ## O que você nunca faz com o git
 
 **Não rode `git add`, `git commit` ou `git push` enquanto houver trabalho de
