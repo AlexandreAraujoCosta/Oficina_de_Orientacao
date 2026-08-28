@@ -26,6 +26,7 @@ Uso:
 """
 
 import argparse
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -40,6 +41,45 @@ for fluxo in (sys.stdout, sys.stderr):
 
 RAIZ = Path(__file__).resolve().parent
 GERADOS = ("entrega-", "anotado-", "relatorio-", "caderno-")
+
+
+INSTITUICAO = ("universidade", "faculdade", "instituto", "programa", "curso",
+               "departamento", "centro", "escola", "mestrado", "doutorado",
+               "pos-graduacao", "pós-graduação", "brasilia", "brasília",
+               "orientador", "orientadora", "professor", "professora", "banca",
+               "dissertacao", "dissertação", "tese", "monografia", "resumo",
+               "abstract", "agradecimentos", "sumario", "sumário")
+
+
+def nome_provavel(extracao):
+    """Quem assina o trabalho, pela capa. E palpite, e vai dito como palpite.
+
+    A capa traz instituicao, autoria e titulo, e so a autoria e um nome de
+    pessoa: duas a cinco palavras capitalizadas, sem digito, sem palavra de
+    instituicao, e curta. O primeiro que passa nesses filtros costuma ser ele.
+    """
+    import unicodedata
+    try:
+        linhas = Path(extracao).read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return None
+    for linha in linhas[:120]:
+        m = re.match(r"^[#*>\s]*\[P(\d+)\]\s*(.+)$", linha)
+        if not m or int(m.group(1)) > 40:
+            continue
+        s = " ".join(m.group(2).split())
+        if not (8 < len(s) < 60) or any(c.isdigit() for c in s):
+            continue
+        sem = unicodedata.normalize("NFKD", s.lower())
+        if any(p in sem for p in INSTITUICAO):
+            continue
+        palavras = s.split()
+        if not (2 <= len(palavras) <= 5):
+            continue
+        maiusculas = sum(1 for p in palavras if p[:1].isupper())
+        if maiusculas >= len(palavras) - 1:
+            return s
+    return None
 
 
 def candidatos(pasta):
@@ -123,6 +163,16 @@ def main():
     print("cada uma e a proxima etapa, e e leitura.")
     print("")
     print("A saida ficou em %s, que e a entrada de quem julga." % destino.name)
+    quem = nome_provavel(Path("extracao") / (alvo.stem + ".txt"))
+    if quem:
+        curto = "".join(quem.split()[:2]).lower()
+        for de, para in (("á","a"),("ã","a"),("â","a"),("é","e"),("ê","e"),("í","i"),
+                         ("ó","o"),("õ","o"),("ô","o"),("ú","u"),("ç","c")):
+            curto = curto.replace(de, para)
+        print("")
+        print("Autor provavel, pela capa: %s" % quem)
+        print("Para a entrega, isso da --estudante %s. Confira antes de usar:" % curto)
+        print("e palpite lido da capa, e nao dado do sistema.")
     return 0
 
 
