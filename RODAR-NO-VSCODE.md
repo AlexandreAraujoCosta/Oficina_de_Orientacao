@@ -28,7 +28,12 @@ opções. A que interessa é a quarta:
 
 Clique nela e siga as três perguntas que o programa faz, nesta ordem:
 
-1. **O endereço**, numa caixa que surge no alto da janela. Cole e tecle Enter:
+1. **O endereço**, numa caixa que surge no alto da janela.
+
+   **Copie a linha abaixo**, cole na caixa e tecle Enter. Se estiver lendo isto
+   pelo site do GitHub, passe o mouse sobre a linha: aparece um botão de copiar
+   no canto direito dela. Copie em vez de digitar, porque um endereço desses
+   erra numa letra e a mensagem de falha não diz qual.
 
    ```
    https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao.git
