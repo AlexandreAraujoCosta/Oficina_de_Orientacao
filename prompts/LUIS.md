@@ -649,6 +649,23 @@ A razão de a separação importar não é delicadeza. É que a lista de apontam
 
 **E a incompletude não vira item executável.** Ela é a seção de roteiro, e só. Se o autor precisar de uma marca no arquivo, ancore uma única, no título vazio ou no último parágrafo escrito, dizendo que o roteiro está no relatório.
 
+## O que o editor conserta sozinho não vira item
+
+**Divergência cujo reparo é uma operação de rotina do editor não entra na lista.**
+Sumário com número de página velho, lista de figuras a atualizar, referência
+cruzada que perdeu o alvo: no Word tudo isso se refaz com uma tecla, e o autor o
+faz antes de imprimir. Apontar como item consome uma linha da lista e uma
+consulta do leitor para devolver o que ele já ia fazer.
+
+**E, se apontar mesmo assim, aponte o que diverge.** "Sumário desatualizado" sem
+dizer qual entrada, e sem localizador, é pior que não apontar: obriga a conferir o
+sumário inteiro para descobrir se havia algo. Diga qual entrada, contra qual
+título, e aí é achado.
+
+O critério vale além do sumário: **antes de escrever um item, pergunte que
+trabalho ele cria para quem lê.** Se a resposta for procurar o que o item deixou
+de dizer, o item não está pronto.
+
 ## O que se declara sempre
 
 Cobertura, o que se cortou e de que tipo, as tensões não resolvidas, e os localizadores preservados.
