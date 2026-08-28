@@ -124,10 +124,11 @@ peça a instalação na mesma mensagem, com a mesma exigência de perguntar ante
 
 ## 3. Escolher o modelo, e este é o primeiro ponto de medição
 
-No seletor de modelos do Copilot, escolha **Claude Opus** se ele estiver na lista.
-Sonnet funciona e rende menos, na proporção que o `AGENTS.md` registra. **Evite o
-modo automático:** modelo escolhido pelo serviço é modelo desconhecido, e
-relatório de modelo desconhecido não se compara com nenhum outro.
+No seletor de modelos do Copilot, **escolha o melhor que a sua assinatura
+oferecer.** Entre os Claude a ordem é Opus, depois Sonnet, depois os menores, e a
+razão está medida no `AGENTS.md`. **Evite o modo automático:** modelo escolhido
+pelo serviço é modelo desconhecido, e relatório de modelo desconhecido não se
+compara com nenhum outro, nem com o mesmo trabalho na semana passada.
 
 Em 12 de março de 2026 o plano de estudante do GitHub perdeu a seleção de Opus e
 Sonnet, restando Haiku, Gemini e GPT. Não confirmei se a mudança atingiu o
