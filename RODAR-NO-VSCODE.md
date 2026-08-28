@@ -9,6 +9,25 @@ Se você está seguindo isto como teste, anote três coisas ao longo do caminho:
 consome**, e **em que passo você precisou de conhecimento que não está escrito
 aqui**. A terceira é a mais valiosa, e é a que nenhum de nós consegue ver sozinho.
 
+## Por que rodar aqui, e não colar o prompt numa conversa
+
+**Porque só assim volta o trabalho anotado.** O prompt da oficina cola em qualquer
+assistente e devolve uma boa leitura. O que nenhuma conversa devolve é o arquivo:
+texto atravessa a fronteira do chat, porque se copia, e um `.docx` não atravessa.
+
+O que sai daqui é **o documento da autora, com cada apontamento como comentário do
+Word na margem do parágrafo que ele cita**, e com os comentários que ela já tinha
+escrito preservados ao lado. Ela abre no Word, vê a observação na altura certa, e
+responde ali mesmo. Quem orienta lê a resposta no próprio arquivo e responde
+também. O relatório em PDF vai junto, para quem quiser o conjunto de uma vez.
+
+A diferença aparece quando se compara com a alternativa: um relatório de cem
+páginas ao lado do documento, em que conferir cada item exige achar o parágrafo. É
+a mesma análise, e o trabalho de casar uma coisa com a outra fica com o autor.
+
+Vale para as duas vias com agente, esta e o Claude Code. **O que o agente
+acrescenta é o arquivo de volta, e não a leitura.**
+
 ## O que você instala à mão, e é uma coisa só
 
 **O VS Code, com a extensão GitHub Copilot.** É o único arranque irredutível: o
