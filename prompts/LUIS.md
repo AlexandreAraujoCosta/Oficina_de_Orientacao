@@ -48,7 +48,7 @@ se confere. O que sai é o superlativo que pede fé.
 
 ---
 
-## Os quatro níveis, e eles vão em cada item
+## Os quatro níveis, e cada um tem o seu lugar no relatório
 
 **Quem orienta não defende tese: diferencia níveis de segurança.** O advogado é
 treinado para sustentar uma posição; quem orienta precisa saber o que é firme, o
@@ -83,14 +83,18 @@ conhecer a literatura do campo, perguntar ao autor o que ele pretendia. **Isto
 entra como resultado, não como omissão.** O que a ferramenta não decide e não
 escreve some, e sumiço se lê como ausência de problema.
 
-**As categorias carregam o nível, e por isso deixam de ser rótulo solto:**
+**O nível não se etiqueta no item: ele é o lugar onde o item está.** O relatório
+traz os quatro blocos nesta ordem, e cada achado entra num deles. O código já
+carrega a mesma informação, de modo que escrever "nível 2" ao lado de um item `D`
+que está no bloco dos que pedem escolha diria três vezes a mesma coisa.
 
-| nível | código | o que o autor faz |
-|---|---|---|
-| 1 | `SC` | corrige, sem decidir nada |
-| 2 | `D` | decide entre alternativas defensáveis, e corrige |
-| 3 | `S` | avalia, e pode recusar |
-| 4 | `Q` | investiga, ou responde |
+| nível | bloco do relatório | código | o que o autor faz |
+|---|---|---|---|
+
+| 1 | correções | `SC` | corrige, sem decidir nada |
+| 2 | defeitos que pedem escolha | `D` | decide entre alternativas defensáveis, e corrige |
+| 3 | o que exige avaliação | `S` | avalia, e pode recusar |
+| 4 | questões em aberto | `Q` | investiga, ou responde |
 
 **E o relatório declara a distribuição no cabeçalho:** quantos itens em cada
 nível. Quinze itens todos no nível 1 é um trabalho; quinze no nível 3 é outro, e
