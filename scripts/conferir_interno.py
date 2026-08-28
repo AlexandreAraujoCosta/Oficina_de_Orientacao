@@ -187,6 +187,8 @@ def main():
     ap.add_argument("--verboso", action="store_true")
     a = ap.parse_args()
 
+    if not Path(a.fonte).exists():
+        sys.exit(("nao encontrei %s." + "\n" + "Rode antes o extrair.py sobre o trabalho: ele grava a extracao em" + "\n" + "extracao/, com o mesmo nome do arquivo e a terminacao .txt.") % a.fonte)
     pars = carregar(a.fonte)
     if not pars:
         sys.exit("nenhum parágrafo reconhecido em %s" % a.fonte)
