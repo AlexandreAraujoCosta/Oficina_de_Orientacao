@@ -200,6 +200,13 @@ programas da oficina escrevem em UTF-8 explícito.
 Se precisar mesmo capturar algo, use `| Out-File -Encoding utf8`, ou faça o
 programa gravar.
 
+**E não conte com ferramenta Unix.** No Windows o terminal é o PowerShell, e
+`grep`, `head`, `tail`, `wc` e `cat` não existem lá; o equivalente de `grep` é
+`Select-String`. Mas repare no que isso costuma significar: **a cadeia inteira é
+`python scripts/...` e não precisa de nenhuma delas.** Se você está alcançando o
+`grep`, provavelmente está improvisando uma busca que já tem programa, como
+`conferir_consistencia.py termos --termo`.
+
 ## O que você nunca faz com o git
 
 **Não rode `git add`, `git commit` ou `git push` enquanto houver trabalho de
