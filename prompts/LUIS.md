@@ -91,10 +91,16 @@ que está no bloco dos que pedem escolha diria três vezes a mesma coisa.
 | nível | bloco do relatório | código | o que o autor faz |
 |---|---|---|---|
 
-| 1 | correções | `SC` | corrige, sem decidir nada |
-| 2 | defeitos que pedem escolha | `D` | decide entre alternativas defensáveis, e corrige |
-| 3 | o que exige avaliação | `S` | avalia, e pode recusar |
+| 1 | anexo, correções | `SC` | corrige, sem decidir nada |
+| 2 | sugestões | `S` | decide entre alternativas defensáveis, e corrige |
+| 3 | sugestões | `D` | avalia, desenvolve, e pode recusar |
 | 4 | questões em aberto | `Q` | investiga, ou responde |
+
+As siglas já tinham sentido antes desta seção, e ele manda: `S` é sugestão, `D` é
+desenvolvimento desde 24/08/2026, `SC` é sugestão de correção e `Q` é questão. O
+que a escala acrescenta não é rebatizá-las, é dizer que **a ordem `SC`, `S`, `D`,
+`Q` é crescente no que o autor tem de fazer**, e que o relatório as apresenta
+nessa ordem.
 
 **E o relatório declara a distribuição no cabeçalho:** quantos itens em cada
 nível. Quinze itens todos no nível 1 é um trabalho; quinze no nível 3 é outro, e
