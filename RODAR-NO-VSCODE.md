@@ -145,46 +145,24 @@ para o repositório por descuido.
 
 ## 5. Os programas, que rodam sem modelo nenhum
 
-São cinco comandos, e há duas formas de rodá-los.
-
-**Pelo chat, que é a mais simples.** Cole no chat do Copilot, em modo agente:
-
-```
-Rode os cinco programas da cadeia do AGENTS.md sobre este trabalho, na ordem, e
-me mostre a saída de cada um.
-```
-
-Ele abre o terminal sozinho e executa. É para isso que serve o modo agente.
-
-**Ou você mesmo, se preferir ver os comandos.** Abra o terminal do VS Code com
-``Ctrl+` `` (a tecla de crase, acima do Tab), ou pelo menu `Terminal` › `Novo
-Terminal`. Ele já abre na pasta do projeto, que é o que este roteiro chama de
-raiz: a pasta `Oficina_de_Orientacao`, onde estão `scripts/` e `prompts/`. Digite
-ou cole, uma linha de cada vez.
-
-**Nos comandos abaixo, `SEU-ARQUIVO` é para ser trocado pelo nome real do seu
-arquivo**, com a extensão. Se ele se chama `dissertacao-agosto.docx`, é isso que
-entra no lugar. Colar como está roda os programas sobre um arquivo que não
-existe, e o resultado é nada acontecer. Se o nome tiver espaços, ponha entre
-aspas.
+É um comando só, e ele não pede o nome do arquivo. No terminal do VS Code, que
+abre com ``Ctrl+` `` ou pelo menu `Terminal` › `Novo Terminal`, já na pasta do
+projeto:
 
 ```bash
-python scripts/extrair.py SEU-ARQUIVO.docx
-python scripts/analisar_docx.py sumario SEU-ARQUIVO.docx
-python scripts/analisar_docx.py forma SEU-ARQUIVO.docx
-python scripts/conferir_consistencia.py tudo SEU-ARQUIVO.docx
-python scripts/conferir_interno.py extracao/SEU-ARQUIVO.txt
+python scripts/analisar.py
 ```
 
-**A última linha usa `.txt`, e não é engano:** ela lê o que a primeira extraiu,
-que é um arquivo de texto com o mesmo nome, gravado em `extracao/`.
+Ele procura o `.docx` ou o `.pdf` da pasta, diz qual escolheu, e roda os quatro
+programas na ordem. Havendo mais de um, pega o modificado mais recentemente e
+**lista os outros**, para você ver se acertou. Para mandar um arquivo que está
+noutro lugar, passe o caminho entre aspas.
 
-**É por isso que a forma do chat é mais simples.** O assistente vê qual arquivo
-está ali e troca o nome sozinho.
+**Ou peça ao agente**, no chat, que dá no mesmo:
 
-Estes cinco não usam inteligência artificial, não consomem cota e não erram por
-julgamento. Eles levantam **suspeitas**, e não apontamentos: nenhum deles
-distingue mudança declarada de deslize. Silêncio de um programa não é aprovação.
+```
+Rode python scripts/analisar.py e me mostre a saída.
+```
 
 **São muitos comandos, e você escolhe como eles são aprovados.** Logo abaixo da
 caixa do prompt há um seletor de permissão. No modo corrente, o agente mostra
