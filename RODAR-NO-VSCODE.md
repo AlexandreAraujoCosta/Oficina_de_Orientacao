@@ -122,18 +122,58 @@ gigabyte de LaTeX antes de saber se a ferramenta serve.
 **Se preferiu clonar em vez de baixar o zip**, o git entra pelo mesmo caminho:
 peça a instalação na mesma mensagem, com a mesma exigência de perguntar antes.
 
-## 3. Escolher o modelo, e este é o primeiro ponto de medição
+## 3. Escolher o modelo, e há dois modos de chegar a um bom
 
-No seletor de modelos do Copilot, **escolha o melhor que a sua assinatura
-oferecer.** Entre os Claude a ordem é Opus, depois Sonnet, depois os menores, e a
-razão está medida no `AGENTS.md`. **Evite o modo automático:** modelo escolhido
-pelo serviço é modelo desconhecido, e relatório de modelo desconhecido não se
-compara com nenhum outro, nem com o mesmo trabalho na semana passada.
+Este passo decide o resultado mais que qualquer outro do roteiro. A medição está
+no `AGENTS.md`: quatro modelos leram a mesma dissertação, e o que separou o
+melhor do pior não foi render menos, foi produzir outra coisa com o mesmo nome.
 
-Em 12 de março de 2026 o plano de estudante do GitHub perdeu a seleção de Opus e
-Sonnet, restando Haiku, Gemini e GPT. Não confirmei se a mudança atingiu o
-benefício docente. **Anote o que aparece na sua lista:** é o que decide se esta
-via serve só a quem orienta ou também a quem é orientado.
+**Evite o modo automático.** Modelo escolhido pelo serviço é modelo desconhecido,
+e relatório de modelo desconhecido não se compara com nenhum outro, nem com o
+mesmo trabalho na semana passada.
+
+### Pela assinatura, e é aqui que o Pack de professor conta
+
+No seletor, **escolha o melhor que a sua assinatura oferecer**. Entre os Claude a
+ordem é Opus, depois Sonnet.
+
+**O benefício docente do GitHub Education é o que torna esta via praticável.** Ele
+dá acesso ao Copilot com os modelos de topo, e é com Sonnet ou Opus que a leitura
+completa funciona. **O plano de estudante não serve para isto:** desde 12 de março
+de 2026 ele perdeu a seleção de Opus e Sonnet, restando modelos com os quais o
+Luis não roda, o que foi medido e está registrado.
+
+O custo aqui é a cota. **Medido em 28/08/2026: uma leitura completa no Sonnet 4.5
+consumiu 17% da cota semanal**, o que dá cinco ou seis leituras por semana. A
+camada de consistência sozinha custa uma fração disso.
+
+### Pela sua própria chave, e aí não há teto
+
+O VS Code aceita **chave própria** no chat, no mesmo modo agente que roda os
+programas. Aceita Anthropic, OpenAI, Gemini, Azure e **OpenRouter**, além de
+modelo local por Ollama. Configura-se no seletor de modelos, em *Manage Models* ou
+*Add model provider*.
+
+Duas consequências. **O consumo é cobrado pelo provedor e não conta na cota do
+Copilot**, de modo que o teto semanal desaparece. E **a escolha do modelo deixa de
+depender do que a assinatura oferece**: com uma chave da Anthropic, ou com
+créditos no OpenRouter, você seleciona o Opus e roda na calibragem em que tudo foi
+medido.
+
+**Sobre o OpenRouter, uma ressalva de preço e uma de teste.** A de preço: a cadeia
+reenvia o trabalho a cada passo, e os cerca de 3 dólares por leitura completa
+supõem que o serviço cobre um décimo por reenviar o que já viu. Pela Anthropic
+direto esse desconto existe; pelo agregador, depende de ele repassar o cache, e a
+diferença entre 3 e 15 dólares por dissertação está nisso. Mede-se numa rodada,
+anotando o saldo antes e depois. A de teste: **não há aqui comparação sólida entre
+os modelos oferecidos pelo agregador**, e escolher um que não seja Claude é uso
+não calibrado, pelas razões que o `AGENTS.md` registra.
+
+**Para quem já tem assinatura paga de um bom assistente**, vale saber que esta via
+não é a única: o prompt `prompts/ANALISADOR-PORTATIL.md` cola em qualquer conversa
+e não passa por cota nenhuma. O que só o VS Code dá é o agente com terminal, que
+roda os programas sozinho. É por isso que a via existe, e é só isso que ela
+acrescenta.
 
 ## 4. Pôr o trabalho no lugar
 
