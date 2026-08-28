@@ -1,7 +1,11 @@
 # Este repositório traz a maquinaria, e nunca o material.
 # O que fica de fora é trabalho de terceiro, e a política está em POLITICA.md.
 
-# Trabalhos e o que deles se extrai
+# Trabalhos e o que deles se extrai. As duas pastas abaixo sao onde se
+# trabalha: crie trabalhos/<nome>/ e rode de la. Nada dali sobe.
+trabalhos/
+entregas/
+
 *.docx
 *.doc
 *.odt
