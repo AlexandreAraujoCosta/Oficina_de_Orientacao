@@ -19,31 +19,30 @@ login na conta do GitHub.
 Tudo o mais, **inclusive o Python**, sai de um pedido em português ao assistente,
 que tem terminal em modo agente. É o passo 2.
 
-## 1. Baixar a oficina, e isto também é um pedido ao agente
+## 1. Trazer a oficina
 
-Crie uma pasta vazia onde quiser, abra-a no VS Code (`Arquivo` › `Abrir Pasta`),
-e peça ao Copilot **em modo agente**:
+Na tela inicial do VS Code há **Clone Git Repository**. Clique, cole o endereço e
+escolha onde guardar:
 
-> Baixe e descompacte a Oficina de Orientação **nesta pasta**, com o conteúdo na
-> raiz e não dentro de uma subpasta. O pacote está em
-> `https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao/archive/refs/heads/main.zip`
-> e tem cerca de 380 KB. O zip abre numa pasta `Oficina_de_Orientacao-main`, então
-> suba o conteúdo um nível e apague o zip e a pasta vazia no fim. Depois liste o
-> que ficou na raiz e confirme que existem `AGENTS.md`, `scripts/` e
-> `.github/copilot-instructions.md`.
+```
+https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao.git
+```
 
-**Feito isso, feche e reabra a pasta no VS Code.** O Copilot lê
-`.github/copilot-instructions.md` quando o espaço de trabalho abre, e o arquivo
-não existia quando você abriu. Sem reabrir, ele segue a conversa sem as
-instruções, **e não avisa que está**. Se preferir, `Ctrl+Shift+P` e
-*Recarregar Janela* faz o mesmo.
+O VS Code cria a pasta, abre-a como espaço de trabalho e lê
+`.github/copilot-instructions.md` na abertura, que é o que faz o assistente
+trabalhar com as instruções em vez de sem elas. Se o git não estiver instalado,
+ele mesmo oferece instalar.
 
-**Duas coisas importam nesse arranjo.** O conteúdo tem de ficar na raiz, porque é
-onde o Copilot procura as instruções e onde os comandos `python scripts/...`
-funcionam sem caminho relativo. E baixar não é clonar: **o pacote não traz remoto
-configurado**, e por isso nada do que você puser aqui tem para onde ser enviado.
-Se quiser acompanhar o desenvolvimento, clone em vez de baixar, e aí `git pull`
-atualiza sem enviar nada.
+**Você não consegue empurrar nada daqui, e isso é proteção e não limitação.** O
+repositório é de outra pessoa e você não tem permissão de escrita: qualquer push
+é recusado pelo GitHub. Para atualizar a maquinaria depois, `git pull`, que só
+recebe.
+
+**Se preferir não usar git**, baixe o zip em `Code` › `Download ZIP` na página do
+repositório. Duas ressalvas que o clone não tem: o pacote abre numa pasta
+`Oficina_de_Orientacao-main`, e o conteúdo precisa ficar na raiz do que você abrir
+no VS Code; e, se você descompactar dentro de uma pasta já aberta, feche e reabra
+a janela, porque as instruções são lidas na abertura e ainda não existiam.
 
 ## 2. Pedir o que faltar, em uma mensagem
 
