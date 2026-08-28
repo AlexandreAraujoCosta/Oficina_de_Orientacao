@@ -97,8 +97,8 @@ o repositório nem por descuido. Para manter vários trabalhos ao mesmo tempo,
    do original. Caminho com espaço vai entre aspas.
 2. **Confira o ambiente antes de prometer.** `python --version` precisa responder
    3.11 ou mais. Sem PyMuPDF, o caminho do PDF não roda e o do `.docx` roda.
-3. **Rode os cinco programas** da seção seguinte, na ordem. Eles não usam modelo,
-   não consomem cota e não erram por julgamento.
+3. **Rode `python scripts/analisar.py`**, que acha o trabalho e executa a cadeia.
+   Os programas não usam modelo, não consomem cota e não erram por julgamento.
 4. **Julgue as suspeitas**, uma a uma, contra o parágrafo que cada uma cita. É
    aqui que você trabalha, e é a única parte que exige leitura.
 5. **Escreva `RELATORIO.md` e `ANEXO.md`** e monte a entrega com `--estudante`.
@@ -120,10 +120,22 @@ do modelo e vai para o programa custa zero e não erra.
 ## A cadeia, na ordem
 
 ```bash
-python scripts/extrair.py trabalho.docx              # extração numerada por parágrafo
-python scripts/analisar_docx.py forma trabalho.docx  # consistência formal, por papel
-python scripts/conferir_consistencia.py tudo trabalho.docx   # números, listas, termos
-python scripts/conferir_interno.py extracao/trabalho.txt     # remissões, numeração, contas
+python scripts/analisar.py
+```
+
+Sem argumento nenhum. Ele acha o `.docx` ou o `.pdf` da pasta, diz qual escolheu,
+e roda os quatro programas na ordem. Havendo mais de um candidato, escolhe o mais
+recente e **lista os outros**, para que a escolha errada apareça. Para mandar um
+arquivo específico, ou um que esteja fora da pasta, passe o caminho:
+`python scripts/analisar.py "caminho/para/o trabalho.docx"`.
+
+Os quatro que ele executa, se precisar chamá-los à mão:
+
+```bash
+python scripts/extrair.py ARQUIVO              # extração numerada por parágrafo
+python scripts/analisar_docx.py forma ARQUIVO  # consistência formal, por papel
+python scripts/conferir_consistencia.py tudo ARQUIVO   # números, listas, termos
+python scripts/conferir_interno.py extracao/ARQUIVO.txt  # remissões, numeração, contas
 ```
 
 Os quatro devolvem **suspeitas**, e não apontamentos. Nenhum deles julga: eles
