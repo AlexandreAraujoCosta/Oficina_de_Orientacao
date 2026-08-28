@@ -51,6 +51,48 @@ não usam modelo nenhum e a leitura julga algumas dezenas de trechos já
 localizados. A cadeia completa do Luis, não: são cerca de 560 mil tokens numa
 dissertação, em dezenas de passos. Meça antes de prometer.
 
+## O modo de uso no VS Code: um diretório só
+
+**O arranjo é este, e ele existe para não haver caminho a errar.** A pessoa clona
+este repositório, abre a pasta clonada como espaço de trabalho no VS Code, e
+**põe o trabalho a analisar na raiz**, ao lado de `scripts/` e `prompts/`. Nada
+mais precisa ser configurado.
+
+```
+Oficina_de_Orientacao/
+├── .github/copilot-instructions.md   ← o assistente lê isto sozinho
+├── AGENTS.md                          ← e daqui vem o resto
+├── scripts/                           ← os programas
+├── prompts/                           ← a doutrina
+├── trabalho.docx                      ← o arquivo a analisar, aqui
+├── extracao/                          ← aparece sozinho, e não sobe
+└── entregas/<estudante>/<data>/       ← a entrega, e também não sobe
+```
+
+Os comandos ficam `python scripts/extrair.py trabalho.docx`, sem caminho
+relativo para acertar. O `.gitignore` barra `*.docx`, `*.pdf`, `extracao/`,
+`trabalhos/` e `entregas/`, de modo que o trabalho de outra pessoa não sobe para
+o repositório nem por descuido. Para manter vários trabalhos ao mesmo tempo,
+`trabalhos/<nome>/` serve, e aí os comandos precisam do caminho.
+
+**Quando alguém pedir a análise sem dizer mais nada, faça nesta ordem:**
+
+1. **Ache o trabalho.** É o único `.docx` ou `.pdf` na raiz. Se houver mais de um,
+   pergunte qual; se não houver nenhum, diga onde pôr, e não invente arquivo.
+2. **Confira o ambiente antes de prometer.** `python --version` precisa responder
+   3.11 ou mais. Sem PyMuPDF, o caminho do PDF não roda e o do `.docx` roda.
+3. **Rode os cinco programas** da seção seguinte, na ordem. Eles não usam modelo,
+   não consomem cota e não erram por julgamento.
+4. **Julgue as suspeitas**, uma a uma, contra o parágrafo que cada uma cita. É
+   aqui que você trabalha, e é a única parte que exige leitura.
+5. **Escreva `RELATORIO.md` e `ANEXO.md`** e monte a entrega com `--estudante`.
+6. **Confira o que você mesmo escreveu** com `conferir_citacoes.py`.
+
+**Diga em qual passo está, e o que cada programa devolveu.** Quem opera isto pela
+primeira vez não sabe distinguir programa que calou por não achar nada de
+programa que quebrou, e essa diferença é a coisa mais fácil de esconder sem
+querer.
+
 ## A regra que faz as duas coisas ao mesmo tempo
 
 **Onde existe programa, rode o programa.** Não confira à mão o que
@@ -76,7 +118,7 @@ do que ele sabe procurar apareceu.
 Depois da leitura, com o relatório e o anexo escritos:
 
 ```bash
-python scripts/montar_entrega.py RELATORIO.md ANEXO.md trabalho.docx
+python scripts/montar_entrega.py RELATORIO.md ANEXO.md trabalho.docx --estudante silva
 python scripts/conferir_citacoes.py RELATORIO.md trabalho.pdf
 ```
 

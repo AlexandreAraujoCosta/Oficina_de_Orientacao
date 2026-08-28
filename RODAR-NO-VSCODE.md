@@ -43,25 +43,22 @@ via serve só a quem orienta ou também a quem é orientado.
 
 ## 3. Pôr o trabalho no lugar
 
-```bash
-mkdir -p trabalhos/silva
-```
-
-Copie o `.docx` ou o PDF para lá, e **rode sempre de dentro dessa pasta**. O
-`.gitignore` barra `trabalhos/`, `entregas/`, todo `.docx`, todo `.pdf` e as
-extrações, de modo que nada do trabalho de outra pessoa sobe para o repositório
-por descuido. A extração é gravada onde você está, e não onde moram os scripts.
+Copie o `.docx` ou o PDF **para a raiz da pasta clonada**, ao lado de `scripts/`
+e `prompts/`. É o arranjo que o `AGENTS.md` define, e ele existe para não haver
+caminho relativo a errar. O `.gitignore` barra `*.docx`, `*.pdf`, `extracao/`,
+`trabalhos/` e `entregas/`, de modo que nada do trabalho de outra pessoa sobe
+para o repositório por descuido.
 
 ## 4. Os programas, que rodam sem modelo nenhum
 
-Do terminal, dentro de `trabalhos/silva`:
+Do terminal, na raiz:
 
 ```bash
-python ../../scripts/extrair.py trabalho.docx
-python ../../scripts/analisar_docx.py sumario trabalho.docx
-python ../../scripts/analisar_docx.py forma trabalho.docx
-python ../../scripts/conferir_consistencia.py tudo trabalho.docx
-python ../../scripts/conferir_interno.py extracao/trabalho.txt
+python scripts/extrair.py trabalho.docx
+python scripts/analisar_docx.py sumario trabalho.docx
+python scripts/analisar_docx.py forma trabalho.docx
+python scripts/conferir_consistencia.py tudo trabalho.docx
+python scripts/conferir_interno.py extracao/trabalho.txt
 ```
 
 Estes cinco não usam inteligência artificial, não consomem cota e não erram por
@@ -91,10 +88,10 @@ versão que cabe numa conversa só é `prompts/ANALISADOR-PORTATIL.md`.
 
 ## 6. Montar a entrega
 
-Com o relatório e o anexo escritos, ainda de dentro de `trabalhos/silva`:
+Com o relatório e o anexo escritos, ainda na raiz:
 
 ```bash
-python ../../scripts/montar_entrega.py RELATORIO.md ANEXO.md trabalho.docx --estudante silva
+python scripts/montar_entrega.py RELATORIO.md ANEXO.md trabalho.docx --estudante silva
 ```
 
 Sai em `entregas/silva/<data>/`. Vindo de `.docx`, a entrega é **o trabalho
@@ -107,7 +104,7 @@ Se faltar pandoc ou xelatex, acrescente `--sem-pdf`.
 ## 7. Conferir o que o modelo escreveu
 
 ```bash
-python ../../scripts/conferir_citacoes.py RELATORIO.md trabalho.pdf
+python scripts/conferir_citacoes.py RELATORIO.md trabalho.pdf
 ```
 
 Procura no arquivo de origem toda sequência entre aspas do relatório. **Rode
@@ -126,6 +123,7 @@ Escrito antes do teste, para valer como previsão e não como explicação depoi
    é a porta de entrada de qualquer modo.
 3. **pandoc e xelatex.** São a instalação mais chata da lista, e servem só ao PDF.
    `--sem-pdf` resolve, e ninguém descobre isso sozinho.
-4. **O caminho `../../scripts/`.** Funciona se você estiver exatamente em
-   `trabalhos/<nome>/`. Um nível a mais ou a menos e nada roda, com uma mensagem
-   que não explica por quê.
+4. **O trabalho fora da raiz.** Se o arquivo estiver noutra pasta, o assistente
+   não o acha sozinho, porque a regra que ele segue é "o único `.docx` ou `.pdf`
+   na raiz". Ele deveria perguntar em vez de inventar, e é isso que o teste
+   verifica.
