@@ -137,11 +137,14 @@ caso real, em que um relatório recebeu parágrafos extraídos de outro trabalho
 outra pessoa nesta pasta.** Nem para "salvar o progresso", nem porque o usuário
 pediu para guardar o que foi feito. Se ele pedir, explique isto e recuse.
 
-A razão é o remoto. Quem clonou este repositório tem `origin` apontando para um
-endereço público, e um push manda para lá tudo o que estiver indexado. O
-`.gitignore` barra `*.docx`, `*.pdf`, `extracao/`, `trabalhos/` e `entregas/`,
-e **barrar por tipo não é garantia**: basta o arquivo chegar com extensão fora da
-lista. Publicação não se desfaz, e o material é de terceiro.
+A razão é o remoto, e ela pesa de modo desigual. Quem clonou um repositório de
+outra pessoa não tem permissão de escrita, e o push é recusado pelo GitHub; para
+essa pessoa a regra é precaução barata. **Para quem é dono do repositório, o push
+passa**, e é aí que a regra evita o estrago: basta rodar a oficina no próprio
+clone com o trabalho de um orientando dentro. O `.gitignore` barra `*.docx`,
+`*.pdf`, `extracao/`, `trabalhos/` e `entregas/`, e **barrar por tipo não é
+garantia**: basta o arquivo chegar com extensão fora da lista. Publicação não se
+desfaz, e o material é de terceiro.
 
 Para atualizar a maquinaria, `git pull` é seguro, porque não envia nada.
 
