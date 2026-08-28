@@ -19,29 +19,31 @@ login na conta do GitHub.
 Tudo o mais, **inclusive o Python**, sai de um pedido em português ao assistente,
 que tem terminal em modo agente. É o passo 2.
 
-## 1. Baixar e abrir
+## 1. Baixar a oficina, e isto também é um pedido ao agente
 
-**Baixe o zip**, em `Code` › `Download ZIP` na página do repositório:
+Crie uma pasta vazia onde quiser, abra-a no VS Code (`Arquivo` › `Abrir Pasta`),
+e peça ao Copilot **em modo agente**:
 
-https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao
+> Baixe e descompacte a Oficina de Orientação **nesta pasta**, com o conteúdo na
+> raiz e não dentro de uma subpasta. O pacote está em
+> `https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao/archive/refs/heads/main.zip`
+> e tem cerca de 380 KB. O zip abre numa pasta `Oficina_de_Orientacao-main`, então
+> suba o conteúdo um nível e apague o zip e a pasta vazia no fim. Depois liste o
+> que ficou na raiz e confirme que existem `AGENTS.md`, `scripts/` e
+> `.github/copilot-instructions.md`.
 
-Descompacte onde quiser e abra **a pasta descompactada** como espaço de trabalho
-no VS Code. Isso importa: o Copilot lê `.github/copilot-instructions.md` na raiz
-do espaço de trabalho, e se você abrir uma pasta acima, ele não acha as
-instruções e trabalha sem elas, sem avisar.
+**Feito isso, feche e reabra a pasta no VS Code.** O Copilot lê
+`.github/copilot-instructions.md` quando o espaço de trabalho abre, e o arquivo
+não existia quando você abriu. Sem reabrir, ele segue a conversa sem as
+instruções, **e não avisa que está**. Se preferir, `Ctrl+Shift+P` e
+*Recarregar Janela* faz o mesmo.
 
-**Por que o zip, e não `git clone`.** Não é para poupar a instalação do git. É que
-o clone deixa um remoto configurado, apontando para um endereço público, dentro
-da mesma pasta onde você vai pôr a dissertação de outra pessoa. O `.gitignore`
-barra os tipos conhecidos, e barrar por tipo não é garantia: basta um arquivo com
-extensão fora da lista, ou um clique em *stage all* no painel de controle de
-versão. O zip não tem remoto, e o que não tem para onde ir não vai.
-
-**Quem quiser acompanhar o desenvolvimento** clona em vez de baixar, e aí atualiza
-com `git pull`, que não envia nada. O `AGENTS.md` proíbe o assistente de rodar
-`git add`, `git commit` e `git push` havendo trabalho de terceiro na pasta, mas
-essa é uma trava de instrução, e trava de instrução se contorna sozinha quando o
-modelo é outro.
+**Duas coisas importam nesse arranjo.** O conteúdo tem de ficar na raiz, porque é
+onde o Copilot procura as instruções e onde os comandos `python scripts/...`
+funcionam sem caminho relativo. E baixar não é clonar: **o pacote não traz remoto
+configurado**, e por isso nada do que você puser aqui tem para onde ser enviado.
+Se quiser acompanhar o desenvolvimento, clone em vez de baixar, e aí `git pull`
+atualiza sem enviar nada.
 
 ## 2. Pedir o que faltar, em uma mensagem
 
