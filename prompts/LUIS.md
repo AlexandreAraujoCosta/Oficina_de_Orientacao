@@ -662,9 +662,17 @@ dizer qual entrada, e sem localizador, é pior que não apontar: obriga a confer
 sumário inteiro para descobrir se havia algo. Diga qual entrada, contra qual
 título, e aí é achado.
 
+**Mas não confunda o campo com o que ele exibe.** No mesmo índice de figuras
+convivem duas coisas de naturezas opostas: a página velha, que a tecla conserta,
+e o buraco na numeração, que ela não conserta. Numa dissertação medida em
+28/08/2026 faltavam os gráficos 24, 37 e 38 numa série de 63 numerada até 66, e o
+índice reproduzia a falha, o que provava que ele fora regenerado depois das
+exclusões. **O primeiro não é achado; o segundo é, e é dos bons**, porque o
+número que sumiu não volta por atualização de campo.
+
 O critério vale além do sumário: **antes de escrever um item, pergunte que
 trabalho ele cria para quem lê.** Se a resposta for procurar o que o item deixou
-de dizer, o item não está pronto.
+de dizer, o item não está pronto. Se for apertar F9, também não.
 
 ## O que se declara sempre
 
