@@ -28,21 +28,26 @@ opções. A que interessa é a quarta:
 
 Clique nela e siga as três perguntas que o programa faz, nesta ordem:
 
-1. **O endereço**, numa caixa que surge no alto da janela.
+1. **O endereço**, numa caixa que surge no alto da janela. Há dois modos de
+   preenchê-la, e o segundo existe porque o primeiro às vezes falha.
 
-   **Copie a linha abaixo**, cole na caixa e tecle Enter. Se estiver lendo isto
-   pelo site do GitHub, passe o mouse sobre a linha: aparece um botão de copiar
-   no canto direito dela. Copie em vez de digitar, porque um endereço desses
-   erra numa letra e a mensagem de falha não diz qual.
+   **Se conseguir copiar**, cole isto e tecle Enter:
 
    ```
-   https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao.git
+   https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao
    ```
 
-   A mesma caixa oferece **Clone from GitHub**, que faz login e abre uma busca.
-   **Não precisa.** Ela serve para achar repositório cujo endereço você não sabe,
-   e o endereço está aí em cima. Colar a URL dispensa a autenticação, porque ler
-   repositório público é aberto, e é um passo a menos para falhar.
+   **Se o botão de copiar não funcionar**, e isso acontece quando a página está
+   aberta numa janela embutida em vez do navegador, não digite o endereço inteiro:
+   sessenta caracteres erram numa letra e a mensagem de falha não diz qual. Use a
+   opção **Clone from GitHub**, que a mesma caixa oferece, e digite só
+
+   ```
+   AlexandreAraujoCosta/Oficina_de_Orientacao
+   ```
+
+   Ela faz login na sua conta do GitHub e mostra o repositório numa lista, para
+   você escolher. É um passo a mais e some com o risco de errar de letra.
 
 2. **Onde guardar.** Escolha uma pasta qualquer, como Documentos. O VS Code cria
    ali dentro uma subpasta `Oficina_de_Orientacao`, e não despeja nada solto.
