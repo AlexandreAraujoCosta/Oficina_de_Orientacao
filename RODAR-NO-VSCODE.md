@@ -160,15 +160,27 @@ Ele abre o terminal sozinho e executa. É para isso que serve o modo agente.
 ``Ctrl+` `` (a tecla de crase, acima do Tab), ou pelo menu `Terminal` › `Novo
 Terminal`. Ele já abre na pasta do projeto, que é o que este roteiro chama de
 raiz: a pasta `Oficina_de_Orientacao`, onde estão `scripts/` e `prompts/`. Digite
-ou cole, uma linha de cada vez:
+ou cole, uma linha de cada vez.
+
+**Nos comandos abaixo, `SEU-ARQUIVO` é para ser trocado pelo nome real do seu
+arquivo**, com a extensão. Se ele se chama `dissertacao-agosto.docx`, é isso que
+entra no lugar. Colar como está roda os programas sobre um arquivo que não
+existe, e o resultado é nada acontecer. Se o nome tiver espaços, ponha entre
+aspas.
 
 ```bash
-python scripts/extrair.py trabalho.docx
-python scripts/analisar_docx.py sumario trabalho.docx
-python scripts/analisar_docx.py forma trabalho.docx
-python scripts/conferir_consistencia.py tudo trabalho.docx
-python scripts/conferir_interno.py extracao/trabalho.txt
+python scripts/extrair.py SEU-ARQUIVO.docx
+python scripts/analisar_docx.py sumario SEU-ARQUIVO.docx
+python scripts/analisar_docx.py forma SEU-ARQUIVO.docx
+python scripts/conferir_consistencia.py tudo SEU-ARQUIVO.docx
+python scripts/conferir_interno.py extracao/SEU-ARQUIVO.txt
 ```
+
+**A última linha usa `.txt`, e não é engano:** ela lê o que a primeira extraiu,
+que é um arquivo de texto com o mesmo nome, gravado em `extracao/`.
+
+**É por isso que a forma do chat é mais simples.** O assistente vê qual arquivo
+está ali e troca o nome sozinho.
 
 Estes cinco não usam inteligência artificial, não consomem cota e não erram por
 julgamento. Eles levantam **suspeitas**, e não apontamentos: nenhum deles
@@ -235,7 +247,7 @@ versão que cabe numa conversa só é `prompts/ANALISADOR-PORTATIL.md`.
 Com o relatório e o anexo escritos, ainda na raiz:
 
 ```bash
-python scripts/montar_entrega.py RELATORIO.md ANEXO.md trabalho.docx --estudante silva
+python scripts/montar_entrega.py RELATORIO.md ANEXO.md SEU-ARQUIVO.docx --estudante sobrenome
 ```
 
 Sai em `entregas/silva/<data>/`. Vindo de `.docx`, a entrega é **o trabalho
@@ -252,7 +264,7 @@ algumas centenas de megabytes. Só instale se for entregar o PDF a alguém.
 ## 8. Conferir o que o modelo escreveu
 
 ```bash
-python scripts/conferir_citacoes.py RELATORIO.md trabalho.pdf
+python scripts/conferir_citacoes.py RELATORIO.md SEU-ARQUIVO.pdf
 ```
 
 Procura no arquivo de origem toda sequência entre aspas do relatório. **Rode
