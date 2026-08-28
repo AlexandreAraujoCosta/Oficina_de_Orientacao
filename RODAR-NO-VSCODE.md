@@ -177,6 +177,15 @@ O `AGENTS.md` proíbe o assistente de usar git havendo trabalho de terceiro na
 pasta, e isso é trava de instrução; a aprovação era a segunda guarda, e as duas
 não caem pelo mesmo motivo.
 
+**E por isso a guarda não fica só nas duas.** O repositório traz um
+`.vscode/settings.json` que recusa a aprovação automática de `git push`,
+`git commit`, `git add`, `rm` e afins, por mais frouxo que esteja o modo: esses
+voltam a exigir confirmação explícita. Ela chega junto com o clone, sem você
+precisar configurar nada. **Não é garantia:** há relato aberto no VS Code de que
+as regras por expressão regular nem sempre são aplicadas, e a proteção que não
+depende de software nenhum é não guardar trabalho de terceiro dentro de um clone
+que tenha remoto de escrita.
+
 **Se o trabalho for PDF e aparecer `No module named 'fitz'`**, é o PyMuPDF que
 falta. Peça ao Copilot: *instale o PyMuPDF com `pip install pymupdf` e rode de
 novo*. Com `.docx` isso nunca acontece, porque nenhum dos cinco abre PDF.
