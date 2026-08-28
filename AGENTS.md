@@ -193,6 +193,30 @@ desfaz, e o material é de terceiro.
 
 Para atualizar a maquinaria, `git pull` é seguro, porque não envia nada.
 
+## O formato do anexo, e ele não admite variação
+
+O relatório é prosa livre. **O anexo não é:** ele é lido por programa, e o
+programa reconhece exatamente esta forma, item por item.
+
+```markdown
+## D1
+**Aponta:** o que se aponta, em prosa, numa linha só.
+**Abrir:** [P1191] [P1190]
+```
+
+O código é uma ou duas letras maiúsculas seguidas de número, e a convenção é
+**D** para defeito, **S** para sugestão. As duas linhas seguintes começam
+exatamente com `**Aponta:**` e `**Abrir:**`, nessa ordem. Em `Abrir:` vão os
+localizadores entre colchetes, separados por espaço; o primeiro é onde o
+comentário será ancorado no `.docx`, e os demais entram no texto do comentário.
+
+**Item sem localizador é descartado em silêncio**, e item fora dessa forma
+também. Se `montar_entrega.py` disser que leu zero itens, o defeito está no
+anexo, e não no trabalho.
+
+**Não escreva o trecho do trabalho no anexo.** Você indica o parágrafo; um
+programa copia o texto do arquivo e o insere depois.
+
 ## O que nunca entra neste repositório
 
 Trabalho de estudante, relatório sobre pessoa nomeada, extração de texto de
