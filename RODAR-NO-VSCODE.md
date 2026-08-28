@@ -69,8 +69,18 @@ janela, porque as instruções são lidas na abertura e ainda não existiam.
 
 ## 2. Abrir o chat, e pedir o que faltar
 
-Com a oficina aberta, o resto da conversa acontece no chat do Copilot. Abra com
-**Ctrl+Alt+I**, ou pelo ícone de balão na barra lateral.
+Com a oficina aberta, o resto da conversa acontece no chat do Copilot, e abri-lo
+não é tão evidente quanto parece. Três caminhos, do mais estável ao mais rápido:
+
+- **Pelo menu:** `Exibir` › `Chat` (*View* › *Chat*).
+- **Pela paleta de comandos:** `Ctrl+Shift+P`, digite `chat` e escolha a opção de
+  abrir ou focar o chat. Este funciona mesmo quando os outros dois mudam de
+  lugar, porque procura pelo nome do comando.
+- **Pelo atalho:** `Ctrl+Alt+I`.
+
+Há também um ícone de balão na barra lateral. **Se ele não estiver lá, é
+diagnóstico e não detalhe:** significa que a extensão não foi instalada ou que
+falta fazer login na conta do GitHub, e nada adiante vai funcionar antes disso.
 
 **Ponha em modo agente**, no seletor no alto do painel do chat, onde costuma
 estar escrito *Ask*. Modo agente é o que tem terminal e escreve arquivo; nos
