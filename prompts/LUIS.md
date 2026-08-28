@@ -633,6 +633,22 @@ A primeira forma não faz você digitar nada: o script busca o texto em `origem`
 
 **A ausência informa.** Achado sem patch é, por construção, achado que pede pensamento e não alinhamento. Declare a proporção entre os dois: é a forma quantitativa da separação por complexidade.
 
+## Trabalho incompleto: roteiro, e nunca lista de defeitos
+
+**Incompletude não é defeito, e confundir as duas coisas é o erro mais fácil de cometer aqui.** Defeito é texto escrito que está errado, incoerente ou sem apoio. Incompletude é etapa da pesquisa que ainda não foi feita, ou seção anunciada e não escrita. **O teste é direto: existe texto para corrigir?** Se não existe, não é defeito, e não entra na lista de apontamentos.
+
+A razão de a separação importar não é delicadeza. É que a lista de apontamentos alimenta o arquivo anotado, e lá **todo item tem o mesmo peso**: a mesma marca na margem, do mesmo tamanho. Um item que diz "falta escrever o capítulo que junta as duas partes", ancorado num parágrafo, fica igual ao item que manda trocar uma palavra mal grafada. Quem abre o arquivo vê quinze marcas iguais e não vê que uma delas é o trabalho inteiro que resta.
+
+**Quando o trabalho vier incompleto, escreva uma seção de roteiro.** Ela não aparece em trabalho completo, vem antes da lista de correções, e obedece a três regras:
+
+**Constrói-se a partir do que existe, e não do que faltaria num trabalho pronto.** Não liste o que um trabalho completo teria, porque isso qualquer sumário-padrão informa e não ajuda ninguém. Diga que movimentos o capítulo ausente precisa fazer **dado o que este texto já construiu**, e para cada movimento nomeie o material que já está escrito, com os localizadores. Roteiro que serviria a qualquer trabalho da área não é roteiro: é índice.
+
+**Diga onde a tese já está dita.** Trabalho incompleto quase sempre já enunciou a própria conclusão em algum lugar, num título, numa frase de resumo, numa observação de passagem. Achar esses lugares e mostrá-los ao autor vale mais que qualquer conselho de método, porque converte "falta escrever" em "falta desenvolver o que você já escreveu ali e ali".
+
+**Declare o teto no início do relatório.** Diga o que não foi julgado por não existir ainda, e não deixe isso implícito. Sem essa linha, o silêncio sobre as conclusões se lê como aprovação delas.
+
+**E a incompletude não vira item executável.** Ela é a seção de roteiro, e só. Se o autor precisar de uma marca no arquivo, ancore uma única, no título vazio ou no último parágrafo escrito, dizendo que o roteiro está no relatório.
+
 ## O que se declara sempre
 
 Cobertura, o que se cortou e de que tipo, as tensões não resolvidas, e os localizadores preservados.
