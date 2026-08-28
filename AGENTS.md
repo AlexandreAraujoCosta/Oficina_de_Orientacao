@@ -102,6 +102,9 @@ o repositório nem por descuido. Para manter vários trabalhos ao mesmo tempo,
 4. **Julgue as suspeitas**, uma a uma, contra o parágrafo que cada uma cita. É
    aqui que você trabalha, e é a única parte que exige leitura.
 5. **Escreva `RELATORIO.md` e `ANEXO.md`** e monte a entrega com `--estudante`.
+   **Não pergunte o nome do estudante:** `analisar.py` o lê da capa e imprime,
+   junto com a forma curta a usar. Confira se faz sentido e use. Só pergunte se
+   ele não tiver achado nome nenhum.
 6. **Confira o que você mesmo escreveu** com `conferir_citacoes.py`.
 
 **Diga em qual passo está, e o que cada programa devolveu.** Quem opera isto pela
