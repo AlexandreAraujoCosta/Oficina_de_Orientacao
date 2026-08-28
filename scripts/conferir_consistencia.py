@@ -176,8 +176,11 @@ def conferir_numeros(paragrafos, min_ocorr=2, max_ocorr=6, min_comum=2):
     partilham vocabulario de conteudo. Dois usos do mesmo numero interessam
     quando falam da mesma coisa; se nao partilham nada, sao fatos distintos
     que por acaso tem o mesmo valor."""
+    # O pre-textual sai antes: a entrada do indice de figuras tem o mesmo
+    # numero da legenda que ela lista, e o par entre as duas nao e achado.
+    inicio = fim_do_pretextual(paragrafos)
     ocorr = defaultdict(list)
-    for pnum, texto in paragrafos:
+    for pnum, texto in paragrafos[inicio:]:
         if not texto or RE_PONTILHADO.search(texto) or RE_BIBL.search(texto):
             continue  # sumario, listas de figuras e entradas bibliograficas
         for m in RE_NUM.finditer(texto):
