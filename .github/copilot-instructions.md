@@ -1,8 +1,12 @@
 # Oficina de Orientação
 
 Ferramentas de leitura automática de trabalhos acadêmicos. **Siga `AGENTS.md`, na
-raiz do repositório**, que traz a cadeia de comandos, a escolha de modelo e a
-política sobre material de terceiro.
+raiz do repositório**, que traz o modo de uso, a cadeia de comandos, a escolha de
+modelo e a política sobre material de terceiro.
+
+O arranjo é um diretório só: esta pasta, com o trabalho a analisar na raiz. Quando
+pedirem a análise sem dizer mais nada, o trabalho é o único `.docx` ou `.pdf` aqui.
+Se houver mais de um, pergunte; se não houver nenhum, diga onde pôr.
 
 As três travas, repetidas aqui porque nenhuma delas pode se perder e todas falham
 em silêncio:
