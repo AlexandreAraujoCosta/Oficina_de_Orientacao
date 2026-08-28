@@ -48,7 +48,7 @@ O script entrega dezenas de trechos com localizador. O modelo lê esses trechos,
 
 **`termos`** — implementado, ainda não testado.
 
-**A comparação entre versões** ainda não está em script, e é a operação de maior valor medido: o documento de banca saiu quase todo dela. É o próximo item.
+**A comparação entre versões** entrou em script em 25/08/2026, e é a operação de maior valor medido: o documento de banca saiu quase todo dela. `comparar_versoes.py` pareia os parágrafos por conteúdo e diz, de cada localizador do relatório antigo, se o parágrafo correspondente mudou.
 
 ## Um defeito do próprio script, registrado porque é o tema do projeto
 
@@ -61,6 +61,5 @@ Achado só porque os resultados continuavam ruins depois de o código parecer ce
 ## O que falta antes de distribuir
 
 1. **A camada de julgamento sobre os candidatos**, que é um prompt curto e não uma cadeia.
-2. **A comparação entre versões em script.**
-3. **Medir a taxa de erro depois do julgamento**, que é o número que nunca foi apurado e sem o qual não se distribui. Tudo que foi medido até agora é taxa de hipótese bruta.
-4. **Testar em Sonnet**, que é onde o estudante vai rodar.
+2. **Medir a taxa de erro depois do julgamento**, que é o número que nunca foi apurado e sem o qual não se distribui. Tudo que foi medido até agora é taxa de hipótese bruta.
+3. **Testar em Sonnet**, que é onde o estudante vai rodar.
