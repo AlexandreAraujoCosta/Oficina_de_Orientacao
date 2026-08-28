@@ -21,17 +21,30 @@ que tem terminal em modo agente. É o passo 2.
 
 ## 1. Trazer a oficina
 
-Na tela inicial do VS Code há **Clone Git Repository**. Clique, cole o endereço e
-escolha onde guardar:
+Ao abrir o VS Code aparece o painel **Início** (*Start*), com meia dúzia de
+opções. A que interessa é a quarta:
 
-```
-https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao.git
-```
+> **Clonar Repositório Git...** (*Clone Git Repository...*)
 
-O VS Code cria a pasta, abre-a como espaço de trabalho e lê
-`.github/copilot-instructions.md` na abertura, que é o que faz o assistente
-trabalhar com as instruções em vez de sem elas. Se o git não estiver instalado,
-ele mesmo oferece instalar.
+Clique nela e siga as três perguntas que o programa faz, nesta ordem:
+
+1. **O endereço**, numa caixa que surge no alto da janela. Cole e tecle Enter:
+
+   ```
+   https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao.git
+   ```
+
+2. **Onde guardar.** Escolha uma pasta qualquer, como Documentos. O VS Code cria
+   ali dentro uma subpasta `Oficina_de_Orientacao`, e não despeja nada solto.
+
+3. **Se quer abrir o que acabou de clonar.** Responda que sim. **Este é o ponto
+   que não pode ser pulado:** o Copilot lê `.github/copilot-instructions.md` no
+   momento em que o espaço de trabalho abre, e é isso que faz ele trabalhar com
+   as instruções em vez de sem elas. Quem responde que não fica com a pasta no
+   disco e sem nada aberto, e o resto do roteiro deixa de fazer sentido.
+
+Se o git não estiver instalado, o VS Code avisa e oferece instalar antes de
+prosseguir.
 
 **Você não consegue empurrar nada daqui, e isso é proteção e não limitação.** O
 repositório é de outra pessoa e você não tem permissão de escrita: qualquer push
@@ -41,8 +54,8 @@ recebe.
 **Se preferir não usar git**, baixe o zip em `Code` › `Download ZIP` na página do
 repositório. Duas ressalvas que o clone não tem: o pacote abre numa pasta
 `Oficina_de_Orientacao-main`, e o conteúdo precisa ficar na raiz do que você abrir
-no VS Code; e, se você descompactar dentro de uma pasta já aberta, feche e reabra
-a janela, porque as instruções são lidas na abertura e ainda não existiam.
+no VS Code; e, se descompactar dentro de uma pasta já aberta, feche e reabra a
+janela, porque as instruções são lidas na abertura e ainda não existiam.
 
 ## 2. Pedir o que faltar, em uma mensagem
 
