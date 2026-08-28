@@ -115,7 +115,10 @@ def main():
     destino.write_text(rel + SEPARADOR + anx + "\n", encoding="utf-8")
     print("  montado: %s" % destino)
 
-    if not a.sem_paragrafos:
+    docx = a.trabalho.lower().endswith(".docx")
+    # Num .docx o comentario ja esta na margem do paragrafo certo, e a
+    # numeracao so existia para suprir a falta disso.
+    if not a.sem_paragrafos and not docx:
         paragrafos(a.trabalho, destino)
 
     # O indice que o corretor percorre. Vai junto porque separado nao e enviado.
@@ -125,14 +128,15 @@ def main():
                        capture_output=True, text=True, encoding="utf-8", errors="replace")
     print((r.stdout or "").rstrip() or (r.stderr or "")[-200:])
 
-    # O .md anotado, em CriticMarkup: serve aos dois caminhos, e e o unico
-    # que o caminho do PDF tem, porque la nao ha .docx para comentar.
-    r = subprocess.run([sys.executable, str(RAIZ / "anotar_md.py"),
-                        str(destino.with_name("ENTREGA-PARAGRAFOS-" + Path(a.relatorio).name)),
-                        str(destino.with_name("ENTREGA-CORRETOR-" + Path(a.relatorio).name)),
-                        "--saida", str(destino.with_name("ENTREGA-ANOTADO-" + Path(a.relatorio).name))],
-                       capture_output=True, text=True, encoding="utf-8", errors="replace")
-    print((r.stdout or "").rstrip() or (r.stderr or "")[-300:])
+    # O .md anotado, em CriticMarkup, e o que o caminho do PDF tem no lugar
+    # do .docx comentado. Num .docx seria a mesma coisa dita duas vezes.
+    if not docx:
+      r = subprocess.run([sys.executable, str(RAIZ / "anotar_md.py"),
+                          str(destino.with_name("ENTREGA-PARAGRAFOS-" + Path(a.relatorio).name)),
+                          str(destino.with_name("ENTREGA-CORRETOR-" + Path(a.relatorio).name)),
+                          "--saida", str(destino.with_name("ENTREGA-ANOTADO-" + Path(a.relatorio).name))],
+                         capture_output=True, text=True, encoding="utf-8", errors="replace")
+      print((r.stdout or "").rstrip() or (r.stderr or "")[-300:])
 
     # O .docx anotado: o mesmo relatorio, na margem do documento do autor.
     if a.trabalho.lower().endswith(".docx"):
@@ -141,6 +145,11 @@ def main():
                             "--saida", str(destino.with_name("ENTREGA-ANOTADO-" + Path(a.trabalho).name))],
                            capture_output=True, text=True, encoding="utf-8", errors="replace")
         print((r.stdout or "").rstrip() or (r.stderr or "")[-300:])
+        # O indice do corretor e a entrada do anotar_docx.py, e nao entrega:
+        # num .docx o apontamento ja vai na margem do paragrafo que ele cita.
+        lista = destino.with_name("ENTREGA-CORRETOR-" + Path(a.relatorio).name)
+        if lista.exists():
+            lista.unlink()
 
     com = destino.with_name(destino.stem + "-COM-TRECHOS.md")
     r = subprocess.run([sys.executable, str(RAIZ / "relatorio_autossuficiente.py"),
