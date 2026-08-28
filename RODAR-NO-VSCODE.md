@@ -106,10 +106,12 @@ rodar.
 
 Cole então:
 
-> Confira se o Python está instalado e se a versão é 3.11 ou mais nova, rodando
-> `python --version`. Se não estiver, ou se for mais antigo, me diga o que você
-> pretende instalar e quanto ocupa, **pergunte antes de instalar**, e depois
-> confirme que o comando passou a responder.
+```
+Confira se o Python está instalado e se a versão é 3.11 ou mais nova, rodando
+python --version. Se não estiver, ou se for mais antigo, me diga o que você
+pretende instalar e quanto ocupa, pergunte antes de instalar, e depois confirme
+que o comando passou a responder.
+```
 
 **Não peça mais nada agora.** As outras duas dependências entram só quando
 fizerem falta, cada uma no passo em que faz: o PyMuPDF apenas se o trabalho for
@@ -165,11 +167,14 @@ mensagem: é informação sobre a portabilidade, que é o que este teste procura
 
 ## 6. A leitura, que é onde o Copilot entra
 
-Abra o chat do Copilot **em modo agente** e peça, com estas palavras ou parecidas:
+No mesmo chat do passo 2, ainda em modo agente, cole:
 
-> Leia o `AGENTS.md` na raiz e siga o que ele manda. O trabalho está em
-> `trabalhos/silva/trabalho.docx`. Rode a análise de consistência: julgue cada
-> suspeita que os programas levantaram, e escreva o relatório.
+```
+Leia o AGENTS.md na raiz e siga o que ele manda. O trabalho é o único .docx ou
+.pdf na raiz desta pasta. Rode a análise de consistência: execute os programas,
+julgue cada suspeita que eles levantaram contra o parágrafo citado, e escreva o
+relatório. Me diga em qual passo está e o que cada programa devolveu.
+```
 
 **Comece pelo Alberto, e não pelo Luis.** A camada de consistência julga algumas
 dezenas de trechos já localizados, o que cabe em qualquer contexto. A leitura
