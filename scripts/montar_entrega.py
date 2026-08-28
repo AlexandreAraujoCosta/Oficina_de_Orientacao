@@ -164,6 +164,27 @@ def main():
     r = subprocess.run([sys.executable, str(RAIZ / "gerar_pdf.py"), str(com)],
                        capture_output=True, text=True, encoding="utf-8", errors="replace")
     print((r.stdout or "").rstrip())
+    pdf = com.with_suffix(".pdf")
+    if not (docx and pdf.exists()):
+        return 0
+
+    # Docx entra, docx sai: fica o trabalho anotado e o PDF do relatorio. O
+    # resto e andaime, e so se recolhe depois que o PDF existe, porque sem
+    # pandoc ele nao existe e o markdown passa a ser a unica saida.
+    guardar = {pdf.name, ("ENTREGA-ANOTADO-" + Path(a.trabalho).name)}
+    tmp = destino.parent / "tmp"
+    tmp.mkdir(exist_ok=True)
+    recolhidos = 0
+    for peca in destino.parent.glob("ENTREGA-*"):
+        if peca.name in guardar or peca.is_dir():
+            continue
+        peca.replace(tmp / peca.name)
+        recolhidos += 1
+    for peca in tmp.iterdir():
+        peca.unlink()
+    tmp.rmdir()
+    print("  %d intermediarios recolhidos e apagados; ficam o .docx anotado e o PDF"
+          % recolhidos)
     return 0
 
 
