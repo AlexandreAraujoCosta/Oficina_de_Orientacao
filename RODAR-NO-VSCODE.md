@@ -158,22 +158,24 @@ Estes cinco não usam inteligência artificial, não consomem cota e não erram 
 julgamento. Eles levantam **suspeitas**, e não apontamentos: nenhum deles
 distingue mudança declarada de deslize. Silêncio de um programa não é aprovação.
 
-**São muitos comandos, e aprovar um a um cansa.** Logo abaixo da caixa do
-prompt há um seletor de permissão, com *Default*, *Bypass Approvals* e
-**Autopilot**. Ligar o Autopilot **neste passo** faz a cadeia correr inteira sem
-parar a cada comando, e aqui o risco é baixo: os cinco programas só leem o
-trabalho e escrevem em `extracao/`.
+**São muitos comandos, e você escolhe como eles são aprovados.** Logo abaixo da
+caixa do prompt há um seletor de permissão. No modo corrente, o agente mostra
+cada comando e espera você aprovar; os outros afrouxam isso em graus, até o
+**Autopilot**, em prévia desde o VS Code 1.111, em que ele aprova as próprias
+ações e ainda responde sozinho às perguntas que o bloqueariam.
 
-**Desligue-o depois, e não o use no passo 2.** Ele suprime as aprovações e também
-responde sozinho às perguntas que o bloqueariam, o que anula as duas proteções
-deste roteiro. No passo 2, a de pedir que ele pergunte antes de instalar: com
-Autopilot ligado, ele responde a própria pergunta e baixa o LaTeX. E em qualquer
-momento, a aprovação humana é o que faria você ver um comando de `git` antes de
-ele rodar. O `AGENTS.md` proíbe o assistente de usar git com trabalho de terceiro
-na pasta, mas isso é trava de instrução, e a aprovação era a segunda guarda.
+**O critério para escolher é uma pergunta: o que a aprovação está guardando
+aqui?** Neste passo, pouco. Os cinco programas leem o trabalho e escrevem em
+`extracao/`, e não há entre eles comando que apague ou envie coisa alguma; se
+aprovar um a um estiver cansando, afrouxe à vontade.
 
-O Autopilot está em prévia desde o VS Code 1.111, de março de 2026, e o
-comportamento pode mudar de versão.
+**Nos outros dois momentos, a aprovação guarda algo.** No passo 2, o prompt pede
+que o assistente pergunte antes de instalar; um modo que responde sozinho às
+perguntas responde também a essa, e baixa o LaTeX sem consultar. E em qualquer
+ponto, a aprovação é o que faz você ver um comando de `git` antes de ele rodar.
+O `AGENTS.md` proíbe o assistente de usar git havendo trabalho de terceiro na
+pasta, e isso é trava de instrução; a aprovação era a segunda guarda, e as duas
+não caem pelo mesmo motivo.
 
 **Se o trabalho for PDF e aparecer `No module named 'fitz'`**, é o PyMuPDF que
 falta. Peça ao Copilot: *instale o PyMuPDF com `pip install pymupdf` e rode de
