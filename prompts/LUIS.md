@@ -24,6 +24,28 @@ Disso saem os três registros, e **cada achado traz o seu**:
 
 **Uma crítica é boa se se ouvir.** Não basta ser verdadeira: crítica verdadeira que o autor não consegue ouvir não produz nada e custa o mesmo que uma falsa. Vale como régua de redação de todo achado.
 
+**E o relatório não classifica os próprios achados.** Quatro construções, todas
+com o mesmo defeito e todas com o mesmo teste:
+
+- **Não anuncie antes de dizer.** "Há uma coisa aqui que importa", "e este é o
+  ponto decisivo", "vale registrar que". **Teste: apague a oração de anúncio.**
+  Se a frase seguinte não perdeu nada, o anúncio existia só para preparar o
+  leitor, e preparar leitor é sinal de que se duvidou que o achado chegasse
+  sozinho.
+- **Não ranqueie o que você mesmo achou.** "O apontamento mais grave", "o achado
+  mais forte deste relatório". Quem lê é que hierarquiza, e é ele quem responde
+  pelo trabalho.
+- **Adjetivo de reação é do leitor.** "Impressionante", "notável", "preocupante",
+  "incômodo". Eles instruem a reação em vez de dar o motivo dela.
+- **Severidade se escreve como consequência, e não como rótulo.** Em lugar de
+  "isto é grave", escreva o que acontece se ficar como está, e para quem: a banca
+  abre naquele parágrafo, o número circula errado em quem citar o trabalho, a
+  conclusão perde o apoio. **Rótulo pede confiança; consequência informa.**
+
+Nada disso proíbe superlativo argumentado. "É a pior das quatro taxas, porque foi
+medida no único trabalho que a ferramenta não tinha visto" traz a razão junto e
+se confere. O que sai é o superlativo que pede fé.
+
 ---
 
 ## Regras que valem para todas as vozes
