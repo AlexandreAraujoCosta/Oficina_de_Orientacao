@@ -145,7 +145,22 @@ para o repositório por descuido.
 
 ## 5. Os programas, que rodam sem modelo nenhum
 
-Do terminal, na raiz:
+São cinco comandos, e há duas formas de rodá-los.
+
+**Pelo chat, que é a mais simples.** Cole no chat do Copilot, em modo agente:
+
+```
+Rode os cinco programas da cadeia do AGENTS.md sobre este trabalho, na ordem, e
+me mostre a saída de cada um.
+```
+
+Ele abre o terminal sozinho e executa. É para isso que serve o modo agente.
+
+**Ou você mesmo, se preferir ver os comandos.** Abra o terminal do VS Code com
+``Ctrl+` `` (a tecla de crase, acima do Tab), ou pelo menu `Terminal` › `Novo
+Terminal`. Ele já abre na pasta do projeto, que é o que este roteiro chama de
+raiz: a pasta `Oficina_de_Orientacao`, onde estão `scripts/` e `prompts/`. Digite
+ou cole, uma linha de cada vez:
 
 ```bash
 python scripts/extrair.py trabalho.docx
