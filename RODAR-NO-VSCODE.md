@@ -67,9 +67,18 @@ repositório. Duas ressalvas que o clone não tem: o pacote abre numa pasta
 no VS Code; e, se descompactar dentro de uma pasta já aberta, feche e reabra a
 janela, porque as instruções são lidas na abertura e ainda não existiam.
 
-## 2. Pedir o que faltar, em uma mensagem
+## 2. Abrir o chat, e pedir o que faltar
 
-Abra o chat do Copilot **em modo agente**, na pasta que você descompactou, e cole:
+Com a oficina aberta, o resto da conversa acontece no chat do Copilot. Abra com
+**Ctrl+Alt+I**, ou pelo ícone de balão na barra lateral.
+
+**Ponha em modo agente**, no seletor no alto do painel do chat, onde costuma
+estar escrito *Ask*. Modo agente é o que tem terminal e escreve arquivo; nos
+outros o assistente **responde sobre** os comandos em vez de executá-los, e a
+diferença não é anunciada: você pede que rode e recebe uma explicação de como
+rodar.
+
+Cole então:
 
 > Confira se o Python está instalado e se a versão é 3.11 ou mais nova, rodando
 > `python --version`. Se não estiver, ou se for mais antigo, me diga o que você
