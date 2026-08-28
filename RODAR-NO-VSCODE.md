@@ -44,8 +44,24 @@ Clique nela e siga as três perguntas que o programa faz, nesta ordem:
    e o endereço está aí em cima. Colar a URL dispensa a autenticação, porque ler
    repositório público é aberto, e é um passo a menos para falhar.
 
-2. **Onde guardar.** Escolha uma pasta qualquer, como Documentos. O VS Code cria
-   ali dentro uma subpasta `Oficina_de_Orientacao`, e não despeja nada solto.
+2. **Onde guardar.** Abre-se uma janela para escolher pasta, e aqui há uma
+   confusão a evitar: **você não está escolhendo a pasta da oficina, e sim o
+   diretório em que ela será criada.** O VS Code cria, dentro do que você
+   selecionar, uma subpasta chamada `Oficina_de_Orientacao`, com o conteúdo lá
+   dentro. Escolhendo `Documentos\vscode`, o resultado é
+
+   ```
+   Documentos\vscode\Oficina_de_Orientacao\
+   ```
+
+   e é essa subpasta, e não a que você escolheu, que precisa ficar aberta como
+   espaço de trabalho.
+
+   **Evite acento e cedilha no caminho.** Python e git lidam bem com eles, mas o
+   xelatex, que só entra no passo do PDF, tem histórico de tropeçar em caminho
+   acentuado. Se tropeçar, a falha aparece no fim de tudo e com mensagem que não
+   aponta para a causa. Uma pasta chamada `orientacao` custa o mesmo que uma
+   chamada `orientação`.
 
 3. **Se quer abrir o que acabou de clonar.** Responda que sim. **Este é o ponto
    que não pode ser pulado:** o Copilot lê `.github/copilot-instructions.md` no
