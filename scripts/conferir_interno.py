@@ -48,12 +48,58 @@ def carregar(caminho):
     return saida
 
 
+# --------------------------------------------------------- o pre-textual
+RE_LISTA = re.compile(r"^\s*(SUM[ÁA]RIO|[ÍI]NDICE|LISTA)", re.IGNORECASE)
+
+
+def faixas_de_lista(pars):
+    """Onde estao o sumario, os indices e as listas de figuras.
+
+    A entrada de indice tem a MESMA forma da legenda ('Grafico 1 - Titulo'),
+    e por isso todo conferidor que casa legenda por expressao regular conta a
+    peca duas vezes. Achar a faixa pelo titulo resolve os dois casos de uma vez,
+    e nao depende de o pre-textual caber numa proporcao do documento.
+
+    Devolve o conjunto de numeros de paragrafo a ignorar. A faixa vai do titulo
+    ate o proximo paragrafo que nao seja entrada de lista nem linha vazia.
+    """
+    ignorar, i = set(), 0
+    numeros = [n for n, _pg, _t in pars]
+    while i < len(pars):
+        n, _pg, t = pars[i]
+        if RE_LISTA.match(t or "") and len(t) < 60:
+            ignorar.add(n)
+            j = i + 1
+            while j < len(pars):
+                tj = (pars[j][2] or "").strip()
+                # entrada de lista: acaba em numero de pagina, ou e curta
+                if not tj or re.search(r"\s\d{1,3}$", tj) or RE_ITEM_LISTA.match(tj):
+                    ignorar.add(pars[j][0]); j += 1; continue
+                break
+            i = j
+            continue
+        i += 1
+    return ignorar
+
+
+RE_ITEM_LISTA = re.compile(r"^\d+(\.\d+)*\.?\s+\S")
+
+# A entrada de indice traz o numero da pagina ao fim; a legenda, nunca.
+RE_PAGINA = re.compile(r"\s\d{1,3}$")
+
+
 # --------------------------------------------------------------- as conferências
 
 def legendas(pars):
-    """Onde cada peça é apresentada: 'Quadro 7 – ...' no início do parágrafo."""
+    """Onde cada peça é apresentada: 'Quadro 7 – ...' no início do parágrafo.
+
+    A entrada do índice de figuras tem a mesma forma e não é legenda: contá-la
+    faz toda peça aparecer duas vezes. Por isso o pré-textual sai antes."""
+    fora = faixas_de_lista(pars)
     achadas = defaultdict(list)
     for n, _pg, t in pars:
+        if n in fora or RE_PAGINA.search(t or ""):
+            continue
         m = re.match(r"^(%s)\s+(\d+)\s*[–—-]" % "|".join(PECAS), t)
         if m:
             achadas[(m.group(1), int(m.group(2)))].append(n)

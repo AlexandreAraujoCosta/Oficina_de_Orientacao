@@ -216,11 +216,34 @@ RE_ITEM = re.compile(r"\b(Gr[áa]fico|Quadro|Tabela|Figura|Ap[êe]ndice)\s+(\d{1
                      re.IGNORECASE)
 
 
+RE_PAGINA = re.compile(r"\s\d{1,3}$")
+
+
+def fim_do_pretextual(paragrafos, teto=0.45, piso=0.15):
+    """Onde acaba o sumario e comecam as legendas de verdade.
+
+    A entrada de indice e a legenda tem a mesma forma; o que as separa e o
+    numero da pagina ao fim da entrada. Medido em 28/08/2026 numa dissertacao:
+    66 entradas de indice acabam em numero e nenhuma das 66 legendas do corpo
+    acaba.
+
+    Antes disto o pre-textual era 15% dos paragrafos, por estimativa. No mesmo
+    trabalho ele ocupava 25%, e a conferencia acusou 19 graficos e 3 tabelas
+    ausentes de uma lista que os continha. Proporcao fixa nao serve: ha trabalho
+    com sumario de duas paginas e trabalho com indice de sessenta figuras.
+    """
+    total = len(paragrafos)
+    ultimo = 0
+    for i, (_pnum, texto) in enumerate(paragrafos[:int(total * teto)]):
+        if RE_ITEM.search(texto or "") and RE_PAGINA.search((texto or "").strip()):
+            ultimo = i
+    return max(ultimo + 1, int(total * piso)) if ultimo else int(total * piso)
+
+
 def conferir_listas(paragrafos, corte_lista=0.15):
     """Compara itens numerados citados na parte inicial (sumario e listas)
     com os que aparecem no corpo."""
-    total = len(paragrafos)
-    limite = int(total * corte_lista)
+    limite = fim_do_pretextual(paragrafos)
 
     def coletar(faixa):
         d = defaultdict(set)
