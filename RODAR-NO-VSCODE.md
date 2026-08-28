@@ -9,18 +9,15 @@ Se você está seguindo isto como teste, anote três coisas ao longo do caminho:
 consome**, e **em que passo você precisou de conhecimento que não está escrito
 aqui**. A terceira é a mais valiosa, e é a que nenhum de nós consegue ver sozinho.
 
-## O que você instala à mão, e são duas coisas
+## O que você instala à mão, e é uma coisa só
 
-**Python 3.11 ou mais novo** e **o VS Code com a extensão GitHub Copilot**. Só.
-Estas duas são o arranque, porque sem elas não há quem execute o resto: o Python
-roda os programas e o Copilot faz a metade que julga.
+**O VS Code, com a extensão GitHub Copilot.** É o único arranque irredutível: o
+VS Code porque é onde o Copilot mora, e a extensão porque é o próprio Copilot.
+Instala-se pelo painel de extensões, procurando por *GitHub Copilot*, e ela pede
+login na conta do GitHub.
 
-No Python, marque a opção de acrescentá-lo ao PATH durante a instalação. É a
-caixa que quase todo mundo desmarca sem ler, e sem ela nenhum comando adiante
-funciona.
-
-A extensão instala-se de dentro do VS Code, no painel de extensões, procurando
-por *GitHub Copilot*. Ela pede login na conta do GitHub.
+Tudo o mais, **inclusive o Python**, sai de um pedido em português ao assistente,
+que tem terminal em modo agente. É o passo 2.
 
 ## 1. Baixar e abrir
 
@@ -46,19 +43,23 @@ com `git pull`, que não envia nada. O `AGENTS.md` proíbe o assistente de rodar
 essa é uma trava de instrução, e trava de instrução se contorna sozinha quando o
 modelo é outro.
 
-## 2. Confirmar o Python, e mais nada
+## 2. Pedir o que faltar, em uma mensagem
 
 Abra o chat do Copilot **em modo agente**, na pasta que você descompactou, e cole:
 
-> Rode `python --version` e me diga o que respondeu. Preciso de 3.11 ou mais
-> novo. Se o comando não for encontrado, o Python não está no PATH, e me diga
-> como resolver na minha máquina.
+> Confira se o Python está instalado e se a versão é 3.11 ou mais nova, rodando
+> `python --version`. Se não estiver, ou se for mais antigo, me diga o que você
+> pretende instalar e quanto ocupa, **pergunte antes de instalar**, e depois
+> confirme que o comando passou a responder.
 
-**Não instale mais nada agora.** As outras duas dependências entram só quando
+**Não peça mais nada agora.** As outras duas dependências entram só quando
 fizerem falta, cada uma no passo em que faz: o PyMuPDF apenas se o trabalho for
 PDF, e o pandoc com o xelatex apenas se você quiser o relatório em PDF. Quem está
 só experimentando não precisa de nenhuma das duas, e não faz sentido baixar meio
 gigabyte de LaTeX antes de saber se a ferramenta serve.
+
+**Se preferiu clonar em vez de baixar o zip**, o git entra pelo mesmo caminho:
+peça a instalação na mesma mensagem, com a mesma exigência de perguntar antes.
 
 ## 3. Escolher o modelo, e este é o primeiro ponto de medição
 
