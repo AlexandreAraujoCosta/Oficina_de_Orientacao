@@ -89,6 +89,8 @@ def main():
                     help="arquiva tudo em entregas/<estudante>/<AAAA-MM-DD>/; a data "
                          "separa as rodadas do mesmo trabalho, que e o que "
                          "comparar_versoes.py precisa para achar a anterior")
+    ap.add_argument("--aceitar-citacoes", action="store_true",
+                    help="monta mesmo com citacao que nao confere; carimba o relatorio")
     ap.add_argument("--sem-pdf", action="store_true")
     ap.add_argument("--sem-paragrafos", action="store_true",
                     help="nao grava o ENTREGA-PARAGRAFOS-<nome>.md ao lado")
@@ -112,6 +114,23 @@ def main():
         destino = Path(a.saida)
     else:
         destino = Path(a.relatorio).with_name("ENTREGA-" + Path(a.relatorio).name)
+    # A conferencia de citacoes bloqueia. Ela existe porque um relatorio ja
+    # recebeu paragrafos de outro trabalho, e em 28/08/2026 um modelo entregou
+    # uma citacao fabricada: abertura verdadeira, continuacao inventada. Etapa
+    # cuja execucao depende de quem esta sendo conferido nao e etapa.
+    conf = subprocess.run([sys.executable, str(RAIZ / "conferir_citacoes.py"),
+                           a.relatorio, a.trabalho],
+                          capture_output=True, text=True, encoding="utf-8", errors="replace")
+    ausentes = [x.strip() for x in (conf.stdout or "").splitlines() if "AUSENTE" in x]
+    if ausentes and not a.aceitar_citacoes:
+        sys.exit(("%d trecho(s) entre aspas nao existem no trabalho." % len(ausentes)) + '\n\n'                 + ('\n').join("  " + x for x in ausentes[:12]) + '\n\n'                 + "A entrega NAO foi montada. Ou o trecho foi digitado errado, ou e" + '\n'                 + "parafrase entre aspas, ou foi inventado. Nenhum dos tres se entrega." + '\n'                 + "Tire as aspas, ou deixe o programa inserir o trecho pelo localizador." + '\n\n'                 + "Se souber que sao falsos positivos, repita com --aceitar-citacoes:" + '\n'                 + "o relatorio sai carimbado dizendo que a conferencia foi dispensada.")
+    if ausentes:
+        rel = ("> **Conferencia de citacoes dispensada na montagem.** %d trecho(s)" % len(ausentes)
+               + " entre aspas deste relatorio nao foram encontrados no trabalho." + '\n'               + "> Quem receber isto precisa conferi-los a mao antes de acreditar." + '\n\n' + rel)
+        print("  AVISO: montado com %d citacao(oes) nao conferida(s); o relatorio saiu carimbado." % len(ausentes))
+    elif conf.stdout:
+        print("  citacoes: " + [x for x in conf.stdout.splitlines() if "confirmadas" in x or "Nada a conferir" in x][-1].strip())
+
     destino.write_text(rel + SEPARADOR + anx + "\n", encoding="utf-8")
     print("  montado: %s" % destino)
 
