@@ -158,6 +158,23 @@ Estes cinco não usam inteligência artificial, não consomem cota e não erram 
 julgamento. Eles levantam **suspeitas**, e não apontamentos: nenhum deles
 distingue mudança declarada de deslize. Silêncio de um programa não é aprovação.
 
+**São muitos comandos, e aprovar um a um cansa.** Logo abaixo da caixa do
+prompt há um seletor de permissão, com *Default*, *Bypass Approvals* e
+**Autopilot**. Ligar o Autopilot **neste passo** faz a cadeia correr inteira sem
+parar a cada comando, e aqui o risco é baixo: os cinco programas só leem o
+trabalho e escrevem em `extracao/`.
+
+**Desligue-o depois, e não o use no passo 2.** Ele suprime as aprovações e também
+responde sozinho às perguntas que o bloqueariam, o que anula as duas proteções
+deste roteiro. No passo 2, a de pedir que ele pergunte antes de instalar: com
+Autopilot ligado, ele responde a própria pergunta e baixa o LaTeX. E em qualquer
+momento, a aprovação humana é o que faria você ver um comando de `git` antes de
+ele rodar. O `AGENTS.md` proíbe o assistente de usar git com trabalho de terceiro
+na pasta, mas isso é trava de instrução, e a aprovação era a segunda guarda.
+
+O Autopilot está em prévia desde o VS Code 1.111, de março de 2026, e o
+comportamento pode mudar de versão.
+
 **Se o trabalho for PDF e aparecer `No module named 'fitz'`**, é o PyMuPDF que
 falta. Peça ao Copilot: *instale o PyMuPDF com `pip install pymupdf` e rode de
 novo*. Com `.docx` isso nunca acontece, porque nenhum dos cinco abre PDF.
