@@ -45,7 +45,11 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent
 PROJETO = RAIZ.parent
-DESTINO = PROJETO / "extracao"
+
+# A extracao guarda texto do trabalho de outra pessoa, e por isso e gravada
+# onde se trabalha, e nao dentro da arvore da maquinaria. OFICINA_EXTRACAO
+# fixa outro lugar, para quem preferir um so.
+DESTINO = Path(os.environ.get("OFICINA_EXTRACAO") or (Path.cwd() / "extracao"))
 
 MARCA = "##EXTRACAO"
 

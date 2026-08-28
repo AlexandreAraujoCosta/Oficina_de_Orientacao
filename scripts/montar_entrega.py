@@ -18,6 +18,7 @@ Uso:
 import argparse
 import subprocess
 import sys
+from datetime import date
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent
@@ -84,6 +85,10 @@ def main():
     ap.add_argument("anexo")
     ap.add_argument("trabalho")
     ap.add_argument("--saida", help="padrão: ENTREGA-<nome>.md ao lado do relatório")
+    ap.add_argument("--estudante",
+                    help="arquiva tudo em entregas/<estudante>/<AAAA-MM-DD>/; a data "
+                         "separa as rodadas do mesmo trabalho, que e o que "
+                         "comparar_versoes.py precisa para achar a anterior")
     ap.add_argument("--sem-pdf", action="store_true")
     ap.add_argument("--sem-paragrafos", action="store_true",
                     help="nao grava o ENTREGA-PARAGRAFOS-<nome>.md ao lado")
@@ -97,8 +102,16 @@ def main():
         linha, _, resto = anx.partition("\n")
         anx = "# " + linha[2:].strip() + "\n" + resto
 
-    destino = Path(a.saida) if a.saida else \
-        Path(a.relatorio).with_name("ENTREGA-" + Path(a.relatorio).name)
+    # A entrega se arquiva sozinha: onze arquivos por rodada, e mais de uma
+    # rodada por trabalho, nao cabem empilhados no diretorio corrente.
+    if a.estudante:
+        pasta = Path("entregas") / a.estudante / date.today().isoformat()
+        pasta.mkdir(parents=True, exist_ok=True)
+        destino = pasta / ("ENTREGA-" + Path(a.relatorio).name)
+    elif a.saida:
+        destino = Path(a.saida)
+    else:
+        destino = Path(a.relatorio).with_name("ENTREGA-" + Path(a.relatorio).name)
     destino.write_text(rel + SEPARADOR + anx + "\n", encoding="utf-8")
     print("  montado: %s" % destino)
 
