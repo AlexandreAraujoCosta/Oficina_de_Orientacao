@@ -48,6 +48,59 @@ se confere. O que sai é o superlativo que pede fé.
 
 ---
 
+## Os quatro níveis, e eles vão em cada item
+
+**Quem orienta não defende tese: diferencia níveis de segurança.** O advogado é
+treinado para sustentar uma posição; quem orienta precisa saber o que é firme, o
+que é médio, o que não tem base e o que ainda não se sabe. Um relatório que
+entrega tudo no mesmo registro devolve ao leitor a classificação que ele deveria
+ter recebido pronta.
+
+**O corte é pelo que o autor tem de fazer**, e não pelo assunto nem pelo tamanho
+do problema. Severidade e certeza são eixos distintos: há defeito grave e
+conferível, e há defeito grave e incerto.
+
+**Nível 1 — erro trivial.** Existe uma forma correta única, derivável do próprio
+trabalho. Corrige-se sem escolher nada: número que não fecha, remissão a quadro
+errado, termo grafado de dois modos, sigla trocada. Estes descem para a lista
+executável, com o antes e o depois escritos.
+
+**Nível 2 — o erro é certo, a solução pede escolha.** A divergência se demonstra
+abrindo o parágrafo, e consertá-la depende de uma decisão que só o autor toma:
+qual das duas formas de legenda adotar, qual dos dois nomes da categoria fica, o
+que fazer com a seção temática que existe na codificação e não na exposição. **Não
+proponha a escolha como se fosse a correção.**
+
+**Nível 3 — exige avaliação cuidadosa.** A existência do problema depende de uma
+leitura que outro leitor competente pode recusar: se a categoria central descreve
+o fenômeno, se o vocabulário teórico faz trabalho ou é ornamento, se o alcance da
+conclusão excede o material. Aqui se entrega a leitura e o motivo, **e não o
+veredicto**.
+
+**Nível 4 — questão, e não sugestão.** O instrumento notou algo e não consegue
+resolver, porque resolver exige o que ele não alcança: renderizar o documento,
+conhecer a literatura do campo, perguntar ao autor o que ele pretendia. **Isto
+entra como resultado, não como omissão.** O que a ferramenta não decide e não
+escreve some, e sumiço se lê como ausência de problema.
+
+**As categorias carregam o nível, e por isso deixam de ser rótulo solto:**
+
+| nível | código | o que o autor faz |
+|---|---|---|
+| 1 | `SC` | corrige, sem decidir nada |
+| 2 | `D` | decide entre alternativas defensáveis, e corrige |
+| 3 | `S` | avalia, e pode recusar |
+| 4 | `Q` | investiga, ou responde |
+
+**E o relatório declara a distribuição no cabeçalho:** quantos itens em cada
+nível. Quinze itens todos no nível 1 é um trabalho; quinze no nível 3 é outro, e
+os dois hoje têm a mesma aparência. A distribuição também denuncia o que nenhuma
+outra linha denuncia: uma leitura que só produz nível 1 repassou a saída dos
+programas sem julgar nada, porque nível 1 é exatamente o que o programa acha
+sozinho.
+
+---
+
 ## Regras que valem para todas as vozes
 
 - **Localização, nunca transcrição.** Todo apontamento traz `[P123]`. Você não copia o texto do trabalho. Um script insere o literal depois, a partir do localizador.
