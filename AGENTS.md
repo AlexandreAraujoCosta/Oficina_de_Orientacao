@@ -88,8 +88,13 @@ o repositório nem por descuido. Para manter vários trabalhos ao mesmo tempo,
 
 **Quando alguém pedir a análise sem dizer mais nada, faça nesta ordem:**
 
-1. **Ache o trabalho.** É o único `.docx` ou `.pdf` na raiz. Se houver mais de um,
-   pergunte qual; se não houver nenhum, diga onde pôr, e não invente arquivo.
+1. **Ache o trabalho.** É o único `.docx` ou `.pdf` na raiz, ou o caminho que a
+   pessoa lhe der. Se houver mais de um na raiz, pergunte qual; se não houver
+   nenhum e ninguém tiver dito onde está, **pergunte pelo caminho**, e não invente
+   arquivo nem trabalhe sobre o que estiver anexado à conversa. Os programas leem
+   caminho no disco, e aceitam caminho absoluto: o trabalho não precisa ser
+   copiado para cá, e a extração é gravada na pasta de onde você roda, e não junto
+   do original. Caminho com espaço vai entre aspas.
 2. **Confira o ambiente antes de prometer.** `python --version` precisa responder
    3.11 ou mais. Sem PyMuPDF, o caminho do PDF não roda e o do `.docx` roda.
 3. **Rode os cinco programas** da seção seguinte, na ordem. Eles não usam modelo,
