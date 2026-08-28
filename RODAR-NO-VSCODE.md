@@ -34,6 +34,11 @@ Clique nela e siga as três perguntas que o programa faz, nesta ordem:
    https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao.git
    ```
 
+   A mesma caixa oferece **Clone from GitHub**, que faz login e abre uma busca.
+   **Não precisa.** Ela serve para achar repositório cujo endereço você não sabe,
+   e o endereço está aí em cima. Colar a URL dispensa a autenticação, porque ler
+   repositório público é aberto, e é um passo a menos para falhar.
+
 2. **Onde guardar.** Escolha uma pasta qualquer, como Documentos. O VS Code cria
    ali dentro uma subpasta `Oficina_de_Orientacao`, e não despeja nada solto.
 
