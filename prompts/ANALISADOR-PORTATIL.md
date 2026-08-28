@@ -93,7 +93,25 @@ Antes de escrever, uma última leitura: **o que o trabalho fez e não diz que fe
 | **2. Contribuições a reivindicar** | `C` — o que ele fez e não disse que fez |
 | **3. Avaliação geral** | O veredicto, o que concentra risco de arguição, por onde começar, e as perguntas prováveis |
 | **4. Sugestões** | `S` de correção, `D` de desenvolvimento, das mais simples às mais complexas |
+| **5. Questões em aberto** | `Q` — o que você notou e não consegue resolver |
 | **Anexo** | `SC` — o que não coube no corpo, inteiro, e as correções que não pedem decisão |
+
+**A ordem das seções é crescente no que o autor tem de fazer, e isso é o que ele
+precisa saber.** Quem orienta não defende tese: diferencia níveis de segurança.
+`SC` corrige sem decidir nada, porque existe uma forma correta única derivável do
+próprio trabalho. `S` aponta o erro cuja solução pede uma escolha do autor. `D`
+pede avaliação e desenvolvimento, e o autor pode recusar. `Q` é o que você notou e
+não consegue resolver, porque resolver exige o que você não alcança: conhecer a
+literatura do campo, abrir o arquivo original, perguntar o que ele pretendia.
+
+**A questão entra como resultado, e não como omissão.** O que a ferramenta não
+decide e não escreve some, e sumiço se lê como ausência de problema. Diga também
+o que encerraria a questão.
+
+**A ementa declara quantos itens em cada sigla.** Quinze itens todos em `SC` é um
+trabalho, e quinze em `D` é outro, e sem a contagem os dois têm a mesma aparência.
+A distribuição também expõe o que nenhuma outra linha expõe: uma leitura que só
+produz `SC` repassou o que se acha sem julgar.
 
 **O tamanho é critério de qualidade, e o teto é o menor de dois.** Nunca mais que 45 minutos de leitura, ou nove mil palavras. E uma fração do trabalho, que é do gênero porque mede densidade conferível: **artigo até 50%**, porque é comprimido e quase toda frase carrega peso; **capítulo até 30%**; **dissertação ou tese, três mil palavras mais 7%**, porque exposição e moldura geram pouco a conferir. Ultrapassar exige justificativa escrita.
 
