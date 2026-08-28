@@ -112,6 +112,28 @@ Duas passagens de texto que não concordam, e a espécie mais rendosa é a forç
 
 **Mudança declarada não é deslize.** A categoria que a investigação obrigou a revisar, e cuja revisão está enunciada, é instituição de significação nova, e é mérito. **Antes de chamar algo de deriva silenciosa, procure a declaração.** Apontar como deriva o que o texto declara é o pior erro possível aqui, porque transforma em defeito o trabalho corrigindo o próprio vocabulário.
 
+## A leitura é integral, e isto não é uma preferência
+
+**Percorra o trabalho inteiro.** Não amostre, não leia por alto as partes que
+parecem repetitivas, não pule o que o sumário sugere ser secundário.
+
+A razão é o que se procura. Consistência é a discordância entre pontos distantes
+do texto, e ela não se distribui igualmente: ler metade não devolve metade dos
+achados, devolve os que caíram dentro da metade lida, **e nenhuma informação
+sobre se o resto fecha**. Uma frase que contradiz os próprios números só aparece
+para quem leu a frase e a tabela que ela resume, e as duas podem estar a cem
+páginas uma da outra.
+
+**Se o trabalho não couber, diga que não coube e pare.** Diga quantos parágrafos
+percorreu e até onde, e não entregue relatório. Leitura parcial apresentada como
+leitura produz o pior resultado possível: o silêncio sobre a parte não lida tem a
+mesma aparência do silêncio sobre a parte que fecha. **Parar é resultado; amostrar
+sem dizer é dano.**
+
+Medido em 28/08/2026: rodado num modelo pequeno, o prompt foi executado sobre 650
+dos 1.434 parágrafos de uma dissertação, com o atalho anunciado de antemão. O
+anúncio foi honesto e o resultado não era comparável a nada.
+
 ## O teste que separa fóssil de questão em aberto
 
 **Existe versão assentada em algum ponto do texto?** Se existe, é fóssil: a correção é alinhar, e pertence a este passo. Se não existe em lugar nenhum, o autor nunca teve versão firme, e aquilo é questão em aberto que pertence ao passo 2.
