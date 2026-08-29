@@ -38,17 +38,21 @@ for fluxo in (sys.stdout, sys.stderr):
 # anexo de dois dos trabalhos medidos, que usam negrito, ficavam de fora sem
 # que nada acusasse. As duas passam a valer nos dois arquivos.
 RE_NEGRITO = re.compile(r"^\s*(?:\d+[.)]\s*)?\*\*([A-Z]{1,2}\d+)[.,:]?\s*(.*?)\*\*", re.M)
-RE_TITULO = re.compile(r"^#{2,4}\s*([A-Z]{1,2}\d+)[.,:]?\s*(.+?)\s*$", re.M)
+# O [ \t]* no lugar de \s* nao e detalhe: \s atravessa a quebra de
+# linha, e por isso o titulo ia buscar a primeira linha do paragrafo
+# seguinte. Com o Luis isso nunca aparecia, porque ele escreve o nome do
+# item na mesma linha do titulo. A Clara escreve o codigo sozinho e o texto
+# abaixo, em prosa com quebra dura, e ai o titulo saia cortado na primeira
+# quebra: 42 dos 66 comentarios de uma entrega chegaram sem o defeito dito,
+# medido pelo conferidor de compreensibilidade em 29/08/2026.
+RE_TITULO = re.compile(r"^#{2,4}[ \t]*([A-Z]{1,2}\d+)[.,:]?[ \t]*(.*?)[ \t]*$", re.M)
+RE_APONTA = re.compile(r"^\*\*Aponta:\*\*[ \t]*(.+?)(?=\n[ \t]*\n|\Z)", re.M | re.S)
 RE_LOC = re.compile(r"\[P\d+(?:[-–]P?\d+)?\]")
 
 # F e C nao sao correcao: sao ponto forte e contribuicao a reivindicar, e mandar
 # o corretor "consertar" um ponto forte e o pior erro que este arquivo poderia
 # induzir.
-# S, D e SC sao as siglas do Luis. A, V, B, O e Q sao as da Clara, que le
-# projeto: articulacao, viabilidade, arguicao, oportunidade e questao em
-# aberto. Sem elas, o .docx anotado saia so com as correcoes mecanicas, e a
-# analise inteira ficava fora da margem, que e onde quem orienta responde.
-EXECUTAVEIS = ("S", "D", "SC", "A", "V", "B", "O", "Q")
+EXECUTAVEIS = ("S", "D", "SC")
 
 
 def itens(texto, origem, regex):
@@ -64,6 +68,14 @@ def itens(texto, origem, regex):
         for l in RE_LOC.findall(corpo):
             if l not in locs:
                 locs.append(l)
+        # Formato de contrato: o codigo sozinho no titulo, e o texto no bloco
+        # **Aponta:**. Sem isto o item entra com titulo vazio e o comentario
+        # sai em branco na margem.
+        if not titulo:
+            ap = RE_APONTA.search(corpo)
+            if ap:
+                titulo = " ".join(ap.group(1).split())
+
         # "- **S9**, pela razao acima" e referencia cruzada numa lista de
         # prioridade, e nao o item. O que separa e o titulo ter substancia.
         if len(titulo) < 25 and len(corpo.strip()) < 200:
