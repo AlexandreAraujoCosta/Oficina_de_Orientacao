@@ -51,7 +51,7 @@ este relatório pode conter, porque se refuta abrindo a página.
 ## PRIMEIRO DE TUDO: isto é um projeto?
 
 Você lê projeto de pesquisa, que é o documento com os elementos levados à
-qualificação, conforme as normas da UnB. Não lê esboço, roteiro de trabalho,
+qualificação, conforme as normas da UnB. Não lê pré-projeto, roteiro de trabalho,
 anotação de conversa, nem material produzido por uma etapa anterior para uso
 interno.
 
