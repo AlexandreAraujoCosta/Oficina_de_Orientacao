@@ -116,17 +116,23 @@ o repositório nem por descuido. Para manter vários trabalhos ao mesmo tempo,
    caminho no disco, e aceitam caminho absoluto: o trabalho não precisa ser
    copiado para cá, e a extração é gravada na pasta de onde você roda, e não junto
    do original. Caminho com espaço vai entre aspas.
-2. **Confira o ambiente antes de prometer.** `python --version` precisa responder
+2. **Veja se é trabalho executado ou projeto de pesquisa.** Se o que chegou é um
+   projeto, isto é, um plano de pesquisa ainda não executada, sem resultados nem
+   conclusões, a leitura é a do `prompts/CLARA.md`, e não a do Luis. O Luis julga
+   o argumento, e sobre um projeto ele julga o que ainda não existe: o que volta é
+   uma lista de ausências que o autor já conhece. A cadeia de programas é a mesma;
+   muda a doutrina que você segue ao ler.
+3. **Confira o ambiente antes de prometer.** `python --version` precisa responder
    3.11 ou mais. Sem PyMuPDF, o caminho do PDF não roda e o do `.docx` roda.
-3. **Rode `python scripts/analisar.py`**, que acha o trabalho e executa a cadeia.
+4. **Rode `python scripts/analisar.py`**, que acha o trabalho e executa a cadeia.
    Os programas não usam modelo, não consomem cota e não erram por julgamento.
-4. **Julgue as suspeitas**, uma a uma, contra o parágrafo que cada uma cita. É
+5. **Julgue as suspeitas**, uma a uma, contra o parágrafo que cada uma cita. É
    aqui que você trabalha, e é a única parte que exige leitura.
-5. **Escreva `RELATORIO.md` e `ANEXO.md`** e monte a entrega com `--estudante`.
+6. **Escreva `RELATORIO.md` e `ANEXO.md`** e monte a entrega com `--estudante`.
    **Não pergunte o nome do estudante:** `analisar.py` o lê da capa e imprime,
    junto com a forma curta a usar. Confira se faz sentido e use. Só pergunte se
    ele não tiver achado nome nenhum.
-6. **Confira o que você mesmo escreveu** com `conferir_citacoes.py`.
+7. **Confira o que você mesmo escreveu** com `conferir_citacoes.py`.
 
 **Diga em qual passo está, e o que cada programa devolveu.** Quem opera isto pela
 primeira vez não sabe distinguir programa que calou por não achar nada de
@@ -267,7 +273,11 @@ nunca por quem o escreveu.
 ## Onde está a doutrina
 
 `prompts/LUIS.md` é a leitura completa, em quatro passos. `prompts/ANALISADOR-PORTATIL.md`
-é a versão que cabe numa conversa só. `REGISTRO-DE-DESENHO.md` explica por que
+é a versão que cabe numa conversa só. `prompts/CLARA.md` é a leitura de
+projeto de pesquisa, que é objeto diferente: não há resultados a julgar, e o que
+se examina é se o desenho, executado como está escrito, produz a resposta à
+pergunta que faz. Usa a mesma cadeia de programas, a Norma inclusive, e o mesmo
+formato de item. `REGISTRO-DE-DESENHO.md` explica por que
 cada regra existe, com a medição que a originou e a data. Registro desatualizado
 não é documentação obsoleta: é instrução ativa errada.
 
