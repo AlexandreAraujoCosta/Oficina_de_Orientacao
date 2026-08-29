@@ -44,7 +44,11 @@ RE_LOC = re.compile(r"\[P\d+(?:[-–]P?\d+)?\]")
 # F e C nao sao correcao: sao ponto forte e contribuicao a reivindicar, e mandar
 # o corretor "consertar" um ponto forte e o pior erro que este arquivo poderia
 # induzir.
-EXECUTAVEIS = ("S", "D", "SC")
+# S, D e SC sao as siglas do Luis. A, V, B, O e Q sao as da Clara, que le
+# projeto: articulacao, viabilidade, arguicao, oportunidade e questao em
+# aberto. Sem elas, o .docx anotado saia so com as correcoes mecanicas, e a
+# analise inteira ficava fora da margem, que e onde quem orienta responde.
+EXECUTAVEIS = ("S", "D", "SC", "A", "V", "B", "O", "Q")
 
 
 def itens(texto, origem, regex):
