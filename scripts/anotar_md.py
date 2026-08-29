@@ -27,6 +27,14 @@ import re
 import sys
 from pathlib import Path
 
+for fluxo in (sys.stdout, sys.stderr):
+    try:
+        fluxo.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+
+
 RE_ITEM = re.compile(
     r"^## ([A-Z]{1,2}\d+)\s*$\n+\*\*Aponta:\*\* (.+?)\s*$\n+\*\*Abrir:\*\* (.*?)\s*$",
     re.M | re.S)

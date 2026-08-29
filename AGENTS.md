@@ -276,3 +276,23 @@ não é documentação obsoleta: é instrução ativa errada.
 Estas ferramentas examinam o trabalho por dentro. Não validam nada por fora: não
 dizem se o trabalho afirma algo verdadeiro sobre o objeto, nem se a construção é
 inédita. Coerência interna perfeita convive com codificação errada.
+
+## Antes de montar a entrega, confira se os apontamentos se entendem
+
+`texto_dos_comentarios.py` grava o texto que cada apontamento terá dentro do
+Word. Esse arquivo, e só ele, vai para um leitor que não escreveu os
+apontamentos, com o `prompts/COMPREENSIBILIDADE.md`.
+
+**Abra um subagente**, que os dois ambientes suportam. Sem subagente
+disponível, peça ao usuário uma janela nova de conversa e mande colar os dois
+arquivos ali. **Não confira você mesmo:** quem escreveu o apontamento é o pior
+juiz de se ele se entende, e a conferência feita na mesma sessão mede outra
+coisa.
+
+**Não entregue o trabalho nem a análise ao conferidor.** Com o trabalho em mãos
+ele reconstrói o que o apontamento quis dizer, que é justamente o que se quer
+medir.
+
+Os itens reprovados voltam para você reescrever, com a condição que os reprovou:
+a primeira frase diz o defeito e o lugar, sem categoria que você tenha inventado
+para organizar a própria leitura.

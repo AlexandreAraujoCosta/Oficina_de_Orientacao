@@ -39,6 +39,14 @@ sys.path.insert(0, str(RAIZ))
 
 from conferir_consistencia import carregar  # noqa: E402
 
+for fluxo in (sys.stdout, sys.stderr):
+    try:
+        fluxo.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+
+
 # [P123] ou P123, faixa com hifen simples ou longo. Colchete opcional porque uma
 # das agregacoes ja entregues escreveu sem ele 499 vezes.
 RE_REF = re.compile(r"(?<![A-Za-z0-9])\[?P(\d+)(?:\s*[-–]\s*P?(\d+))?\]?")

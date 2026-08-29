@@ -92,9 +92,28 @@ def main():
     ap.add_argument("--aceitar-citacoes", action="store_true",
                     help="monta mesmo com citacao que nao confere; carimba o relatorio")
     ap.add_argument("--sem-pdf", action="store_true")
+    ap.add_argument("--pdf", help="o PDF da MESMA versão do trabalho, para o mapa de páginas")
+    ap.add_argument("--sem-paginas", action="store_true",
+                    help="não gera o mapa de páginas nem abre o Word")
     ap.add_argument("--sem-paragrafos", action="store_true",
                     help="nao grava o ENTREGA-PARAGRAFOS-<nome>.md ao lado")
     a = ap.parse_args()
+
+    # A normalizacao nao se faz aqui, e sim na entrada. Neste ponto o relatorio
+    # ja existe e cada localizador dele aponta para um paragrafo deste arquivo:
+    # normalizar agora deslocaria a numeracao inteira sem que nada acusasse. O
+    # que cabe e dizer que nao foi feita, porque a camada formal do relatorio
+    # entao mistura desvio de verdade com ruido de colagem.
+    if a.trabalho.lower().endswith(".docx"):
+        try:
+            import zipfile
+            st = zipfile.ZipFile(a.trabalho).read("word/styles.xml")
+            if b"Oficina" not in st:
+                print("  AVISO: o trabalho nao passou pelo normalizador. O que o relatorio")
+                print("         apontar de formatacao mistura desvio e ruido de colagem.")
+                print("         Na proxima rodada: normalizar_docx.py ANTES de extrair.")
+        except Exception:
+            pass
 
     rel = Path(a.relatorio).read_text(encoding="utf-8").rstrip()
     anx = Path(a.anexo).read_text(encoding="utf-8").lstrip()
@@ -131,7 +150,17 @@ def main():
     elif conf.stdout:
         print("  citacoes: " + [x for x in conf.stdout.splitlines() if "confirmadas" in x or "Nada a conferir" in x][-1].strip())
 
-    destino.write_text(rel + SEPARADOR + anx + "\n", encoding="utf-8")
+    # O que a normalizacao mudou vai anexo, porque quem recebe o arquivo
+    # normalizado precisa saber o que mudou nele, e isso so aparecia no
+    # terminal de quem rodou o programa.
+    norm = Path(a.trabalho).with_name("ANEXO-NORMALIZACAO-"
+                                      + Path(a.trabalho).stem + ".md")
+    extra = ""
+    if norm.exists():
+        extra = SEPARADOR + norm.read_text(encoding="utf-8").lstrip()
+        print("  anexo da normalização incluído: %s" % norm.name)
+
+    destino.write_text(rel + SEPARADOR + anx + extra + "\n", encoding="utf-8")
     print("  montado: %s" % destino)
 
     docx = a.trabalho.lower().endswith(".docx")
@@ -159,16 +188,54 @@ def main():
 
     # O .docx anotado: o mesmo relatorio, na margem do documento do autor.
     if a.trabalho.lower().endswith(".docx"):
+        lista = destino.with_name("ENTREGA-CORRETOR-" + Path(a.relatorio).name)
+
+        # ---- o mapa de paginas, que e o endereco que quem recebe sabe usar.
+        # Quem recebeu a primeira entrega disse, em 28/08/2026, que preferiu
+        # achar os erros pelo PDF, "que indica a pagina em que esta o erro".
+        # Depende de haver Word para exportar, ou de um PDF da MESMA versao;
+        # faltando os dois, a entrega sai com o endereco por palavras iniciais,
+        # que funciona no Ctrl+F, e o programa diz que foi isso que aconteceu.
+        mapa = destino.with_name("paginas-" + Path(a.trabalho).stem + ".json")
+        arg_pag = []
+        if not a.sem_paginas:
+            r = subprocess.run([sys.executable, str(RAIZ / "paginas.py"), a.trabalho,
+                                "--saida", str(mapa)]
+                               + (["--pdf", a.pdf] if a.pdf else []),
+                               capture_output=True, text=True,
+                               encoding="utf-8", errors="replace")
+            if mapa.exists():
+                arg_pag = ["--paginas", str(mapa)]
+                print("  " + (r.stdout or "").strip().splitlines()[0])
+            else:
+                print("  sem mapa de páginas (%s); o endereço sai pelas palavras "
+                      "iniciais do parágrafo"
+                      % ((r.stderr or r.stdout or "sem PDF").strip().splitlines()[0][:80]))
+
         r = subprocess.run([sys.executable, str(RAIZ / "anotar_docx.py"), a.trabalho,
-                            str(destino.with_name("ENTREGA-CORRETOR-" + Path(a.relatorio).name)),
-                            "--saida", str(destino.with_name("ENTREGA-ANOTADO-" + Path(a.trabalho).name))],
+                            str(lista),
+                            "--saida", str(destino.with_name("ENTREGA-ANOTADO-" + Path(a.trabalho).name))]
+                           + arg_pag,
                            capture_output=True, text=True, encoding="utf-8", errors="replace")
         print((r.stdout or "").rstrip() or (r.stderr or "")[-300:])
+
+        # ---- o texto que cada apontamento tera dentro do Word, para o
+        # conferidor de compreensibilidade. Sai sempre, porque conferir depende
+        # de existir o arquivo, e depender de alguem lembrar de gerar e o mesmo
+        # que nao conferir.
+        r = subprocess.run([sys.executable, str(RAIZ / "texto_dos_comentarios.py"),
+                            a.trabalho, str(lista),
+                            "--saida", str(destino.with_name(
+                                "COMENTARIOS-" + Path(a.relatorio).name))],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace")
+        print("  " + ((r.stdout or "").strip() or (r.stderr or "")[-160:].strip()))
+
         # O indice do corretor e a entrada do anotar_docx.py, e nao entrega:
         # num .docx o apontamento ja vai na margem do paragrafo que ele cita.
-        lista = destino.with_name("ENTREGA-CORRETOR-" + Path(a.relatorio).name)
         if lista.exists():
             lista.unlink()
+        if mapa.exists():
+            mapa.unlink()
 
     com = destino.with_name(destino.stem + "-COM-TRECHOS.md")
     r = subprocess.run([sys.executable, str(RAIZ / "relatorio_autossuficiente.py"),

@@ -42,6 +42,29 @@ com o mesmo defeito e todas com o mesmo teste:
   abre naquele parágrafo, o número circula errado em quem citar o trabalho, a
   conclusão perde o apoio. **Rótulo pede confiança; consequência informa.**
 
+**Quem lê não acompanhou a sua análise.** Você criou categorias para organizar a
+leitura, e elas serviram enquanto você lia. Nenhuma delas chega ao relatório sem
+estar definida ali mesmo, na primeira vez que aparece. **Teste: se o termo não
+está no trabalho nem é corrente no campo, ou você o define numa oração, ou o
+troca pela descrição da coisa.** Termo não definido chega como jargão, e obriga a
+pessoa a decifrar o apontamento antes de poder corrigi-lo.
+
+**A primeira frase de cada item diz o defeito e onde ele está.** Quem recebe vai
+corrigir o trabalho, e lê procurando o que fazer. Item que só se entende na
+segunda leitura passa ao autor o trabalho de redação que era seu.
+
+**Escreva em português corrente, e vigie o decalque do inglês**, que é o que mais
+atrapalha porque a palavra parece portuguesa e passa sem alarme: *reparo* onde
+cabe correção, *endereçar* onde cabe tratar, *em termos de* onde cabe quanto a,
+*consistente* onde cabe coerente, *evidência* onde cabe prova ou indício,
+*assumir* onde cabe supor, *crítico* onde cabe decisivo, *realizar* onde cabe
+perceber. Não troque por atacado: a palavra certa muda com a coisa nomeada, e
+substituir no automático produz texto empolado, que atrapalha do mesmo jeito.
+
+Medido em 28/08/2026, no retorno de quem recebeu a primeira entrega feita a uma
+autora: dos três defeitos que ela relatou, o primeiro foi não entender o que a
+crítica apontava, pela linguagem.
+
 Nada disso proíbe superlativo argumentado. "É a pior das quatro taxas, porque foi
 medida no único trabalho que a ferramenta não tinha visto" traz a razão junto e
 se confere. O que sai é o superlativo que pede fé.
@@ -145,6 +168,20 @@ E quando o resultado admitir explicação rival que o corpus não separa, **sepa
 **O que este passo acha é quase sempre defeito de propagação, não de pensamento.** Trabalhos longos são escritos em camadas: algo muda, a mudança chega a alguns pontos e não a todos, e fica o fóssil. A versão correta em geral já existe no texto.
 
 **Por isso a correção é barata e a redação é outra.** Não se pede ao autor que pense de novo, pede-se que alinhe. É relatório de manutenção, não acusação de confusão, e a diferença de recepção entre as duas coisas é enorme para o mesmo fato textual.
+
+## Antes do script, o arquivo
+
+**Se o que chegou é um `.docx`, ele precisa ser normalizado antes.** Trabalho de
+estudante raramente vem formatado por estilo: o parágrafo típico não usa o estilo
+Normal, o estilo muda ao longo do texto, e sobre ele vem uma camada de formatação
+direta que deixa tudo parecido na tela sem deixar nada igual no arquivo. O espaço
+entre blocos costuma ser feito com parágrafo vazio.
+
+**Onde você roda programas**, o primeiro comando é
+`python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas`, e a
+análise usa o arquivo que ele gravou. **Onde você não roda nada**, diga no alto do
+relatório que a camada formal foi lida sobre um arquivo não normalizado, e que o
+que ela aponta ali mistura desvio de verdade com ruído de colagem.
 
 ## O script roda antes, e a leitura começa de onde ele parou
 
@@ -719,7 +756,50 @@ Três razões para essa classe ser central, e as três valem juntas. **É barata
 
 **A exceção, e ela é obrigatória.** Erro manifesto em frase que carrega o trabalho fica na seção 2, e não desce. São a frase que enuncia o problema de pesquisa, o resumo, o abstract, o título, o enunciado de hipótese e a conclusão. A razão é que a seção final diz ao leitor que ali não há decisão a tomar, e um "não" faltando na pergunta de pesquisa faz o trabalho perguntar o inverso do que responde: é trivial de reparar e grave de deixar. Medido em 18/08/2026, numa dissertação cuja frase única do problema de pesquisa trocava uma palavra e passava a indagar o contrário do achado. **Onde a exceção se aplicar, diga por que o item ficou em cima**, para que o autor não o confunda com os pequenos.
 
+**Erro de superfície não se agrupa.** Cada gralha, cada concordância e cada
+grafia vira um item com o seu próprio localizador, mesmo que sejam quinze do
+mesmo tipo e no mesmo capítulo. Agrupar produz um item que fala de meia dúzia de
+lugares e só pode ser entregue em um deles, e o autor lê aquilo no parágrafo em
+que caiu, procura ali o erro que o item descreve e não o encontra. Medido em
+28/08/2026: a autora que recebeu a primeira entrega relatou que preferiu achar
+esses erros pelo PDF, que ao menos dava a página de cada um, e que num caso
+procurou no lugar marcado uma frase que não estava lá.
+
 **Descer não é despriorizar dentro da própria seção.** Todos vêm listados, com localizador, e os que um script aplica vêm no bloco de código. O autor os resolve numa passada só, o que é exatamente o motivo de estarem juntos.
+
+## A marca, que decide onde o apontamento aparece na margem
+
+**Item cuja correção é a mesma em cada ocorrência traz, no anexo, uma linha
+própria com a instrução curta.**
+
+```
+**Marca:** trocar "prevalescente" por "prevalecente"
+```
+
+Quando a mesma palavra está errada em quinze lugares, cada lugar é uma tarefa, e
+quem corrige precisa da instrução onde ela se aplica. O programa que anota o
+arquivo marca, nesse caso, os quinze pontos, e leva essa linha a cada um.
+
+**Não escreva essa linha quando o item for uma afirmação sobre o conjunto.** Item
+que diz que a hipótese e o resumo enunciam o mesmo componente com forças
+diferentes se resolve uma vez, decidindo, e não se resolve em cada ponto citado.
+Sem a linha, o programa marca um lugar só e escreve no comentário em que páginas
+o item ocorre. Medido em 29/08/2026, numa entrega de 53 itens feita sem esse
+critério: 307 marcas na margem, das quais 254 eram repetição, com 71 pares do
+mesmo item caindo a três parágrafos ou menos um do outro. Quem lê o terceiro já
+não lê.
+
+**O teste é uma pergunta:** o que o autor faz neste ponto é diferente do que ele
+faz nos outros? Se é o mesmo gesto repetido, há marca. Se é uma decisão que vale
+para todos, não há.
+
+## Itens que dependem da mesma decisão dizem isso um ao outro
+
+Medido na mesma entrega: três itens tratavam da mesma ressalva de uma seção e
+chegaram como três apontamentos separados, sem dizer se as três correções são a
+mesma ou se se somam. Quem recebe tem de descobrir sozinho que mexer num lugar
+resolve os três, ou que não resolve. **Quando dois ou mais itens caem sobre o
+mesmo ponto, o primeiro nomeia os outros, e os outros remetem a ele.**
 
 ## A lista de patches
 
