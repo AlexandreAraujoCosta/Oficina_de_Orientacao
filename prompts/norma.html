@@ -1,0 +1,846 @@
+<title>Norma</title>
+<style>
+  :root {
+    --paper:      #eef0ef;
+    --paper-sunk: #e4e7e5;
+    --ink:        #141c24;
+    --ink-soft:   #4a5560;
+    --ink-faint:  #7c868f;
+    --rule:       #c9cfce;
+    --rule-firm:  #a8b1b0;
+    --correcao:   #a32b23;
+    --medida:     #3e6b7a;
+    --conforme:   #4a7a52;
+
+    --serif: Constantia, Cambria, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --sans:  "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono:  "Cascadia Mono", Consolas, "SF Mono", ui-monospace, Menlo, monospace;
+
+    --measure: 66ch;
+    --gap: 1.5rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:      #10161b;
+      --paper-sunk: #171f26;
+      --ink:        #e3e8ea;
+      --ink-soft:   #9aa6ad;
+      --ink-faint:  #6b767d;
+      --rule:       #2a343c;
+      --rule-firm:  #3c4850;
+      --correcao:   #e07a6e;
+      --medida:     #74aabb;
+      --conforme:   #7fb287;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #10161b;
+    --paper-sunk: #171f26;
+    --ink:        #e3e8ea;
+    --ink-soft:   #9aa6ad;
+    --ink-faint:  #6b767d;
+    --rule:       #2a343c;
+    --rule-firm:  #3c4850;
+    --correcao:   #e07a6e;
+    --medida:     #74aabb;
+    --conforme:   #7fb287;
+  }
+  :root[data-theme="light"] {
+    --paper:      #eef0ef;
+    --paper-sunk: #e4e7e5;
+    --ink:        #141c24;
+    --ink-soft:   #4a5560;
+    --ink-faint:  #7c868f;
+    --rule:       #c9cfce;
+    --rule-firm:  #a8b1b0;
+    --correcao:   #a32b23;
+    --medida:     #3e6b7a;
+    --conforme:   #4a7a52;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* ---------------------------------------------------------- cabeçalho */
+  .top { border-bottom: 2px solid var(--ink); padding-bottom: 1.1rem; margin-bottom: 2rem; }
+  .top h1 {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 4vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin: 0 0 .4rem;
+    text-wrap: balance;
+  }
+  .top p { margin: 0; max-width: var(--measure); color: var(--ink-soft); }
+  .top .ressalva {
+    margin: .9rem 0 0; max-width: var(--measure);
+    border-left: 2px solid var(--correcao); padding-left: .9rem;
+    font-size: .93rem; color: var(--ink-soft);
+  }
+  .top .privacidade {
+    margin-top: .85rem;
+    font-family: var(--mono);
+    font-size: .74rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--medida);
+  }
+
+  /* ---------------------------------------------------------- estrutura */
+  .cols { display: grid; grid-template-columns: 19rem 1fr; gap: 2.5rem; align-items: start; }
+  @media (max-width: 900px) { .cols { grid-template-columns: 1fr; gap: 1.75rem; } }
+
+  .rail { position: sticky; top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  @media (max-width: 900px) { .rail { position: static; } }
+
+  /* ---------------------------------------------------------- entrada */
+  .rail-titulo { font-family: var(--serif); font-size: 18px; margin: 0 0 6px; }
+
+  .rail-nota { font-size: 14px; color: var(--muted); line-height: 1.5; margin: 0 0 14px; }
+
+
+  .vias {
+    border: 1px solid var(--rule-firm);
+    border-radius: 4px;
+    padding: 18px 20px 14px;
+    margin: 20px 0;
+  }
+
+  .vias-titulo {
+    font-family: var(--serif);
+    font-size: 18px;
+    margin: 0 0 14px;
+  }
+
+  .via-op { border-top: 1px solid var(--rule); padding: 12px 0 2px; }
+
+  .via-op:first-of-type { border-top: none; padding-top: 0; }
+
+  .via-op h3 { font-family: var(--serif); font-size: 16px; margin: 0 0 4px; }
+
+  .via-op p { margin: 0 0 6px; }
+
+  .via-volta { font-size: 14px; color: var(--ink-faint); }
+
+  .vias-nota { font-size: 14px; color: var(--ink-faint); margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); }
+
+
+  .vias { border: 1px solid var(--rule-firm); border-radius: 4px; padding: 18px 20px 14px; margin: 20px 0; }
+
+  .vias-titulo { font-family: var(--serif); font-size: 18px; margin: 2.5rem 0 14px; }
+
+  .via-op { border-top: 1px solid var(--rule); padding: 12px 0 2px; }
+
+  .via-op:first-of-type { border-top: none; padding-top: 0; }
+
+  .via-op h3 { font-family: var(--serif); font-size: 16px; margin: 0 0 4px; }
+
+  .via-op p { margin: 0 0 6px; }
+
+  .via-volta { font-size: 14px; color: var(--ink-faint); }
+
+  .vias-nota { font-size: 14px; color: var(--ink-faint); margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); }
+
+
+  .vias-titulo {
+    font-family: var(--serif);
+    font-size: 19px;
+    margin: 22px 0 12px;
+  }
+
+  .vias-grade {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 720px) { .vias-grade { grid-template-columns: 1fr; } }
+
+  .via-bt {
+    display: block;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    background: var(--paper);
+    border: 1px solid var(--rule-firm);
+    border-radius: 4px;
+    padding: 16px 16px 14px;
+    cursor: pointer;
+  }
+
+  .via-bt:hover, .via-bt:focus-visible { border-color: var(--ink-soft); }
+
+  .via-bt[aria-pressed="true"] { background: var(--paper-sunk); border-color: var(--ink-soft); }
+
+  .via-nome {
+    display: block;
+    font-family: var(--serif);
+    font-size: 23px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .via-txt { display: block; font-size: 14.5px; line-height: 1.5; margin-bottom: 8px; }
+
+  .via-volta { display: block; font-size: 13.5px; color: var(--ink-faint); line-height: 1.45; }
+
+  .via-guia { margin: 8px 0 26px; }
+
+  .via-guia h2 { font-family: var(--serif); margin-bottom: 8px; }
+
+
+  .passos {
+    counter-reset: p;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 26px;
+  }
+
+  .passos li {
+    counter-increment: p;
+    position: relative;
+    padding-left: 34px;
+    margin-bottom: 12px;
+    line-height: 1.55;
+  }
+
+  .passos li::before {
+    content: counter(p);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-family: var(--mono);
+    font-size: 13px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border: 1px solid var(--rule-firm);
+    border-radius: 50%;
+  }
+
+  .prompts h2,
+  .anexar h2,
+  .cuidados h2,
+  .passo-titulo {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0 0 .6rem;
+  }
+
+  .passo-nota { color: var(--ink-faint); line-height: 1.55; margin: 0 0 18px; }
+
+  .via-guia h3 { font-family: var(--serif); font-size: 17px; margin: 22px 0 6px; }
+
+  .pedido { border: 1px solid var(--rule); border-radius: 4px; padding: 14px 16px; margin: 16px 0; }
+
+  .pedido-rot { font-size: 13px; color: var(--ink-faint); margin: 0 0 8px; }
+
+  .pedido-txt { font-family: var(--mono); font-size: 13px; line-height: 1.5; white-space: pre-wrap; margin: 0 0 12px; }
+
+  .solta {
+    border: 1px dashed var(--rule-firm);
+    background: var(--paper-sunk);
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .12s, background .12s;
+  }
+  .solta:hover, .solta:focus-visible { border-color: var(--medida); }
+  .solta.ativa { border-color: var(--medida); background: color-mix(in srgb, var(--medida) 10%, var(--paper-sunk)); }
+  .solta strong { display: block; font-family: var(--serif); font-size: 1.1rem; margin-bottom: .3rem; }
+  .solta span { font-size: .82rem; color: var(--ink-soft); }
+  .solta input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+
+  /* ---------------------------------------------------------- ficha */
+  .ficha { border-top: 1px solid var(--ink); padding-top: .75rem; }
+  .ficha h2, .indice h2 {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 .6rem;
+    font-weight: 600;
+  }
+  .ficha dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: .28rem .8rem; }
+  .ficha dt { color: var(--ink-soft); font-size: .85rem; }
+  .ficha dd {
+    margin: 0;
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: .85rem;
+    text-align: right;
+  }
+
+  .indice { border-top: 1px solid var(--rule); padding-top: .75rem; }
+  .indice ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+  .indice a {
+    display: flex; justify-content: space-between; gap: .6rem;
+    color: var(--ink-soft); text-decoration: none;
+    font-size: .87rem; padding: .18rem 0;
+    border-bottom: 1px solid transparent;
+  }
+  .indice a:hover, .indice a:focus-visible { color: var(--ink); border-bottom-color: var(--rule-firm); }
+  .indice .marca { font-family: var(--mono); font-size: .74rem; }
+
+  .acoes { display: flex; flex-direction: column; gap: .5rem; }
+  .acoes .ajuda { margin: 0; font-size: .8rem; line-height: 1.45; color: var(--ink-faint); }
+  button.acao.destaque { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 600; text-align: center; }
+  button.acao.destaque:disabled { background: transparent; color: var(--ink); border-color: var(--rule-firm); font-weight: 400; }
+  button.acao.destaque[data-estado="feito"] { background: var(--conforme); border-color: var(--conforme); }
+  .acoes details summary { font-size: .82rem; color: var(--ink-soft); cursor: pointer; }
+  .acoes details textarea {
+    width: 100%; height: 11rem; margin-top: .5rem; resize: vertical;
+    border: 1px solid var(--rule-firm); background: var(--paper-sunk); color: var(--ink);
+    font-family: var(--mono); font-size: .72rem; line-height: 1.5; padding: .6rem;
+  }
+  button.acao {
+    font-family: var(--sans); font-size: .88rem;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--rule-firm); padding: .5rem .8rem;
+    cursor: pointer; text-align: left;
+    transition: border-color .12s, color .12s;
+  }
+  button.acao:hover:not(:disabled), button.acao:focus-visible:not(:disabled) { border-color: var(--ink); }
+  button.acao:disabled { opacity: .4; cursor: default; }
+
+  /* ---------------------------------------------------------- resultados */
+  .painel { min-width: 0; }
+
+  .abertura { max-width: var(--measure); }
+  .abertura h2 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin: 0 0 .6rem; }
+  .abertura p { color: var(--ink-soft); margin: 0 0 1.1rem; }
+  .abertura ul { margin: 0 0 1.4rem; padding-left: 1.1rem; color: var(--ink-soft); }
+  .abertura li { margin-bottom: .3rem; }
+  .abertura .aviso {
+    border-left: 2px solid var(--correcao);
+    padding-left: .9rem;
+    color: var(--ink);
+  }
+
+  .bloco { border-top: 1px solid var(--rule); padding: 1.6rem 0 .4rem; scroll-margin-top: 1rem; }
+  .bloco:first-of-type { border-top: 2px solid var(--ink); }
+  .bloco > h2 {
+    font-family: var(--serif);
+    font-size: 1.3rem; font-weight: 600;
+    margin: 0 0 .2rem; letter-spacing: -.01em;
+  }
+  .bloco > h2 .num {
+    font-family: var(--mono); font-size: .78rem; color: var(--ink-faint);
+    margin-right: .55rem; letter-spacing: .04em;
+  }
+  .bloco > .nota { margin: 0 0 1rem; color: var(--ink-soft); font-size: .92rem; max-width: var(--measure); }
+
+  /* números destacados */
+  .metricas { display: flex; flex-wrap: wrap; gap: 1.75rem; margin: 0 0 1.1rem; }
+  .metrica { display: flex; flex-direction: column; gap: .1rem; }
+  .metrica .v {
+    font-family: var(--mono); font-variant-numeric: tabular-nums;
+    font-size: 1.65rem; line-height: 1; color: var(--medida);
+  }
+  .metrica .v.alerta { color: var(--correcao); }
+  .metrica .v.bom { color: var(--conforme); }
+  .metrica .r {
+    font-size: .74rem; text-transform: uppercase; letter-spacing: .07em;
+    color: var(--ink-faint); font-family: var(--mono);
+  }
+
+  .chip {
+    display: inline-block; font-family: var(--mono);
+    font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
+    padding: .1rem .4rem; border: 1px solid currentColor; margin-right: .5rem;
+    vertical-align: .08em;
+  }
+  .chip.grave { color: var(--correcao); }
+  .chip.atencao { color: var(--medida); }
+  .chip.ok { color: var(--conforme); }
+
+  .achado { border-top: 1px solid var(--rule); padding: .8rem 0; }
+  .achado:last-child { border-bottom: 1px solid var(--rule); }
+  .achado .cab { display: flex; align-items: baseline; gap: .1rem; flex-wrap: wrap; }
+  .achado .titulo { font-weight: 600; }
+  .achado .detalhe { color: var(--ink-soft); font-size: .92rem; margin: .25rem 0 0; max-width: var(--measure); }
+  .achado ul.ex { margin: .5rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .25rem; }
+  .achado ul.ex li {
+    font-size: .85rem; color: var(--ink-soft);
+    padding-left: 3.6rem; text-indent: -3.6rem;
+  }
+  .par {
+    font-family: var(--mono); font-size: .78rem; color: var(--medida);
+    letter-spacing: .02em;
+  }
+  .assinatura { font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); }
+
+  table.dados { width: 100%; border-collapse: collapse; font-size: .87rem; }
+  .rolagem { overflow-x: auto; }
+  table.dados th, table.dados td { text-align: left; padding: .34rem .7rem .34rem 0; border-bottom: 1px solid var(--rule); }
+  table.dados th {
+    font-family: var(--mono); font-size: .7rem; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--ink-faint); font-weight: 600; white-space: nowrap;
+  }
+  table.dados td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  table.dados td.marca { color: var(--correcao); font-family: var(--mono); font-size: .78rem; white-space: nowrap; }
+
+  /* faixa de ritmo */
+  .faixa { margin: .2rem 0 1rem; }
+  .faixa canvas { width: 100%; height: 132px; display: block; }
+  .faixa .legenda {
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
+    font-family: var(--mono); font-size: .72rem; color: var(--ink-faint);
+    letter-spacing: .04em; margin-top: .4rem;
+  }
+  .faixa .legenda i { display: inline-block; width: .7rem; height: .7rem; margin-right: .35rem; vertical-align: -.05em; }
+
+  .erro { border-left: 2px solid var(--correcao); padding-left: .9rem; color: var(--ink); max-width: var(--measure); }
+  .vazio { color: var(--ink-faint); font-style: italic; }
+
+  :focus-visible { outline: 2px solid var(--medida); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  /* ---------------------------------------------------------- cuidados */
+  .cuidados { border-top: 2px solid var(--ink); margin-top: 3.5rem; padding-top: 1.6rem; }
+  .cuidados h3 {
+    font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 600; margin: 2rem 0 .7rem;
+  }
+  .cuidados .chamada { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1.5rem; }
+  .cuidados > p { max-width: var(--measure); color: var(--ink-soft); }
+
+  .modos { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
+  @media (max-width: 760px) { .modos { grid-template-columns: 1fr; } }
+  .modo { padding: 1rem 1.5rem 1.2rem 0; border-bottom: 1px solid var(--rule); }
+  .modos .modo + .modo { padding-left: 1.5rem; border-left: 1px solid var(--rule); }
+  @media (max-width: 760px) { .modos .modo + .modo { padding-left: 0; border-left: 0; } }
+  .modo .rot {
+    display: block; font-family: var(--mono); font-size: .7rem; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--medida); margin-bottom: .5rem;
+  }
+  .modo p { margin: 0; font-size: .93rem; color: var(--ink-soft); }
+  .modo strong { color: var(--ink); }
+
+  dl.falhas { margin: 0; }
+  dl.falhas dt {
+    font-weight: 600; margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--rule);
+  }
+  dl.falhas dt:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+  dl.falhas dd { margin: .25rem 0 0; color: var(--ink-soft); font-size: .93rem; max-width: var(--measure); }
+
+  ol.fazer { margin: 0; padding-left: 1.3rem; max-width: var(--measure); }
+  ol.fazer li { margin-bottom: .7rem; color: var(--ink-soft); }
+  ol.fazer strong { color: var(--ink); }
+  ol.fazer li::marker { font-family: var(--mono); font-size: .82rem; color: var(--medida); }
+
+  /* ---------------------------------------------------------- prompts */
+  .prompts { border-top: 1px solid var(--rule); margin-top: 3rem; padding-top: 1.6rem; }
+  .prompts > p { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1rem; }
+  .prompts ol.passos { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1.4rem; padding-left: 1.2rem; }
+  .prompts ol.passos li { margin-bottom: .3rem; }
+  .prompts ol.passos strong { color: var(--ink); }
+
+  .escolha { display: flex; gap: 0; margin-bottom: 1rem; flex-wrap: wrap; }
+  .escolha button {
+    font-family: var(--sans); font-size: .9rem; cursor: pointer;
+    background: transparent; color: var(--ink-soft);
+    border: 1px solid var(--rule-firm); border-right-width: 0;
+    padding: .55rem 1rem;
+  }
+  .escolha button:last-child { border-right-width: 1px; }
+  .escolha button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .barra {
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    border: 1px solid var(--rule-firm); border-bottom: 0;
+    padding: .8rem 1rem; background: var(--paper-sunk);
+  }
+  .barra .desc { flex: 1; min-width: 14rem; font-size: .88rem; color: var(--ink-soft); }
+  button.copiar {
+    font-family: var(--sans); font-size: .9rem; font-weight: 600;
+    background: var(--ink); color: var(--paper); border: 1px solid var(--ink);
+    padding: .5rem 1.1rem; cursor: pointer; white-space: nowrap;
+  }
+  button.copiar[data-estado="feito"] { background: var(--conforme); border-color: var(--conforme); }
+
+  textarea.prompt {
+    display: block; width: 100%; height: 22rem; resize: vertical;
+    border: 1px solid var(--rule-firm); background: var(--paper-sunk); color: var(--ink);
+    font-family: var(--mono); font-size: .8rem; line-height: 1.62;
+    padding: 1rem; white-space: pre-wrap;
+  }
+  .prompts .rodape { margin-top: 1rem; max-width: var(--measure); font-size: .9rem; color: var(--ink-soft); border-left: 2px solid var(--medida); padding-left: .9rem; }
+
+  footer.creditos {
+    margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+    font-size: .86rem; color: var(--ink-faint); max-width: var(--measure);
+  }
+  footer.creditos p { margin: 0 0 .5rem; }
+  footer.creditos strong { color: var(--ink-soft); font-weight: 600; }
+  .top .experimental {
+    margin: 1.1rem 0 0; max-width: var(--measure);
+    border-left: 2px solid var(--conforme); padding-left: .9rem;
+    font-size: .9rem; color: var(--ink-soft);
+  }
+  .experimental p { margin: 0 0 .55rem; }
+  .experimental p:last-child { margin-bottom: 0; }
+  a { color: var(--medida); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  .anexar { margin-top:3.2rem; border-top:2px solid var(--ink); padding-top:1.4rem; }
+  .anexar .chamada { max-width:var(--measure); margin:0 0 1.2rem; }
+  dl.formatos { margin:0; max-width:var(--measure); }
+  dl.formatos dt { font-family:var(--mono); font-size:.95rem; font-weight:600; margin-top:1.1rem;
+    padding-top:.9rem; border-top:1px solid var(--rule); display:flex; gap:.7rem; align-items:baseline; flex-wrap:wrap; }
+  dl.formatos dt:first-child { border-top:0; padding-top:0; margin-top:0; }
+  dl.formatos dt .rot { font-family:var(--sans); font-size:.72rem; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--medida); font-weight:600; }
+  dl.formatos dd { margin:.3rem 0 0; color:var(--ink-soft); font-size:.95rem; }
+  dl.formatos dd b { color:var(--ink); }
+  .anexar .aviso { border-left:2px solid var(--correcao); padding-left:1rem;
+    margin:1.6rem 0 0; max-width:var(--measure); }
+
+
+  .alerta { border-left: 2px solid var(--correcao); padding: .1rem 0 .1rem 1rem;
+            margin: 1.6rem 0; max-width: var(--measure); }
+  .alerta p { margin: .4rem 0; }
+  .cmd { position: relative; border: 1px solid var(--rule); border-radius: 4px;
+         background: var(--paper-sunk); padding: .7rem 5.5rem .7rem .9rem;
+         margin: .55rem 0 .9rem; }
+  .cmd pre { font-family: var(--mono); font-size: 13px; line-height: 1.5;
+             white-space: pre-wrap; word-break: break-all; margin: 0; }
+  .copiar { position: absolute; top: .45rem; right: .45rem; font: inherit;
+            font-size: 13px; color: inherit; background: var(--paper);
+            border: 1px solid var(--rule-firm); border-radius: 3px;
+            padding: .25rem .7rem; cursor: pointer; }
+  .copiar:hover { border-color: var(--ink-soft); }
+  .wrap > .ressalva { border-left: 2px solid var(--correcao); padding-left: .9rem;
+                      margin: 2.5rem 0 0; max-width: var(--measure);
+                      font-size: .93rem; color: var(--ink-soft); }
+  .cuidados h3 { font-family: var(--serif); font-size: 17px; margin: 22px 0 6px; }
+  .feedback { border-left: 3px solid var(--conforme); background: var(--paper-sunk);
+    padding: .8rem 1.1rem; border-radius: 0 3px 3px 0;
+    margin: 1.4rem 0 0; max-width: var(--measure);
+    font-size: .93rem; color: var(--ink-soft); }
+  .feedback p { margin: 0; }
+  .feedback b { color: var(--ink); }
+  table.med { border-collapse: collapse; margin: 1rem 0; font-size: 14.5px; }
+  table.med th, table.med td { border-bottom: 1px solid var(--rule);
+                               padding: .45rem .9rem .45rem 0; text-align: left;
+                               vertical-align: top; }
+  table.med th { font-size: 12.5px; text-transform: uppercase;
+                 letter-spacing: .06em; color: var(--ink-faint); font-weight: 600; }
+</style>
+<div class="wrap">
+
+  <header class="top">
+  <h1>Norma</h1>
+  <p>Põe um arquivo <code>.docx</code> em ordem. Trabalho acadêmico raramente chega
+  formatado por estilo: o parágrafo típico não usa o estilo Normal, o estilo muda ao longo do
+  texto, e sobre ele vem uma camada de formatação direta que deixa tudo parecido na tela sem
+  deixar nada igual no arquivo. O espaço entre blocos costuma ser feito com parágrafo vazio.</p>
+
+  <p><b>Serve a dois usos, e eles são independentes.</b> Como preparação, antes de uma leitura
+  automática: sem ela, o que a análise apontar de formatação mistura desvio de verdade com
+  ruído de colagem. E sozinha, como formatador de trabalhos, para quem só quer o arquivo em
+  ordem e não vai rodar análise nenhuma.</p>
+
+  <p><b>Ela integra as duas oficinas.</b> Na
+  <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">Oficina de
+  Orientação</a> precede o Alberto e o Luis, que leem trabalho executado; na
+  <a href="https://claude.ai/code/artifact/1d29d917-d73f-48b3-9f89-1eaab12cfffd">Oficina de
+  Projetos</a> precede a Clara, que lê projeto de pesquisa. É a mesma ferramenta, e o que muda
+  é o que vem depois dela.</p>
+
+  <p><b>Ela não usa modelo de inteligência artificial.</b> É um programa em Python que lê e
+  reescreve o XML do arquivo. Não custa nada, roda em segundos, e não depende de assinatura
+  nem de chave de API. Em compensação não roda no chat, que não executa programa.</p>
+  </header>
+
+    <div class="feedback">
+      <p>Trata-se de um protótipo, ainda em fase de testes, e todo feedback (dirigido a
+      <a href="mailto:alexandrearcos@unb.br">alexandrearcos@unb.br</a>) será muito útil
+      para aperfeiçoá-lo. <b>Se você usar a Norma fora do contexto das disciplinas</b>,
+      envie um relato por
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdziEHALH04stCpbVCHqDODK072YKzRRWCaN4ZhsiHojYrKmg/viewform?usp=dialog">este
+      formulário</a>: é com esses relatos que dá para saber se ela funciona fora da
+      situação para a qual foi escrita.</p>
+    </div>
+
+  <p class="vias-titulo">Escolha por onde vai rodá-la.</p>
+
+  <div class="vias-grade">
+    <button type="button" class="via-bt" data-via="colab">
+      <span class="via-nome">Google Colab</span>
+      <span class="via-txt">Não instala nada: abre no navegador, envia o arquivo, roda três
+      células e baixa o resultado. É a via de quem quer só formatar o próprio trabalho.</span>
+      <span class="via-volta">O <code>.docx</code> com as mudanças como alterações
+      controladas, e o relatório do que mudou.</span>
+    </button>
+
+    <button type="button" class="via-bt" data-via="python">
+      <span class="via-nome">Python direto</span>
+      <span class="via-txt">Você instala o Python e roda um comando. É a via de quem quer só
+      o formatador, sem o resto da oficina.</span>
+      <span class="via-volta">Volta o <code>.docx</code> com as mudanças como alterações
+      controladas, para aceitar ou recusar uma a uma.</span>
+    </button>
+
+    <button type="button" class="via-bt" data-via="agente">
+      <span class="via-nome">Com agente</span>
+      <span class="via-txt">No Claude Code ou no VS Code, o assistente instala o que falta e
+      roda por você, e responde quando algo quebra.</span>
+      <span class="via-volta">O mesmo arquivo, e a possibilidade de seguir direto para a
+      análise do conteúdo.</span>
+    </button>
+  </div>
+
+  <p class="vias-nota">Não há via de chat: o chat não roda programa. Quem só tem chat pode
+  usar o <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> ou o <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> por lá, com a
+  ressalva de que a camada formal do relatório sairá lida sobre um arquivo não normalizado.</p>
+
+  <div class="via-guia" id="guia-colab" hidden>
+    <h2>No Google Colab, sem instalar nada</h2>
+    <p>O Colab é um caderno de Python que roda no navegador, de graça, com uma conta Google.
+    Abra <code>colab.research.google.com</code>, crie um caderno novo e cole cada bloco abaixo
+    numa célula, rodando uma de cada vez.</p>
+
+    <div class="alerta">
+      <p><b>Não use esta via no trabalho de outra pessoa.</b> Rodar aqui significa enviar o
+      arquivo para servidor do Google, e essa decisão é de quem escreveu o trabalho. Para
+      formatar o próprio trabalho, não há problema: você envia o que é seu. Para o trabalho de
+      um orientando, use uma das outras duas vias, que rodam na sua máquina.</p>
+    </div>
+
+    <ol class="passos">
+      <li><b>Traga a oficina e envie o seu arquivo.</b> A janela de envio aparece embaixo da
+      célula; escolha o <code>.docx</code>.
+        <div class="cmd">
+          <button type="button" class="copiar" data-alvo="c-colab1">Copiar</button>
+          <pre id="c-colab1">!git clone -q https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao
+
+from google.colab import files
+files.upload()</pre>
+        </div>
+      </li>
+      <li><b>Veja o que ela faria</b>, sem gravar nada.
+        <div class="cmd">
+          <button type="button" class="copiar" data-alvo="c-colab2">Copiar</button>
+          <pre id="c-colab2">import glob
+arquivo = glob.glob("*.docx")[0]
+print("arquivo:", arquivo)
+
+!python Oficina_de_Orientacao/scripts/normalizar_docx.py "{arquivo}" --so-relatorio</pre>
+        </div>
+      </li>
+      <li><b>Rode de verdade e baixe o resultado</b>, quando o relatório fizer sentido.
+        <div class="cmd">
+          <button type="button" class="copiar" data-alvo="c-colab3">Copiar</button>
+          <pre id="c-colab3">!python Oficina_de_Orientacao/scripts/normalizar_docx.py "{arquivo}" --estilos --legendas --notas
+
+saida = arquivo.replace(".docx", "-normalizado.docx")
+files.download(saida)
+files.download("ANEXO-NORMALIZACAO-" + saida.replace(".docx", ".md"))</pre>
+        </div>
+      </li>
+    </ol>
+
+    <h3>Se você for analisar o conteúdo depois</h3>
+    <p>Acrescente <code>--silencio</code> na terceira célula. Sem ele o arquivo sai com
+    alterações controladas, e parágrafo excluído só some quando alguém aceita: até lá a
+    numeração de parágrafo não fecha com a do relatório da análise.</p>
+  </div>
+
+  <div class="via-guia" id="guia-python" hidden>
+    <h2>Direto no Python</h2>
+
+    <ol class="passos">
+      <li><b>Instale o Python</b>, versão 3.11 ou mais nova, marcando a opção de acrescentá-lo
+      ao PATH durante a instalação. É a caixa que quase todo mundo desmarca sem querer, e sem
+      ela o comando abaixo não é encontrado.</li>
+      <li><b>Baixe a oficina</b> pelo endereço abaixo, em <b>Code › Download ZIP</b>, e
+      descompacte.
+        <div class="cmd">
+          <button type="button" class="copiar" data-alvo="c-repo">Copiar</button>
+          <pre id="c-repo">https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</pre>
+        </div>
+      </li>
+      <li><b>Ponha o trabalho na pasta</b> que você descompactou, ao lado de
+      <code>scripts/</code>.</li>
+      <li><b>Veja primeiro o que ela faria</b>, sem gravar nada. Troque
+      <code>trabalho.docx</code> pelo nome do seu arquivo.
+        <div class="cmd">
+          <button type="button" class="copiar" data-alvo="c-diag">Copiar</button>
+          <pre id="c-diag">python scripts/normalizar_docx.py trabalho.docx --so-relatorio</pre>
+        </div>
+      </li>
+      <li><b>Rode de verdade</b>, quando o relatório fizer sentido.
+        <div class="cmd">
+          <button type="button" class="copiar" data-alvo="c-rodar">Copiar</button>
+          <pre id="c-rodar">python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas</pre>
+        </div>
+      </li>
+    </ol>
+
+    <h3>O que volta</h3>
+    <p>Um arquivo <code>trabalho-normalizado.docx</code>, com as mudanças como alterações
+    controladas: você abre no Word, vê cada uma no painel de revisão, assinada por Norma, e
+    aceita ou recusa. Junto vai um <code>ANEXO-NORMALIZACAO-*.md</code> com o que mudou em
+    números.</p>
+
+    <h3>Se você for analisar o conteúdo depois</h3>
+    <p>Aí a versão com alterações controladas não serve, porque parágrafo excluído só some
+    quando alguém aceita, e até lá a numeração de parágrafo não fecha com a do relatório.
+    Acrescente <code>--silencio</code> e o arquivo sai já normalizado.</p>
+  </div>
+
+  <div class="via-guia" id="guia-agente" hidden>
+    <h2>Com agente, no Claude Code ou no VS Code</h2>
+    <p>Serve a quem já vai rodar a análise depois, e a quem prefere não lidar com instalação:
+    o assistente instala o que falta, roda, e lê o próprio erro quando algo quebra.</p>
+
+    <ol class="passos">
+      <li><b>Instale o Claude Code</b>, pelo site da Anthropic, <b>ou o VS Code</b> com a
+      extensão GitHub Copilot e a sua própria chave de API.</li>
+      <li><b>Traga a oficina</b> e abra a pasta.
+        <div class="cmd">
+          <button type="button" class="copiar" data-alvo="c-clone">Copiar</button>
+          <pre id="c-clone">git clone https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</pre>
+        </div>
+      </li>
+      <li><b>Ponha o trabalho na pasta</b> e <b>peça</b>, com o pedido abaixo.</li>
+    </ol>
+
+    <div class="pedido">
+      <button type="button" class="copiar" data-alvo="c-pedido">Copiar</button>
+      <p class="pedido-rot">Cole isto na conversa:</p>
+      <pre class="pedido-txt" id="c-pedido">Rode scripts/normalizar_docx.py sobre o .docx que esta nesta pasta.
+
+Primeiro com --so-relatorio, e me mostre o que ele diz. Depois, se eu
+confirmar, rode com --estilos --legendas --notas.
+
+Se faltar Python ou alguma dependencia, instale. Nao rode git.</pre>
+    </div>
+  </div>
+
+  <section class="cuidados">
+    <h2>O que ela faz</h2>
+    <p><b>Apaga parágrafo vazio</b>, convertendo a altura dele em espaço depois do parágrafo
+    anterior, que é como o espaçamento deveria ter sido feito. <b>Junta espaço repetido</b>
+    dentro do texto. <b>Reconhece três papéis</b>, corpo, referência e legenda, e alinha cada
+    um a uma forma só, criando um estilo com a forma que aquele grupo já tinha. <b>Põe no
+    estilo de legenda</b> os parágrafos que descrevem gráfico, tabela ou quadro. E <b>tira o
+    recuo e o parágrafo sobrando dos separadores de nota de rodapé</b>, que herdam do corpo um
+    recuo sem sentido ali.</p>
+
+    <h3>Um estilo por papel, e não por forma</h3>
+    <p>Contar as formas encontradas e criar um estilo para cada uma organiza a aparência e
+    cimenta a desordem: legenda que sai em três formatos não tem três padrões, tem falta de
+    padrão, e dar estilo a cada variante faz cada uma passar a ser correta pela sua própria
+    definição. Multiplicar estilo é tão ruim quanto não ter nenhum.</p>
+
+    <h3>E ela não alinha quando não há a que alinhar</h3>
+    <p>Se nenhuma forma reúne metade dos parágrafos daquele papel, o programa para e diz que
+    escolher uma é decisão de quem escreveu. Num trabalho medido, as legendas apareciam em 15
+    formatos e a maior reunia 36%: ali ele não mexeu.</p>
+
+    <h3>O que ela não toca</h3>
+    <p>A formatação de corrida de texto, onde moram fonte e corpo de letra, porque ali o que
+    se vê muda palavra a palavra. E o pré-textual inteiro: capa, folha de rosto, folha de
+    aprovação, dedicatória, resumo e sumário são diagramados à mão, com linha em branco
+    empurrando bloco para baixo da página, e apagá-las comprime a capa.</p>
+
+    <h3>Quatro travas, e elas existem por medição</h3>
+    <p>Parágrafo vazio nem sempre é espaço em branco. O programa não apaga o que carregue
+    quebra de seção, quebra de página ou coluna, âncora de imagem, ou âncora de nota, marcador
+    e comentário. Também não toca em parágrafo dentro de tabela nem em texto suprimido com
+    controle de alterações. Num trabalho de 1.434 parágrafos, 156 dos 533 vazios ficaram por
+    essas travas.</p>
+  </section>
+
+  <section class="cuidados">
+    <h2>O que está medido</h2>
+    <p>Cinco trabalhos, todos dissertações em direito. Em todos: o texto saiu idêntico
+    parágrafo a parágrafo, a contagem de marcadores e de campos se preservou, o XML fecha e o
+    Word abre e exporta.</p>
+
+    <table class="med">
+      <tr><th>trabalho</th><th>estilos em uso</th><th>com formatação direta</th><th>páginas</th></tr>
+      <tr><td>1.434 parágrafos</td><td>18</td><td>99%</td><td>140 → 133</td></tr>
+      <tr><td>1.347 parágrafos</td><td>11</td><td>92%</td><td>130 → 131</td></tr>
+      <tr><td>1.303 parágrafos</td><td>8</td><td>100%</td><td>124 → 125</td></tr>
+      <tr><td>757 parágrafos</td><td>3</td><td>99%</td><td>85 → 83</td></tr>
+      <tr><td>671 parágrafos</td><td>9</td><td>100%</td><td>57 → 54</td></tr>
+    </table>
+
+    <p><b>O deslocamento de página não é defeito, é o conserto.</b> Alinhar parágrafos que
+    estavam fora da forma do seu papel muda a altura deles, e é para isso que a ferramenta
+    existe. O que seria defeito é o texto mudar, e ele não muda.</p>
+
+    <p><b>O que não está medido:</b> nenhuma comparação de imagem entre as páginas antes e
+    depois. As verificações usadas pegam texto perdido, XML quebrado e arquivo que o Word
+    recusa; não pegam uma mudança de aparência que preserve tudo isso.</p>
+  </section>
+
+  <p class="ressalva">Ferramenta de leitura assistida, feita por Alexandre Araújo Costa,
+  Faculdade de Direito da UnB, com assistência do Claude Opus em Claude Code. Ela faz parte da
+  <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">Oficina de Orientação</a>
+  e da <a href="https://claude.ai/code/artifact/1d29d917-d73f-48b3-9f89-1eaab12cfffd">Oficina de Projetos</a>,
+  e a maquinaria está aberta em
+  <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao">github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</a>, com o registro
+  de desenho que explica por que cada regra existe.</p>
+</div>
+
+<script>
+(function () {
+  var bts = Array.prototype.slice.call(document.querySelectorAll(".via-bt"));
+  var guias = { colab: "guia-colab", python: "guia-python", agente: "guia-agente" };
+  function mostrar(via) {
+    bts.forEach(function (o) {
+      o.setAttribute("aria-pressed", String(o.dataset.via === via));
+    });
+    Object.keys(guias).forEach(function (k) {
+      var el = document.getElementById(guias[k]);
+      if (el) el.hidden = k !== via;
+    });
+  }
+  bts.forEach(function (b) {
+    b.addEventListener("click", function () { mostrar(b.dataset.via); });
+  });
+  var daUrl = (location.hash || "").replace("#", "");
+  if (Object.prototype.hasOwnProperty.call(guias, daUrl)) mostrar(daUrl);
+})();
+</script>
+<script>
+(function () {
+  document.querySelectorAll(".copiar").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var el = document.getElementById(b.dataset.alvo);
+      if (!el) return;
+      navigator.clipboard.writeText(el.textContent).then(function () {
+        var antes = b.textContent;
+        b.textContent = "Copiado";
+        setTimeout(function () { b.textContent = antes; }, 1600);
+      }).catch(function () {
+        var r = document.createRange();
+        r.selectNodeContents(el);
+        var s = window.getSelection();
+        s.removeAllRanges();
+        s.addRange(r);
+      });
+    });
+  });
+})();
+</script>
