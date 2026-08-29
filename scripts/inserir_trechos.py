@@ -65,20 +65,45 @@ def trecho(indice, ini, fim):
     return "\n".join(linhas), aviso
 
 
+def dividir_em_blocos(corpo):
+    """Os paragrafos do Markdown: o que linha em branco separa.
+
+    Devolve o bloco e, depois dele, a linha em branco que o fechava, para o
+    texto sair com o mesmo espacamento que entrou.
+    """
+    atual = []
+    for linha in corpo.splitlines():
+        if linha.strip():
+            atual.append(linha)
+            continue
+        if atual:
+            yield chr(10).join(atual)
+            atual = []
+        yield ""
+    if atual:
+        yield chr(10).join(atual)
+
+
 def processar(relatorio, pdf, saida=None):
     corpo = Path(relatorio).read_text(encoding="utf-8", errors="replace")
     indice = indexar(pdf)
 
     inseridos, problemas = 0, []
     saida_linhas = []
-    for linha in corpo.splitlines():
-        saida_linhas.append(linha)
-        # a citacao entra depois da linha que a referencia, uma vez por linha
-        refs = REF.findall(linha)
+    # A citacao entra depois do BLOCO que a referencia, e nao depois da linha.
+    # Um relatorio com quebra dura a 80 colunas tem varias linhas por paragrafo,
+    # e inserir por linha parte a frase ao meio: o leitor ve "nao admite",
+    # depois quatro paragrafos citados, e so entao "resposta negativa". Bloco e
+    # o que separa linha em branco, que e o paragrafo do Markdown.
+    for bloco_txt in dividir_em_blocos(corpo):
+        saida_linhas.extend(bloco_txt.splitlines())
+        if not bloco_txt.strip():
+            continue
+        if bloco_txt.lstrip().startswith(">"):
+            continue  # ja e citacao inserida
+        refs = list(dict.fromkeys(REF.findall(bloco_txt)))
         if not refs:
             continue
-        if linha.lstrip().startswith(">"):
-            continue  # ja e citacao inserida
         for ini, fim in refs:
             ini = int(ini)
             fim = int(fim) if fim else ini

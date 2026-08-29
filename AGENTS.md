@@ -116,12 +116,33 @@ o repositório nem por descuido. Para manter vários trabalhos ao mesmo tempo,
    caminho no disco, e aceitam caminho absoluto: o trabalho não precisa ser
    copiado para cá, e a extração é gravada na pasta de onde você roda, e não junto
    do original. Caminho com espaço vai entre aspas.
-2. **Veja se é trabalho executado ou projeto de pesquisa.** Se o que chegou é um
-   projeto, isto é, um plano de pesquisa ainda não executada, sem resultados nem
-   conclusões, a leitura é a do `prompts/CLARA.md`, e não a do Luis. O Luis julga
-   o argumento, e sobre um projeto ele julga o que ainda não existe: o que volta é
-   uma lista de ausências que o autor já conhece. A cadeia de programas é a mesma;
-   muda a doutrina que você segue ao ler.
+2. **Veja o que chegou, porque nem tudo se lê.** Três casos, e os dois primeiros
+   terminam antes da leitura.
+
+   **Não é projeto nem trabalho:** é pré-projeto, roteiro de trabalho, anotação de
+   conversa, material que uma etapa anterior produziu para uso interno. Reconhece-se
+   pelo destinatário, e não pelo tamanho: **o projeto fala a um leitor sobre a
+   pesquisa; o documento de trabalho fala ao autor sobre o que ele ainda tem de
+   fazer.** Marcação de pendência dirigida a quem escreve, registro de quem formulou
+   cada coisa, lista de itens em aberto no lugar de prosa contínua. Aqui não se roda
+   leitura nenhuma e não se monta entrega: diga o que chegou e mande de volta ao Miro,
+   se as bases ainda estão sendo formadas, ou ao Nelson, se o que falta é a revisão.
+   **Não organize as pendências dele:** elas já estão organizadas, foi para isso que
+   foram escritas.
+
+   **É projeto e falta peça estruturante:** falta a lacuna, o problema, os objetivos,
+   a estratégia metodológica, ou a articulação entre eles, e aí é o Miro; falta a
+   revisão de literatura, ou ela é lista de obras sem análise do campo, e aí é o
+   Nelson. O critério é **falta, e não fraqueza**: elemento presente e frágil se
+   analisa na leitura, elemento ausente ou presente só no nome se encaminha.
+   Relatório sobre elemento que não existe devolve ao autor uma lista de ausências
+   que ele já conhece. Um caso se confunde com este e não é encaminhamento: material
+   levantado e seção não redigida. O trabalho foi feito e o que falta é escrever;
+   mandar de volta a quem já entregou o material fecha um laço.
+
+   **É projeto inteiro, ainda que frágil:** a leitura é a do Luis, com a camada de
+   `prompts/PROJETO.md`, que diz o que muda quando não há resultados nem conclusões.
+   A cadeia de programas é a mesma.
 3. **Confira o ambiente antes de prometer.** `python --version` precisa responder
    3.11 ou mais. Sem PyMuPDF, o caminho do PDF não roda e o do `.docx` roda.
 4. **Rode `python scripts/analisar.py`**, que acha o trabalho e executa a cadeia.
@@ -273,11 +294,12 @@ nunca por quem o escreveu.
 ## Onde está a doutrina
 
 `prompts/LUIS.md` é a leitura completa, em quatro passos. `prompts/ANALISADOR-PORTATIL.md`
-é a versão que cabe numa conversa só. `prompts/CLARA.md` é a leitura de
-projeto de pesquisa, que é objeto diferente: não há resultados a julgar, e o que
-se examina é se o desenho, executado como está escrito, produz a resposta à
-pergunta que faz. Usa a mesma cadeia de programas, a Norma inclusive, e o mesmo
-formato de item. `REGISTRO-DE-DESENHO.md` explica por que
+é a versão que cabe numa conversa só. `prompts/PROJETO.md` é a camada curta que
+adapta o Luis a projeto de pesquisa, que é objeto diferente: não há resultados a
+julgar, e o que se examina é se o desenho, executado como está escrito, produz a
+resposta à pergunta que faz. Ela não repete o Luis, e por isso não pode divergir
+dele: diz os passos que ficam sem objeto, o que entra no lugar do elo 2.3, e a
+régua de tamanho, que a tabela do Luis não tem para documento curto. `REGISTRO-DE-DESENHO.md` explica por que
 cada regra existe, com a medição que a originou e a data. Registro desatualizado
 não é documentação obsoleta: é instrução ativa errada.
 
