@@ -150,11 +150,13 @@ Percorra: o tema e o recorte; a lacuna; a pergunta; a justificativa; os objetivo
 a abordagem metodológica; o referencial teórico; a revisão de literatura; o
 cronograma. De cada um, se ele faz o que o nome promete.
 
-**Os que se sustentam não geram item.** Vão numa linha só do relatório, nomeados e
-com o localizador. Dizer de cada um que ele está lá e faz o seu trabalho enche
-página e não informa: o autor sabe que escreveu a seção.
+**Tudo isso cabe num parágrafo.** Diga que foram localizados os elementos
+constitutivos e nomeie-os, **sem localizador**, porque quem escreveu o projeto sabe
+onde estão as próprias seções. Depois, **com localizador**, os defeitos: os que
+cumprem o nome só em parte e os que não existem. Dizer de cada elemento presente
+que ele está lá e faz o seu trabalho enche página e não informa.
 
-### 2. As articulações
+### 2. Fragilidades na articulação entre os elementos
 
 É onde esta leitura rende, e é o que o autor não enxerga sozinho, porque elemento
 isolado quase sempre parece bem. Verifique, no mínimo:
@@ -232,25 +234,30 @@ trabalho para a correção.
 |---|---|
 | **Ementa** | O estágio do projeto numa frase, com a razão, e quantos itens em cada sigla |
 | **Como ler** | As siglas, e o alcance: você leu um projeto e não executou nada dele |
-| **1. O que eu entendi** | Um parágrafo, o que o projeto se propõe, com localizador |
-| **2. Os elementos** | Uma linha para os que se sustentam; item só para os que não |
-| **3. As articulações** | `A` — o que não fecha entre um elemento e outro |
-| **4. Viabilidade** | `V` — o que o projeto supõe e ninguém conferiu |
-| **5. Arguição** | `B` — o que a banca aperta, e o que uma boa resposta contém |
-| **6. Oportunidade** | `O` — decisão apresentada como tomada sem estar tomada |
-| **7. Por onde começar** | Três itens, em ordem de dependência |
-| **8. Questões em aberto** | `Q` — o que você notou e não consegue resolver |
+| **1. O que o projeto se propõe a fazer** | Um parágrafo, reconstruído do texto |
+| **2. Elementos constitutivos** | Um parágrafo: os que existem, e os que faltam ou cumprem o nome só em parte |
+| **3. Fragilidades na articulação entre os elementos** | `S` · `D` |
+| **4. Suposições de viabilidade não conferidas** | `D` |
+| **5. Pontos de risco na arguição** | `S` · `D` |
+| **6. Decisões apresentadas como tomadas** | `D` |
+| **7. Ordem de trabalho** | Três itens, o primeiro sendo aquele de que os outros dependem |
+| **8. O que esta leitura não consegue resolver** | `Q` |
 | **Anexo** | `SC` — correção que não pede decisão, e o que não coube no corpo |
 
-**A ordem das seções é crescente no que o autor tem de fazer.** `SC` corrige sem
-decidir nada, porque existe uma forma correta única derivável do próprio projeto.
-`A`, `V` e `B` apontam o que exige escolha dele. `O` não é defeito: é o que ele
-pode ganhar. `Q` é o que você notou e não consegue resolver, porque resolver exige
-o que você não alcança: conhecer a literatura do campo, saber se a fonte existe,
-perguntar o que ele pretendia.
+**A sigla é a mesma das outras leituras desta oficina, e ela não diz o assunto do
+item: diz o quanto o autor tem de fazer.** O assunto está no título da seção.
+
+`SC` corrige sem decidir nada, porque existe uma forma correta única derivável do
+próprio projeto. `S` aponta o erro cuja solução pede uma escolha dele. `D` pede
+avaliação e desenvolvimento, e ele pode recusar com razão. `Q` é o que você notou e
+não consegue resolver, porque resolver exige o que você não alcança: conhecer a
+literatura do campo, saber se a fonte existe, perguntar o que ele pretendia.
+
+**`Q` não vai para a margem do documento**, e sim para a seção 8: é pergunta a quem
+sabe, e não tarefa localizada.
 
 **A ementa declara quantos itens em cada sigla.** Doze itens todos em `SC` é um
-projeto, e doze em `A` é outro, e sem a contagem os dois têm a mesma aparência.
+projeto, e doze em `S` é outro, e sem a contagem os dois têm a mesma aparência.
 
 **Por onde começar não é lista de defeitos, é ordem de trabalho:** o que resolver
 primeiro porque outras coisas dependem dele. Três itens no máximo. Se resolver o
@@ -260,7 +267,7 @@ vezes.
 ### O formato de cada item, e ele é contrato com o programa
 
 ```
-## A3
+## S3
 
 **Aponta:** o objetivo específico d pede análise crítica da compatibilidade das
 soluções com a segurança jurídica, e nenhuma etapa da metodologia produz isso: o
