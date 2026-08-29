@@ -28,3 +28,11 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# A analise de um trabalho e material sobre pessoa nomeada, como o proprio
+# trabalho. RELATORIO.md e ANEXO.md sao os nomes que a cadeia usa por padrao,
+# entao ignora-los por nome vale para qualquer rodada, e nao so para esta.
+RELATORIO*.md
+ANEXO*.md
+COMENTARIOS-*.md
+COMPREENSIBILIDADE-RESULTADO*.md
