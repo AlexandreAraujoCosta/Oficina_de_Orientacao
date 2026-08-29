@@ -603,6 +603,68 @@ citados, e 38 parágrafos saíam como um muro de texto. O guia era inserido mesm
 quando o relatório já tinha o seu, e o PDF saiu com duas seções "Como ler". O
 parágrafo de tamanho, na entrega única, contava o anexo e anunciava 102 minutos.
 
+## A leitura de projeto deixou de ser doutrina separada, em 29/08
+
+Havia duas doutrinas para dois objetos: a `LUIS.md`, de 113 mil caracteres, para
+trabalho executado, e uma `CLARA.md`, de 22 mil, escrita do zero para projeto de
+pesquisa. A segunda tinha estrutura, siglas e nomes de seção proprios, e 94% das
+suas linhas cobriam materia que a primeira ja cobria com outras palavras.
+
+**A medicao.** O mesmo projeto, de 16.451 palavras, lido duas vezes por sessoes
+isoladas uma da outra, cada uma sem ver o resultado da outra nem saber que a outra
+existia.
+
+| | Clara | Luis |
+|---|---|---|
+| tokens | 214 mil | 253 mil |
+| tempo | 23 min | 21,6 min |
+| corpo do relatorio | 1.600 palavras | 5.954 |
+| itens | 66 | 63 |
+
+**O custo nao separava as duas.** A premissa de camada barata antes da cara vem da
+dissertacao, onde o Luis gasta 560 mil tokens. Num projeto a diferenca cai para 18%,
+e ele roda um pouco mais rapido.
+
+**A cobertura separava, e a favor do Luis.** Onde a Clara achou duas formulacoes
+divergentes da pergunta de pesquisa, ele achou tres, e mostrou que a frase e igual
+palavra por palavra ate a oracao final. Achou a demarcacao contra os dois trabalhos
+que a propria revisao nomeia, cada um tendo feito uma das duas operacoes propostas,
+que ela nao achou. E testou contra o padrao de circularidade o item que ela apenas
+afirmou; o teste nao passou, o item desceu de observacao critica para sugestao de
+desenvolvimento, e o teste ficou escrito no anexo. **Achado afirmado contra achado
+conferido, e e o cotejo que faz a diferenca.**
+
+**E ele tem merito, que ela nao tinha.** A Clara era defeito do comeco ao fim. O
+Luis abre por pontos fortes e contribuicoes a reivindicar, e num projeto isso rende
+coisa concreta: o terceiro objetivo ja estava meio executado dentro da justificacao,
+o que converte "falta escrever" em "falta desenvolver o que ja esta ali".
+
+**O que o exercicio mediu contra o Luis foi o tamanho.** Corpo com 36% do documento
+lido, contra os 4.150 que a regua dele daria; a tabela dele nao tem linha para
+projeto. A camada fixa metade, com teto de 1.600 palavras.
+
+**Dois passos ficaram sem objeto, e ele os declarou em vez de contorna-los**, que
+era o risco: o 1.2 numerico, com cinco das seis operacoes vazias por o projeto nao
+apresentar quantidade propria, e o 2.3 inteiro, por nao haver conclusao redigida.
+Cerca de um quarto do metodo. Contornar em silencio e o modo de falha que esta
+oficina documenta para modelo pequeno, e aqui ele nao apareceu.
+
+**Um achado que nenhuma das duas leituras prevê, e que so aparece rodando as duas.**
+Elas olharam a mesma frase e chegaram a vereditos opostos. A Clara apontou como
+defeito que a pergunta central nao admite resposta negativa; o Luis pos a mesma
+formulacao entre os pontos fortes, porque enunciar "se e possivel elaborar" marca o
+conceito como ainda nao disponivel e impede que o nome faca o trabalho que a
+pesquisa ainda deve fazer. Mesmos paragrafos. Nao e contradicao logica, porque sao
+propriedades diferentes da frase, mas a autora receberia as duas coisas sobre a
+mesma linha. **A camada passou a exigir que o item so entre dizendo qual das duas
+propriedades esta em causa.**
+
+**O que sobrou da CLARA.md** nao e leitura, e sim decisao anterior a ela: a porta de
+entrada, que separa projeto de pre-projeto pelo destinatario do texto, e o
+encaminhamento ao Miro ou ao Nelson quando falta peca. Subiu para o passo 2 do
+`AGENTS.md`. O resto virou `prompts/PROJETO.md`, com 6,6 mil caracteres, que nao
+repete o Luis e por isso nao pode divergir dele.
+
 ## Ferramentas novas
 
 `scripts/montar_entrega.py`, `scripts/prosa_vazia.py` (marcas de linguagem vazia,
