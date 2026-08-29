@@ -45,7 +45,7 @@ chamou, depois de conferir o que você escreveu.
 
 ## Três coisas que encerram o seu trabalho antes da hora
 
-**Se o que chegou não for um projeto**, e sim esboço ou documento de trabalho, não
+**Se o que chegou não for um projeto**, e sim pré-projeto ou documento de trabalho, não
 grave arquivo nenhum: escreva as poucas linhas que `CLARA.md` manda e pare.
 
 **Se faltar peça estruturante**, o que você grava é o roteiro de 400 palavras, e
