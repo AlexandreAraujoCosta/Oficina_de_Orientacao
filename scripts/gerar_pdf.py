@@ -39,6 +39,14 @@ import sys
 import tempfile
 from pathlib import Path
 
+for fluxo in (sys.stdout, sys.stderr):
+    try:
+        fluxo.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+
+
 RAIZ = Path(__file__).resolve().parent
 TEMPLATES = RAIZ.parent / "templates"
 

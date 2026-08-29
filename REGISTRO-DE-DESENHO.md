@@ -387,6 +387,204 @@ sem justificação, sem recuo de primeira linha e com outra entrelinha. A causa 
 no diagnóstico de forma: **ela formata à mão, e não por estilo**, e o
 `--reference-doc` herda estilo nomeado. É como quase todo mundo escreve no Word.
 
+## O retorno de quem recebeu a entrega, em 28/08
+
+A primeira entrega a uma autora voltou com três queixas e dois elogios, e é a
+única medição do projeto feita por quem não o construiu. As queixas valem mais
+do que os elogios, e duas delas eram defeito de programa.
+
+**Primeira: não se entende o que a crítica aponta.** Duas causas somadas. O
+comentário do Word saía num parágrafo único, sem quebra nem negrito, porque o
+programa escrevia todo o texto numa corrida só quando o formato sempre permitiu
+parágrafo e destaque. E a redação do apontamento carregava o vocabulário que o
+modelo inventou para organizar a própria leitura, entregue a quem não acompanhou
+o desenvolvimento, mais os decalques do inglês. O primeiro tem conserto no
+`anotar_docx.py`; o segundo virou regra de redação nos três prompts, com a lista
+das palavras decalcadas e o teste do termo não definido.
+
+**Segunda: erro de português e de formatação vinham juntos num comentário só,
+posto em lugar arbitrário.** Era o desenho: o item ia inteiro para o primeiro
+localizador, e os demais viravam uma lista de aberturas dentro daquele
+comentário. Um item que cita quinze pontos marcava um. Agora marca os quinze, e o
+apontamento se repete inteiro em cada um, porque marca que remete ao comentário
+principal obriga a procurá-lo antes de saber o que corrigir. Medido no mesmo
+arquivo entregue: os quinze itens do anexo davam quinze marcas e passaram a dar
+setenta e três, em sessenta e sete parágrafos. A regra de não agrupar erro de
+superfície entrou nos prompts pelo mesmo motivo.
+
+**Terceira: um comentário pediu correção numa frase que não existe no
+trabalho.** Não se reproduziu. Conferidos, um a um, todos os trechos citados
+dentro dos comentários do arquivo entregue e todas as palavras apontadas pelo
+item de erros de superfície, todos estão no trabalho dela. A hipótese de
+vazamento de outro trabalho lido nas mesmas sessões foi testada contra as nove
+extrações do diretório e não se confirmou: nenhum trecho ausente do trabalho dela
+aparece em qualquer dos outros. O que explica a queixa é a segunda: o item de
+erros de superfície citava três parágrafos e foi entregue no primeiro, de modo
+que duas das cinco palavras apontadas estavam a seis e a trezentos parágrafos
+dali. Quem lê o comentário no parágrafo marcado procura ali a frase e não a
+encontra. Fica registrado como não reproduzido, e não como refutado: só a autora
+pode apontar o comentário que leu.
+
+**Os dois elogios também medem.** O relatório achou uma categoria temática que o
+gráfico exibia e a análise qualitativa não tratava, e ela diz que não tinha
+percebido isso até hoje. E os itens que trazem opção de correção junto com o
+defeito foram os que ela pôde aplicar. O primeiro é achado de consistência entre
+figura e corpo, que é o que o PDF permite e o `.docx` não; o segundo confirma a
+separação por custo de aplicação.
+
+## O conferidor escrito depois do artefato, em 29/08
+
+Em dois dias de trabalho, **seis conferências escritas às pressas produziram o
+achado em vez de encontrá-lo.** Vale registrar porque o defeito tem forma
+constante e porque a regra que o evita já estava escrita, aplicada ao modelo e
+não a quem escreve os programas.
+
+Os seis casos, e o que cada um acusou de errado:
+
+**Material errado.** A conferência de citações rodou contra a extração de um
+arquivo homônimo e não contra o trabalho analisado, e devolveu onze alvos
+ausentes que estavam todos no arquivo certo.
+
+**Categoria que engloba o que devia excluir.** O conferidor do mapa de páginas
+contou parágrafo vazio como perda e anunciou 686 falhas onde havia 88.
+
+**Padrão comido pelo shell.** Uma busca por barra invertida seguida de `n` virou,
+depois da expansão, uma busca por linhas que contêm a letra `n`, e acusou 215
+escapes num arquivo que não tinha nenhum.
+
+**Filtro que casa com o que devia separar.** A contagem de marcas de continuação
+incluiu a primeira marca de cada item, porque ela também traz "1 de 11".
+
+**Busca pelo atributo que eu teria usado.** A verificação de que o prompt estava
+fora dos guias procurou a classe `via-guia` e não encontrou o guia do chat, que
+usa `id`. Conclusão publicada: defeito que não existia.
+
+**Janela curta demais.** A verificação de que os pedidos não tinham botão de
+copiar olhou os primeiros trezentos caracteres do bloco, e o botão estava depois
+do texto. Acrescentei um segundo botão a cada um dos três antes de perceber.
+
+### O que os seis têm em comum
+
+**A conferência é escrita por quem já sabe onde a coisa deveria estar, e procura
+ali.** Ela não erra ao acaso: erra na direção do modelo mental de quem a
+escreveu. Por isso ela é mais confiável justamente onde é menos necessária, e
+falha nos casos que ela existia para pegar.
+
+E falha nas duas direções. O falso positivo custa tempo e se descobre ao
+investigar. **O falso negativo não se descobre**, porque ausência de acusação se
+lê como ausência de defeito, que é o mesmo mecanismo que a Parte X do texto sobre
+os limites da IA descreve no relatório tranquilizador.
+
+### A regra, que já existia noutro lugar
+
+O prompt do Luis manda, ao modelo, o seguinte: **toda afirmação de que algo falta
+exige duas buscas, a que procura o que você acha que não existe e uma de
+controle, com a mesma forma, por algo que você sabe que existe.** Sem a segunda,
+o zero pode ser do texto ou da busca.
+
+A regra vale igual para quem escreve o conferidor, e não estava sendo aplicada.
+**Antes de acreditar num conferidor novo, rode-o sobre um caso que você sabe
+defeituoso e sobre um que você sabe limpo.** Se ele não acusa o defeito
+conhecido, ele não mede o que se pensa que mede, e o que ele disser sobre o resto
+não informa nada.
+
+## O endereço no texto, e a marca única, em 29/08
+
+A correção feita em 28/08 para a queixa de quem recebeu a primeira entrega
+passou do ponto, e a medição mostrou como. Ela reclamava de erros de português
+agrupados num comentário só, posto em lugar arbitrário. A resposta foi marcar
+cada ponto citado. Numa entrega de 53 itens isso deu **307 marcas, das quais 254
+eram continuação**, com 71 pares do mesmo item caindo a três parágrafos ou menos
+um do outro e 62 parágrafos carregando duas marcas ou mais.
+
+**A leitura fria dos mesmos 53 itens apontou para o lado oposto, e é o cruzamento
+das duas que dá o desenho certo.** Ela reprovou 17, dos quais 13 por endereço: a
+frase de reformulação começava com "procurar". Conferido no arquivo entregue, 12
+desses 13 tinham várias marcas, e a âncora dava o lugar que o texto não dava.
+**A marca estava carregando o endereço que o texto devia carregar.** O item
+dizia "as duas glosas do capítulo 4" sem dizer quais, e precisava de quatro
+marcas para suprir isso.
+
+Daí as duas metades da regra. O endereço entra no texto do comentário, como
+páginas, que existem desde 28/08 e não estavam sendo usadas para isso. E marcar
+todos os pontos passa a depender do campo `**Marca:**`, que a análise escreve
+quando a correção é a mesma em cada ocorrência. Sem ele o item é afirmação sobre
+o conjunto e recebe uma marca. A mesma entrega caiu de 307 para 53 marcas, sem
+perder lugar nenhum: o que era continuação virou uma linha de páginas.
+
+**As outras quatro reprovações não são de endereço, e são o defeito de exportar
+categoria de trabalho:** "assimetria da forma do registro", "resíduo do capítulo
+3", "taxa-base", "posto em quarentena". Nomes que o modelo criou para organizar a
+própria leitura e entregou a quem não acompanhou nada. A regra contra isso entrou
+nos prompts em 28/08, e este relatório é anterior a ela, de modo que a medição
+descreve o problema e não a regra. Junto vieram sete decalques do inglês.
+
+## O normalizador, em 28/08
+
+Nasceu de uma observação de quem orienta: trabalho de estudante raramente chega
+com formatação feita por estilo, e o padrão se repete tanto que dá para
+descrever. O estilo nominal do parágrafo típico não é o Normal, e sim algum
+importado numa colagem; o estilo muda ao longo do texto; e sobre ele vem
+formatação direta que iguala a aparência sem igualar o arquivo.
+
+**Duas decisões de desenho, ambas por medição.**
+
+A primeira: **estilo novo, e não reescrita do estilo dominante.** Reescrever o
+Normal com a forma observada é mais simples e está errado, porque quem herda
+dele sem formatação direta para se defender muda de aparência junto. Medido: o
+arquivo foi de 140 para 147 páginas. Com um estilo de corpo novo, baseado no
+antigo, foi para 136, e a diferença que sobra é da conversão dos vazios.
+
+A segunda: **varredura com profundidade, e não expressão regular.** Caixa de
+texto guarda parágrafo dentro de parágrafo, e a busca preguiçosa `<w:p>.*?</w:p>`
+fecha no `</w:p>` de dentro. Apagar o que ela devolve deixa um `</w:p>` órfão, e
+o arquivo para de abrir. Isso apareceu na primeira execução, e vale como
+suspeita sobre os demais programas que usam a mesma expressão: eles só inserem,
+e por isso o defeito não se manifesta neles.
+
+A terceira, e ela corrigiu a versão anterior deste mesmo programa: **um estilo
+por papel, e não por forma.** A primeira versão contava as formas do corpo e
+criava um estilo para cada uma que recorresse, e o resultado no trabalho medido
+foram catorze estilos, entre eles três de legenda. Isso organiza a aparência e
+cimenta a desordem: três formas de legenda não são três padrões, são falta de
+padrão, e dar estilo a cada variante faz cada uma passar a ser correta pela sua
+própria definição, de modo que a camada formal deixa de enxergar o desvio.
+Multiplicar estilo é tão ruim quanto não ter nenhum. Na versão corrigida os
+papéis são três e os estilos criados foram dois, porque o terceiro papel não
+tinha forma assentada e o programa se recusou a escolher por quem escreveu.
+
+**A leitura fria de 28/08 achou cinco defeitos que a construção não tinha
+visto**, e dois deles estragavam o arquivo em silêncio. O `<w:tbl>.*?</w:tbl>`
+repetia, para tabela, o mesmo erro de aninhamento que já estava corrigido para
+parágrafo, e deixava desprotegida a tabela externa quando havia tabela dentro de
+célula. E a busca do `w:pPr` devolvia o primeiro do trecho, que num parágrafo com
+caixa de texto é o do parágrafo de dentro: o programa tirava o recuo e trocava o
+estilo do que estava dentro da caixa. Os outros três: faltavam travas para
+`bookmarkEnd`, `commentRangeEnd`, campo e alteração controlada, e um parágrafo
+inteiramente suprimido com controle de alterações parecia vazio porque a
+verificação só olhava `w:t`; o `basedOn` do estilo novo era o estilo mais
+frequente do arquivo, que pode ser um estilo de título; e a junção de espaços
+repetidos rodava também na capa, desmontando o alinhamento que a promessa de não
+tocar no pré-textual dizia preservar.
+
+**Fica pendente o que ela apontou e não foi consertado:** o teto de 2400 twips
+passou a ser relatado quando corta, mas continua arbitrário; o limite de 60
+caracteres que separa linha curta de corpo é chute e decide papel; e a
+verificação mais forte, que é renderizar as páginas antes e depois e comparar as
+imagens, não foi feita. As três verificações usadas (XML bem formado, texto
+idêntico parágrafo a parágrafo, Word abrir) não pegam mudança de aparência, que é
+justamente o que o programa produz.
+
+**As quatro travas** existem porque parágrafo vazio nem sempre é espaço em
+branco: pode carregar quebra de seção, quebra de página, âncora de imagem ou
+âncora de nota, marcador e comentário. No arquivo medido, 156 dos 533 vazios
+ficaram por isso, e apagá-los teria estragado o trabalho de outra pessoa em
+silêncio.
+
+**O que ele não faz:** não mexe na formatação de corrida de texto, onde moram
+fonte e corpo de letra. Ali o que se vê muda palavra a palavra, e o ganho não
+paga o risco.
+
 ## Defeitos de ferramenta corrigidos em 25/08
 
 `montar_entrega.py` morria ao imprimir a saída do subprocesso num console cp1252,

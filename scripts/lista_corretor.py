@@ -24,6 +24,14 @@ import re
 import sys
 from pathlib import Path
 
+for fluxo in (sys.stdout, sys.stderr):
+    try:
+        fluxo.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+
+
 # Duas formas convivem, e ambas aparecem tanto no relatorio quanto no anexo:
 # negrito abrindo paragrafo (`**S11. ...**`) e titulo (`### S11. ...`). Ate
 # 27/08/2026 o anexo so era lido na forma de titulo, e por isso os itens de
@@ -56,7 +64,12 @@ def itens(texto, origem, regex):
         # prioridade, e nao o item. O que separa e o titulo ter substancia.
         if len(titulo) < 25 and len(corpo.strip()) < 200:
             continue
-        achados.append((cod, titulo, locs, origem))
+        # A instrucao curta que o item traz quando a correcao e a mesma em cada
+        # ocorrencia. Ela decide, no anotar_docx.py, se o item marca todos os
+        # pontos que cita ou um so; sem ela, item que cita quinze lugares
+        # marcaria os quinze e a margem viraria eco.
+        mm = re.search(r"^\*\*Marca:\*\*\s*(.+?)\s*$", corpo, re.M)
+        achados.append((cod, titulo, locs, origem, mm.group(1) if mm else None))
     return achados
 
 
@@ -73,15 +86,17 @@ def main():
         # O mesmo codigo pode casar nas duas formas; fica a de titulo, que traz
         # o item inteiro, e nao a linha que so o referencia numa lista.
         melhor = {}
-        for cod, tit, locs, org in achados:
+        for cod, tit, locs, org, mrc in achados:
             ant = melhor.get(cod)
             if ant is None or len(tit) > len(ant[1]) or len(locs) > len(ant[2]):
-                melhor[cod] = (cod, tit, locs, org)
+                # A marca vem de onde estiver: se a forma vencedora nao a traz e
+                # a outra traz, ela nao pode se perder na escolha.
+                melhor[cod] = (cod, tit, locs, org, mrc or (ant[4] if ant else None))
         return list(melhor.values())
 
     todos = ler(a.relatorio, "relatório")
     if a.anexo and Path(a.anexo).exists():
-        vistos = {c for c, _, _, _ in todos}
+        vistos = {c for c, *_ in todos}
         todos += [x for x in ler(a.anexo, "anexo") if x[0] not in vistos]
 
     if not todos:
@@ -106,11 +121,14 @@ def main():
         "---",
         "",
     ]
-    for cod, titulo, locs, origem in todos:
+    for cod, titulo, locs, origem, marca in todos:
         L.append("## %s" % cod)
         L.append("")
         L.append("**Aponta:** %s" % titulo)
         L.append("")
+        if marca:
+            L.append("**Marca:** %s" % marca)
+            L.append("")
         L.append("**Abrir:** %s" % (" ".join(locs) if locs else "(sem localizador no item)"))
         L.append("")
         L.append("**Onde está:** %s" % origem)
@@ -120,7 +138,7 @@ def main():
         Path(a.relatorio).with_name("CORRETOR-" + Path(a.relatorio).name)
     saida.write_text("\n".join(L) + "\n", encoding="utf-8")
     por = {}
-    for cod, _, _, _ in todos:
+    for cod, *_ in todos:
         por[cod.rstrip("0123456789")] = por.get(cod.rstrip("0123456789"), 0) + 1
     print("  %s: %d itens (%s)" % (saida.name, len(todos),
           ", ".join("%s %d" % (k, v) for k, v in sorted(por.items()))))

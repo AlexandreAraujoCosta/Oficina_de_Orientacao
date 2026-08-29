@@ -43,6 +43,55 @@ apontamentos, os localizadores `[P123]`, e o arquivo de volta.
 
 **Com os programas.** A cadeia inteira, do texto extraído ao trabalho anotado.
 
+**Antes de mais nada, se o que você tem é um `.docx`, normalize.** Trabalho de
+estudante raramente chega formatado por estilo, e o que se vê é sempre o mesmo:
+o parágrafo típico não usa o estilo Normal, o estilo muda ao longo do texto, e
+sobre ele vem uma camada de formatação direta que deixa tudo parecido na tela
+sem deixar nada igual no arquivo. O espaço entre blocos é feito com parágrafo
+vazio. Sem normalizar, a camada formal da análise acusa como desvio o que é
+ruído de colagem, e a numeração de parágrafo, que é o localizador do relatório,
+muda a cada linha em branco apagada.
+
+```bash
+python scripts/normalizar_docx.py trabalho.docx --so-relatorio
+python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas
+```
+
+O primeiro comando não grava nada e diz o que faria. O segundo apaga parágrafo
+vazio, convertendo a altura em espaço depois; junta espaço repetido; **conta
+quantos padrões de formatação o corpo tem de fato e cria um estilo para cada um
+que recorre**, com a forma que aquele grupo já tinha; põe no estilo de legenda
+os parágrafos que descrevem gráfico, tabela ou quadro; e tira o recuo e o
+parágrafo sobrando dos separadores de nota de rodapé, que herdam do corpo um
+recuo que ali não faz sentido.
+
+**Um estilo por papel, e não por forma.** Contar as formas encontradas e criar
+um estilo para cada uma organiza a aparência e cimenta a desordem: legenda que
+sai em três formatos não tem três padrões, tem falta de padrão, e dar um estilo
+a cada variante faz cada uma passar a ser correta pelo seu próprio estilo, de
+modo que a camada formal da análise deixa de ver o desvio. Multiplicar estilo é
+tão ruim quanto não ter nenhum. O programa reconhece três papéis, corpo,
+referência e legenda, e alinha cada um a uma forma só.
+
+**E não alinha quando não há a que alinhar.** Se nenhuma forma reúne metade do
+papel, ele para e diz: escolher uma é decisão de quem escreveu. Medido no
+trabalho de 140 páginas: corpo, 333 parágrafos em 19 formas, a maior com 57%,
+alinhado; referências, 113 em 4 formas, 88%, alinhado; legendas, 88 em 15 formas
+e a maior com 36%, não alinhado.
+
+**O pré-textual não é tocado.** Capa, folha de rosto, folha de aprovação,
+dedicatória, resumo e sumário são diagramados à mão, com linha em branco
+empurrando bloco para baixo da página, e apagá-las comprime a capa. **Quatro travas impedem que
+ele apague parágrafo vazio que seja estrutura:** quebra de seção, quebra de
+página ou coluna, âncora de imagem, e âncora de nota, marcador ou comentário.
+Parágrafo dentro de tabela não é tocado. O que difere da forma dominante fica, e
+é justamente o desvio que a análise deve enxergar depois.
+
+Medido em 28/08/2026, numa dissertação de 1.434 parágrafos e 140 páginas: 18
+estilos em uso, 99% dos parágrafos com formatação direta sobre o estilo, 533
+parágrafos vazios dos quais 377 saíram e 156 ficaram pelas travas, 66 legendas
+convertidas, e o texto saiu idêntico, parágrafo a parágrafo.
+
 ```bash
 python scripts/extrair.py trabalho.docx
 python scripts/analisar_docx.py forma trabalho.docx
@@ -50,11 +99,32 @@ python scripts/conferir_interno.py extracao/trabalho.txt
 python scripts/montar_entrega.py RELATORIO.md ANEXO.md trabalho.docx
 ```
 
+**A cadeia é um comando só.** `montar_entrega.py` chama o que precisa: confere as
+citações e para se alguma não existir no trabalho; monta o relatório com o anexo;
+gera o mapa de páginas, pedindo ao Word que exporte o PDF da mesma versão que
+está sendo comentada; e escreve, além da entrega, o `COMENTARIOS-<nome>.md`, que é
+o texto exatamente como ele chega a quem recebe, para o conferidor de
+compreensibilidade ler. Sem Word e sem `--pdf`, o mapa não sai e o endereço dos
+comentários volta a ser as palavras iniciais do parágrafo, que o Ctrl+F encontra;
+o programa diz qual dos dois casos ocorreu. `--sem-paginas` dispensa a etapa.
+
+**Ele também avisa quando o trabalho não passou pelo normalizador**, e não
+normaliza ali: neste ponto cada localizador do relatório já aponta para um
+parágrafo deste arquivo, e normalizar deslocaria a numeração inteira sem que nada
+acusasse.
+
 `montar_entrega.py` grava de uma vez: o relatório em PDF, com os parágrafos
 citados inseridos abaixo de cada item; o trabalho com os parágrafos numerados; o
 índice dos itens para a correção; e, quando a origem é `.docx`, **o trabalho
 anotado**, com cada apontamento como comentário do Word na margem do parágrafo
 que o exibe.
+
+**Antes de entregar**, `texto_dos_comentarios.py` escreve o texto que cada
+apontamento terá dentro do Word, e `prompts/COMPREENSIBILIDADE.md` o lê como se
+fosse o autor: sem o trabalho e sem notícia da análise, ele diz de cada item o
+que faria ao recebê-lo. Item de que não se consegue extrair uma ação falhou, e o
+teste precisa de uma sessão que não tenha escrito os itens, porque quem os
+escreveu é o pior juiz de se eles se entendem.
 
 Depois, `aplicar_docx.py` põe os reparos no arquivo como alterações controladas,
 onde o alvo cabe numa formatação contínua, e como comentário onde atravessa.
