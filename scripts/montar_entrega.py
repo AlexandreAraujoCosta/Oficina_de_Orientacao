@@ -92,6 +92,8 @@ def main():
     ap.add_argument("--aceitar-citacoes", action="store_true",
                     help="monta mesmo com citacao que nao confere; carimba o relatorio")
     ap.add_argument("--sem-pdf", action="store_true")
+    ap.add_argument("--sem-conferencia", action="store_true",
+                    help="monta sem a conferência de compreensibilidade, assumindo a falta")
     ap.add_argument("--pdf", help="o PDF da MESMA versão do trabalho, para o mapa de páginas")
     ap.add_argument("--sem-paginas", action="store_true",
                     help="não gera o mapa de páginas nem abre o Word")
@@ -114,6 +116,25 @@ def main():
                 print("         Na proxima rodada: normalizar_docx.py ANTES de extrair.")
         except Exception:
             pass
+
+    # A conferencia de compreensibilidade e bloqueante desde 30/08/2026: analise
+    # que passa sem leitor frio saiu tres vezes num mesmo dia sem que nada
+    # impedisse, e o que ela pega nao aparece de outro modo.
+    conf = Path(a.relatorio).with_name("CONFERENCIA-" + Path(a.relatorio).name)
+    if not a.sem_conferencia:
+        if not conf.exists():
+            sys.exit(
+                "\n%s nao existe, e sem ele nao se monta a entrega.\n"
+                "\nRode texto_dos_comentarios.py, entregue a saida a um leitor que nao\n"
+                "escreveu os apontamentos, com prompts/COMPREENSIBILIDADE.md, e grave a\n"
+                "tabela que ele devolver naquele arquivo. A tabela volta para voce, que\n"
+                "decide item a item: so mantem como esta o que ja responde a objecao.\n"
+                "\nPara montar sem isso, e assumindo a falta: --sem-conferencia."
+                % conf.name)
+        if conf.stat().st_mtime < Path(a.relatorio).stat().st_mtime:
+            sys.exit(
+                "\n%s e mais antigo que o relatorio: a conferencia rodou sobre uma\n"
+                "versao anterior. Rode de novo sobre esta." % conf.name)
 
     rel = Path(a.relatorio).read_text(encoding="utf-8").rstrip()
     anx = Path(a.anexo).read_text(encoding="utf-8").lstrip()

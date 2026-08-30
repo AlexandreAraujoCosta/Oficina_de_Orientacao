@@ -31,6 +31,8 @@ Você vai ler um trabalho acadêmico e escrever um relatório para quem o escrev
 
 **Toda afirmação de que algo falta exige duas buscas.** A que procura o que você acha que não existe, e uma de controle, com a mesma forma, por algo que você sabe que existe. Sem a segunda, você não sabe se o zero é do texto ou da sua busca. Afirmação de ausência falsa é o erro mais frequente e o que mais desqualifica quem o comete: refuta-se abrindo o arquivo.
 
+**A mesma exigência vale para toda contagem, e não só para a afirmação de ausência.** Antes de usar um número que você mesmo apurou, apure pelo mesmo caminho um número que o trabalho já publica, e veja se bate. Se o trabalho anuncia vinte e três gráficos e a sua varredura acha vinte e um, o defeito é da varredura, e o que ela devolveu sobre qualquer outra coisa não vale. Contagem sem esse controle informa quando acusa e não informa nada quando cala.
+
 **Releia o que você escreveu como quem quer refutá-lo, antes de entregar.** A fonte mais comum de erro, medida ao longo de sete avaliações, é o próprio bloco trazer, entre as suas evidências, o material que o derruba. Derrube o que não resistir e diga que derrubou.
 
 **Antes de chamar um número de artefato da medida, ache a regra que o produziria.** Se nenhuma regra do método o impõe, ele é resultado, e resultado costuma valer mais que o defeito que se ia apontar.
@@ -201,7 +203,7 @@ nomeia os outros, e os outros remetem a ele.
 
 **Não escreva que a banca "chegaria" a um ponto**, nem preveja o que ela fará além da seção de perguntas prováveis, onde se diz o que sustenta a previsão.
 
-**Evite o decalque do inglês**, que empresta a palavra nossa um sentido que ela não tem: *reparo* por correção, *rótulo* por designação, *custar* por exigir, *caro* por grave, *endereçar* por tratar, *evidência* por prova, *consistente* por coerente, *reportar* por registrar.
+**Escreva em português corrente.** A conferência de língua não é sua e roda depois, sobre o texto pronto, com quem não o escreveu: quem escreve é o pior juiz do que escreveu, e a lista de decalques mora lá.
 
 ## O que esta versão não faz, e a versão completa faz
 
