@@ -178,6 +178,95 @@ def folha(a, doc, sp, pars):
 
 # ------------------------------------------------------------------ aplicar
 
+def paragrafos_do_arquivo(caminho):
+    """Texto de cada paragrafo, por varredura com profundidade.
+
+    Regex ingenua de `<w:p>` quebra em caixa de texto, onde ha paragrafo dentro
+    de paragrafo, e ja produziu acusacao falsa em 30/08/2026."""
+    with zipfile.ZipFile(caminho) as z:
+        doc = z.read("word/document.xml")
+    saida, i, n = [], 0, len(doc)
+    abre = re.compile(rb"<w:p(?: [^>]*)?>")
+    while True:
+        m = abre.search(doc, i)
+        if not m:
+            break
+        prof, j = 1, m.end()
+        while prof and j < n:
+            f = doc.find(b"</w:p>", j)
+            if f == -1:
+                break
+            a1, a2 = doc.find(b"<w:p ", j), doc.find(b"<w:p>", j)
+            prox = min(x for x in (a1, a2, n) if x != -1)
+            if prox < f:
+                prof, j = prof + 1, prox + 4
+            else:
+                prof, j = prof - 1, f + 6
+        b = doc[m.start():j]
+        txt = b"".join(re.findall(rb"<w:t[^>]*>(.*?)</w:t>", b, re.S))
+        saida.append(" ".join(re.sub(rb"<[^>]+>", b"", txt).decode("utf-8", "replace").split()))
+        i = m.end()
+    return saida
+
+
+def conferir_no_word(original, corrigido):
+    """Recusa tudo no Word e exige o original de volta; aceita tudo e exige o
+    mesmo numero de paragrafos.
+
+    E a conferencia que as duas do XML nao alcancam, porque elas testam o nosso
+    modelo do aceite e nao o aceite. Sem Word instalado, avisa e segue: o
+    programa nao depende dela para gravar, e dizer que nao conferiu vale mais do
+    que fingir que conferiu."""
+    try:
+        import win32com.client.dynamic
+    except ImportError:
+        print("  a conferencia pelo Word nao rodou: falta o pywin32.")
+        return None
+    try:
+        w = win32com.client.dynamic.Dispatch("Word.Application")
+    except Exception as e:
+        print("  a conferencia pelo Word nao rodou: %s" % e)
+        return None
+    w.Visible = False
+    w.DisplayAlerts = False
+    provas = []
+    try:
+        for nome, acao in (("recusa", "reject"), ("aceite", "accept")):
+            alvo = corrigido.with_name(corrigido.stem + "-prova-" + nome + ".docx")
+            d = w.Documents.Open(str(corrigido.resolve()), ReadOnly=False,
+                                 AddToRecentFiles=False)
+            if acao == "reject":
+                d.Revisions.RejectAll()
+            else:
+                d.Revisions.AcceptAll()
+            d.SaveAs2(str(alvo.resolve()), FileFormat=16)
+            d.Close(False)
+            provas.append((nome, alvo))
+    finally:
+        w.Quit()
+
+    orig = paragrafos_do_arquivo(original)
+    ok = True
+    for nome, alvo in provas:
+        obtido = paragrafos_do_arquivo(alvo)
+        if nome == "recusa":
+            bate = obtido == orig
+            print("  Word, recusando tudo: %s (%d parágrafos contra %d)"
+                  % ("volta ao original" if bate else "NAO VOLTA AO ORIGINAL",
+                     len(obtido), len(orig)))
+        else:
+            bate = len(obtido) == len(orig)
+            print("  Word, aceitando tudo: %s (%d parágrafos contra %d)"
+                  % ("nenhum parágrafo se fundiu" if bate
+                     else "PARAGRAFOS SE FUNDIRAM", len(obtido), len(orig)))
+        if bate:
+            alvo.unlink(missing_ok=True)
+        else:
+            ok = False
+            print("     a prova ficou em %s" % alvo.name)
+    return ok
+
+
 def main():
     # O console do Windows abre em cp1252, e um til na mensagem derrubava o
     # programa depois de ele ja ter gravado. A guarda existe porque o teste do
@@ -193,6 +282,8 @@ def main():
     ap.add_argument("--lista", help="ENTREGA-CORRETOR-*.md, para comentar os itens sem reparo")
     ap.add_argument("--saida")
     ap.add_argument("--autor", default=AUTOR)
+    ap.add_argument("--sem-word", action="store_true",
+                    help="não confere o resultado abrindo no Word (não recomendado)")
     a = ap.parse_args()
     a.lista = a.arquivo if a.frases else a.lista
 
@@ -355,6 +446,8 @@ def main():
           % (dest.name, trocas, len(plano), len(novos),
              ", %d do autor preservados" % len(usados) if usados else ""))
     print("  conferido: recusando tudo volta ao original; aceitando tudo dá o texto pedido.")
+    if not a.sem_word:
+        conferir_no_word(Path(a.trabalho), dest)
     if recusas:
         rec = dest.with_name(dest.stem + "-RECUSAS.md")
         L = ["# Reparos não aplicados — %s" % Path(a.trabalho).name, "",
