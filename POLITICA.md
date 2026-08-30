@@ -98,7 +98,7 @@ A comparação identificada, portanto, pode ser feita. O que fica no lugar da ve
 
 - **Forma não é mérito.** Os índices do `perfil` medem forma, ritmo e higiene. Nenhuma comparação identificada se apoia neles, e nenhuma tabela ordenável por coluna sai identificada. O que sustenta comparação identificada é a leitura de lente, que argumenta.
 - **Defeito do instrumento não é propriedade do trabalho.** Antes de qualquer afirmação identificada, o achado passa pela conferência: citação contra a fonte (`scripts\conferir_citacoes.py`), e checagem de que a faixa de texto lida era a certa. O instrumento já produziu 431 capítulos numa dissertação, delimitação que descartava 88% do texto e paráfrase apresentada como transcrição.
-- **Defeito do trabalho não é falha de orientação.** Só o subconjunto que um orientador está posicionado para pegar numa leitura de versão diz algo sobre orientação, e só quando reaparece em anos distantes. Ver a triagem por orientabilidade na `FILA.md`, fase 3b.
+- **Defeito do trabalho não é falha de orientação.** Só o subconjunto que um orientador está posicionado para pegar numa leitura de versão diz algo sobre orientação, e só quando reaparece em anos distantes.
 - **Presença não é taxa.** Seis trabalhos por orientador sustentam "esta classe aparece" ou "não aparece". Não sustentam frequência, ordenação nem comparação de intensidade.
 - **O corpus não é a produção do orientador.** O repositório traz o que foi depositado, com o orientador de registro. Não distingue coorientação, não mede envolvimento real e não inclui o que ficou fora do repositório.
 

@@ -40,6 +40,9 @@ import argparse
 import hashlib
 import os
 import subprocess
+import re
+import zipfile
+from collections import Counter
 import sys
 from pathlib import Path
 
@@ -105,10 +108,49 @@ def vigente(trabalho):
     return alvo if (ct == ht and ce == he) else None
 
 
+RE_REVISAO = re.compile(rb"<w:(ins|del)\b[^>]*w:author=\"([^\"]*)\"")
+
+
+def porta_das_alteracoes(caminho):
+    """Recusa .docx com alteração controlada por decidir.
+
+    Decidido em 30/08/2026. Extrair de um arquivo com alteração controlada
+    desloca o localizador, porque ali o parágrafo apagado ainda conta: medido em
+    até 308 parágrafos numa dissertação real. Aceitar por conta destruiria
+    marcação alheia, que costuma ser de quem orienta."""
+    caminho = Path(caminho)
+    if caminho.suffix.lower() != ".docx" or not caminho.exists():
+        return
+    try:
+        with zipfile.ZipFile(caminho) as z:
+            doc = z.read("word/document.xml")
+    except Exception:
+        return
+    de = Counter()
+    for m in RE_REVISAO.finditer(doc):
+        de[m.group(2).decode("utf-8", "replace") or "(sem autor)"] += 1
+    if not de:
+        return
+    total = sum(de.values())
+    plural = "alterações controladas" if total > 1 else "alteração controlada"
+    linhas = ["",
+              "%s tem %d %s por decidir, e a extração" % (caminho.name, total, plural),
+              "não pode rodar assim: o parágrafo apagado ainda conta, e o localizador",
+              "sairia deslocado do arquivo que o autor abre.",
+              "", "Quem assina:"]
+    for autor, n in de.most_common():
+        linhas.append("   %-28s %4d" % (autor[:28], n))
+    linhas += ["",
+               "Aceite ou recuse as alterações no Word, salve, e rode de novo.",
+               "Comentário não atrapalha e pode ficar."]
+    sys.exit("\n".join(linhas))
+
+
 def extrair(trabalho, forcar=False):
     trabalho = Path(trabalho)
     if not trabalho.exists():
         raise SystemExit(f"nao encontrei {trabalho}")
+    porta_das_alteracoes(trabalho)
 
     alvo = caminho_de(trabalho)
     ht, he = impressao(trabalho)

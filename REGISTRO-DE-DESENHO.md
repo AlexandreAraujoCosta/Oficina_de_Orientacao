@@ -665,6 +665,140 @@ encaminhamento ao Miro ou ao Nelson quando falta peca. Subiu para o passo 2 do
 `AGENTS.md`. O resto virou `prompts/PROJETO.md`, com 6,6 mil caracteres, que nao
 repete o Luis e por isso nao pode divergir dele.
 
+## A cópia com controle de alteração passou a ser feita pelo Word, em 30/08
+
+**A marcação que escrevíamos estava correta e o resultado dela não estava.** Na
+dissertação do Akeshi, a Norma marcou 27 marcas de parágrafo como excluídas, e a
+verificação com varredura por profundidade confirma que as 27 estavam em
+parágrafo vazio. Ainda assim, aceitas as alterações no Word, **oito pares de
+parágrafos de texto se fundiram**: três legendas grudaram na primeira célula da
+tabela seguinte, dois títulos de seção grudaram no parágrafo que abrem, e um
+título de anexo grudou no texto seguinte. A cópia limpa tinha 886 parágrafos com
+texto e a aceita, 877.
+
+**A causa não foi isolada, e três hipóteses caíram no teste.** Não é a marcação:
+nenhum dos parágrafos que se fundem tem marca excluída. Não é o `pPrChange` que
+registra a conversão de altura em espaço: suprimi 34 deles e as oito fusões
+ficaram idênticas. Não é o Word reescrever o arquivo: abrir a cópia limpa e
+salvar, sem aceitar nada, devolve texto idêntico parágrafo a parágrafo.
+
+**A saída foi trocar quem escreve a marcação.** `scripts/revisao_word.py` recebe
+o original e a cópia normalizada e manda o Word compará-los. Aceitar o resultado
+devolve a cópia normalizada **por construção**, porque foi dela que a marcação
+nasceu, e o programa confere isso sozinho antes de terminar: aceita as alterações
+numa cópia descartável e coteja parágrafo a parágrafo. No Akeshi, 76 alterações e
+886 contra 886.
+
+**O normalizador não mudou, e é de propósito.** Ele continua em Python puro,
+sem Word, porque é o que permite rodar no Colab, que é a via da página da Norma.
+A comparação é passo a mais, opcional, e só para a cópia que vai para quem
+escreveu.
+
+### Quatro conferidores meus erraram no mesmo dia, e três pela mesma causa
+
+A investigação acima só chegou ao fim porque cada acusação foi testada antes de
+virar achado, e a maioria não sobreviveu. **Três das quatro falhas vieram de usar
+`<w:p>.*?</w:p>` para varrer parágrafos**, que quebra em caixa de texto, onde há
+parágrafo dentro de parágrafo. É o mesmo defeito que o próprio normalizador já
+tinha corrigido em 28/08 e que voltou nos conferidores escritos às pressas para
+medi-lo. A quarta foi `grep` com classe acentuada (`[áa]`), que neste shell não
+casa em UTF-8 e devolveu zeros falsos numa conferência de ausência.
+
+Registrado porque a lição não é sobre regex: **o conferidor escrito depois do
+artefato erra na direção do que quem o escreveu espera encontrar**, e num dia em
+que se procura defeito, ele encontra defeito.
+
+## Dois geradores abandonados, em 29/08
+
+Foram escritos e descartados no mesmo dia dois prompts que consumiriam a entrega
+do analisador: um gerador de roteiro de apresentação de defesa, em dez minutos, e
+um sugestor de produto técnico para mestrado profissional. Junto com eles saiu o
+roteiro que o primeiro produziu para um trabalho real, e que já estava na pasta
+de entrega. Vale registrar porque o motivo do abandono não é dos dois prompts, e
+sim do que se pode pendurar na saída de um analisador.
+
+### O relatório de crítica não descreve o trabalho
+
+**Ele registra onde teve reparo a fazer, e onde não teve, cala.** Isso não é
+defeito dele: é o que ele é. A consequência aparece na primeira coisa que se
+tente gerar a partir dele e que precise do que o trabalho afirma.
+
+O roteiro gerado abria com a pergunta da dissertação, que é se o Plenário Virtual
+é inovação institucional, e nenhum dos sete blocos a respondia. A conclusão do
+trabalho estava numa oração subordinada do penúltimo item. Medido depois: a
+expressão **"inovação institucional" aparece uma vez em todo o relatório**, que
+tem cerca de 7.500 palavras sobre um trabalho de 40.808.
+
+Duas leituras frias independentes chegaram ali por caminhos opostos. A que só viu
+o prompt previu o buraco sem ver saída nenhuma: *onde o relatório não teve reparo
+a fazer, o modelo fica sem material, e é justamente aí que costumam estar os
+resultados*. A que só viu a saída encontrou o buraco sem ver o prompt: *uma banca
+que ouve dez minutos e não ouve a conclusão abre a arguição perguntando qual é
+ela*.
+
+**A regra que fica:** nada pendurado na saída do analisador pode precisar do que o
+trabalho conclui. A entrega basta para produto que age sobre defeito e sobre
+mérito, que é corrigir, arguir e conferir. Não basta para produto que tenha de
+dizer o que o trabalho sustenta. Esse precisa do trabalho, e aí é outra
+ferramenta, com outro custo de leitura.
+
+### A regra declarada e as exigências que a violam
+
+Os dois prompts abriam com "você não recebe o trabalho" e em seguida pediam o que
+só o trabalho tem. No roteiro: que apêndice projetar, quanto tempo um gráfico
+consome, qual resultado é o mais forte. No sugestor: se a peça é usável como
+está, o que falta nela, se o conserto sai numa tarde ou numa semana.
+
+A assimetria mais fina foi a do sugestor. Ele proibia entrar peça sobre a qual o
+relatório nada diz, e ao mesmo tempo mandava afirmar defeito da peça a partir do
+silêncio do relatório. O silêncio não prova nos dois sentidos.
+
+### O teste que exclui metade do próprio objeto
+
+Defeito só do sugestor, e é o que o tornava irrecuperável por correção. O teste
+de produto técnico era "o que alguém sem interesse nenhum na sua pergunta de
+pesquisa usaria assim mesmo". O mesmo prompt mandava examinar as proposições
+dirigidas à instituição, e não existe usuário desinteressado de uma minuta de
+norma sobre a triagem de um tribunal. O próprio exemplo de bom usuário que o
+prompt oferecia, *o servidor que faz aquela triagem*, violava o teste.
+
+O teste errava nos dois sentidos. Aprovava a planilha baixada do sítio do
+tribunal, que não é produto de ninguém, porque não tinha critério de elaboração
+autoral. Reprovava o manual de codificação, que exige entender a distinção
+teórica que o fundamenta e é o produto mais canônico de uma dissertação empírica.
+
+### O exemplo que não valia como prova
+
+**Escrevi o prompt e depois escrevi eu mesmo a saída de exemplo.** A saída reparou
+em silêncio tudo o que o prompt não especificava: deu título aos blocos, que a
+especificação não pedia, e escreveu "nada" onde não havia peça a mostrar, caso
+que o prompt não previa. O exemplo parecia bom e não dizia nada sobre o prompt,
+porque a mesma cabeça preencheu os dois. É a mesma família do conferidor escrito
+depois do artefato.
+
+### Dois conselhos ruins, que são sobre defesa e não sobre prompt
+
+Ficam registrados porque valem fora desta linha abandonada.
+
+**Não se estreia conteúdo numa defesa.** O roteiro mandava dizer em voz alta um
+número que o próprio roteiro reconhecia não estar escrito no trabalho. Se o
+examinador não encontra no texto que leu o resultado que ouviu, a pergunta
+seguinte não é sobre o resultado, e sim sobre por que ele não está lá.
+
+**Limite não publicado não se antecipa.** Declarar limite antes que perguntem vale
+quando o limite já está no texto e a banca vai chegar nele. O roteiro mandava
+declarar um que ele mesmo descrevia como não publicado, o que entrega de graça,
+em noventa segundos, a objeção que derruba um capítulo inteiro.
+
+### O erro no desenho do teste
+
+A leitura fria do roteiro recebeu só o roteiro, sem o relatório, que a autora real
+tem em mãos. A queixa central dela, de estar diante do índice de um livro que não
+recebeu, é artefato do teste e não achado. **Dos cinco blocos reprovados, quatro
+reprovavam por razão independente disso**, e por isso o veredicto se sustentou.
+Registra-se junto com o resto porque conferidor tem bug, e o bug do conferidor
+entra no relato pelo mesmo critério do defeito que ele acusa.
+
 ## Ferramentas novas
 
 `scripts/montar_entrega.py`, `scripts/prosa_vazia.py` (marcas de linguagem vazia,
@@ -672,6 +806,58 @@ por bloco, sem afirmar nada sobre a origem do texto), `scripts/cruzar_base_frede
 e o modo `--anglicismos` de `legibilidade.py`, com dois níveis de ruído.
 
 ## Pendências
+
+### O que está na frente, desde 29/08
+
+**As três vias nunca foram testadas de ponta a ponta.** A página da Oficina promete,
+por via, o que sai de cada ferramenta. O que fica por fazer é um caderno com uma
+linha por ferramenta e via, dizendo o que se roda, o que tem de sair e quem
+consegue rodar.
+
+**O que já rodou, em 30/08.** A checagem de caminhos e tamanhos, que não precisa de
+sessão interativa, e o teste do prompt portátil do Luis contra o relatório da
+versão completa sobre a mesma dissertação. A página do Luis está certa: ela cola a
+versão portátil e só menciona o `LUIS.md` como a das vias com programas.
+
+**O primeiro teste de via achou um defeito que compromete a entrega, em 30/08.** O
+pedido que a página do Luis mandava colar encadeava a normalização com a
+extração, e a Norma imprime, ao terminar, que o arquivo com alteração controlada
+não serve de entrada. Medido sobre uma dissertação real, com os 654 parágrafos de
+texto único casados um a um: o localizador sai deslocado, o desvio cresce do
+começo ao fim e chega a **308 parágrafos**, que são os vazios que a Norma apaga e
+que no arquivo controlado ainda contam. `[P1245]` no relatório é `[P1031]` no
+arquivo que a pessoa abre. Corrigido nos dois pedidos, que agora geram a cópia
+limpa com `--silencio --saida` para a análise e a controlada para quem escreveu.
+A sequência nova foi rodada de ponta a ponta antes de publicar.
+
+**O que falta é a metade que depende do usuário:** rodar o portátil num chat de
+modelo pequeno e gratuito, e os dois testes do Copilot no VS Code. O teste de
+30/08 mediu o prompt, e não a via: quem o rodou tinha modelo grande e trinta e
+quatro leituras do PDF.
+
+**Uma referência quebrada, de 30/08.** A `POLITICA.md` manda "ver a triagem por
+orientabilidade na `FILA.md`", e esse arquivo não existe em lugar nenhum do
+repositório. Foi o único caminho realmente quebrado entre as 79 referências
+examinadas.
+
+**Duas coisas na página do Luis.** O bloco do prompt diz que o `LUIS.md` "tem
+dezessete mil palavras", e ele tem 19.641; a frase está dentro do prompt portátil,
+de modo que muda nos dois lugares ao mesmo tempo. E a página opõe a versão de
+conversa à das vias com programas, sem lugar para o caso do meio, que é o Luis
+inteiro colado num chat de modelo bom. O pino de compartilhamento dela também não
+foi movido depois da publicação de 30/08.
+
+### Cinco achados que a entrega da Janaína não tem
+
+O teste do portátil, em 30/08, levantou cinco itens ausentes do relatório da
+versão completa, conferidos um a um contra o relatório e o anexo. A entrega está
+pronta para sair sem eles, e a decisão de incluí-los é de quem orienta.
+
+São: três referências citadas por página fora do intervalo que a própria entrada
+publica; duas células do gráfico 9 que não somam, conferidas contra o gráfico 7;
+a família de busca `alter`, que a nota 21 arrola e o Quadro 2 não traz, no mesmo
+lugar que o relatório completo elogia em `F8`; o Apêndice II ordenado como texto e
+não como número; e a dedicatória com título, contra a NBR 14724.
 
 ### Duas sessões a abrir, com o prompt inicial pronto
 
@@ -704,7 +890,48 @@ O que sobrou são **três itens `Q`**, de um registro que foi extinto, e o corpo
 capítulo de 13.103 palavras. São 36 minutos de leitura onde cabem 20. A poda por
 deslocamento nunca foi feita nele.
 
-**O artifact do Simulador de banca está compartilhado por link com a versão
-fixada**, e quem tem o endereço continua vendo a versão anterior até o pino de
-compartilhamento ser movido. O do Corretor deixou de importar: foi apagado em
-27/08.
+### Entregas a refazer
+
+**A entrega da Maria Fernanda está limpa, e o alarme de 29/08 era do arquivo
+errado.** A medição que acusou 19 ocorrências rodou sobre
+`relatorios/mfernanda/RELATORIO-MFERNANDA.md`, que é a rodada nova e ainda não
+entregue, e não sobre o `RELATORIO-plenario-virtual.md` da pasta de entrega, que
+é o que ela recebeu. Varrido em 30/08, o entregue não tem nenhuma ocorrência.
+
+**A rodada nova foi corrigida assim mesmo**, porque é o material da próxima
+entrega: treze substituições, sendo cinco de *substantivo* no sentido inglês,
+duas de *comparador*, três da metáfora de preço, uma de *magnitude* e duas de
+"custa uma frase". Ficaram de fora seis ocorrências de "endereço", que ali é o
+endereço do repositório, e duas de "substantivo" como classe gramatical.
+
+**O achado da data do Toffoli**, em [P233] e [P526] do trabalho dela, está guardado
+para a próxima versão e não entrou na entrega atual.
+
+**O teste do segundo conferidor** continua por rodar, com as dezoito hipóteses já
+reunidas em `relatorios/mfernanda/v2-consistencia.md`.
+
+### Duas críticas frias prontas e não rodadas
+
+Confirmado com o usuário em 29/08: nem a da sessão do Miro nem a do desk review
+foram executadas. O prompt inicial das duas está guardado.
+
+### Da Norma, e nada bloqueia
+
+**Dois números nunca foram medidos:** o teto de 2400 twips e o limite de 60
+caracteres por linha. Entraram por estimativa e continuam por conferir.
+
+**Falta a comparação de imagens das páginas antes e depois da normalização**, que é
+a verificação que o programa não tem. Hoje ele confere texto, contagem de campos
+e validade do XML, e não confere o que a página passou a parecer.
+
+### Decisões pequenas, paradas
+
+O bloco de retorno na página do Alberto, que é a única das cinco sem ele. O
+diagnóstico da Norma dentro dessa mesma página, rodando no navegador e sem gravar
+arquivo. E a camada de legibilidade da Oficina LAW, que está pronta e espera a
+decisão de substituir a versão original ou ficar ao lado.
+
+### Do artigo
+
+As partes I a VIII do `relatorios/TEXTO-LIMITES-IA.md` continuam por desenvolver.
+A parte X, sobre a conta do chat gratuito, ficou pronta em 28/08.

@@ -44,3 +44,13 @@ medir.
 Os itens reprovados voltam para você reescrever, com a condição que os reprovou:
 a primeira frase diz o defeito e o lugar, sem categoria que você tenha inventado
 para organizar a própria leitura.
+
+A conferência devolve ainda uma tabela de língua, que cobre também os itens
+aprovados e traz quatro espécies: palavra que parece portuguesa e está no sentido
+inglês, frase cujas palavras são todas portuguesas e cuja construção não é, termo
+de campo que não é o do autor, e trabalho dito como preço. Essa tabela se corrige
+sem o trabalho em mãos, porque o defeito está na frase do apontamento e não no
+que ela descreve. Escolha a palavra pela coisa nomeada: em 29/08/2026, dezesseis
+ocorrências de *comparador* num mesmo relatório pediram três substitutos
+diferentes. **Um item pode passar no teste da ação e estar escrito em inglês
+disfarçado**, e foi assim que essas dezesseis chegaram à entrega.

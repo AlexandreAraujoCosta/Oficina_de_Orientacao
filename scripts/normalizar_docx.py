@@ -646,6 +646,44 @@ class Registro:
         destino.write_text(chr(10).join(corpo), encoding='utf-8')
 
 
+RE_REVISAO = re.compile(rb"<w:(ins|del)\b[^>]*w:author=\"([^\"]*)\"")
+
+
+def alteracoes_pendentes(doc):
+    """Quem assina as alteracoes controladas do arquivo, e quantas de cada um.
+
+    Comentario nao entra: ele nao cria paragrafo e nao move a numeracao."""
+    de = Counter()
+    for m in RE_REVISAO.finditer(doc):
+        de[m.group(2).decode("utf-8", "replace") or "(sem autor)"] += 1
+    return de
+
+
+def porta_das_alteracoes(doc, nome):
+    """Para se o arquivo trouxer alteracao controlada por decidir.
+
+    Decidido em 30/08/2026: os programas nao aceitam nem recusam por conta as
+    alteracoes de ninguem. Quem decide e quem tem o arquivo."""
+    de = alteracoes_pendentes(doc)
+    if not de:
+        return
+    total = sum(de.values())
+    plural = "alterações controladas" if total > 1 else "alteração controlada"
+    linhas = ["",
+              "%s tem %d %s por decidir, e não dá para trabalhar" % (nome, total, plural),
+              "assim: enquanto elas existirem, o parágrafo apagado ainda conta, e o",
+              "localizador do relatório sai deslocado do arquivo que você abre.",
+              "", "Quem assina:"]
+    for autor, n in de.most_common():
+        linhas.append("   %-28s %4d" % (autor[:28], n))
+    linhas += ["",
+               "Aceite ou recuse as alterações no Word, salve, e rode de novo.",
+               "Nenhum programa daqui decide por você: se a marcação for de quem",
+               "orienta, aceitá-la em silêncio apagaria o trabalho dessa pessoa.",
+               "Comentário não atrapalha e pode ficar."]
+    sys.exit("\n".join(linhas))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("trabalho")
@@ -670,6 +708,7 @@ def main():
     origem = Path(a.trabalho)
     z = zipfile.ZipFile(origem)
     doc = z.read("word/document.xml")
+    porta_das_alteracoes(doc, origem.name)
 
     corpo, estilos, direta = diagnostico(doc)
     diz("%s: %d parágrafos com texto" % (origem.name, len(corpo)))
@@ -733,9 +772,21 @@ def main():
         # paragrafo valem os tres, e atribuir faria o ultimo apagar os outros.
         extra[anterior] = extra.get(anterior, 0) + altura(doc[pars[i][0]:pars[i][1]])
 
+    # O paragrafo que recebe o espaco e cujo seguinte vai ser apagado no mesmo
+    # lote nao leva `pPrChange`. Medido em 30/08/2026: com a marca de exclusao
+    # logo abaixo de um `pPrChange`, o Word funde os dois paragrafos ao aceitar,
+    # e o que se perde e um paragrafo de texto do autor. O anexo de normalizacao
+    # continua registrando a mudanca de espacamento.
+    vizinho_apagado = set()
+    for i in apagar:
+        j = next((k for k in range(i - 1, -1, -1) if k not in fora), None)
+        if j is not None:
+            vizinho_apagado.add(j)
+
     ordens = ([(pars[i][0], pars[i][1], None) for i in apagar]
               + [(pars[j][0], pars[j][1], v) for j, v in extra.items()])
     novo = doc
+    calados = 0
     for ini, fim, twips in sorted(ordens, key=lambda x: -x[0]):
         antigo = doc[ini:fim]
         if twips is None:
@@ -746,8 +797,11 @@ def main():
             trecho = apagar_com_revisao(antigo) if not a.silencio else b""
         else:
             trecho = por_espaco_depois(antigo, min(twips, TETO))
-            if not a.silencio:
+            indice = next((j for j, (x, y) in enumerate(pars) if x == ini), None)
+            if not a.silencio and indice not in vizinho_apagado:
                 trecho = com_ppr_change(antigo, trecho)
+            elif not a.silencio:
+                calados += 1
             convertidos += 1
             if twips > TETO:
                 cortados += 1
@@ -850,6 +904,10 @@ def main():
               "foi cortada: ali o espaço devolvido é menor que o apagado"
               % (cortados, TETO))
     diz("   parágrafos: %d antes, %d depois" % (len(pars), conf))
+    if not a.silencio and calados:
+        diz("   %d mudanças de espaçamento não foram marcadas como alteração, "
+            "porque o parágrafo seguinte é apagado e o Word funde os dois ao aceitar"
+            % calados)
     if a.estilos:
         for nome, n, quantas, fatia, ok, alin in criados:
             diz("   %-12s %4d parágrafos, em %2d formas; %d alinhados à mais "

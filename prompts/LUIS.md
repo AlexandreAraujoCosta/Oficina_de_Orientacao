@@ -22,7 +22,7 @@ Disso saem os três registros, e **cada achado traz o seu**:
 
 ## O critério de redação
 
-**Uma crítica é boa se se ouvir.** Não basta ser verdadeira: crítica verdadeira que o autor não consegue ouvir não produz nada e custa o mesmo que uma falsa. Vale como régua de redação de todo achado.
+**Uma crítica é boa se se ouvir.** Não basta ser verdadeira: crítica verdadeira que o autor não consegue ouvir não produz nada e ocupa o mesmo espaço que uma falsa. Vale como régua de redação de todo achado.
 
 **E o relatório não classifica os próprios achados.** Quatro construções, todas
 com o mesmo defeito e todas com o mesmo teste:
@@ -167,7 +167,7 @@ E quando o resultado admitir explicação rival que o corpus não separa, **sepa
 
 **O que este passo acha é quase sempre defeito de propagação, não de pensamento.** Trabalhos longos são escritos em camadas: algo muda, a mudança chega a alguns pontos e não a todos, e fica o fóssil. A versão correta em geral já existe no texto.
 
-**Por isso a correção é barata e a redação é outra.** Não se pede ao autor que pense de novo, pede-se que alinhe. É relatório de manutenção, não acusação de confusão, e a diferença de recepção entre as duas coisas é enorme para o mesmo fato textual.
+**Por isso a correção exige pouco e a redação é outra.** Não se pede ao autor que pense de novo, pede-se que alinhe. É relatório de manutenção, não acusação de confusão, e a diferença de recepção entre as duas coisas é enorme para o mesmo fato textual.
 
 ## Antes do script, o arquivo
 
@@ -300,7 +300,7 @@ Depois disso, o resto do elo:
 2. **Circularidade categorial:** a categoria contém, na definição, o que seria a conclusão?
 3. **Por que essa e não outra.**
 4. **Transposição entre contextos.** Herança não é defeito; herança sem exame do trânsito é.
-5. **O comparador.** Quando a moldura exige comparação, verifique contra o quê o trabalho compara, e se é o comparador que a moldura pede ou o que maximiza o resultado desejado. Trabalho que identifica o comparador certo numa seção e usa outro na aplicação é achado forte e barato de mostrar.
+5. **A base de comparação.** Quando a moldura exige comparação, verifique contra o quê o trabalho compara, e se é a base que a moldura pede ou a que maximiza o resultado desejado. Trabalho que fixa a base certa numa seção e usa outra na aplicação é achado forte e fácil de mostrar.
 
 **Não se pergunta se os conceitos são verdadeiros.** O rastreio de referente já foi feito no passo 1; aqui se pergunta se o vocabulário faz trabalho, e se ele cabe no objeto.
 
@@ -342,7 +342,7 @@ O que sobrou das duas regras é um **registro**, e ele muda a ordem do relatóri
 
 1. **Circularidade.** A categoria contém, na definição, o que a conclusão anuncia como achado. **Exiba a definição e a conclusão lado a lado, com os dois localizadores**, e mostre que uma contém a outra.
 2. **Fato afirmado a partir de inferência que não se apoia em fato.** Percorra a cadeia elo a elo e **mostre onde ela deixa o solo**: qual afirmação empírica sustenta o elo anterior, e qual não tem nenhuma sob si. Dizer que a inferência é longa não basta.
-3. **O desenho não pode produzir a conclusão.** Selecionar pela variável dependente, medir o efeito só onde ele ocorre, comparar contra o comparador que maximiza o resultado desejado. **Diga qual operação faltaria**, e se ela cabe no prazo ou muda a pesquisa.
+3. **O desenho não pode produzir a conclusão.** Selecionar pela variável dependente, medir o efeito só onde ele ocorre, comparar contra a base que maximiza o resultado desejado. **Diga qual operação faltaria**, e se ela cabe no prazo ou muda a pesquisa.
 
 **E entra também a indefinição que trava a leitura**, que era o gatilho da primeira parada: um termo que opera na tese central com dois referentes e **sem versão vigente em ponto nenhum**; resumo ou conclusão afirmando achado diferente do corpo, e não por redação; números da própria base que não reconciliam. Nos três, o passo 2 fica analisando o que o autor ainda vai decidir, e **isso se diz no item**, para ele saber que a análise daquele ponto vale contra uma versão que talvez ele não mantenha.
 
@@ -381,7 +381,7 @@ Existe por erro observado: um verificador derrubou uma hipótese alegando declar
 
 - **Confirma.**
 - **Confirma e reforça.** Sustenta-se e **subestima** o que o texto mostra. **O reforço é afirmação nova e não passou por adversário nenhum**, ao contrário da hipótese, que foi escrita para ser atacada e foi atacada. Por isso ele exige padrão de prova mais alto que o da hipótese, e não mais baixo: localizador próprio, operação escrita, e nada que dependa de leitura do parágrafo em vez de leitura no parágrafo. **Marque cada reforço como tal**, para que um segundo passe possa mirá-lo. Medido em 17/08/2026: num passe adversarial sobre 34 apontamentos retidos, 14 encolheram, e em sete de oito encolhimentos de uma das leituras o que saiu foi reforço acrescentado pelo próprio verificador. É o modo pelo qual conteúdo não verificado entra no produto carimbado como verificado.
-- **Confirma e não vale dizer.** Verdadeira, e dizer custa mais que ganha. Só duas razões: redundante com hipótese mais forte já retida, ou tão menor que dilui as que importam. **Nunca se aplica a erro aritmético.** Declarado e contado.
+- **Confirma e não vale dizer.** Verdadeira, e dizer rende menos do que ocupa. Só duas razões: redundante com hipótese mais forte já retida, ou tão menor que dilui as que importam. **Nunca se aplica a erro aritmético.** Declarado e contado.
 - **Cai.** Diga com as suas palavras qual operação de leitura falhou, e nomeie o padrão se ele se repetir.
 - **Ponto em aberto.** As duas leituras sobrevivem aos mesmos parágrafos.
 
@@ -502,7 +502,7 @@ O resumo executivo tem duas partes e nada mais:
 Quatro respostas, e escolhe-se uma:
 
 - **Defensável como está.** Nenhum item retido pede mais do que redação e alinhamento.
-- **Defensável depois das correções listadas**, que são determinados e cabem no prazo. Diga quais e quanto custam.
+- **Defensável depois das correções listadas**, que são determinados e cabem no prazo. Diga quais e quanto trabalho dão.
 - **Pede uma decisão antes da banca**, sobre alcance de afirmação ou sobre operação a refazer, e a banca chegaria lá. Diga qual decisão e quem a toma.
 - **Pede refazer desenho.** Reservado ao caso em que um item retido ataca a construção da pesquisa, e não o que se afirma sobre ela.
 
@@ -521,13 +521,13 @@ Quatro exigências, e nenhuma é de estilo:
 3. **Diga, para cada uma, o que uma boa resposta contém.** Não é o gabarito, que o relatório não tem, e sim a forma da resposta: qual escolha ela precisa declarar, que peça precisa citar, o que a torna insuficiente. Onde o relatório não sabe a resposta, e há casos assim, diga que só o autor sabe.
 4. **Pelo menos uma das cinco discrimina compreensão, e não localização.** Há o risco de um trabalho bom que quem assina não domina, e ele não vem só de uso de IA: vem também de orientação que escreveu demais, de coautoria não declarada, de bloco herdado de projeto coletivo. A pergunta que discrimina não acusa ninguém e não precisa acusar: **quem fez o trabalho responde em quinze segundos, e quem não fez não acha a resposta no texto, porque ela não está lá.**
 
-A forma que funciona é o contrafactual sobre uma decisão do próprio método: *se a regra de exclusão não tivesse tirado da contagem tal coisa, quantos casos mudariam de grupo?*; *o que aconteceria com o resultado se a variável tivesse sido codificada assim?*; *por que este critério, e não aquele outro, que a literatura usa?* Quem construiu a grade raciocina sobre ela na hora, porque tomou a decisão e viu o que ela custou. Quem recebeu o texto pronto só pode reproduzir o que ele diz, e o texto não diz o que teria acontecido de outro modo.
+A forma que funciona é o contrafactual sobre uma decisão do próprio método: *se a regra de exclusão não tivesse tirado da contagem tal coisa, quantos casos mudariam de grupo?*; *o que aconteceria com o resultado se a variável tivesse sido codificada assim?*; *por que este critério, e não aquele outro, que a literatura usa?* Quem construiu a grade raciocina sobre ela na hora, porque tomou a decisão e sabe o que ela trouxe junto. Quem recebeu o texto pronto só pode reproduzir o que ele diz, e o texto não diz o que teria acontecido de outro modo.
 
 Duas formas que **não** discriminam, e que parecem discriminar: pedir que explique um conceito, porque está no capítulo 1 e se decora; e pedir que resuma o próprio achado, porque está na conclusão. Perguntar pela decisão, e não pelo resultado.
 
 5. **Ofereça a pergunta generosa primeiro.** A que abre costuma ser a contribuição não reivindicada, porque ela entrega ao autor a melhor parte do que ele fez e ele responde bem. Isso não é cortesia: é o que faz o autor ensaiar as outras quatro em vez de largar a lista.
 
-**Uma sexta, curta, é permitida quando existe pergunta muito barata de responder e muito constrangedora de não saber responder** (um número que aparece uma vez e nunca retorna, uma lista que não fecha). Vai depois das cinco, em um parágrafo.
+**Uma sexta, curta, é permitida quando existe pergunta que se responde num segundo e constrange muito quem não sabe respondê-la** (um número que aparece uma vez e nunca retorna, uma lista que não fecha). Vai depois das cinco, em um parágrafo.
 
 **Feche dizendo o que a seção não cobre.** Onde o objeto for penalmente, politicamente ou moralmente controverso, o examinador pode querer discutir o mérito da posição adotada, e essa discussão é legítima e não se prepara conferindo o texto. Diga isso, e não simule a pergunta de mérito: a ferramenta examina construção.
 
@@ -632,7 +632,7 @@ Quatro degraus, e cada um se sustenta dizendo o que o parecerista encontraria:
 
 O teste é o mesmo das sugestões, aplicado ao contrário: **quem ler só a frase sabe dizer de que coisa do trabalho ela fala e o que se fez com ela.** `O aparato que permite recontar está publicado inteiro, e o núcleo quantitativo do capítulo 3 se reconstrói sem pedir nada ao autor` reprova, porque nenhum dos dois substantivos nomeia coisa alguma. `A base de dados, a expressão de busca, o comando de extração e o protocolo de leitura estão publicados por inteiro, e com eles todas as contas do capítulo 3 foram refeitas e conferiram` passa. Medido em 23/08/2026: em dois relatórios, as quarenta e cinco frases de sugestão nomeavam o objeto e **onze das doze frases de mérito não nomeavam**.
 
-**Encurtar não é a virtude aqui.** Título curto e cifrado custa ao leitor mais do que título longo e claro, porque o curto ele lê duas vezes e ainda pergunta. Se a escolha for entre precisão e brevidade no título, fica a precisão; a brevidade tem onde caber, que é o corpo do item, onde o leitor já sabe do que se trata.
+**Encurtar não é a virtude aqui.** Título curto e cifrado dá ao leitor mais trabalho do que título longo e claro, porque o curto ele lê duas vezes e ainda pergunta. Se a escolha for entre precisão e brevidade no título, fica a precisão; a brevidade tem onde caber, que é o corpo do item, onde o leitor já sabe do que se trata.
 
 **Os títulos de seção dizem o que a seção contém, e não como a ferramenta a chama.** O sumário é a primeira coisa que um orientador lê. Nomes fixos:
 
@@ -680,7 +680,7 @@ Onde um item depender de fonte não aberta, ele mesmo o diz, e é lá que a ress
 | Capítulo ou parte | até **30%** | 14.000 → 4.200 (21 min) |
 | Dissertação ou tese | **3.000 palavras + 7%** | 99.000 → 9.000, no teto (45 min) |
 
-**Por que o artigo admite metade do próprio tamanho.** Ele é comprimido: quase toda frase carrega peso argumentativo, não há capítulo de enquadramento, e a superfície conferível por palavra é alta. Uma dissertação tem exposição, recapitulação e moldura que geram pouco a conferir, e por isso a fração cai e uma base fixa entra no lugar — guia de leitura, pontos fortes, avaliação e perguntas custam quase o mesmo em qualquer tamanho.
+**Por que o artigo admite metade do próprio tamanho.** Ele é comprimido: quase toda frase carrega peso argumentativo, não há capítulo de enquadramento, e a superfície conferível por palavra é alta. Uma dissertação tem exposição, recapitulação e moldura que geram pouco a conferir, e por isso a fração cai e uma base fixa entra no lugar — guia de leitura, pontos fortes, avaliação e perguntas ocupam quase o mesmo em qualquer tamanho.
 
 **Gênero e destino são eixos independentes, e confundi-los produz relatório errado.** O gênero decide a fração do teto, porque mede densidade. O destino decide se há veredicto de suficiência e qual é o bloco de perguntas. **Um TCC em formato de artigo vai a banca**, e é o caso que obriga a separação: fração de artigo, com veredicto e perguntas de banca.
 
@@ -702,7 +702,7 @@ Onde um item depender de fonte não aberta, ele mesmo o diz, e é lá que a ress
 
 **A referência de tempo não é arbitrária: quinze a vinte minutos é uma arguição de banca.** É o tempo que um examinador dedica a dizer o que tem a dizer sobre um trabalho inteiro, e é o tempo que quem orienta tem para ler antes de conversar com o autor. Passar muito disso não é ser mais completo: **lê-se como erro de cálculo de quem escreveu**, e o efeito é o documento ser folheado em vez de lido. Se o trabalho exigir mais do que cabe, o que se diz é que ele depende de várias camadas de melhoria, e que se começa pelas centrais. Isso é informação sobre o trabalho, e é útil; documento de quarenta páginas não é.
 
-**Duas coisas não entram nessa conta: os trechos inseridos e o anexo de sugestões complementares.** O teto mede o que uma pessoa lê de ponta a ponta, e o anexo não é isso: destina-se à correção automática, é lido por máquina ou consultado item a item, e cresce sem custo para o leitor humano. Contá-lo contra o teto forçaria a jogar fora achado verificado para caber num relógio que ele não ocupa.
+**Duas coisas não entram nessa conta: os trechos inseridos e o anexo de sugestões complementares.** O teto mede o que uma pessoa lê de ponta a ponta, e o anexo não é isso: destina-se à correção automática, é lido por máquina ou consultado item a item, e cresce sem pesar para o leitor humano. Contá-lo contra o teto forçaria a jogar fora achado verificado para caber num relógio que ele não ocupa.
 
 **Os trechos inseridos também não entram, e não se cortam.** Eles se consultam, e não se leem de ponta a ponta: quem confere um item abre o trecho ao lado do apontamento e volta. Houve uma tentativa de limitá-los por item, em 24/08, e ela estava errada pela razão mais simples: **mandar o leitor humano ao caderno de conferência é mandá-lo a um documento de setecentas páginas para achar um parágrafo.** O caderno existe para outra coisa, que é exibir o objeto que a análise leu. O que encurta o documento é o corpo ter menos itens, e não cada item ter menos prova ao lado.
 
@@ -710,7 +710,7 @@ Onde um item depender de fonte não aberta, ele mesmo o diz, e é lá que a ress
 
 **A razão tinta/dado, no sentido de Tufte, aplica-se a este documento.** Cada linha do relatório precisa carregar informação que o autor não teria sem ela. Prosa que reencena o achado, que reafirma o que o título do item já disse, ou que exibe a operação de verificação para uma correção de palavra, é tinta sem dado.
 
-**A regra operacional: a extensão da prova escrita é proporcional ao custo de o item estar errado.** Item que manda trocar uma palavra ou um algarismo se sustenta com o localizador e uma frase; se ele estiver errado, o autor abre o parágrafo e descarta em dez segundos. Item que pede rever o que uma afirmação sustenta, ou que toca peça que carrega o trabalho, exibe a operação inteira, porque ali o erro do relatório pesa muito e a desconfiança é legítima. **A prova completa de todo item continua existindo, no cotejo, que não vai ao autor.** O relatório não é o lugar de guardá-la.
+**A regra operacional: a extensão da prova escrita é proporcional ao que se perde se o item estiver errado.** Item que manda trocar uma palavra ou um algarismo se sustenta com o localizador e uma frase; se ele estiver errado, o autor abre o parágrafo e descarta em dez segundos. Item que pede rever o que uma afirmação sustenta, ou que toca peça que carrega o trabalho, exibe a operação inteira, porque ali o erro do relatório pesa muito e a desconfiança é legítima. **A prova completa de todo item continua existindo, no cotejo, que não vai ao autor.** O relatório não é o lugar de guardá-la.
 
 **O relatório é uma camada, e não o inventário completo.** Trabalho com problema sério não se conserta numa passada: o autor decide as três coisas que decidem o resto, reescreve o que delas depende, e só então faz sentido olhar o que sobrou, porque metade do que sobrou terá mudado de figura ou desaparecido. Entregar quarenta e cinco itens de uma vez não antecipa esse processo, atrapalha: o autor faz os dez fáceis primeiro, e os três que decidem ficam para o fim, quando o prazo acabou.
 
@@ -726,7 +726,7 @@ A segunda passada corre sobre o texto corrigido, que é o único momento em que 
 
 **Uma classe entra sempre entre os centrais: o critério fixado ao fim e não aplicado desde o início.** O autor chega ao critério escrevendo. Na conclusão ele separa, dos vinte e quatro acórdãos, dois que são precedentes contra legem e um que é erro de proibição, e fixa que só vinte e um invocaram a técnica; mas a legenda da tabela e a do quadro, escritas meses antes, continuam chamando os vinte e quatro de acórdãos que acolheram o distinguishing. Nada disso é erro de raciocínio: é a marca de um texto que amadureceu, e a designação velha ficou onde estava.
 
-Três razões para essa classe ser central, e as três valem juntas. **É barata de corrigir**, porque muda a designação e não o argumento. **Impacta o argumento assim mesmo**, porque a designação é o que o leitor carrega da tabela para o resto do capítulo, e ele carrega a versão antiga. E **é o que esta ferramenta faz melhor que um leitor humano**: quem lê em sequência experimenta o refinamento como progressão natural, e não tem por que voltar à legenda da página 90 ao chegar à conclusão da página 190; a leitura automática segura o texto inteiro de uma vez e vê os dois enunciados lado a lado.
+Três razões para essa classe ser central, e as três valem juntas. **Corrige-se numa passada**, porque muda a designação e não o argumento. **Impacta o argumento assim mesmo**, porque a designação é o que o leitor carrega da tabela para o resto do capítulo, e ele carrega a versão antiga. E **é o que esta ferramenta faz melhor que um leitor humano**: quem lê em sequência experimenta o refinamento como progressão natural, e não tem por que voltar à legenda da página 90 ao chegar à conclusão da página 190; a leitura automática segura o texto inteiro de uma vez e vê os dois enunciados lado a lado.
 
 **Onde procurar:** legendas de tabela e de quadro, listas de figuras, títulos de seção, definições da introdução, o resumo e o abstract.
 
@@ -746,9 +746,9 @@ Três razões para essa classe ser central, e as três valem juntas. **É barata
 
 ## A última seção absorve todo o erro pequeno
 
-**Erro trivial não divide espaço com correção que exige decisão.** A seção 2 ordena por custo, e custo não é importância: uma palavra trocada e um reenquadramento de alcance podem custar o mesmo e não pesam o mesmo. Misturados, a atenção do leitor se dilui em dezenas de itens e a lista deixa de dizer onde ele deve pensar. Por isso todo o erro pequeno desce para a última seção, junto das correções que um script aplica, e ela passa a ser o lugar único do que se corrige sem decidir nada.
+**Erro trivial não divide espaço com correção que exige decisão.** A seção 2 ordena por custo, e custo não é importância: uma palavra trocada e um reenquadramento de alcance podem exigir o mesmo e não pesam o mesmo. Misturados, a atenção do leitor se dilui em dezenas de itens e a lista deixa de dizer onde ele deve pensar. Por isso todo o erro pequeno desce para a última seção, junto das correções que um script aplica, e ela passa a ser o lugar único do que se corrige sem decidir nada.
 
-**Separe o custo de achar do custo de aplicar, porque eles não têm relação.** A regra antiga exigia que o erro fosse *manifesto* para descer à última seção, e isso confundia as duas coisas. Uma frase que enumera "uma solução seguida de outras vinte e duas" quando os julgados são vinte e quatro não tem nada de manifesto: só aparece a quem soma. Mas, uma vez vista, **a correção é determinada e não depende de análise nenhuma** — o número certo se deduz do próprio texto, e quem aplica não decide nada. Item assim entra na lista executável, ainda que tenha custado uma recontagem para ser encontrado.
+**Separe o custo de achar do custo de aplicar, porque eles não têm relação.** A regra antiga exigia que o erro fosse *manifesto* para descer à última seção, e isso confundia as duas coisas. Uma frase que enumera "uma solução seguida de outras vinte e duas" quando os julgados são vinte e quatro não tem nada de manifesto: só aparece a quem soma. Mas, uma vez vista, **a correção é determinada e não depende de análise nenhuma** — o número certo se deduz do próprio texto, e quem aplica não decide nada. Item assim entra na lista executável, ainda que tenha exigido uma recontagem para ser encontrado.
 
 **O teste é sobre a aplicação, e é um só: existe uma forma correta única, derivável do próprio trabalho?** Se existe, a correção é automática e desce, com o antes e o depois escritos. Se a forma correta depende de o autor escolher entre duas coisas defensáveis, ou de informação que não está no texto, o item fica onde está, por mais óbvio que pareça o defeito. Correção numérica, remissão a quadro errado, sigla trocada e concordância quebrada quase sempre passam no teste; alcance de afirmação, atribuição de tese e definição de categoria quase nunca.
 
@@ -814,7 +814,7 @@ mesmo ponto, o primeiro nomeia os outros, e os outros remetem a ele.**
 
 A primeira forma não faz você digitar nada: o script busca o texto em `origem` e leva a `destino`. A segunda existe para a troca pontual, e **os operandos são palavras, nunca passagens**. Se a correção exige escrever período novo, não é patch: é reescrita, sai desta lista e vai para a etapa de correção, depois de alguém confirmar o achado.
 
-**O patch se autoverifica.** O script confere que `de` ocorre em `destino` e recusa se não ocorrer, o que impede que palavra alucinada edite o lugar errado em silêncio. **Recusa não é falha do script, é achado sobre esta leitura**, e a taxa de recusa deve ser relatada: é medida barata de fidelidade ao texto, apurável sem cotejo manual.
+**O patch se autoverifica.** O script confere que `de` ocorre em `destino` e recusa se não ocorrer, o que impede que palavra alucinada edite o lugar errado em silêncio. **Recusa não é falha do script, é achado sobre esta leitura**, e a taxa de recusa deve ser relatada: é medida fácil de fidelidade ao texto, apurável sem cotejo manual.
 
 **O que nunca entra.** Achado de registro *sugestão*, porque a correção dependeria de a hipótese ser verdadeira e isso não se confere abrindo o arquivo. Achado de registro *questão*, que é pergunta e não defeito. E qualquer correção que peça dado novo ou análise nova.
 
@@ -895,7 +895,7 @@ Cada ponto traz: **as passagens colacionadas** (inseridas por script a partir do
 
 # Bloco de calibragem — direito
 
-**Isolado de propósito.** A arquitetura acima é geral; o que segue é do campo. Portar para outra área custa reescrever este bloco, e não caçar guardas espalhadas pelas vozes. O alcance da ferramenta é proporcional a quanto do trabalho está no texto, e no direito isso é quase tudo.
+**Isolado de propósito.** A arquitetura acima é geral; o que segue é do campo. Portar para outra área exige reescrever este bloco, e não caçar guardas espalhadas pelas vozes. O alcance da ferramenta é proporcional a quanto do trabalho está no texto, e no direito isso é quase tudo.
 
 **Registros do campo:** dogmático, empírico, histórico, e as misturas declaradas entre eles.
 
