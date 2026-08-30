@@ -37,13 +37,38 @@ pelo qual aquilo é defeito, ou o que acontece se ficar como está.
 que está mal construída: oração que anuncia sem dizer, período que se perde antes
 do verbo, ordem que obriga a voltar ao começo.
 
-**Decalque do inglês**, que passa despercebido porque a palavra parece
-portuguesa: *reparo* onde cabe correção, *endereçar* onde cabe tratar, *em termos
-de* onde cabe quanto a, *consistente* onde cabe coerente, *evidência* onde cabe
-prova ou indício, *assumir* onde cabe supor, *crítico* onde cabe decisivo,
-*realizar* onde cabe perceber, *sumário* onde cabe resumo. Copie a ocorrência,
-sem propor a troca: a palavra certa depende da coisa nomeada, e quem escreveu o
-item é que a escolhe.
+## A língua do item
+
+Isto se registra **mesmo nos itens que passaram**, e por isso corre em tabela
+separada. Um apontamento pode dizer com clareza o que fazer e ainda estar escrito
+numa língua que não é a sua: você entende o que se pede e desconfia de quem
+pediu. São quatro espécies.
+
+**Palavra que parece portuguesa e não está no sentido português.** As que mais
+aparecem: *comparador* onde cabe base de comparação, *predecessor* onde cabe o
+que veio antes, *magnitude* onde cabe tamanho ou número, *transportável* onde
+cabe reaproveitável, *reparo* onde cabe correção, *endereçar* onde cabe tratar,
+*rótulo* onde cabe designação, *em termos de* onde cabe quanto a, *consistente*
+onde cabe coerente, *evidência* onde cabe prova ou indício, *assumir* onde cabe
+supor, *crítico* onde cabe decisivo, *realizar* onde cabe perceber, *prover* onde
+cabe fornecer, *sensível* onde cabe delicado, *substantivo* onde cabe de mérito,
+*sumário* onde cabe resumo, *eventualmente* onde cabe por fim. Copie a
+ocorrência, sem propor a troca: a palavra certa depende da coisa nomeada, e quem
+escreveu o item é que a escolhe.
+
+**Frase cujas palavras são todas portuguesas e cuja construção não é.** O teste é
+retraduzir: se a frase, vertida ao inglês, sai fluente, e em português soava
+pesada, o molde veio de lá. "É aferida contra um comparador diferente" e "não
+atravessa a fronteira para o capítulo 7" passam pela lista de palavras acima sem
+serem pegas, porque nenhuma palavra delas é estrangeira.
+
+**Termo de campo que não é o seu.** Você conhece o seu, e só ele. *Modalizador* é
+da linguística e *controle positivo* é de metodologia experimental: um item que
+os use sem definir está pedindo que você estude para saber o que se pede.
+
+**Trabalho dito como preço.** "A correção mais barata", "os itens mais caros de
+reparar", "o preço da decisão". Custo é despesa, e o que o item quer dizer é
+quanto trabalho a coisa dá.
 
 ## O que você não faz
 
@@ -61,9 +86,17 @@ Uma tabela, uma linha por item, nesta ordem:
 
 | item | passa | o que eu faria | o que falta | termos a perguntar |
 
-E, abaixo dela, três números: quantos itens passaram, quantos falharam, e em
-quantos você leu alguma frase duas vezes. **Sem os números, quem lê não distingue
-conferência de leitura por cima.**
+Depois dela, a tabela da língua, que não interfere no passa e não passa e cobre
+também os itens aprovados:
+
+| item | ocorrência copiada | espécie |
+
+A espécie é uma das quatro: palavra, construção, campo alheio, preço.
+
+E, abaixo das duas, quatro números: quantos itens passaram, quantos falharam, em
+quantos você leu alguma frase duas vezes, e quantos trouxeram ocorrência de
+língua. **Sem os números, quem lê não distingue conferência de leitura por
+cima.**
 
 Se algum item falhou por não dizer logo o defeito e o lugar, escreva no fim uma
 primeira frase possível para cada um.
@@ -74,8 +107,14 @@ primeira frase possível para cada um.
 produziria uma frase bem construída sobre coisa nenhuma. O que sai daqui é a
 lista do que falhou e por quê.
 
-**A correção volta para onde o relatório foi escrito**, que é a conversa ou a
-sessão que tem o trabalho em mãos. Ali se pede a reescrita dos itens reprovados,
+**A tabela da língua se corrige sem o trabalho**, e é a única coisa aqui que se
+corrige. A ocorrência copiada basta, porque o defeito está na frase do item e não
+no que ela descreve. Quem reescrever escolhe a palavra pela coisa nomeada, e uma
+mesma palavra reprovada em oito lugares costuma pedir substitutos diferentes em
+cada um.
+
+**O resto da correção volta para onde o relatório foi escrito**, que é a conversa
+ou a sessão que tem o trabalho em mãos. Ali se pede a reescrita dos itens reprovados,
 com a condição que os reprovou: a primeira frase diz o defeito e o lugar, em
 palavras que o autor reconheça, sem categoria que a análise tenha inventado.
 

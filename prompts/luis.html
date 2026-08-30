@@ -620,6 +620,11 @@
       quadros e tabelas como imagem, e é daí que sai boa parte dos achados. Num
       <code>.docx</code> as imagens ficam guardadas dentro do arquivo e não chegam até
       ele.</li>
+      <li><b>Se o arquivo tiver alteração controlada, aceite ou recuse no Word
+      antes de anexar</b>, e anexe uma cópia sem comentários. Nesta via não há
+      programa entre o arquivo e o modelo: o texto marcado para exclusão continua
+      lá e é lido, e comentário de quem orienta pode ser tomado por texto do
+      trabalho.</li>
       <li><b>Se você tiver o <code>.docx</code></b>, gere as medidas de formatação no medidor do
       navegador, que está na <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">página do Alberto</a>, e cole o resultado na
       conversa junto com o trabalho. Sem elas a camada formal não é conferida, e o relatório
@@ -630,11 +635,21 @@
       <h2>O prompt, para a via do chat</h2>
       <p>Esta é a versão que cabe numa conversa só. A versão completa, que as vias com programas
       usam, está em <code>prompts/LUIS.md</code> no repositório, e é cinco vezes maior.</p>
+      <p>Medida em 30/08/2026, contra o relatório da versão completa sobre a mesma
+      dissertação: as duas convergem nos achados mais expostos, e cada uma pega o
+      que a outra não pega. A portátil ganha no que um leitor atento com as páginas
+      à frente enxerga, como a lista de referências, as formalidades da ABNT, o
+      intervalo de página citado e a soma das células de uma figura, e levantou
+      cinco itens que a completa não tinha. Perde no que exige segurar o texto
+      inteiro de uma vez e contar através dele: afirmação de ausência, que só se
+      sustenta com busca de controle, e número que existe num capítulo e não chega
+      a outro. A divisão é a esperada, porque é justamente essa a parte que depende
+      de programa.</p>
       <div class="prompt">
         <button type="button" class="copiar" data-alvo="p-luis">Copiar</button>
         <pre id="p-luis"># Luis — versão portátil
 
-Versão de 25/08/2026. Destila `LUIS.md`, que tem dezessete mil palavras e
+Versão de 25/08/2026. Destila `LUIS.md`, que tem quase vinte mil palavras e
 depende de scripts, subagentes e de uma extração numerada. Esta roda numa conversa
 só, em qualquer assistente, sobre o arquivo que se anexa. **O que se perde está
 declarado ao fim.**
@@ -691,7 +706,7 @@ Formal, numérica, categorial e textual. É o que a revisão deixou para trás: 
 
 Uma cadeia de quatro elos, e cada um pressupõe o anterior. **Tudo aqui parte do princípio de que a versão mais recente é a que vale** — criticar formulação que o autor já corrigiu produz apontamento que ele desmonta numa frase. Isso só é seguro porque o passo 1 rodou antes.
 
-**2.1 Os pontos de partida estão bem definidos?** Comece pela pergunta que mais rende e que quase nunca se faz: **a categoria central descreve o fenômeno?** Não é o mesmo que perguntar se a moldura é aplicada com fidelidade. Pegue o requisito que define o conceito, pegue as categorias que o autor construiu, e conte quantas o satisfazem. Depois: o conceito trabalha ou é citado sem tocar a análise? A definição contém o que seria a conclusão? Herança de outro campo foi examinada no trânsito? E, quando a moldura exigir comparação, **contra o quê o trabalho compara** — o comparador que a moldura pede, ou o que maximiza o resultado desejado?
+**2.1 Os pontos de partida estão bem definidos?** Comece pela pergunta que mais rende e que quase nunca se faz: **a categoria central descreve o fenômeno?** Não é o mesmo que perguntar se a moldura é aplicada com fidelidade. Pegue o requisito que define o conceito, pegue as categorias que o autor construiu, e conte quantas o satisfazem. Depois: o conceito trabalha ou é citado sem tocar a análise? A definição contém o que seria a conclusão? Herança de outro campo foi examinada no trânsito? E, quando a moldura exigir comparação, **contra o quê o trabalho compara** — a base de comparação que a moldura pede, ou a que maximiza o resultado desejado?
 
 **2.2 A estratégia anunciada é a executada?** Reconstrua o método que o trabalho de fato executa e **o que ele autoriza a afirmar**; escreva essa frase de modo que sirva sozinha. Promessa não cumprida é defeito; pergunta abandonada porque a pesquisa mostrou que era a errada é virtude, e o discriminador é textual: o trabalho diz por que abandonou? **Leia a promessa na peça que a executa, e não no parágrafo que a anuncia.**
 
@@ -759,7 +774,7 @@ produz `SC` repassou o que se acha sem julgar.
 
 **As sugestões dizem o que mudar, onde, e sob que condição o item se considera resolvido.** Marque com **[arrasta]** a correção que obriga a mexer noutras partes: é a que não se deve começar sem tempo de terminar, porque um número recalculado com o texto ao redor não reescrito é pior que o estado anterior. A fórmula que fecha é *o que poderia ser dito*, e não *o que precisaria ser escrito*: o segundo afirma necessidade sobre um texto que não é seu.
 
-**O veredicto.** Em trabalho que vai a banca, quatro degraus: pronto para ir à banca; pronto depois de ajustes delimitados; tem pontos que precisam ser desenvolvidos; em estágio inicial. Em artigo ou capítulo que vai a revista, o veredicto é sobre **o momento de submeter**, e não sobre o mérito de publicar. **Nunca escreva &quot;recomendação: aprovar&quot; nem que o texto merece publicação:** aprovar é ato da banca, publicar é decisão do editor.
+**O veredicto.** Em trabalho que vai a banca, quatro degraus: pronto para ir à banca; pronto depois de ajustes delimitados; tem pontos que precisam ser desenvolvidos; em estágio inicial. Em artigo ou capítulo que vai a revista, o veredicto é sobre **o momento de submeter**, e não sobre o mérito de publicar. **Nunca escreva "recomendação: aprovar" nem que o texto merece publicação:** aprovar é ato da banca, publicar é decisão do editor.
 
 **As perguntas prováveis fecham a avaliação geral.** Cinco, escritas como as faria quem leu o trabalho inteiro e não o resumo, citando a peça e a seção. Cada uma respondível com o trabalho que existe — pergunta que só se responde tendo feito outra pesquisa é reprovação disfarçada. Diga, de cada uma, **o que uma boa resposta contém**, que é a forma da resposta e não o gabarito. Abra pela pergunta generosa, que costuma ser a contribuição não reivindicada. E **pelo menos uma discrimina compreensão**: um contrafactual sobre uma decisão do próprio método, que quem construiu responde de cabeça e quem recebeu o texto pronto não acha no texto.
 
@@ -815,8 +830,8 @@ normaliza antes de ler.
 ## A marca, que decide onde o apontamento aparece na margem
 
 **Item cuja correção é a mesma em cada ocorrência traz, no anexo, uma linha
-própria com a instrução curta**, como `**Marca:** trocar &quot;prevalescente&quot; por
-&quot;prevalecente&quot;`. Cada ocorrência é uma tarefa, e quem corrige precisa da
+própria com a instrução curta**, como `**Marca:** trocar "prevalescente" por
+"prevalecente"`. Cada ocorrência é uma tarefa, e quem corrige precisa da
 instrução onde ela se aplica.
 
 **Não escreva essa linha quando o item for uma afirmação sobre o conjunto**, que
@@ -833,7 +848,7 @@ nomeia os outros, e os outros remetem a ele.
 
 **Não invente ponto forte.** Se uma parte não tem nenhum relevante, escreva isso e siga. Reconhecimento específico e conferível é informação, porque marca o que não se deve mexer na revisão.
 
-**Não escreva que a banca &quot;chegaria&quot; a um ponto**, nem preveja o que ela fará além da seção de perguntas prováveis, onde se diz o que sustenta a previsão.
+**Não escreva que a banca "chegaria" a um ponto**, nem preveja o que ela fará além da seção de perguntas prováveis, onde se diz o que sustenta a previsão.
 
 **Evite o decalque do inglês**, que empresta a palavra nossa um sentido que ela não tem: *reparo* por correção, *rótulo* por designação, *custar* por exigir, *caro* por grave, *endereçar* por tratar, *evidência* por prova, *consistente* por coerente, *reportar* por registrar.
 
@@ -841,8 +856,7 @@ nomeia os outros, e os outros remetem a ele.
 
 Não roda leituras independentes que se corrigem umas às outras, e por isso perde a convergência, que é o sinal mais forte daquele desenho. Não renderiza as páginas para conferir contra as imagens quando o que se entrega é um .docx, e aí a leitura fica cega aos quadros. Não insere os trechos citados abaixo de cada item, então quem conferir precisa abrir o trabalho. E não mede a própria taxa de erro ao longo de uma série.
 
-**Em nenhuma versão a ferramenta avalia se o trabalho diz algo verdadeiro sobre o objeto**, o que exigiria conhecer o campo, nem se a construção é inédita. O que ele examina é a construção.
-</pre>
+**Em nenhuma versão a ferramenta avalia se o trabalho diz algo verdadeiro sobre o objeto**, o que exigiria conhecer o campo, nem se a construção é inédita. O que ele examina é a construção.</pre>
       </div>
     </section>
 
@@ -887,13 +901,19 @@ claude</pre>
       <p class="pedido-rot">Cole isto na conversa:</p>
       <pre class="pedido-txt" id="c-pedido-claude">Leia prompts/LUIS.md nesta pasta e siga o que ele manda.
 
-Antes de tudo, se o trabalho for .docx, normalize:
+Antes de tudo, se o trabalho for .docx, normalize duas vezes. A copia limpa e a
+que a analise le; a com alteracao controlada e a que vai para quem escreveu.
+python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas --silencio --saida trabalho-limpo.docx
 python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas
-python scripts/extrair.py trabalho-normalizado.docx
-python scripts/conferir_interno.py extracao/trabalho-normalizado.txt
+python scripts/extrair.py trabalho-limpo.docx
+python scripts/conferir_interno.py extracao/trabalho-limpo.txt
 
-Depois faca a leitura completa do Luis sobre o arquivo normalizado, e monte a
-entrega com scripts/montar_entrega.py.
+Leia e monte a entrega sempre sobre trabalho-limpo.docx. No arquivo com alteracao
+controlada os paragrafos apagados ainda contam, e os localizadores do relatorio
+sairiam deslocados em ate algumas centenas de paragrafos.
+
+Depois faca a leitura completa do Luis sobre a copia limpa, e monte a entrega com
+scripts/montar_entrega.py.
 
 Nao rode git. Nao publique nada. Se faltar alguma coisa, diga o que falta.</pre>
     </div>
@@ -946,13 +966,19 @@ Nao rode git. Nao publique nada. Se faltar alguma coisa, diga o que falta.</pre>
       <p class="pedido-rot">Cole isto na conversa:</p>
       <pre class="pedido-txt" id="c-pedido-vscode">Leia o AGENTS.md nesta pasta e siga o que ele manda.
 
-Antes de tudo, se o trabalho for .docx, normalize:
+Antes de tudo, se o trabalho for .docx, normalize duas vezes. A copia limpa e a
+que a analise le; a com alteracao controlada e a que vai para quem escreveu.
+python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas --silencio --saida trabalho-limpo.docx
 python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas
-python scripts/extrair.py trabalho-normalizado.docx
-python scripts/conferir_interno.py extracao/trabalho-normalizado.txt
+python scripts/extrair.py trabalho-limpo.docx
+python scripts/conferir_interno.py extracao/trabalho-limpo.txt
 
-Depois faca a leitura do prompts/LUIS.md sobre o arquivo normalizado, e monte a
-entrega com scripts/montar_entrega.py.
+Leia e monte a entrega sempre sobre trabalho-limpo.docx. No arquivo com alteracao
+controlada os paragrafos apagados ainda contam, e os localizadores do relatorio
+sairiam deslocados em ate algumas centenas de paragrafos.
+
+Depois faca a leitura do prompts/LUIS.md sobre a copia limpa, e monte a entrega
+com scripts/montar_entrega.py.
 
 Nao rode git. Nao publique nada.</pre>
     </div>

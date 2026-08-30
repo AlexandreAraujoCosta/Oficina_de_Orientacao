@@ -1,6 +1,6 @@
 # Luis — versão portátil
 
-Versão de 25/08/2026. Destila `LUIS.md`, que tem dezessete mil palavras e
+Versão de 25/08/2026. Destila `LUIS.md`, que tem quase vinte mil palavras e
 depende de scripts, subagentes e de uma extração numerada. Esta roda numa conversa
 só, em qualquer assistente, sobre o arquivo que se anexa. **O que se perde está
 declarado ao fim.**
@@ -57,7 +57,7 @@ Formal, numérica, categorial e textual. É o que a revisão deixou para trás: 
 
 Uma cadeia de quatro elos, e cada um pressupõe o anterior. **Tudo aqui parte do princípio de que a versão mais recente é a que vale** — criticar formulação que o autor já corrigiu produz apontamento que ele desmonta numa frase. Isso só é seguro porque o passo 1 rodou antes.
 
-**2.1 Os pontos de partida estão bem definidos?** Comece pela pergunta que mais rende e que quase nunca se faz: **a categoria central descreve o fenômeno?** Não é o mesmo que perguntar se a moldura é aplicada com fidelidade. Pegue o requisito que define o conceito, pegue as categorias que o autor construiu, e conte quantas o satisfazem. Depois: o conceito trabalha ou é citado sem tocar a análise? A definição contém o que seria a conclusão? Herança de outro campo foi examinada no trânsito? E, quando a moldura exigir comparação, **contra o quê o trabalho compara** — o comparador que a moldura pede, ou o que maximiza o resultado desejado?
+**2.1 Os pontos de partida estão bem definidos?** Comece pela pergunta que mais rende e que quase nunca se faz: **a categoria central descreve o fenômeno?** Não é o mesmo que perguntar se a moldura é aplicada com fidelidade. Pegue o requisito que define o conceito, pegue as categorias que o autor construiu, e conte quantas o satisfazem. Depois: o conceito trabalha ou é citado sem tocar a análise? A definição contém o que seria a conclusão? Herança de outro campo foi examinada no trânsito? E, quando a moldura exigir comparação, **contra o quê o trabalho compara** — a base de comparação que a moldura pede, ou a que maximiza o resultado desejado?
 
 **2.2 A estratégia anunciada é a executada?** Reconstrua o método que o trabalho de fato executa e **o que ele autoriza a afirmar**; escreva essa frase de modo que sirva sozinha. Promessa não cumprida é defeito; pergunta abandonada porque a pesquisa mostrou que era a errada é virtude, e o discriminador é textual: o trabalho diz por que abandonou? **Leia a promessa na peça que a executa, e não no parágrafo que a anuncia.**
 

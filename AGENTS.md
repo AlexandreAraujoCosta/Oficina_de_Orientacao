@@ -4,6 +4,27 @@ Este repositório traz ferramentas de leitura automática de trabalhos acadêmic
 Se você é um assistente com terminal e acesso a arquivos (GitHub Copilot em modo
 agente, Claude Code, ou equivalente), estas são as instruções para operá-las.
 
+## A porta: arquivo com alteração controlada não entra
+
+**Se o `.docx` trouxer alteração controlada por decidir, pare e diga.** Os
+programas param sozinhos e dizem quantas são e quem assina; se você chegar ao
+arquivo por outro caminho, pare do mesmo jeito. Enquanto a marcação existir, o
+parágrafo apagado ainda conta, e o localizador do relatório sai deslocado do
+arquivo que o autor abre: medido em 30/08/2026 numa dissertação real, o desvio
+cresce do começo ao fim e chega a **308 parágrafos**.
+
+**Você nunca aceita nem recusa alteração de ninguém.** No primeiro arquivo real
+em que a porta fechou, as 276 alterações eram do orientador. Aceitá-las em
+silêncio teria incorporado a revisão dele sem que ninguém decidisse. Quem decide
+é quem tem o arquivo, no Word.
+
+**Comentário passa e não atrapalha.** Ele não cria parágrafo e não move a
+numeração, e a extração nem o alcança: ela lê `word/document.xml`, e comentário
+mora em `word/comments.xml`. Medido sobre uma entrega anotada com 8.011
+caracteres de comentário, nenhum deles aparece na extração. Isso vale para as
+vias com programa; na via do chat, em que o arquivo vai direto ao modelo, o
+comentário é lido e pode ser tomado por texto do trabalho.
+
 ## As travas, e elas vêm antes de tudo
 
 Estas três não são preferências de estilo. São o que distingue um relatório
@@ -283,7 +304,7 @@ texto do arquivo e o insere depois. **Isso inclui paráfrase entre aspas**, que 
 a aparência de citação e é a violação que ninguém percebe lendo o relatório. Se
 for parafrasear, parafraseie sem aspas.
 
-## O que nunca entra neste repositório## O que nunca entra neste repositório
+## O que nunca entra neste repositório
 
 Trabalho de estudante, relatório sobre pessoa nomeada, extração de texto de
 terceiro. O `.gitignore` bloqueia `*.docx`, `*.pdf`, `extracao/` e `relatorios/`,
@@ -328,3 +349,13 @@ medir.
 Os itens reprovados voltam para você reescrever, com a condição que os reprovou:
 a primeira frase diz o defeito e o lugar, sem categoria que você tenha inventado
 para organizar a própria leitura.
+
+A conferência devolve ainda uma tabela de língua, que cobre também os itens
+aprovados e traz quatro espécies: palavra que parece portuguesa e está no sentido
+inglês, frase cujas palavras são todas portuguesas e cuja construção não é, termo
+de campo que não é o do autor, e trabalho dito como preço. Essa tabela se corrige
+sem o trabalho em mãos, porque o defeito está na frase do apontamento e não no
+que ela descreve. Escolha a palavra pela coisa nomeada: em 29/08/2026, dezesseis
+ocorrências de *comparador* num mesmo relatório pediram três substitutos
+diferentes. **Um item pode passar no teste da ação e estar escrito em inglês
+disfarçado**, e foi assim que essas dezesseis chegaram à entrega.
