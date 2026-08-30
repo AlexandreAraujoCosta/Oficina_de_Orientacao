@@ -101,6 +101,12 @@ cima.**
 Se algum item falhou por não dizer logo o defeito e o lugar, escreva no fim uma
 primeira frase possível para cada um.
 
+**Da coluna "o que falta", nos itens reprovados, sai a série.** Escreva ali a
+razão da reprovação em palavras suas, e não um rótulo: um programa depois
+classifica as reprovações por espécie e as acumula, para que se saiba quando elas
+deixam de ser espécies novas. Rótulo escrito por você atrapalharia essa
+classificação, porque a faria concordar consigo mesma.
+
 ## O que fazer com esta conferência
 
 **Ela não se corrige aqui.** Você não tem o trabalho, e reescrever o item sem ele

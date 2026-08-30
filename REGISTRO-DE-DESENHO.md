@@ -665,6 +665,29 @@ encaminhamento ao Miro ou ao Nelson quando falta peca. Subiu para o passo 2 do
 `AGENTS.md`. O resto virou `prompts/PROJETO.md`, com 6,6 mil caracteres, que nao
 repete o Luis e por isso nao pode divergir dele.
 
+## O lista_corretor descarta item em silêncio, em 30/08
+
+**Três itens de um anexo de dezenove sumiram sem aviso, e o programa relatou o
+número menor como se fosse o total.** Na análise da Edileusa, `SC3` e `SC10`
+ficaram de fora da lista do corretor, e a montagem seguiria sem eles; corrigidos
+os dois, `SC9` saiu no lugar. Só apareceu porque a comparação foi feita por
+conjunto, e não de olho: `set(anexo) - set(lista)`.
+
+**A causa é de forma, e a exigência não está escrita em lugar nenhum.** O item
+precisa ter o título em negrito fechando num ponto final e cabendo numa linha
+só. Título que atravessa quebra de linha some. Título cujo negrito fecha antes do
+ponto, como `**SC9. \`recursa\` por \`recusa\`**, em [P569], ...`, também some.
+
+**O que torna isso grave não é a fragilidade, é o silêncio.** O programa imprime
+"19 itens (D 1, S 8, SC 10)" com a mesma cara com que imprimiria 22, e quem
+escreveu o anexo não tem como saber que perdeu três. A entrega sairia com itens
+que existem no relatório e não chegam à margem do trabalho.
+
+**Conserto pendente:** o `lista_corretor.py` deve contar os códigos que aparecem
+no relatório e no anexo, comparar com os que colheu, e parar quando a diferença
+não for de contribuição. Enquanto não for feito, a conferência por conjunto tem
+de ser rodada à mão antes de montar.
+
 ## A cópia com controle de alteração passou a ser feita pelo Word, em 30/08
 
 **A marcação que escrevíamos estava correta e o resultado dela não estava.** Na
