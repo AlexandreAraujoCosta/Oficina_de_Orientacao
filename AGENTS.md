@@ -43,6 +43,13 @@ diferentes. Afirmação de ausência é a que se refuta abrindo o arquivo, e foi
 causa dominante de apontamento falso nas primeiras medições da série: catorze de
 vinte e sete num dos casos.
 
+**A regra das duas buscas vale para qualquer conferidor que você escrever**, e
+não só para afirmação de ausência. Programa de checagem escrito às pressas erra
+na direção do que quem o escreveu espera encontrar, e num dia em que se procura
+defeito ele encontra defeito. Antes de usar o resultado, dê ao programa um caso
+que ele tem de acusar e confira que acusa. Conferidor que cala sem controle não
+informa nada.
+
 **3. Se você recebeu só o `.docx`, você não viu as figuras.** Declare isso no
 relatório, não descreva nenhuma figura, e não diga que converteu o arquivo. Quem
 precisa ler gráfico precisa do PDF.
