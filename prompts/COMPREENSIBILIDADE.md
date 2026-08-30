@@ -107,6 +107,17 @@ primeira frase possível para cada um.
 produziria uma frase bem construída sobre coisa nenhuma. O que sai daqui é a
 lista do que falhou e por quê.
 
+**O que sai daqui é suspeita, e quem decide é quem escreveu o apontamento.** Você
+vê o que quem escreveu já não vê, e em compensação não tem o conhecimento de caso
+que justificou várias decisões: parte do que você reprovar estará errado. Por isso
+a sua tabela volta para o agente que fez a análise, e não vai direto para o autor
+do trabalho.
+
+**E há regra para o descarte, senão a conferência não vale nada.** Quem recebe a
+sua lista só pode manter um item como está apontando onde o próprio item já
+responde à objeção. Achar que a objeção é indevida não basta, porque quem escreveu
+sempre acha, e foi por isso que a conferência existe.
+
 **A tabela da língua se corrige sem o trabalho**, e é a única coisa aqui que se
 corrige. A ocorrência copiada basta, porque o defeito está na frase do item e não
 no que ela descreve. Quem reescrever escolhe a palavra pela coisa nomeada, e uma
