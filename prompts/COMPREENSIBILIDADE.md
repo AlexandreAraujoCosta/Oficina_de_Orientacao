@@ -70,6 +70,12 @@ os use sem definir está pedindo que você estude para saber o que se pede.
 reparar", "o preço da decisão". Custo é despesa, e o que o item quer dizer é
 quanto trabalho a coisa dá.
 
+**E esta espécie tem limiar, ao contrário das outras três.** Uma ocorrência solta
+no meio de uma explicação não é defeito, e apontá-la produz ruído. Registre
+quando for **sistemática**, isto é, quando a figura organizar a leitura e voltar
+ao longo do documento, ou quando estiver **no título do achado**, que é a linha
+pela qual quem lê decide o que vai abrir. No corpo da explicação ela passa.
+
 ## O que você não faz
 
 **Não julga se o apontamento tem razão.** Você não tem o trabalho e não saberia.
