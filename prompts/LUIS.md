@@ -574,6 +574,8 @@ Quatro degraus, e cada um se sustenta dizendo o que o parecerista encontraria:
 
 **Quase nenhuma destas palavras é proibida.** Todas existem em português, e é por isso que passam: o decalque não introduz palavra estrangeira, empresta a uma palavra nossa um sentido que ela não tem. Proibir por atacado erra em sentido contrário e produz texto empolado. A terceira coluna é a que faz a lista funcionar.
 
+**Antes de acusar uma palavra, confira se o sentido suspeito já é português**, no dicionário e na etimologia, e não de memória. *Reportar* traz notícia desde o latim *reportare* e esteve nesta tabela por engano, porque a semelhança com o inglês bastou para condená-la.
+
 <!-- lista-decalques:inicio — gerada por `python scripts/legibilidade.py --tabela`, não editar à mão -->
 
 | Escreve-se | Em português | Legítimo quando |
@@ -590,7 +592,7 @@ Quatro degraus, e cada um se sustenta dizendo o que o parecerista encontraria:
 | customizar | adaptar, personalizar, ajustar | em nada |
 | dramático | acentuado, expressivo, forte | é relativo ao drama |
 | suportar | sustentar, apoiar, embasar | é aguentar carga |
-| reportar | registrar, relatar, dizer | no reflexivo ("reporta-se a Kelsen") e na subordinação |
+| reportar *(só na hierarquia)* | subordinar-se a, responder a | dar notícia ou relatar: é o sentido do latim *reportare*, e o francês tem *reporter*. Vale também o reflexivo ("reporta-se a Kelsen") |
 | evidência *(alto ruído)* | prova, indício | significa o que salta aos olhos: "pôr em evidência" |
 | consistente *(alto ruído)* | coerente, uniforme, constante | significa denso: "argumentação consistente" |
 | assumir *(alto ruído)* | supor, pressupor | é tomar para si, e "assumir que" no sentido de admitir é correto |
@@ -606,7 +608,7 @@ Quatro degraus, e cada um se sustenta dizendo o que o parecerista encontraria:
 
 **Medidos neste projeto, e não copiados de manual:** `reparo` e `rótulo` foram apontados pelo orientador em 18 e 24/08/2026; `endereçar o pesquisador` e `o texto reporta` saíram na varredura de 18/08; `checado` virou `conferido` na mesma passada. Os demais entram por antecipação, e a distinção importa: os cinco primeiros têm ocorrência contada, o resto é hipótese.
 
-**Três que a varredura de 18/08 examinou e manteve, e vale registrar por quê.** `sumário` designa o índice e é o termo da norma. `se reportam a` é o reflexivo correto. `checagem` é palavra dos próprios trabalhos analisados, e trocá-la descreveria errado o que eles fazem.
+**Três que a varredura de 18/08 examinou e manteve, e vale registrar por quê.** `sumário` designa o índice e é o termo da norma. `reportar` dá notícia em português, e o reflexivo `se reportam a` também está correto. `checagem` é palavra dos próprios trabalhos analisados, e trocá-la descreveria errado o que eles fazem.
 
 **A conferência é por script e não corrige sozinha:** `python scripts/legibilidade.py <relatório> --anglicismos` lista as ocorrências com o contexto. A substituição é manual porque a palavra certa varia com a coisa: as oito ocorrências de `rótulo` num relatório de 24/08 pediram cinco palavras diferentes.
 
