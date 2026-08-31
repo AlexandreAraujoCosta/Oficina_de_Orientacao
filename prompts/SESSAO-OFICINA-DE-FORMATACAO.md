@@ -68,7 +68,7 @@ programas diferentes:
 - **Mostrador**: não formata nem organiza. Exibe as formas que existem, quantos
   parágrafos usam cada uma, e a escolha de qual vale é de quem tem o arquivo.
 
-A terceira é a que a evidência favorece, porque devolve a decisão a quem tem o
+A terceira é a que os dados favorecem, porque devolve a decisão a quem tem o
 arquivo e deixa o programa fazendo o que ele faz bem, que é contar.
 
 **O que fica de pé em qualquer das três.** Um estilo por papel, e não por forma:
@@ -137,7 +137,7 @@ sessão deve começar perguntando se ela existe.
 
 ## O que a oficina nova herda das antigas, e é obrigatório
 
-**Toda conferência tem controle positivo.** Antes de reportar o que um teste
+**Toda conferência tem controle positivo.** Antes de dizer o que um teste
 acusou, dê a ele um caso que ele tem de reprovar e confira que reprova. Num único
 dia, quatro conferências escritas às pressas produziram o achado em vez de
 encontrá-lo, e três pela mesma causa: varrer parágrafo com expressão que quebra
