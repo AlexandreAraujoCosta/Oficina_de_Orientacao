@@ -558,6 +558,14 @@ Quatro degraus, e cada um se sustenta dizendo o que o parecerista encontraria:
 
 **Isto não é o desk review, e a diferença é de cadeira.** O desk review pergunta, do lado da revista, se o manuscrito merece consumir dois avaliadores, e decide uma porta. Aqui a pergunta é a mesma e a resposta serve ao autor, para ele escolher quando submeter. Os mesmos fatos, lidos de assentos diferentes, e nenhum dos dois decide o que cabe ao outro.
 
+**O veredicto de quem ainda vai à banca vem com prospecto de resultado.** Dizer que o trabalho está em condição de ser submetido responde se a porta está aberta; quem vai defender quer saber o que acontece do outro lado. **São duas respostas, e usam o mesmo material:** um trabalho pode estar em condição de ir e sair de lá com correção material exigida, e saber disso antes muda o que o autor faz nas semanas que restam.
+
+**O prospecto se escreve na escala da banca**, que está logo abaixo, e diz qual degrau o texto atual sustenta hoje: aprovação sem exigência de correção, com correção de forma no prazo do depósito, ou com correção material. **Vem sempre com a conta**, que é a distribuição dos itens: quantos mudam uma afirmação e quantos não. Sem a conta é adivinhação com aparência de veredicto, e o autor não tem como discordar dela.
+
+**E vem com o condicional que o torna útil:** o prospecto vale para o texto como ele está hoje, e a lista de sugestões existe justamente para movê-lo de degrau. Diga qual item, se resolvido, muda o prospecto, porque essa é a informação que o autor usa para escolher onde gastar as semanas que tem.
+
+**A decisão de submeter nem sempre está aberta, e é isso que torna o prospecto obrigatório.** Prazo de bolsa, prazo regimental e agenda de banca fecham a porta antes de o texto estar pronto, e trabalho verde se defende. Quando a data já está marcada, dizer que o trabalho ganharia com mais um semestre informa pouco e chega tarde; o que ainda serve é qual degrau ele sustenta hoje e o que, feito nas semanas que restam, o move. **Escreva o prospecto mesmo quando o degrau de submissão for o mais baixo:** é ali que ele mais rende.
+
 **Há uma segunda escala, e ela vale quando quem lê está na banca.** A escala de quatro degraus acima responde "vale submeter?", que é a pergunta de quem ainda vai. Quem lê como examinador tem o trabalho na mesa, a data marcada, e outra pergunta pela frente: o que a banca decide. Dizer a essa pessoa que o trabalho "pode ir à banca" devolve-lhe uma pergunta que ela já respondeu ao aceitar o convite.
 
 **Nessa leitura, o veredicto é sobre o que o trabalho sustenta diante da decisão que vem**, em quatro degraus que acompanham o que uma banca de fato profere:
