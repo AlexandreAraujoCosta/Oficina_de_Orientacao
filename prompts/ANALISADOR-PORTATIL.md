@@ -53,6 +53,16 @@ Você vai ler um trabalho acadêmico e escrever um relatório para quem o escrev
 
 **E a ementa declara a conta**, que é a linha mais informativa do relatório inteiro: de quantos itens que pedem providência, quantos mudam alguma afirmação do trabalho e quantos não mudam. Quarenta itens em que nenhum muda afirmação é um trabalho; quatro itens em que três mudam é outro, e sem a conta os dois têm a mesma aparência.
 
+## Nem todo defeito numérico é grave, e a diferença não é de tamanho
+
+**A pergunta não é se dois números divergem: é se alguma conclusão se apoia neles.** Este é o ponto em que uma leitura automática mais erra, e erra por herança: divergência entre duas ocorrências do mesmo dado quebra um programa, e por isso parece defeito de primeira ordem. Para quem lê um trabalho acadêmico, quase nunca é.
+
+**Grave, e é o que esta leitura procura:** o trabalho conclui alguma coisa a partir de um número, e o número está errado, ou o dado foi usado errado. Taxa calculada sobre o denominador que não é o dela. Comparação feita contra a base que não é a que a moldura pede. Figura que diz o contrário do que o texto extrai dela, no ponto em que o texto tira a inferência. Categoria contada por um critério na tabela e por outro na conclusão. **Nos quatro, a conclusão herda o erro, e corrigir o número obriga a reescrever o que dele se concluiu.**
+
+**Anexo, e sem cerimônia:** o mesmo dado aparece como 135 num ponto e 134 noutro, e nenhuma das duas passagens conclui nada a partir dele. É gralha de algarismo. Quem lê não percebe, e não deveria perceber, porque não há nada ali de que depender. Registra-se para o autor uniformizar, e não se gasta uma linha de argumento com isso.
+
+**O teste, e ele se aplica antes de o item ser escrito:** aponte a frase do trabalho que deixa de valer se este número estiver errado. Se você a encontra, o item é do corpo e a frase entra nele. **Se não encontra nenhuma, o item é de anexo**, por mais nítida que seja a divergência e por mais trabalho que tenha dado achá-la.
+
 ## Os quatro passos, e a ordem não se inverte
 
 ### 1. Consistência
@@ -187,6 +197,8 @@ alarme porque a palavra parece portuguesa: *reparo* onde cabe correção,
 *endereçar* onde cabe tratar, *em termos de* onde cabe quanto a, *consistente*
 onde cabe coerente, *evidência* onde cabe prova ou indício, *assumir* onde cabe
 supor, *crítico* onde cabe decisivo.
+
+**Erro de português importa e não é o foco.** Gralha, concordância e regência se colhem **ao passar**, enquanto se lê para outra coisa, e **nunca se procuram**: não há varredura ortográfica neste método, e nenhum minuto de passo se gasta nela. Vão todos para o anexo, e o autor os resolve numa passada de revisor. Um relatório cujo anexo tem trinta gralhas e cujo corpo não tem nenhum item que toque uma conclusão errou o alvo, ainda que as trinta estejam certas.
 
 **Erro de superfície não se agrupa.** Cada gralha e cada concordância vira um
 item com o seu próprio localizador, ainda que sejam quinze do mesmo tipo. Item
