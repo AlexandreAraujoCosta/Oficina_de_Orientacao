@@ -1,0 +1,431 @@
+<title>Oficina de Formatação</title>
+<style>
+  :root {
+    --paper:      #eef0ef;
+    --paper-sunk: #e4e7e5;
+    --ink:        #141c24;
+    --ink-soft:   #4a5560;
+    --ink-faint:  #7c868f;
+    --rule:       #c9cfce;
+    --rule-firm:  #a8b1b0;
+    --correcao:   #a32b23;
+    --medida:     #3e6b7a;
+    --conforme:   #4a7a52;
+
+    --serif: Constantia, Cambria, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --sans:  "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono:  "Cascadia Mono", Consolas, "SF Mono", ui-monospace, Menlo, monospace;
+
+    --measure: 66ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #10161b;
+      --paper-sunk: #171f26;
+      --ink:        #e3e8ea;
+      --ink-soft:   #9aa6ad;
+      --ink-faint:  #6b767d;
+      --rule:       #2a343c;
+      --rule-firm:  #3c4850;
+      --correcao:   #e07a6e;
+      --medida:     #74aabb;
+      --conforme:   #7fb287;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #10161b;
+    --paper-sunk: #171f26;
+    --ink:        #e3e8ea;
+    --ink-soft:   #9aa6ad;
+    --ink-faint:  #6b767d;
+    --rule:       #2a343c;
+    --rule-firm:  #3c4850;
+    --correcao:   #e07a6e;
+    --medida:     #74aabb;
+    --conforme:   #7fb287;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  a { color: var(--medida); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--medida); outline-offset: 2px; }
+  code { font-family: var(--mono); font-size: .92em; }
+
+  /* ------------------------------------------------------------ cabeçalho */
+  .top { border-bottom: 2px solid var(--ink); padding-bottom: 1.3rem; margin-bottom: 2.2rem; }
+  .top h1 {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 4vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin: 0 0 .5rem;
+    text-wrap: balance;
+  }
+  .top p { margin: 0 0 .8rem; max-width: var(--measure); color: var(--ink-soft); }
+  .top strong, .top b { color: var(--ink); }
+
+  .estado {
+    border-left: 2px solid var(--conforme);
+    padding-left: 1rem;
+    margin: 1.6rem 0 0;
+    max-width: var(--measure);
+  }
+  .estado p { margin: 0 0 .55rem; color: var(--ink-soft); }
+  .estado p:last-child { margin-bottom: 0; }
+  .estado b { color: var(--ink); }
+
+  .alerta {
+    border-left: 2px solid var(--correcao);
+    padding-left: 1rem;
+    margin: 2.2rem 0;
+    max-width: var(--measure);
+  }
+  .alerta .rot {
+    display: block; font-family: var(--mono); font-size: .7rem;
+    letter-spacing: .09em; text-transform: uppercase;
+    color: var(--correcao); margin-bottom: .45rem;
+  }
+  .alerta p { margin: 0 0 .55rem; color: var(--ink-soft); }
+  .alerta p:last-child { margin-bottom: 0; }
+  .alerta b { color: var(--ink); }
+
+  /* ------------------------------------------------------------- seções */
+  section { border-top: 1px solid var(--rule); margin-top: 3rem; padding-top: 1.6rem; }
+  section.forte { border-top: 2px solid var(--ink); }
+  section > h2 {
+    font-family: var(--serif); font-size: 1.6rem; font-weight: 600;
+    margin: 0 0 .7rem; letter-spacing: -.01em; text-wrap: balance;
+  }
+  section > p, section > .chamada { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1rem; }
+  section > p b, section > p strong { color: var(--ink); }
+
+  /* --------------------------------------------------------- ferramentas */
+  .ferr { border-top: 1px solid var(--rule); padding: 1.4rem 0 .4rem; }
+  .ferr:first-of-type { border-top: 0; padding-top: .3rem; }
+
+  .ferr-cab { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin-bottom: .15rem; }
+  .ferr-num { font-family: var(--mono); font-size: .74rem; letter-spacing: .06em; color: var(--ink-faint); }
+  .ferr-nome { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin: 0; }
+  .selo {
+    font-family: var(--mono); font-size: .66rem; letter-spacing: .08em;
+    text-transform: uppercase; padding: .12rem .45rem;
+    border: 1px solid currentColor; white-space: nowrap;
+  }
+  .selo.parado { color: var(--correcao); }
+  .selo.ausente { color: var(--ink-faint); }
+
+  .ferr-risco {
+    font-family: var(--mono); font-size: .74rem; color: var(--medida);
+    letter-spacing: .02em; margin: 0 0 .6rem;
+  }
+  .ferr p { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 .75rem; }
+  .ferr p:last-child { margin-bottom: 0; }
+  .ferr b { color: var(--ink); }
+
+  /* -------------------------------------------------------------- tabela */
+  .rolagem { overflow-x: auto; margin: 1rem 0 1.1rem; }
+  table.med { border-collapse: collapse; font-size: .9rem; min-width: 30rem; }
+  table.med th, table.med td {
+    border-bottom: 1px solid var(--rule);
+    padding: .42rem 1.1rem .42rem 0; text-align: left; vertical-align: top;
+  }
+  table.med th {
+    font-family: var(--mono); font-size: .68rem; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--ink-faint); font-weight: 600; white-space: nowrap;
+  }
+  table.med td.n {
+    font-family: var(--mono); font-variant-numeric: tabular-nums;
+    text-align: right; white-space: nowrap;
+  }
+
+  /* ------------------------------------------------------------- comando */
+  .cmd {
+    position: relative; border: 1px solid var(--rule); border-radius: 4px;
+    background: var(--paper-sunk); padding: .7rem 5.5rem .7rem .9rem;
+    margin: .8rem 0 1rem; max-width: var(--measure);
+  }
+  .cmd pre {
+    font-family: var(--mono); font-size: 13px; line-height: 1.5;
+    white-space: pre-wrap; word-break: break-word; margin: 0;
+  }
+  .copiar {
+    position: absolute; top: .45rem; right: .45rem; font: inherit;
+    font-size: 13px; color: inherit; background: var(--paper);
+    border: 1px solid var(--rule-firm); border-radius: 3px;
+    padding: .25rem .7rem; cursor: pointer;
+  }
+  .copiar:hover, .copiar:focus-visible { border-color: var(--ink-soft); }
+
+  /* ------------------------------------------------------------ perguntas */
+  ol.perguntas { margin: 0; padding-left: 1.3rem; max-width: var(--measure); }
+  ol.perguntas li { margin-bottom: 1.1rem; color: var(--ink-soft); }
+  ol.perguntas b { color: var(--ink); }
+  ol.perguntas li::marker { font-family: var(--mono); font-size: .82rem; color: var(--medida); }
+
+  .feedback {
+    border-left: 3px solid var(--conforme); background: var(--paper-sunk);
+    padding: .8rem 1.1rem; border-radius: 0 3px 3px 0;
+    margin: 1.6rem 0 0; max-width: var(--measure);
+    font-size: .93rem; color: var(--ink-soft);
+  }
+  .feedback p { margin: 0; }
+  .feedback b { color: var(--ink); }
+
+  .ressalva {
+    border-top: 1px solid var(--rule); margin-top: 3.2rem; padding-top: 1.2rem;
+    max-width: var(--measure); font-size: .88rem; color: var(--ink-faint);
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <h1>Oficina de Formatação</h1>
+
+    <p>Programas que cuidam da forma do arquivo acadêmico: o <code>.docx</code> que sai do
+    editor com dezoito estilos e formatação direta em quase todos os parágrafos, a página que
+    ninguém viu renderizada, o PDF que vai para a banca. É irmã da
+    <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">Oficina de
+    Orientação</a> e nasceu separada dela por uma razão só.</p>
+
+    <p><b>A razão é o risco, e não o assunto.</b> Lá os programas leem e relatam, e o pior que
+    acontece é um apontamento errado, que se descarta. Aqui um deles escreve no arquivo de
+    outra pessoa. Quem roda um formatador sobre a dissertação de um orientando está mexendo
+    naquilo que o orientando vai entregar, e isso pede outra porta, outro aviso e outra
+    conferência.</p>
+
+    <div class="estado">
+      <p><b>Esta oficina está em desenho, e nenhuma das três ferramentas está pronta para
+      uso.</b> Uma existe em código e não é recomendada. As outras duas ainda não foram
+      escritas.</p>
+      <p>A página está publicada por dois motivos: o desenho é aberto desde o começo, e quem
+      chegar aqui pelo endereço antigo precisa saber o que mudou.</p>
+    </div>
+  </header>
+
+  <div class="alerta">
+    <span class="rot">Se você veio pelo link da Norma</span>
+    <p>A Norma saiu da cadeia da Oficina de Orientação em <b>30 de agosto de 2026</b>, e as
+    instruções de uso que estavam nesta página foram retiradas. No lugar dela entrou um
+    diagnóstico que lê a formatação, conta o que existe e não altera nada.</p>
+    <p>Quem quer saber o estado da forma do próprio arquivo usa esse diagnóstico, que está na
+    <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">Oficina de
+    Orientação</a>. Quem quer o código da Norma o encontra preservado, e o endereço está logo
+    abaixo.</p>
+  </div>
+
+  <section class="forte">
+    <h2>O que aconteceu em 30 de agosto</h2>
+
+    <p>A Norma desmontou a capa de uma dissertação que ela não havia tocado. O arquivo foi de
+    85 para 92 páginas, e a causa era escrever a forma do corpo dentro do estilo Normal, que
+    alcança tudo o que herda dele: capa, folha de rosto, dedicatória. Proteger o que herdava
+    exigiu escrever formatação direta em cerca de 360 parágrafos, que é exatamente o defeito
+    que o programa foi feito para desfazer.</p>
+
+    <p><b>Nenhuma das conferências da oficina viu isso.</b> Elas conferem que o texto não
+    mudou parágrafo a parágrafo, que o XML fecha e que o Word abre e exporta o arquivo. A capa
+    desmontada passava nas três, porque o texto dela continuava lá, na ordem certa e com todos
+    os caracteres. O defeito apareceu quando as páginas foram convertidas em imagem e alguém
+    olhou.</p>
+
+    <p>No mesmo dia, uma segunda medição fechou a decisão pelo outro lado: dos dezenove
+    apontamentos de uma análise real, <b>nenhum vinha da camada formal</b>, e todos teriam sido
+    encontrados no arquivo original. A normalização cobrava um risco que a análise não
+    usava.</p>
+  </section>
+
+  <section>
+    <h2>As três ferramentas</h2>
+    <p class="chamada">Elas estão em ordem decrescente de risco, e a ordem diz quanto cada uma
+    pode estragar. A primeira reescreve o arquivo de quem escreveu o trabalho. A segunda não
+    escreve nada. A terceira escreve um arquivo novo e deixa o original intacto.</p>
+
+    <div class="ferr">
+      <div class="ferr-cab">
+        <span class="ferr-num">01</span>
+        <h3 class="ferr-nome">Norma</h3>
+        <span class="selo parado">existe, e não é recomendada</span>
+      </div>
+      <p class="ferr-risco">risco: reescreve o .docx do autor</p>
+
+      <p>Apaga parágrafo vazio convertendo a altura dele em espaço depois do parágrafo
+      anterior, que é como o espaçamento deveria ter sido feito. Junta espaço repetido.
+      Reconhece papéis no texto, corpo, referência e legenda, e alinha cada um a uma forma só,
+      criando um estilo com a forma que aquele grupo já tinha. Tira o recuo sem sentido dos
+      separadores de nota de rodapé.</p>
+
+      <p><b>O que ela acertou continua valendo</b>, e é por isso que o código foi guardado em
+      vez de apagado. Quando nenhuma forma reúne metade dos parágrafos de um papel, ela recusa
+      alinhar e diz que a escolha é de quem escreveu: num trabalho medido, as legendas
+      apareciam em quinze formatos e a maior reunia 36%, e ali ela não mexeu. Quatro travas
+      impedem apagar parágrafo vazio que carregue quebra de seção, âncora de imagem, âncora de
+      nota ou marcação de revisão: num trabalho de 1.434 parágrafos, 156 dos 533 vazios
+      ficaram de pé por essas travas.</p>
+
+      <p><b>Um estilo por papel, e não por forma.</b> Criar um estilo para cada forma
+      encontrada organiza a aparência e cimenta a desordem: legenda que sai em três formatos
+      não tem três padrões, tem falta de padrão, e dar estilo a cada variante faz cada uma
+      passar a ser correta pela sua própria definição. Multiplicar estilo é tão ruim quanto não
+      ter nenhum.</p>
+
+      <p><b>E há uma região onde ela nunca deveria ter entrado.</b> Capa, folha de rosto, folha
+      de aprovação, dedicatória, resumo e sumário são diagramados à mão, com linha em branco
+      empurrando bloco para baixo da página. O vazio que ali parece sujeira é o que põe o
+      título no meio da folha e a cidade no rodapé, e foi por alcançá-lo que a capa se
+      desmontou.</p>
+
+      <p>O código está no ramo <code>norma-transformadora</code> do repositório, com os
+      comentários que explicam cada regra pela medição que a originou.</p>
+
+      <div class="cmd">
+        <button type="button" class="copiar" data-alvo="c-ramo">Copiar</button>
+        <pre id="c-ramo">git clone https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao
+cd Oficina_de_Orientacao
+git checkout norma-transformadora</pre>
+      </div>
+    </div>
+
+    <div class="ferr">
+      <div class="ferr-cab">
+        <span class="ferr-num">02</span>
+        <h3 class="ferr-nome">Analisador de design</h3>
+        <span class="selo ausente">não existe</span>
+      </div>
+      <p class="ferr-risco">risco: nenhum, só renderiza e olha</p>
+
+      <p>Converte as páginas em imagem e avalia o resultado: se a capa está de pé, se o título
+      caiu para o rodapé, se a mancha de texto está uniforme, se a numeração e o sumário
+      correspondem ao que existe. É a conferência que pegou os dois piores defeitos de 30 de
+      agosto, e naquele dia ela foi feita à mão.</p>
+
+      <p><b>Ela avalia o resultado, e não a receita.</b> Contar parágrafo e contar estilo diz
+      se o programa fez o que prometia, e não diz se a página ficou boa. Foi por medir só a
+      receita que os relatórios daquele dia afirmaram que a capa não havia sido tocada
+      enquanto ela estava desmontada.</p>
+    </div>
+
+    <div class="ferr">
+      <div class="ferr-cab">
+        <span class="ferr-num">03</span>
+        <h3 class="ferr-nome">Gerador de PDF por LaTeX</h3>
+        <span class="selo ausente">não existe, e está bloqueado</span>
+      </div>
+      <p class="ferr-risco">risco: escreve um arquivo novo, e o original fica intacto</p>
+
+      <p>Recebe o texto e devolve um PDF composto, com a tipografia que o Word não faz. Escapa
+      da classe inteira de problemas que a Norma enfrentou, porque não precisa preservar nada:
+      o original continua onde estava.</p>
+
+      <p>As peças estão instaladas e verificadas em 27 de agosto de 2026: abntex2, MiKTeX com
+      XeTeX 4.18, pandoc 3.1.2 e Zotero 9.0.6. <b>O que falta não é software.</b> O programa de
+      pós-graduação não tem especificação de formato escrita, e sem ela o gerador ou aplica a
+      ABNT estrita, que talvez não seja exigida, ou aplica uma norma que nós inventamos, que
+      ninguém pediu.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Onde o arquivo roda é decisão de quem escreveu o trabalho</h2>
+    <p>A regra vale para as três ferramentas e vem da Norma, que já a tinha. Rodar um programa
+    num serviço de nuvem significa enviar o arquivo para o servidor de outra empresa, e essa
+    escolha pertence a quem escreveu o texto. Para formatar o próprio trabalho não há
+    problema, porque você envia o que é seu. <b>Para o trabalho de um orientando, a via tem de
+    rodar na sua máquina</b>, e o orientando tem de saber que rodou.</p>
+  </section>
+
+  <section>
+    <h2>O que a Norma tem medido</h2>
+    <p>Cinco dissertações em direito. Em todas: o texto saiu idêntico parágrafo a parágrafo, a
+    contagem de marcadores e de campos se preservou, o XML fecha, e o Word abre e exporta o
+    arquivo.</p>
+
+    <div class="rolagem">
+      <table class="med">
+        <tr><th>trabalho</th><th>estilos em uso</th><th>com formatação direta</th><th>páginas</th></tr>
+        <tr><td class="n">1.434 parágrafos</td><td class="n">18</td><td class="n">99%</td><td class="n">140 → 133</td></tr>
+        <tr><td class="n">1.347 parágrafos</td><td class="n">11</td><td class="n">92%</td><td class="n">130 → 131</td></tr>
+        <tr><td class="n">1.303 parágrafos</td><td class="n">8</td><td class="n">100%</td><td class="n">124 → 125</td></tr>
+        <tr><td class="n">757 parágrafos</td><td class="n">3</td><td class="n">99%</td><td class="n">85 → 83</td></tr>
+        <tr><td class="n">671 parágrafos</td><td class="n">9</td><td class="n">100%</td><td class="n">57 → 54</td></tr>
+      </table>
+    </div>
+
+    <p><b>O alcance desta medição é o que ela não cobre.</b> As verificações pegam texto
+    perdido, XML quebrado e arquivo que o Word recusa. Nenhuma delas compara imagem de página,
+    e foi por essa fresta que a capa passou. A tabela diz que o texto sobreviveu nos cinco
+    trabalhos, e não diz que as páginas ficaram boas.</p>
+  </section>
+
+  <section>
+    <h2>As duas perguntas que decidem o que se constrói</h2>
+    <p>Elas estão abertas de propósito. Respondê-las cedo demais foi o que produziu o defeito
+    de 30 de agosto, quando o programa decidiu sozinho um ponto que era do autor.</p>
+
+    <ol class="perguntas">
+      <li><b>A Norma formata, organiza ou apenas mostra?</b> Se formata, impõe uma norma
+      escolhida e a forma do arquivo original é irrelevante; não há o que alinhar, há o que
+      aplicar. Se organiza, parte do que o autor já fez, encontra o padrão dominante e
+      aproxima o resto dele, que é o desenho de onde saíram todos os problemas, porque
+      respeitar o que existe obriga a distinguir padrão de ruído. Se mostra, exibe as formas
+      encontradas, quantos parágrafos usam cada uma, e deixa a escolha com quem tem o arquivo.
+      A terceira é a que os dados favorecem: contar é o que o programa faz bem.</li>
+
+      <li><b>A especificação de formato existe por escrito?</b> Sem ela o gerador de PDF fica
+      sem alvo, e o formatador também. Achar essa especificação, ou constatar que ela não
+      existe, vale mais do que qualquer linha de código escrita antes disso.</li>
+    </ol>
+
+    <div class="feedback">
+      <p>A oficina está em desenho, e o retorno de quem lê é mais útil agora do que depois:
+      <a href="mailto:alexandrearcos@unb.br">alexandrearcos@unb.br</a>. <b>Se o seu programa de
+      pós-graduação tem norma de formatação escrita</b>, essa é a informação mais útil que pode
+      chegar aqui.</p>
+    </div>
+  </section>
+
+  <p class="ressalva">Oficina em desenho, por Alexandre Araújo Costa, Faculdade de Direito da
+  UnB, com assistência do Claude Opus em Claude Code. A maquinaria está aberta em
+  <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao">github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</a>,
+  com o registro de desenho que explica por que cada regra existe e o que falhou em cada
+  rodada.</p>
+</div>
+
+<script>
+(function () {
+  document.querySelectorAll(".copiar").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var el = document.getElementById(b.dataset.alvo);
+      if (!el) return;
+      navigator.clipboard.writeText(el.textContent).then(function () {
+        var antes = b.textContent;
+        b.textContent = "Copiado";
+        setTimeout(function () { b.textContent = antes; }, 1600);
+      }).catch(function () {
+        var r = document.createRange();
+        r.selectNodeContents(el);
+        var s = window.getSelection();
+        s.removeAllRanges();
+        s.addRange(r);
+      });
+    });
+  });
+})();
+</script>
