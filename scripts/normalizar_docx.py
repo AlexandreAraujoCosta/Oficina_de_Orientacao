@@ -362,8 +362,19 @@ RE_LEGENDA = re.compile(r"^(Gr[áa]fico|Tabela|Quadro|Figura|Imagem)\s*\d+\s*[-�
 
 
 def texto_de(bloco):
-    return " ".join(x.decode("utf-8", "replace")
-                    for x in RE_TEXTO.findall(bloco)).strip()
+    """O texto do paragrafo, com as corridas concatenadas e nao separadas.
+
+    Em OOXML, `<w:t>` adjacentes sao texto contiguo, e o espaco, quando existe,
+    esta escrito, com `xml:space="preserve"`. Juntar com espaco inventa espaco
+    onde a palavra foi partida entre corridas, o que o Word faz o tempo todo por
+    causa de marcador de revisao e de correcao ortografica, e dobra o espaco onde
+    ele ja estava escrito.
+
+    Medido em 30/08/2026, antes de trocar: de 49% a 77% dos paragrafos de tres
+    dissertacoes tinham texto diferente entre as duas juncoes, e as regras que
+    consomem esse texto mudavam de resultado em 12 casos ao todo, todos de
+    comprimento de linha, porque as demais casam no inicio da linha."""
+    return b"".join(RE_TEXTO.findall(bloco)).decode("utf-8", "replace").strip()
 
 
 def forma(bloco):
@@ -424,8 +435,8 @@ def diagnostico(doc):
     return corpo, estilos, direta
 
 
-RE_REFS = re.compile(r"^\s*(REFER[ÊE]NCIAS?|BIBLIOGRAFIA)", re.I)
-RE_POSREFS = re.compile(r"^\s*(AP[ÊE]NDICES?|ANEXOS?)\b", re.I)
+RE_REFS = re.compile(r"^\s*(?:\d+[.)]?\s+)?(REFER[ÊE]NCIAS?|BIBLIOGRAFIA)", re.I)
+RE_POSREFS = re.compile(r"^\s*(?:\d+[.)]?\s+)?(AP[ÊE]NDICES?|ANEXOS?)\b", re.I)
 
 
 def faixa_referencias(doc, pars):
@@ -463,9 +474,50 @@ def recuado(dom):
                 or re.search(rb'w:hanging="([1-9]\d*)"', ind))
 
 
-PAPEIS = (("Corpo", b"CorpoOficina"),
+# O corpo mora no Normal, e nao num estilo novo: e o estilo que o autor ja usa,
+# e multiplicar estilo e tao ruim quanto nao ter nenhum. Decidido em 30/08/2026.
+# Quem herdava do Normal e mudava junto ganha estilo proprio em blindar_herdeiros.
+PAPEIS = (("Corpo", b"Normal"),
           ("Referência", b"ReferenciaOficina"),
-          ("Legenda", b"LegendaOficina"))
+          ("Legenda", b"LegendaOficina"),
+          ("Recuado", b"RecuadoOficina"),
+          ("Tabela", b"TabelaOficina"))
+
+# A forma da referencia vem da NBR 6023, e nao da forma dominante do papel:
+# alinhada a esquerda, sem recuo nenhum, entrelinha simples e uma linha em branco
+# entre entradas. E o unico papel em que a Norma impoe forma em vez de alinhar a
+# que o autor ja usava, porque aqui existe forma certa fora do arquivo.
+FORMA_REFERENCIA = (b'<w:jc w:val="left"/>',
+                    b'<w:ind w:left="0" w:right="0" w:firstLine="0"/>',
+                    b'<w:spacing w:after="240" w:line="240" w:lineRule="auto"/>')
+
+
+
+# Titulo numerado: '2', '2.4', '2.4.1', com ou sem ponto final, seguido de texto.
+RE_TITULO_NUM = re.compile(r"^\s*\d+(?:\.\d+)*\.?\s+\S")
+
+
+def titulos_por_marcar(doc, pars, inicio):
+    """Quantos paragrafos parecem titulo e nao usam estilo de titulo.
+
+    Conservador de proposito: so conta o que abre com numeracao de secao, que e o
+    sinal quase sem falso positivo, e o que esta inteiro em caixa alta e curto. O
+    programa nao converte nada; quem decide e quem escreveu, no Word, e a
+    conversao daria sumario automatico e painel de navegacao."""
+    parecem, com_estilo = [], 0
+    for i, (a, b) in enumerate(pars):
+        if i < inicio or vazio(doc[a:b]):
+            continue
+        est = estilo_de(doc[a:b]) or b""
+        if any(x in est for x in (b"Ttulo", b"Titulo", b"Heading")):
+            com_estilo += 1
+            continue
+        txt = texto_de(doc[a:b])
+        if not txt or len(txt) > 130 or txt.rstrip().endswith((".", ";", ",")):
+            continue
+        if RE_TITULO_NUM.match(txt) or (txt == txt.upper() and len(txt) >= 4):
+            parecem.append(i)
+    return parecem, com_estilo
 
 
 def papeis(doc, pars, tabelas, inicio, faixa_ref):
@@ -487,6 +539,10 @@ def papeis(doc, pars, tabelas, inicio, faixa_ref):
         if i < inicio or vazio(doc[a:b]):
             continue
         if any(x <= a < y for x, y in tabelas):
+            # Paragrafo de tabela ganha estilo proprio, e nao herda a forma do
+            # corpo. Sem isso, escrever o corpo no Normal empurra a tabela junto,
+            # que foi o defeito medido em 28/08/2026.
+            achados["Tabela"].append(i)
             continue
         est = estilo_de(doc[a:b]) or b""
         if any(x in est for x in (b"Ttulo", b"Heading", b"Sumrio", b"TOC", b"ndice")):
@@ -496,10 +552,14 @@ def papeis(doc, pars, tabelas, inicio, faixa_ref):
             achados["Legenda"].append(i)
         elif r0 is not None and r0 <= i < r1:
             achados["Referência"].append(i)
-        elif recuado(forma(doc[a:b])) or len(txt) <= 60:
-            # Bloco recuado e linha curta tem forma propria e legitima: citacao
-            # longa, item de lista, definicao. Alinha-los ao corpo destruiria o
-            # recuo que o autor quis.
+        elif recuado(forma(doc[a:b])):
+            # Bloco recuado e papel proprio: a citacao longa da ABNT, com recuo,
+            # corpo menor e entrelinha simples. Alinha-lo ao corpo destruiria o
+            # recuo que o autor quis, e deixa-lo sem estilo mantem a desordem.
+            achados["Recuado"].append(i)
+        elif len(txt) <= 60:
+            # Linha curta nao e papel: e titulo por reconhecer, item de lista,
+            # legenda sem prefixo. Batizar no chute afirma o que nao se verificou.
             outros.append(i)
         else:
             achados["Corpo"].append(i)
@@ -532,6 +592,73 @@ def escolher_forma(doc, pars, indices, piso=0.5):
     return dom, fatia, len(c), fatia >= piso
 
 
+def forma_do_normal(estilos_xml):
+    """As tres propriedades de paragrafo que o estilo Normal define hoje."""
+    m = re.search(rb'<w:style [^>]*w:styleId="Normal".*?</w:style>', estilos_xml, re.S)
+    if not m:
+        return (b"", b"", b"")
+    bloco = m.group(0)
+
+    def cap(padrao):
+        x = re.search(padrao, bloco)
+        return x.group(0) if x else b""
+    return (cap(rb"<w:jc(?: [^>]*)?/>"),
+            cap(rb"<w:ind(?: [^>]*)?/>"),
+            cap(rb"<w:spacing(?: [^>]*)?/>"))
+
+
+def congelar_forma(bloco, herdada, nova=None):
+    """Escreve no paragrafo o que ele herda, para que mudar o estilo nao o mude.
+
+    So escreve o que falta: propriedade que o paragrafo ja declara fica como
+    esta, porque ela ja o protege. Serve ao pre-textual, que nao tem estilo
+    proprio e por isso muda junto com o Normal."""
+    nova = nova or {}
+    pp = RE_PPR.search(bloco)
+    corpo = pp.group(1) if pp else b""
+    jc_h, ind_h, sp_h = herdada
+    proprio = {}
+    for chave, padrao in (("jc", rb"<w:jc(?: [^>]*)?/>"),
+                          ("ind", rb"<w:ind(?: [^>]*)?/>"),
+                          ("spacing", rb"<w:spacing(?: [^>]*)?/>")):
+        m = re.search(padrao, corpo)
+        proprio[chave] = m.group(0) if m else b""
+    # So protege o que de fato muda: propriedade em que a forma nova coincide
+    # com a herdada nao precisa ser escrita, e escrever de graca e criar
+    # formatacao direta, que e o que este programa existe para tirar.
+    faltam = [(k, v) for k, v in (("jc", jc_h), ("ind", ind_h), ("spacing", sp_h))
+              if v and not proprio[k] and v != nova.get(k, b"")]
+    if not faltam:
+        return bloco, False
+
+    # A ordem e imposta pelo esquema: spacing, ind, jc, e o rPr perto do fim.
+    # Fora de ordem, o Word ignora em silencio, e o congelamento nao protege
+    # nada. Medido em 30/08/2026 na capa da dissertacao da Edileusa.
+    final = {k: (proprio[k] or dict(faltam).get(k, b""))
+             for k in ("spacing", "ind", "jc")}
+    limpo = corpo
+    for padrao in (rb"<w:jc(?: [^>]*)?/>", rb"<w:ind(?: [^>]*)?/>",
+                   rb"<w:spacing(?: [^>]*)?/>"):
+        limpo = re.sub(padrao, b"", limpo, count=1)
+    posto = final["spacing"] + final["ind"] + final["jc"]
+
+    if not pp:
+        m = re.match(rb"<w:p(?: [^>]*)?>", bloco)
+        if not m:
+            return bloco, False
+        return (bloco[:m.end()] + b"<w:pPr>" + posto + b"</w:pPr>"
+                + bloco[m.end():], True)
+
+    # entra antes do primeiro dos que o esquema poe depois
+    pos = len(limpo)
+    for tag in (b"<w:rPr", b"<w:sectPr", b"<w:pPrChange"):
+        i = limpo.find(tag)
+        if i != -1:
+            pos = min(pos, i)
+    novo_corpo = limpo[:pos] + posto + limpo[pos:]
+    return bloco[:pp.start(1)] + novo_corpo + bloco[pp.end(1):], True
+
+
 def alinhar(bloco, dom, marca_id):
     """Poe o estilo do papel e retira a formatacao direta que ele ja carrega.
 
@@ -555,6 +682,57 @@ def alinhar(bloco, dom, marca_id):
     return bloco[:pp.start(1)] + corpo + bloco[pp.end(1):], mudou
 
 
+# As tres formas que nao podem herdar a do corpo. Sem elas, escrever no Normal
+# empurra tabela, nota e sumario junto, que foi o defeito medido em 28/08/2026.
+NEUTRO = (b'<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
+          b'<w:ind w:left="0" w:right="0" w:firstLine="0"/>')
+HERDEIROS = (
+    (b"TabelaOficina", "Tabela (Oficina)", NEUTRO),
+    (b"NotaOficina", "Nota de rodapé (Oficina)",
+     b'<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
+     b'<w:ind w:left="0" w:right="0" w:firstLine="0"/><w:jc w:val="both"/>'),
+)
+
+
+def escrever_no_normal(estilos_xml, dom):
+    """Poe a forma dominante do corpo dentro do proprio Normal.
+
+    Trocar o pPr do Normal e o que o usuario decidiu em 30/08/2026, depois de a
+    blindagem dos herdeiros tirar a razao que impedia. O que se ganha e o corpo
+    do trabalho no estilo que o autor ja usa, sem estilo novo nenhum."""
+    m = re.search(rb'<w:style [^>]*w:styleId="Normal".*?</w:style>', estilos_xml, re.S)
+    if not m:
+        return estilos_xml, False
+    bloco = m.group(0)
+    novo_ppr = b"<w:pPr>" + b"".join(x for x in dom if x) + b"</w:pPr>"
+    if re.search(rb"<w:pPr>.*?</w:pPr>", bloco, re.S):
+        bloco2 = re.sub(rb"<w:pPr>.*?</w:pPr>", novo_ppr, bloco, count=1, flags=re.S)
+    else:
+        mm = re.search(rb"<w:name [^>]*/>", bloco)
+        pos = mm.end() if mm else bloco.find(b">") + 1
+        bloco2 = bloco[:pos] + novo_ppr + bloco[pos:]
+    return estilos_xml[:m.start()] + bloco2 + estilos_xml[m.end():], True
+
+
+def blindar_herdeiros(estilos_xml):
+    """Cria os estilos que impedem tabela e nota de herdarem a forma do corpo.
+
+    O sumario nao entra aqui: o Word ja lhe da estilos proprios (TOC1, TOC2),
+    e mexer neles moveria o que o proprio Word gera."""
+    criados = []
+    for sid, nome, corpo in HERDEIROS:
+        if re.search(rb'w:styleId="%s"' % re.escape(sid), estilos_xml):
+            continue
+        bloco = (b'<w:style w:type="paragraph" w:customStyle="1" w:styleId="' + sid + b'">'
+                 b'<w:name w:val="' + nome.encode() + b'"/>'
+                 b'<w:basedOn w:val="Normal"/><w:qFormat/>'
+                 b"<w:pPr>" + corpo + b"</w:pPr></w:style>")
+        if b"</w:styles>" in estilos_xml:
+            estilos_xml = estilos_xml.replace(b"</w:styles>", bloco + b"</w:styles>", 1)
+            criados.append(sid.decode())
+    return estilos_xml, criados
+
+
 def escrever_estilo(estilos_xml, base, dom, novo_id, nome):
     """Cria um estilo com a forma que aqueles paragrafos ja tinham.
 
@@ -563,6 +741,10 @@ def escrever_estilo(estilos_xml, base, dom, novo_id, nome):
     em 28/08/2026 numa dissertacao de 140 paginas: reescrever o Normal com a
     entrelinha dominante levou o arquivo a 147 paginas. Estilo novo, baseado no
     antigo, move apenas os paragrafos que o recebem."""
+    if novo_id == b"Normal":
+        return escrever_no_normal(estilos_xml, dom)
+    if novo_id == b"ReferenciaOficina":
+        dom = FORMA_REFERENCIA
     if re.search(rb'w:styleId="%s"' % re.escape(novo_id), estilos_xml):
         return estilos_xml, True
     bloco = (b'<w:style w:type="paragraph" w:customStyle="1" w:styleId="' + novo_id + b'">'
@@ -831,6 +1013,7 @@ def main():
 
     # ---- um estilo por papel, e os papeis sao tres
     estilos_xml, criados, adiados, resto = None, [], [], (0, 0, 0)
+    congelados = 0
     if a.estilos:
         estilos_xml = z.read("word/styles.xml")
         pars2 = paragrafos(novo)
@@ -843,6 +1026,36 @@ def main():
         # de letra e nivel de topico.
         base = b"Normal"
         onde = {}
+
+        # Congela quem fica no Normal sem ser corpo: pre-textual, linha curta,
+        # forma isolada. Sem isso, escrever a forma do corpo no Normal alcanca a
+        # capa, que a Norma nao tocou. Medido em 30/08/2026 com imagem das paginas.
+        herdada = forma_do_normal(estilos_xml)
+        dom_corpo = (escolher_forma(novo, pars2, achados["Corpo"])[0]
+                     if achados.get("Corpo") else (b"", b"", b""))
+        do_corpo = set(achados.get("Corpo", []))
+        saida_c, pos_c = [], 0
+        for k, (ini_c, fim_c) in enumerate(pars2):
+            # O vazio entra: e ele que sustenta o desenho vertical da capa,
+            # e se herdar o Normal novo cresce e empurra o bloco de baixo.
+            if k in do_corpo:
+                continue
+            est_c = estilo_de(novo[ini_c:fim_c])
+            if est_c and est_c != b"Normal":
+                continue
+            b2, mexeu = congelar_forma(
+                novo[ini_c:fim_c], herdada,
+                dict(zip(("jc", "ind", "spacing"), dom_corpo)))
+            if not mexeu:
+                continue
+            congelados += 1
+            saida_c.append(novo[pos_c:ini_c])
+            saida_c.append(b2)
+            pos_c = fim_c
+        if congelados:
+            saida_c.append(novo[pos_c:])
+            novo = b"".join(saida_c)
+            pars2 = paragrafos(novo)
         for nome, ident in PAPEIS:
             idx = achados[nome]
             if not idx:
@@ -904,6 +1117,23 @@ def main():
               "foi cortada: ali o espaço devolvido é menor que o apagado"
               % (cortados, TETO))
     diz("   parágrafos: %d antes, %d depois" % (len(pars), conf))
+    if congelados:
+        diz("   %d parágrafos fora do corpo tiveram a forma congelada, para que "
+            "mudar o Normal não os alcance" % congelados)
+
+    # Nao converte: indica. Decidido em 30/08/2026.
+    parecem, com_estilo = titulos_por_marcar(novo, paragrafos(novo),
+                                             fim_do_pretextual(novo, paragrafos(novo)))
+    if parecem and com_estilo <= len(parecem) // 4:
+        diz("   %d parágrafos parecem título e não usam estilo de título; %d usam"
+            % (len(parecem), com_estilo))
+        diz("      marcá-los como Título 1, 2 e 3 no Word daria sumário automático,")
+        diz("      painel de navegação e numeração que não se digita. A Norma não faz")
+        diz("      isso: errar um converte parágrafo de texto em entrada de sumário,")
+        diz("      e a decisão é de quem escreveu. Padronizar os títulos importa")
+        diz("      mais do que parece: é deles que saem o sumário, a numeração e a")
+        diz("      navegação do arquivo inteiro.")
+
     if not a.silencio and calados:
         diz("   %d mudanças de espaçamento não foram marcadas como alteração, "
             "porque o parágrafo seguinte é apagado e o Word funde os dois ao aceitar"
