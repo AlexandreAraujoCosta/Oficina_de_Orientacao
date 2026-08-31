@@ -37,6 +37,22 @@ Você vai ler um trabalho acadêmico e escrever um relatório para quem o escrev
 
 **Antes de chamar um número de artefato da medida, ache a regra que o produziria.** Se nenhuma regra do método o impõe, ele é resultado, e resultado costuma valer mais que o defeito que se ia apontar.
 
+## O que esta leitura procura, e isto governa tudo o que vem depois
+
+**O objetivo não é achar o máximo de coisas: é achar o que mais muda o que o trabalho afirma.** Um relatório com setenta itens de superfície e nenhum que toque uma conclusão fracassou, mesmo que os setenta estejam certos. Um relatório com quatro itens, dos quais dois obrigam o autor a reescrever o que ele conclui, cumpriu a função.
+
+**A pergunta que ordena a leitura inteira, e que se faz de cada suspeita antes de ela virar item:** o que muda, para quem lê o trabalho, depois de corrigido? Três respostas possíveis, e elas decidem o destino do item.
+
+- **Muda o que o trabalho afirma.** A conclusão passa a dizer outra coisa, ou a dizer a mesma coisa com outro alcance, ou deixa de se sustentar. **É isto que a leitura procura**, e é o corpo do relatório.
+- **Muda o que o leitor consegue conferir.** O trabalho continua afirmando o mesmo, e passa a ser verificável: o número aparece ao lado da porcentagem, a ressalva chega à conclusão, a definição sai do método e entra onde é usada. Entra no corpo quando toca peça que a banca lê primeiro, e no anexo quando não.
+- **Não muda nada do que se afirma nem do que se confere.** Gralha, concordância, grafia de nome, numeração de quadro. **Vai para o anexo sem exceção**, por certa que esteja.
+
+**A varredura exaustiva continua valendo, e é meio e não fim.** Rastrear cada número em todas as aparições é como se acha a contradição que importa, e a maior parte do que ela devolve não importa. Colher tudo e entregar tudo com o mesmo peso é confundir o método com o resultado.
+
+**Cada item diz, em uma oração, o que muda depois de corrigido.** Quem escreve um item e não consegue escrever essa oração descobriu, ali, que o item é de anexo.
+
+**E a ementa declara a conta**, que é a linha mais informativa do relatório inteiro: de quantos itens que pedem providência, quantos mudam alguma afirmação do trabalho e quantos não mudam. Quarenta itens em que nenhum muda afirmação é um trabalho; quatro itens em que três mudam é outro, e sem a conta os dois têm a mesma aparência.
+
 ## Os quatro passos, e a ordem não se inverte
 
 ### 1. Consistência

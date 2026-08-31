@@ -20,6 +20,22 @@ Disso saem os três registros, e **cada achado traz o seu**:
 
 **Ressalva sem razão nomeada é hedge, e hedge não passa.**
 
+## O que esta leitura procura, e isto governa tudo o que vem depois
+
+**O objetivo não é achar o máximo de coisas: é achar o que mais muda o que o trabalho afirma.** Um relatório com setenta itens de superfície e nenhum que toque uma conclusão fracassou, mesmo que os setenta estejam certos. Um relatório com quatro itens, dos quais dois obrigam o autor a reescrever o que ele conclui, cumpriu a função.
+
+**A pergunta que ordena a leitura inteira, e que se faz de cada suspeita antes de ela virar item:** o que muda, para quem lê o trabalho, depois de corrigido? Três respostas possíveis, e elas decidem o destino do item.
+
+- **Muda o que o trabalho afirma.** A conclusão passa a dizer outra coisa, ou a dizer a mesma coisa com outro alcance, ou deixa de se sustentar. **É isto que a leitura procura**, e é o corpo do relatório.
+- **Muda o que o leitor consegue conferir.** O trabalho continua afirmando o mesmo, e passa a ser verificável: o número aparece ao lado da porcentagem, a ressalva chega à conclusão, a definição sai do método e entra onde é usada. Entra no corpo quando toca peça que a banca lê primeiro, e no anexo quando não.
+- **Não muda nada do que se afirma nem do que se confere.** Gralha, concordância, grafia de nome, numeração de quadro. **Vai para o anexo sem exceção**, por certa que esteja.
+
+**A varredura exaustiva continua valendo, e é meio e não fim.** Rastrear cada número em todas as aparições é como se acha a contradição que importa, e a maior parte do que ela devolve não importa. Colher tudo e entregar tudo com o mesmo peso é confundir o método com o resultado.
+
+**Cada item diz, em uma oração, o que muda depois de corrigido.** Quem escreve um item e não consegue escrever essa oração descobriu, ali, que o item é de anexo.
+
+**E a ementa declara a conta**, que é a linha mais informativa do relatório inteiro: de quantos itens que pedem providência, quantos mudam alguma afirmação do trabalho e quantos não mudam. Quarenta itens em que nenhum muda afirmação é um trabalho; quatro itens em que três mudam é outro, e sem a conta os dois têm a mesma aparência.
+
 ## O critério de redação
 
 **Uma crítica é boa se se ouvir.** Não basta ser verdadeira: crítica verdadeira que o autor não consegue ouvir não produz nada e ocupa o mesmo espaço que uma falsa. Vale como régua de redação de todo achado.
@@ -794,7 +810,7 @@ Três razões para essa classe ser central, e as três valem juntas. **Corrige-s
 
  São as peças que se escrevem cedo e não se releem. A busca é pelo termo que a conclusão qualifica ou restringe, aplicada às peças que o usam sem a qualificação.
 
-**O que decide se um item é central, e a pergunta é uma só:** o que muda, para quem lê o trabalho, depois de corrigido? Entram os que tocam peça que carrega o trabalho (resumo, abstract, conclusão, título de tabela, abertura de apêndice), os que tocam a base ou a operação que produz os números, os que um examinador alcança sozinho, e os que decidem o alcance de uma afirmação da tese. **Não entram** os que corrigem dado de contexto tomado de terceiro, os que apertam uma palavra sem mudar o que a frase afirma, e os que só existem somados a outro.
+**O que decide se um item é central é a mesma pergunta que ordena a leitura inteira**, enunciada no alto deste documento, e aqui ela decide o lugar do item em vez do esforço gasto nele: o que muda, para quem lê o trabalho, depois de corrigido? Entram os que tocam peça que carrega o trabalho (resumo, abstract, conclusão, título de tabela, abertura de apêndice), os que tocam a base ou a operação que produz os números, os que um examinador alcança sozinho, e os que decidem o alcance de uma afirmação da tese. **Não entram** os que corrigem dado de contexto tomado de terceiro, os que apertam uma palavra sem mudar o que a frase afirma, e os que só existem somados a outro.
 
 **Cortar achado central para caber no teto é o erro pior.** Se os centrais não couberem em 10%, o relatório excede e escreve por quê, com a contagem. O teto disciplina a prosa e a seleção; não disciplina o julgamento.
 
