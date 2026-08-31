@@ -474,6 +474,12 @@ Recebe só o que sobreviveu. Não relê o trabalho.
 - **O trabalho anuncia uma operação e a executa de modo fino demais para o que dela conclui.** Distinto da promessa não cumprida, que já é defeito: aqui a operação existe, e o que ela sustenta é menor do que o que se lhe faz sustentar.
 - **O material do trabalho comporta uma consequência que ele não tira.** Vizinha da fissura, e a diferença é que a fissura é resultado pronto não reivindicado, e esta é resultado ao alcance e não produzido. Diga qual operação o produziria e com que dado já em mãos.
 
+**Quando a contribuição não reivindicada for um produto, diga onde ela se entrega.** Há uma espécie de contribuição que não é uma conclusão a enunciar e sim uma peça a publicar: um sistema de codificação com as categorias fechadas e as regras de registro escritas, uma base construída e documentada, uma série reconstituída, um roteiro de coleta, um instrumento de classificação. **O teste é se um terceiro a aplica a outro material sem reconstruir nada.** Se aplica, é produto, e o item muda de forma: além de dizer que o trabalho fez e não disse que fez, diz **em que peça isso se entrega**, que em geral é um apêndice, com o nome que ele teria e o que precisaria conter para ser usável fora dali.
+
+**A diferença não é de vocabulário.** Chamar a peça de instrumento a descreve pelo uso que a própria pesquisa lhe deu, que é exatamente o enquadramento que o trabalho já adota e que o item existe para desfazer. Chamá-la de produto diz que ela sobrevive à pesquisa que a produziu, e abre a consequência prática: o programa de pós-graduação tem onde registrar produto, e o autor não costuma perceber que tem um.
+
+**Não force.** Nem toda contribuição é produto, e a maioria não é: uma consequência teórica que o trabalho não tira continua sendo contribuição sem ser peça. O item só ganha a forma de produto quando passa no teste da aplicação por terceiro.
+
 **A sigla é `D`, de desenvolvimento**, com numeração própria: `D1`, `D2`. Sobre a colisão com o `D` antigo, ver a regra das siglas adiante.
 
 **Escreve-se como sugestão de desenvolvimento, e não de correção**, porque o autor não errou: ele parou antes. A condição de superação também muda de forma, porque não há erro que se corrija; o que há é um patamar a atingir, e ele se enuncia pelo que o texto passará a sustentar.
@@ -925,13 +931,15 @@ O dano desta classe de erro não é proporcional ao seu tamanho. Um item aritmé
 
 **A referência à ferramenta é obrigatória.** Uso não declarado é o que cria problema de integridade, e não o uso. Com a procedência escrita e a lista de correções anexada, a intervenção automática fica auditável em vez de clandestina.
 
-> Relatório do **Luis**, gerado automaticamente. **Nenhum humano leu este texto antes de você.**
+> Relatório do Luis, analisador de trabalhos acadêmicos, gerado automaticamente. Nenhum humano leu este texto antes de você.
 >
 > Os achados foram levantados por leitura automática e depois conferidos contra o próprio trabalho, e o que não se sustentou foi retirado antes desta entrega. Ainda assim, **nada aqui vale antes de ser validado por quem tem competência para isso**, e a exigência é maior nas questões de qualidade: contagem, data divergente e frase que contradiz outra frase se conferem abrindo o arquivo no parágrafo indicado, mas juízo sobre método, argumento e literatura não se confere assim, e é de quem orienta e de quem examina.
 >
 > As soluções apontadas são **sugestões**. Quem determina é o orientador.
 
 **A ressalva fica na abertura porque é ali que ela é lida.** Ressalva no fim chega depois da decisão que ela deveria informar.
+
+**A abertura e a ementa saem sem negrito e sem monoespaço.** São as duas primeiras coisas que se leem, e ali a citação em bloco já é uma forma distinta do corpo: acrescentar negrito, e o monoespaço do nome do arquivo, empilha três formas na mesma linha e a página começa desarrumada. O negrito de abertura de parágrafo vale das seções numeradas em diante, onde serve para dizer, numa varredura, do que trata cada item.
 
 ---
 

@@ -20,9 +20,13 @@
 \definecolor{realce}{HTML}{33477E}
 
 \usepackage{titlesec}
-\titleformat{\section}{\color{unbAzul}\bfseries\Large}{}{0pt}{}
-\titleformat{\subsection}{\color{unbAzul}\bfseries\large}{}{0pt}{}
-\titleformat{\subsubsection}{\color{unbAzul!85!black}\bfseries\normalsize}{}{0pt}{}
+% Titulo nao se hifeniza: pedido de 31/08/2026. \raggedright desliga a
+% justificacao na linha do titulo, e a penalidade proibitiva impede a quebra
+% de palavra dentro dele; sem os dois, o LaTeX parte a palavra para justificar.
+\newcommand{\semHifen}{\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000}
+\titleformat{\section}{\semHifen\color{unbAzul}\bfseries\Large}{}{0pt}{}
+\titleformat{\subsection}{\semHifen\color{unbAzul}\bfseries\large}{}{0pt}{}
+\titleformat{\subsubsection}{\semHifen\color{unbAzul!85!black}\bfseries\normalsize}{}{0pt}{}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
