@@ -736,7 +736,6 @@
     <ol>
       <li><a href="#rota"><span class="idx">·</span><span>Ferramentas disponíveis</span></a></li>
       <li class="navgap"></li>
-      <li><a href="#norma"><span class="idx">[00]</span><span>Norma</span></a></li>
       <li><a href="#consistencia"><span class="idx">[01]</span><span>Alberto</span></a></li>
       <li><a href="#ataide"><span class="idx">[02]</span><span>Luis</span></a></li>
       <li><a href="#simulador"><span class="idx">[03]</span><span>Simulador de banca</span></a></li>
@@ -794,13 +793,6 @@
       <div class="route">
         <div class="route-row">
           <div class="route-a">
-            <span class="route-n">00</span><a href="https://claude.ai/code/artifact/4d7706bf-3382-419e-97ff-4ad35b65e1eb">Norma</a>
-            <span class="route-sub">normalizador do arquivo (etapa optativa no fluxo)</span>
-          </div>
-          <div class="route-q">Põe o <span class="loc">.docx</span> em ordem: apaga parágrafo vazio convertendo a altura em espaço, alinha cada papel a uma forma só e põe as legendas no estilo de legenda. <b>O Alberto e o Luis já fazem isso em silêncio</b>, como primeira fase da leitura, porque numa dissertação são cerca de setecentas mudanças e revisá-las uma a uma não é atividade real. <b>Esta ferramenta existe para quem quiser o controle da forma:</b> rodada em separado, antes da análise, ela mostra quantos estilos o trabalho tem de fato e o que mudaria, e deixa você ajustar antes de olhar o conteúdo. Não usa modelo, e por isso não custa nada e não roda no chat.</div>
-        </div>
-        <div class="route-row">
-          <div class="route-a">
             <span class="route-n">01</span><a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a>
             <span class="route-sub">analisador de consistência</span>
           </div>
@@ -826,34 +818,6 @@
     <section id="ferramentas">
       
 
-      <!-- 00 -->
-      <article class="instrument" id="norma">
-        <div class="inst-head">
-          <span class="inst-num">[00]</span>
-          <h3><a class="inst-link" href="https://claude.ai/code/artifact/4d7706bf-3382-419e-97ff-4ad35b65e1eb">Norma</a></h3>
-        </div>
-        <p class="inst-sub">Põe o arquivo em ordem antes que alguém o leia. Trabalho de estudante raramente chega formatado por estilo: o parágrafo típico não usa o estilo Normal, o estilo muda ao longo do texto, e sobre ele vem uma camada de formatação direta que deixa tudo parecido na tela sem deixar nada igual no arquivo. O espaço entre blocos costuma ser feito com parágrafo vazio.</p>
-        <div class="chips">
-          <span class="chip">programa em Python, sem modelo de IA</span>
-          <span class="chip"><b>tokens</b> nenhum</span>
-          <span class="chip"><b>tempo</b> segundos</span>
-          <span class="chip"><b>roda em</b> Python, e não roda no chat</span>
-        </div>
-        <div class="pair">
-          <div class="does">
-            <h4>Faz</h4>
-            <p>Apaga parágrafo vazio convertendo a altura em espaço depois do parágrafo anterior. Junta espaço repetido. Reconhece três papéis, corpo, referência e legenda, e <b>alinha cada um a uma forma só</b>, criando um estilo com a forma que aquele grupo já tinha. Põe no estilo de legenda os parágrafos que descrevem figura. E tira o recuo e o parágrafo sobrando dos separadores de nota de rodapé, que herdam do corpo um recuo sem sentido ali.</p>
-          </div>
-          <div class="doesnt">
-            <h4>Não faz</h4>
-            <p>Não toca na formatação de corrida de texto, onde moram fonte e corpo de letra, porque ali o que se vê muda palavra a palavra. Não inventa forma: cada estilo recebe a que aqueles parágrafos já tinham. E <b>não alinha quando não há a que alinhar</b>: se nenhuma forma reúne metade do papel, ele para e diz que escolher uma é decisão de quem escreveu.</p>
-          </div>
-        </div>
-        <p class="when"><b>Um estilo por papel, e não por forma.</b> Contar as formas encontradas e criar um estilo para cada uma organiza a aparência e cimenta a desordem: legenda que sai em três formatos não tem três padrões, tem falta de padrão, e dar estilo a cada variante faz cada uma passar a ser correta pela sua própria definição, de modo que a camada formal da análise deixa de ver o desvio. Multiplicar estilo é tão ruim quanto não ter nenhum.</p>
-        <p class="when"><b>O pré-textual não é tocado.</b> Capa, folha de rosto, folha de aprovação, dedicatória, resumo e sumário são diagramados à mão, com linha em branco empurrando bloco para baixo da página, e apagá-las comprime a capa. E quatro travas impedem que ele apague parágrafo vazio que seja estrutura: quebra de seção, quebra de página, âncora de imagem, e âncora de nota, marcador ou comentário. Parágrafo dentro de tabela não é tocado.</p>
-        <p class="when"><b>O Alberto e o Luis já rodam a Norma em silêncio</b>, como primeira fase da leitura. Numa dissertação ela faz cerca de setecentas mudanças, e revisá-las uma a uma não é atividade real. <b>Rodá-la em separado serve a quem quer o controle da forma:</b> ela diz quantos estilos o trabalho tem de fato e o que mudaria, e você ajusta antes de olhar o conteúdo. Há também um modo que grava as mudanças como alterações controladas, para inspecionar no Word, e ele não serve para entregar: parágrafo excluído só some quando alguém aceita, e até lá a numeração de parágrafo não fecha com a do relatório.</p>
-        <p class="when"><b>O que está medido.</b> Em cinco trabalhos, o texto saiu idêntico parágrafo a parágrafo, a contagem de marcadores e de campos se preservou, o XML fecha e o Word abre. Num deles, de 1.434 parágrafos: 18 estilos em uso, 99% dos parágrafos com formatação direta sobre o estilo, 533 vazios dos quais 377 saíram e 156 ficaram pelas travas, 66 legendas convertidas. O deslocamento de página ficou entre menos três e mais uma.</p>
-      </article>
 
       <!-- 01 -->
       <article class="instrument" id="consistencia">
@@ -886,6 +850,8 @@
         <p class="when"><b>Duas implementações do mesma ferramenta, e uma delas é pública.</b> Um programa em Python, para quem roda o projeto inteiro, e uma <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">página que faz a mesma checagem dentro do navegador</a>, sem instalar nada e sem que o arquivo saia da máquina. É a única porta gratuita do conjunto, e é por onde se começa quando ainda não se sabe se vale entrar no resto. A página traz também, no fim, a versão portátil do [02] em formato de prompt.</p>
 
         <p class="when"><b>A camada formal entrou em 27/08/2026, e a medição mudou a ferramenta junto.</b> Comparar cada parágrafo contra o padrão dominante do documento marcava 347 parágrafos numa dissertação e 160 num capítulo, e quase todos eram legítimos: referência, legenda e fonte de figura têm forma própria por construção. Passando a comparar <b>dentro de cada papel</b>, o número caiu para 108 e para 16, e o que sobrou é sempre da mesma espécie: duas referências em negrito entre 117, sete legendas em negrito entre 27, uma linha de fonte em Times num documento todo em Arial. Defeito de propagação, que é o que esta ferramenta procura.</p>
+
+        <p class="when"><b>Nenhum programa daqui altera o arquivo do autor, e a decisão é de 30/08/2026.</b> Um diagnóstico lê a formatação e conta o que há: quantos estilos existem de fato, quantos parágrafos trazem formatação direta sobre o estilo, quantos parecem título sem usar estilo de título, quantos vazios estão no corpo e quantos no pré-textual. Isso vira sugestão no relatório, e quem decide é quem escreveu o trabalho. O programa que <em>transformava</em> o arquivo saiu da cadeia depois de desmontar a capa de uma dissertação que não havia tocado, e hoje é a semente da <a href="https://claude.ai/code/artifact/4d7706bf-3382-419e-97ff-4ad35b65e1eb">Oficina de Formatação</a>, que existe separada justamente porque ali um programa escreve no arquivo de outra pessoa.</p>
 
         <p class="when"><b>O que está pronto e o que falta, em 27/08/2026.</b> A metade
         mecânica está feita e conferida nos dois trabalhos: a formatação por papel, a
@@ -1057,7 +1023,7 @@
             <div class="step gate">
               <span class="n">humano</span>
               <span class="t">Revisão</span>
-              <span class="d">Nada sai daqui sem uma pessoa ler. O arquivo segue como veio, sem normalização e sem anotação na margem.</span>
+              <span class="d">Nada sai daqui sem uma pessoa ler. O arquivo segue como veio, e não volta anotado na margem.</span>
             </div>
           </div>
         </div>
@@ -1065,15 +1031,9 @@
           <p class="track-label">Com agente, no Claude Code ou no VS Code</p>
           <div class="steps">
             <div class="step">
-              <span class="n">opcional</span>
-              <span class="t">Norma</span>
-              <span class="d">Por padrão a Norma roda em silêncio, dentro da fase seguinte. Rodá-la previamente, em separado, dá controle sobre a forma: você vê o que mudaria, ajusta o que quiser e só então manda analisar o conteúdo. De toda forma, a primeira etapa dos analisadores envolverá uma normalização, para tornar mais eficiente o trabalho de análise.</span>
-            </div>
-            <div class="arrow" aria-hidden="true">→</div>
-            <div class="step">
               <span class="n">analisadores:</span>
               <span class="t">Alberto ou Luis</span>
-              <span class="d"><b>Fase 1, se houver <span class="loc">.docx</span>:</b> a Norma roda em silêncio. <b>Fase 2, a leitura:</b> os programas levantam as suspeitas e o modelo julga uma a uma. <b>Fase 3, o acabamento:</b> aplica as correções cuja versão certa já existe no texto, e confere os próprios apontamentos <b>numa sessão nova</b>, com um leitor que não os escreveu, porque quem escreve é o pior juiz de se o que escreveu se entende. Alguns minutos, e cerca de 80 mil tokens numa dissertação de 130 páginas.</span>
+              <span class="d"><b>Fase 1, se houver <span class="loc">.docx</span>:</b> um diagnóstico lê a formatação e conta o que existe, sem alterar nada, e o que ele apontar entra no relatório como sugestão. <b>Fase 2, a leitura:</b> os programas levantam as suspeitas e o modelo julga uma a uma. <b>Fase 3, o acabamento:</b> aplica as correções cuja versão certa já existe no texto, e confere os próprios apontamentos <b>numa sessão nova</b>, com um leitor que não os escreveu, porque quem escreve é o pior juiz de se o que escreveu se entende. Alguns minutos, e cerca de 80 mil tokens numa dissertação de 130 páginas.</span>
             </div>
             <div class="arrow" aria-hidden="true">→</div>
             <div class="step">
@@ -1153,7 +1113,7 @@
 
     <section id="entrega">
       <h2>O que se entrega, e em que formato</h2>
-      <p class="deck">Um relatório que o destinatário não consegue abrir, ou não consegue conferir, não foi entregue. Estas cinco peças saem juntas, e quatro delas existem por causa de problemas que só apareceram quando alguém de fora tentou usar o material.</p>
+      <p class="deck">Um relatório que o destinatário não consegue abrir, ou não consegue conferir, não foi entregue. Estas quatro peças saem juntas, e três delas existem por causa de problemas que só apareceram quando alguém de fora tentou usar o material.</p>
 
       <div class="verbete">
         <h4>O relatório com os trechos dentro</h4>
@@ -1166,10 +1126,6 @@
         <p>O próprio arquivo do autor, devolvido com cada apontamento como comentário do Word na margem do parágrafo que ele cita, e com os comentários que ele já tinha escrito preservados ao lado. Cada comentário diz também <b>em que páginas o item ocorre</b>, porque o número de parágrafo é da extração e não existe dentro do Word. Serve para achar qualquer localizador sem contar parágrafos, para ver quando vários apontamentos se concentram no mesmo ponto, e para responder na margem, que é onde quem orienta lê a resposta. <b>Substituiu o caderno de conferência</b>, que era uma cópia numerada em separado, desde que o arquivo anotado passou a ser gerado.</p>
       </div>
 
-      <div class="verbete">
-        <h4>O anexo do que a normalização mudou</h4>
-        <p>Quando o trabalho passa pela Norma, o arquivo devolvido não é byte a byte o que foi enviado, e quem recebe precisa saber o que mudou nele. O programa grava o próprio relatório de normalização, e ele vai anexo ao fim da entrega: quantos estilos o trabalho tinha, quantos parágrafos vazios saíram e quantos ficaram por trava, quantos parágrafos foram alinhados à forma do seu papel, e onde ele se recusou a alinhar porque nenhuma forma predominava.</p>
-      </div>
       <div class="verbete">
         <h4>PDF, em dois formatos</h4>
         <p>O original é Markdown, que é o formato certo para o que os programas fazem com ele: texto puro, que um script altera com segurança. Mas ninguém recebe uma dissertação de volta em Markdown. Um gerador converte para PDF, com dois temas.</p>
