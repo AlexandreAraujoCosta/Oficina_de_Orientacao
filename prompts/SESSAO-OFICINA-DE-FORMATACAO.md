@@ -137,11 +137,11 @@ sessão deve começar perguntando se ela existe.
 
 ## O que a oficina nova herda das antigas, e é obrigatório
 
-**Toda conferência tem controle positivo.** Antes de dizer o que um teste
-acusou, dê a ele um caso que ele tem de reprovar e confira que reprova. Num único
-dia, quatro conferências escritas às pressas produziram o achado em vez de
-encontrá-lo, e três pela mesma causa: varrer parágrafo com expressão que quebra
-onde há parágrafo dentro de parágrafo.
+**Toda conferência tem controle positivo.** Antes de reportar o que um teste
+acusou, dê a ele um caso que ele tem de reprovar e confira que reprova. Num
+único dia, quatro conferências escritas às pressas produziram o achado em vez
+de encontrá-lo, e três pela mesma causa: varrer parágrafo com expressão que
+quebra onde há parágrafo dentro de parágrafo.
 
 **A ferramenta declara o que toca e o que não toca, e prova depois de rodar.**
 `scripts/revisao_word.py` é o padrão: ele aceita as próprias alterações numa
