@@ -558,7 +558,31 @@ Quatro degraus, e cada um se sustenta dizendo o que o parecerista encontraria:
 
 **Isto não é o desk review, e a diferença é de cadeira.** O desk review pergunta, do lado da revista, se o manuscrito merece consumir dois avaliadores, e decide uma porta. Aqui a pergunta é a mesma e a resposta serve ao autor, para ele escolher quando submeter. Os mesmos fatos, lidos de assentos diferentes, e nenhum dos dois decide o que cabe ao outro.
 
-**Não escreva "recomendação: aprovar" nem equivalente.** Aprovar é ato da banca, e a ferramenta nega a si mesmo essa autoridade três parágrafos acima, na ressalva de abertura. Um relatório automático que recomenda aprovação desfaz a própria ressalva e devolve ao leitor a impressão de veredicto institucional. O que se diz é o que se examinou e o que dali decorre: que nada pede refazer desenho, que estes itens concentram o risco, que estes condicionam a versão final. Quem converte isso em recomendação é quem assina.
+**Há uma segunda escala, e ela vale quando quem lê está na banca.** A escala de quatro degraus acima responde "vale submeter?", que é a pergunta de quem ainda vai. Quem lê como examinador tem o trabalho na mesa, a data marcada, e outra pergunta pela frente: o que a banca decide. Dizer a essa pessoa que o trabalho "pode ir à banca" devolve-lhe uma pergunta que ela já respondeu ao aceitar o convite.
+
+**Nessa leitura, o veredicto é sobre o que o trabalho sustenta diante da decisão que vem**, em quatro degraus que acompanham o que uma banca de fato profere:
+
+1. **Aprovação, sem exigência de correção.** O que o trabalho afirma é sustentado pelo que ele executou, e o que se aponta são ajustes para o depósito, que não mudam nenhuma afirmação. Escreva assim, e não como elogio: o que autoriza o degrau é a lista de itens ser toda de acabamento, e isso se confere contando.
+2. **Aprovação com correção de forma no prazo do depósito.** O que se corrige não altera o que o trabalho afirma. Diga quais itens são, porque é essa lista que a ata vai registrar.
+3. **Aprovação com correção material.** Há ponto em que o texto afirma mais do que mediu, e a correção muda o que ele diz. Nomeie os pontos e diga, de cada um, o que passaria a estar escrito.
+4. **Há defeito que a correção não alcança.** Desenho que não produz a conclusão, categoria que contém na definição o que a conclusão anuncia, fato afirmado por inferência sem apoio em fato. **Exiba**, como manda a observação crítica: a definição e a conclusão lado a lado, o elo que deixa o solo. Sem exibição é acusação, e não achado, e num relatório que chega a um examinador isso é o pior que pode sair daqui.
+
+**O degrau se justifica pela distribuição dos itens, e a justificativa é conferível.** Nenhum item que mude afirmação, e o degrau é o primeiro. Itens que mudam afirmação e não desenho, e é o terceiro. Escrever o degrau sem a conta que o sustenta é dar palpite com aparência de veredicto.
+
+**E o relatório não decide.** Ele diz o que o trabalho sustenta, e quem profere é a banca, reunida, depois de ouvir a defesa, que é o que esta leitura não faz e não pode fazer. A ressalva de abertura continua valendo inteira.
+
+**E há a terceira escala, para projeto de pesquisa.** A pergunta da qualificação não é o que o texto afirma, e sim o que o desenho pode produzir: se o projeto pode ir à banca e se tende a ser aprovado, o que significa ter o desenho entendido como pronto para execução. Quatro degraus:
+
+1. **Desenho pronto para execução.** A pergunta está posta de modo que o método declarado a responde, o material a que o projeto tem acesso sustenta esse método, e o que se promete entregar decorre do que se vai executar.
+2. **Desenho pronto, com uma peça a fechar antes de começar.** Em geral é uma definição operacional, um critério de recorte ou a confirmação de acesso a uma base. **Nomeie a peça e diga o que ela decide**, porque é isso que separa o degrau do anterior.
+3. **Há um elo que ainda não fecha entre a pergunta e o método.** Executado como está, o projeto produz material que não responde à pergunta como ela está posta. Diga qual é o elo, e o que o fecharia: em projeto, isso quase sempre é uma operação a acrescentar, e não uma pesquisa a refazer.
+4. **O que se promete não é produzível pelo desenho apresentado.** Exibição obrigatória, como na observação crítica: a promessa e a operação lado a lado, e o que falta entre as duas.
+
+**A trava, e ela é o erro caracteristico de quem lê projeto com a régua de dissertação.** Num projeto ainda não há resultado, e por isso o elo "o que foi executado sustenta o que se conclui" não tem em que morder. Apontar como defeito a ausência de achados, de análise ou de conclusão é apontar como falta o que define o gênero. **Diga no alto do relatório quais elos se aplicam e quais não**, e o que o projeto afirma sobre o que vai encontrar entra como hipótese, que é o que ela é, e não como afirmação sem prova.
+
+**No relatório que vai ao autor, não escreva "recomendação: aprovar" nem equivalente.** Aprovar é ato da banca, e a ferramenta nega a si mesma essa autoridade na ressalva de abertura. Um relatório automático que recomenda aprovação ao próprio autor desfaz a própria ressalva e devolve a ele a impressão de veredicto institucional. O que se diz é o que se examinou e o que dali decorre: que nada pede refazer desenho, que estes itens concentram o risco, que estes condicionam a versão final. Quem converte isso em recomendação é quem assina.
+
+**A proibição é da posição, e não da palavra.** No relatório que vai a quem está na banca, a ferramenta não simula a decisão: alimenta um membro dela, que decide com a defesa na frente. Ali o silêncio sobre o que o trabalho sustenta é que seria omissão, porque é justamente essa a pergunta que a pessoa tem.
 
 **Depois vem a prioridade de execução**, para quem tem prazo curto: quais itens primeiro, e por quê. É a parte da seção que o autor usa na segunda-feira de manhã.
 
