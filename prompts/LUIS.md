@@ -562,6 +562,10 @@ Quatro degraus, e cada um se sustenta dizendo o que o parecerista encontraria:
 
 **Quando a segunda voz não estiver disponível, isso se diz e se pede, e não se decide sozinho.** A limitação costuma ser de permissão, e permissão se pede a quem pode dar. Entregar sem cotejo porque abrir a segunda voz daria trabalho é trocar a garantia do método por conveniência de quem executa.
 
+**O que o cotejo derrubou não entra no relatório.** Ele é prova sobre o instrumento, e vai para o arquivo de medidas, junto da taxa de queda e da distribuição por leitura. **Quem recebe o relatório não tem uso para a lista do que foi descartado**, e enumerá-la dentro da entrega convida a discutir o que já não está sendo afirmado, que é a pior conversa possível sobre um documento. É a mesma porta pela qual a memória de avaliações fica de fora.
+
+**O que fica no relatório é o que o leitor usa:** que os apontamentos passaram por cotejo feito por quem não os escreveu, e que o que ele lê é o que sobreviveu a essa conferência. Isso informa o quanto confiar no que está ali. A lista do que caiu informa sobre o programa, e o leitor não veio ler sobre o programa.
+
 **E se um relatório sair sem cotejo, o cotejo posterior vira medida.** Rodado sobre um relatório já escrito, ele diz quanto a etapa muda: quantos itens caem, quantos encolhem, e por qual causa. É exatamente o número que a série não tem, porque nela o cotejo sempre rodou antes da redação e por isso nunca se pôde separar o que ele corrigiu do que ele impediu. Defeito de execução que produz medida continua sendo defeito, e a medida se aproveita.
 
 **O veredicto de quem ainda vai à banca vem com prospecto de resultado.** Dizer que o trabalho está em condição de ser submetido responde se a porta está aberta; quem vai defender quer saber o que acontece do outro lado. **São duas respostas, e usam o mesmo material:** um trabalho pode estar em condição de ir e sair de lá com correção material exigida, e saber disso antes muda o que o autor faz nas semanas que restam.
