@@ -173,12 +173,13 @@ ali o erro que o item descreve sem encontrá-lo.
 
 ## Se o que chegou é um .docx
 
-O arquivo quase certamente não está normalizado: o parágrafo típico não usa o
-estilo Normal, o estilo muda ao longo do texto, e há formatação direta por cima
-de tudo. Esta versão não roda programa nenhum, então **diga no alto do relatório
-que a camada formal foi lida sobre um arquivo não normalizado**, e que o que ela
-aponta mistura desvio de verdade com ruído de colagem. A versão com programas
-normaliza antes de ler.
+O arquivo quase certamente não está formatado por estilo: o parágrafo típico não
+usa o estilo Normal, o estilo muda ao longo do texto, e há formatação direta por
+cima de tudo. Esta versão não roda programa nenhum, então **diga no alto do
+relatório que a camada formal foi lida a olho**, e que o que ela aponta mistura
+desvio de verdade com ruído de colagem. Nas vias com programas há um diagnóstico
+que conta essas formas, e que também não conserta nada: consertar é decisão de
+quem escreveu.
 
 ## A marca, que decide onde o apontamento aparece na margem
 

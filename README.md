@@ -48,13 +48,15 @@ estudante raramente chega formatado por estilo, e o que se vê é sempre o mesmo
 o parágrafo típico não usa o estilo Normal, o estilo muda ao longo do texto, e
 sobre ele vem uma camada de formatação direta que deixa tudo parecido na tela
 sem deixar nada igual no arquivo. O espaço entre blocos é feito com parágrafo
-vazio. Sem normalizar, a camada formal da análise acusa como desvio o que é
-ruído de colagem, e a numeração de parágrafo, que é o localizador do relatório,
-muda a cada linha em branco apagada.
+vazio.
+
+A oficina **não conserta isso**, e a decisão é de 30/08/2026: o programa que
+transformava o arquivo saiu da cadeia e está guardado no ramo
+`norma-transformadora`, como semente de outro artefato. No lugar dele entrou o
+diagnóstico, que lê e relata.
 
 ```bash
-python scripts/normalizar_docx.py trabalho.docx --so-relatorio
-python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas
+python scripts/diagnostico_forma.py trabalho.docx
 ```
 
 O primeiro comando não grava nada e diz o que faria. O segundo apaga parágrafo

@@ -171,17 +171,23 @@ E quando o resultado admitir explicação rival que o corpus não separa, **sepa
 
 ## Antes do script, o arquivo
 
-**Se o que chegou é um `.docx`, ele precisa ser normalizado antes.** Trabalho de
-estudante raramente vem formatado por estilo: o parágrafo típico não usa o estilo
-Normal, o estilo muda ao longo do texto, e sobre ele vem uma camada de formatação
-direta que deixa tudo parecido na tela sem deixar nada igual no arquivo. O espaço
-entre blocos costuma ser feito com parágrafo vazio.
+**Trabalho de estudante raramente vem formatado por estilo.** O parágrafo típico
+não usa o estilo Normal, o estilo muda ao longo do texto, e sobre ele vem uma
+camada de formatação direta que deixa tudo parecido na tela sem deixar nada igual
+no arquivo. O espaço entre blocos costuma ser feito com parágrafo vazio.
 
-**Onde você roda programas**, o primeiro comando é
-`python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas`, e a
-análise usa o arquivo que ele gravou. **Onde você não roda nada**, diga no alto do
-relatório que a camada formal foi lida sobre um arquivo não normalizado, e que o
-que ela aponta ali mistura desvio de verdade com ruído de colagem.
+**Nenhum programa daqui conserta isso, e a decisão é de 30/08/2026.** Onde você
+roda programas, `python scripts/diagnostico_forma.py trabalho.docx` diz o estado
+da formatação e não mexe em nada: quantos estilos existem, quantos parágrafos têm
+formatação direta, quantas formas cada papel tem, quantos parágrafos parecem
+título sem usar estilo de título. Isso vira sugestão no relatório, e quem decide
+é quem escreveu o trabalho.
+
+**A razão de o programa não consertar está medida.** Numa análise real, nenhum
+dos dezenove apontamentos veio da camada formal, e todos teriam sido encontrados
+no arquivo original. A transformação, no mesmo dia, desmontou a capa de um
+trabalho que ela não tinha tocado. Todo o resto desta oficina lê e relata, e era
+ali o único ponto em que um programa escrevia no arquivo de outra pessoa.
 
 ## O script roda antes, e a leitura começa de onde ele parou
 
