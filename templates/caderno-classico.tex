@@ -24,9 +24,9 @@
 % justificacao na linha do titulo, e a penalidade proibitiva impede a quebra
 % de palavra dentro dele; sem os dois, o LaTeX parte a palavra para justificar.
 \newcommand{\semHifen}{\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000}
-\titleformat{\section}{\semHifen\color{unbAzul}\bfseries\Large}{}{0pt}{}
-\titleformat{\subsection}{\semHifen\color{unbAzul}\bfseries\large}{}{0pt}{}
-\titleformat{\subsubsection}{\semHifen\color{unbAzul!85!black}\bfseries\normalsize}{}{0pt}{}
+\titleformat{\section}{\semHifen\color{unbAzul}\bfseries\huge}{}{0pt}{}
+\titleformat{\subsection}{\semHifen\color{unbAzul}\bfseries\LARGE}{}{0pt}{}
+\titleformat{\subsubsection}{\semHifen\color{unbAzul!85!black}\bfseries\large}{}{0pt}{}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -77,11 +77,28 @@ $endif$
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
+
+% Na primeira pagina o cabecalho corrente nao repete o titulo, que esta logo
+% abaixo dele. Pedido de 31/08/2026. O rodape com o numero fica.
+\fancypagestyle{aberturaOficina}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\footnotesize\color{margemCor}\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\headrule}{}%
+}
+
 \begin{document}
+\thispagestyle{aberturaOficina}
 
 $if(title)$
-{\color{unbAzul}\bfseries\LARGE $title$\par}
-\vspace{4pt}
+\begin{center}
+{\color{unbAzul}\bfseries\LARGE\semHifen $title$\par}
+$if(autoria)$
+\vspace{5pt}
+{\color{unbAzul}\bfseries\Large\semHifen $autoria$\par}
+$endif$
+\end{center}
+\vspace{6pt}
 {\color{unbVerde}\hrule height 1pt}
 \vspace{14pt}
 $endif$
