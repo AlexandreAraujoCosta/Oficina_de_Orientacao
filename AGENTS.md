@@ -213,6 +213,7 @@ Os quatro que ele executa, se precisar chamá-los à mão:
 ```bash
 python scripts/extrair.py ARQUIVO              # extração numerada por parágrafo
 python scripts/analisar_docx.py forma ARQUIVO  # consistência formal, por papel
+python scripts/diagnostico_forma.py ARQUIVO    # o estado da formatação, e não mexe em nada
 python scripts/conferir_consistencia.py tudo ARQUIVO   # números, listas, termos
 python scripts/conferir_interno.py extracao/ARQUIVO.txt  # remissões, numeração, contas
 ```

@@ -144,6 +144,7 @@ def main():
     rodar("analisar_docx.py" if docx else "analisar_pdf.py", "sumario", alvo)
     if docx:
         rodar("analisar_docx.py", "forma", alvo)
+        rodar("diagnostico_forma.py", alvo)
         rodar("conferir_consistencia.py", "tudo", alvo)
     rodar("conferir_interno.py", Path("extracao") / (alvo.stem + ".txt"))
 

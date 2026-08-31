@@ -929,16 +929,14 @@ claude</pre>
       <p class="pedido-rot">Cole isto na conversa:</p>
       <pre class="pedido-txt" id="c-pedido-claude">Leia prompts/LUIS.md nesta pasta e siga o que ele manda.
 
-Antes de tudo, se o trabalho for .docx, normalize duas vezes. A copia limpa e a
-que a analise le; a com alteracao controlada e a que vai para quem escreveu.
-python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas --silencio --saida trabalho-limpo.docx
-python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas
-python scripts/extrair.py trabalho-limpo.docx
-python scripts/conferir_interno.py extracao/trabalho-limpo.txt
+Antes de tudo, se o trabalho for .docx, rode o diagnostico de forma, que le e
+nao mexe em nada:
+python scripts/diagnostico_forma.py trabalho.docx
+python scripts/extrair.py trabalho.docx
+python scripts/conferir_interno.py extracao/trabalho.txt
 
-Leia e monte a entrega sempre sobre trabalho-limpo.docx. No arquivo com alteracao
-controlada os paragrafos apagados ainda contam, e os localizadores do relatorio
-sairiam deslocados em ate algumas centenas de paragrafos.
+O que o diagnostico apontar entra no relatorio como sugestao. Nenhum programa
+daqui altera o arquivo do autor.
 
 Depois faca a leitura completa do Luis sobre a copia limpa, e monte a entrega com
 scripts/montar_entrega.py.
@@ -994,16 +992,14 @@ Nao rode git. Nao publique nada. Se faltar alguma coisa, diga o que falta.</pre>
       <p class="pedido-rot">Cole isto na conversa:</p>
       <pre class="pedido-txt" id="c-pedido-vscode">Leia o AGENTS.md nesta pasta e siga o que ele manda.
 
-Antes de tudo, se o trabalho for .docx, normalize duas vezes. A copia limpa e a
-que a analise le; a com alteracao controlada e a que vai para quem escreveu.
-python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas --silencio --saida trabalho-limpo.docx
-python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas
-python scripts/extrair.py trabalho-limpo.docx
-python scripts/conferir_interno.py extracao/trabalho-limpo.txt
+Antes de tudo, se o trabalho for .docx, rode o diagnostico de forma, que le e
+nao mexe em nada:
+python scripts/diagnostico_forma.py trabalho.docx
+python scripts/extrair.py trabalho.docx
+python scripts/conferir_interno.py extracao/trabalho.txt
 
-Leia e monte a entrega sempre sobre trabalho-limpo.docx. No arquivo com alteracao
-controlada os paragrafos apagados ainda contam, e os localizadores do relatorio
-sairiam deslocados em ate algumas centenas de paragrafos.
+O que o diagnostico apontar entra no relatorio como sugestao. Nenhum programa
+daqui altera o arquivo do autor.
 
 Depois faca a leitura do prompts/LUIS.md sobre a copia limpa, e monte a entrega
 com scripts/montar_entrega.py.

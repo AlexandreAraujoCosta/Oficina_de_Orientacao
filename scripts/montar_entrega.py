@@ -111,9 +111,9 @@ def main():
             import zipfile
             st = zipfile.ZipFile(a.trabalho).read("word/styles.xml")
             if b"Oficina" not in st:
-                print("  AVISO: o trabalho nao passou pelo normalizador. O que o relatorio")
-                print("         apontar de formatacao mistura desvio e ruido de colagem.")
-                print("         Na proxima rodada: normalizar_docx.py ANTES de extrair.")
+                print("  nota: o trabalho nao foi normalizado, e isso e o esperado desde")
+                print("        30/08/2026. A transformacao saiu da cadeia; o que entra e o")
+                print("        diagnostico_forma.py, que le e relata.")
         except Exception:
             pass
 

@@ -24,11 +24,11 @@ Normal, o estilo muda ao longo do texto, e sobre ele vem uma camada de formataç
 direta que deixa tudo parecido na tela sem deixar nada igual no arquivo. O espaço
 entre blocos costuma ser feito com parágrafo vazio.
 
-**Onde você roda programas**, o primeiro comando é
-`python scripts/normalizar_docx.py trabalho.docx --estilos --legendas --notas`, e a
-análise usa o arquivo que ele gravou. **Onde você não roda nada**, diga no alto do
-relatório que a camada formal foi lida sobre um arquivo não normalizado, e que o
-que ela aponta ali mistura desvio de verdade com ruído de colagem.
+**Nenhum programa daqui conserta isso.** Onde você roda programas,
+`python scripts/diagnostico_forma.py trabalho.docx` conta o que existe e não mexe
+em nada. Onde você não roda nada, diga no alto do relatório que a camada formal
+foi lida a olho, e que o que ela aponta mistura desvio de verdade com ruído de
+colagem.
 
 **Pode vir um bloco de medidas de formatação**, apurado por um programa. Use como ponto de partida e confirme lendo. **Nenhuma medida dali é, por si, um defeito**, porque o que um número significa depende do gênero: parágrafo curto é defeito em prosa argumentativa e é a forma certa num capítulo de catálogo. Descartar os falsos positivos é parte do seu trabalho, e o relatório diz quantos você descartou.
 
