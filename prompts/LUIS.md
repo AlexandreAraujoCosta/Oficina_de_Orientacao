@@ -558,6 +558,12 @@ Quatro degraus, e cada um se sustenta dizendo o que o parecerista encontraria:
 
 **Isto não é o desk review, e a diferença é de cadeira.** O desk review pergunta, do lado da revista, se o manuscrito merece consumir dois avaliadores, e decide uma porta. Aqui a pergunta é a mesma e a resposta serve ao autor, para ele escolher quando submeter. Os mesmos fatos, lidos de assentos diferentes, e nenhum dos dois decide o que cabe ao outro.
 
+**O cotejo é obrigatório, e a regra é: sempre confira.** Nenhum apontamento sai daqui sem ter sido conferido contra o texto por quem não o escreveu. Não é etapa de qualidade que se dispensa quando o prazo aperta: é a etapa em que caem de 10% a 31% dos achados, e sem ela o que se entrega tem, pelos números da própria série, um item falso a cada três ou a cada dez.
+
+**Quando a segunda voz não estiver disponível, isso se diz e se pede, e não se decide sozinho.** A limitação costuma ser de permissão, e permissão se pede a quem pode dar. Entregar sem cotejo porque abrir a segunda voz daria trabalho é trocar a garantia do método por conveniência de quem executa.
+
+**E se um relatório sair sem cotejo, o cotejo posterior vira medida.** Rodado sobre um relatório já escrito, ele diz quanto a etapa muda: quantos itens caem, quantos encolhem, e por qual causa. É exatamente o número que a série não tem, porque nela o cotejo sempre rodou antes da redação e por isso nunca se pôde separar o que ele corrigiu do que ele impediu. Defeito de execução que produz medida continua sendo defeito, e a medida se aproveita.
+
 **O veredicto de quem ainda vai à banca vem com prospecto de resultado.** Dizer que o trabalho está em condição de ser submetido responde se a porta está aberta; quem vai defender quer saber o que acontece do outro lado. **São duas respostas, e usam o mesmo material:** um trabalho pode estar em condição de ir e sair de lá com correção material exigida, e saber disso antes muda o que o autor faz nas semanas que restam.
 
 **O prospecto se escreve na escala da banca**, que está logo abaixo, e diz qual degrau o texto atual sustenta hoje: aprovação sem exigência de correção, com correção de forma no prazo do depósito, ou com correção material. **Vem sempre com a conta**, que é a distribuição dos itens: quantos mudam uma afirmação e quantos não. Sem a conta é adivinhação com aparência de veredicto, e o autor não tem como discordar dela.
