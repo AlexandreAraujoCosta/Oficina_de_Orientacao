@@ -122,6 +122,8 @@ def nota_de_tamanho(palavras_texto, palavras_citadas):
     honesto e o do texto proprio: as citacoes se consultam, e estao ali para que
     ninguem precise abrir o trabalho ao lado.
     """
+    # Sem negrito: desde 31/08/2026 esta nota fecha a ementa, e a ementa sai
+    # numa fonte so. Os destaques vinham de quando ela vivia isolada.
     minutos = max(1, round(palavras_texto / 200))
     # Um numero so. Faixa que termina alto ("57 a 80 minutos") desinfla ao
     # contrario: o leitor guarda o teto. Se o numero unico envergonha, o
@@ -129,12 +131,12 @@ def nota_de_tamanho(palavras_texto, palavras_citadas):
     faixa = "cerca de %d minutos" % minutos
     proporcao = palavras_citadas / max(1, palavras_texto + palavras_citadas)
     return [
-        "**O texto deste relatório tem cerca de %s palavras, o que dá %s de "
-        "leitura.** Todo o resto, que é "
+        "O texto deste relatório tem cerca de %s palavras, o que dá %s de "
+        "leitura. Todo o resto, que é "
         "%d%% do documento, são trechos do próprio trabalho, copiados e inseridos "
         "logo abaixo de cada apontamento. Eles não se leem de ponta a ponta: estão "
-        "ali para que **não seja preciso abrir o trabalho ao lado para entender o "
-        "que se aponta**, e para que cada sugestão possa ser pensada dentro deste "
+        "ali para que não seja preciso abrir o trabalho ao lado para entender o "
+        "que se aponta, e para que cada sugestão possa ser pensada dentro deste "
         "documento mesmo, com a frase original à vista. As sugestões complementares "
         "estão no anexo, ao fim deste documento, e não entram nesse tempo: destinam-se ao "
         "corretor automático, e não a esta leitura."
@@ -335,15 +337,31 @@ def processar(relatorio, trabalho, saida, limite, todas, max_por_item=None):
              "D": "sugestões de desenvolvimento", "C": "contribuições a reivindicar",
              "Q": "questões"}
     contagem = {NOMES[k]: v for k, v in conta_itens.items() if k in NOMES}
-    # Procura o fim da ementa; sem ela, cai no primeiro "---", que fecha a ressalva.
+    # A nota fecha a ementa, e o ponto de insercao e o fim dela.
+    #
+    # A regra anterior procurava o primeiro "---" depois da ementa e inseria logo
+    # abaixo. Relatorio que nao usa separador ali caia no ramo de recuo, que
+    # devolvia o fim do arquivo, e a nota de tempo de leitura saia na ultima
+    # pagina, depois de tudo o que ela deveria ter enquadrado. Foi o que se
+    # entregou em 31/08/2026.
+    #
+    # A regra nova nao depende de separador: acha a proxima secao depois da
+    # ementa e insere imediatamente antes dela. Sem ementa, insere antes da
+    # primeira secao do documento.
+    def e_fronteira(l):
+        s = l.strip()
+        return s == "---" or (s.startswith("#") and not s.startswith("#####"))
+
     ementa = next((i for i, l in enumerate(saida_linhas)
                    if l.lstrip("# ").strip().lower().startswith("ementa")), None)
-    inicio = ementa if ementa is not None else 0
-    corte = next((i for i, l in enumerate(saida_linhas)
-                  if i > inicio and l.strip() == "---"), None)
-    if corte is None:
+    if ementa is None:
         corte = next((i for i, l in enumerate(saida_linhas)
-                      if i and l.startswith("# ")), len(saida_linhas)) - 1
+                      if i and e_fronteira(l)), len(saida_linhas))
+    else:
+        corte = next((i for i, l in enumerate(saida_linhas)
+                      if i > ementa and e_fronteira(l)), len(saida_linhas))
+    # `corte` e a linha da proxima secao; a nota entra antes dela.
+    corte -= 1
     # Numa entrega unica o anexo vem depois do relatorio no mesmo arquivo, e
     # conta-lo aqui faria a nota prometer o dobro do tempo de leitura. O relogio
     # vale para o corpo, que se le de ponta a ponta; o anexo se consulta.
@@ -364,9 +382,9 @@ def processar(relatorio, trabalho, saida, limite, todas, max_por_item=None):
     # depois da outra, foi defeito entregue em 24/08/2026.
     ja_tem = any(l.strip().lower().startswith("## como ler") for l in saida_linhas)
     if ja_tem:
-        novo = [""] + nota
+        novo = [""] + nota + [""]
     else:
-        novo = [""] + guia(indice, rotulos, Path(trabalho).name, contagem, inseridos > 0) + [""] + nota
+        novo = [""] + guia(indice, rotulos, Path(trabalho).name, contagem, inseridos > 0) + [""] + nota + [""]
     saida_linhas[corte + 1:corte + 1] = novo
 
     cabecalho = (

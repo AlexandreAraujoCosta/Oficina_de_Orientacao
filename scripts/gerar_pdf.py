@@ -137,6 +137,35 @@ def preparar_para_latex(texto):
     return texto
 
 
+
+# O titulo do relatorio e uma linha so no Markdown, e sai em duas no PDF: o que o
+# relatorio e, na primeira, e de quem e o trabalho, na segunda. Pedido de
+# 31/08/2026. A divisao fica aqui, e nao no relatorio, para que o Markdown e o
+# HTML continuem com o titulo inteiro numa linha.
+#
+# O corte e no ultimo conectivo que introduz o nome, e so quando o que vem
+# depois parece nome proprio, isto e, comeca por maiuscula. "Relatorio sobre o
+# Capitulo 5 (Parte II), de Maria Fernanda" corta em ", de"; "Relatorio sobre a
+# dissertacao de Clarice Saavedra Vieira" corta em " de ". Titulo sem nome nao
+# corta, e sai numa linha so.
+RE_AUTORIA = re.compile(
+    r"^(?P<obra>.+?)[,]?\s+d[eoa]s?\s+(?P<nome>[A-ZÁÉÍÓÚÂÊÔÃÕÇ][^,]*)$")
+
+
+def _parte(titulo, qual):
+    m = RE_AUTORIA.match(titulo.strip())
+    if not m:
+        return titulo.strip() if qual == "obra" else ""
+    return m.group(qual).strip()
+
+
+def _titulo_curto(titulo):
+    return _parte(titulo, "obra")
+
+
+def _autoria(titulo):
+    return _parte(titulo, "nome")
+
 def gerar_pdf(texto, destino, titulo, tema, manter_tex):
     template = TEMPLATES / f"caderno-{tema}.tex"
     if not template.exists():
@@ -151,7 +180,8 @@ def gerar_pdf(texto, destino, titulo, tema, manter_tex):
             "--from", "markdown+raw_attribute+pipe_tables",
             "--template", str(template),
             "--pdf-engine", "xelatex",
-            "--metadata", f"title={titulo}",
+            "--metadata", f"title={_titulo_curto(titulo)}",
+            "--metadata", f"autoria={_autoria(titulo)}",
             "-o", str(destino),
         ]
         out = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8",
