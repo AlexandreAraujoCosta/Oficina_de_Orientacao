@@ -36,6 +36,16 @@ Disso saem os três registros, e **cada achado traz o seu**:
 
 **E a ementa declara a conta**, que é a linha mais informativa do relatório inteiro: de quantos itens que pedem providência, quantos mudam alguma afirmação do trabalho e quantos não mudam. Quarenta itens em que nenhum muda afirmação é um trabalho; quatro itens em que três mudam é outro, e sem a conta os dois têm a mesma aparência.
 
+## Nem todo defeito numérico é grave, e a diferença não é de tamanho
+
+**A pergunta não é se dois números divergem: é se alguma conclusão se apoia neles.** Este é o ponto em que uma leitura automática mais erra, e erra por herança: divergência entre duas ocorrências do mesmo dado quebra um programa, e por isso parece defeito de primeira ordem. Para quem lê um trabalho acadêmico, quase nunca é.
+
+**Grave, e é o que esta leitura procura:** o trabalho conclui alguma coisa a partir de um número, e o número está errado, ou o dado foi usado errado. Taxa calculada sobre o denominador que não é o dela. Comparação feita contra a base que não é a que a moldura pede. Figura que diz o contrário do que o texto extrai dela, no ponto em que o texto tira a inferência. Categoria contada por um critério na tabela e por outro na conclusão. **Nos quatro, a conclusão herda o erro, e corrigir o número obriga a reescrever o que dele se concluiu.**
+
+**Anexo, e sem cerimônia:** o mesmo dado aparece como 135 num ponto e 134 noutro, e nenhuma das duas passagens conclui nada a partir dele. É gralha de algarismo. Quem lê não percebe, e não deveria perceber, porque não há nada ali de que depender. Registra-se para o autor uniformizar, e não se gasta uma linha de argumento com isso.
+
+**O teste, e ele se aplica antes de o item ser escrito:** aponte a frase do trabalho que deixa de valer se este número estiver errado. Se você a encontra, o item é do corpo e a frase entra nele. **Se não encontra nenhuma, o item é de anexo**, por mais nítida que seja a divergência e por mais trabalho que tenha dado achá-la.
+
 ## O critério de redação
 
 **Uma crítica é boa se se ouvir.** Não basta ser verdadeira: crítica verdadeira que o autor não consegue ouvir não produz nada e ocupa o mesmo espaço que uma falsa. Vale como régua de redação de todo achado.
@@ -179,6 +189,11 @@ E quando o resultado admitir explicação rival que o corpus não separa, **sepa
 
 # Passo 1 — Consistência
 
+**A numeração é de dependência, e não de importância.** Este passo vem primeiro porque o passo 2 precisa dele: lá se parte do princípio de que a versão mais recente é a que vale, e isso só é seguro depois que este apontou onde ficou a antiga. **Vir primeiro não é valer mais.** A maior parte do que este passo colhe não muda o que o trabalho afirma, e por isso a maior parte dele termina no anexo.
+
+**O passo em que a leitura se paga é o 2**, porque é lá que se decide se o que o trabalho conclui está sustentado pelo que ele executou. Se o tempo ou o orçamento apertarem, é o passo 2 que tem de sair completo, e é do passo 1 que se corta.
+
+
 **Quatro conferências, uma leitura só: formal, numérica, categorial e textual.** Eram duas vozes até 25/08/2026, e a fusão veio de medição: a leitura de consistência é a de maior cobertura da ferramenta, com 46% de território exclusivo, e a numérica a de menor, com 19% e a maior sobreposição com ela. Fazem a mesma operação, que é rastrear e conferir uma afirmação contra outra.
 
 **O que este passo acha é quase sempre defeito de propagação, não de pensamento.** Trabalhos longos são escritos em camadas: algo muda, a mudança chega a alguns pontos e não a todos, e fica o fóssil. A versão correta em geral já existe no texto.
@@ -301,6 +316,9 @@ Cada item entrega **o que alinhar, onde, e qual é a versão vigente**. "Alinhar
 **Versão vigente e onde está.** Sem esse campo a leitura caridosa não tem como ser aplicada. É também o campo que decide, no passo 4, se o item vira correção executável por programa ou só sugestão escrita. Registre-o com localizador sempre que existir, e diga expressamente quando não existir, porque a ausência é informação e não lacuna.
 
 # Passo 2 — Marco, método e argumento
+
+**Este é o passo que produz os itens que mudam o que o trabalho afirma.** Os quatro elos abaixo são a razão de esta leitura existir: um erro de conta se corrige numa tarde e não desloca conclusão nenhuma, e uma categoria que não descreve o fenômeno desloca o capítulo inteiro. **Nenhum item daqui vai para o anexo por falta de espaço:** se não couber, o que sai é item do passo 1.
+
 
 **Uma leitura só, e ela percorre uma cadeia.** Eram três vozes até 25/08/2026, e a fusão veio de medição: marco e argumento eram o par de maior sobreposição de todos, com 24,1%, seguido de método e argumento com 18,3%. Numa mesma rodada, as duas melhores hipóteses de marco e de argumento eram o mesmo defeito visto de dois ângulos, e cada voz gastou um orçamento para chegar lá.
 
@@ -827,6 +845,8 @@ Três razões para essa classe ser central, e as três valem juntas. **Corrige-s
 **Duas condições, e as duas são necessárias.** Primeira, **o erro é manifesto**: não é preciso juízo nenhum para ver que está errado, porque a forma correta é evidente ou está escrita noutro ponto. Palavra trocada por outra, algarismo em desacordo com o extenso, sigla mal grafada, data impossível, um "não" que falta e inverte a frase, período que termina antes do verbo. Segunda, **a correção não muda o que o trabalho afirma**: corrigido o erro, nenhuma outra frase precisa mudar e nenhuma conclusão se desloca.
 
 **A exceção, e ela é obrigatória.** Erro manifesto em frase que carrega o trabalho fica na seção 2, e não desce. São a frase que enuncia o problema de pesquisa, o resumo, o abstract, o título, o enunciado de hipótese e a conclusão. A razão é que a seção final diz ao leitor que ali não há decisão a tomar, e um "não" faltando na pergunta de pesquisa faz o trabalho perguntar o inverso do que responde: é trivial de reparar e grave de deixar. Medido em 18/08/2026, numa dissertação cuja frase única do problema de pesquisa trocava uma palavra e passava a indagar o contrário do achado. **Onde a exceção se aplicar, diga por que o item ficou em cima**, para que o autor não o confunda com os pequenos.
+
+**Erro de português importa e não é o foco.** Gralha, concordância e regência se colhem **ao passar**, enquanto se lê para outra coisa, e **nunca se procuram**: não há varredura ortográfica neste método, e nenhum minuto de passo se gasta nela. Vão todos para o anexo, e o autor os resolve numa passada de revisor. Um relatório cujo anexo tem trinta gralhas e cujo corpo não tem nenhum item que toque uma conclusão errou o alvo, ainda que as trinta estejam certas.
 
 **Erro de superfície não se agrupa.** Cada gralha, cada concordância e cada
 grafia vira um item com o seu próprio localizador, mesmo que sejam quinze do
