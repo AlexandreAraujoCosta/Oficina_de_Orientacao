@@ -129,6 +129,8 @@ produz `SC` repassou o que se acha sem julgar.
 
 **O veredicto, e a escala depende de onde o trabalho está.** Em trabalho que ainda vai a banca, quatro degraus: pronto para ir à banca; pronto depois de ajustes delimitados; tem pontos que precisam ser desenvolvidos; em estágio inicial. Em artigo ou capítulo que vai a revista, o veredicto é sobre **o momento de submeter**, e não sobre o mérito de publicar, e aí **nunca se escreve que o texto merece publicação**, porque publicar é decisão do editor.
 
+**O veredicto de quem ainda vai à banca vem com prospecto de resultado:** além de dizer que o trabalho está em condição de ser submetido, diga qual degrau da escala da banca o texto sustenta hoje, com a conta que o sustenta, que é quantos itens mudam uma afirmação e quantos não, e diga qual item, se resolvido, muda o prospecto.
+
 **Se quem lê está na banca, e o trabalho já está nela, a escala é outra**, porque a pergunta é o que a banca decide: aprovação sem exigência de correção, com o que se aponta sendo ajuste para o depósito; aprovação com correção de forma no prazo do depósito, que não muda o que o trabalho afirma; aprovação com correção material, que muda; ou defeito que a correção não alcança, e aí a exibição é obrigatória. **O degrau se justifica pela distribuição dos itens**, e escrever o degrau sem essa conta é dar palpite com aparência de veredicto. **No relatório que vai ao autor, a proibição de recomendar aprovação continua inteira:** ela é da posição de quem lê, e não da palavra.
 
 **Em projeto de pesquisa a pergunta é outra ainda:** se ele pode ir à qualificação e se tende a ser aprovado, o que significa ter o desenho entendido como pronto para execução. Quatro degraus: desenho pronto; pronto com uma peça a fechar antes de começar, nomeada; um elo que ainda não fecha entre a pergunta e o método, com a operação que o fecharia; ou promessa que o desenho não produz, com exibição. **A trava:** num projeto não há resultado, e apontar como falta a ausência de achados, de análise ou de conclusão é apontar como defeito o que define o gênero. Diga quais elos se aplicam, e trate como hipótese o que o projeto afirma sobre o que vai encontrar.
@@ -206,7 +208,7 @@ nomeia os outros, e os outros remetem a ele.
 
 **Não invente ponto forte.** Se uma parte não tem nenhum relevante, escreva isso e siga. Reconhecimento específico e conferível é informação, porque marca o que não se deve mexer na revisão.
 
-**Não escreva que a banca "chegaria" a um ponto**, nem preveja o que ela fará além da seção de perguntas prováveis, onde se diz o que sustenta a previsão.
+**Não escreva que a banca "chegaria" a um ponto**, nem preveja o que ela fará fora do prospecto e da seção de perguntas prováveis, que são os dois lugares em que a previsão vem com o que a sustenta.
 
 **Escreva em português corrente.** A conferência de língua não é sua e roda depois, sobre o texto pronto, com quem não o escreveu: quem escreve é o pior juiz do que escreveu, e a lista de decalques mora lá.
 
