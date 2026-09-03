@@ -59,6 +59,16 @@ bibliográfico e a densidade de prova por item.
 | rápido, no agente, **em Sonnet** | 344 mil | 21 min, e não vale |
 | completo | **acima de 1,15 milhão** | horas |
 
+**Colado inteiro, o prompt costuma virar anexo, e vale conferir.** A oficina mediu, em
+dois assistentes conversacionais, que como anexo o assistente descumpre justamente as
+regras que mandam recusar alguma coisa. **E há indício de que alcança a trava da transcrição:** de duas rodadas em chat, a que
+recebeu o prompt como texto devolveu zero trechos entre aspas e a que o recebeu como
+conteúdo colado devolveu 84. Indício e não medida, porque os assistentes eram
+diferentes e o modelo variou junto. Depois de colar,
+ponha o prompt no campo de texto se o assistente oferecer o botão, e **rode
+`scripts/conferir_entrega.py` antes de entregar**, que é a trava que não depende de
+saber a causa.
+
 **O modelo decide, e está medido.** Os dois leram a mesma tese com o mesmo prompt e a
 mesma cegueira. O **Opus** devolveu 7.723 palavras, 226 endereços, 20 correções e
 **zero trechos entre aspas**. O **Sonnet** devolveu 4.914 palavras, 60 endereços, 4
