@@ -1,5 +1,11 @@
 # Instruções para assistentes que rodam esta oficina
 
+**Leia antes `TRES-COLUNAS.md`**, que divide o trabalho entre o que a ferramenta
+roda, o que sobra para a pessoa fazer à mão e o que não se pode afirmar sem
+conferência. **A divisão não se decide pelo nome do produto nem do plano**, que
+mudam sem aviso: decide-se por três capacidades que se descobrem em dois
+minutos, e que estão descritas lá.
+
 Este repositório traz ferramentas de leitura automática de trabalhos acadêmicos.
 Se você é um assistente com terminal e acesso a arquivos (GitHub Copilot em modo
 agente, Claude Code, ou equivalente), estas são as instruções para operá-las.
@@ -27,7 +33,7 @@ comentário é lido e pode ser tomado por texto do trabalho.
 
 ## As travas, e elas vêm antes de tudo
 
-Estas três não são preferências de estilo. São o que distingue um relatório
+Estas quatro não são preferências de estilo. São o que distingue um relatório
 conferível de um relatório que parece conferível, e as três falham em silêncio:
 o resultado sai com a mesma aparência e sem a garantia.
 
@@ -38,10 +44,27 @@ trocada numa citação é o defeito mais difícil de perceber e o mais grave num
 análise que se pretende verificável. Se o relatório precisa exibir a passagem, ela
 entra por programa, e não pela sua mão.
 
-**2. Antes de afirmar que falta algo no trabalho, procure duas vezes,** com termos
-diferentes. Afirmação de ausência é a que se refuta abrindo o arquivo, e foi a
-causa dominante de apontamento falso nas primeiras medições da série: catorze de
-vinte e sete num dos casos.
+**2. Antes de afirmar que falta algo no trabalho, procure junto uma coisa que
+você sabe estar lá, e relate os dois resultados.** É o controle positivo.
+Afirmação de ausência é a que se refuta abrindo o arquivo, e foi a causa
+dominante de apontamento falso nas primeiras medições da série: catorze de vinte
+e sete num dos casos.
+
+**Procurar duas vezes com termos diferentes não substitui o controle**, e a
+diferença não é sutil: duas buscas quebradas do mesmo jeito devolvem zero duas
+vezes, e o zero de busca quebrada tem exatamente a mesma cara do zero de coisa
+inexistente. O que prova que o instrumento funciona é ele achar, na mesma
+execução, o que existe.
+
+Cada um destes defeitos foi medido nesta oficina e produziu pelo menos uma
+acusação falsa: `grep -c` conta **linhas** e não ocorrências; `grep -o` com `-i`
+e `-F` juntos devolve vazio; o ponto da expressão regular não casa letra
+acentuada, porque ela ocupa dois bytes; busca sem fronteira de palavra acha a
+cadeia dentro de outra palavra, e um verbo no meio da prosa já foi contado como
+título de seção; busca no singular devolve zero onde só existe o plural; `grep`
+sem `-i` distingue caixa, e "INTRODU" não acha "Introduction"; e procurar o
+**termo** em vez da **coisa** devolve zero num documento que diz o mesmo com
+outras palavras.
 
 **A regra das duas buscas vale para qualquer conferidor que você escrever**, e
 não só para afirmação de ausência. Programa de checagem escrito às pressas erra
@@ -52,7 +75,16 @@ informa nada.
 
 **3. Se você recebeu só o `.docx`, você não viu as figuras.** Declare isso no
 relatório, não descreva nenhuma figura, e não diga que converteu o arquivo. Quem
-precisa ler gráfico precisa do PDF.
+precisa ler gráfico precisa do PDF, ou das imagens extraídas do pacote.
+
+**4. A extração em texto não carrega realce, comentário nem nota de rodapé.**
+Antes de acusar qualquer coisa de descuido, abra o `.docx` como zip e leia
+`word/comments.xml`, `word/footnotes.xml` e as marcas de realce em
+`word/document.xml`. Boa parte do que parece descuido está marcada pelo autor, e
+parte já é pergunta que ele fez ao orientador: cobrar isso como defeito é o pior
+uso possível de uma leitura automática. Ignorar esta trava já produziu, aqui,
+acusação contra parágrafo cuja nota de rodapé trazia justamente o que se dizia
+faltar, e duas contagens de zero marcador num documento cheio deles.
 
 ## Qual modelo escolher, e o que isso custa
 
@@ -322,13 +354,30 @@ nunca por quem o escreveu.
 
 ## Onde está a doutrina
 
-`prompts/LUIS.md` é a leitura completa, em quatro passos. `prompts/ANALISADOR-PORTATIL.md`
-é a versão que cabe numa conversa só. `prompts/PROJETO.md` é a camada curta que
-adapta o Luis a projeto de pesquisa, que é objeto diferente: não há resultados a
-julgar, e o que se examina é se o desenho, executado como está escrito, produz a
-resposta à pergunta que faz. Ela não repete o Luis, e por isso não pode divergir
-dele: diz os passos que ficam sem objeto, o que entra no lugar do elo 2.3, e a
-régua de tamanho, que a tabela do Luis não tem para documento curto. `REGISTRO-DE-DESENHO.md` explica por que
+**A leitura completa é o pipeline, em `prompts/leituras/`**: quatro leituras por caminhos
+diferentes, a verificação, a triagem e a redação, mais `VEREDITO.md` para a abertura,
+`_REGRAS.md` para as regras comuns e `CALIBRAGEM-DIREITO.md` para o que é do campo.
+`ESTADO.md` traz o desenho congelado, a medição que sustenta cada escolha e onde parou
+cada trabalho.
+
+**`prompts/ALBERTO.md` é o relatório rápido:** uma leitura, o mesmo formato de oito
+partes, e uma revisão quando roda no agente. Cola numa conversa de chat.
+
+**`prompts/LUIS.md` foi aposentado em 03/09/2026** e não roda sobre trabalho
+executado: devolveu dois itens e nenhum de conteúdo numa dissertação inteira, porque
+as travas contra falso positivo derrubavam o achado verdadeiro junto. O que ele tinha
+e o pipeline não tinha foi migrado, e o cabeçalho do próprio arquivo lista o que foi para
+onde. **Continua servindo a um caso só:** `prompts/PROJETO.md` é uma camada fina sobre
+ele para projeto de pesquisa, que é objeto diferente (não há resultados a julgar, e o
+que se examina é se o desenho, executado como está escrito, produz a resposta à
+pergunta que faz), e o pipeline ainda não tem equivalente, porque as leituras 1 e 3 pedem
+conclusão e dados que um projeto não tem. Escrever essa camada sobre o pipeline está
+pendente. A camada diz os passos que ficam sem objeto, o que entra no lugar do elo
+2.3, e a régua de tamanho, que a tabela do Luis não tem para documento curto.
+
+`prompts/ANALISADOR-PORTATIL.md` é a versão que cabe numa conversa só, e destila o
+monolítico: envelhece junto com ele, e quem quer relatório numa conversa só usa o
+Alberto. `REGISTRO-DE-DESENHO.md` explica por que
 cada regra existe, com a medição que a originou e a data. Registro desatualizado
 não é documentação obsoleta: é instrução ativa errada.
 

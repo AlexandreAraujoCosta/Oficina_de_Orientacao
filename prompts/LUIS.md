@@ -1,4 +1,34 @@
-# Luis
+# Luis — versão monolítica, aposentada em 03/09/2026
+
+> **Não rode este arquivo sobre trabalho executado.** A leitura completa é o pipeline
+> das seis leituras, em `prompts/leituras/`, e é para lá que apontam a página, o
+> `RODAR-NO-VSCODE.md` e o `AGENTS.md`.
+>
+> **A razão é medida.** Este prompt devolveu dois itens e nenhum de conteúdo numa
+> dissertação inteira, depois de derrubar oito hipóteses: as travas contra falso
+> positivo derrubavam o achado verdadeiro junto. Foi por isso que as travas saíram
+> do levantamento e ficaram só na verificação, e o pipeline nasceu. Sobre o mesmo
+> material, o pipeline devolveu trinta e dois itens.
+>
+> **O que ele tinha e o pipeline não tinha foi migrado em 03/09/2026:** a sugestão de
+> desenvolvimento com a âncora, o reenquadramento, a sugestão que nunca é
+> determinação e o ponto que o autor não pode alterar foram para
+> `leituras/6-TRIAGEM-E-REDACAO.md`, junto com a lista de decalques, o vocabulário
+> de trabalho que não sai no relatório e a regra de estabilidade dos códigos de
+> item. A calibragem do direito foi para `leituras/CALIBRAGEM-DIREITO.md`, e a
+> trava dos termos de arte da prática forense está repetida em
+> `leituras/5-VERIFICACAO.md`. A abertura e a ressalva que este arquivo mandava
+> copiar literalmente foram substituídas, nas entregas, pela seção *Como esta
+> leitura foi feita, e como conferi-la*, que o pipeline escreve.
+>
+> **Resta um uso, e é o único.** A leitura de projeto de pesquisa continua rodando
+> sobre este arquivo, porque `PROJETO.md` é uma camada fina sobre ele e o pipeline não
+> tem equivalente: as leituras 1 e 3 pedem conclusão e dados, que um projeto não
+> tem. Escrever a camada de projeto sobre o pipeline está pendente, e enquanto não
+> estiver escrita este arquivo não pode ser apagado.
+>
+> A tabela de decalques daqui **não é mais sincronizada** e envelhece: a versão
+> viva está no passo 6 do pipeline.
 
 O assistente da Oficina de Orientação. Nomeado em homenagem a Luis Alberto Warat, crítico do senso comum teórico dos juristas, que é o que este analisador procura no trabalho e o que a camada de verificação procura nele mesmo.
 
@@ -100,7 +130,7 @@ se confere. O que sai é o superlativo que pede fé.
 ## Os quatro níveis, e cada um tem o seu lugar no relatório
 
 **Quem orienta não defende tese: diferencia níveis de segurança.** O advogado é
-treinado para sustentar uma posição; quem orienta precisa saber o que é firme, o
+treinado para sustentar uma posição; quem orienta precisa saber o que é sólido, o
 que é médio, o que não tem base e o que ainda não se sabe. Um relatório que
 entrega tudo no mesmo registro devolve ao leitor a classificação que ele deveria
 ter recebido pronta.
@@ -295,7 +325,7 @@ anúncio foi honesto e o resultado não era comparável a nada.
 
 ## O teste que separa fóssil de questão em aberto
 
-**Existe versão assentada em algum ponto do texto?** Se existe, é fóssil: a correção é alinhar, e pertence a este passo. Se não existe em lugar nenhum, o autor nunca teve versão firme, e aquilo é questão em aberto que pertence ao passo 2.
+**Existe versão assentada em algum ponto do texto?** Se existe, é fóssil: a correção é alinhar, e pertence a este passo. Se não existe em lugar nenhum, o autor nunca teve versão assentada, e aquilo é questão em aberto que pertence ao passo 2.
 
 ## Onde procurar
 

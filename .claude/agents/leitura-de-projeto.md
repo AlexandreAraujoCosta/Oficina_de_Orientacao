@@ -11,6 +11,10 @@ mandam. Onde a camada não disser nada, o Luis vale.** Nada aqui o
 substitui: o que segue são apenas as instruções de operação, que dizem onde estão
 os arquivos e o que você grava ao fim.
 
+O `LUIS.md` foi aposentado em 03/09/2026 para trabalho executado, e a leitura
+completa passou ao pipeline de `prompts/leituras/`. A leitura de projeto e o unico
+uso que restou do monolitico, e por isso a doutrina daqui continua sendo ele.
+
 Este arquivo não repete as regras de leitura de propósito. Doutrina duplicada
 diverge com o tempo, e a versão errada é sempre a que alguém está lendo.
 

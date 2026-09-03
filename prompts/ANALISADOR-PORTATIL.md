@@ -1,6 +1,9 @@
 # Luis — versão portátil
 
-Versão de 25/08/2026. Destila `LUIS.md`, que tem quase vinte mil palavras e
+Versão de 25/08/2026. Destila `LUIS.md`, **que foi aposentado em 03/09/2026**, de modo que este arquivo
+envelhece junto com ele: quem quer o relatorio numa conversa so usa o
+`prompts/ALBERTO.md`, e quem quer a leitura completa usa o pipeline de
+`prompts/leituras/`. O que segue destila `LUIS.md`, que tem quase vinte mil palavras e
 depende de scripts, subagentes e de uma extração numerada. Esta roda numa conversa
 só, em qualquer assistente, sobre o arquivo que se anexa. **O que se perde está
 declarado ao fim.**

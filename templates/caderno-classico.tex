@@ -70,6 +70,28 @@
 \newcommand{\citado}[2]{{\bfseries\color{realce}#1}\footnote{Citado por: #2}\quad}
 \newcommand{\numero}[1]{{\bfseries\color{margemCor}#1}\quad}
 
+% Localizador de paragrafo no meio da prosa. Sao 443 deles nos tres
+% relatorios de 03/09/2026, e a maioria esta dentro da frase, nao entre
+% parenteses. Em corpo de texto e entre colchetes, o olho para em cada um.
+% Aqui perdem os colchetes, encolhem e esmaecem, e continuam achaveis com
+% Ctrl+F no arquivo de paragrafos numerados, que traz a mesma cadeia. O
+% mbox impede que a faixa quebre no traco.
+\newcommand{\loc}[1]{\mbox{{\footnotesize\color{margemCor}#1}}}
+
+% NOME DE ARQUIVO E URL ESTOURAM A MARGEM.
+%
+% Medido em 03/09/2026 nos seis PDFs: o nome do .docx anotado saia 56pt para
+% fora da caixa de texto nos tres relatorios do aluno, e as URLs dos trechos
+% inseridos faziam o mesmo nos do orientador. A causa e a mesma: cadeia longa
+% sem ponto de quebra. O hyphenat com htt deixa o TeX hifenizar dentro de
+% texto monoespacado, que e onde entram os nomes de arquivo; o xurl quebra a
+% URL em qualquer ponto; e o emergencystretch da folga a linha antes de o TeX
+% desistir e deixar transbordar.
+\usepackage[htt]{hyphenat}
+\usepackage{xurl}
+\setlength{\emergencystretch}{3em}
+\sloppy
+
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$

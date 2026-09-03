@@ -43,12 +43,22 @@ def main():
     linhas = ["# Apontamentos, como chegam a quem escreveu o trabalho", "",
               "Cada bloco abaixo e um comentario na margem do trabalho. Quem le",
               "tem o trabalho aberto e nao acompanhou analise nenhuma.", ""]
+    # A regra tem de ser a mesma do anotar_docx.py, senao este arquivo promete
+    # marcas que o Word nao vai receber. Sem `Marca`, o item marca UM ponto; com
+    # `Marca`, marca ate o teto. Em 02/09/2026 este texto anunciava 61 pontos
+    # para um item que ia marcar um so, e a conferencia de compreensibilidade
+    # leu a promessa, nao a realidade.
+    from anotar_docx import marcas as _marcas
+    TETO = 8
+    curtas = _marcas(a.lista)
     for cod, aponta, locs in lista:
         limpo = sem_localizador(aponta, secoes, pars)
         linhas += ["## %s" % cod, "", limpo, ""]
-        if len(locs) > 1:
-            linhas += ["*Este item chega repetido em %d pontos do trabalho.*"
-                       % len(locs), ""]
+        n = min(len(locs), TETO) if curtas.get(cod) else 1
+        if n > 1:
+            linhas += ["*Este item chega marcado em %d pontos do trabalho%s.*"
+                       % (n, ", de %d ao todo" % len(locs)
+                          if len(locs) > n else ""), ""]
 
     dest = Path(a.saida or (Path(a.lista).with_name(
         "COMENTARIOS-" + Path(a.lista).stem + ".md")))

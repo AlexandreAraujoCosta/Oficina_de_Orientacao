@@ -634,7 +634,11 @@
   <section class="prompts" id="prompts">
       <h2>O prompt, para a via do chat</h2>
       <p>Esta é a versão que cabe numa conversa só. A versão completa, que as vias com programas
-      usam, está em <code>prompts/LUIS.md</code> no repositório, e é cinco vezes maior.</p>
+      usam, são os seis prompts de <code>prompts/leituras/</code> no repositório, e somam
+      cinco vezes mais texto. O antigo prompt único <code>prompts/LUIS.md</code> foi
+      aposentado em 03/09/2026, porque devolvia dois itens e nenhum de conteúdo numa
+      dissertação inteira: as travas contra falso positivo derrubavam o achado
+      verdadeiro junto.</p>
       <p>Medida em 30/08/2026, contra o relatório da versão completa sobre a mesma
       dissertação: as duas convergem nos achados mais expostos, e cada uma pega o
       que a outra não pega. A portátil ganha no que um leitor atento com as páginas
@@ -927,7 +931,8 @@ claude</pre>
     <div class="pedido">
       <button type="button" class="copiar" data-alvo="c-pedido-claude">Copiar</button>
       <p class="pedido-rot">Cole isto na conversa:</p>
-      <pre class="pedido-txt" id="c-pedido-claude">Leia prompts/LUIS.md nesta pasta e siga o que ele manda.
+      <pre class="pedido-txt" id="c-pedido-claude">Leia prompts/leituras/ESTADO.md nesta pasta e rode o pipeline sobre este trabalho,
+seguindo os prompts numerados de prompts/leituras/ na ordem.
 
 Antes de tudo, se o trabalho for .docx, rode o diagnostico de forma, que le e
 nao mexe em nada:
@@ -1001,7 +1006,7 @@ python scripts/conferir_interno.py extracao/trabalho.txt
 O que o diagnostico apontar entra no relatorio como sugestao. Nenhum programa
 daqui altera o arquivo do autor.
 
-Depois faca a leitura do prompts/LUIS.md sobre a copia limpa, e monte a entrega
+Depois rode o pipeline de prompts/leituras/ sobre a copia limpa, e monte a entrega
 com scripts/montar_entrega.py.
 
 Nao rode git. Nao publique nada.</pre>

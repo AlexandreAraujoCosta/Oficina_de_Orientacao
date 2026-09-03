@@ -134,6 +134,49 @@ def preparar_para_latex(texto):
     # no meio da frase que o explica. Trocado por simbolo matematico, que existe
     # em qualquer instalacao.
     texto = texto.replace("▸", r"`$\triangleright$`{=latex}")
+
+    # OS LOCALIZADORES NO MEIO DA PROSA
+    #
+    # O relatorio cita o paragrafo do trabalho na propria frase, e sao muitos:
+    # 148, 179 e 116 nos tres relatorios do aluno de 03/09/2026. Em corpo de
+    # texto e entre colchetes, cada um e uma parada do olho, e num paragrafo
+    # medido havia seis. Reclamacao do usuario na mesma data.
+    #
+    # Nao da para move-los para a margem nem para nota: a maioria esta dentro da
+    # frase (so um quarto fica sozinho entre parenteses) e vinte e seis ABREM
+    # frase, onde o localizador e o sujeito. Mexer na posicao quebraria a sintaxe.
+    # O que se faz e tira-los do caminho sem tira-los do lugar: perdem os
+    # colchetes, encolhem e esmaecem. Continuam achaveis com Ctrl+F, porque o
+    # arquivo de paragrafos numerados traz a mesma cadeia Pxxx.
+    #
+    # As faixas vem primeiro: se as simples rodassem antes, [P714]-[P719]
+    # viraria dois comandos com um traco solto entre eles, e o traco quebraria
+    # linha.
+    #
+    # Duas formas convivem, e a divisao e por relatorio, nao por acaso: os da
+    # Duas dissertacoes escrevem [P714]-[P719], com um par de
+    # colchetes de cada lado (26 e 29 no relatorio do aluno), e uma tese
+    # escreve [P755-P760], tudo dentro de um par so (33). Medido em 03/09/2026.
+    # Tratar so uma delas deixaria um relatorio inteiro sem conversao.
+    texto = re.sub(
+        r"\[P(\d+)\s*[-–—]\s*P?(\d+)\]",
+        lambda m: "`\\loc{P%s–P%s}`{=latex}" % (m.group(1), m.group(2)), texto)
+    texto = re.sub(
+        r"\[P(\d+)\]\s*[-–—]\s*\[?P?(\d+)\]?",
+        lambda m: "`\\loc{P%s–P%s}`{=latex}" % (m.group(1), m.group(2)), texto)
+    texto = re.sub(
+        r"\[P(\d+)\]", lambda m: "`\\loc{P%s}`{=latex}" % m.group(1), texto)
+
+    # O HIFEN QUE SE REPETE NA LINHA SEGUINTE
+    #
+    # "2020-2025" saia como "2020-" e "-2025". Nao e defeito: e regra
+    # tipografica portuguesa, que repete o hifen ao quebrar um composto
+    # ("guarda-" / "-chuva"), e o polyglossia a aplica. Esta certa para palavra
+    # composta e errada para intervalo de numeros, onde se le como erro de
+    # digitacao. O mbox impede a quebra.
+    texto = re.sub(
+        r"\b(\d{4})\s*-\s*(\d{4})\b",
+        lambda m: "`\\mbox{%s–%s}`{=latex}" % (m.group(1), m.group(2)), texto)
     return texto
 
 
@@ -145,8 +188,8 @@ def preparar_para_latex(texto):
 #
 # O corte e no ultimo conectivo que introduz o nome, e so quando o que vem
 # depois parece nome proprio, isto e, comeca por maiuscula. "Relatorio sobre o
-# Capitulo 5 (Parte II), de Maria Fernanda" corta em ", de"; "Relatorio sobre a
-# dissertacao de Clarice Saavedra Vieira" corta em " de ". Titulo sem nome nao
+# Capitulo 5 (Parte II), de Fulano" corta em ", de"; "Relatorio sobre a
+# dissertacao de Fulano de Tal" corta em " de ". Titulo sem nome nao
 # corta, e sai numa linha so.
 RE_AUTORIA = re.compile(
     r"^(?P<obra>.+?)[,]?\s+d[eoa]s?\s+(?P<nome>[A-ZÁÉÍÓÚÂÊÔÃÕÇ][^,]*)$")
