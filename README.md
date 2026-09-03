@@ -55,10 +55,20 @@ bibliográfico e a densidade de prova por item.
 | | tokens | relógio |
 |---|---|---|
 | rápido, no chat | uma mensagem: o prompt (cerca de 6 mil) mais o trabalho | 1 a 3 min |
-| rápido, no agente | **270 a 320 mil**, incluindo a revisão | **41 a 48 min** |
+| rápido, no agente, **em Opus** | **270 a 320 mil**, incluindo a revisão | **41 a 48 min** |
+| rápido, no agente, **em Sonnet** | 344 mil | 21 min, e não vale |
 | completo | **acima de 1,15 milhão** | horas |
 
-**A linha do meio corrige um engano fácil:** os poucos milhares são o tamanho do
+**O modelo decide, e está medido.** Os dois leram a mesma tese com o mesmo prompt e a
+mesma cegueira. O **Opus** devolveu 7.723 palavras, 226 endereços, 20 correções e
+**zero trechos entre aspas**. O **Sonnet** devolveu 4.914 palavras, 60 endereços, 4
+correções e **122 trechos entre aspas, dos quais 56 não existem na fonte** — a trava
+mais antiga desta oficina, quebrada. Gastou mais tokens que o Opus e foi mais rápido
+no relógio, e é só isso que tem a favor. **Rode em Opus**, e se a sua conta só oferecer
+modelo menor, rode `scripts/conferir_entrega.py` antes de entregar: foi ele que pegou
+as 56.
+
+**A linha do agente corrige um engano fácil:** os poucos milhares são o tamanho do
 prompt, e não o da rodada. No agente o rápido lê o trabalho, abre parágrafos, roda
 programas e ainda passa por uma revisão que abre outros oitenta, e isso custa. **O que
 o separa do completo não é ser barato em termos absolutos: é ser quatro vezes mais
