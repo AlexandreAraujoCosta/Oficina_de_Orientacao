@@ -69,6 +69,34 @@ agente, em Opus 5, custa de 270 a 320 mil tokens e de 41 a 48 minutos, já conta
 revisão; a completa passa de 1,15 milhão e leva horas.** Os poucos milhares são o
 tamanho deste prompt, e não o da rodada.
 
+## Como o prompt entra na conversa, e isso não é detalhe
+
+**Colado inteiro, ele vira anexo, e a oficina já mediu o que isso muda.** Em dois
+assistentes rodados variando uma coisa só, a instrução chegando como anexo ou como
+corpo da mensagem, **o assistente descumpriu quatro regras quando ela chegou como
+anexo, e as quatro eram do mesmo tipo: as que mandam recusar alguma coisa.** Como
+corpo da mensagem, o mesmo modelo, na mesma conta, cumpriu as quatro.
+
+**Este prompt tem vinte e um mil caracteres, e colado inteiro ele costuma virar
+anexo.** Depois de colar, confira se ele está no campo de texto e não como arquivo, e
+onde o assistente oferecer o botão que converte de volta (no ChatGPT ele se chama
+*Mostrar no campo de texto*), use-o antes de enviar.
+
+**E há indício de que isso alcança a trava da transcrição.** Em 03/09/2026, duas
+rodadas em chat, cada uma numa conta diferente: naquela em que o prompt entrou **como
+texto**, o relatório saiu com **zero** trechos entre aspas; naquela em que entrou
+**como conteúdo colado**, saiu com **oitenta e quatro**. É consistente com a medição
+anterior, porque *nunca escreva nada entre aspas* é uma regra de recusa, e são as
+regras de recusa que caem.
+
+**Indício, e não medida, e o confundidor tem nome:** as duas rodadas foram em
+assistentes diferentes, de modo que modelo e forma de entrega variaram juntos. E o
+modelo pesa por conta própria: dois modelos leram este prompt do mesmo modo, num
+agente, e um deu zero e o outro cento e vinte e dois.
+
+**Por isso o conferidor mecânico roda sempre**, e não só quando se desconfia: ele
+funciona sem que se saiba a causa.
+
 ## Em que modelo rodar, e a resposta está medida
 
 **Rode em Opus.** Os dois modelos leram a mesma tese, com este prompt, no mesmo dia e
