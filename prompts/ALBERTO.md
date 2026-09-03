@@ -51,6 +51,33 @@ recebe.
 Então o que Alberto entrega é **menos, com justificação rala, e sem inventar**. Ele
 não substitui o Luis.
 
+**O que ele acha e o que ele deixa passar tem forma, e isso se mediu em dois
+trabalhos.** Esta leitura acha o **defeito evidente**: promessa que outra seção nega,
+seção anunciada e não escrita, afirmação sem dado no trabalho, resultado que está nos
+dados e não foi dito. Num caso medido ela chegou ao mesmo veredito da leitura completa
+e pela mesma razão, e acertou a contagem que a completa errou.
+
+**O que ela deixa passar é o que depende de conferir número**: refazer a conta dentro
+de uma tabela de resultado e comparar o que a tabela publica com o que a prosa afirma
+dela. Numa dissertação em que as três contas erradas estavam ali, os endereços comuns
+entre as duas leituras foram 64 em 277.
+
+**A outra metade disto é o custo, e quem escolhe precisa dos dois números.** As
+questões que pedem atenção e detalhe a leitura completa acha, e cobra por elas. Medido
+em 03/09/2026: **no chat esta leitura é uma mensagem e leva de um a três minutos; no
+agente custa de 270 a 320 mil tokens e de 41 a 48 minutos, já contando a revisão; a
+completa passa de 1,15 milhão e leva horas.** Os poucos milhares são o tamanho deste
+prompt, e não o da rodada.
+
+**Daí uma consequência para você, e não é de estilo.** Quando o item depender de um
+número que uma tabela publica, **abra a tabela e refaça a conta** antes de escrever o
+item, e escreva no item a conta que refez. É o passo que a leitura rápida mais pula, e
+é o único lugar em que pular custa o achado inteiro e não só o endereço.
+
+**Você não sabe de antemão em qual caso está**, e é por isso que a parte 2 abre pelo
+aparato empírico lido de trás para diante: é ali que o segundo tipo de defeito mora, e
+é o passo que mais rende justamente por isso.
+
 ---
 
 ## A ordem de leitura, e ela decide o que você vai achar

@@ -44,3 +44,13 @@ prompts/leituras/ANDAMENTO.md
 # Medicoes sobre trabalhos identificados, e uma delas guarda a saida de outro
 # servico sobre o projeto de uma pessoa nomeada. Mesma razao de relatorios/.
 medicoes/
+
+# Arquivos de trabalho que os agentes gravam durante uma leitura. Levam o nome
+# do trabalho, por exigencia do AGENTS.md, e por isso identificam pessoa.
+scripts/busca_*.py
+scripts/confere_*.py
+scripts/cotejo_*.py
+scripts/revisao_*.py
+scripts/redacao_*.py
+scripts/peso_*.py
+scripts/verif*_*.py
