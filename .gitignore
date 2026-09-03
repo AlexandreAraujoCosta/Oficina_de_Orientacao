@@ -36,3 +36,11 @@ RELATORIO*.md
 ANEXO*.md
 COMENTARIOS-*.md
 COMPREENSIBILIDADE-RESULTADO*.md
+
+# O andamento por trabalho identifica pessoa, e o repositorio traz a
+# maquinaria e nunca o material. Ver POLITICA.md.
+prompts/leituras/ANDAMENTO.md
+
+# Medicoes sobre trabalhos identificados, e uma delas guarda a saida de outro
+# servico sobre o projeto de uma pessoa nomeada. Mesma razao de relatorios/.
+medicoes/

@@ -15,21 +15,49 @@ As medições registradas nos comentários e no registro de desenho identificam 
 trabalho pelo gênero e pelo tamanho, jamais por quem o escreveu. O critério está
 em `POLITICA.md`.
 
-## As três ferramentas
+## As ferramentas
 
-**Alberto.** Dobra o trabalho sobre si mesmo, em quatro níveis: formal, numérica,
-categorial e textual. Serve em qualquer momento, porque não depende de haver
-argumento pronto. Programas levantam as suspeitas em segundos, e a leitura julga
-cada uma, porque nenhum programa distingue mudança declarada de deslize nem
-categoria bem usada de categoria inconsistente. **Confere consistência, e só:**
-o nome não avisa isso, e por isso está dito aqui.
+**Alberto, o relatório rápido.** Uma leitura, um a três minutos, e um relatório no
+mesmo formato do Luis. Cola em qualquer assistente de chat e também roda no agente,
+onde ganha uma revisão que derruba o que não se sustenta. O prompt está em
+`prompts/ALBERTO.md`.
 
-**Luis.** A leitura que julga o argumento, em quatro passos: consistência, a
-cadeia do marco e do método, o cotejo adversarial de cada apontamento, e o
-relatório. Pede desenvolvimento argumentativo suficiente, com resultados
-apresentados e conclusões escritas: rodado antes disso, julga o que ainda não
-existe. O prompt está em `prompts/LUIS.md`, e a versão que cabe numa conversa só,
-em `prompts/ANALISADOR-PORTATIL.md`.
+O que ele entrega, medido em 03/09/2026 sobre a mesma dissertação: **menos, com
+justificação rala, e sem inventar**. Vinte e nove afirmações de duas rodadas foram
+abertas na fonte e as vinte e nove estavam certas; mas as duas rodadas devolveram
+dezessete e doze itens, com seis em comum, contra os trinta e dois do Luis. Cada
+apontamento traz o endereço, e não a cadeia de prova que uma verificação independente
+produziria.
+
+**O que a extensão degrada é o endereço, e não o achado.** Uma passada única de dez
+mil palavras teve quatorze quedas em sessenta e sete afirmações, o que parece
+condená-la; lidas uma a uma, doze derrubam o endereço, a contagem ou uma afirmação
+acessória, e o apontamento continua de pé. Sobre vinte e seis itens, dois eram falsos.
+**Por isso o prompt não corta itens:** cortar para comprar precisão joga fora o achado
+verdadeiro junto com o endereço torto, que é o defeito medido do prompt monolítico
+anterior. O que ele impõe é disciplina de endereço, e a revisão que os confere.
+
+**Luis, o relatório completo.** Quatro leituras por caminhos diferentes, verificação,
+cotejo adversarial de cada apontamento, e a redação. Custa cerca de um milhão de
+tokens e quase uma hora. Pede desenvolvimento argumentativo suficiente, com
+resultados apresentados e conclusões escritas: rodado antes disso, julga o que ainda
+não existe. Os prompts estão em `prompts/leituras/`, e `ESTADO.md`, ali dentro, traz o
+desenho congelado com a medição que sustenta cada escolha.
+
+O prompt monolítico `prompts/LUIS.md` **foi aposentado em 03/09/2026** e não roda mais
+sobre trabalho executado: devolvia dois itens e nenhum de conteúdo numa dissertação
+inteira, porque as travas contra falso positivo derrubavam o achado verdadeiro junto.
+O que ele tinha e o pipeline não tinha foi migrado, e o cabeçalho do arquivo lista o que
+foi para onde. Ele segue no lugar por um motivo só: a leitura de projeto de pesquisa
+(`prompts/PROJETO.md`) é uma camada fina sobre ele, e o pipeline ainda não tem
+equivalente, porque duas de suas leituras pedem conclusão e dados que um projeto não
+tem.
+
+**Conferência de consistência.** Dobra o trabalho sobre si mesmo, em quatro níveis:
+formal, numérica, categorial e textual. Serve em qualquer momento, porque não depende
+de haver argumento pronto. **Confere consistência, e só**, sem julgar o argumento.
+Chamava-se Alberto até 03/09/2026, quando o nome passou ao relatório rápido; o prompt
+está em `prompts/CONSISTENCIA.md`.
 
 **Banca simulada.** Uma sessão de arguição com dois examinadores e o orientador
 presidindo. Parte do relatório e da apresentação do candidato, e devolve, além da
@@ -38,10 +66,14 @@ experiência de ser interpelado, o que a apresentação causou na banca.
 ## Duas vias de uso
 
 **No chat.** Os prompts de `prompts/` colam em qualquer assistente. Não instala
-nada e não custa nada. O que se perde: o cotejo feito por quem não escreveu os
-apontamentos, os localizadores `[P123]`, e o arquivo de volta.
+nada e não custa nada. **A ferramenta desenhada para esta via é o Alberto**, porque
+o chat precisa de resposta em minutos e ele entrega o relatório inteiro numa
+passada. O que se perde aqui: a revisão feita por quem não escreveu os apontamentos,
+os localizadores `[P123]`, e o arquivo de volta.
 
-**Com os programas.** A cadeia inteira, do texto extraído ao trabalho anotado.
+**Com os programas.** A cadeia inteira, do texto extraído ao trabalho anotado. Aqui
+cabem os dois: o Luis, com as quatro leituras e o cotejo, e o Alberto, que ganha a
+revisão que no chat não existe.
 
 **Antes de mais nada, se o que você tem é um `.docx`, normalize.** Trabalho de
 estudante raramente chega formatado por estilo, e o que se vê é sempre o mesmo:

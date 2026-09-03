@@ -59,8 +59,11 @@ for fluxo in (sys.stdout, sys.stderr):
 
 
 
-AUTOR = "Luis"
-INICIAIS = "AL"
+# O nome tem de dizer que e maquina. As iniciais eram "AL", que dentro do
+# Word se le como as do orientador, e o comentario chegava com a aparencia
+# de ter sido escrito por ele. Corrigido em 01/09/2026.
+AUTOR = "Luis (assistente de IA)"
+INICIAIS = "IA"
 DATA = "2026-01-01T12:00:00Z"
 
 RE_PAR_XML = re.compile(rb"<w:p(?:\s[^>]*)?/>|<w:p(?:\s[^>]*)?>.*?</w:p>", re.S)
@@ -68,8 +71,12 @@ RE_ITEM = re.compile(
     r"^## ([A-Z]{1,2}\d+)\s*$\n+\*\*Aponta:\*\* (.+?)\s*$\n+\*\*Abrir:\*\* (.*?)\s*$",
     re.M | re.S)
 RE_LOC = re.compile(r"\[P(\d+)\]")
+# O mesmo defeito de linha unica que estava no lista_corretor.py: com `$` e
+# re.M, o campo era cortado na primeira quebra, e a marca chegava a margem
+# terminando em preposicao. Corrigido em 02/09/2026.
 RE_MARCA = re.compile(
-    r"^## ([A-Z]{1,2}\d+)\s*$(?:(?!^## ).)*?^\*\*Marca:\*\* (.+?)\s*$",
+    r"^## ([A-Z]{1,2}\d+)\s*$(?:(?!^## ).)*?^\*\*Marca:\*\*\s*"
+    r"(.+?)(?=\n\s*\n|\s\*\*[A-ZÀ-Ú][^*\n]{0,40}:\*\*|\n## |\Z)",
     re.M | re.S)
 
 
@@ -182,7 +189,13 @@ def abertura(pars, n, limite=46):
     if len(s) <= limite:
         return s
     corte = s.rfind(" ", 0, limite)
-    return s[:corte if corte > 20 else limite] + "…"
+    # SEM reticencias. Elas ficavam dentro das aspas, e quem colava a cadeia
+    # inteira no Ctrl+F do Word nao achava nada e concluia que o paragrafo tinha
+    # mudado de lugar. Dito por quem recebeu, na conferencia de 02/09/2026: "vou
+    # concluir que o paragrafo mudou de lugar antes de concluir que preciso
+    # apagar tres pontos". O endereco e uma cadeia para colar, e tem de ser
+    # colavel inteira.
+    return s[:corte if corte > 20 else limite]
 
 
 def mapa_secoes(pars):
@@ -196,7 +209,19 @@ def mapa_secoes(pars):
         if p.level is not None and p.text.strip():
             s = " ".join(p.text.split())
             m = re.match(r"^(\d+(?:\.\d+)*)", s)
-            atual = m.group(1) if m else (s[:24].rsplit(" ", 1)[0] if len(s) > 24 else s)
+            # Cortar em 24 caracteres deixava o nome terminando em preposicao
+            # ou conjuncao ("em Perfil decisorio por", "em Comparando criticas
+            # e"), e quem recebeu procurou no sumario uma secao com esse nome,
+            # que nao existe. Corta-se antes da ultima palava curta.
+            if m:
+                atual = m.group(1)
+            elif len(s) > 24:
+                corte = s[:24].rsplit(" ", 1)[0]
+                while corte and len(corte.rsplit(" ", 1)[-1]) <= 3:
+                    corte = corte.rsplit(" ", 1)[0]
+                atual = corte or s[:24]
+            else:
+                atual = s
         mapa[p.idx] = atual
     return mapa
 
@@ -410,13 +435,24 @@ def main():
         # ocorrencia, e ai cada ponto e uma tarefa. Sem ele o item e uma
         # afirmacao sobre o conjunto, e repeti-la na margem em dezesseis lugares
         # produz eco: medido nesta entrega, 254 das 307 marcas eram continuacao.
+        # E ha um teto, porque marcar tudo tambem deixa de informar. Um item
+        # desta serie chegou a citar 61 pontos, e a margem de um capitulo com
+        # 61 balões da mesma cor nao se le: quem recebe para de abrir no
+        # terceiro. Acima do teto marcam-se os primeiros e diz-se, no primeiro
+        # balão, quantos ficaram de fora e onde estao listados.
+        TETO_MARCAS = 8
         curta = marca.get(cod)
         if curta and demais:
+            marcados, excedentes = demais[:TETO_MARCAS - 1], demais[TETO_MARCAS - 1:]
             texto = "**[%s]** %s" % (cod, limpo)
             if onde:
                 texto += "%s%s Os pontos estão marcados um a um." % (chr(10), onde)
+            if excedentes:
+                texto += ("%sSão %d ocorrências ao todo; %d estão marcadas aqui no "
+                          "documento, e a lista completa está no relatório."
+                          % (chr(10), len(validos), TETO_MARCAS))
             por_par.setdefault(alvo, []).append(texto)
-            for i, n in enumerate(demais, start=2):
+            for i, n in enumerate(marcados, start=2):
                 por_par.setdefault(n, []).append(
                     "**[%s]** %d de %d. %s" % (cod, i, len(validos), curta))
         else:

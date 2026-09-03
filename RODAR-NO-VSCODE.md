@@ -263,39 +263,46 @@ mensagem: é informação sobre a portabilidade, que é o que este teste procura
 Os programas levantaram suspeitas. Julgá-las é leitura, e daqui saem duas coisas
 diferentes conforme até onde você quiser ir.
 
-**A leitura completa é o Luis**, e é ela que vale como uso normal da oficina. São
-quatro passos sobre o mesmo trabalho: a consistência, a cadeia do marco e do
-método, o cotejo em que cada apontamento é testado contra o texto antes de sair,
-e o relatório. No mesmo chat, ainda em modo agente:
+**A leitura completa é o pipeline**, e é ela que vale como uso normal da oficina. São
+seis prompts em `prompts/leituras/`: três leituras em paralelo sobre caminhos
+diferentes do mesmo trabalho, a que pesa as contribuições, a verificação em que
+cada apontamento é testado contra o texto antes de sair, e a triagem com a
+redação. No mesmo chat, ainda em modo agente:
 
 ```
-Leia prompts/LUIS.md e siga os quatro passos sobre este trabalho. As suspeitas
-dos programas estão em SUSPEITAS-<nome>.md e na extração em extracao/. Escreva
+Leia prompts/leituras/ESTADO.md e rode o pipeline sobre este trabalho, seguindo os
+prompts numerados de prompts/leituras/ na ordem. A extração numerada está em
+extracao/ e as suspeitas dos programas em SUSPEITAS-<nome>.md. Escreva
 RELATORIO.md e ANEXO.md, com o anexo na forma que o AGENTS.md descreve. Não
 digite trecho do trabalho: indique o parágrafo pelo número.
 ```
 
-**E parar no Alberto é uso legítimo, não meia análise.** O Alberto é a camada de
-consistência sozinha: dobra o trabalho sobre si mesmo em quatro níveis, formal,
-numérico, categorial e textual, e não julga argumento. Ele serve em qualquer
-momento da escrita, inclusive quando ainda não há argumento pronto, e é o que
-cabe folgado numa assinatura modesta. Para ficar por aí:
+**O `prompts/LUIS.md` não roda mais aqui.** Era o prompt monolítico e foi
+aposentado em 03/09/2026, porque devolvia dois itens e nenhum de conteúdo numa
+dissertação inteira: as travas contra falso positivo derrubavam o achado
+verdadeiro junto. Continua no lugar por causa da leitura de projeto de pesquisa,
+que ainda depende dele.
+
+**E parar no Alberto é uso legítimo, não meia análise.** O Alberto lê uma vez e
+escreve o relatório inteiro, no mesmo formato de oito partes, em um a três
+minutos. O que ele entrega é menos, com justificação mais rala, e sem inventar.
+Para ficar por aí:
 
 ```
-Julgue as suspeitas de SUSPEITAS-<nome>.md e da extração, uma a uma, abrindo o
-parágrafo citado para decidir se é deslize ou decisão do autor. Não digite
-trecho: indique o parágrafo pelo número. Diga quantas descartou e por quê.
+Leia prompts/ALBERTO.md e siga o que ele manda sobre este trabalho, inclusive a
+revisão do fim. A extração numerada está em extracao/. Escreva RELATORIO.md.
 ```
 
-**O que decide entre os dois é o estado do trabalho**, e não o gosto. O Luis pede
+**O que decide entre os dois é o prazo e o estado do trabalho.** O pipeline pede
 desenvolvimento argumentativo suficiente, com resultados apresentados e
-conclusões escritas: rodado antes disso, ele julga o que ainda não existe. O
-Alberto não pede nada disso.
+conclusões escritas: rodado antes disso, julga o que ainda não existe. E custa
+cerca de um milhão de tokens contra os poucos milhares do Alberto.
 
-**Este é o segundo ponto de medição.** A cadeia do Luis é outra ordem de grandeza:
-o prompt tem cerca de 26 mil tokens e o trabalho inteiro entra junto, em vários
-passos. É onde eu esperaria a primeira parede, por contexto ou por cota. Se
-parar, anote em que passo, e note que o Alberto continua funcionando.
+**Este é o segundo ponto de medição.** O pipeline é outra ordem de grandeza: o trabalho
+inteiro entra junto, em vários passos, e a rodada completa fica por volta de um
+milhão de tokens e quase uma hora. É onde eu esperaria a primeira parede, por
+contexto ou por cota. Se parar, anote em que passo, e note que o Alberto continua
+funcionando.
 
 ## 7. Montar a entrega
 

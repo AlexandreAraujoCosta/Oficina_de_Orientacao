@@ -164,13 +164,15 @@ def guia(indice, rotulos, fonte, contagem, com_trecho):
     faixa = f"[P{numeros[0]}] a [P{numeros[-1]}]" if numeros else "(vazio)"
     exemplo = f"[P{numeros[len(numeros) // 3]}]" if numeros else "[P1]"
     linhas = [
-        "## Como ler este relatório",
+        "## Como esta leitura foi feita, e como conferi-la",
         "",
-        "**Quem escreveu isto.** Um programa que lê o trabalho inteiro e compara "
-        "cada afirmação com as demais, procurando onde uma contradiz a outra ou "
-        "onde o texto afirma mais do que mediu. Ele não leu as obras citadas nem "
-        "conhece o campo, e por isso o julgamento sobre o mérito continua sendo de "
-        "quem orienta e de quem examina.",
+        "**Quem escreveu isto.** Sou o Luis, um leitor automático. Leio o trabalho "
+        "inteiro e comparo cada afirmação com as demais, procurando onde uma "
+        "contradiz a outra ou onde o texto afirma mais do que mediu. Não li as obras "
+        "citadas nem conheço o campo como quem o pratica, e por isso o julgamento "
+        "sobre o mérito continua sendo de quem orienta e de quem examina. O que eu "
+        "faço bem é conferir, e é sob essa medida que este relatório deve ser lido: "
+        "onde ele elogia, elogia coisa conferida.",
         "",
         f"**Versão lida:** `{fonte}`. Se você tem mais de uma versão no computador, "
         "é esta a que foi analisada, e apontamento sobre versão diferente não vale.",
@@ -226,7 +228,16 @@ def guia(indice, rotulos, fonte, contagem, com_trecho):
     return linhas
 
 
-def processar(relatorio, trabalho, saida, limite, todas, max_por_item=None):
+def processar(relatorio, trabalho, saida, limite, todas, max_por_item=None,
+              so_secoes=None):
+    """so_secoes restringe a insercao as secoes cujo titulo contenha um dos termos.
+
+    A versao do aluno nao recebe trechos, porque ela anda com o `.docx` comentado e
+    o paragrafo esta na margem, no ponto exato. **Os questionamentos sao a excecao,
+    e a razao e que ali nao ha margem que os resolva**: questionamento nao vira
+    comentario no Word, entao a autora teria de abrir o arquivo de paragrafos para
+    cada um. Pedido do usuario em 03/09/2026.
+    """
     indice = dict(carregar(trabalho))
     corpo = Path(relatorio).read_text(encoding="utf-8", errors="replace")
 
@@ -235,7 +246,7 @@ def processar(relatorio, trabalho, saida, limite, todas, max_por_item=None):
     vistos = set()          # (item, numero) ja inseridos
     inseridos, ausentes, remissoes = 0, [], 0
     rotulo, por_item, cortados = None, 0, 0
-    sem_trecho = False
+    sem_trecho = bool(so_secoes)   # com so_secoes, so a secao nomeada insere
     # Numero citado sozinho e que nao existe e defeito do relatorio. Numero que
     # so aparece por expansao de faixa e nao existe e buraco da numeracao: o
     # extrator nao rotula paragrafo vazio, entao a serie tem lacunas legitimas.
@@ -245,15 +256,42 @@ def processar(relatorio, trabalho, saida, limite, todas, max_por_item=None):
     lacunas = []
     dentro_de_codigo = False
 
+    # O TRECHO ENTRA NO FIM DO PARAGRAFO, E NAO NO FIM DA LINHA.
+    #
+    # Ate 03/09/2026 o bloco era emitido logo depois da linha que trazia o
+    # localizador. O relatorio e quebrado em 80 colunas, entao "a linha" quase
+    # nunca e a frase: numa entrega de dissertacao, um item de lista foi cortado
+    # em "O teste que separa as duas categorias e se o espaco" e o resto da frase
+    # so voltava depois de um bloco de citacao de doze linhas. E o mesmo defeito
+    # que apareceu a noite toda noutros lugares: tratar linha fisica como unidade
+    # de sentido. Aqui os blocos se acumulam e saem juntos na linha em branco.
+    trechos_pendentes = []
+
     for linha in corpo.splitlines():
         if linha.lstrip().startswith("```"):
             dentro_de_codigo = not dentro_de_codigo
+        if trechos_pendentes and not linha.strip():
+            saida_linhas.append("")
+            saida_linhas.extend(trechos_pendentes)
+            trechos_pendentes = []
         saida_linhas.append(linha)
 
         if dentro_de_codigo:
             continue
         if RE_TITULO.match(linha):
-            sem_trecho = any(k in linha.lower() for k in SEM_TRECHO)
+            if so_secoes:
+                # SO O TITULO DE SECAO REAVALIA, E NAO O DE ITEM.
+                #
+                # Um relatorio escreve os itens da secao como `### Q3. ...` e
+                # outro como `**Q3. ...**`. Reavaliando em qualquer nivel, o
+                # primeiro saia da secao no item seguinte ao titulo dela, e a
+                # entrega de uma tese ficou com zero trechos onde a de uma
+                # dissertacao teve dezoito. Medido em 03/09/2026.
+                nivel = len(linha) - len(linha.lstrip("#"))
+                if nivel <= 2:
+                    sem_trecho = not any(k in linha.lower() for k in so_secoes)
+            else:
+                sem_trecho = any(k in linha.lower() for k in SEM_TRECHO)
         m = RE_ITEM.match(linha)
         if m:
             item = m.group(1)
@@ -298,7 +336,6 @@ def processar(relatorio, trabalho, saida, limite, todas, max_por_item=None):
         if not pendentes:
             continue
 
-        saida_linhas.append("")
         anterior = None
         # A linha ">" entre dois blocos e o que os torna paragrafos distintos:
         # linhas de citacao consecutivas, sem ela, o markdown junta num
@@ -306,21 +343,32 @@ def processar(relatorio, trabalho, saida, limite, todas, max_por_item=None):
         # citados saem como um muro de texto. `bloco` retira o separador final,
         # o que esta certo para ele sozinho e errado para quem o chama em serie,
         # entao a recomposicao e aqui. Defeito entregue em 24/08/2026.
-        primeiro = True
+        #
+        # Os blocos vao para a fila, e nao para a saida: quem os solta e a linha
+        # em branco que fecha o paragrafo. `primeiro` olha a fila, e nao um
+        # contador local, porque duas linhas do mesmo paragrafo podem trazer
+        # localizadores e os blocos das duas saem juntos.
+        primeiro = not trechos_pendentes
         for n in sorted(dict.fromkeys(pendentes)):
             b = bloco(indice, n, n, limite)
             if not b:
                 anterior = n
                 continue
             if not primeiro:
-                saida_linhas.append(">")
+                trechos_pendentes.append(">")
             if anterior is not None and n != anterior + 1:
-                saida_linhas.append("> *[...]*")
-                saida_linhas.append(">")
-            saida_linhas.extend(b)
+                trechos_pendentes.append("> *[...]*")
+                trechos_pendentes.append(">")
+            trechos_pendentes.extend(b)
             inseridos += 1
             primeiro = False
             anterior = n
+
+    # O ultimo paragrafo do arquivo pode nao terminar em linha em branco, e o
+    # bloco dele ficaria na fila sem sair.
+    if trechos_pendentes:
+        saida_linhas.append("")
+        saida_linhas.extend(trechos_pendentes)
         saida_linhas.append("")
 
     # A guia entra DEPOIS da ementa, e nao antes. O leitor abre o arquivo para
@@ -381,11 +429,19 @@ def processar(relatorio, trabalho, saida, limite, todas, max_por_item=None):
     # script nao acrescenta outra: duas secoes com o mesmo titulo, uma logo
     # depois da outra, foi defeito entregue em 24/08/2026.
     ja_tem = any(l.strip().lower().startswith("## como ler") for l in saida_linhas)
-    if ja_tem:
-        novo = [""] + nota + [""]
+    if not ja_tem:
+        # O guia desce para o fim, e ate 01/09/2026 abria o documento. Uma
+        # leitura fria feita por quem recebe trabalho desses devolveu que a
+        # primeira pagina era toda aparato e ressalva: quem escreveu o capitulo
+        # lia como o instrumento funciona, o que nao foi conferido e que a
+        # decisao continua sendo de outro, antes de chegar a uma linha sobre o
+        # proprio trabalho. Ressalva na abertura assusta e e pulada, de modo
+        # que nem cumpre a funcao de honestidade que a justificava. Ela se
+        # cumpre por existir e ser achada, e nao por vir primeiro.
+        saida_linhas += ["", "---", ""] + guia(
+            indice, rotulos, Path(trabalho).name, contagem, inseridos > 0) + nota + [""]
     else:
-        novo = [""] + guia(indice, rotulos, Path(trabalho).name, contagem, inseridos > 0) + [""] + nota + [""]
-    saida_linhas[corte + 1:corte + 1] = novo
+        saida_linhas[corte + 1:corte + 1] = [""] + nota + [""]
 
     cabecalho = (
         "<!-- Parágrafos inseridos por scripts/relatorio_autossuficiente.py a partir\n"
@@ -426,8 +482,14 @@ def main():
     ap.add_argument("--max-por-item", type=int, default=None,
                     help="teto de parágrafos inseridos por item; o excedente "
                          "fica só como localizador, e se confere no caderno")
+    ap.add_argument("--so-secoes", nargs="+", metavar="TERMO",
+                    help="insere so nas secoes cujo titulo contenha um destes "
+                         "termos. A entrega do aluno usa --so-secoes questionamento, "
+                         "porque questionamento nao vira comentario no Word e ali "
+                         "o localizador nao se resolve na margem")
     a = ap.parse_args()
-    processar(a.relatorio, a.trabalho, a.saida, a.limite, a.todas, a.max_por_item)
+    processar(a.relatorio, a.trabalho, a.saida, a.limite, a.todas, a.max_por_item,
+              so_secoes=[s.lower() for s in a.so_secoes] if a.so_secoes else None)
     return 0
 
 

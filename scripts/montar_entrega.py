@@ -16,6 +16,8 @@ Uso:
 """
 
 import argparse
+import hashlib
+import re
 import subprocess
 import sys
 from datetime import date
@@ -92,6 +94,13 @@ def main():
     ap.add_argument("--aceitar-citacoes", action="store_true",
                     help="monta mesmo com citacao que nao confere; carimba o relatorio")
     ap.add_argument("--sem-pdf", action="store_true")
+    ap.add_argument("--sem-docx", action="store_true",
+                    help="nao anota o .docx do autor. Uma rodada produz dois "
+                         "relatorios, e so um deles tem a lista inteira de itens: "
+                         "o do aluno remete a margem em vez de repetir os itens, e "
+                         "anotar por ele produziria um .docx com parte dos "
+                         "comentarios, por cima do bom. Medido em 01/09/2026: 14 "
+                         "comentarios no lugar de 47.")
     ap.add_argument("--sem-conferencia", action="store_true",
                     help="monta sem a conferência de compreensibilidade, assumindo a falta")
     ap.add_argument("--pdf", help="o PDF da MESMA versão do trabalho, para o mapa de páginas")
@@ -131,10 +140,63 @@ def main():
                 "decide item a item: so mantem como esta o que ja responde a objecao.\n"
                 "\nPara montar sem isso, e assumindo a falta: --sem-conferencia."
                 % conf.name)
-        if conf.stat().st_mtime < Path(a.relatorio).stat().st_mtime:
+        # A TRAVA E DE CONTEUDO, E NAO DE DATA.
+        #
+        # Ate 03/09/2026 a comparacao era de data de modificacao, e eu passei por
+        # ela copiando o arquivo da conferencia para dentro das pastas dos tres
+        # trabalhos: a data ficou nova e nenhuma leitura nova aconteceu. Data se
+        # atualiza por acidente (copiar, salvar no editor, tocar no arquivo); o
+        # selo so aparece se alguem rodar selar_conferencia.py apontando para as
+        # duas coisas. Nao impede a mesma fraude, mas exige que ela seja um ato.
+        selo = re.search(
+            r"^<!--\s*selo:\s*sha256=([0-9a-f]{64})\b[^>]*-->\s*$",
+            conf.read_text(encoding="utf-8"), re.M)
+        atual = hashlib.sha256(Path(a.relatorio).read_bytes()).hexdigest()
+        if not selo:
             sys.exit(
-                "\n%s e mais antigo que o relatorio: a conferencia rodou sobre uma\n"
-                "versao anterior. Rode de novo sobre esta." % conf.name)
+                "\n%s nao tem selo, e a data do arquivo nao prova leitura nenhuma.\n"
+                "\nDepois que a conferencia rodar SOBRE ESTA versao do relatorio:\n"
+                "  python selar_conferencia.py %s %s\n"
+                "\nPara montar sem isso, e assumindo a falta: --sem-conferencia."
+                % (conf.name, conf.name, Path(a.relatorio).name))
+        if selo.group(1) != atual:
+            sys.exit(
+                "\n%s foi selado sobre OUTRA versao do relatorio.\n"
+                "  selo:  %s\n  atual: %s\n"
+                "\nO relatorio mudou depois da conferencia. Rode a conferencia sobre\n"
+                "esta versao e sele de novo, ou monte com --sem-conferencia."
+                % (conf.name, selo.group(1)[:16], atual[:16]))
+
+    # AS CONFERENCIAS MECANICAS, QUE NAO DEPENDEM DE NINGUEM LEMBRAR
+    #
+    # A trava de compreensibilidade custa uma leitura inteira e e julgamento
+    # humano. Os defeitos que mais custaram em 03/09/2026 nao eram de julgamento:
+    # seis aspas que nao estavam na fonte, 45 ocorrencias de vocabulario de
+    # trabalho, e a perifrase que deixa o numero para acreditar. Os tres se
+    # conferem por programa, e por isso passam a se conferir sempre.
+    #
+    # A extracao e opcional porque nem toda montagem a tem a mao; sem ela, a
+    # conferencia de aspas nao roda, e isso vai DITO, para que a falta nao se
+    # leia como aprovacao.
+    extracao = RAIZ.parent.parent / "TCC" / "extracao" / (
+        Path(a.trabalho).stem + ".txt")
+    if not a.sem_conferencia:
+        if extracao.exists():
+            saida = subprocess.run(
+                [sys.executable, str(RAIZ / "conferir_entrega.py"),
+                 a.relatorio, str(extracao)],
+                capture_output=True, text=True, encoding="utf-8", errors="replace")
+            print((saida.stdout or "").rstrip())
+            if saida.returncode == 1:
+                sys.exit(
+                    "\nAs conferencias mecanicas reprovaram. Corrija e monte de novo,\n"
+                    "ou monte assumindo a falta com --sem-conferencia.")
+            if saida.returncode == 2:
+                sys.exit("\nO proprio conferidor esta quebrado. Nao monto sobre ele.")
+        else:
+            print("  aviso: nao achei %s, e por isso NAO conferi as aspas contra a"
+                  % extracao.name)
+            print("         fonte. Isto e falta de conferencia, e nao aprovacao.")
 
     rel = Path(a.relatorio).read_text(encoding="utf-8").rstrip()
     anx = Path(a.anexo).read_text(encoding="utf-8").lstrip()
@@ -143,6 +205,29 @@ def main():
     if anx.startswith("# "):
         linha, _, resto = anx.partition("\n")
         anx = "# " + linha[2:].strip() + "\n" + resto
+
+    # NA ENTREGA DO ALUNO, O ANEXO ENCOLHE PARA A LISTA DE TITULOS.
+    #
+    # Estes itens sao os que nao mudam nenhuma afirmacao do trabalho, e todos
+    # viram comentario na margem do `.docx`: o indice do corretor executa S, D e
+    # SC, e SC e o que o anexo traz. Medido em 03/09/2026: 14, 6 e 4 itens de
+    # anexo nos tres trabalhos, com 15, 14 e 11 mencoes nos baloes do Word.
+    # Repetir aqui o texto inteiro deles e dizer duas vezes o que ja esta no
+    # ponto exato, e alonga em mil e quinhentas palavras a peca que ela le do
+    # comeco ao fim. Fica o titulo, que serve de indice, e a frase que diz onde
+    # estao. Pedido do usuario em 03/09/2026.
+    if a.sem_docx:
+        titulos = re.findall(r"^#{2,4}\s*((?:[A-Z]{1,2}\d+)\.\s*.+?)\s*$", anx, re.M)
+        cabecalho = anx.split("\n", 1)[0] if anx.startswith("# ") else \
+            "# Correções que não mudam nenhuma afirmação"
+        anx = "\n".join(
+            [cabecalho, "",
+             "São %d, e nenhuma delas altera o que o trabalho afirma: são acabamento, "
+             "grafia, remissão e numeração. **Todas estão marcadas na margem do "
+             "arquivo `.docx` comentado**, no parágrafo exato, com a providência "
+             "escrita no balão. A lista abaixo serve de índice do que você vai "
+             "encontrar lá, e não pede leitura." % len(titulos), ""]
+            + ["- %s" % t for t in titulos] + [""])
 
     # A entrega se arquiva sozinha: onze arquivos por rodada, e mais de uma
     # rodada por trabalho, nao cabem empilhados no diretorio corrente.
@@ -185,9 +270,12 @@ def main():
     print("  montado: %s" % destino)
 
     docx = a.trabalho.lower().endswith(".docx")
-    # Num .docx o comentario ja esta na margem do paragrafo certo, e a
-    # numeracao so existia para suprir a falta disso.
-    if not a.sem_paragrafos and not docx:
+    # Vale tambem para .docx, e ate 01/09/2026 nao valia: supunha-se que a
+    # margem do Word substituisse a numeracao. Ela substitui apenas nos itens
+    # que viraram comentario. O relatorio cita paragrafo em todo o resto (nos
+    # pontos fortes, na avaliacao secao a secao, nas questoes), e sem este
+    # arquivo esses [P123] nao se resolvem para quem recebe.
+    if not a.sem_paragrafos:
         paragrafos(a.trabalho, destino)
 
     # O indice que o corretor percorre. Vai junto porque separado nao e enviado.
@@ -208,7 +296,7 @@ def main():
       print((r.stdout or "").rstrip() or (r.stderr or "")[-300:])
 
     # O .docx anotado: o mesmo relatorio, na margem do documento do autor.
-    if a.trabalho.lower().endswith(".docx"):
+    if a.trabalho.lower().endswith(".docx") and not a.sem_docx:
         lista = destino.with_name("ENTREGA-CORRETOR-" + Path(a.relatorio).name)
 
         # ---- o mapa de paginas, que e o endereco que quem recebe sabe usar.
@@ -258,13 +346,46 @@ def main():
         if mapa.exists():
             mapa.unlink()
 
-    com = destino.with_name(destino.stem + "-COM-TRECHOS.md")
-    r = subprocess.run([sys.executable, str(RAIZ / "relatorio_autossuficiente.py"),
-                        str(destino), a.trabalho, "--saida", str(com)],
-                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    # QUEM RECEBE O .DOCX COMENTADO NAO PRECISA DO PARAGRAFO TRANSCRITO
+    #
+    # A insercao existe para que o relatorio se leia sem abrir o trabalho ao
+    # lado, e isso vale para quem orienta, que le o PDF e nao abre o Word do
+    # orientando. Para quem escreveu, o comentario ja esta na margem do
+    # paragrafo: a transcricao devolve o proprio texto dela, de novo, e paga
+    # caro por isso. Medido em 03/09/2026 numa entrega: o PDF do aluno tinha
+    # 27.647 palavras, das quais 21.179 eram trechos do trabalho dela, 77% do
+    # documento, e 50 paginas contra as 18 do relatorio sozinho.
+    # A do aluno anda com o .docx comentado: o paragrafo esta a vista, na margem,
+    # no ponto exato, e os demais localizadores se resolvem no arquivo de
+    # paragrafos numerados que vai junto. Transcrever ali e devolver a ela o
+    # proprio texto, de novo. Medido em 03/09/2026: com insercao, o PDF do aluno
+    # tinha 27.647 palavras, das quais 21.179 eram trechos do trabalho dela, 77%
+    # do documento, em 50 paginas.
+    #
+    # OS QUESTIONAMENTOS SAO A EXCECAO, e a razao e mecanica: o indice do corretor
+    # so executa S, D e SC, entao questionamento NAO vira comentario no Word. Ali
+    # o localizador nao tem margem que o resolva, e a autora teria de abrir o
+    # arquivo de paragrafos a cada pergunta. Pedido do usuario em 03/09/2026.
+    # O nome nao muda para o aluno: `-COM-TRECHOS` descreve o documento do
+    # orientador, que traz o trabalho inteiro citado. A entrega dela continua
+    # sendo ENTREGA-RELATORIO-ALUNO, com os trechos so onde eles fazem falta.
+    if a.sem_docx:
+        com = destino.with_name(destino.stem + "-tmp-q.md")
+    else:
+        com = destino.with_name(destino.stem + "-COM-TRECHOS.md")
+    cmd = [sys.executable, str(RAIZ / "relatorio_autossuficiente.py"),
+           str(destino), a.trabalho, "--saida", str(com)]
+    if a.sem_docx:
+        cmd += ["--so-secoes", "questionamento"]
+    r = subprocess.run(cmd, capture_output=True, text=True,
+                       encoding="utf-8", errors="replace")
     print((r.stdout or "").rstrip())
     if r.returncode != 0:
         sys.exit((r.stderr or "")[-600:])
+    if a.sem_docx:
+        destino.write_text(com.read_text(encoding="utf-8"), encoding="utf-8")
+        com.unlink()
+        com = destino
 
     if a.sem_pdf:
         return 0
@@ -275,23 +396,31 @@ def main():
     if not (docx and pdf.exists()):
         return 0
 
-    # Docx entra, docx sai: fica o trabalho anotado e o PDF do relatorio. O
-    # resto e andaime, e so se recolhe depois que o PDF existe, porque sem
-    # pandoc ele nao existe e o markdown passa a ser a unica saida.
-    guardar = {pdf.name, ("ENTREGA-ANOTADO-" + Path(a.trabalho).name)}
-    tmp = destino.parent / "tmp"
-    tmp.mkdir(exist_ok=True)
+    # TRES ARQUIVOS NA RAIZ DA ENTREGA, E O RESTO EM complementos/
+    #
+    # Quem abre a pasta tem de ver o que abrir, e ate 01/09/2026 via uma lista
+    # em que o PDF disputava atencao com arquivo de trabalho. Ficam na raiz o
+    # relatorio (PDF), o trabalho anotado (.docx) e o .md com os paragrafos
+    # numerados, sem o qual os [P123] do relatorio nao se resolvem. O resto
+    # nao se apaga, porque cada peca ja foi precisa uma vez: desce um nivel.
+    # Uma rodada produz mais de um relatorio (o do aluno e o do orientador, que
+    # nao abre o .docx e por isso precisa das demonstracoes no corpo). A regra e
+    # por especie, e nao por nome: todo PDF fica. Guardar so `pdf.name` fazia a
+    # segunda montagem mandar o PDF da primeira para complementos.
+    paragrafos_md = destino.name.replace("ENTREGA-", "ENTREGA-PARAGRAFOS-", 1)
+    guardar = {("ENTREGA-ANOTADO-" + Path(a.trabalho).name), paragrafos_md}
+    # Com --sem-docx o .docx anotado veio de outra montagem desta mesma rodada,
+    # e nao pode ser recolhido por nao ter sido produzido aqui.
+    compl = destino.parent / "complementos"
     recolhidos = 0
-    for peca in destino.parent.glob("ENTREGA-*"):
-        if peca.name in guardar or peca.is_dir():
+    for peca in sorted(destino.parent.iterdir()):
+        if peca.is_dir() or peca.name in guardar or peca.suffix.lower() == ".pdf":
             continue
-        peca.replace(tmp / peca.name)
+        compl.mkdir(exist_ok=True)
+        peca.replace(compl / peca.name)
         recolhidos += 1
-    for peca in tmp.iterdir():
-        peca.unlink()
-    tmp.rmdir()
-    print("  %d intermediarios recolhidos e apagados; ficam o .docx anotado e o PDF"
-          % recolhidos)
+    print("  raiz da entrega: PDF, .docx anotado e os parágrafos numerados; "
+          "%d peça(s) em complementos/" % recolhidos)
     return 0
 
 

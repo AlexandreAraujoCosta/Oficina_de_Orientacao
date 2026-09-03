@@ -80,11 +80,41 @@ def itens(texto, origem, regex):
         # prioridade, e nao o item. O que separa e o titulo ter substancia.
         if len(titulo) < 25 and len(corpo.strip()) < 200:
             continue
+
+        # O TITULO DIAGNOSTICA; O COMENTARIO NA MARGEM TEM DE DIZER O QUE FAZER.
+        #
+        # Na margem do Word chega este titulo, e nada mais: a demonstracao e a
+        # providencia ficam no relatorio, que quem corrige nao tem ao lado do
+        # paragrafo. Uma conferencia de compreensibilidade em 01/09/2026
+        # reprovou quatro de vinte e seis itens exatamente por isso, e a frase
+        # que a leitora escrevia comecava por "procurar". Se o item traz
+        # `**O que fazer:**`, ele entra aqui, colado ao diagnostico.
+        # Para no proximo campo em negrito, e nao so na linha em branco: sem
+        # isso `**O que muda:**` entrava junto, e ele e do relatorio, nao da
+        # margem. Quem corrige quer a providencia, e a consequencia ja esta
+        # dita no documento que acompanha.
+        fazer = re.search(
+            r"^\*\*O que fazer:\*\*\s*(.+?)"
+            r"(?=\n\s*\n|\s\*\*[A-ZÀ-Ú][^*\n]{0,40}:\*\*|\Z)",
+            corpo, re.M | re.S)
+        if fazer:
+            titulo = "%s. O que fazer: %s" % (
+                titulo.rstrip("."), " ".join(fazer.group(1).split()))
         # A instrucao curta que o item traz quando a correcao e a mesma em cada
         # ocorrencia. Ela decide, no anotar_docx.py, se o item marca todos os
         # pontos que cita ou um so; sem ela, item que cita quinze lugares
         # marcaria os quinze e a margem viraria eco.
-        mm = re.search(r"^\*\*Marca:\*\*\s*(.+?)\s*$", corpo, re.M)
+        # Ate 02/09/2026 este padrao terminava em `$` com re.M, e por isso
+        # capturava so a PRIMEIRA LINHA FISICA do campo. Num relatorio em que
+        # o `Marca` ocupava duas linhas, o texto que ia para a margem do Word
+        # acabava em preposicao ("conferir se ha entrada correspondente na"),
+        # e uma conferencia de compreensibilidade leu isso como frase cortada
+        # do proprio relatorio. Nao era: o relatorio estava inteiro, e quem
+        # cortava era este programa. Agora vai ate a linha em branco ou ate o
+        # campo seguinte em negrito, como o `O que fazer`.
+        mm = re.search(
+            r"^\*\*Marca:\*\*\s*(.+?)(?=\n\s*\n|\s\*\*[A-ZÀ-Ú][^*\n]{0,40}:\*\*|\Z)",
+            corpo, re.M | re.S)
         achados.append((cod, titulo, locs, origem, mm.group(1) if mm else None))
     return achados
 

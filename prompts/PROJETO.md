@@ -5,6 +5,13 @@ repete e não o substitui: diz o que muda quando o documento é um plano de pesq
 ainda não executada, e mais nada. Se algo aqui parecer contradizer o Luis, o Luis
 vale, salvo nos quatro pontos abaixo, que são exatamente as exceções.
 
+> **O `LUIS.md` foi aposentado em 03/09/2026 para trabalho executado**, e a
+> leitura completa passou ao pipeline em `prompts/leituras/`. **A leitura de projeto
+> e o unico uso que restou dele**, porque o pipeline nao tem equivalente: as leituras
+> 1 e 3 pedem conclusao e dados, que um projeto nao tem. Escrever a camada de
+> projeto sobre o pipeline esta pendente, e ate la e daqui que a leitura de projeto
+> roda.
+
 O texto é curto de propósito. Doutrina duplicada diverge com o tempo, e a versão
 errada é sempre a que alguém está lendo. A leitura de projeto foi doutrina separada
 até 29/08/2026, com vinte e dois mil caracteres, e a medição que a encerrou está no

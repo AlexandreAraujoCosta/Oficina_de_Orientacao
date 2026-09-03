@@ -1,19 +1,32 @@
 # -*- coding: utf-8 -*-
 """Escreve a tabela gerada nas regras globais e no instrumento, entre marcas."""
+import os
 import re
 import subprocess
 import sys
 from pathlib import Path
 
-tab = subprocess.run([sys.executable, "scripts/legibilidade.py", "--tabela", "x"],
-                     capture_output=True, text=True, encoding="utf-8").stdout.strip()
+# O filho herda a codificacao do console (cp1252 nesta maquina) e a tabela sai com
+# acento; lida como utf-8, a saida quebra e `stdout` volta None. Medido em
+# 03/09/2026: o sincronizador estava assim, e a tabela nao era atualizavel.
+_env = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1")
+_p = subprocess.run([sys.executable, "-X", "utf8", "scripts/legibilidade.py", "--tabela", "x"],
+                    capture_output=True, text=True, encoding="utf-8", env=_env)
+assert _p.stdout, "legibilidade.py --tabela nao devolveu nada: %s" % (_p.stderr or "")[:300]
+tab = _p.stdout.strip()
 assert tab.startswith("| Escreve-se"), tab[:80]
 
 INI = "<!-- lista-decalques:inicio — gerada por `python scripts/legibilidade.py --tabela`, não editar à mão -->"
 FIM = "<!-- lista-decalques:fim -->"
 BLOCO = INI + "\n\n" + tab + "\n\n" + FIM
 
-ALVOS = ["C:/Users/alexa/.claude/CLAUDE.md", "prompts/LUIS.md"]
+# 03/09/2026: o LUIS.md foi aposentado e a tabela passou ao passo de redacao
+# do pipeline. Alvo antigo: "prompts/LUIS.md".
+# O ALBERTO.md fica de fora de proposito: ele cola numa conversa de chat, e ali
+# a tabela de 23 linhas e peso morto. A lista curta em prosa que ele traz e a
+# forma certa para aquele uso, e se mantem a mao.
+ALVOS = ["C:/Users/alexa/.claude/CLAUDE.md",
+         "prompts/leituras/6-TRIAGEM-E-REDACAO.md"]
 for caminho in ALVOS:
     p = Path(caminho)
     s = p.read_text(encoding="utf-8")
