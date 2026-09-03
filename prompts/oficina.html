@@ -789,21 +789,21 @@
 
     <section id="rota">
       <h2>Ferramentas disponíveis</h2>
-      <p class="deck">A escolha segue a fase em que o trabalho está. <b>O Alberto serve em qualquer momento</b>, porque dobra o trabalho sobre si mesmo e não depende de haver argumento pronto. <b>O Luis pede desenvolvimento argumentativo suficiente</b>, com resultados apresentados e conclusões escritas: rodado antes disso, ele julga o que ainda não existe. <b>E o simulador de banca pede a apresentação pronta</b>, porque é do cotejo entre ela e o trabalho que vem o que a distingue de mais uma leitura.</p>
+      <p class="deck">Os dois analisadores fazem a mesma coisa e não fazem igual. <b>O Alberto lê uma vez e escreve o relatório inteiro em um a três minutos</b>; o <b>Luis lê quatro vezes por caminhos diferentes, confere cada apontamento por quem não o escreveu, e leva quase uma hora</b>. Medido sobre a mesma dissertação em 03/09/2026: o rápido devolveu dezessete itens numa rodada e doze noutra, com seis em comum, contra os trinta e dois do completo. <b>Os dois pedem desenvolvimento argumentativo suficiente</b>, com resultados apresentados e conclusões escritas: rodados antes disso, julgam o que ainda não existe. <b>E o simulador de banca pede a apresentação pronta</b>, porque é do cotejo entre ela e o trabalho que vem o que o distingue de mais uma leitura.</p>
       <div class="route">
         <div class="route-row">
           <div class="route-a">
             <span class="route-n">01</span><a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a>
-            <span class="route-sub">analisador de consistência</span>
+            <span class="route-sub">o relatório rápido</span>
           </div>
-          <div class="route-q">Verifica se existe coerência interna em quatro níveis: formal, numérica, categorial e textual. <b>Devolve um relatório.</b></div>
+          <div class="route-q">Uma leitura, e o mesmo relatório de oito partes do Luis: veredito, o que está sólido, o que o trabalho tem e não reivindica, as correções, o destino de cada capítulo, os questionamentos, por onde começar e o alcance. <b>Devolve um relatório</b>, em um a três minutos, e vê menos.</div>
         </div>
         <div class="route-row">
           <div class="route-a">
             <span class="route-n">02</span><a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a>
-            <span class="route-sub">analisador de conteúdo</span>
+            <span class="route-sub">o relatório completo</span>
           </div>
-          <div class="route-q">Faz o que o Alberto faz e, sobre isso, julga o argumento: se os pontos de partida estão definidos, se a estratégia anunciada foi a executada, e se os resultados sustentam as conclusões. <b>Devolve um relatório.</b></div>
+          <div class="route-q">O mesmo relatório, produzido por quatro leituras que percorrem o trabalho por caminhos diferentes, uma delas com busca externa, e por uma verificação que ataca cada apontamento antes de ele sair. <b>Devolve um relatório</b>, com a cadeia de prova de cada item.</div>
         </div>
         <div class="route-row">
           <div class="route-a">
@@ -825,49 +825,38 @@
           <span class="inst-num">[01]</span>
           <h3><a class="inst-link" href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a></h3>
         </div>
-        <p class="inst-sub">Procura onde o trabalho discorda de si mesmo: conta que não fecha, número que aparece diferente em dois lugares, palavra usada com dois sentidos, formatação que muda no meio. Programas acham os pontos a olhar em segundos, e a leitura decide, um a um, se ali houve descuido ou escolha do autor.</p>
+        <p class="inst-sub">Lê o trabalho uma vez, na ordem que mais rende (primeiro o que ele promete, depois o aparato empírico lido de trás para diante, e só então o cruzamento), e escreve o relatório inteiro. É o mesmo formato do [02], e o que muda é o quanto se enxerga.</p>
 
         <div class="chips">
-          <span class="chip">combina programas em Python e análise por modelo de IA generativa</span>
-          <span class="chip"><b>tokens</b> ~60 mil, como se roda hoje</span>
-          <span class="chip"><b>tempo</b> alguns minutos</span>
-          <span class="chip"><b>roda em</b> navegador ou Python, mais um assistente</span>
+          <span class="chip status-good">medido em 03/09/2026, duas rodadas sobre a mesma dissertação</span>
+          <span class="chip"><b>tokens</b> alguns milhares</span>
+          <span class="chip"><b>tempo</b> 1 a 3 minutos no chat</span>
+          <span class="chip"><b>roda em</b> qualquer assistente, inclusive gratuito</span>
         </div>
 
         <div class="pair">
           <div class="does">
             <h4>Confere</h4>
-            <p>O mesmo número em duas aparições distantes. Os itens numerados nas listas contra os do corpo. O termo definido num ponto e usado longe dele. Duas versões do arquivo entre si. E a <b>consistência formal</b>: dentro de cada papel do parágrafo, quem está fora da forma dos seus iguais.</p>
+            <p>O mesmo que o [02] procura: promessa não cumprida, seção anunciada e ausente, afirmação que o parágrafo citado não sustenta, critério de seleção não declarado, percentual sem denominador, inferência causal em trabalho descritivo, recortes temporais que não coincidem. E o que está nos dados e não foi afirmado em lugar nenhum, que é a parte que o autor não produz sozinho.</p>
           </div>
           <div class="doesnt">
             <h4>Não confere</h4>
-            <p>Argumento, método, marco teórico, contribuição. Não diz se a tese se sustenta nem se o trabalho é original. Nem diz se o texto está bem formatado, porque não conhece norma externa: só sabe se o trabalho é igual a si mesmo. <b>O nome não avisa isso, e por isso está escrito aqui:</b> Alberto confere consistência, e só. <strong>O silêncio dele não é aprovação:</strong> três achados corrigidos significam que a consistência interna foi conferida, e nada além.</p>
+            <p>Se a contribuição é nova no campo, porque isso pede busca externa que esta leitura não faz. E não confere a si mesmo: no chat não há a verificação por quem não escreveu os apontamentos. <strong>O que ele não aponta não é atestado de que esteja correto</strong>, e a diferença de cobertura está medida logo abaixo.</p>
           </div>
         </div>
 
-        <p class="when"><b>Por que esta é a camada certa para a versão barata.</b> Quatro razões, e todas foram medidas. Quando os apontamentos foram conferidos um a um contra o texto, os de consistência caíram menos que os de interpretação: nenhum de dezoito e dois de dezenove nas duas primeiras dissertações, cinco de vinte na terceira, contra nove de dezoito na leitura de argumento do mesmo trabalho. A busca é mecânica e cabe num programa comum, sem inteligência artificial nenhuma, e por isso não custa nada. Rastrear um número por duzentas páginas é tedioso, e é justamente por ser tedioso que ninguém faz à mão. E a correção é organização, não redimensionamento: a versão correta em geral já está escrita noutro ponto do trabalho.</p>
+        <p class="when"><b>O que a medição diz, e é o que decide entre as duas ferramentas.</b> Sobre a mesma dissertação, em 03/09/2026, duas rodadas do mesmo prompt devolveram <b>dezessete itens numa vez e doze na outra, com seis em comum</b>, e dezessete endereços comuns em setenta e cinco. As vinte e nove afirmações foram abertas na fonte, uma a uma, e <b>as vinte e nove estavam certas</b>. O rápido não inventa: vê menos, e vê coisa diferente a cada vez.</p>
 
-        <p class="when"><b>Duas implementações do mesma ferramenta, e uma delas é pública.</b> Um programa em Python, para quem roda o projeto inteiro, e uma <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">página que faz a mesma checagem dentro do navegador</a>, sem instalar nada e sem que o arquivo saia da máquina. É a única porta gratuita do conjunto, e é por onde se começa quando ainda não se sabe se vale entrar no resto. A página traz também, no fim, a versão portátil do [02] em formato de prompt.</p>
+        <p class="when"><b>O que a extensão degrada é o endereço, e não o achado.</b> Uma passada única mandada escrever sem teto produziu dez mil palavras, e quatorze afirmações em sessenta e sete caíram na conferência, o que parece condená-la. Lidas uma a uma, <b>doze das quatorze derrubam o endereço, a contagem ou uma afirmação acessória, e o apontamento continua de pé</b>: a grafia errada existe e o endereço manda abrir um parágrafo vazio; o argumento do item não depende do número que caiu; a questão sobrevive, e sobrevive melhor com o endereço certo. Sobre vinte e seis itens, dois eram falsos. <b>Por isso o prompt não corta itens:</b> cortar para comprar precisão joga fora o achado verdadeiro junto com o endereço torto.</p>
 
-        <p class="when"><b>A camada formal entrou em 27/08/2026, e a medição mudou a ferramenta junto.</b> Comparar cada parágrafo contra o padrão dominante do documento marcava 347 parágrafos numa dissertação e 160 num capítulo, e quase todos eram legítimos: referência, legenda e fonte de figura têm forma própria por construção. Passando a comparar <b>dentro de cada papel</b>, o número caiu para 108 e para 16, e o que sobrou é sempre da mesma espécie: duas referências em negrito entre 117, sete legendas em negrito entre 27, uma linha de fonte em Times num documento todo em Arial. Defeito de propagação, que é o que esta ferramenta procura.</p>
+        <p class="when"><b>No agente ele ganha uma revisão, e ela não acrescenta nada.</b> Recebe o trabalho e o relatório com a instrução de derrubar, e confere os endereços, as afirmações de ausência, os números, as atribuições e os alvos de correção. Antes de retirar um item, pergunta o que caiu: se caiu o endereço e o apontamento se sustenta, conserta o endereço e mantém o item; só sai o item cujo achado morreu. Medido numa dissertação em 03/09/2026: <b>nenhum item retirado, dezesseis endereços consertados e três colisões entre partes desfeitas</b>, em oitenta e duas afirmações abertas na fonte.</p>
 
-        <p class="when"><b>Nenhum programa daqui altera o arquivo do autor, e a decisão é de 30/08/2026.</b> Um diagnóstico lê a formatação e conta o que há: quantos estilos existem de fato, quantos parágrafos trazem formatação direta sobre o estilo, quantos parecem título sem usar estilo de título, quantos vazios estão no corpo e quantos no pré-textual. Isso vira sugestão no relatório, e quem decide é quem escreveu o trabalho. O programa que <em>transformava</em> o arquivo saiu da cadeia depois de desmontar a capa de uma dissertação que não havia tocado, e hoje é a semente da <a href="https://claude.ai/code/artifact/4d7706bf-3382-419e-97ff-4ad35b65e1eb">Oficina de Formatação</a>, que existe separada justamente porque ali um programa escreve no arquivo de outra pessoa.</p>
+        <p class="when"><b>A página traz também o medidor de formatação</b>, que abre o <span class="loc">.docx</span> dentro do navegador, sem instalar nada e sem que o arquivo saia da máquina, e mede forma, ritmo, aparato gráfico e higiene bibliográfica. As medidas entram na conversa junto com o prompt, porque num <span class="loc">.docx</span> o assistente não enxerga a camada formal. <b>Nenhuma medida dali é, por si, um defeito:</b> o que um número significa depende do gênero, e parágrafo curto é defeito em prosa argumentativa e é a forma certa num capítulo de catálogo.</p>
 
-        <p class="when"><b>O que está pronto e o que falta, em 27/08/2026.</b> A metade
-        mecânica está feita e conferida nos dois trabalhos: a formatação por papel, a
-        aritmética refazível, as remissões, a numeração de quadros e a página de citação
-        contra o intervalo da referência. <b>A metade que julga as suspeitas não tem
-        prompt escrito.</b> Quem cola o texto da página do navegador num assistente hoje
-        recebe o relatório completo do [02], e não uma conferência de consistência.</p>
+        <p class="when"><b>Nenhum programa daqui altera o arquivo do autor, e a decisão é de 30/08/2026.</b> Um diagnóstico lê a formatação e conta o que há, e isso vira sugestão no relatório. O programa que <em>transformava</em> o arquivo saiu da cadeia depois de desmontar a capa de uma dissertação que não havia tocado, e hoje é a semente da <a href="https://claude.ai/code/artifact/4d7706bf-3382-419e-97ff-4ad35b65e1eb">Oficina de Formatação</a>, que existe separada justamente porque ali um programa escreve no arquivo de outra pessoa.</p>
 
-        <p class="when"><b>E o custo não é zero.</b> O programa não usa modelo e por isso
-        não custa nada. A leitura que julga as suspeitas custa: numa dissertação de 37 mil
-        palavras, cerca de <b>US$ 0,50 no Opus</b> ou US$ 0,31 no Sonnet, porque o que domina
-        a conta é o trabalho que entra, e não o tamanho do prompt. Num trabalho de 104 mil
-        palavras sobe para US$ 1,10.</p>
-
-        <p class="footnote"><strong>A divisão que faz a economia.</strong> O programa levanta as suspeitas, e a inteligência artificial julga as suspeitas. É o mesmo princípio do localizador: o que é operação mecânica vai para o programa, e o que exige julgamento fica com quem julga. Na prática, o programa entrega algumas dezenas de trechos suspeitos com o número do parágrafo, e a inteligência artificial lê esses trechos em vez das trinta e seis mil palavras do trabalho. É daí que vem a diferença de custo entre esta ferramenta e a seguinte. A comparação entre duas versões do arquivo, que foi a operação de maior rendimento nos testes, entrou em programa em 25/08/2026. O pareamento é por conteúdo, e não por número, porque um parágrafo inserido desloca toda a numeração seguinte; de cada localizador do relatório antigo o programa diz se o parágrafo correspondente mudou. Se a mudança atendeu ao apontamento, quem lê é que decide.</p>
-      </article>
+        <p class="footnote"><strong>O nome mudou de dono em 03/09/2026, e vale registrar.</strong> Alberto designava, até então, uma conferência de consistência que dobrava o trabalho sobre si mesmo em quatro níveis (formal, numérico, categorial e textual) sem julgar o argumento. Essa conferência continua existindo, sob o nome do que ela faz, em <span class="loc">prompts/CONSISTENCIA.md</span>, e serve a quem quer só isso, em qualquer fase da escrita. O que herdou o nome foi o relatório rápido, porque é ele que hoje ocupa o lugar de porta de entrada que a conferência ocupava.</p>
+        </article>
 
       <!-- 02 -->
       <article class="instrument" id="ataide">
@@ -875,13 +864,13 @@
           <span class="inst-num">[02]</span>
           <h3><a class="inst-link" href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a></h3>
         </div>
-        <p class="inst-sub">Quatro passos sobre o mesmo trabalho. Dois leem, um tenta derrubar o que os dois acharam, e o último escreve. Nada é apontamento antes de passar pelo terceiro.</p>
+        <p class="inst-sub">Quatro leituras percorrem o trabalho por caminhos diferentes, uma verificação ataca cada apontamento antes de ele sair, e uma última voz tria e escreve. Nada é apontamento antes de passar pela verificação.</p>
 
         <div class="chips">
-          <span class="chip status-good">v5, sete avaliações em cinco trabalhos</span>
-          <span class="chip"><b>tokens</b> ~560 mil</span>
-          <span class="chip"><b>tempo</b> ~30 min</span>
-          <span class="chip"><b>roda em</b> Opus (Sonnet degrada)</span>
+          <span class="chip status-good">seis prompts, medidos em cinco trabalhos</span>
+          <span class="chip"><b>tokens</b> ~1,2 milhão</span>
+          <span class="chip"><b>tempo</b> ~55 min</span>
+          <span class="chip"><b>roda em</b> Opus, com a verificação em Sonnet</span>
         </div>
 
         <div class="pair">
@@ -895,15 +884,15 @@
           </div>
         </div>
 
-        <p class="when"><b>Quatro passos, e a ordem não se inverte.</b> Eram seis leituras até 25/08/2026, e a fusão veio de medição: os pares que mais se sobrepunham eram justamente os que hoje formam o passo 2, e num mesmo trabalho duas vozes gastaram um orçamento cada para achar o mesmo defeito por dois ângulos.</p>
+        <p class="when"><b>O desenho mudou em 01/09/2026, e a razão é medida.</b> Havia um prompt único de vinte e dois mil palavras, e ele devolveu <b>dois itens e nenhum de conteúdo</b> numa dissertação inteira, depois de derrubar oito hipóteses: as travas contra falso positivo derrubavam o achado verdadeiro junto. As travas saíram do levantamento e ficaram só na verificação, e as leituras passaram a percorrer caminhos diferentes em vez de repetirem a mesma travessia. Sobre o mesmo material, o desenho novo devolveu trinta e dois itens.</p>
 
-        <p class="when"><b>1. Consistência.</b> É o Alberto, inteiro, dentro do Luis: formal, numérica, categorial e textual, numa leitura só, precedida por um programa que confere em segundos o que não precisa de modelo. Procura o que a revisão deixou para trás: trabalho longo se escreve em camadas, a mudança chega a alguns pontos e não a todos, e sobra a versão antiga onde ninguém olhou. É defeito de propagação, não de pensamento, e a versão correta em geral já existe no texto.</p>
+        <p class="when"><b>Três leituras em paralelo, cada uma entrando por uma porta.</b> A primeira parte do <b>resumo e da conclusão</b>, e procura afirmação sem lastro. A segunda parte da <b>introdução</b>, e procura promessa não cumprida e ressalva atravessada. A terceira parte das <b>figuras e tabelas</b>, lidas antes da prosa que as comenta, e procura resultado desperdiçado e narrativa que contradiz o gráfico. Ler as figuras se paga: numa leitura de 77 delas, o maior achado do trabalho foi uma frase de tópico que diz o contrário do gráfico.</p>
 
-        <p class="when"><b>2. Marco, método e argumento.</b> Uma cadeia de quatro elos, e cada um pressupõe o anterior: os pontos de partida estão bem definidos, a estratégia anunciada é a executada, o que foi executado sustenta o que se conclui, e os fundamentos são sólidos. O primeiro elo faz a pergunta que faltava à ferramenta — <b>a categoria central descreve o fenômeno?</b> —, e o teste dela é aritmético sobre a codificação do próprio autor. Tudo aqui parte do princípio de que <b>a versão mais recente é a que vale</b>, o que só é seguro porque o passo 1 já apontou onde ficou a antiga.</p>
+        <p class="when"><b>A quarta pesa as contribuições, e é a única que usa a web.</b> Recebe o que as três marcaram como contribuição ou resultado inexplorado e pergunta o que o trabalho não responde: <b>isto é novo, e para quem?</b> Três saídas, e a do meio é a mais valiosa: já existe, e o autor precisa saber antes da banca; <b>contraria o que existe</b>, que é a contribuição mais forte que um trabalho empírico pode ter e a que os autores mais deixam passar; ou não encontrei, com o que se buscou declarado.</p>
 
-        <p class="when"><b>3. Cotejo.</b> Quem confere não escreveu nada do que confere. Cada apontamento é testado contra o texto antes de sair, na ordem do estrago que causaria estar errado: primeiro toda afirmação de que falta algo no trabalho, que é a que se refuta abrindo o arquivo e a que mais desqualifica quem a fez.</p>
+        <p class="when"><b>Depois vem a verificação, e quem confere não escreveu nada do que confere.</b> Cada apontamento é testado contra o texto na ordem do estrago que causaria estar errado: primeiro toda afirmação de que falta algo no trabalho, que é a que se refuta abrindo o arquivo. Antes de conferir, o verificador escreve numa linha a proposição que, se verdadeira, derruba o item, e vai atrás dela. <b>Confirmar a metade que o item concede é o modo de falha mais caro deste passo</b>, porque produz acusação falsa com aparência de conferida, e ela atravessa todas as camadas seguintes.</p>
 
-        <p class="when"><b>4. Contribuições e relatório.</b> Lê o que o trabalho tem e não reivindica, recebe o cotejo pronto, e escreve. Pergunta primeiro se há mérito, antes de qualquer lista de defeitos, porque somar problemas não é avaliar.</p>
+        <p class="when"><b>Por fim a triagem e a redação.</b> Uma voz que não verificou decide onde cada item entra, pela pergunta que decide tudo: o que muda, para quem lê o trabalho, depois de corrigido? Quem não consegue escrever essa oração descobriu ali que o item é de anexo. E escreve, perguntando primeiro se há mérito, antes de qualquer lista de defeitos, porque somar problemas não é avaliar.</p>
 
         <p class="footnote"><strong>Nada é apontamento antes de ser conferido.</strong> Os passos 1 e 2 produzem suspeitas, e a razão de o passo 3 conferir todas antes de entregar está escrita na ferramenta: antes de correr o risco de causar sofrimento ao autor com comentário excessivo ou deslocado, confere-se com o texto. O relatório final conta defeitos, e não comentários. Um mesmo defeito visto por duas leituras continua sendo um defeito, e dizer que duas o viram informa que o achado é robusto, não que há dois problemas. <b>Convergência entre leituras independentes é o sinal mais forte que este desenho produz</b>, e é rara: numa dissertação de 235 páginas, duas em 83 apontamentos.</p>
       </article>
@@ -1023,9 +1012,9 @@
             </div>
             <div class="arrow" aria-hidden="true">→</div>
             <div class="step">
-              <span class="n">analisadores:</span>
-              <span class="t">Alberto ou Luis</span>
-              <span class="d"><b>Retorna um relatório em texto, na própria conversa.</b> O chat não gera arquivo: não volta <span class="loc">.docx</span> anotado nem PDF, e não há localizador de parágrafo, porque quem os cria é um programa. O que você leva daqui é o que copiar da tela.</span>
+              <span class="n">analisador:</span>
+              <span class="t">Alberto</span>
+              <span class="d"><b>Retorna o relatório inteiro em texto, na própria conversa, em um a três minutos.</b> O chat não gera arquivo: não volta <span class="loc">.docx</span> anotado nem PDF, e não há localizador de parágrafo, porque quem os cria é um programa. O que você leva daqui é o que copiar da tela.</span>
             </div>
             <div class="arrow" aria-hidden="true">→</div>
             <div class="step gate">
@@ -1153,13 +1142,13 @@
 
       <p><strong>O que se distribui aqui são as instruções e os programas, não um serviço em funcionamento.</strong> A diferença é de custeio. Um serviço a que qualquer pessoa se conectasse exigiria um motor ligado executando os prompts, e cada análise que ele fizesse seria cobrada de alguém. Esse alguém seria o docente, do próprio bolso, ou o programa de pós-graduação (PMPD). Como não há financiamento para isso, cada um roda no seu próprio acesso, e é por essa razão que os números abaixo interessam a quem for usar: são a conta que você vai pagar, ou o limite de uso que você vai consumir.</p>
 
-      <p><strong>É também o que justifica existir uma versão barata.</strong> Sem serviço custeado, exigir meia hora de processamento por trabalho tornaria a ferramenta inacessível a quem mais precisa dela. O Alberto deixa de ser um recurso menor e passa a ser a porta de entrada.</p>
+      <p><strong>É também o que justifica existir uma versão barata.</strong> Sem serviço custeado, exigir quase uma hora de processamento por trabalho tornaria a ferramenta inacessível a quem mais precisa dela. O Alberto deixa de ser um recurso menor e passa a ser a porta de entrada, e o que ele cobra por isso está medido: vê menos, e vê coisa diferente a cada rodada.</p>
 
       <p>O cartão de cada ferramenta declara o consumo em tokens, e não em dinheiro, porque o token é o mesmo número em qualquer serviço: o que muda de um para outro é o preço, não o consumo. Esta seção faz a conversão para quem liga a ferramenta diretamente ao serviço da Anthropic. Quem usa a Claude por assinatura mensal não vê estes números: paga um valor fixo e esbarra num limite de uso. Eles aparecem para quem liga a ferramenta diretamente ao serviço da Anthropic, onde se cobra por token processado. Medido na dissertação de 36.457 palavras, cerca de 55 mil tokens.</p>
 
       <p>Preços de junho de 2026, por milhão de tokens: <b>Opus</b> a US$ 5,00 o que entra e US$ 25,00 o que sai; <b>Sonnet</b> a US$ 2,00 e US$ 10,00, que é preço promocional e <b>vence em 31 de agosto de 2026</b>, subindo para US$ 3,00 e US$ 15,00. Depois disso a coluna do Sonnet cresce cerca de metade. Sai mais caro do que entra porque escrever custa mais do que ler. Os valores em reais são aproximados, convertidos a US$ 1,00 = R$ 5,22, cotação de 16 de agosto de 2026, e envelhecem com o câmbio.</p>
 
-      <p><b>Duas expressões da tabela.</b> <em>Cadeia completa</em> é uma passagem inteira do Luis pelo trabalho: as leituras, a conferência de cada apontamento e a montagem do relatório. <b>Os valores da tabela são do desenho de seis vozes, que vigorou até 25/08/2026.</b> A fusão em quatro passos mediu, numa dissertação, redução de 64% no consumo, de 1.570 mil para 559 mil unidades, o que põe a cadeia completa perto de <b>US$ 3</b>, e é esse o número do cartão. A tabela abaixo continua com os valores antigos porque foram os medidos, e um caso não é série. <em>Reaproveitamento</em> traduz o que o serviço chama de <span class="loc">prompt caching</span>: como cada leitura reenvia o trabalho a cada passo, o serviço guarda o que já viu e cobra um décimo por reenviar o mesmo texto, desde que o programa peça isso explicitamente.</p>
+      <p><b>Duas expressões da tabela.</b> <em>Cadeia completa</em> é uma passagem inteira do Luis pelo trabalho: as leituras, a conferência de cada apontamento e a montagem do relatório. <b>Os valores da tabela são do desenho de seis vozes, que vigorou até 25/08/2026.</b> A fusão em quatro passos mediu, numa dissertação, redução de 64% no consumo, de 1.570 mil para 559 mil unidades. <b>O desenho de 01/09/2026, que é o de hoje, voltou a subir para cerca de 1,2 milhão</b>, porque as leituras deixaram de repetir a mesma travessia e passaram a percorrer caminhos diferentes, cada uma carregando o material de que precisa. A tabela abaixo continua com os valores antigos porque foram os medidos, e um caso não é série. <em>Reaproveitamento</em> traduz o que o serviço chama de <span class="loc">prompt caching</span>: como cada leitura reenvia o trabalho a cada passo, o serviço guarda o que já viu e cobra um décimo por reenviar o mesmo texto, desde que o programa peça isso explicitamente.</p>
 
       <div class="tablewrap">
         <table>
@@ -1179,7 +1168,7 @@
               <td class="num">US$ 0,11<span class="brl">R$ 0,60</span></td>
             </tr>
             <tr>
-              <td>Os programas do Alberto</td>
+              <td>Os programas de medição</td>
               <td class="num">0</td>
               <td class="num">US$ 0<span class="brl">R$ 0</span></td>
               <td class="num">US$ 0<span class="brl">R$ 0</span></td>
@@ -1294,6 +1283,13 @@
             <p style="margin-top:12px"><b>E achou o que ninguém tinha achado.</b> Entre os 20 havia um erro verdadeiro: a mesma fala de um ministro datada de dois anos diferentes em dois pontos do trabalho, uma delas na epígrafe que abre a dissertação. Ele o encontrou, e nenhuma das outras três leituras daquele dia o encontrara, porque nas listas anteriores ele estava enterrado no ruído. Junto vieram três apontamentos falsos, em dezenove casos legítimos, e todos se derrubam abrindo o parágrafo.</p>
             <p style="margin-top:12px"><b>A lição não é sobre o modelo, é sobre a entrada.</b> A mesma instrução e o mesmo modelo produziram comportamentos opostos conforme a qualidade da lista. Lista suja convida ao atalho, e nenhuma instrução vence o convite. O caminho para usar modelo pequeno é limpar o que se entrega a ele.</p>
             <p style="margin-top:12px"><b>O que isto não autoriza dizer.</b> Foi medida a camada numérica, com vinte candidatos; a formal, com 35 parágrafos de corpo e 18 referências, não passou por julgamento nessa rodada. É uma observação única, ao passo que o fracasso do mesmo modelo na leitura completa está replicado em duas. E a trava de transcrição aguentou aqui, sem nenhuma citação a conferir, depois de ter sido violada pelo mesmo modelo na leitura completa: a diferença plausível é o formato de tabela, que não abre espaço para prosa citada, e nesse caso o mérito é do formato.</p></div>
+        <div class="ledger-item">
+          <h4><span class="mark m-yes">medido</span> Quanto a leitura de uma passada só vê, e o que ela erra</h4>
+          <p>Em 03/09/2026, duas rodadas do mesmo prompt rápido sobre a mesma dissertação devolveram <b>dezessete itens numa vez e doze na outra, com seis em comum</b>, e dezessete endereços comuns em setenta e cinco, contra os trinta e dois do relatório completo. As vinte e nove afirmações foram abertas na fonte, uma a uma, e <b>as vinte e nove estavam certas</b>. A perda é de cobertura, e não de veracidade.</p>
+          <p style="margin-top:12px"><b>O que a extensão degrada é o endereço, e não o achado.</b> Uma passada única mandada escrever sem teto produziu dez mil palavras, e quatorze afirmações em sessenta e sete caíram na conferência. Lidas uma a uma, doze das quatorze derrubam o endereço, a contagem ou uma afirmação acessória, e o apontamento continua de pé; duas matam o achado. Sobre vinte e seis itens, <b>dois eram falsos</b>. A primeira leitura desse número tinha sido outra, e produziu um teto de itens no prompt rápido que foi retirado no mesmo dia: cortar item para comprar precisão joga fora o achado verdadeiro junto com o endereço torto, que é exatamente o defeito que aposentou o prompt monolítico.</p>
+          <p style="margin-top:12px"><b>E a revisão do agente conserta mais do que retira.</b> Numa dissertação, em 03/09/2026: oitenta e duas afirmações abertas na fonte, <b>nenhum item retirado, dezesseis endereços consertados</b> e três colisões entre partes desfeitas. As causas foram página impressa trocada pela página do arquivo, número de passo errado, nota de rodapé errada e um enquadramento invertido que, reescrito, ficou mais forte.</p>
+        </div>
+
         <div class="ledger-item">
           <h4><span class="mark m-no">não medido</span> Se um segundo conferidor derrubaria as mesmas coisas</h4>
           <p>Toda a série depende de uma etapa que confere e de ninguém que confira a conferência. Taxa de queda baixa pode significar leitura mais disciplinada, e pode significar conferidor mais frouxo, e o formato atual não separa as duas. O teste que separaria é conhecido e ainda não foi feito: refazer a conferência de uma avaliação inteira com outro conferidor, sobre as mesmas hipóteses, e comparar as quedas.</p>

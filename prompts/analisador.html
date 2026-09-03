@@ -1,4 +1,4 @@
-<title>Analisador de dissertações e teses</title>
+<title>Alberto — o relatório rápido</title>
 
 <style>
   :root {
@@ -108,6 +108,152 @@
   @media (max-width: 900px) { .rail { position: static; } }
 
   /* ---------------------------------------------------------- entrada */
+  .rail-titulo { font-family: var(--serif); font-size: 18px; margin: 0 0 6px; }
+
+  .rail-nota { font-size: 14px; color: var(--muted); line-height: 1.5; margin: 0 0 14px; }
+
+
+  .vias {
+    border: 1px solid var(--rule-firm);
+    border-radius: 4px;
+    padding: 18px 20px 14px;
+    margin: 20px 0;
+  }
+
+  .vias-titulo {
+    font-family: var(--serif);
+    font-size: 18px;
+    margin: 0 0 14px;
+  }
+
+  .via-op { border-top: 1px solid var(--rule); padding: 12px 0 2px; }
+
+  .via-op:first-of-type { border-top: none; padding-top: 0; }
+
+  .via-op h3 { font-family: var(--serif); font-size: 16px; margin: 0 0 4px; }
+
+  .via-op p { margin: 0 0 6px; }
+
+  .via-volta { font-size: 14px; color: var(--ink-faint); }
+
+  .vias-nota { font-size: 14px; color: var(--ink-faint); margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); }
+
+
+  .vias { border: 1px solid var(--rule-firm); border-radius: 4px; padding: 18px 20px 14px; margin: 20px 0; }
+
+  .vias-titulo { font-family: var(--serif); font-size: 18px; margin: 2.5rem 0 14px; }
+
+  .via-op { border-top: 1px solid var(--rule); padding: 12px 0 2px; }
+
+  .via-op:first-of-type { border-top: none; padding-top: 0; }
+
+  .via-op h3 { font-family: var(--serif); font-size: 16px; margin: 0 0 4px; }
+
+  .via-op p { margin: 0 0 6px; }
+
+  .via-volta { font-size: 14px; color: var(--ink-faint); }
+
+  .vias-nota { font-size: 14px; color: var(--ink-faint); margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); }
+
+
+  .vias-titulo {
+    font-family: var(--serif);
+    font-size: 19px;
+    margin: 22px 0 12px;
+  }
+
+  .vias-grade {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 720px) { .vias-grade { grid-template-columns: 1fr; } }
+
+  .via-bt {
+    display: block;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    background: var(--paper);
+    border: 1px solid var(--rule-firm);
+    border-radius: 4px;
+    padding: 16px 16px 14px;
+    cursor: pointer;
+  }
+
+  .via-bt:hover, .via-bt:focus-visible { border-color: var(--ink-soft); }
+
+  .via-bt[aria-pressed="true"] { background: var(--paper-sunk); border-color: var(--ink-soft); }
+
+  .via-nome {
+    display: block;
+    font-family: var(--serif);
+    font-size: 23px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .via-txt { display: block; font-size: 14.5px; line-height: 1.5; margin-bottom: 8px; }
+
+  .via-volta { display: block; font-size: 13.5px; color: var(--ink-faint); line-height: 1.45; }
+
+  .via-guia { margin: 8px 0 26px; }
+
+  .via-guia h2 { font-family: var(--serif); margin-bottom: 8px; }
+
+
+  .passos {
+    counter-reset: p;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 26px;
+  }
+
+  .passos li {
+    counter-increment: p;
+    position: relative;
+    padding-left: 34px;
+    margin-bottom: 12px;
+    line-height: 1.55;
+  }
+
+  .passos li::before {
+    content: counter(p);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-family: var(--mono);
+    font-size: 13px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border: 1px solid var(--rule-firm);
+    border-radius: 50%;
+  }
+
+  .prompts h2,
+  .anexar h2,
+  .cuidados h2,
+  .passo-titulo {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0 0 .6rem;
+  }
+
+  .passo-nota { color: var(--ink-faint); line-height: 1.55; margin: 0 0 18px; }
+
+  .via-guia h3 { font-family: var(--serif); font-size: 17px; margin: 22px 0 6px; }
+
+  .pedido { border: 1px solid var(--rule); border-radius: 4px; padding: 14px 16px; margin: 16px 0; }
+
+  .pedido-rot { font-size: 13px; color: var(--ink-faint); margin: 0 0 8px; }
+
+  .pedido-txt { font-family: var(--mono); font-size: 13px; line-height: 1.5; white-space: pre-wrap; margin: 0 0 12px; }
+
   .solta {
     border: 1px dashed var(--rule-firm);
     background: var(--paper-sunk);
@@ -270,7 +416,6 @@
 
   /* ---------------------------------------------------------- cuidados */
   .cuidados { border-top: 2px solid var(--ink); margin-top: 3.5rem; padding-top: 1.6rem; }
-  .cuidados h2 { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; margin: 0 0 .5rem; }
   .cuidados h3 {
     font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
     color: var(--ink-faint); font-weight: 600; margin: 2rem 0 .7rem;
@@ -304,7 +449,6 @@
 
   /* ---------------------------------------------------------- prompts */
   .prompts { border-top: 1px solid var(--rule); margin-top: 3rem; padding-top: 1.6rem; }
-  .prompts h2 { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; margin: 0 0 .5rem; }
   .prompts > p { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1rem; }
   .prompts ol.passos { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1.4rem; padding-left: 1.2rem; }
   .prompts ol.passos li { margin-bottom: .3rem; }
@@ -356,22 +500,205 @@
   .experimental p:last-child { margin-bottom: 0; }
   a { color: var(--medida); text-decoration: underline; text-underline-offset: 2px; }
   a:hover, a:focus-visible { color: var(--ink); }
+  .anexar { margin-top:3.2rem; border-top:2px solid var(--ink); padding-top:1.4rem; }
+  .anexar .chamada { max-width:var(--measure); margin:0 0 1.2rem; }
+  dl.formatos { margin:0; max-width:var(--measure); }
+  dl.formatos dt { font-family:var(--mono); font-size:.95rem; font-weight:600; margin-top:1.1rem;
+    padding-top:.9rem; border-top:1px solid var(--rule); display:flex; gap:.7rem; align-items:baseline; flex-wrap:wrap; }
+  dl.formatos dt:first-child { border-top:0; padding-top:0; margin-top:0; }
+  dl.formatos dt .rot { font-family:var(--sans); font-size:.72rem; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--medida); font-weight:600; }
+  dl.formatos dd { margin:.3rem 0 0; color:var(--ink-soft); font-size:.95rem; }
+  dl.formatos dd b { color:var(--ink); }
+  .cmd { position:relative; border:1px solid var(--rule); border-radius:4px;
+    background:var(--paper-sunk); padding:.7rem 6.5rem .7rem .9rem; margin:.55rem 0 .9rem; }
+  .cmd pre { font-family:var(--mono); font-size:13px; line-height:1.5;
+    white-space:pre-wrap; word-break:break-all; margin:0; }
+  .pedido { position:relative; padding-right:6.5rem; }
+  .cmd .copiar, .pedido .copiar { position:absolute; top:.5rem; right:.5rem; }
+  .anexar .aviso { border-left:2px solid var(--correcao); padding-left:1rem;
+    margin:1.6rem 0 0; max-width:var(--measure); }
+
 </style>
 
 <div class="wrap">
   <header class="top">
-    <h1>Analisador de dissertações e teses</h1>
-    <p>A metade mecânica da análise: o que se confere sem discutir e se corrige sem negociar. Abre o <code>.docx</code>, resolve a herança de estilos e mede forma, ritmo, aparato gráfico e higiene bibliográfica. Não julga o argumento, e nenhuma medida daqui é medida de qualidade.</p>
-    <p class="ressalva">Nenhuma medida desta página é, por si, um defeito. O que uma medida significa depende do gênero do trabalho, e essa é uma decisão de leitura: um número alto de parágrafos curtos é defeito em prosa argumentativa e é a forma certa num capítulo de catálogo; a ausência de condição de refutação é grave em pesquisa que testa hipótese e é esperada em pesquisa descritiva.</p>
-    <p class="privacidade">O arquivo é lido no seu navegador e não sai da máquina</p>
-    <div class="experimental">
-      <p>Estes assistentes foram desenvolvidos pelo Prof. Alexandre Araújo Costa prioritariamente para uso dos seus estudantes e orientandos, na graduação e na pós-graduação da Faculdade de Direito da UnB. A princípio podem servir a outras abordagens, especialmente no direito e nas demais ciências sociais, mas só testes mais amplos permitirão medir a qualidade das respostas, nessas áreas e fora delas.</p>
-      <p>Por isso a abordagem é experimental, está em fase de testes, e o retorno importa. Quem quiser relatar um resultado, apontar um erro ou sugerir um ajuste pode usar <a href="https://forms.gle/BHhKZSQiRq1JUgsE8">este formulário</a>, feito para colher resultados e comentários.</p>
+    <h1>Alberto — o relatório rápido</h1>
+    <p>Uma leitura, um a três minutos, e um relatório de orientação em oito partes: o veredito, o que está sólido, o que o trabalho tem e não reivindica, as correções, o destino de cada capítulo, os questionamentos, por onde começar, e o alcance da leitura. É o mesmo formato do relatório completo, e o que muda é o quanto se enxerga.</p>
+    <p><b>O que ele entrega, medido em 03/09/2026 sobre a mesma dissertação: menos, com justificação mais rala, e sem inventar.</b> Vinte e nove afirmações de duas rodadas foram abertas na fonte, uma a uma, e as vinte e nove estavam certas. Mas as duas rodadas devolveram dezessete e doze itens, com seis em comum, contra os trinta e dois da leitura completa. Cada apontamento traz o endereço de onde conferi-lo, e não a cadeia de prova que uma verificação independente produziria. <b>O que ele não aponta não é atestado de que esteja correto.</b></p>
+    <p><b>Se você precisa da leitura completa</b>, ela são quatro leituras por caminhos diferentes, mais a verificação de cada apontamento por quem não o escreveu, e está nos prompts de <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao/tree/main/prompts/leituras">prompts/leituras/</a>. Custa cerca de um milhão de tokens e quase uma hora, e a diferença está medida na <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">página da Oficina</a>.</p>
+    <p>Esta página traz também o <b>medidor de formatação</b>, que abre o <code>.docx</code> no seu navegador e mede forma, ritmo, aparato gráfico e higiene bibliográfica. As medidas dele entram na conversa junto com o prompt, porque num <code>.docx</code> o assistente não enxerga a camada formal.</p>
+    <p class="vias-titulo">Escolha a via pela qual você vai aplicar a ferramenta, para ter as orientações adequadas sobre o seu uso em cada opção.</p>
+
+    <div class="vias-grade">
+      <button type="button" class="via-bt" data-via="chat">
+        <span class="via-nome">Chat</span>
+        <span class="via-txt">Você tem uma conta de assistente e nada instalado. Mede-se o arquivo aqui, copia-se o resultado, e cola-se junto com o prompt numa conversa nova.</span>
+        <span class="via-volta">Volta um relatório na conversa. Não volta arquivo.</span>
+      </button>
+
+      <button type="button" class="via-bt" data-via="claude">
+        <span class="via-nome">Claude&nbsp;Code</span>
+        <span class="via-txt">É o modo mais testado. Você instala o Claude Code no computador e ele trabalha sobre a pasta onde está o trabalho, rodando os programas sozinho. Exige assinatura da Claude e alguma instalação.</span>
+        <span class="via-volta">Volta o trabalho anotado, com os apontamentos na margem do Word, e o relatório em PDF.</span>
+      </button>
+
+      <button type="button" class="via-bt" data-via="vscode">
+        <span class="via-nome">VS&nbsp;Code + Agente</span>
+        <span class="via-txt">Com a sua própria chave de API, de Anthropic, OpenAI, Gemini ou OpenRouter. O assistente roda os programas sozinho.</span>
+        <span class="via-volta">Volta o trabalho anotado, com os apontamentos na margem do Word, e o relatório em PDF.</span>
+      </button>
+    </div>
+
+    <div class="via-guia" id="guia-vscode" hidden>
+      <h2>Pelo VS Code com agente, e a sua própria chave de API</h2>
+      <p>Serve a quem tem crédito de API e não tem assinatura de assistente. Você não usa o medidor desta página: o assistente roda os programas, que medem tudo o que se mede aqui e ainda conferem números repetidos, listas contra o corpo, uso de termos e a série de figuras.</p>
+
+      <ol class="passos">
+        <li><b>Instale o VS Code</b> e, no painel de extensões dele, a extensão <b>GitHub Copilot</b>. É a única instalação que você faz sozinho; o resto se pede ao assistente.</li>
+        <li><b>Traga a oficina:</b> na tela inicial do VS Code, clique em <b>Clonar Repositório Git…</b> e cole o endereço abaixo. Ele pergunta onde guardar, cria a pasta ali dentro, e pergunta se quer abrir: <b>responda que sim</b>, porque é ao abrir que ele lê as instruções.<div class="cmd"><button type="button" class="copiar" data-alvo="c-repo">Copiar</button><pre id="c-repo">https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</pre></div></li>
+        <li><b>Ligue a sua chave:</b> no seletor de modelos, procure <i>Manage Models</i> ou <i>Add model provider</i>. Aceita Anthropic, OpenAI, Gemini e OpenRouter. O consumo é cobrado pelo provedor e não gasta cota de assinatura.</li>
+        <li><b>Escolha o melhor modelo que a sua chave oferecer.</b> Entre os Claude, a ordem é Opus, depois Sonnet. Evite o modo automático: modelo escolhido pelo serviço é modelo desconhecido, e relatório de modelo desconhecido não se compara com nenhum outro.</li>
+        <li><b>Ponha o trabalho na pasta</b>, ao lado de <code>scripts/</code> e <code>prompts/</code>.</li>
+        <li><b>Abra o chat</b> com <b>Ctrl+Alt+I</b>, ou pelo menu <i>Exibir › Chat</i>, e <b>ponha em modo agente</b> no seletor do alto do painel, onde costuma estar escrito <i>Ask</i>. Modo agente é o que tem terminal; nos outros o assistente explica os comandos em vez de executá-los, e não avisa a diferença.</li>
+        <li><b>Peça a análise</b>, com o pedido abaixo.</li>
+      </ol>
+
+      <div class="pedido"><p class="pedido-rot">Cole isto na conversa:</p>
+        <pre class="pedido-txt" id="c-pedido-1">Leia o AGENTS.md nesta pasta e siga o que ele manda.
+
+O trabalho a analisar é o único .docx ou .pdf que está aqui. Rode a cadeia de programas, julgue uma a uma as suspeitas que eles levantarem, abrindo na extração o parágrafo que cada uma cita, e monte a entrega.
+
+Não digite trecho do trabalho, nem entre aspas nem parafraseado entre aspas: indique o parágrafo pelo número e deixe o programa inserir o texto.
+
+Ao final me diga quantas suspeitas você examinou, quantas descartou por serem escolha do autor e não deslize, e onde ficaram os arquivos da entrega.</pre>
+        <button type="button" class="copiar copiar-pedido">Copiar o pedido</button>
+      </div>
+
+      <p><b>O que volta:</b> o seu <code>.docx</code> com cada apontamento como comentário do Word na margem do parágrafo que o cita, com os seus próprios comentários preservados, e o relatório em PDF.</p>
+      <p><b>Se faltar alguma coisa, peça ao próprio assistente</b>, e mande que ele pergunte antes de instalar. O Python 3.11 é necessário; o PyMuPDF só se o trabalho for PDF; o pandoc e o xelatex só para o relatório em PDF.</p>
+      <p class="via-volta"><b>O que está acima basta para rodar.</b> Quem quiser ir mais fundo encontra no repositório o registro de desenho, que traz cada regra com a medição que a originou e a data, e a política sobre material de terceiro: <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao">github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</a>.</p>
+    
+      <h3>Se faltar alguma coisa, peça ao assistente</h3>
+      <p>Nada além do VS Code e da extensão precisa ser instalado por você. O Python, e o que mais faltar, o próprio assistente resolve. Cole no chat:</p>
+      <div class="pedido"><p class="pedido-rot">Cole isto na conversa:</p>
+        <pre class="pedido-txt" id="c-pedido-2">Confira se o Python está instalado e se a versão é 3.11 ou mais nova, rodando python --version. Se não estiver, me diga o que você pretende instalar e quanto ocupa, pergunte antes de instalar, e depois confirme que o comando passou a responder.</pre>
+        <button type="button" class="copiar copiar-pedido">Copiar o pedido</button>
+      </div>
+      <p><b>Não instale mais nada agora.</b> O PyMuPDF só faz falta se o trabalho for PDF, e o pandoc com o xelatex só para o relatório em PDF. Quem está experimentando não precisa de nenhum dos dois, e não faz sentido baixar meio gigabyte de LaTeX antes de saber se a ferramenta serve.</p>
+
+      <h3>Sobre a assinatura, e sobre a cota</h3>
+      <p>Há dois modos de chegar a um bom modelo. <b>Pela assinatura</b>, e é aqui que o benefício docente do GitHub Education conta: ele dá acesso aos modelos de topo, e é com eles que a leitura funciona. <b>O plano de estudante não serve:</b> desde março de 2026 ele perdeu a seleção de Opus e Sonnet. O custo, nesse modo, é a cota: uma leitura completa consumiu 17% da cota semanal numa medição de agosto de 2026.</p>
+      <p><b>Pela sua própria chave</b>, o consumo é cobrado pelo provedor e não gasta cota. Com créditos num agregador como o OpenRouter, uma chave só dá acesso a vários modelos. Duas ressalvas: não há aqui comparação sólida entre os modelos de um agregador, e o preço depende de o serviço repassar o desconto de reenvio, o que separa uma leitura de três dólares de uma de quinze.</p>
+
+      <h3>Aprovar os comandos</h3>
+      <p>Abaixo da caixa do prompt há um seletor de permissão. No modo corrente o agente mostra cada comando e espera você aprovar; os outros afrouxam isso em graus. <b>O critério é uma pergunta: o que a aprovação está guardando aqui?</b> Na parte dos programas, pouco: eles leem o trabalho e escrevem numa pasta, e não há entre eles comando que apague ou envie coisa alguma. Se aprovar um a um estiver cansando, afrouxe. <b>Mas volte ao modo corrente antes de qualquer coisa que envolva instalar ou usar git</b>, porque é ali que a aprovação está guardando algo.</p>
+
+      <h3>Se quebrar</h3>
+      <p><b>Se aparecer <code>No module named 'fitz'</code></b>, falta o PyMuPDF, e isso só acontece com trabalho em PDF. Peça ao assistente que instale.</p>
+      <p><b>Se reclamar de pandoc ou de xelatex</b>, é só o relatório em PDF. Peça que rode de novo com <code>--sem-pdf</code>, e o relatório sai em texto e em HTML.</p>
+      <p><b>Se ele disser que não consegue ler um arquivo que ele mesmo gravou</b>, provavelmente redirecionou a saída com <code>&gt;</code>, e no PowerShell isso grava em UTF-16. Diga que não use <code>&gt;</code>: os programas gravam sozinhos, em UTF-8.</p>
+      <p><b>E se a conversa morrer no meio</b>, com erro do próprio Copilot, abra outra. Não se perde o caro: a extração e as medidas ficam no disco, e só a leitura se refaz.</p>
+
+      <h3>Onde fica a entrega</h3>
+      <p>Numa pasta <code>entregas/</code>, dentro da pasta da oficina, com o seu <code>.docx</code> anotado e o relatório. O trabalho original não é alterado: o anotado é uma cópia.</p>
+    </div>
+
+    <div class="via-guia" id="guia-claude" hidden>
+      <h2>Pelo Claude Code, sobre a pasta do trabalho</h2>
+      <p>É o modo mais testado. Você não usa o medidor desta página: os programas fazem a medição e mais do que ela, e no fim devolvem o seu <code>.docx</code> com os apontamentos na margem.</p>
+
+      <ol class="passos">
+        <li><b>Instale o Python</b>, versão 3.11 ou mais nova, marcando a opção de acrescentá-lo ao PATH durante a instalação. É a caixa que quase todo mundo desmarca sem ler, e sem ela nada adiante funciona.</li>
+        <li><b>Instale o Claude Code</b> e abra-o. Ele precisa de assinatura da Claude.</li>
+        <li><b>Baixe a oficina</b>: na página <span class="loc">github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</span>, use <b>Code › Download ZIP</b> e descompacte. Ou peça ao próprio Claude Code que baixe.</li>
+        <li><b>Ponha o trabalho na pasta</b>, ao lado de <code>scripts/</code> e <code>prompts/</code>.</li>
+        <li><b>Peça a análise</b>, com o pedido abaixo. Ele roda os programas, julga as suspeitas e monta a entrega.</li>
+      </ol>
+
+      <div class="pedido"><p class="pedido-rot">Cole isto na conversa:</p>
+        <pre class="pedido-txt" id="c-pedido-3">Leia o AGENTS.md nesta pasta e siga o que ele manda.
+
+O trabalho a analisar é o único .docx ou .pdf que está aqui. Rode a cadeia de programas, julgue uma a uma as suspeitas que eles levantarem, abrindo na extração o parágrafo que cada uma cita, e monte a entrega.
+
+Não digite trecho do trabalho, nem entre aspas nem parafraseado entre aspas: indique o parágrafo pelo número e deixe o programa inserir o texto.
+
+Ao final me diga quantas suspeitas você examinou, quantas descartou por serem escolha do autor e não deslize, e onde ficaram os arquivos da entrega.</pre>
+        <button type="button" class="copiar copiar-pedido">Copiar o pedido</button>
+      </div>
+
+      <p><b>Escolha o melhor modelo que a sua assinatura oferecer</b>, e entre os Claude a ordem é Opus, depois Sonnet. <b>Evite o modo automático:</b> modelo escolhido pelo serviço é modelo desconhecido, e relatório de modelo desconhecido não se compara com nenhum outro, nem com o mesmo trabalho na semana passada. Aqui não há seletor de modo a ajustar: o Claude Code já é um agente, e já tem terminal.</p>
+      <p><b>O que volta:</b> o seu <code>.docx</code> com cada apontamento como comentário do Word na margem do parágrafo que o cita, com os seus próprios comentários preservados, e o relatório em PDF.</p>
+      <p><b>Se faltar alguma coisa, peça ao próprio assistente</b>, e mande que ele pergunte antes de instalar. O PyMuPDF só é necessário se o trabalho for PDF, e o pandoc com o xelatex só para o relatório em PDF; sem eles o relatório sai em texto simples, e a opção <code>--sem-pdf</code> resolve.</p>
+      <p class="via-volta"><b>O que está acima basta para rodar.</b> Quem quiser ir mais fundo encontra no repositório o registro de desenho, que traz cada regra com a medição que a originou e a data, e a política sobre material de terceiro: <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao">github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</a>.</p>
+    
+      <h3>Se faltar alguma coisa, peça ao assistente</h3>
+      <p>O Claude Code instala e configura o que faltar, se você pedir. Mande que ele pergunte antes de instalar qualquer coisa, e ele o fará.</p>
+      <p><b>O PyMuPDF só faz falta se o trabalho for PDF</b>, e o pandoc com o xelatex só para o relatório em PDF. Sem eles o relatório sai em texto e em HTML, com a opção <code>--sem-pdf</code>.</p>
+
+      <h3>Se quebrar</h3>
+      <p><b>Se aparecer <code>No module named 'fitz'</code></b>, falta o PyMuPDF, e só com trabalho em PDF. Peça que instale.</p>
+      <p><b>Se ele disser que não consegue ler um arquivo que ele mesmo gravou</b>, provavelmente redirecionou a saída com <code>&gt;</code>, e no PowerShell isso grava em UTF-16. Diga que não use <code>&gt;</code>: os programas gravam sozinhos, em UTF-8.</p>
+
+      <h3>Vários trabalhos na mesma sessão</h3>
+      <p><b>Aqui você não precisa recomeçar a cada trabalho.</b> Terminada uma análise, ponha o próximo arquivo na pasta e peça de novo: o Claude Code trabalha sobre a pasta, e não sobre uma conversa que precisa ficar limpa. A regra da conversa nova vale para a via do chat, onde o que você contou antes vira contexto que a banca não terá.</p>
+      <p><b>Uma ressalva, e ela vem de um acidente.</b> Numa leva de leituras feitas ao mesmo tempo, o relatório de um trabalho recebeu parágrafos extraídos de outro. A troca é silenciosa, e como o relatório cita por localizador ela chega com aparência de prova. Por isso a montagem hoje <b>recusa a entrega</b> quando encontra, entre aspas, texto que não existe no arquivo de origem. Diga sempre, no pedido, de qual arquivo se trata.</p>
+
+      <h3>Onde fica a entrega</h3>
+      <p>Numa pasta <code>entregas/</code>, dentro da pasta da oficina, com o seu <code>.docx</code> anotado e o relatório. O trabalho original não é alterado: o anotado é uma cópia.</p>
     </div>
   </header>
 
-  <div class="cols">
+  <div id="guia-chat" hidden>
+
+    <ol class="passos">
+      <li><b>Abra uma conversa nova</b> no seu assistente e <b>cole o prompt</b>, que está <a href="#prompts">mais abaixo nesta página</a>. Tecle enter e espere a resposta. A conversa tem de ser nova: histórico anterior contamina a leitura.</li>
+      <li><b>Anexe o trabalho</b> na mesma conversa, pelo botão <b>+</b>. Prefira o PDF: ele entrega as figuras como imagem, e é o que permite ao assistente ver os gráficos.</li>
+      <li><b>Meça o arquivo aqui e anexe o resultado.</b> A medição é feita na caixa ao lado, e precisa do <code>.docx</code>, porque lê o arquivo por dentro. Copie o que sair e cole na conversa. Então peça a análise.</li>
+    </ol>
+
+    <p>Esta página abre o <code>.docx</code>, desfaz a herança de formatação que o Word aplica sem mostrar, e mede o documento contra ele mesmo: como cada tipo de parágrafo está formatado, o ritmo do texto, as legendas e fontes das figuras, e se o que o corpo cita aparece na lista de referências. <b>Nenhuma medida daqui é medida de qualidade</b>, e o julgamento do que elas significam é a outra metade, no prompt do fim da página.</p>
+    <p><b>O medidor precisa do <code>.docx</code></b>, porque lê o arquivo por dentro. Já a leitura da outra metade prefere o PDF, que entrega as figuras como imagem e permite ao assistente ver os gráficos.</p>
+
+<section class="prompts" id="prompts">
+    <h2>Primeiro passo: abrir uma janela nova e colar o prompt</h2>
+    <p>A página mede a forma; o resto é leitura, e ela vai aqui. <b>O prompt não é site nem aplicativo: é um texto que se cola em qualquer assistente de inteligência artificial, inclusive nos gratuitos.</b> Ele manda o assistente ler o trabalho numa ordem determinada — primeiro o que o trabalho promete, depois o aparato empírico lido de trás para diante, e só então o cruzamento — e escrever o relatório.</p>
+    <p style="margin-top:10px"><b>É o mesmo arquivo que roda nas vias com programa</b>, e por isso a última seção dele fala de uma revisão que só existe quando um agente o executa. Numa conversa de chat ela não se aplica, e não atrapalha: prompt duplicado diverge com o tempo, e a versão errada é sempre a que alguém está lendo.</p>
+    <p><b>A conversa tem de ser nova</b>, e não uma em que o trabalho já foi discutido: o que você contou antes vira contexto que a banca não terá, e a leitura passa a supor o que não está escrito. Se o assistente pedir upgrade no meio, é o limite gratuito da conversa; recomece noutra e o prompt roda igual.</p>
+
+    <div class="barra">
+      <span class="desc" id="descPrompt">Um relatório em oito partes, começando pelo veredito e pelo que está sólido, e terminando pelo alcance: o que foi lido, o que não foi, e o que ficou sem conferência.</span>
+      <button type="button" class="copiar" id="copiar">Copiar prompt</button>
+    </div>
+    <textarea class="prompt" id="textoPrompt" readonly spellcheck="false"></textarea>
+
+    <p class="rodape" id="rodapePrompt">O mesmo relatório serve a quem escreve e a quem orienta, e o ideal é que quem escreve rode primeiro. Por isso ele não traz especulação sobre autoria: o que entra é o que se confere (referência que não se confirma, citação que não bate com a fonte, número que não fecha), e não impressão sobre quem escreveu o quê. <b>E ele não substitui a leitura completa:</b> enxerga uma parte, e a parte que enxerga vem com o endereço de onde conferi-la.</p>
+  </section>
+
+      <section class="anexar" id="anexar">
+    <h2>Segundo passo: anexar o trabalho (de preferência o PDF, mas pode ser o .docx)</h2>
+    <p class="chamada"><b>A ordem é esta: abra uma conversa nova, cole o prompt, tecle enter, e só então anexe os arquivos.</b> São dois gestos distintos, e o assistente aceita o prompt sozinho primeiro; anexar antes costuma atrapalhar mais do que ajudar.</p>
+    <p class="chamada">Os arquivos entram pelo botão <b>+</b> da conversa, e são dois: o resultado das medidas que você fez aqui, sobre o <code>.docx</code>, e o arquivo com o conteúdo do trabalho.</p>
+    <p class="chamada"><b>E neste momento é melhor anexar o PDF do que o <code>.docx</code>.</b> O <code>.docx</code> era necessário para fazer as medidas, porque elas se leem por dentro do arquivo. Para a leitura, o PDF entrega as figuras como imagem, e é o que permite ao assistente ver os gráficos em vez de só saber que existem.</p>
+    <p class="chamada"><b>Anexe um só.</b> Mandar o PDF e o <code>.docx</code> do mesmo trabalho faz o assistente ler o mesmo texto duas vezes, em duas contagens de parágrafo, e devolver localizações que não batem entre um apontamento e o seguinte.</p>
+
+    <dl class="formatos">
+      <dt><code>.pdf</code> <span class="rot">o padrão</span></dt>
+      <dd>Entrega as páginas como imagem, e é por isso que ele é o padrão: o assistente enxerga o conteúdo dos quadros, dos gráficos e das tabelas. Num trabalho medido, o que estava dentro das figuras produziu nove dos dezessete achados e evitou quatro falsos positivos, porque o número que contradiz o texto costuma estar num lugar que nenhuma busca textual alcança. Traz também o número de página, que é como se cita.</dd>
+
+      <dt><code>.docx</code> <span class="rot">para o medidor desta página</span></dt>
+      <dd>O medidor ao lado precisa dele, porque lê o arquivo por dentro. Se você só tem o <code>.docx</code>, exporte um PDF do próprio Word, que sai em um clique, e passe a ter os dois: o <code>.docx</code> aqui e o PDF no assistente. Anexar só o <code>.docx</code> funciona, e o que se perde é o conteúdo das figuras, que o assistente deve declarar que não viu.</dd>
+        </dl>
+
+    <p class="aviso"><b>E não peça ao assistente que converta o arquivo.</b> Um assistente de chat não tem sistema de arquivos e não roda programa nenhum, de modo que o pedido produz uma de duas coisas: ou ele diz que não pode, ou <b>ele diz que converteu e passa a descrever gráficos que nunca viu</b>. O segundo caso é o que arruína o relatório, porque a afirmação inventada sobre uma figura se refuta abrindo a página. A conversão custa um clique no seu editor, e é lá que ela se faz.</p>
+  </section>
+
+<h2 class="passo-titulo">Terceiro passo: gerar e anexar as medidas (se houver o .docx)</h2>
+    <p class="passo-nota">Aqui se medem a forma e o aparato do documento: fontes, espaçamentos, legendas, notas, referências. A medição roda dentro do seu navegador, e o arquivo não sai da sua máquina. Copie o resultado e cole na conversa que você abriu no primeiro passo.</p>
+
+    <div class="cols">
     <aside class="rail">
+
       <label class="solta" id="solta" tabindex="0">
         <strong>Escolher arquivo .docx</strong>
         <span>ou arraste até aqui</span>
@@ -391,6 +718,8 @@
       <div class="acoes">
         <button class="acao destaque" id="copiarMedidas" disabled>Copiar as medidas</button>
         <p class="ajuda">Copia, em Markdown, tudo o que esta página apurou. Cole no assistente junto com o trabalho e o prompt.</p>
+        <button class="acao" id="baixarAnotado" hidden disabled>Baixar o trabalho anotado</button>
+        <p class="ajuda" id="ajudaAnotado" hidden>Devolve o seu <code>.docx</code> com cada achado como comentário do Word, na margem, ao lado do parágrafo. O texto não é tocado, e os seus próprios comentários ficam.</p>
         <details id="verMedidas" hidden>
           <summary>Ver e selecionar à mão</summary>
           <textarea id="areaMedidas" readonly spellcheck="false"></textarea>
@@ -400,10 +729,10 @@
 
     <main class="painel" id="painel">
       <div class="abertura">
-        <h2>O que este instrumento mede</h2>
+        <h2>O que esta ferramenta mede</h2>
         <p>Dez blocos, todos apurados a partir do XML do próprio arquivo, sem inferência e sem amostragem.</p>
         <ul>
-          <li>Formatação do corpo de texto: padrão dominante e cada desvio, com exemplo localizado</li>
+          <li>Consistência formal: dentro de cada papel do parágrafo, quem está fora da forma dos seus iguais</li>
           <li>Hierarquia de títulos: coerência dentro de cada nível e saltos de nível</li>
           <li>Pseudo-títulos, isto é, parágrafos formatados à mão como título</li>
           <li>Ritmo dos parágrafos, com o piso de dez linhas convertido a partir da mancha real da página</li>
@@ -414,71 +743,25 @@
           <li>Sujeira tipográfica</li>
           <li>Marcas de escrita que hoje fazem um texto parecer gerado</li>
         </ul>
-        <p class="aviso">O que este instrumento não faz é a parte que decide: se o problema de pesquisa se sustenta, se o método aplicado é o método declarado, se a conclusão excede a evidência. Isso exige leitura, e leitura é a outra metade.</p>
+        <p class="aviso">O que esta ferramenta não faz é a parte que decide: se o problema de pesquisa se sustenta, se o método aplicado é o método declarado, se a conclusão excede a evidência. Isso exige leitura, e leitura é a outra metade.</p>
       </div>
     </main>
   </div>
 
-  <section class="cuidados" id="cuidados">
-    <h2>Cuidados na aplicação</h2>
-    <p class="chamada">Há duas maneiras de rodar a análise, elas enxergam coisas diferentes, e a diferença não é de qualidade: é de posição. Quem usa só uma das duas perde exatamente o que a outra veria.</p>
 
-    <div class="modos">
-      <div class="modo">
-        <span class="rot">Leitura fria</span>
-        <p>Sessão nova, só o arquivo, nenhum histórico. Não sabe nada do processo, e é isso que a torna útil: <strong>é a condição da banca</strong>, que também não sabe o que você quis dizer. Com acesso à web, é a única que confere se as obras citadas existem e se as citações diretas batem com a fonte.</p>
-      </div>
-      <div class="modo">
-        <span class="rot">Dentro da sessão de desenvolvimento</span>
-        <p>O assistente tem as versões anteriores, as decisões tomadas, o material de origem, os dados. Enxerga o que o texto final não mostra: divergência entre o notebook e o número impresso, item que sumiu do material de origem para o capítulo, conteúdo de imagem que nenhuma busca textual alcança.</p>
-      </div>
-    </div>
+    <section class="cuidados" id="cuidados">
+      <h2>Cuidados na aplicação</h2>
 
-    <h3>Onde o uso dentro da sessão falha</h3>
-    <p>Os quatro modos de falha abaixo não são defeito do modelo. São consequência da posição, e por isso nenhum deles se resolve pedindo mais rigor.</p>
-    <dl class="falhas">
-      <dt>Contaminação por contexto</dt>
-      <dd>O assistente sabe o que você quis dizer e lê preenchendo as lacunas com a memória da conversa. Julga claro o que é claro para ele. É a falha mais perigosa porque é invisível: ninguém percebe estar completando um texto.</dd>
+      <p><b>Faça a leitura numa conversa nova, e nunca naquela em que o trabalho foi escrito.</b> Se você usou um assistente para desenvolver a pesquisa, aquela conversa guarda tudo o que você contou pelo caminho: as decisões, os dados brutos, o que você quis dizer e não escreveu. Rodando a leitura ali, ele lê o trabalho <b>somado ao que sabe de você</b>, e o relatório sai aprovando passagens que só se sustentam com o que está fora do texto.</p>
 
-      <dt>Deriva para advogado de defesa</dt>
-      <dd>Numa sessão longa o assistente ajudou a construir a coisa, e criticá-la é criticar trabalho de que ele participou. Aparece como explicação onde deveria haver medida.</dd>
+      <p><b>É o oposto do que se quer.</b> Quem vai avaliar o trabalho não esteve naquela conversa. A banca lê o que está escrito, e nada mais. Uma leitura contaminada devolve exatamente o contexto que a banca não terá, e por isso deixa de encontrar as lacunas que a banca vai encontrar.</p>
 
-      <dt>Conformidade no lugar de qualidade</dt>
-      <dd>Conferir se o que foi determinado na rodada anterior foi executado mede execução, não mérito. É excelente nisso, e o risco é que substitua a releitura: "fizemos o que foi determinado" não é "o texto está bom".</dd>
+      <p><b>Pela mesma razão, não explique o trabalho ao assistente.</b> Anexe os arquivos, cole o prompt, e mais nada. Toda frase de contexto que você acrescentar é uma frase que a banca não vai ter. A ignorância dele é o que torna a leitura útil, e é fácil estragá-la sem perceber, com uma explicação bem-intencionada.</p>
 
-      <dt>Cegueira à pauta</dt>
-      <dd>O que nunca entrou na conversa não entra no relatório. Um erro de inferência num parágrafo que nunca foi discutido permanece invisível, por melhor que seja o assistente. A leitura fria não tem pauta.</dd>
-    </dl>
+      <p><b>E não continue uma conversa que já rendeu um relatório.</b> Para uma segunda versão do trabalho, abra outra: o assistente que já elogiou uma passagem tende a defendê-la, e o que já apontou um defeito tende a reencontrá-lo mesmo depois de corrigido.</p>
+    </section>
 
-    <h3>O que fazer</h3>
-    <ol class="fazer">
-      <li><strong>Rode as duas, e nunca só a de dentro.</strong> A de dentro para acompanhar execução e para o que só se vê com o material na mão; a fria para o que a banca vai ver.</li>
-      <li><strong>Não explique o trabalho para a leitura fria.</strong> É a instrução mais contraintuitiva e a mais importante: o valor dela vem da ignorância. Anexe o arquivo, cole o prompt, e mais nada. Toda frase de contexto que você acrescentar é justamente o contexto que a banca não terá, devolvido ao leitor que existe para simular a falta dele.</li>
-      <li><strong>Peça, na sessão de desenvolvimento, a lista do que você contou e não está escrito.</strong> Literalmente: "liste tudo o que eu disse ao longo da sessão que não está no texto". Cada item ali é uma lacuna que a banca vai encontrar, e é o único diagnóstico que só o assistente contaminado consegue produzir.</li>
-      <li><strong>Tire dele o bloco de pontos de atenção.</strong> Ninguém é testemunha do próprio caso. Esse bloco vem da leitura fria ou de quem orienta.</li>
-      <li><strong>Separe conformidade de mérito em dois pedidos.</strong> Um relatório de execução e um de leitura, sem misturar, porque misturados o primeiro engole o segundo.</li>
-      <li><strong>Trate a divergência entre os dois relatórios como o achado principal.</strong> Onde eles discordam é onde olhar, e a regra é não resolver escolhendo o mais gentil.</li>
-    </ol>
-  </section>
-
-  <section class="prompts" id="prompts">
-    <h2>A outra metade: o prompt</h2>
-    <p>Esta página mede, e a medida não lê o argumento. Quem decide se o problema de pesquisa se sustenta, se o método aplicado é o método declarado e se a conclusão excede a evidência é a leitura, e ela vai aqui, em formato portátil: não é site nem aplicativo, é apenas um texto que se cola em qualquer assistente de IA gratuito.</p>
-    <ol class="passos">
-      <li><strong>Copie as medidas</strong> no botão da coluna ao lado, depois de carregar o arquivo. É tudo o que esta página apurou, em Markdown.</li>
-      <li><strong>Copie</strong> o prompt abaixo e cole como primeira mensagem num assistente.</li>
-      <li><strong>Anexe o .docx</strong> (ou cole o texto do trabalho) junto com as medidas copiadas.</li>
-      <li>O assistente devolve o relatório. Se ele pedir upgrade no meio, é só o limite gratuito: abra conversa nova, cole o prompt outra vez e reenvie os arquivos.</li>
-    </ol>
-
-    <div class="barra">
-      <span class="desc" id="descPrompt">Um relatório só, com veredito, determinações, metodologia, arquitetura do argumento e as perguntas que a banca vai fazer.</span>
-      <button type="button" class="copiar" id="copiar">Copiar prompt</button>
-    </div>
-    <textarea class="prompt" id="textoPrompt" readonly spellcheck="false"></textarea>
-
-    <p class="rodape" id="rodapePrompt">O mesmo relatório serve a quem escreve e a quem orienta, e o ideal é que quem escreve rode primeiro. Por isso ele não traz especulação sobre autoria: o que entra é o que se confere (referência que não se confirma, citação que não bate com a fonte, número que não fecha), e não impressão sobre quem escreveu o quê.</p>
-  </section>
+  </div>
 
   <footer class="creditos">
     <p><strong>Concepção, critérios e prompts:</strong> Prof. Alexandre Araújo Costa, Universidade de Brasília. Desenvolvido com apoio do modelo Opus, da Anthropic, no Claude Code.</p>
@@ -515,7 +798,16 @@
       const comentLen = dv.getUint16(off + 32, true);
       const local = dv.getUint32(off + 42, true);
       const nome = dec.decode(new Uint8Array(buf, off + 46, nomeLen));
-      itens.set(nome, { metodo, comp, local });
+      /* crc, tamanhos e data vêm do diretório central, que é a fonte
+         autoritativa: com eles a entrada intacta se copia sem descompactar. */
+      itens.set(nome, {
+        metodo, comp, local,
+        crc: dv.getUint32(off + 16, true),
+        cru: dv.getUint32(off + 24, true),
+        hora: dv.getUint16(off + 12, true),
+        data: dv.getUint16(off + 14, true),
+        ordem: i
+      });
       off += 46 + nomeLen + extraLen + comentLen;
     }
     return { buf, dv, itens };
@@ -537,6 +829,113 @@
     }
     const fluxo = new Blob([bruto]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
     return new TextDecoder().decode(await new Response(fluxo).arrayBuffer());
+  }
+
+  /* ------------------------------------------------------- gravação do zip */
+  /* Copia as entradas intactas com os bytes que já estão no arquivo, e grava as
+     modificadas sem compactar. Word aceita as duas formas na mesma pasta. */
+
+  const TABELA_CRC = (() => {
+    const t = new Uint32Array(256);
+    for (let i = 0; i < 256; i++) {
+      let c = i;
+      for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+      t[i] = c >>> 0;
+    }
+    return t;
+  })();
+
+  function crc32(bytes) {
+    let c = 0xFFFFFFFF;
+    for (let i = 0; i < bytes.length; i++) c = TABELA_CRC[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+    return (c ^ 0xFFFFFFFF) >>> 0;
+  }
+
+  function bytesDeEntrada(zip, nome) {
+    const it = zip.itens.get(nome);
+    const { dv, buf } = zip;
+    const nomeLen = dv.getUint16(it.local + 26, true);
+    const extraLen = dv.getUint16(it.local + 28, true);
+    const ini = it.local + 30 + nomeLen + extraLen;
+    return new Uint8Array(buf, ini, it.comp);
+  }
+
+  async function comprimir(bytes) {
+    /* Sem CompressionStream a entrada entra armazenada: cresce, e funciona. */
+    if (typeof CompressionStream === "undefined") return null;
+    try {
+      const fluxo = new Blob([bytes]).stream().pipeThrough(new CompressionStream("deflate-raw"));
+      const saida = new Uint8Array(await new Response(fluxo).arrayBuffer());
+      return saida.length < bytes.length ? saida : null;
+    } catch (e) { return null; }
+  }
+
+  async function gravarZip(zip, trocas) {
+    const cod = new TextEncoder();
+    const nomes = [...zip.itens.keys()].sort((a, b) => zip.itens.get(a).ordem - zip.itens.get(b).ordem);
+    for (const n of Object.keys(trocas)) if (!zip.itens.has(n)) nomes.push(n);
+
+    const partes = [], central = [];
+    let desloc = 0;
+
+    for (const nome of nomes) {
+      const it = zip.itens.get(nome);
+      const nb = cod.encode(nome);
+      let metodo, crc, comp, cru, dados, hora, data;
+      if (Object.prototype.hasOwnProperty.call(trocas, nome)) {
+        const puro = cod.encode(trocas[nome]);
+        crc = crc32(puro); cru = puro.length;
+        const zip8 = await comprimir(puro);
+        dados = zip8 || puro; metodo = zip8 ? 8 : 0; comp = dados.length;
+        hora = it ? it.hora : 0; data = it ? it.data : 0x2821;
+      } else {
+        dados = bytesDeEntrada(zip, nome);
+        metodo = it.metodo; crc = it.crc; comp = it.comp; cru = it.cru;
+        hora = it.hora; data = it.data;
+      }
+
+      const lh = new Uint8Array(30 + nb.length);
+      const ldv = new DataView(lh.buffer);
+      ldv.setUint32(0, 0x04034b50, true);
+      ldv.setUint16(4, 20, true);          // versão necessária
+      ldv.setUint16(6, 0x0800, true);      // nomes em UTF-8
+      ldv.setUint16(8, metodo, true);
+      ldv.setUint16(10, hora, true); ldv.setUint16(12, data, true);
+      ldv.setUint32(14, crc, true);
+      ldv.setUint32(18, comp, true); ldv.setUint32(22, cru, true);
+      ldv.setUint16(26, nb.length, true); ldv.setUint16(28, 0, true);
+      lh.set(nb, 30);
+      partes.push(lh, dados);
+
+      const cd = new Uint8Array(46 + nb.length);
+      const cdv = new DataView(cd.buffer);
+      cdv.setUint32(0, 0x02014b50, true);
+      cdv.setUint16(4, 20, true); cdv.setUint16(6, 20, true);
+      cdv.setUint16(8, 0x0800, true);
+      cdv.setUint16(10, metodo, true);
+      cdv.setUint16(12, hora, true); cdv.setUint16(14, data, true);
+      cdv.setUint32(16, crc, true);
+      cdv.setUint32(20, comp, true); cdv.setUint32(24, cru, true);
+      cdv.setUint16(28, nb.length, true);
+      cdv.setUint32(42, desloc, true);
+      cd.set(nb, 46);
+      central.push(cd);
+
+      desloc += lh.length + dados.length;
+    }
+
+    const centralIni = desloc;
+    let centralTam = 0;
+    for (const c of central) centralTam += c.length;
+    const fim = new Uint8Array(22);
+    const fdv = new DataView(fim.buffer);
+    fdv.setUint32(0, 0x06054b50, true);
+    fdv.setUint16(8, central.length, true);
+    fdv.setUint16(10, central.length, true);
+    fdv.setUint32(12, centralTam, true);
+    fdv.setUint32(16, centralIni, true);
+
+    return new Blob([...partes, ...central, fim]);
   }
 
   const parseXml = (t) => new DOMParser().parseFromString(t, "application/xml");
@@ -660,7 +1059,10 @@
           if (t) { partes.push(t); pesos.push([Math.max(t.trim().length, 1), ef]); }
         } else if (c.localName === "footnoteReference") {
           const id = attr(c, "id"); if (id) { o.notas.push(id); partes.push("[nota " + id + "]"); }
-        } else if (c.localName === "hyperlink" || c.localName === "smartTag" || c.localName === "ins") {
+        } else if (c.localName === "hyperlink" || c.localName === "smartTag" || c.localName === "ins"
+                   || c.localName === "fldSimple" || c.localName === "sdt" || c.localName === "sdtContent") {
+          /* fldSimple guarda o numero automatico da legenda: sem entrar aqui, "Figura 3."
+             chega como "Figura ." e a legenda deixa de ser reconhecida como legenda. */
           anda(c);
         }
       }
@@ -732,7 +1134,10 @@
 
   const RE_SUM = /[\t.…]\s*\d{1,4}\s*$/;
   const RE_CODIGO = /^\s*(import |from \w+ import|def |class |print\(|#|\/\/|<\?|\{|\})/;
-  const RE_LEGENDA = /^\s*(Gr[áa]fico|Tabela|Figura|Quadro|Esquema|Imagem)\s*n?[.º°]?\s*(\d+)/i;
+  /* O numero e opcional de proposito: quando ele vem de campo automatico e a
+     extracao falha, a legenda continua sendo legenda, e classifica-la como prosa
+     poe dezenas de falsos positivos no bloco de consistencia formal. */
+  const RE_LEGENDA = /^\s*(Gr[áa]fico|Tabela|Figura|Quadro|Esquema|Imagem)\s*n?[.º°]?\s*(\d+)?\s*[.\-–—:)]/i;
   const RE_FONTE = /^\s*(Fonte|Nota|Legenda|Obs)\b/i;
   const RE_ITEM = /^\s*([-•–]|\(?[a-z]\)|\(?[ivx]+\)|\d+[.)])\s+/i;
   const RE_FIM = /^\s*(REFER[ÊE]NCIAS?|BIBLIOGRAFIA|OBRAS CITADAS|AP[ÊE]NDICES?|ANEXOS?)\b/i;
@@ -771,6 +1176,54 @@
     if (eSumario(p) || eCodigo(p) || ePseudo(p, base)) return false;
     if (RE_LEGENDA.test(t) || RE_FONTE.test(t) || RE_ITEM.test(t)) return false;
     return !t.endsWith(":");
+  }
+
+  /* --------------------------------------------------- papel do parágrafo */
+  /* A comparação de forma só vale dentro do mesmo papel. Comparar tudo contra o
+     padrão dominante marcava, nos dois trabalhos medidos em 26/08/2026, 347 e
+     160 parágrafos, e quase todos eram legítimos: referência, legenda e fonte de
+     figura têm forma própria por construção. O sinal verdadeiro estava dentro de
+     cada papel, e é sempre o mesmo: mesmo papel, duas formatações. */
+
+  const SEM_COMPARACAO = {
+    "tabela": "cabeçalho, célula de texto e célula de número são formas distintas na mesma tabela",
+    "pré-textual": "capa, folha de rosto, ficha, dedicatória e resumo são páginas únicas, cada uma com forma própria",
+    "sumário": "a forma vem do nível do título, e quem a gera é o próprio editor",
+    "linha curta": "etiqueta de gráfico, linha solta e fragmento não são prosa e não têm forma única"
+  };
+
+  function marcosPos(pars, fim) {
+    const out = [];
+    for (const p of pars) {
+      const t = p.texto.trim();
+      if (p.idx < fim || !t || eSumario(p)) continue;
+      if (RE_FIM.test(t) && (p.nivel !== null || t.length < 60))
+        out.push([p.idx, t.replace(/\s+/g, " ").trim().toLowerCase().slice(0, 40)]);
+    }
+    return out;
+  }
+
+  function papel(p, base, ini, fim, marcos) {
+    const t = p.texto.trim();
+    if (!t || p.nivel !== null) return null;
+    if (p.emTabela) return "tabela";
+    if (eSumario(p)) return "sumário";
+    if (p.idx < ini) return "pré-textual";
+    if (p.idx >= fim) {
+      let nome = "referências";
+      for (const [i, n] of marcos) if (p.idx >= i) nome = n;
+      return nome;
+    }
+    if (RE_LEGENDA.test(t)) return "legenda";
+    if (RE_FONTE.test(t)) return "fonte de figura";
+    /* O piso vem ANTES da citação longa: sem isso, "Plenário Virtual" em 11pt sob
+       um gráfico entrava como citação recuada. Medido em 27/08/2026. */
+    if (t.length <= 60) return "linha curta";
+    if (eCitacao(p, base, ini)) return "citação longa";
+    /* Recuo deslocado é a assinatura do item de lista e da definição, que têm
+       forma própria e não se comparam com prosa corrida. */
+    if ((p.pp.ih || 0) > 0) return "item de lista";
+    return "corpo";
   }
 
   const RE_ABREV = /\b(art|arts|inc|p|pp|n|no|cf|op|cit|ed|orgs?|coord|s[ée]c|vol|fl|fls|Dr|Dra|Sr|Sra|Prof|Min|Rel|Ex)\./gi;
@@ -831,27 +1284,67 @@
       "Em tabela": nfmt(pars.filter(p => p.emTabela).length)
     };
 
+    R.totalPars = pars.length;
     const B = (id, titulo, nota) => { const b = { id, titulo, nota, metricas: [], achados: [], html: [] }; R.blocos.push(b); return b; };
 
-    /* 1. corpo */
+    /* 1. consistência formal, por papel */
     {
-      const b = B("forma", "Formatação do corpo de texto", "O critério é coerência interna, sem comparação com norma externa. Variante com função é escolha (legenda em corpo menor, citação recuada); variante que aparece uma vez só costuma ser descuido. Quem separa as duas é a leitura.");
-      const corpos = pars.filter(eCorpo);
-      const sig = new Map();
-      for (const p of corpos) { const s = assinatura(p); if (!sig.has(s)) sig.set(s, []); sig.get(s).push(p); }
-      const ord = [...sig.entries()].sort((a, c) => c[1].length - a[1].length);
-      if (!ord.length) { b.achados.push({ vazio: "Nenhum parágrafo de corpo identificado." }); }
-      else {
-        const [domS, domP] = ord[0];
-        const pctDom = 100 * domP.length / corpos.length;
-        b.metricas.push({ r: "no padrão dominante", v: nfmt(pctDom, 0) + "%", tom: pctDom >= 80 ? "bom" : pctDom >= 55 ? "" : "alerta" });
-        b.metricas.push({ r: "formatações distintas", v: nfmt(ord.length), tom: ord.length > 12 ? "alerta" : "" });
-        b.achados.push({ chip: "padrão", tom: "ok", titulo: domP.length + " de " + corpos.length + " parágrafos", detalheMono: domS });
-        for (const [s, ps] of ord.slice(1, 11)) {
-          b.achados.push({ chip: ps.length + "×", tom: "", titulo: "variante", detalheMono: s, exemplos: ps.slice(0, 3) });
-        }
-        if (ord.length > 11) b.achados.push({ vazio: "mais " + (ord.length - 11) + " variantes não listadas" });
+      const b = B("forma", "Consistência formal (mesmo papel, duas formatações)",
+        "Compara-se dentro de cada papel, e nunca entre papéis: referência, legenda e fonte de figura têm forma própria, e diferir do corpo é o certo. O que sai daqui é sempre da mesma espécie, e é defeito de propagação: a formatação foi mudada em quase tudo e sobrou a versão antiga onde ninguém olhou.");
+      const marcos = marcosPos(pars, fim);
+      const grupos = new Map();
+      for (const p of pars) {
+        const r = papel(p, base, ini, fim, marcos);
+        if (!r) continue;
+        if (!grupos.has(r)) grupos.set(r, []);
+        grupos.get(r).push(p);
       }
+      const ordG = [...grupos.entries()].sort((a, c) => c[1].length - a[1].length);
+
+      let fora = 0, comparados = 0;
+      const uniformes = [], blocos = [];
+      for (const [r, g] of ordG) {
+        if (g.length < 3 || SEM_COMPARACAO[r]) continue;
+        const sig = new Map();
+        for (const p of g) { const s = assinatura(p); if (!sig.has(s)) sig.set(s, []); sig.get(s).push(p); }
+        const ord = [...sig.entries()].sort((a, c) => c[1].length - a[1].length);
+        comparados += g.length;
+        if (ord.length === 1) { uniformes.push(r + " (" + g.length + ")"); continue; }
+        const [domS, domP] = ord[0];
+        const pct = 100 * domP.length / g.length;
+        if (pct < 60) {
+          blocos.push({
+            chip: r, tom: "atencao",
+            titulo: "sem forma assentada: " + g.length + " parágrafos em " + ord.length + " formatações, e a maior tem " + nfmt(pct, 0) + "%",
+            detalhe: "Não há versão certa a que alinhar, e por isso não há correção a fazer aqui: a escolha é de quem escreve.",
+            sublistas: ord.slice(0, 3).map(([s, ps]) => ({ mono: "[" + ps.length + "] " + s, exemplos: ps.slice(0, 1) }))
+          });
+          continue;
+        }
+        fora += g.length - domP.length;
+        blocos.push({ chip: r, tom: "ok", titulo: "vale esta forma, em " + domP.length + " de " + g.length, detalheMono: domS });
+        for (const [s, ps] of ord.slice(1, 7))
+          blocos.push({ chip: ps.length + "×", tom: ps.length <= 3 ? "grave" : "", titulo: "fora da forma de " + r, detalheMono: s, exemplos: ps.slice(0, 3) });
+        if (ord.length > 7) blocos.push({ vazio: "mais " + (ord.length - 7) + " variantes de " + r + " não listadas" });
+      }
+
+      b.metricas.push({ r: "fora da forma do próprio papel", v: nfmt(fora), tom: fora === 0 ? "bom" : fora > 30 ? "alerta" : "" });
+      b.metricas.push({ r: "parágrafos comparados", v: nfmt(comparados) });
+      b.metricas.push({ r: "papéis identificados", v: nfmt(ordG.length) });
+
+      const excl = ordG.filter(([r]) => SEM_COMPARACAO[r]);
+      if (excl.length) b.achados.push({
+        chip: "fora da conta", tom: "",
+        titulo: excl.map(([r, g]) => r + " (" + g.length + ")").join(", "),
+        detalhe: excl.map(([r]) => r + ", porque " + SEM_COMPARACAO[r]).join("; ") + "."
+      });
+      if (uniformes.length) b.achados.push({
+        chip: "uniforme", tom: "ok", titulo: uniformes.join(", "),
+        detalhe: "Relatar o que fecha é o que dá crédito ao que não fecha."
+      });
+      for (const x of blocos) b.achados.push(x);
+      if (!blocos.length && !uniformes.length) b.achados.push({ vazio: "Nenhum papel com parágrafos suficientes para comparar." });
+      else if (!blocos.length) b.achados.push({ vazio: "Nenhuma divergência dentro de papel: a formatação está consistente." });
     }
 
     /* 2. títulos */
@@ -894,7 +1387,7 @@
 
     /* 4. ritmo */
     {
-      const b = B("ritmo", "Ritmo dos parágrafos", "O piso de dez linhas sai da mancha real da página, mas é preferência de quem montou este instrumento, não padrão da área: dissertações aprovadas ficam rotineiramente abaixo dele. O que a medida serve para localizar são as sequências em staccato, e nelas o defeito nunca é o comprimento, é a relação entre as frases que ficou implícita. Em capítulo descritivo ou de catálogo, onde cada parágrafo esgota um caso, o parágrafo curto é a forma certa. E nunca se resolve fundindo parágrafos.");
+      const b = B("ritmo", "Ritmo dos parágrafos", "O piso de dez linhas sai da mancha real da página, mas é preferência de quem montou esta ferramenta, não padrão da área: dissertações aprovadas ficam rotineiramente abaixo dele. O que a medida serve para localizar são as sequências em staccato, e nelas o defeito nunca é o comprimento, é a relação entre as frases que ficou implícita. Em capítulo descritivo ou de catálogo, onde cada parágrafo esgota um caso, o parágrafo curto é a forma certa. E nunca se resolve fundindo parágrafos.");
       const prosa = pars.filter(p => eProsa(p, base) && p.idx >= ini && p.idx < fim);
       let cpl = 78;
       if (geo && base) { const util = (geo.w || 21) - (geo.left || 3) - (geo.right || 2); if (util > 1) cpl = util / (base * 0.01764); }
@@ -1221,6 +1714,119 @@
 
   const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
+  /* ---------------------------------------------------- .docx anotado */
+  /* ESTE BLOCO NÃO RODA HOJE, E ISSO É DECISÃO, NÃO ESQUECIMENTO.
+     Entregar arquivo exige a capacidade "downloads", e a plataforma recusa essa
+     capacidade em artifact compartilhado publicamente. Em 27/08/2026 o
+     compartilhamento público foi mantido, porque o valor desta página é ser um
+     endereço que se manda ao orientando. O código fica: está testado nos dois
+     trabalhos (671 e 1.347 parágrafos preservados, XML válido, comentários do
+     autor intactos) e o botão se esconde sozinho quando claude.use devolve
+     null, de modo que nada aqui quebra a página. Quem quiser o arquivo anotado
+     roda scripts/anotar_docx.py. */
+  /* Os achados desta página já vêm ancorados em parágrafo. Aqui eles viram
+     comentário do Word, na margem, ao lado do parágrafo que os exibe. */
+
+  const RE_PAR_XML = /<w:p(?:\s[^>]*)?\/>|<w:p(?:\s[^>]*)?>[\s\S]*?<\/w:p>/g;
+  /* O bloco das marcas de escrita fica de fora: ele mesmo diz que não prova
+     nada, e espalhar isso pela margem transforma ressalva em acusação. */
+  const NAO_ANOTA = new Set(["escrita"]);
+
+  const escXml = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+  function achadosPorParagrafo(R) {
+    const por = new Map();
+    const pousa = (p, texto) => {
+      if (!p || typeof p.idx !== "number") return;
+      if (!por.has(p.idx)) por.set(p.idx, []);
+      const lista = por.get(p.idx);
+      if (!lista.includes(texto)) lista.push(texto);
+    };
+    for (const b of R.blocos) {
+      if (NAO_ANOTA.has(b.id)) continue;
+      for (const a of b.achados) {
+        if (a.vazio || a.tom === "ok") continue;
+        const rot = (a.chip ? a.chip + ": " : "") + (a.titulo || "");
+        const texto = "[" + b.titulo.split(" (")[0] + "] " + rot;
+        for (const p of a.exemplos || []) pousa(p, texto);
+        for (const s of a.sublistas || []) for (const p of s.exemplos || []) pousa(p, texto);
+      }
+    }
+    return por;
+  }
+
+  function montarAnotado(R, g) {
+    const por = achadosPorParagrafo(R);
+    if (!por.size) throw new Error("Nada a anotar: nenhum achado deste arquivo aponta um parágrafo.");
+
+    const spans = [];
+    let m;
+    RE_PAR_XML.lastIndex = 0;
+    while ((m = RE_PAR_XML.exec(g.docTxt)) !== null) {
+      spans.push({ ini: m.index, fim: m.index + m[0].length, vazio: m[0].endsWith("/>") });
+    }
+    /* Comentário no parágrafo errado é pior que comentário nenhum: se as duas
+       contagens não batem, nada é gravado. */
+    if (spans.length !== R.totalPars) {
+      throw new Error("As duas contagens de parágrafo não batem (" + spans.length +
+        " no XML, " + R.totalPars + " na leitura). Nada foi gravado, porque anotar assim poria o comentário no lugar errado.");
+    }
+
+    const usados = [...(g.comentarios || "").matchAll(/w:id="(\d+)"/g)].map(x => +x[1]);
+    let prox = usados.length ? Math.max(...usados) + 1 : 0;
+
+    const novos = [];
+    const partes = [];
+    let pos = 0;
+    for (const idx of [...por.keys()].sort((a, b) => a - b)) {
+      const sp = spans[idx - 1];
+      if (!sp || sp.vazio) continue;
+      partes.push(g.docTxt.slice(pos, sp.ini));
+      let bloco = g.docTxt.slice(sp.ini, sp.fim);
+      const abre = bloco.indexOf(">") + 1;
+      let ini = "", fim = "";
+      for (const texto of por.get(idx)) {
+        ini += '<w:commentRangeStart w:id="' + prox + '"/>';
+        fim += '<w:commentRangeEnd w:id="' + prox + '"/><w:r><w:commentReference w:id="' + prox + '"/></w:r>';
+        novos.push({ id: prox, texto });
+        prox++;
+      }
+      bloco = bloco.slice(0, abre) + ini + bloco.slice(abre, bloco.length - 6) + fim + "</w:p>";
+      partes.push(bloco);
+      pos = sp.fim;
+    }
+    partes.push(g.docTxt.slice(pos));
+
+    const corpo = novos.map(n =>
+      '<w:comment w:id="' + n.id + '" w:author="Alberto" w:initials="AL" ' +
+      'w:date="2026-01-01T12:00:00Z"><w:p><w:r><w:t xml:space="preserve">' +
+      escXml(n.texto) + "</w:t></w:r></w:p></w:comment>").join("");
+
+    const comentarios = g.comentarios
+      ? g.comentarios.replace("</w:comments>", corpo + "</w:comments>")
+      : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:comments xmlns:w=' +
+        '"http://schemas.openxmlformats.org/wordprocessingml/2006/main">' + corpo + "</w:comments>";
+
+    return { doc: partes.join(""), comentarios, quantos: novos.length, paragrafos: por.size };
+  }
+
+  async function completarPartes(g, trocas) {
+    let ct = await extrair(g.zip, "[Content_Types].xml");
+    let rels = await extrair(g.zip, "word/_rels/document.xml.rels");
+    if (ct && !ct.includes("comments+xml")) {
+      trocas["[Content_Types].xml"] = ct.replace("</Types>",
+        '<Override PartName="/word/comments.xml" ContentType="application/vnd.' +
+        'openxmlformats-officedocument.wordprocessingml.comments+xml"/></Types>');
+    }
+    if (rels && !rels.includes("comments.xml")) {
+      trocas["word/_rels/document.xml.rels"] = rels.replace("</Relationships>",
+        '<Relationship Id="rIdComentariosAC" Type="http://schemas.openxmlformats.org/' +
+        'officeDocument/2006/relationships/comments" Target="comments.xml"/></Relationships>');
+    }
+    return trocas;
+  }
+
   function achadoHtml(a) {
     if (a.vazio) return '<p class="vazio">' + esc(a.vazio) + "</p>";
     let h = '<div class="achado"><div class="cab">';
@@ -1309,9 +1915,11 @@
   const baixar = document.getElementById("copiarMedidas");
   const verMedidas = document.getElementById("verMedidas");
   const areaMedidas = document.getElementById("areaMedidas");
-  let md = "", nomeArq = "";
+  let md = "", nomeArq = "", guardado = null;
 
   function render(R, nome) {
+    ultimoR = R;
+    if (salvar) botaoAnotado.disabled = false;
     const fichaDl = document.getElementById("fichaDl");
     fichaDl.innerHTML = Object.entries(R.ficha).map(([k, v]) => "<dt>" + esc(k) + "</dt><dd>" + esc(v) + "</dd>").join("");
     document.getElementById("ficha").hidden = false;
@@ -1346,13 +1954,76 @@
     baixar.disabled = false;
   }
 
+  /* ------------------------------------------------- entrega do anotado */
+  const botaoAnotado = document.getElementById("baixarAnotado");
+  const ajudaAnotado = document.getElementById("ajudaAnotado");
+  let salvar = null;
+  let ultimoR = null;
+
+  /* A capacidade pode não estar disponível nesta visualização, e aí o botão não
+     aparece: oferecer o que não se pode cumprir é pior que não oferecer. */
+  claude.use("downloads").then(d => {
+    salvar = d;
+    if (d) { botaoAnotado.hidden = false; ajudaAnotado.hidden = false; }
+  }).catch(() => {});
+
+  function anotadoEmTexto(R) {
+    const por = achadosPorParagrafo(R);
+    const L = ["# Achados por parágrafo", "",
+      "Gerado pelo Alberto a partir de " + nomeArq + ".",
+      "O número entre colchetes é o parágrafo, contado na ordem do documento.", "", "---", ""];
+    for (const idx of [...por.keys()].sort((a, b) => a - b)) {
+      L.push("## Parágrafo " + idx, "");
+      for (const x of por.get(idx)) L.push("- " + x);
+      L.push("");
+    }
+    return L.join("\n");
+  }
+
+  botaoAnotado.addEventListener("click", async () => {
+    if (!salvar || !ultimoR || !guardado) return;
+    const base = nomeArq.replace(/\.docx$/i, "");
+    botaoAnotado.disabled = true;
+    const antes = botaoAnotado.textContent;
+    botaoAnotado.textContent = "Montando…";
+    try {
+      const feito = montarAnotado(ultimoR, guardado);
+      const trocas = await completarPartes(guardado, {
+        "word/document.xml": feito.doc,
+        "word/comments.xml": feito.comentarios
+      });
+      const blob = await gravarZip(guardado.zip, trocas);
+      try {
+        await salvar.save({ filename: base + "-ANOTADO.docx", data: blob });
+        botaoAnotado.textContent = feito.quantos + " comentários em " + feito.paragrafos + " parágrafos";
+      } catch (e) {
+        if (e && e.code === "extension_not_enabled") {
+          /* .docx está no conjunto estendido e pode não estar habilitado aqui.
+             O mesmo conteúdo sai em .md, que é do conjunto básico. */
+          await salvar.save({ filename: base + "-ACHADOS.md", data: anotadoEmTexto(ultimoR) });
+          botaoAnotado.textContent = "Salvo em .md (este navegador não aceita .docx)";
+        } else if (e && e.code === "declined") {
+          botaoAnotado.textContent = antes;
+        } else {
+          throw e;
+        }
+      }
+    } catch (e) {
+      botaoAnotado.textContent = "Não deu: " + (e && e.message ? e.message : "erro ao montar");
+    } finally {
+      botaoAnotado.disabled = false;
+      setTimeout(() => { botaoAnotado.textContent = antes; }, 6000);
+    }
+  });
+
   async function processar(file) {
     nomeArq = file.name;
     painel.innerHTML = '<p class="vazio">Lendo o arquivo…</p>';
     try {
-      if (!/\.docx$/i.test(file.name)) throw new Error("Este instrumento lê apenas .docx. Para .doc, .odt ou PDF, converta antes.");
+      if (!/\.docx$/i.test(file.name)) throw new Error("Esta ferramenta lê apenas .docx. Para .doc, .odt ou PDF, converta antes.");
       const zip = await lerZip(await file.arrayBuffer());
       const docTxt = await extrair(zip, "word/document.xml");
+      guardado = { zip, docTxt, comentarios: await extrair(zip, "word/comments.xml") };
       if (!docTxt) throw new Error("O arquivo não contém word/document.xml. Pode estar corrompido ou não ser um documento do Word.");
       const E = montarEstilos(parseXml(await extrair(zip, "word/styles.xml") || "<x/>"));
       const doc = parseXml(docTxt);
@@ -1393,41 +2064,7 @@
 
   /* ---------------------------------------------------------- prompts */
 
-  const P_UNICO = `Você vai analisar um trabalho acadêmico (dissertação, tese, TCC ou artigo). Quem roda isto pode ser quem escreveu ou quem orienta, e o relatório é o mesmo para os dois: o ideal é que quem escreveu rode primeiro, corrija o que dá para corrigir sozinho, e só então mostre o trabalho ao orientador. Vão lhe entregar o texto e, possivelmente, um diagnóstico mecânico em Markdown com medidas de formatação, ritmo, elementos gráficos e bibliografia. Use o diagnóstico como ponto de partida e confirme tudo lendo: ele produz falsos positivos, e descartá-los é parte do seu trabalho.
-
-O produto é um relatório que permite decidir, em poucos minutos, o que precisa ser refeito. Quem lê conhece a área e não precisa de contextualização.
-
-POSTURA. Crítica dura, não avaliação equilibrada com elogio na abertura e ressalva no rodapé. Mas dureza não é destruição: cada apontamento tem que ser executável e dizer o que está em jogo se ficar como está. Toda crítica vem com localização e trecho citado literalmente, com a pontuação e os erros que estiverem lá; nunca corrija em silêncio, porque prova retocada não vale nada. Separe defeito de preferência, e mande a preferência para o fim. Não invente ponto forte: se uma seção não tem nenhum relevante, escreva isso e siga. Reconhecimento específico e verificável é informação, porque marca o que não deve ser mexido na revisão. Quando o próprio texto se declarar inacabado, registre o estado e não gaste o relatório criticando o que ainda não foi escrito, com uma exceção que você deve procurar ativamente: quando o fragmento inacabado revela risco sobre parte já pronta.
-
-ESTRUTURA DO RELATÓRIO, com os tetos. Total de 6.000 palavras, sendo no máximo 1.500 na abertura somada e 600 por seção analisada. O teto por seção é o mesmo para todas, de propósito: um capítulo de 14 mil palavras recebe o mesmo espaço que um de 3 mil, o que obriga a hierarquizar em vez de inventariar. Se estourar, corte enumeração de ocorrências (três exemplos e a contagem bastam), números que você está só repetindo sem interpretar, e o que já foi dito em outro ponto. Nunca corte o trecho citado.
-
-1. FICHA. Arquivo, extensão, o que foi lido integralmente, o que foi amostrado, e o que você não conseguiu avaliar (o conteúdo das imagens, a exatidão dos dados de origem, a literatura que você não domina).
-
-2. VEREDITO. Um parágrafo, no máximo 250 palavras, legível sozinho, sobre o estado do trabalho e a distância que falta para uma defesa. Ao final, um prognóstico, e não uma nota: se a defesa fosse hoje, com este texto, o resultado provável seria um destes três, que são os que uma banca efetivamente profere. APROVAÇÃO. APROVAÇÃO COM REVISÃO DE FORMA, e o nome engana, porque as alterações podem ser materiais: o que a define é o prazo de trinta dias e a exigência de que um membro da banca, além do orientador, aprove o resultado. REFORMULAÇÃO, o resultado grave, quando são muitas modificações substanciais, na ordem de três meses num mestrado ou seis num doutorado, e todos voltam para uma nova banca. Diga qual e por quê, em duas linhas. Se o texto ainda não estiver em condição de ser depositado, diga isso primeiro e dê o prognóstico para a versão que seria depositada depois de fechadas as pendências, porque trabalho incompleto não recebe resultado: não chega à banca.
-
-3. DETERMINAÇÕES PRIORITÁRIAS. Até dez itens numerados, em ordem de urgência, cada um acionável e com referência à seção. Cada um leva o HORIZONTE MÍNIMO em que cabe, marcado assim: [semana], [mês], [3 meses] ou [6 meses]. Semana é o que um leitor tropeça no primeiro contato mais o que já está escrito e só precisa ser posto no lugar; mês inclui recálculo com dado que já existe na base e parágrafos que não dependem de medição nova; três meses inclui uma operação metodológica nova, uma só, com a reescrita que ela desarrumar; seis meses inclui o que muda o que o trabalho pode afirmar. Marque com [arrasta] a determinação que obriga a reescrever outras partes: é a que não se deve começar sem tempo de terminar, porque um número recalculado e um texto não reescrito é pior que o estado anterior.
-
-   Feche a seção com os QUATRO PLANOS, que são filtros cumulativos sobre esta lista e não listas novas: uma semana, um mês, três meses, seis meses. Diga quais números entram em cada um e o que fica de fora, com a resposta oral para o que ficar. E uma advertência que precisa estar escrita: ninguém espera que um trabalho feche todas as pontas, um ótimo trabalho tem pontas soltas, e este relatório enxerga mais do que qualquer banca enxergará, porque refaz todas as contas e não cansa, enquanto um examinador humano se concentra em poucos tópicos e acredita nos números do candidato até algo destoar. A lista é mapa de exposição, não lista de dívidas.
-
-4. O QUE A BANCA VAI PERGUNTAR. Três grupos. Inevitáveis (decorrem de escolhas estruturais e serão feitas mesmo com tudo corrigido; para cada uma, escreva a melhor resposta disponível hoje com o material do trabalho). Evitáveis, se corrigidas agora, cada uma remetendo à determinação correspondente. Fatais, se não corrigidas, com a razão, sem dramatizar. No máximo doze perguntas no total, formuladas como um examinador competente e hostil as faria.
-
-5. METODOLOGIA E REPETIBILIDADE. Existe seção de método, onde está, quanto ocupa, está consolidada ou espalhada? Os quatro elementos do planejamento (lacuna, problema, metodologia, referencial teórico) estão presentes e articulados, e as tensões entre eles são reconhecidas? Um terceiro refaria a pesquisa: fonte e acesso, recorte, universo e amostra, critérios de inclusão e exclusão, unidade de análise, variáveis e codificação, verificação por amostra, termos de busca, duplicatas e faltantes, base e código. Três defeitos bloqueiam e não são acabamento: circularidade (que resultado teria refutado a hipótese?), confusão entre pesquisa documental e realidade (ementa não é comportamento do tribunal, norma não é prática), e pergunta normativa pura vestida de empírica. Nomeie o viés de seleção e cobre a mitigação (amostragem aleatória, censo, ampliar ou diversificar, ajustar o universo aos dados disponíveis), com a ressalva honesta de que pesquisa jurídica raramente o elimina. Verifique se as categorias foram herdadas prontas da dogmática ou da administração judiciária e adotadas como naturais. E diga que uso dos dados o trabalho declara e qual entrega, entre descritivo, explicativo, preditivo e prescritivo: conclusão prescritiva sobre base descritiva é o desvio mais caro.
-
-6. FORMA. Coerência interna, sem norma externa. Distinga variação com função de variação por descuido. Feche com um veredito curto: o documento está diagramado ou remendado.
-
-7. ANÁLISE POR SEÇÃO. Para cada uma: função declarada e função cumprida (a distância entre as duas costuma ser o achado principal); até três pontos fortes específicos; pontos fracos em ordem de gravidade, com trecho citado; e uma a três exigências concretas. Procure especificamente: afirmação relevante sem fonte ou com fonte que não a sustenta; descrição que se apresenta como análise; conclusão parcial que excede a evidência; conceito usado em dois sentidos; citação de autoridade no lugar de argumento; autor citado na revisão e nunca mobilizado; seção que não serve à pergunta de pesquisa; nota de rodapé substantiva que deveria estar no corpo; salto lógico em transição de subseção.
-
-8. ARQUITETURA DO ARGUMENTO. Três provas que são a mesma em direções diferentes. Da teoria para frente: os conceitos do capítulo teórico retornam e trabalham nos analíticos, ou apenas decoram? O erro inverso é mais grave: categoria usada na análise sem ter sido construída antes. Da introdução para frente: cada elemento anunciado é depois explorado, e a subseção que descreve a estrutura corresponde aos capítulos que existem? Da conclusão para trás: para cada asserção, nomeie a seção que a estabeleceu; aponte asserção sem antecedente e, simetricamente, achado órfão, resultado estabelecido no corpo que nunca chega à conclusão.
-
-9. ESTRUTURA E ECONOMIA. Fusão, fissão, encolhimento, corte e apêndice, sempre com o número de palavras recuperadas. O critério é a unidade de argumento, não o tamanho. Acrescente o teste de posição: capítulo que poderia ser movido para qualquer lugar sem perda não está fazendo trabalho argumentativo.
-
-10. VERIFICAÇÕES TRANSVERSAIS. Aritmética recalculada (relate inclusive o que fecha). Correspondência entre citações e lista, nos dois sentidos. Citações diretas conferidas contra a fonte caractere a caractere, porque alteração de uma preposição continua sendo citação errada. Existência das obras citadas, se você tiver acesso à web: classifique cada uma como confirmada, divergente, não localizada ou com sinais de inexistência, e nunca escreva que uma referência é falsa, porque ausência de resultado não é prova de inexistência. Atenção ao modo de falha mais comum: entrada com sobrenome e ano certos, mas obra inteiramente diversa da que sustenta a afirmação.
-
-11. PONTOS DE ATENÇÃO. Não é crítica nem acusação, e você não conclui nada sobre autoria. São passagens capazes de gerar dúvida em quem lê, e essa dúvida costuma não ser dita: vira uma pergunta na banca ou, pior, um preconceito que ninguém enuncia e que por isso não pode ser respondido. Como não há defesa contra o que não foi dito, a saída é retirar o gatilho, e isso vale independentemente de ter havido ou não uso de ferramenta. Divida em dois grupos. O primeiro é o que se confere e portanto se corrige: referência que não existe ou não se confirma; citação direta que não bate com a fonte; afirmação sobre gráfico que não confere com os números do próprio trabalho; erro que um especialista não cometeria, como tese atribuída ao autor errado, versão errada de norma ou ementa que não corresponde ao julgado; ausência sistemática de detalhe verificável, como citação sem página. O segundo é o que não se confere e ainda assim chama atenção: trecho cujo vocabulário e ritmo destoam do resto, sobretudo quando coincide com descontinuidade de formatação; parágrafos de comprimento uniforme demais ao longo de um capítulo; concentração anormal de conectivos de arremate num trecho isolado. Para cada item do segundo grupo, escreva ao lado a explicação inocente, que quase sempre existe, e a instrução prática, que é sempre a mesma: reescrever o trecho na própria voz resolve.
-
-12. LIMPEZA DE ESTILO. Traços que hoje fazem um texto parecer gerado por máquina mesmo quando não é: travessão em excesso, conectivo de arremate ("além disso", "ademais", "em suma", "por fim", "dessa forma"), fórmula de anúncio ("vale ressaltar", "cumpre notar", "é importante destacar"), elogio abstrato sem medida ("robusto", "significativo", "crucial"), tríade por reflexo, negrito decorativo, abertura de seção por definição genérica. Sobre a construção "não X, mas Y": é legítima quando explora uma tensão real, e só vira defeito quando se acumula num mesmo trecho ou quando serve apenas para dar ênfase sem contraste argumentado; aponte o acúmulo, não a construção. Encerre com a lista de conferência a fazer antes de entregar o trabalho: abrir cada referência citada e confirmar que a obra trata do assunto para o qual foi citada, porque o erro mais comum não é a obra inexistente, é a entrada com sobrenome e ano certos e obra diversa; conferir precedente no site do tribunal (número, relator, data, e se a ementa diz o que se afirma); conferir norma no texto consolidado, com as alterações posteriores; garantir que todo número seja rastreável a uma célula da própria base ou a uma página de uma fonte; e citar a origem mesmo quando a ideia foi reformulada.
-
-COMO ESCREVER. Evite travessão, use parênteses, vírgula, dois-pontos ou duas frases. Sem conectivo de arremate, sem tríade por reflexo, sem negrito decorativo, sem hipérbole e sem eufemismo. Frases diretas, comprimento variado. Redação se avalia à parte do mérito: texto malescrito com pesquisa boa exige revisão de escrita, não reformulação, e o relatório precisa dizer qual dos dois casos é.`;
+  const P_UNICO = "# Alberto — o relatório rápido\n\nUma leitura, um relatório, no formato do Luis. Serve na conversa de chat e serve no\nagente, com a diferença que está no fim deste arquivo.\n\nAté 03/09/2026 este nome designava a conferência de consistência, que continua em\n`CONSISTENCIA.md`.\n\n## O que este relatório é, e o leitor precisa saber disso\n\nO Luis lê o trabalho quatro vezes por caminhos diferentes, confere cada apontamento\npor uma voz que não o escreveu, e devolve trinta itens com o endereço de cada peça\nde prova. Custa cerca de um milhão de tokens e quase uma hora.\n\nAlberto lê uma vez. Custa um a três minutos.\n\nO que a medição de 03/09/2026 diz sobre a diferença, sobre a mesma dissertação:\n\n| | palavras | itens | endereços distintos | afirmações conferidas | caíram |\n|---|---|---|---|---|---|\n| Luis | 23.393 | 32 | 868 | 49 | 0 |\n| uma passada, sem teto | 10.341 | 26 | 253 | 67 | 14 |\n| uma passada, curta | 4.892 | 17 | 45 | 17 | 0 |\n| a mesma, outra vez | 4.102 | 12 | 47 | 12 | 0 |\n\nTrês coisas saem daí, e cada uma vira regra abaixo.\n\n**A passada curta não erra.** Vinte e nove afirmações das duas rodadas curtas foram\nabertas na fonte, uma a uma, e as vinte e nove estavam certas.\n\n**O que a extensão degrada é o endereço, e não o achado.** A rodada de dez mil\npalavras teve quatorze quedas em sessenta e sete afirmações, o que parece condená-la.\nLidas uma a uma, **doze das quatorze derrubam o endereço, a contagem ou uma\nafirmação acessória, e o apontamento continua de pé**: a grafia errada existe e o\nendereço manda abrir um parágrafo vazio; o argumento do item não depende do número\nque caiu; a questão sobrevive, e sobrevive melhor com os endereços certos. Só duas\nmatam o achado: uma afirmação de ausência que se desfaz, e uma providência cuja\nconsequência não existe. Sobre vinte e seis itens, **dois eram falsos**.\n\nDaí a regra que **não** se tira: cortar itens. Cortar item para comprar precisão\njoga fora o achado verdadeiro junto com o endereço torto, que é o defeito medido do\nprompt anterior desta oficina. O que se tira é disciplina de endereço, e a revisão\nque os confere.\n\n**A passada curta vê pouco, e vê coisa diferente a cada vez.** As duas rodadas curtas\ncompartilham seis itens de dezessete e de doze, e dezessete endereços de setenta e\ncinco. Cada uma achou coisas verdadeiras que a outra não achou. **Esta é a perda que\nnão tem conserto dentro de uma leitura só**, e é o que a ressalva final diz a quem\nrecebe.\n\nEntão o que Alberto entrega é **menos, com justificação rala, e sem inventar**. Ele\nnão substitui o Luis.\n\n---\n\n## A ordem de leitura, e ela decide o que você vai achar\n\nLer na ordem do sumário faz chegar aos dados já sabendo o que eles deviam provar, e\nentão eles são lidos como prova. Cumpra os cinco passos nesta ordem, e **só comece a\njulgar no passo 4**.\n\n**1. O que o trabalho promete.** Só o resumo, a introdução e a conclusão. Liste o que\no trabalho afirma sobre si: a pergunta, os objetivos, cada ressalva metodológica\ndeclarada, o produto que ele anuncia entregar, e cada asserção forte da conclusão.\nCada linha traz o endereço. Não julgue nada.\n\n**2. O que ele entrega, lido de trás para diante.** Abra as tabelas, as figuras, o\napêndice e a seção de resultados **antes** do texto que os comenta. Anote o que os\ndados mostram, com endereço, sem olhar o que o autor diz que eles mostram. Depois\nleia o comentário.\n\nEste é o passo que mais rende, e é o que se perde na ordem normal.\n\n**3. O material de apoio.** A lista de referências contra o corpo e o corpo contra a\nlista. As notas de rodapé, que guardam o que o corpo devia dizer. Os realces,\ncomentários e marcas de revisão do arquivo, que dizem onde o autor já sabia que\nfaltava algo.\n\n**4. O cruzamento, e aqui começa o julgamento.** Promessa por promessa: foi entregue?\nonde? o que foi entregue sustenta o que foi prometido, ou sustenta menos, ou sustenta\noutra coisa?\n\n**5. O caminho inverso.** Percorra as anotações do passo 2 procurando o que está nos\ndados e não foi afirmado em lugar nenhum. É a parte que o autor não produz sozinho,\nporque ele já sabe o que quis dizer.\n\n## Não há teto de itens, e há teto de precisão\n\n**Escreva todo achado que a leitura sustentar.** Uma leitura só já vê pouco, e o\nmaior desperdício possível é ela ver e não escrever.\n\nO que tem limite é a precisão do que acompanha o achado. À medida que a lista cresce,\no endereço, a contagem e a afirmação acessória se degradam antes do apontamento, e é\nneles que a disciplina abaixo morde. **Onde não tiver certeza do endereço, escreva a\nforma fraca e mantenha o item.** Item verdadeiro com endereço fraco custa ao leitor\numa busca; item cortado custa o achado inteiro.\n\n## A disciplina\n\n**Nunca escreva nada entre aspas.** Nem uma palavra do trabalho. É aqui que uma\npassada só falha do modo mais grave e menos visível: você acredita estar copiando e\ntroca um artigo, um tempo verbal, uma preposição, e o resultado tem a aparência de\ntranscrição sem ser transcrição. **O que você produz é o endereço:** *em [P1194], a\nterceira frase*; *no segundo período do parágrafo que abre a seção 4.2*; *a legenda\ndo Gráfico 54*. Quem recebe abre e lê ali. Palavra que você contou ou que está em\ndiscussão vai em itálico, com o parágrafo em que está.\n\n**Toda afirmação carrega o endereço, e cada item carrega dois:** o do que ele aponta\ne o do que o contradiz. Item com um endereço só afirma sem mostrar o conflito, e é o\nque a medição chama de justificação rala. Se o trabalho vier com parágrafos\nnumerados, use-os; se não, use seção, página, figura ou tabela, e a posição dentro do\nparágrafo.\n\n**Não invente endereço.** Sem certeza de onde algo está, escreva a forma fraca (*em\nalgum ponto da seção 4.3, que não localizei com segurança*). Endereço preciso e falso\né pior que vagueza, porque parece conferível e o leitor gasta o tempo dele.\n\n**Toda afirmação de ausência vem provada.** Antes de escrever que algo não está no\ntrabalho, procure alguma coisa que você sabe que está, do mesmo tipo, e diga que\nachou. Sem isso, zero de procura mal feita se parece com zero de coisa inexistente.\nArmadilhas: a palavra pode estar no plural, com inicial maiúscula, dentro de outra\npalavra maior, numa nota de rodapé, ou dentro de uma imagem.\n\n**Todo número vem com a regra e com a palavra contada, escrita.** *O termo que\ndesigna os ministros ocorre 133 vezes* não se confere; *Justices aparece em 131\nparágrafos do corpo* se confere. A regra tem três partes: a unidade contada\n(ocorrência ou parágrafo), o recorte (trabalho inteiro, capítulo, intervalo) e o modo\n(palavra inteira ou pedaço, com ou sem distinção de maiúscula).\n\n**Mudança declarada não é deslize.** Antes de apontar deriva de vocabulário, procure\na passagem em que o trabalho declara que mudou. Apontar como defeito o autor\ncorrigindo o próprio vocabulário transforma em falha o trabalho se corrigindo.\n\n**A afirmação com fonte no fim do parágrafo é da fonte.** Quando o parágrafo encerra\ncom uma citação, o que ele afirma foi atribuído, e não reivindicado. Apontar isso\ncomo achado próprio do autor é erro medido: aconteceu duas vezes em relatórios\nentregues, e nas duas o parágrafo trazia a fonte no fecho.\n\n**Hipótese sua que caiu é resultado.** Se você suspeitou de algo e a leitura não\nsustentou, escreva que não sustentou e onde estava o que a derrubou.\n\n**Declare o que não conferiu junto do achado que depende disso**, e não só no fim.\nFonte externa que não abriu, figura que não conseguiu ler, cálculo que não refez.\n\n## Se o que chegou é um `.docx`\n\nAs imagens ficam guardadas dentro do arquivo e não chegam até você. **Diga isso no\nalto do relatório, não descreva nenhuma figura e não deduza o que ela mostra pela\nlegenda.** Descrever figura que não se viu se refuta abrindo a página. Num PDF você\nenxerga as figuras, e deve usá-las: numa leitura medida, o conteúdo delas produziu\nnove dos dezessete achados.\n\n## Onde olhar quando o passo 4 não render\n\nNão é lista para percorrer marcando caixas. Cada uma apareceu em trabalho real deste\nacervo.\n\n**Produto anunciado e não entregue.** O trabalho promete um instrumento, um\nformulário, um roteiro, uma minuta, e termina sem ele, ou com ele só descrito. Em\nmestrado profissional é o achado mais consequente que existe.\n\n**Seção anunciada e ausente.** O sumário ou a introdução anunciam uma seção que não\nexiste, ou que existe como título vazio. Confira o sumário contra o corpo, item a\nitem.\n\n**Afirmação que o parágrafo citado não sustenta.** O texto diz que a fonte X afirma\nY; abra e veja. Erro frequente: o trabalho atribui à fonte a conclusão que ele mesmo\ntirou dela.\n\n**Critério de seleção não declarado.** O corpus foi montado, e não se diz onde se\nbuscou, em que período, e que regra decidiu a entrada e a saída. Saturação e bola de\nneve também são regra e se declaram.\n\n**Número que só existe na figura.** O valor está impresso dentro de um gráfico e\nnunca aparece em prosa, de modo que o leitor não pode citá-lo nem conferi-lo.\n\n**Percentual sem o denominador.** 12,5% que são um caso em oito, e a frase os trata\ncomo tendência.\n\n**Denominador errado.** A taxa é calculada sobre o conjunto inteiro quando o próprio\ntrabalho declara que o fenômeno só podia ocorrer num subconjunto.\n\n**Ano atípico lido como regra.** A série tem um ano fora da curva, e a generalização\né feita sobre ele.\n\n**Citação no corpo sem entrada na lista, e entrada sem uso no corpo.** As duas\ndireções, e as duas contam.\n\n**Duas contagens do mesmo conjunto que não fecham.** O total declarado num parágrafo\ne a distribuição por categoria noutro.\n\n**Ressalva declarada e não honrada.** O trabalho promete não emitir juízo de\nregularidade, ou não inferir causa, ou não representar o universo, e depois faz\nexatamente isso.\n\n**Inferência causal em trabalho descritivo.** *Essencial*, *responsável por*, *fez com\nque*, num desenho que só permite descrever coincidência.\n\n**Frequência de publicação lida como estado do mundo.** A queda no número de textos\nsobre um problema é tratada como prova de que o problema diminuiu.\n\n**Teste estatístico sobre censo.** Se os dados são todo o universo do recorte, e não\numa amostra dele, teste de significância responde pergunta que ninguém fez.\n\n**Vocabulário de significância sem teste.** *Significativamente maior* num trabalho\nque não roda teste nenhum.\n\n**Recortes temporais que não coincidem.** A base vai de um período, a análise A de\noutro e a análise B de um terceiro, sem que o texto os distinga.\n\n---\n\n## O relatório\n\nOito partes, nesta ordem, que é a do Luis. Quem recebe passou anos no trabalho, e\ncomeçar pela lista de defeitos faz o resto não ser lido.\n\n**1. O veredito, no título da abertura.** Uma frase que diz o destino da peça e se\nela está pronta para ele. Dissertação e tese vão à banca; artigo vai a periódico, ou\na banca se for trabalho de conclusão e o trabalho disser isso; capítulo se integra a\nalgo maior e não vai a banca nenhuma. Não anuncie qualidade no título. Abaixo do\ntítulo, três a cinco linhas com a razão do veredito, e a razão é o que este relatório\nencontrou.\n\n**2. O que está sólido.** Cinco a seis pontos, escolhidos, nunca o inventário. A\nescolha é o ato relevante da seção: o autor precisa saber onde este trabalho é mais\nforte, e uma lista de dezoito virtudes não discrimina nada. Cada ponto traz o\nendereço, e o elogio nomeia a operação e a consequência dela, sem adjetivo. *Publicou\na classificação caso a caso, e por isso um terceiro reconta sem pedir nada ao autor*\ndiz mais do que *trabalho notável*.\n\n**Não escreva que uma prática é rara ou incomum no campo.** É afirmação empírica\nsobre a produção da área, e você leu um trabalho.\n\n**3. O que o trabalho tem e não reivindica.** O resultado do passo 5. Separe o que\nexige uma conta (está nos dados e ninguém somou), o que exige uma frase (está no\ntexto e não foi enunciado) e o que exige um apêndice (é peça que um terceiro\naplicaria a outro material sem reconstruir nada). **Não force:** a maioria das\ncontribuições não é peça, e onde não houver nada, a seção encolhe.\n\nVocê não confere se a contribuição é nova no campo, porque isso pede busca externa\nque esta leitura não faz. Diga que o crédito é interno ao trabalho.\n\n**4. As correções.** Cada uma é um item numerado com um título que diz o defeito e\nonde ele está, e quatro campos:\n\n    Tipo         a categoria do trabalho a fazer, e não a ação. Quatro a seis\n                 categorias no relatório inteiro. Uma categoria por item\n                 transforma o índice em placar.\n    Aponta       o que está errado e onde, com os dois endereços.\n    O que fazer  a providência, numa frase, executável sem perguntar nada a\n                 ninguém. É o único campo que o autor lerá ao lado do texto.\n    O que muda   o que o trabalho passa a sustentar depois de corrigido.\n\n**A providência é sugestão de correção, e nunca determinação.** Quem determina é quem\norienta. E toda sugestão diz onde termina: proibidos *aprofundar*, *explorar melhor*,\n*dialogar mais com a literatura*, *amadurecer*. O que só se enuncia assim vira questão\nda parte 6.\n\n**O ponto que o autor não pode alterar** (sigla registrada, título depositado,\nnumeração oficial, termo de edital) não recebe sugestão de correção: vira questão,\ndizendo qual é a divergência e a quem cabe decidir.\n\nAntes de fechar a seção, percorra os itens procurando pares em que executar um desfaz\no outro. Onde houver, diga a ordem.\n\n**5. O que cada peça faz pelo argumento.** Capítulo a capítulo: fica, sai, se funde,\nvira artigo separado, ou se reescreve. Diga quem consome cada capítulo e o que a\nconclusão perde se ele sair.\n\n**6. Questionamentos.** O que você não conseguiu decidir, e o que precisaria para\ndecidir. É diferente de correção, e a diferença fica visível. **Se o trabalho vai a\nbanca, feche a seção com três a cinco perguntas que a banca pode fazer, escritas como\nperguntas**, cada uma remetendo ao item de que saiu. Nomear o item diz ao autor onde\nolhar; a pergunta escrita diz o que ele vai ouvir, e são coisas diferentes.\n\n**7. Por onde começar.** A ordem, e a razão de ser essa. É a parte que o autor usa na\nsegunda-feira de manhã.\n\n**8. As correções que não mudam nenhuma afirmação.** Gralha, concordância, sigla,\nremissão interna, acabamento de referência. **Cada uma vira um item com o seu próprio\nendereço, ainda que sejam quinze do mesmo tipo:** item agrupado fala de meia dúzia de\nlugares e é entregue num só, e o autor procura ali o erro que o item descreve sem\nencontrá-lo.\n\nDepois dela, a ressalva do fim deste arquivo.\n\n## Como escrever\n\n**Não anuncie que um achado é importante: demonstre.** Nada de *o mais grave desta\nleitura* ou *impressionante*. Severidade se escreve como consequência: o que acontece\nse ficar como está, e para quem.\n\n**Crítica dura, e não avaliação equilibrada com elogio na abertura e ressalva no\nrodapé.** Dureza não é destruição: cada apontamento é executável.\n\n**Quem lê não acompanhou a sua análise.** Nenhuma categoria que você inventou para\norganizar a leitura entra no relatório sem estar definida ali mesmo. E não use o\nvocabulário do método: o leitor é jurista e não conhece *controle positivo*,\n*fronteira de palavra*, *falso positivo* nem *na mesma execução*. Diga a coisa: que a\nmesma procura acha o que existe, que a palavra foi procurada inteira e não como parte\nde outra.\n\n**Português corrente, e vigie o decalque do inglês**, que passa sem alarme porque a\npalavra parece portuguesa: *reparo* onde cabe correção, *endereçar* onde cabe tratar,\n*em termos de* onde cabe quanto a, *consistente* onde cabe coerente, *evidência* onde\ncabe prova ou indício, *assumir* onde cabe supor, *crítico* onde cabe decisivo,\n*performance* onde cabe desempenho, *suportar* onde cabe sustentar.\n\nEvite travessão onde couber parênteses ou ponto. Evite a antítese *não X, mas Y* em\nsérie. Evite tríade por reflexo. Evite conectivo de arremate (*além disso*, *em suma*,\n*nesse sentido*, *por fim*). Evite negrito decorativo.\n\n---\n\n## No agente: a segunda leitura\n\nNo chat, o relatório sai da primeira passada e acaba aí.\n\nNo agente, roda **uma revisão, e uma só**. Ela recebe o trabalho e o relatório, e\nrecebe a instrução de derrubar. **Ela não acrescenta item nenhum**, e não reescreve\no relatório: a passada que redige de novo é a que mais erra, porque troca o vago pelo\npreciso e a precisão nova é que sai errada.\n\nA revisão confere, nesta ordem de prioridade:\n\n1. **Os endereços.** Abra cada parágrafo, seção ou figura citada: está lá o que se diz\n   que está? Erros medidos: o endereço aponta um parágrafo vizinho; o ordinal está\n   errado; a faixa inclui parágrafos que não têm nada a ver; a figura é outra.\n2. **As afirmações de ausência.** Procure você mesmo o que o relatório diz que não\n   existe, e procure de mais de um jeito. Uma ausência que se desfaz é o erro mais\n   caro, porque manda o autor escrever o que já está escrito.\n3. **Os números.** Refaça cada contagem com a regra que o relatório declarar. Se ele\n   não declarar a regra, isso é achado: o número não se confere.\n4. **As atribuições.** Quando o relatório disser que o trabalho afirma algo, leia o\n   parágrafo e veja se afirma aquilo, ou algo parecido, ou o contrário.\n5. **Os alvos de correção.** Executando a providência ao pé da letra, o trabalho\n   melhora? Confira em especial as instruções de uniformizar vocabulário: a expressão\n   pode aparecer noutro lugar com outro sentido.\n6. **Colisões entre itens.**\n\n**Antes de retirar, pergunte o que caiu, e a resposta decide entre duas coisas\ndiferentes.** Numa conferência medida, doze de quatorze quedas atingiram o endereço, a\ncontagem ou uma afirmação acessória, e o apontamento continuava certo; duas mataram o\nachado.\n\n- **Caiu o endereço, o número ou um detalhe acessório, e o apontamento se sustenta:**\n  **conserte o endereço e mantenha o item.** Onde o endereço certo não aparecer,\n  troque pela forma fraca. Retirar aqui é jogar fora um achado verdadeiro para\n  comprar precisão, que é o defeito medido do prompt anterior desta oficina.\n- **Caiu o achado** (a ausência se desfaz, o parágrafo diz outra coisa, a providência\n  manda fazer o que já está feito): **o item sai.**\n\n**O que sai não vira nota.** Quem recebe não tem uso para a lista do que foi\ndescartado, e enumerá-la convida a discutir o que já não está sendo afirmado.\n\n**A contagem vai para a ressalva, separada nas duas espécies:** quantos itens saíram e\nquantos endereços foram consertados. Taxa de erro declarada é o que dá motivo para\nconfiar no que ficou, e as duas espécies informam coisas diferentes sobre o\ninstrumento.\n\n**Prove a sua busca antes de confiar nela.** Defeitos deste ambiente, todos medidos, e\ntodos já produziram acusação falsa: `grep -o` com `-i` e `-F` juntos devolve vazio;\nclasse entre colchetes com letra acentuada falha (`estrat[ée]gia` dá zero onde\n`estratégia` acha); o ponto de expressão regular casa um byte e a letra acentuada\nocupa dois; busca sem fronteira de palavra casa dentro de outra palavra; buscar o\nsingular dá zero onde o plural existe; buscar sem ignorar a caixa perde a ocorrência\nque abre frase; `grep -c` conta linhas e não ocorrências; ancorar `^\\[P` na extração\nperde os parágrafos cuja linha começa por `##`, `**` ou `> `. Onde houver Python, use\n`scripts/contagem.py`, que traz essas regras em código e se recusa a carregar se o\nautoteste dele falhar.\n\n---\n\n## A ressalva, copiada ao fim do relatório\n\n> Este relatório foi produzido por programa, numa leitura só, e é por isso que ele é\n> rápido. Duas consequências para quem lê. **Ele vê menos do que uma leitura\n> completa:** rodado duas vezes sobre a mesma dissertação, este método devolveu\n> dezessete itens numa vez e doze na outra, com seis em comum, o que quer dizer que\n> uma parte do que existe não foi vista. **E ele justifica menos:** cada apontamento\n> traz o endereço, e não a cadeia de prova que uma verificação independente\n> produziria. Nada aqui vale antes de conferido no ponto indicado. O que o relatório\n> não afirma não é atestado de que esteja correto.\n";
 
   const areaPrompt = document.getElementById("textoPrompt");
   const btnCopiar = document.getElementById("copiar");
@@ -1456,5 +2093,52 @@ COMO ESCREVER. Evite travessão, use parênteses, vírgula, dois-pontos ou duas 
     baixar.setAttribute("data-estado", "feito");
     setTimeout(() => { baixar.textContent = "Copiar as medidas"; baixar.removeAttribute("data-estado"); }, 2400);
   });
+})();
+</script>
+
+
+<script>
+// ---- a escolha da via revela so o que serve a ela
+(function () {
+  const guias = { chat: "guia-chat", vscode: "guia-vscode", claude: "guia-claude" };
+  const bts = document.querySelectorAll(".via-bt");
+  const mostrar = (via) => {
+    bts.forEach((o) => o.setAttribute("aria-pressed", String(o.dataset.via === via)));
+    for (const [k, id] of Object.entries(guias)) {
+      const el = document.getElementById(id);
+      if (el) el.hidden = k !== via;
+    }
+  };
+
+  // a Oficina liga para ca com #chat, #claude ou #vscode
+  const daUrl = (location.hash || "").replace("#", "");
+  if (Object.hasOwn(guias, daUrl)) mostrar(daUrl);
+
+  bts.forEach((b) => b.addEventListener("click", () => {
+    const via = b.dataset.via;
+    bts.forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
+    for (const [k, id] of Object.entries(guias)) {
+      const el = document.getElementById(id);
+      if (el) el.hidden = k !== via;
+    }
+    const alvo = document.getElementById(guias[via]);
+    if (alvo) alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+  }));
+})();
+
+(function () {
+  for (const b of document.querySelectorAll(".copiar-pedido, .cmd .copiar")) {
+    b.addEventListener("click", async () => {
+      // O bloco de comando aponta o alvo pelo id; o pedido tem o texto ao lado.
+      const el = b.dataset.alvo ? document.getElementById(b.dataset.alvo)
+                                : b.parentElement.querySelector(".pedido-txt");
+      if (!el) return;
+      const txt = el.textContent;
+      try { await navigator.clipboard.writeText(txt); } catch { return; }
+      const rot = b.textContent;
+      b.textContent = "Copiado";
+      setTimeout(() => { b.textContent = rot; }, 2200);
+    });
+  }
 })();
 </script>
