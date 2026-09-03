@@ -282,8 +282,10 @@ texto e não foi enunciado) e o que exige um apêndice (é peça que um terceiro
 aplicaria a outro material sem reconstruir nada). **Não force:** a maioria das
 contribuições não é peça, e onde não houver nada, a seção encolhe.
 
-Você não confere se a contribuição é nova no campo, porque isso pede busca externa
-que esta leitura não faz. Diga que o crédito é interno ao trabalho.
+**No chat, o crédito é interno ao trabalho**, e o relatório diz isso: esta leitura
+não confere se a contribuição é nova no campo. **No agente ela confere**, pelo passo
+de busca externa descrito adiante, e então cada contribuição vem com a resposta que
+ele deu.
 
 **4. As correções.** Cada uma é um item numerado com um título que diz o defeito e
 onde ele está, e quatro campos:
@@ -357,7 +359,64 @@ série. Evite tríade por reflexo. Evite conectivo de arremate (*além disso*, *
 
 ---
 
-## No agente: a segunda leitura
+## No agente: duas coisas que o chat não faz, e as duas fecham distância medida
+
+A comparação de 03/09/2026 contra a leitura completa, sobre a mesma dissertação,
+mostrou que ela se paga em três coisas e só em três: o que exige sair do trabalho, o
+aparato bibliográfico, e a densidade de prova por item. **As duas primeiras cabem
+aqui**, e a terceira não, porque vem de quatro leituras independentes abrirem cada
+uma os seus parágrafos.
+
+### O aparato bibliográfico, que é programa e não julgamento
+
+```
+python scripts/conferir_referencias.py extracao/<trabalho>.txt
+```
+
+Ele confronta as chamadas do corpo com a lista, nas duas direções, e devolve quatro
+classes: par autor-ano com mais de uma entrada; **chamada cujo ano não existe em
+entrada nenhuma daquele sobrenome**; chamada ausente da lista; e entrada nunca
+citada. Mais a ordem dos autores nas entradas de dois ou mais, para conferir contra
+o corpo.
+
+**Ele acha candidatos e não julga, e a parte que é sua é o julgamento.** Boa parte
+do que sai é artefato legítimo: citação conjunta indexa um autor só, obra de três
+autores é chamada por *et al.*, e a expressão pega nome de autoridade e de órgão
+como se fosse autor. **Abra cada um, decida, e diga no relatório quantos descartou.**
+Sem esse número, quem lê não distingue leitura de repasse.
+
+O que sobrevive quase sempre é de anexo, e há uma exceção: **ano divergente na obra
+que sustenta uma premissa** muda o que se pode conferir, e essa vai ao corpo.
+
+### A busca externa, e ela é curta e mirada
+
+**O passo é este: pegue as duas ou três proposições que o trabalho apresenta como
+aquisição própria, e pergunte se elas já estão publicadas.** Estão na conclusão e no
+resumo, e o trabalho as marca (*este trabalho demonstra*, *o achado desta pesquisa*,
+*ao contrário do que se supunha*). Procure na literatura, **inclusive na que o próprio
+trabalho cita**, que é onde mais dói.
+
+Três respostas, e a do meio é a mais valiosa:
+
+- **JÁ EXISTE.** Dê a referência e a página. Não é contribuição, e o autor precisa
+  saber antes da banca. **Escreva a proposição que coincide, e não a tese inteira:**
+  o que costuma coincidir é a premissa de enquadramento, e dizer que a tese central
+  já está publicada é acusação que a fonte não sustenta.
+- **CONTRARIA O QUE EXISTE.** O dado do trabalho vai contra o que a literatura
+  afirma. **É a contribuição mais forte que um trabalho empírico pode ter, e a que
+  os autores mais deixam passar.** Antes de escrever isso, confira que os dois medem
+  a mesma coisa sobre a mesma população: contraria é afirmação forte, e populações
+  disjuntas não se contradizem, apenas não se falam.
+- **NÃO ENCONTREI.** Declare o que buscou e onde, para que a ausência signifique
+  alguma coisa.
+
+**Duas ou três proposições, e não mais.** O passo é curto de propósito: ele existe
+para o achado que a leitura interna não tem como produzir, e não para varrer a
+literatura do campo. Varrer é a leitura completa.
+
+**No chat isto não roda**, e o relatório diz que não rodou, na parte 3 e no alcance.
+
+## A revisão, e ela é uma só
 
 No chat, o relatório sai da primeira passada e acaba aí.
 
