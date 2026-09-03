@@ -789,7 +789,7 @@
 
     <section id="rota">
       <h2>Ferramentas disponíveis</h2>
-      <p class="deck">Os dois analisadores fazem a mesma coisa e não fazem igual. <b>O Alberto lê uma vez e escreve o relatório inteiro em um a três minutos</b>; o <b>Luis lê quatro vezes por caminhos diferentes, confere cada apontamento por quem não o escreveu, e leva quase uma hora</b>. Medido sobre a mesma dissertação em 03/09/2026: o rápido devolveu dezessete itens numa rodada e doze noutra, com seis em comum, contra os trinta e dois do completo. <b>Os dois pedem desenvolvimento argumentativo suficiente</b>, com resultados apresentados e conclusões escritas: rodados antes disso, julgam o que ainda não existe. <b>E o simulador de banca pede a apresentação pronta</b>, porque é do cotejo entre ela e o trabalho que vem o que o distingue de mais uma leitura.</p>
+      <p class="deck"><b>O rápido acha o defeito evidente, e acha mal o que depende de conferir número.</b> Promessa que outra seção nega, seção anunciada e não escrita, afirmação sem dado, resultado que está nos dados e não foi dito: disso ele dá conta, e num trabalho medido chegou ao mesmo veredito do completo e pela mesma razão, acertando a contagem que o completo errou. O que exige refazer a conta dentro de uma tabela de resultado, e comparar o que ela publica com o que a prosa afirma dela, é onde ele passa ao largo. <b>O completo acha essas, e as demais que pedem atenção e detalhe, e cobra quatro vezes mais por isso.</b> Medido em 03/09/2026: no chat o rápido é uma mensagem e leva de um a três minutos; no agente custa de 270 a 320 mil tokens e de 41 a 48 minutos, já contando a revisão; o completo passa de 1,15 milhão e leva horas. Os dois analisadores fazem a mesma coisa e não fazem igual. <b>O Alberto lê uma vez e escreve o relatório inteiro em um a três minutos</b>; o <b>Luis lê quatro vezes por caminhos diferentes, confere cada apontamento por quem não o escreveu, e leva quase uma hora</b>. Medido sobre a mesma dissertação em 03/09/2026: o rápido devolveu dezessete itens numa rodada e doze noutra, com seis em comum, contra os trinta e dois do completo. <b>Os dois pedem desenvolvimento argumentativo suficiente</b>, com resultados apresentados e conclusões escritas: rodados antes disso, julgam o que ainda não existe. <b>E o simulador de banca pede a apresentação pronta</b>, porque é do cotejo entre ela e o trabalho que vem o que o distingue de mais uma leitura.</p>
       <div class="route">
         <div class="route-row">
           <div class="route-a">
@@ -829,8 +829,8 @@
 
         <div class="chips">
           <span class="chip status-good">medido em 03/09/2026, duas rodadas sobre a mesma dissertação</span>
-          <span class="chip"><b>tokens</b> alguns milhares</span>
-          <span class="chip"><b>tempo</b> 1 a 3 minutos no chat</span>
+          <span class="chip"><b>tokens</b> uma mensagem no chat · 270 a 320 mil no agente</span>
+          <span class="chip"><b>tempo</b> 1 a 3 min no chat · 41 a 48 min no agente</span>
           <span class="chip"><b>roda em</b> qualquer assistente, inclusive gratuito</span>
         </div>
 
@@ -868,8 +868,8 @@
 
         <div class="chips">
           <span class="chip status-good">seis prompts, medidos em cinco trabalhos</span>
-          <span class="chip"><b>tokens</b> ~1,2 milhão</span>
-          <span class="chip"><b>tempo</b> ~55 min</span>
+          <span class="chip"><b>tokens</b> acima de 1,15 milhão</span>
+          <span class="chip"><b>tempo</b> horas</span>
           <span class="chip"><b>roda em</b> Opus, com a verificação em Sonnet</span>
         </div>
 
@@ -1291,7 +1291,19 @@
         </div>
 
         <div class="ledger-item">
-          <h4><span class="mark m-no">não medido</span> Se um segundo conferidor derrubaria as mesmas coisas</h4>
+          <h4><span class="mark m-yes">medido</span> O que a leitura rápida acha e o que ela deixa passar</h4>
+          <p>As duas leituras rodaram sobre os mesmos dois trabalhos em 03/09/2026, a rápida às cegas. <b>Numa tese com sete seções trazendo apenas um marcador de trabalho por fazer, as duas deram o mesmo veredito pela mesma razão, e a contagem certa foi a da rápida:</b> sete seções, e não oito. Endereços comuns: 123 de 358. <b>Numa dissertação em que as três contas erradas estavam dentro de tabelas de resultado, os comuns caíram para 64 de 277</b>, e a completa abriu 199 parágrafos contra 106.</p>
+          <p style="margin-top:12px"><b>A forma do que ela deixa passar é sempre a mesma:</b> o item que exige refazer a conta dentro de uma tabela e comparar o que a tabela publica com o que a prosa afirma dela. E há uma classe que ela não produz sozinha, a de saber se a contribuição já está publicada, que exige sair do trabalho.</p>
+          <p style="margin-top:12px"><b>E a via do chat entrega o veredito e perde a conferência.</b> Rodada no ChatGPT sobre a mesma tese, a leitura rápida acertou o núcleo em nove correções e devolveu <b>zero localizadores</b>, porque ali não há extração numerada. Serve para decidir o que fazer; não serve para o autor corrigir sem procurar cada ponto no arquivo.</p>
+        </div>
+
+        <div class="ledger-item">
+          <h4><span class="mark m-yes">medido</span> Se um segundo conferidor derruba as mesmas coisas</h4>
+          <p>Era a única coisa que esta página listava como não medida sobre o desenho inteiro, e foi medida em 03/09/2026: dois cotejos independentes atacaram o mesmo relatório com a mesma instrução de derrubar. <b>Convergiram em seis achados, e cada um pegou quatro que o outro não pegou.</b> Discordaram num ponto, sobre se um parágrafo dizia o mesmo que outro por outro caminho, e a divergência se decidiu abrindo os dois. <b>Nenhum item foi retirado do relatório:</b> todas as quedas foram de endereço, número ou afirmação acessória.</p>
+        </div>
+
+        <div class="ledger-item">
+          <h4><span class="mark m-no">não medido</span> Se o mesmo conferidor, rodado duas vezes, derrubaria as mesmas coisas</h4>
           <p>Toda a série depende de uma etapa que confere e de ninguém que confira a conferência. Taxa de queda baixa pode significar leitura mais disciplinada, e pode significar conferidor mais frouxo, e o formato atual não separa as duas. O teste que separaria é conhecido e ainda não foi feito: refazer a conferência de uma avaliação inteira com outro conferidor, sobre as mesmas hipóteses, e comparar as quedas.</p>
         </div>
 

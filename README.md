@@ -37,6 +37,73 @@ acessória, e o apontamento continua de pé. Sobre vinte e seis itens, dois eram
 verdadeiro junto com o endereço torto, que é o defeito medido do prompt monolítico
 anterior. O que ele impõe é disciplina de endereço, e a revisão que os confere.
 
+### Qual das duas rodar, e a resposta não é o tamanho do trabalho
+
+**O rápido acha o defeito evidente, e acha mal o que depende de conferir número.**
+Promessa que outra seção nega, seção anunciada e não escrita, afirmação sem dado, o
+que está nos dados e não foi dito: disso ele dá conta. O que exige refazer uma conta
+dentro de uma tabela de resultado, e comparar o que ela publica com o que o texto
+afirma dela, é onde ele passa ao largo.
+
+**O completo acha essas, e as demais que pedem atenção e detalhe, e cobra caro por
+isso.** Não é uma versão melhor da mesma coisa por um pouco mais: é quatro vezes o
+custo, e a diferença que ela compra é a segunda espécie de defeito, o aparato
+bibliográfico e a densidade de prova por item.
+
+#### Tempo e tokens, medidos em 03/09/2026
+
+| | tokens | relógio |
+|---|---|---|
+| rápido, no chat | uma mensagem: o prompt (cerca de 6 mil) mais o trabalho | 1 a 3 min |
+| rápido, no agente | **270 a 320 mil**, incluindo a revisão | **41 a 48 min** |
+| completo | **acima de 1,15 milhão** | horas |
+
+**A linha do meio corrige um engano fácil:** os poucos milhares são o tamanho do
+prompt, e não o da rodada. No agente o rápido lê o trabalho, abre parágrafos, roda
+programas e ainda passa por uma revisão que abre outros oitenta, e isso custa. **O que
+o separa do completo não é ser barato em termos absolutos: é ser quatro vezes mais
+barato**, e entregar cerca de metade dos itens.
+
+Os números do completo somam as quatro partes medidas hoje (peso das contribuições,
+verificação, triagem e redação, cotejo) e **deixam de fora as duas primeiras leituras e
+o cotejo delas**, feitos antes e não registrados. O total real é maior.
+
+**No chat a conta é outra e não se mede em tokens:** é uma mensagem numa conta que
+você já tem, e o limite que se alcança é o de conversas com arquivo anexado, que numa
+conta gratuita chegou depois de três numa mesma manhã.
+ **Se o que se quer é saber o que corrigir antes da
+banca, o rápido entrega o essencial.** O completo se justifica quando importa saber
+se a contribuição é nova, quando o trabalho vai a periódico e o aparato precisa estar
+limpo, ou quando os números do trabalho são o que ele afirma.
+
+Isso se mediu rodando os dois sobre os mesmos dois trabalhos, em 03/09/2026.
+
+**Onde o defeito é grande e declarado pelo próprio trabalho, as duas convergem.** Numa
+tese com sete seções trazendo apenas um marcador de trabalho por fazer, o rápido e o
+completo deram o mesmo veredito pela mesma razão, e **a contagem certa foi a do
+rápido**: sete seções, e não oito. Ali o completo custou cinco vezes mais para
+acrescentar acabamento.
+
+**Onde o defeito está em contas que exigem refazer uma tabela, o completo abre
+vantagem que o rápido não alcança.** Na dissertação em que as três contas erradas
+estavam dentro de tabelas de resultado, os endereços comuns entre os dois foram 64 em
+277 (Jaccard 0,27), e o completo abriu 199 parágrafos contra 106.
+
+**E há uma classe que o rápido não produz sozinho:** se a contribuição já está
+publicada. Ela exige sair do trabalho, e no agente o rápido passou a fazer uma versão
+curta disso; no chat, não faz.
+
+| | dissertação com contas em tabela | tese com seções por escrever |
+|---|---|---|
+| endereços comuns | 64 de 277 (0,27) | 123 de 358 (0,34) |
+| itens, rápido contra completo | 32 contra 37 | 50 contra 20 |
+| vereditos | divergiram | coincidiram |
+
+**A via do chat entrega o veredito e perde a conferência.** Rodado no ChatGPT sobre a
+mesma tese, o rápido acertou o núcleo em nove correções e devolveu **zero
+localizadores**, porque no chat não há extração numerada. Serve para decidir o que
+fazer, e não serve para o autor corrigir sem procurar cada ponto no arquivo.
+
 **Luis, o relatório completo.** Quatro leituras por caminhos diferentes, verificação,
 cotejo adversarial de cada apontamento, e a redação. Custa cerca de um milhão de
 tokens e quase uma hora. Pede desenvolvimento argumentativo suficiente, com
