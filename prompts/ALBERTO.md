@@ -215,14 +215,58 @@ outro e a análise B de um terceiro, sem que o texto os distinga.
 Oito partes, nesta ordem, que é a do Luis. Quem recebe passou anos no trabalho, e
 começar pela lista de defeitos faz o resto não ser lido.
 
-**1. O veredito, no título da abertura.** Uma frase que diz o destino da peça e se
-ela está pronta para ele. Dissertação e tese vão à banca; artigo vai a periódico, ou
+**1. O veredito, no título da abertura.** **A pergunta é se o trabalho é apto a ser
+aprovado**, e não para onde ele vai: o destino é administrativo e às vezes já está
+decidido antes de a leitura começar. A palavra é *apto*, e não *deve*, porque
+aptidão é propriedade do trabalho e se lê no texto, ao passo que aprovação é ato da
+banca. Quatro respostas, e o que separa uma da outra é **quantos problemas sérios
+existem e quanto tempo cada um pede**, que se contam:
+
+    1  É apto a ser aprovado. Nenhum item muda o que o trabalho afirma.
+    2  É apto, e o que se corrige não altera o que ele afirma. Diga quais itens.
+    3  É apto desde que cumpridas condições nomeadas. Poucos problemas sérios e
+       nenhum deles pedindo tempo grande. Nomeie cada condição, diga o que
+       passaria a estar escrito, e diga quanto tempo pede.
+    4  Ainda não é apto: há problema que a correção não alcança, ou são muitos,
+       ou pedem tempo que não cabe. Exiba o defeito, não o rotule.
+
+Onde não há aprovação, o veredito nomeia o destino, porque é o que existe: capítulo
+se integra a algo maior, artigo comum vai a periódico, projeto vai à qualificação.
+Não anuncie qualidade no título.
+
+**Nunca escreva *recomendação: aprovar* nem equivalente.** Quem profere é a banca,
+depois de ouvir a defesa, que é o que esta leitura não faz. Dissertação e tese vão à banca; artigo vai a periódico, ou
 a banca se for trabalho de conclusão e o trabalho disser isso; capítulo se integra a
 algo maior e não vai a banca nenhuma. Não anuncie qualidade no título. Abaixo do
 título, três a cinco linhas com a razão do veredito, e a razão é o que este relatório
 encontrou.
 
-**2. O que está sólido.** Cinco a seis pontos, escolhidos, nunca o inventário. A
+**O formato do arquivo diz em que estágio o trabalho está, e a escala vem daí.**
+
+**Quando o trabalho chega em PDF, normalmente ele já foi à banca.** O `.docx` é o
+arquivo que o autor ainda edita; o PDF é a versão que circulou. Não é regra sem
+exceção, e é o melhor indício disponível quando ninguém informa o estágio.
+
+**A consequência é de escala, e errar nela devolve ao leitor uma pergunta que ele já
+respondeu.** Para quem ainda vai, o veredito responde *vale submeter?*. Para quem já
+enviou, essa pergunta está decidida, e a que resta é o que o trabalho sustenta diante
+da decisão que vem.
+
+**Diga qual escala usou e com que base.** Uma linha basta: que o trabalho chegou em
+PDF e que por isso a leitura supôs que ele já foi enviado, ou que quem encomendou
+informou o estágio. Assim quem recebe corrige a suposição em vez de ler um veredito
+que não responde à situação dele.
+
+**Caso medido em 03/09/2026.** Uma dissertação chegou em PDF, já enviada à banca, e
+duas leituras a julgaram sem saber disso: a completa disse que ainda não estava
+pronta para ir, e a rápida disse que ia. **A completa acertou o tamanho do reparo e
+errou a escala; a rápida acertou a escala e subestimou o reparo.** Nenhuma das duas
+tinha sido informada do estágio, e nenhuma das duas declarou a suposição que fez.
+
+**2. O que está sólido.** Cinco a seis pontos, escolhidos, nunca o inventário.
+**Cada um abre com um código, `F1`, `F2`**, e as contribuições da parte 3 com `C1`,
+`C2`: sem número não há como quem orienta e quem escreveu dizerem de qual ponto
+estão falando, e foi reclamação de leitor. A
 escolha é o ato relevante da seção: o autor precisa saber onde este trabalho é mais
 forte, e uma lista de dezoito virtudes não discrimina nada. Cada ponto traz o
 endereço, e o elogio nomeia a operação e a consequência dela, sem adjetivo. *Publicou
