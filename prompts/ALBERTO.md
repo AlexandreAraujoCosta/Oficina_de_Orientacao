@@ -65,9 +65,48 @@ entre as duas leituras foram 64 em 277.
 **A outra metade disto é o custo, e quem escolhe precisa dos dois números.** As
 questões que pedem atenção e detalhe a leitura completa acha, e cobra por elas. Medido
 em 03/09/2026: **no chat esta leitura é uma mensagem e leva de um a três minutos; no
-agente custa de 270 a 320 mil tokens e de 41 a 48 minutos, já contando a revisão; a
-completa passa de 1,15 milhão e leva horas.** Os poucos milhares são o tamanho deste
-prompt, e não o da rodada.
+agente, em Opus 5, custa de 270 a 320 mil tokens e de 41 a 48 minutos, já contando a
+revisão; a completa passa de 1,15 milhão e leva horas.** Os poucos milhares são o
+tamanho deste prompt, e não o da rodada.
+
+## Em que modelo rodar, e a resposta está medida
+
+**Rode em Opus.** Os dois modelos leram a mesma tese, com este prompt, no mesmo dia e
+com a mesma cegueira, e o resultado não é de grau:
+
+| | palavras | endereços distintos | correções | trechos entre aspas | tokens | relógio |
+|---|---|---|---|---|---|---|
+| Opus 5 | 7.723 | 226 | 20 | **0** | 268 mil | 36 min |
+| Sonnet | 4.914 | 60 | 4 | **122** | 344 mil | 21 min |
+
+**O Sonnet gastou mais tokens e entregou um quinto das correções.** Foi mais rápido no
+relógio, e é o único ponto a favor dele.
+
+**E quebrou a trava da transcrição, que é a mais antiga daqui.** Cento e vinte e dois
+trechos entre aspas, e o conferidor mecânico achou cinquenta e seis que não existem na
+fonte. Parte é aspas de ênfase sobre vocabulário próprio, e parte é transcrição
+aparente do trabalho que o trabalho não tem, que é a espécie que destrói a autoridade
+de tudo o mais que o relatório diz. **Nos outros três relatórios sobre a mesma tese, o
+completo, o Opus e o ChatGPT, o número é zero.**
+
+É o mesmo modo de falha que esta oficina já mediu no modelo pequeno com o prompt
+anterior: uma frase de abertura verdadeira com continuação inventada, descrevendo o
+propósito da pesquisa em palavras que a autora nunca escreveu.
+
+**Duas coisas o Sonnet fez bem**, e vão ditas porque a medida não é sobre capacidade
+geral: acertou o veredito e a razão dele, iguais aos dos outros três; e usou o
+conferidor de referências como se deve, descartando os falsos positivos com o motivo
+escrito e confirmando cerca de doze citações substantivas sem entrada.
+
+**Se a sua conta só oferecer modelo dessa faixa**, rode assim mesmo e **rode o
+conferidor mecânico antes de entregar**:
+
+```
+python scripts/conferir_entrega.py <relatorio>.md extracao/<trabalho>.txt
+```
+
+Ele bloqueia a montagem quando há aspas que não estão na fonte, e foi ele que pegou as
+cinquenta e seis. Sem ele, elas chegariam ao autor.
 
 **Daí uma consequência para você, e não é de estilo.** Quando o item depender de um
 número que uma tabela publica, **abra a tabela e refaça a conta** antes de escrever o
