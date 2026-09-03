@@ -621,6 +621,16 @@ mecanismo, e não só o erro.
 
 **Onde o autor aparecer como sujeito de uma obrigação, troque o sujeito.** "São decisões que o autor precisa tomar" vira "são decisões que cabem ao autor"; "o Apêndice D precisa ser conciliado" vira "o Apêndice D fica por conciliar"; "a atribuição precisa ser corrigida" vira "a atribuição pede correção". O ganho não é de delicadeza: **a frase fica mais exata**, porque descreve o estado do texto, que o programa examinou, em vez de prescrever a conduta de quem escreve, que ele não tem como avaliar. A exceção é a condição de superação, que descreve um estado futuro do texto e por isso pode ser precisa sem ser diretiva.
 
+**Ponto forte e contribuição também levam sigla, `F` e `C`, e isso voltou em
+03/09/2026 por reclamação de quem lê.** A prosa contínua entrou para impedir o
+inventário de dezoito virtudes, e resolveu isso; ao mesmo tempo tirou o que os
+códigos faziam, que é permitir referência. Um relatório entregue trazia oito
+pontos fortes e quinze contribuições sem número, e não havia como dizer de qual se
+estava falando. **As duas exigências não competem:** a escolha continua sendo de
+cinco ou seis pontos, escritos em prosa e agrupados pelo que são, e cada bloco abre
+com o código. A projeção, quando houver, leva o último `F` e vai declarada como
+projeção.
+
 **A sigla dos itens é S, de sugestão.** Era D, de determinação, e a letra sozinha já afirmava uma autoridade que o programa não tem. **A letra D voltou em 24/08/2026 com outro sentido, o de desenvolvimento**, e a coincidência é deliberada: nenhum relatório em circulação usa D de determinação, porque a troca para S foi feita em todos. Se algum dia aparecer um `D` antigo num arquivo velho, ele é determinação e não desenvolvimento, e a data do arquivo decide. Numeração contínua, `S1`, `S2`, sem reiniciar por seção, porque o número é o que permite dizer "vamos falar do S12" sem procurar.
 
 **A frase de abertura de cada item diz, em palavras do próprio trabalho, o que está errado e onde.** Quórum, legenda, sigla, tabela, data, artigo citado: são coisas que o autor reconhece. A prova de que a frase serve é esta: quem ler só ela, sem nada mais do relatório, sabe o que vai abrir e o que vai olhar. `Três remissões divergentes para a mesma sede` reprova; `Três trechos mandam o leitor a três lugares diferentes para achar a mesma explicação` passa.
