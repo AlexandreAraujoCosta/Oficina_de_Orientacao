@@ -734,6 +734,9 @@
   .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
   .eyebrow a:hover, .eyebrow a:focus-visible { opacity: .7; }
   .eyebrow .eb-atual { opacity: .55; }
+  /* O nome da pagina respira entre a faixa e o texto que a descreve. */
+  .eyebrow { margin: 0 0 2.4rem; }
+  .top h1, header h1, .wrap > h1 { margin-bottom: 1.3rem; }
 </style>
 
 <div class="shell">
@@ -783,7 +786,7 @@
         da situação para a qual foram escritas.</p>
       </div>
       <div class="dedication">
-        <p>O assistente se chama Luis em homenagem a <b>Luis Alberto Warat</b>, meu grande professor. Durante quase uma década, eu desenvolvia minhas ideias e as levava para a crítica afetuosa e contundente de Luis, que desconstruía meus rascunhos e me colocava no rumo de construções mais robustas e consistentes. Infelizmente, não podemos mais contar com as análises incomparáveis de Luis, mas sigo o seu exemplo de buscar fazer esclarecimentos que ajudem no desenvolvimento dos trabalhos.</p>
+        <p>O assistente se chama <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> em homenagem a <b>Luis <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> Warat</b>, meu grande professor. Durante quase uma década, eu desenvolvia minhas ideias e as levava para a crítica afetuosa e contundente de Luis, que desconstruía meus rascunhos e me colocava no rumo de construções mais robustas e consistentes. Infelizmente, não podemos mais contar com as análises incomparáveis de Luis, mas sigo o seu exemplo de buscar fazer esclarecimentos que ajudem no desenvolvimento dos trabalhos.</p>
         <p class="pledge"></p>
       </div>
     </header>
@@ -795,7 +798,7 @@
 
     <section id="rota">
       <h2>Ferramentas disponíveis</h2>
-      <p class="deck"><b>O rápido acha o defeito evidente, e acha mal o que depende de conferir número.</b> Promessa que outra seção nega, seção anunciada e não escrita, afirmação sem dado, resultado que está nos dados e não foi dito: disso ele dá conta, e num trabalho medido chegou ao mesmo veredito do completo e pela mesma razão, acertando a contagem que o completo errou. O que exige refazer a conta dentro de uma tabela de resultado, e comparar o que ela publica com o que a prosa afirma dela, é onde ele passa ao largo. <b>O completo acha essas, e as demais que pedem atenção e detalhe, e cobra quatro vezes mais por isso.</b> Medido em 03/09/2026: no agente, em Opus 5, o rápido custa de 270 a 320 mil tokens e de 41 a 48 minutos, já contando a revisão; o completo passa de 1,15 milhão e leva horas. Em Sonnet ela gastou <b>mais</b> tokens que em Opus, 344 mil, e entregou um quinto das correções. Os dois analisadores fazem a mesma coisa e não fazem igual. <b>O Alberto lê uma vez e escreve o relatório inteiro numa passada</b>; o <b>Luis lê quatro vezes por caminhos diferentes, confere cada apontamento por quem não o escreveu, e leva quase uma hora</b>. Medido sobre a mesma dissertação em 03/09/2026: o rápido devolveu dezessete itens numa rodada e doze noutra, com seis em comum, contra os trinta e dois do completo. <b>Os dois pedem desenvolvimento argumentativo suficiente</b>, com resultados apresentados e conclusões escritas: rodados antes disso, julgam o que ainda não existe. <b>E o simulador de banca pede a apresentação pronta</b>, porque é do cotejo entre ela e o trabalho que vem o que o distingue de mais uma leitura.</p>
+      <p class="deck"><b>O rápido acha o defeito evidente, e acha mal o que depende de conferir número.</b> Promessa que outra seção nega, seção anunciada e não escrita, afirmação sem dado, resultado que está nos dados e não foi dito: disso ele dá conta, e num trabalho medido chegou ao mesmo veredito do completo e pela mesma razão, acertando a contagem que o completo errou. O que exige refazer a conta dentro de uma tabela de resultado, e comparar o que ela publica com o que a prosa afirma dela, é onde ele passa ao largo. <b>O completo acha essas, e as demais que pedem atenção e detalhe, e cobra quatro vezes mais por isso.</b> Medido em 03/09/2026: no agente, em Opus 5, o rápido custa de 270 a 320 mil tokens e de 41 a 48 minutos, já contando a revisão; o completo passa de 1,15 milhão e leva horas. Em Sonnet ela gastou <b>mais</b> tokens que em Opus, 344 mil, e entregou um quinto das correções. Os dois analisadores fazem a mesma coisa e não fazem igual. <b>O <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> lê uma vez e escreve o relatório inteiro numa passada</b>; o <b><a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> lê quatro vezes por caminhos diferentes, confere cada apontamento por quem não o escreveu, e leva quase uma hora</b>. Medido sobre a mesma dissertação em 03/09/2026: o rápido devolveu dezessete itens numa rodada e doze noutra, com seis em comum, contra os trinta e dois do completo. <b>Os dois pedem desenvolvimento argumentativo suficiente</b>, com resultados apresentados e conclusões escritas: rodados antes disso, julgam o que ainda não existe. <b>E o simulador de banca pede a apresentação pronta</b>, porque é do cotejo entre ela e o trabalho que vem o que o distingue de mais uma leitura.</p>
       <div class="route">
         <div class="route-row">
           <div class="route-a">
@@ -861,7 +864,7 @@
 
         <p class="when"><b>Nenhum programa daqui altera o arquivo do autor, e a decisão é de 30/08/2026.</b> Um diagnóstico lê a formatação e conta o que há, e isso vira sugestão no relatório. O programa que <em>transformava</em> o arquivo saiu da cadeia depois de desmontar a capa de uma dissertação que não havia tocado, e hoje é a semente da <a href="https://claude.ai/code/artifact/4d7706bf-3382-419e-97ff-4ad35b65e1eb">Oficina de Formatação</a>, que existe separada justamente porque ali um programa escreve no arquivo de outra pessoa.</p>
 
-        <p class="footnote"><strong>O nome mudou de dono em 03/09/2026, e vale registrar.</strong> Alberto designava, até então, uma conferência de consistência que dobrava o trabalho sobre si mesmo em quatro níveis (formal, numérico, categorial e textual) sem julgar o argumento. Essa conferência continua existindo, sob o nome do que ela faz, em <span class="loc">prompts/CONSISTENCIA.md</span>, e serve a quem quer só isso, em qualquer fase da escrita. O que herdou o nome foi o relatório rápido, porque é ele que hoje ocupa o lugar de porta de entrada que a conferência ocupava.</p>
+        <p class="footnote"><strong>O nome mudou de dono em 03/09/2026, e vale registrar.</strong> <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> designava, até então, uma conferência de consistência que dobrava o trabalho sobre si mesmo em quatro níveis (formal, numérico, categorial e textual) sem julgar o argumento. Essa conferência continua existindo, sob o nome do que ela faz, em <span class="loc">prompts/CONSISTENCIA.md</span>, e serve a quem quer só isso, em qualquer fase da escrita. O que herdou o nome foi o relatório rápido, porque é ele que hoje ocupa o lugar de porta de entrada que a conferência ocupava.</p>
         </article>
 
       <!-- 02 -->
@@ -1009,7 +1012,7 @@
         ambiente de desenvolvimento.</b></p>
         <p class="via-devolve"><b>Devolve o arquivo.</b> O agente roda os programas e monta a
         entrega, com o trabalho anotado na margem, o relatório em PDF e a lista de correções.
-        Acrescenta a extração canônica com impressão digital e, no Luis, os quatro passos com o
+        Acrescenta a extração canônica com impressão digital e, no <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a>, os quatro passos com o
         cotejo em sessão separada. Exige Python, com PyMuPDF se o trabalho for PDF, e pandoc com
         xelatex para o PDF. É a única forma em que a comparação entre duas versões do mesmo
         trabalho já está encadeada.</p>
@@ -1101,7 +1104,7 @@
       <p class="deck">O relatório é automático, e é automático sempre. Ler e encaminhar não muda o que o produziu: muda quem responde por ele.</p>
 
       <p><strong>A ferramenta produz, e quem encaminha responde.</strong> O orientador que lê e manda passa a responder pelos apontamentos, e é o nome dele que vai na abertura, porque encaminhar é endossar: mandar crítica automática não lida e sem nome é o pior arranjo possível, com toda a contundência e nenhuma responsabilidade. Se o próprio autor roda no seu trabalho, não há orientador no circuito, e pôr nome de terceiro seria atribuição falsa. <strong>O que não muda em nenhum dos dois casos é a origem do texto.</strong></p>
-      <p><strong>O estado sem revisão tem de ser visível</strong>, e não o silêncio padrão: relatório que não diz que ninguém o leu chega como se alguém tivesse lido. É a mesma regra que limita o Alberto ao que ele confere.</p>
+      <p><strong>O estado sem revisão tem de ser visível</strong>, e não o silêncio padrão: relatório que não diz que ninguém o leu chega como se alguém tivesse lido. É a mesma regra que limita o <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> ao que ele confere.</p>
 
       <p><strong>Procedência declarada não é coautoria</strong>, e a distinção é de responsabilidade: coautoria divide, e aqui não se divide, porque quem endossa responde por inteiro. A ferramenta levantou e redigiu; o humano decidiu o que sobrevive. A proporção, aliás, é declarável item a item, porque os três registros já a marcam: um achado de resultado é substancialmente da ferramenta, já que se confere abrindo o arquivo, e um questão é substancialmente de quem orienta, já que é pergunta que só quem conhece o campo formula.</p>
 
@@ -1179,13 +1182,13 @@
 
       <p><strong>O que se distribui aqui são as instruções e os programas, não um serviço em funcionamento.</strong> A diferença é de custeio. Um serviço a que qualquer pessoa se conectasse exigiria um motor ligado executando os prompts, e cada análise que ele fizesse seria cobrada de alguém. Esse alguém seria o docente, do próprio bolso, ou o programa de pós-graduação (PMPD). Como não há financiamento para isso, cada um roda no seu próprio acesso, e é por essa razão que os números abaixo interessam a quem for usar: são a conta que você vai pagar, ou o limite de uso que você vai consumir.</p>
 
-      <p><strong>É também o que justifica existir uma versão barata.</strong> Sem serviço custeado, exigir quase uma hora de processamento por trabalho tornaria a ferramenta inacessível a quem mais precisa dela. O Alberto deixa de ser um recurso menor e passa a ser a porta de entrada, e o que ele cobra por isso está medido: vê menos, e vê coisa diferente a cada rodada.</p>
+      <p><strong>É também o que justifica existir uma versão barata.</strong> Sem serviço custeado, exigir quase uma hora de processamento por trabalho tornaria a ferramenta inacessível a quem mais precisa dela. O <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> deixa de ser um recurso menor e passa a ser a porta de entrada, e o que ele cobra por isso está medido: vê menos, e vê coisa diferente a cada rodada.</p>
 
       <p>O cartão de cada ferramenta declara o consumo em tokens, e não em dinheiro, porque o token é o mesmo número em qualquer serviço: o que muda de um para outro é o preço, não o consumo. Esta seção faz a conversão para quem liga a ferramenta diretamente ao serviço da Anthropic. Quem usa a Claude por assinatura mensal não vê estes números: paga um valor fixo e esbarra num limite de uso. Eles aparecem para quem liga a ferramenta diretamente ao serviço da Anthropic, onde se cobra por token processado. Medido na dissertação de 36.457 palavras, cerca de 55 mil tokens.</p>
 
       <p>Preços de junho de 2026, por milhão de tokens: <b>Opus</b> a US$ 5,00 o que entra e US$ 25,00 o que sai; <b>Sonnet</b> a US$ 2,00 e US$ 10,00, que é preço promocional e <b>vence em 31 de agosto de 2026</b>, subindo para US$ 3,00 e US$ 15,00. Depois disso a coluna do Sonnet cresce cerca de metade. Sai mais caro do que entra porque escrever custa mais do que ler. Os valores em reais são aproximados, convertidos a US$ 1,00 = R$ 5,22, cotação de 16 de agosto de 2026, e envelhecem com o câmbio.</p>
 
-      <p><b>Duas expressões da tabela.</b> <em>Cadeia completa</em> é uma passagem inteira do Luis pelo trabalho: as leituras, a conferência de cada apontamento e a montagem do relatório. <b>Os valores da tabela são do desenho de seis vozes, que vigorou até 25/08/2026.</b> A fusão em quatro passos mediu, numa dissertação, redução de 64% no consumo, de 1.570 mil para 559 mil unidades. <b>O desenho de 01/09/2026, que é o de hoje, voltou a subir para cerca de 1,2 milhão</b>, porque as leituras deixaram de repetir a mesma travessia e passaram a percorrer caminhos diferentes, cada uma carregando o material de que precisa. A tabela abaixo continua com os valores antigos porque foram os medidos, e um caso não é série. <em>Reaproveitamento</em> traduz o que o serviço chama de <span class="loc">prompt caching</span>: como cada leitura reenvia o trabalho a cada passo, o serviço guarda o que já viu e cobra um décimo por reenviar o mesmo texto, desde que o programa peça isso explicitamente.</p>
+      <p><b>Duas expressões da tabela.</b> <em>Cadeia completa</em> é uma passagem inteira do <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> pelo trabalho: as leituras, a conferência de cada apontamento e a montagem do relatório. <b>Os valores da tabela são do desenho de seis vozes, que vigorou até 25/08/2026.</b> A fusão em quatro passos mediu, numa dissertação, redução de 64% no consumo, de 1.570 mil para 559 mil unidades. <b>O desenho de 01/09/2026, que é o de hoje, voltou a subir para cerca de 1,2 milhão</b>, porque as leituras deixaram de repetir a mesma travessia e passaram a percorrer caminhos diferentes, cada uma carregando o material de que precisa. A tabela abaixo continua com os valores antigos porque foram os medidos, e um caso não é série. <em>Reaproveitamento</em> traduz o que o serviço chama de <span class="loc">prompt caching</span>: como cada leitura reenvia o trabalho a cada passo, o serviço guarda o que já viu e cobra um décimo por reenviar o mesmo texto, desde que o programa peça isso explicitamente.</p>
 
       <div class="tablewrap">
         <table>
@@ -1211,7 +1214,7 @@
               <td class="num">US$ 0<span class="brl">R$ 0</span></td>
             </tr>
             <tr>
-              <td>Uma voz do Luis</td>
+              <td>Uma voz do <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a></td>
               <td class="num">130–380 mil</td>
               <td class="num">US$ 1 a 2<span class="brl">R$ 5 a 10</span></td>
               <td class="num">US$ 0,40 a 0,80<span class="brl">R$ 2 a 4</span></td>
@@ -1244,7 +1247,7 @@
 
       <p class="tnote"><strong>Ressalva da medida.</strong> O contador que registrou esses números soma o que entrou e o que saiu sem separar os dois, e a faixa acima supõe que noventa por cento é entrada. É estimativa com base medida, e não fatura.</p>
 
-      <p class="tnote"><strong>O custo de API não é a restrição.</strong> Cinquenta reais por um trabalho que levou meses não detém ninguém. As restrições reais são que a leitura demora meia hora e que o relatório precisa de revisão humana antes de ser entregue. Para o estudante no plano gratuito a conta é outra: ele não paga em dinheiro, paga em limite de uso, e um milhão e meio de tokens estoura qualquer sessão gratuita. É por isso que o Alberto existe.</p>
+      <p class="tnote"><strong>O custo de API não é a restrição.</strong> Cinquenta reais por um trabalho que levou meses não detém ninguém. As restrições reais são que a leitura demora meia hora e que o relatório precisa de revisão humana antes de ser entregue. Para o estudante no plano gratuito a conta é outra: ele não paga em dinheiro, paga em limite de uso, e um milhão e meio de tokens estoura qualquer sessão gratuita. É por isso que o <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> existe.</p>
     </section>
 
     <section id="medido">
@@ -1315,7 +1318,7 @@
 
           <div class="ledger-item">
             <h4><span class="mark m-yes">medido</span> O que o modelo barato faz quando não precisa procurar</h4>
-            <p>O teste anterior mandou o modelo barato vasculhar 62 mil palavras, e é aí que ele falha. <b>O Alberto não pede isso:</b> um programa levanta os pontos a olhar e o modelo julga algumas dezenas de trechos já localizados, que é outra tarefa. Ela foi medida em 28/08/2026, sobre os candidatos numéricos de uma dissertação, e o resultado não é "roda" ou "não roda". É uma condição.</p>
+            <p>O teste anterior mandou o modelo barato vasculhar 62 mil palavras, e é aí que ele falha. <b>O <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> não pede isso:</b> um programa levanta os pontos a olhar e o modelo julga algumas dezenas de trechos já localizados, que é outra tarefa. Ela foi medida em 28/08/2026, sobre os candidatos numéricos de uma dissertação, e o resultado não é "roda" ou "não roda". É uma condição.</p>
             <p style="margin-top:12px"><b>Com a lista suja, ele amostrou; com a lista limpa, julgou tudo.</b> Na primeira tentativa a lista tinha 66 candidatos, dos quais 84% eram ruído de um defeito dos programas: a linha do índice de figuras contava como se fosse a legenda, e o par entre as duas aparecia como suspeita. Ele viu que era ruído, disse isso corretamente, e abriu 6 dos 66. Corrigido o defeito, a lista caiu para 20, e na segunda tentativa ele abriu os 20.</p>
             <p style="margin-top:12px"><b>E achou o que ninguém tinha achado.</b> Entre os 20 havia um erro verdadeiro: a mesma fala de um ministro datada de dois anos diferentes em dois pontos do trabalho, uma delas na epígrafe que abre a dissertação. Ele o encontrou, e nenhuma das outras três leituras daquele dia o encontrara, porque nas listas anteriores ele estava enterrado no ruído. Junto vieram três apontamentos falsos, em dezenove casos legítimos, e todos se derrubam abrindo o parágrafo.</p>
             <p style="margin-top:12px"><b>A lição não é sobre o modelo, é sobre a entrada.</b> A mesma instrução e o mesmo modelo produziram comportamentos opostos conforme a qualidade da lista. Lista suja convida ao atalho, e nenhuma instrução vence o convite. O caminho para usar modelo pequeno é limpar o que se entrega a ele.</p>

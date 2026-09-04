@@ -534,11 +534,14 @@
   .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
   .eyebrow a:hover, .eyebrow a:focus-visible { opacity: .7; }
   .eyebrow .eb-atual { opacity: .55; }
+  /* O nome da pagina respira entre a faixa e o texto que a descreve. */
+  .eyebrow { margin: 0 0 2.4rem; }
+  .top h1, header h1, .wrap > h1 { margin-bottom: 1.3rem; }
 </style>
 
 <div class="wrap">
   <header class="top">
-    <p class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a></span><span class="eb-linha">Oficinas: <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">Orientação</a> · <a href="https://claude.ai/code/artifact/1d29d917-d73f-48b3-9f89-1eaab12cfffd">Projetos</a></span><span class="eb-linha">Agentes: <span class="eb-atual" aria-current="page">Alberto</span> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></span></p>
+    <p class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a></span><span class="eb-linha">Faz parte da <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">Oficina de Orientação</a> · Outra oficina: <a href="https://claude.ai/code/artifact/1d29d917-d73f-48b3-9f89-1eaab12cfffd">Projetos</a></span><span class="eb-linha">Agentes: <span class="eb-atual" aria-current="page">Alberto</span> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></span></p>
     <h1>Alberto — o relatório rápido</h1>
     <p>Uma leitura só, e um relatório de orientação em oito partes: o veredito, o que está sólido, o que o trabalho tem e não reivindica, as correções, o destino de cada capítulo, os questionamentos, por onde começar, e o alcance da leitura. É o mesmo formato do relatório completo, e o que muda é o quanto se enxerga.</p>
     <p><b>Ele vê menos e não inventa.</b> Encontra o defeito exposto e declarado, e passa ao largo do que exige refazer uma conta dentro de uma tabela. <b>O que ele não aponta não é atestado de que esteja correto</b>, e é assim que o relatório deve ser lido. Quem precisa da leitura completa, com quatro travessias e a conferência de cada apontamento por quem não o escreveu, usa o <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a>, cujos prompts estão em <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao/tree/main/prompts/leituras">prompts/leituras/</a>.</p>
@@ -613,7 +616,7 @@ Ao final me diga quantas suspeitas você examinou, quantas descartou por serem e
       <p><b>Se aparecer <code>No module named 'fitz'</code></b>, falta o PyMuPDF, e isso só acontece com trabalho em PDF. Peça ao assistente que instale.</p>
       <p><b>Se reclamar de pandoc ou de xelatex</b>, é só o relatório em PDF. Peça que rode de novo com <code>--sem-pdf</code>.</p>
       <p><b>Se ele disser que não consegue ler um arquivo que ele mesmo gravou</b>, provavelmente redirecionou a saída com <code>&gt;</code>, e no PowerShell isso grava em UTF-16. Diga que não use <code>&gt;</code>: os programas gravam sozinhos, em UTF-8.</p>
-      <p><b>E se a conversa morrer no meio</b>, com erro do próprio agente, abra outra. Não se perde o caro: a extração e as medidas ficam no disco, e só a leitura se refaz.</p>
+      <p><b>E se a conversa morrer no meio</b>, com erro do próprio agente, abra outra. Não se perde o que já custou: a extração e as medidas ficam no disco, e só a leitura se refaz.</p>
 
       <h3>Vários trabalhos na mesma sessão</h3>
       <p><b>Aqui você não precisa recomeçar a cada trabalho.</b> Terminada uma análise, ponha o próximo arquivo na pasta e peça de novo: o agente trabalha sobre a pasta, e não sobre uma conversa que precisa ficar limpa. A regra da conversa nova vale para a via do chat, onde o que você contou antes vira contexto que a banca não terá.</p>
