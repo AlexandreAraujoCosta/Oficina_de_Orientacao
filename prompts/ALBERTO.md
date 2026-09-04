@@ -12,7 +12,9 @@ O Luis lê o trabalho quatro vezes por caminhos diferentes, confere cada apontam
 por uma voz que não o escreveu, e devolve trinta itens com o endereço de cada peça
 de prova. Custa cerca de um milhão de tokens e quase uma hora.
 
-Alberto lê uma vez. Custa um a três minutos.
+Alberto lê uma vez. No chat isso é uma mensagem só; no agente, em Opus 5, leva de
+41 a 48 minutos, porque ali ele roda os programas, confere na fonte e monta os
+arquivos.
 
 O que a medição de 03/09/2026 diz sobre a diferença, sobre a mesma dissertação:
 
@@ -64,10 +66,16 @@ entre as duas leituras foram 64 em 277.
 
 **A outra metade disto é o custo, e quem escolhe precisa dos dois números.** As
 questões que pedem atenção e detalhe a leitura completa acha, e cobra por elas. Medido
-em 03/09/2026: **no chat esta leitura é uma mensagem e leva de um a três minutos; no
-agente, em Opus 5, custa de 270 a 320 mil tokens e de 41 a 48 minutos, já contando a
-revisão; a completa passa de 1,15 milhão e leva horas.** Os poucos milhares são o
-tamanho deste prompt, e não o da rodada.
+em 03/09/2026: **no agente, em Opus 5, esta leitura custa de 270 a 320 mil tokens e de
+41 a 48 minutos, já contando a revisão; a completa passa de 1,15 milhão e leva horas.**
+Os poucos milhares são o tamanho deste prompt, e não o da rodada.
+
+**No chat o tempo não está medido para este prompt, e vai dito porque havia um número
+aqui que não era dele.** "De um a três minutos" era a rodada do Alberto anterior, a
+conferência de consistência que hoje está em `CONSISTENCIA.md`, e ficou nesta página
+quando o nome mudou de dono. A única rodada de chat cronometrada com este prompt foi
+uma no ChatGPT, e levou mais que isso. O que se pode afirmar é a forma: **no chat é uma
+mensagem só, e o relatório volta na conversa.**
 
 ## Como o prompt entra na conversa, e isso não é detalhe
 
