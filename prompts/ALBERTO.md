@@ -381,8 +381,14 @@ não confere se a contribuição é nova no campo. **No agente ela confere**, pe
 de busca externa descrito adiante, e então cada contribuição vem com a resposta que
 ele deu.
 
-**4. As correções.** Cada uma é um item numerado com um título que diz o defeito e
-onde ele está, e quatro campos:
+**4. As correções.** Cada uma abre com um código, `S1`, `S2`, seguido de um título
+que diz o defeito e onde ele está, e traz quatro campos. **O código não é enfeite de
+numeração:** é por ele que o programa que anota o `.docx` acha o item e o põe na
+margem do parágrafo certo, é por ele que dois itens que dependem da mesma decisão se
+nomeiam um ao outro, e é por ele que quem orienta e quem escreveu dizem de qual ponto
+estão falando. Um item que muda de posição na revisão conserva o código que recebeu.
+
+Os campos são estes:
 
     Tipo         a categoria do trabalho a fazer, e não a ação. Quatro a seis
                  categorias no relatório inteiro. Uma categoria por item
@@ -418,8 +424,10 @@ olhar; a pergunta escrita diz o que ele vai ouvir, e são coisas diferentes.
 segunda-feira de manhã.
 
 **8. As correções que não mudam nenhuma afirmação.** Gralha, concordância, sigla,
-remissão interna, acabamento de referência. **Cada uma vira um item com o seu próprio
-endereço, ainda que sejam quinze do mesmo tipo:** item agrupado fala de meia dúzia de
+remissão interna, acabamento de referência. **Cada uma abre com `SC1`, `SC2`**, pela
+razão da parte 4, e a letra dobrada separa o que se corrige sem decidir nada do que
+exige uma escolha do autor. **Cada uma vira um item com o seu próprio endereço, ainda
+que sejam quinze do mesmo tipo:** item agrupado fala de meia dúzia de
 lugares e é entregue num só, e o autor procura ali o erro que o item descreve sem
 encontrá-lo.
 
