@@ -210,9 +210,24 @@ discussão vai em itálico, com o parágrafo em que está.
 
 **Toda afirmação carrega o endereço, e cada item carrega dois:** o do que ele aponta
 e o do que o contradiz. Item com um endereço só afirma sem mostrar o conflito, e é o
-que a medição chama de justificação rala. Se o trabalho vier com parágrafos
-numerados, use-os; se não, use seção, página, figura ou tabela, e a posição dentro do
-parágrafo.
+que a medição chama de justificação rala.
+
+**Se o trabalho vier com parágrafos numerados, use-os.** É o endereço mais preciso que
+existe aqui, e ele só existe quando um programa numerou a extração antes.
+
+**No chat não há essa numeração, e o endereço é página mais posição.** Não é remendo:
+é o que a rodada de 04/09/2026 fez sozinha e bem, com frases como *p. 85, último
+parágrafo antes da figura*, *p. 74, prosa do segundo parágrafo*, *a nota 22 da mesma
+página*. Diga a página, e dentro dela diga o lugar por uma marca que o olho acha sem
+ler tudo: a figura, a nota, a citação em bloco, o início ou o fim da página, a seção
+que abre. **Duas coisas tornam esse endereço bom:** ele é conferível abrindo o PDF, e
+não custa uma única palavra copiada do trabalho.
+
+**E não troque isso por um trecho copiado, ainda que só para localizar.** A tentação
+existe porque um trecho parece o endereço mais fácil, e a mesma rodada mostra que não
+é preciso: ela devolveu 54 páginas endereçadas e **zero** trechos entre aspas. Copiar
+para localizar tem a mesma aparência de copiar para provar, e quem lê não distingue
+as duas.
 
 **Não invente endereço.** Sem certeza de onde algo está, escreva a forma fraca (*em
 algum ponto da seção 4.3, que não localizei com segurança*). Endereço preciso e falso
