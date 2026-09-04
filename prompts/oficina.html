@@ -961,14 +961,21 @@
     <section id="vias">
       <h2>Duas formas de uso das ferramentas</h2>
       <p class="deck">A mesma ferramenta opera por dois mecanismos, com o mesmo método e com
-      retornos diferentes. <b>O que os separa é o que cada um pode fazer, e não o quanto o
-      modelo sabe.</b> No chat há uma voz só: o assistente lê o trabalho uma vez, não roda
-      programa nenhum, e devolve um relatório na própria conversa. O agente roda comandos, e daí
-      vêm duas coisas que a conversa não alcança: <b>ele gera arquivo</b>, e é por isso que
-      volta um <span class="loc">.docx</span> com os apontamentos na margem e o relatório em
-      PDF; e <b>ele abre subagentes</b>, isto é, várias vozes lendo em paralelo, que é o que
-      permite conferir cada apontamento por quem não o escreveu. <b>Essa conferência é a etapa
-      em que de 10% a 31% dos achados caem</b>, e ela não existe no chat.</p>
+      retornos diferentes. <b>O que os separa é uma voz contra várias, e não rodar programa ou
+      não rodar.</b> Isto foi medido em 04/09/2026 e corrigiu o que esta página dizia antes:
+      numa leitura no chat do Claude, em Opus, <b>o assistente executou 25 comandos, abriu nove
+      arquivos e pesquisou na web</b>, extraindo o texto do PDF com marcação de página, abrindo
+      as oito figuras e rodando conferências de contagem e de referências. <b>Chat que roda
+      programa existe</b>, e depende do assistente: na rodada equivalente no ChatGPT não houve
+      nada disso.</p>
+
+      <p class="deck"><b>O que nenhuma conversa dá são três coisas.</b> Não devolve arquivo, de
+      modo que não há <span class="loc">.docx</span> com os apontamentos na margem. Não traz os
+      localizadores <span class="loc">[P123]</span>, porque estes vêm de uma extração numerada
+      que se guarda entre passos, e o que sobra é citar por página. E <b>não há segunda voz</b>:
+      a conferência de cada apontamento por quem não o escreveu exige sessões separadas, e uma
+      conversa é uma sessão só, mesmo quando executa comandos. <b>Essa conferência é a etapa em
+      que de 10% a 31% dos achados caem.</b></p>
 
       <p class="deck">Daí a divisão entre as ferramentas: o
       <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a>
@@ -1315,6 +1322,30 @@
         </div>
 
         <div class="ledger-item">
+          <h4><span class="mark m-yes">medido</span> O que a leitura rápida faz no chat, em Opus</h4>
+          <p>Em 04/09/2026, o prompt rápido rodou no chat do Claude, em Opus 5 com esforço alto,
+          sobre a mesma tese de 109 páginas, com o prompt entrando como texto no campo e a tese
+          anexada em PDF. <b>Levou 15 minutos e 52 segundos</b>, e devolveu 7.139 palavras, 23
+          correções, 16 itens de anexo, seis pontos fortes e quatro questionamentos, citando 54
+          páginas distintas e <b>zero trechos entre aspas</b>. Para comparar, no agente e em Opus
+          a mesma leitura deu 7.723 palavras, 20 correções e 226 endereços de parágrafo.</p>
+          <p style="margin-top:12px"><b>Contar itens engana, e este par mostra por quê.</b> Os 23
+          contra 20 não são cobertura maior: onde o agente escreveu um item sobre a figura da
+          p. 85 (o total do título diverge do total da nota, e a prosa arredonda para baixo o
+          que a barra mostra), o chat escreveu dois. Conferidos na fonte, os dois estão certos:
+          a figura traz 1.287 ocasiões e a nota 22 traz 1.308, e a barra da quinta-feira ou
+          depois marca 2,2% onde a prosa diz menos de dois por cento.</p>
+          <p style="margin-top:12px"><b>Onde ele foi pior:</b> a conferência mecânica achou três
+          ocorrências de vocabulário de trabalho no relatório do chat, termos do método que não
+          devem chegar ao autor, contra nenhuma no do agente. <b>E onde foi bem:</b> registrou
+          uma hipótese própria que caiu, com o motivo, que é o que a disciplina pede e quase
+          nunca aparece.</p>
+          <p style="margin-top:12px"><b>O que não se mediu:</b> o consumo em tokens. O chat não
+          o expõe, e por isso não há aqui comparação de custo entre as duas vias, apenas de
+          relógio e de resultado.</p>
+        </div>
+
+        <div class="ledger-item">
           <h4><span class="mark m-no">indício</span> Se a forma como o prompt entra na conversa derruba a trava da transcrição</h4>
           <p>Colado inteiro, um prompt longo costuma virar anexo. Esta página já registra a medição de que, <b>como anexo, o assistente descumpre justamente as regras que mandam recusar alguma coisa</b>. Em 03/09/2026 apareceu um indício de que isso alcança a mais antiga das travas: de duas rodadas da leitura rápida em chat, <b>a que recebeu o prompt como texto devolveu zero trechos entre aspas, e a que o recebeu como conteúdo colado devolveu 84</b>.</p>
           <p style="margin-top:12px"><b>Indício e não medida, e o confundidor tem nome:</b> as duas rodadas foram em assistentes diferentes, de modo que o modelo variou junto com a forma de entrega. E o modelo pesa sozinho: no agente, com o prompt entrando do mesmo jeito nos dois, um modelo deu zero e o outro 122. <b>O que decidiria é uma variável só:</b> o mesmo assistente, a mesma conta, o mesmo trabalho, o prompt entrando uma vez como texto e outra como colado.</p>
@@ -1337,7 +1368,7 @@
 
         <div class="ledger-item">
           <h4><span class="mark m-yes">medido</span> O que a leitura rápida acha e o que ela deixa passar</h4>
-          <p>As duas leituras rodaram sobre os mesmos dois trabalhos em 03/09/2026, a rápida às cegas. <b>Numa tese com sete seções trazendo apenas um marcador de trabalho por fazer, as duas deram o mesmo veredito pela mesma razão, e a contagem certa foi a da rápida:</b> sete seções, e não oito. Endereços comuns: 123 de 358. <b>Numa dissertação em que as três contas erradas estavam dentro de tabelas de resultado, os comuns caíram para 64 de 277</b>, e a completa abriu 199 parágrafos contra 106.</p>
+          <p>As duas leituras rodaram sobre os mesmos dois trabalhos em 03/09/2026, a rápida às cegas. <b>Numa tese com seções por escrever, as duas deram o mesmo veredito pela mesma razão, e divergiram na contagem: sete, pela rápida, e oito, pela completa.</b> Endereços comuns: 123 de 358. <b>Esta página deu a rápida por certa, e uma conferência na fonte em 04/09/2026 mostrou que as duas contavam coisas diferentes e nenhuma errava.</b> Sete parágrafos trazem o dizer <span class="loc">[TO DO]</span> e são sete seções; as anunciadas no sumário e vazias são oito, porque a seção 5.1 traz, no lugar do marcador, uma nota da autora sobre o que ainda escreverá. <b>A lição é sobre a conferência e não sobre as leituras:</b> comparar dois números sem reenunciar o que cada um conta produz um vencedor onde não havia disputa. <b>Numa dissertação em que as três contas erradas estavam dentro de tabelas de resultado, os comuns caíram para 64 de 277</b>, e a completa abriu 199 parágrafos contra 106.</p>
           <p style="margin-top:12px"><b>A forma do que ela deixa passar é sempre a mesma:</b> o item que exige refazer a conta dentro de uma tabela e comparar o que a tabela publica com o que a prosa afirma dela. E há uma classe que ela não produz sozinha, a de saber se a contribuição já está publicada, que exige sair do trabalho.</p>
           <p style="margin-top:12px"><b>E a via do chat entrega o veredito e perde a conferência.</b> Rodada no ChatGPT sobre a mesma tese, a leitura rápida acertou o núcleo em nove correções e devolveu <b>zero localizadores</b>, porque ali não há extração numerada. Serve para decidir o que fazer; não serve para o autor corrigir sem procurar cada ponto no arquivo.</p>
         </div>
