@@ -85,11 +85,47 @@
   a:hover, a:focus-visible { color:var(--ink); }
   :focus-visible { outline:2px solid var(--medida); outline-offset:2px; }
 
+  /* --- escolha de via, no desenho das paginas do Alberto e do Luis --- */
+  .vias-titulo { font-family: var(--serif); font-size: 19px; margin: 2.2rem 0 12px; }
+  .vias-grade { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+                margin-bottom: 10px; }
+  @media (max-width: 720px) { .vias-grade { grid-template-columns: 1fr; } }
+  .via-bt { display: block; text-align: left; font: inherit; color: inherit;
+            background: var(--paper); border: 1px solid var(--rule-firm);
+            border-radius: 4px; padding: 16px 16px 14px; cursor: pointer; }
+  .via-bt:hover, .via-bt:focus-visible { border-color: var(--ink-soft); }
+  .via-bt[aria-pressed="true"] { background: var(--paper-sunk); border-color: var(--ink-soft); }
+  .via-nome { display: block; font-family: var(--serif); font-size: 23px;
+              line-height: 1.15; margin-bottom: 8px; }
+  .via-txt { display: block; font-size: 14.5px; line-height: 1.5; margin-bottom: 8px; }
+  .via-volta { display: block; font-size: 13.5px; color: var(--ink-faint); line-height: 1.45; }
+  .via-guia { margin: 8px 0 26px; }
+  .via-guia h3 { font-family: var(--serif); font-size: 17px; margin: 22px 0 6px; }
+  .vias-nota { font-size: 14px; color: var(--ink-faint); margin: 14px 0 0;
+               padding-top: 12px; border-top: 1px solid var(--rule); }
+  .pedido { border: 1px solid var(--rule); border-radius: 4px; padding: 14px 16px;
+            margin: 16px 0; }
+  .pedido-rot { font-size: 13px; color: var(--ink-faint); margin: 0 0 8px; }
+  .pedido-txt { font-family: var(--mono); font-size: 13px; line-height: 1.5;
+                white-space: pre-wrap; margin: 0; }
+  .pedido { position: relative; padding-right: 6.5rem; }
+  .cmd { position: relative; border: 1px solid var(--rule); border-radius: 4px;
+         background: var(--paper-sunk); padding: .7rem 6.5rem .7rem .9rem;
+         margin: .55rem 0 .9rem; }
+  .cmd pre { font-family: var(--mono); font-size: 13px; line-height: 1.5;
+             white-space: pre-wrap; word-break: break-all; margin: 0; }
+  .cmd button.copiar, .pedido button.copiar { position: absolute; top: .5rem; right: .5rem; }
+  .feedback { border-left: 3px solid var(--conforme); background: var(--paper-sunk);
+    padding: .8rem 1.1rem; border-radius: 0 3px 3px 0;
+    margin: 1.4rem 0 0; max-width: var(--measure);
+    font-size: .93rem; color: var(--ink-soft); }
+  .feedback p { margin: 0; }
+  .feedback b { color: var(--ink); }
+
   /* --- faixa de identificacao e navegacao entre as paginas da oficina --- */
   .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
   .eyebrow a:hover, .eyebrow a:focus-visible { opacity: .7; }
   .eyebrow .eb-atual { opacity: .55; }
-  /* O nome da pagina respira entre a faixa e o texto que a descreve. */
   .eyebrow { margin: 0 0 2.4rem; }
   .top h1, header h1, .wrap > h1 { margin-bottom: 1.3rem; }
 </style>
@@ -100,39 +136,153 @@
     <h1>Simulador de banca</h1>
     <p class="convite">Você consegue responder ao que vão te perguntar?</p>
     <p>Uma sessão de arguição com dois examinadores e o orientador presidindo, que é a composição de uma banca real. Eles ouvem as suas respostas e ouvem uns aos outros. Não produz relatório: produz a experiência de ser interpelado, e no fim a lista do que você não conseguiu responder.</p>
-    <p class="quando">Rode depois da pré-banca, e antes de marcar a defesa. A pré-banca indica qual das lentes o examinador interno deve usar.</p>
+    <p class="quando">Rode depois do relatório do Luis, e antes de marcar a defesa. É o relatório que indica qual das lentes o examinador interno deve usar.</p>
     <div class="experimental">
       <p>Estes assistentes foram desenvolvidos pelo Prof. Alexandre Araújo Costa prioritariamente para uso dos seus estudantes e orientandos, na graduação e na pós-graduação da Faculdade de Direito da UnB. A princípio podem servir a outras abordagens, especialmente no direito e nas demais ciências sociais, mas só testes mais amplos permitirão medir a qualidade das respostas, nessas áreas e fora delas.</p>
       <p>Por isso a abordagem é experimental, está em fase de testes, e o retorno importa. Quem quiser relatar um resultado, apontar um erro ou sugerir um ajuste pode usar <a href="https://forms.gle/BHhKZSQiRq1JUgsE8">este formulário</a>, feito para colher resultados e comentários.</p>
     </div>
   </header>
 
+    <div class="feedback">
+      <p>Trata-se de um protótipo, ainda em fase de testes, e todo feedback (dirigido a
+      <a href="mailto:alexandrearcos@unb.br">alexandrearcos@unb.br</a>) será muito útil
+      para aperfeiçoá-lo. <b>Se você usar o o simulador de banca fora do contexto das disciplinas</b>,
+      envie um relato por
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdziEHALH04stCpbVCHqDODK072YKzRRWCaN4ZhsiHojYrKmg/viewform?usp=dialog">este
+      formulário</a>: é com esses relatos que dá para saber se ele funciona fora da
+      situação para a qual foi escrito.</p>
+    </div>
+
   <section class="primeira">
-    <h2>Em que isto difere da pré-banca</h2>
-    <p>São ferramentas opostas de propósito, e usar uma no lugar da outra desperdiça as duas.</p>
+    <h2>Em que isto difere de uma análise</h2>
+    <p>São operações opostas de propósito, e usar uma no lugar da outra desperdiça as duas.</p>
     <div class="contraste">
-      <p><strong>Na pré-banca, o isolamento é o mecanismo.</strong> Cada leitura roda sozinha, sem saber o que as outras acharam, porque o que se quer ali é cobertura: cinco ângulos que não se contaminam encontram mais do que cinco repetições do mesmo ângulo.</p>
+      <p><strong>Na análise, o isolamento é o mecanismo.</strong> Os passos rodam separados, e a conferência é feita por quem não escreveu os apontamentos, porque o que se quer ali é cobertura e depois filtragem: um leitor que já formou opinião confirma a si mesmo.</p>
       <p><strong>Aqui, o compartilhamento é o mecanismo.</strong> Numa banca de verdade os examinadores se ouvem, e isso é estrutura, não ruído. Um pega carona no que o outro levantou, discorda do colega na frente do candidato, e às vezes defende o trabalho contra ele. A resposta que você deu ao primeiro passa a valer para todos, e uma resposta ruim contamina o resto da sessão. É essa dinâmica que você precisa treinar, e ela não existe em leituras isoladas.</p>
       <p><strong>E uma coisa que vale saber antes de ler o que sair daqui.</strong> Examinador só pergunta duramente a quem ele acha que pode responder: apertar custa tempo e expõe quem pergunta, e ninguém gasta uma rodada nisso com um trabalho que já desenganou. Uma sessão dura, portanto, não é má notícia. A má notícia é o examinador que se declara satisfeito sem ter apertado em lugar nenhum e sem apontar nada específico do texto, porque isso pode significar que ele não vê o que perguntar. Se o simulador lhe der uma arguição difícil, leia como o que é: alguém achou que havia com quem discutir.</p>
 
-      <p><strong>Por isso a banca aqui é pequena.</strong> Dois examinadores, não cinco. Cobertura é trabalho da pré-banca, e repeti-la aqui alongaria a sessão sem acrescentar: num teste que fizemos, três de cinco examinadores fixaram a avaliação já na primeira pergunta, e os demais produziram confirmação em vez de informação. O que decide numa arguição é a dinâmica, e ela cabe em seis perguntas.</p>
+      <p><strong>Por isso a banca aqui é pequena.</strong> Dois examinadores, não cinco. Cobertura é trabalho da análise, e repeti-la aqui alongaria a sessão sem acrescentar: num teste que fizemos, três de cinco examinadores fixaram a avaliação já na primeira pergunta, e os demais produziram confirmação em vez de informação. O que decide numa arguição é a dinâmica, e ela cabe em seis perguntas.</p>
     </div>
-    <p>Por isso o simulador roda numa conversa só, do começo ao fim, e por isso ele vem depois: o ideal é chegar aqui já sabendo o que a pré-banca encontrou.</p>
+    <p>Por isso o simulador roda numa conversa só, do começo ao fim, e por isso ele vem depois: o ideal é chegar aqui com o relatório em mãos.</p>
+    <p>O relatório do Luis passa por uma conferência que abre cada ponto e derruba de 10% a 31% do que as leituras levantam. O que chega aqui, portanto, já foi filtrado, e a lente indicada para o examinador interno sai do que sobreviveu.</p>
   </section>
 
-  <section>
-    <h2>Como rodar</h2>
-    <ol class="passos">
-      <li><strong>Anexe o trabalho e cole o prompt.</strong> Uma conversa só, do começo ao fim da sessão.</li>
-      <li><strong>Responda como responderia na sala</strong>, sem consultar o texto a cada pergunta. Se você precisa procurar onde está a resposta, isso já é informação.</li>
-      <li><strong>"Não sei" é resposta válida</strong>, e quase sempre melhor que improvisar. Um examinador perdoa o que você admite e persegue o que você inventa.</li>
-      <li><strong>Não interrompa para corrigir o simulador.</strong> Se ele entendeu errado alguma coisa, isso é dado: um leitor competente entendeu errado, e a culpa disso costuma ser do texto.</li>
-      <li><strong>Vá até o fim</strong> e peça o fechamento. É lá que sai a lista do que precisa ser escrito.</li>
-    </ol>
-    <p class="aviso"><strong>O que este simulador não mede.</strong> Ele não mede você. Uma sessão pode correr bem porque você fala bem, e o texto continuar indefensável, porque a banca lê o texto e não a conversa. Quando a sua resposta for boa e não estiver escrita em lugar nenhum, o examinador registra isso como compromisso de escrita, não como ponto ganho.</p>
-  </section>
+      <section>
+      <h2>Como rodar</h2>
 
-  <section>
+      <p class="vias-titulo">Escolha a via pela qual você vai rodar a sessão, para ter o
+      roteiro adequado a ela.</p>
+
+      <div class="vias-grade">
+        <button type="button" class="via-bt" data-via="chat">
+          <span class="via-nome">Chat</span>
+          <span class="via-txt">É a via natural desta ferramenta, porque a sessão é uma
+          conversa. Você anexa o trabalho, cola o prompt e responde.</span>
+          <span class="via-volta">A sessão fica na conversa, e o fechamento também. Você
+          copia o que quiser guardar.</span>
+        </button>
+
+        <button type="button" class="via-bt" data-via="agente">
+          <span class="via-nome">Agente</span>
+          <span class="via-txt">Mesma sessão, com duas diferenças: os examinadores leem o
+          trabalho inteiro do disco, e o fechamento sai gravado em arquivo. Serve o Claude
+          Code, com assinatura, e serve o VS&nbsp;Code com a sua própria chave de API.</span>
+          <span class="via-volta">Volta um arquivo com a lista do que precisa ser escrito, e
+          com as perguntas que ficaram sem resposta.</span>
+        </button>
+      </div>
+
+      <p class="vias-nota">A escolha aqui pesa menos do que nas outras ferramentas: o que a
+      sessão produz é a conversa, e ela acontece igual nas duas. O que as vias com programas
+      acrescentam é acesso ao arquivo inteiro e um fechamento gravado.</p>
+
+      <div class="via-guia" id="guia-chat" hidden>
+        <h3>Pelo chat, numa conversa só</h3>
+        <ol class="passos">
+          <li><strong>Abra uma janela nova</strong> e <strong>anexe o trabalho</strong>.
+          <strong>Prefira o PDF ao .docx:</strong> anexado no chat, o PDF entrega as páginas
+          como imagem, e os examinadores enxergam o conteúdo dos quadros e dos gráficos. Num
+          .docx eles leem só as legendas, e a pergunta sobre a figura não chega a
+          existir.</li>
+          <li><strong>Cole o prompt</strong>, que está no fim desta página, e comece.</li>
+          <li><strong>Uma conversa só</strong>, do começo ao fim da sessão. Recomeçar noutra
+          janela apaga o que os examinadores já sabem de você.</li>
+        </ol>
+      </div>
+
+      <div class="via-guia" id="guia-agente" hidden>
+        <h3>Por um agente, sobre a pasta do trabalho</h3>
+        <p>Serve quando você quer que os examinadores leiam o trabalho inteiro, e não só o que
+        coube num anexo, e quando quer o fechamento gravado em arquivo. Dois agentes servem, e
+        o que muda entre eles é como se paga: o <b>Claude Code</b> exige assinatura da Claude, e
+        o <b>VS Code</b> com a extensão <b>GitHub Copilot</b> aceita chave de API própria, de
+        Anthropic, OpenAI, Gemini ou OpenRouter, cobrada pelo provedor.</p>
+        <ol class="passos">
+          <li><strong>Instale o agente.</strong> O Claude Code pelo instalador do site da
+          Anthropic, entrando com a sua conta. O VS Code pelo site, e a extensão GitHub Copilot
+          pelo painel de extensões, ligando a sua chave no seletor de modelos, em <em>Manage
+          Models</em> ou <em>Add model provider</em>.</li>
+          <li><strong>Traga a oficina:</strong> no Claude Code, o comando abaixo num terminal;
+          no VS Code, <strong>Clonar Repositório Git…</strong> na tela inicial com o mesmo
+          endereço. Ponha o trabalho na pasta que ele criar.
+            <div class="cmd">
+              <button class="copiar" type="button" data-alvo="c-clone">Copiar</button>
+              <pre id="c-clone">git clone https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</pre>
+            </div>
+          </li>
+          <li><strong>Abra o agente nessa pasta.</strong> No Claude Code, entrando nela e
+          chamando o programa. No VS Code, abrindo o chat com <strong>Ctrl+Alt+I</strong> e
+          pondo em <strong>modo agente</strong>, que é o que tem terminal.
+            <div class="cmd">
+              <button class="copiar" type="button" data-alvo="c-abrir">Copiar</button>
+              <pre id="c-abrir">cd Oficina_de_Orientacao
+claude</pre>
+            </div>
+          </li>
+          <li><strong>Escolha o melhor modelo disponível.</strong> Examinador que não entendeu
+          o trabalho pergunta o que não interessa.</li>
+          <li><strong>Comece a sessão</strong> com o pedido abaixo. No VS Code, troque a
+          primeira linha por <em>Leia o AGENTS.md nesta pasta</em>.</li>
+        </ol>
+        <div class="pedido">
+          <button class="copiar" type="button" data-alvo="c-pedido">Copiar</button>
+          <p class="pedido-rot">Cole isto na conversa:</p>
+          <pre class="pedido-txt" id="c-pedido">Leia prompts/BANCA.md nesta pasta e conduza a sessao comigo,
+sobre o trabalho que esta na pasta.
+
+Leia o trabalho inteiro antes de comecar, e nao me pergunte nada
+antes disso.
+
+Ao fim, grave o fechamento em banca/fechamento.md: a lista do que
+preciso escrever, e as perguntas que ficaram sem resposta.</pre>
+        </div>
+        <h3>Se o relatório do Luis existir, use-o</h3>
+        <p>Se você já rodou o <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> sobre este trabalho, ponha o
+        relatório na mesma pasta e diga isso no pedido. Os examinadores entram sabendo onde o
+        texto é frágil, e a sessão fica mais dura e mais útil.</p>
+      </div>
+
+      <h3>Como responder, e isto vale nas duas vias</h3>
+      <ol class="passos">
+        <li><strong>Responda como responderia na sala</strong>, sem consultar o texto a cada
+        pergunta. Se você precisa procurar onde está a resposta, isso já é informação.</li>
+        <li><strong>"Não sei" é resposta válida</strong>, e quase sempre melhor que improvisar.
+        Um examinador perdoa o que você admite e persegue o que você inventa.</li>
+        <li><strong>Não interrompa para corrigir o simulador.</strong> Se ele entendeu errado
+        alguma coisa, isso é dado: um leitor competente entendeu errado, e a culpa disso
+        costuma ser do texto.</li>
+        <li><strong>Vá até o fim</strong> e peça o fechamento. É lá que sai a lista do que
+        precisa ser escrito.</li>
+      </ol>
+
+      <p class="aviso"><strong>O que este simulador não mede.</strong> Ele não mede você. Uma
+      sessão pode correr bem porque você fala bem, e o texto continuar indefensável, porque a
+      banca lê o texto e não a conversa. Quando a sua resposta for boa e não estiver escrita em
+      lugar nenhum, o examinador registra isso como compromisso de escrita, e não como ponto
+      ganho.</p>
+    </section>
+
+    <section>
     <h2>As regras que os examinadores seguem</h2>
     <dl class="regras">
       <dt>Entram caridosos, e isso não é gentileza</dt>
@@ -150,6 +300,21 @@
       <dt>Eles se ouvem</dt>
       <dd>Um examinador retoma o que o colega levantou, acrescenta, ou discorda dele abertamente. Discordância entre eles é esperada e aparece na sessão.</dd>
 
+      <dt>Devolvem o que você disse, avisando que podem ter distorcido</dt>
+      <dd>Ao resumir a sua resposta, o examinador avisa que a reformulação dele pode ter deturpado algo e pede que você <strong>confira</strong>, não que aprove. É o movimento mais banal de uma sala de defesa e o que mais discrimina: quem domina o trabalho corrige, às vezes com irritação, e a irritação é ótimo sinal; quem decorou aprova sem examinar, e isso já é o diagnóstico. Nesse caso o examinador diz o que acabou de acontecer.</dd>
+
+      <dt>Aceitam provisoriamente, e dizem que é provisório</dt>
+      <dd>"Vamos levar isso a sério por um minuto e ver aonde chega." O examinador conduz pelas consequências até a ideia encontrar onde quebra, e o giro vem de você, que ensina mais que a objeção antecipada. A provisoriedade é declarada no momento em que se aceita, nunca formulada como aprovação: a sessão pode terminar ali, e o que fica registrado não pode ser a banca endossando um desenho ruim.</dd>
+
+      <dt>Nomeiam o padrão, e não o turno</dt>
+      <dd>Se você desvia a cada rodada, repete com outras palavras o que já disse, ou trata toda dúvida como hostilidade, o examinador não corrige turno a turno: mostra a sequência ("perguntei X, você respondeu Y; pedi Z, você mudou para W") e diz o que ela significa. Quem não consegue ouvir uma objeção também não corrige o rumo quando os dados o contrariam, e os dados contrariam em algum ponto. É a informação mais útil da sessão, e nenhuma banca real a entrega.</dd>
+
+      <dt>Nunca inventam para testar</dt>
+      <dd>Nenhum examinador afirma o que sabe ser falso, finge concordar para derrubar depois, ou planta erro para ver a reação. A pressão se faz sem nenhuma mentira, e um simulador que mente ensina você a desconfiar do exercício.</dd>
+
+      <dt>Não repetem as mesmas palavras</dt>
+      <dd>Se você rodar a simulação outra vez, as perguntas vêm com outra redação, outra ordem e outros exemplos. O que permanece constante são os critérios, nunca a frase: uma pergunta já ouvida com as mesmas palavras perde a força de fazer pensar e vira ritual.</dd>
+
       <dt>Concedem quando você tem razão</dt>
       <dd>Se você mostrar que a objeção não se sustenta, o examinador reconhece e diz o que muda por causa disso. Banca que nunca concede está encenando rigor.</dd>
 
@@ -162,8 +327,8 @@
       <dt>A pergunta é a sua janela</dt>
       <dd>Enquanto ele pergunta, a avaliação ainda pode se mover, e ela se move de quatro maneiras. <strong>Complementar:</strong> você mostra o que ele não viu, indicando onde está no trabalho. <strong>Retificar:</strong> você mostra que ele leu errado. <strong>Prometer reavaliação:</strong> você se compromete a refazer, o que não muda o que está escrito e muda o que estará. <strong>Demonstrar alcance:</strong> a pergunta ia além do texto, não havia lacuna a suprir, e a avaliação sobe assim mesmo, porque você mostrou que pensa além do que escreveu.</dd>
 
-      <dt>Ele diz qual das três aconteceu</dt>
-      <dd>Ao fechar cada ponto, o examinador declara se você complementou, retificou, prometeu, ou se nada aconteceu e a avaliação ficou como estava. Nesse último caso ele diz o que teria movido. É a informação mais útil da sessão inteira, e nenhuma banca real a entrega.</dd>
+      <dt>Ele diz qual das quatro aconteceu</dt>
+      <dd>Ao fechar cada ponto, o examinador declara se você complementou, retificou, prometeu, demonstrou alcance, ou se nada aconteceu e a avaliação ficou como estava. Nesse último caso ele diz o que teria movido. É a informação mais útil da sessão inteira, e nenhuma banca real a entrega.</dd>
     </dl>
   </section>
 
@@ -176,7 +341,7 @@
 
   <section>
     <h2>Arguição por um examinador só</h2>
-    <p>Para treinar um flanco específico, mais fundo e sem revezamento. Útil quando a pré-banca já apontou onde está o problema.</p>
+    <p>Para treinar um flanco específico, mais fundo e sem revezamento. Útil quando o relatório já apontou onde está o problema.</p>
     <div class="barra"><span class="lbl">Prompt · escolha a lente na primeira linha</span><button class="copiar" type="button" data-alvo="pu">Copiar</button></div>
     <textarea class="prompt curta" id="pu" readonly spellcheck="false"></textarea>
   </section>
@@ -196,12 +361,34 @@
 
 Leia o trabalho antes de começar. Você conhece apenas o que está nele.
 
-LENTE DO EXAMINADOR INTERNO: [preencha com uma destas, conforme a pré-banca indicou: desenho da pesquisa | os números | o argumento | originalidade da tese | dogmática | filosófica | ciência política]
+A APRESENTAÇÃO, SE ELA VIER JUNTO.
 
-A BANCA. Três vozes, e você as identifica sempre pelo nome antes de falar. É a composição de uma banca real, e não um painel de cobertura: quem cobre tudo é a pré-banca, que roda antes desta sessão.
+Pode vir, antes do trabalho, o texto da apresentação que eu farei na defesa: o roteiro, o script dos slides, ou as próprias falas. Se vier, leia-a **contra o trabalho** antes de começar, e anote em silêncio três coisas: onde ela afirma mais do que o texto sustenta, onde ela deixa de fora algo que o trabalho tem e que a defende, e onde ela diz outra coisa.
+
+A sessão então começa como uma defesa real começa: eu já apresentei, e o presidente abre a arguição. Os examinadores podem ancorar a pergunta no que eu disse, e essa é a pergunta de maior rendimento de uma banca de verdade: *"na apresentação o senhor afirmou X; o trabalho, na seção tal, diz Y"*. Ela não existe sem a apresentação, e é a que mais desconcerta, porque a divergência é do candidato consigo mesmo.
+
+**Não argua contra a apresentação no lugar do trabalho.** O objeto continua sendo o trabalho; a apresentação é prova do que eu acho que ele diz. Um examinador que passa a sessão corrigindo slides trocou a defesa por uma revisão de slides.
+
+**E no fechamento, um bloco à parte sobre ela**, separado do que se diz do trabalho, e escrito por causalidade: **diga que perguntas a apresentação causou.** Para cada pergunta da sessão que nasceu do que eu disse e não do que o trabalho traz, aponte a frase da apresentação que a abriu. Aponte também o contrário, que ninguém percebe: as passagens que **evitaram** perguntas, porque anteciparam a objeção ou declararam o limite antes que alguém cobrasse. E o que a apresentação prometeu e mandou os examinadores procurar no trabalho sem encontrar.
+
+A apresentação dirige a atenção da banca, e é o único instrumento que o candidato controla inteiramente no dia. Uma frase que afirma mais do que o texto sustenta cria uma pergunta que não existiria; uma que declara o limite desarma outra. Este bloco é acionável numa tarde, e é o único achado da sessão que ainda dá tempo de aplicar.
+
+O RELATÓRIO, SE ELE VIER JUNTO, CALIBRA E NÃO PAUTA. Esta é a regra mais importante deste prompt, porque desobedecê-la destrói a simulação sem que nada pareça errado.
+
+Pode vir anexado um relatório de análise do mesmo trabalho. Ele serve a três coisas, e a nenhuma outra. Diz qual lente o examinador interno usa. Diz o que já foi conferido e caiu, e sobre isso ninguém argui, porque arguir achado refutado ensina o candidato a se defender de uma acusação que não virá. E diz onde o próprio relatório se declara incerto, que é onde a pergunta rende.
+
+O que ele NÃO faz é dar as perguntas. As perguntas vêm do trabalho, e você as constrói lendo. Se o relatório trouxer perguntas prováveis já redigidas, elas são o que você **evita repetir**, e não o que você pergunta: repeti-las transforma a arguição em ensaio de gabarito, e o candidato treina a resposta que ele já leu em vez de pensar.
+
+E há uma divisão que você mantém sem exceção: **o examinador externo não recebe o relatório.** Só o interno o consultou. O externo chega ao trabalho cru, e é dele que vem a chance de aparecer o que a análise não viu, que é a razão de a sessão existir. Se você se pegar fazendo o externo repetir um item do relatório, pare e volte ao texto.
+
+Se nenhum relatório vier, nada disso se aplica e você conduz a sessão só com o trabalho.
+
+LENTE DO EXAMINADOR INTERNO: [preencha com uma destas, conforme o relatório indicou: desenho da pesquisa | os números | o argumento | originalidade da tese | dogmática | filosófica | ciência política]
+
+A BANCA. Três vozes, e você as identifica sempre pelo nome antes de falar. É a composição de uma banca real, e não um painel de cobertura: quem cobre tudo é a análise, que roda antes desta sessão.
 
 - ORIENTADOR: preside. Abre, dá a palavra, corta divagação, encerra. **Não argui o mérito em público**, e é ele quem fala na deliberação fechada, depois que eu me retiro.
-- EXAMINADOR INTERNO: argui pela lente indicada no alto deste prompt, que a pré-banca escolheu por ser a que produziu o achado que mais ameaça uma conclusão do trabalho.
+- EXAMINADOR INTERNO: argui pela lente indicada no alto deste prompt, escolhida por ser a que produziu o achado que mais ameaça uma conclusão do trabalho.
 - EXAMINADOR EXTERNO: não seguiu a pesquisa, não tem apego e vai atrás do ponto em que a construção não se sustenta. A dureza dele não está no tom, que é o mesmo de todos, e sim em quatro coisas: escolhe os pontos que mais ameaçam a conclusão central, insiste mais rodadas antes de fixar a avaliação, concede menos quando eu retifico, e é dele a pergunta mais dura da rodada final. Ele também é o que menos conhece o campo específico, e por isso pergunta o que um leitor competente de fora perguntaria.
 
 Cada um dos dois examinadores faz observações gerais e três perguntas centrais nas rodadas individuais, mais uma pergunta na rodada final: oito no total. Reformular, estreitar ou insistir na mesma pergunta não conta como pergunta nova. O orientador não pergunta, e não existe um quarto membro.
@@ -244,7 +431,7 @@ Pelo menos duas das três perguntas de cada examinador devem ser desta família,
 - **Métodos alternativos.** Por que este desenho e não aquele? O que o outro veria que este não vê?
 - **Limites da conclusão.** Onde a frase final é mais larga do que a evidência que a sustenta.
 
-RESTRIÇÃO, a correção irmã da remoção. A maioria das objeções sobre limite da conclusão não pede pesquisa nova nem corte de seção: pede **estreitar a frase** até ela caber no que foi medido. Trocar "o ambiente virtual é mais eficiente" por "o ambiente virtual apresenta tempos menores nesta base, sem que se tenha isolado a causa" custa uma linha e resolve a objeção inteira. Antes de tratar qualquer objeção de conclusão como grave, perguntem se restringir resolve.
+RESTRIÇÃO, o reparo irmão da remoção. A maioria das objeções sobre limite da conclusão não pede pesquisa nova nem corte de seção: pede **estreitar a frase** até ela caber no que foi medido. Trocar "o ambiente virtual é mais eficiente" por "o ambiente virtual apresenta tempos menores nesta base, sem que se tenha isolado a causa" custa uma linha e resolve a objeção inteira. Antes de tratar qualquer objeção de conclusão como grave, perguntem se restringir resolve.
 
 O QUE ESSAS PERGUNTAS MOVEM. Uma pergunta que vai além do texto não revela lacuna: o trabalho nunca se propôs a respondê-la, e por isso **não há o que prometer**. Ela se responde pensando na hora, e o que ela move é a estimativa do examinador sobre quem escreveu. Registrem isso quando ocorrer, como saída (d): não houve complementação, retificação nem promessa, e ainda assim a avaliação subiu. É o caminho mais curto para uma sessão elogiosa, e o único que não depende de mexer no texto.
 
@@ -260,45 +447,35 @@ COMO O VEREDITO SE FORMA, e esta é a instrução que mais corrige uma banca sim
 
 A primeira: **há mérito suficiente?** Existe contribuição própria identificável, alguma coisa que este trabalho estabelece e a literatura que ele cita não estabelecia? Se existe, o trabalho é aprovado, e os defeitos, mesmo sérios, mesmo vários, determinam apenas o que sai, o que se declara e o que se conserta na janela. Bancas reais aprovam trabalhos ruins que têm mérito, e é assim que deve ser: mais valem os méritos que os defeitos, e um defeito pontual não anula uma contribuição.
 
-**O limiar é baixo e preciso: uma contribuição basta, ainda que estreita.** Não se pergunta se o trabalho inteiro é original, e sim se há ao menos uma coisa ali que a literatura citada no próprio trabalho não estabelecia, ou que faz ver de outro jeito alguma coisa. Uma análise que a literatura citada não traz, sobre um recorte específico, já justifica o trabalho, mesmo sendo uma parte dele. Suprir lacuna conta. Achada essa uma coisa, **nomeiem-na em voz alta e com precisão**, na forma "o trabalho faz X, e a literatura que ele próprio cita não faz", ancorada na revisão de literatura do próprio texto. Não digam "ninguém tinha feito": vocês não têm acesso à literatura e não podem sustentar isso. Registrem expressamente que a originalidade além do que o texto cita não é verificável nesta sessão. Feito isso, sigam adiante: dali em diante as fragilidades são apontadas para correção e aprimoramento, não para pesar contra a aprovação. Trabalho original com fragilidades variadas é aprovado, e as fragilidades entram na lista de correções.
+**O limiar é baixo e preciso: uma contribuição basta, ainda que estreita.** Não se pergunta se o trabalho inteiro é original, e sim se há ao menos uma coisa ali que a literatura citada no próprio trabalho não estabelecia, ou que faz ver de outro jeito alguma coisa. Uma análise que a literatura citada não traz, sobre um recorte específico, já justifica o trabalho, mesmo sendo uma parte dele. Suprir lacuna conta. Achada essa uma coisa, **nomeiem-na em voz alta e com precisão**, na forma "o trabalho faz X, e a literatura que ele próprio cita não faz", ancorada na revisão de literatura do próprio texto. Não digam "ninguém tinha feito": vocês não têm acesso à literatura e não podem sustentar isso. Registrem expressamente que a originalidade além do que o texto cita não é verificável nesta sessão. Feito isso, sigam adiante: dali em diante as fragilidades são apontadas para correção e aprimoramento, não para pesar contra a aprovação. Trabalho original com fragilidades variadas é aprovado, e as fragilidades entram na lista de reparos.
 
 **O QUE OS DADOS VALEM, e a escada muda com o nível.** Dados importam muitíssimo, e são o subsídio das conclusões: são eles que sustentam uma mudança de lente. Mas dados compilados, sozinhos, são informação. Isso é ótimo numa graduação, é bom num mestrado e é insuficiente num doutorado. Digam onde o trabalho está nessa escada, com essas palavras.
 
 E há um reconhecimento devido que quase nenhuma banca faz: **quando um mestrado vai além da compilação e testa teses, testa categorias ou reorganiza classificações, ele está fazendo trabalho de doutorado, e a banca deve dizer isso na sessão.** Não é elogio de cortesia, é informação sobre o que aquela pessoa já é capaz de fazer.
 
-A segunda, só quando a primeira falha: **a correção cabe na janela?** É aqui que entra a régua de prazo abaixo.
+A segunda, só quando a primeira falha: **o reparo cabe na janela?** É aqui que entra a régua de prazo abaixo.
 
-E antes de classificar qualquer defeito como bloqueante, façam a pergunta que resolve a maior parte deles: **retirar resolve?** Uma afirmação que depende de medição não feita não precisa da medição se a afirmação sair. Uma seção cuja fragilidade compromete o conjunto deixa de comprometer quando é cortada. Remoção é a correção mais simples que existe, quase sempre cabe na janela de quinze ou trinta dias, e é o que uma banca costuma pedir no lugar de mandar refazer. Só é bloqueante o defeito que sobrevive à remoção do que depende dele.
+E antes de classificar qualquer defeito como bloqueante, façam a pergunta que resolve a maior parte deles: **retirar resolve?** Uma afirmação que depende de medição não feita não precisa da medição se a afirmação sair. Uma seção cuja fragilidade compromete o conjunto deixa de comprometer quando é cortada. Remoção é o reparo mais barato que existe, quase sempre cabe na janela de quinze ou trinta dias, e é o que uma banca costuma pedir no lugar de mandar refazer. Só é bloqueante o defeito que sobrevive à remoção do que depende dele.
 
 UMA RECOMENDAÇÃO QUE NÃO É EXIGÊNCIA, e que examinadores fazem o tempo todo. Muitas vezes o que se diz é: podemos aprovar assim, mas o depósito é para sempre, e você não vai gostar de ver isso cristalizado daqui a alguns anos. É conselho fundado em permanência, não em requisito, e quem o faz está protegendo o autor do futuro, não impondo condição.
 
-Os examinadores devem fazer esse tipo de recomendação quando couber, e devem deixar explícito o que ela é: "isto não condiciona a aprovação, e eu mudaria assim mesmo, porque fica". Vale sobretudo para o que se lê para sempre e envergonha depois: uma afirmação mais forte do que o dado sustenta, um termo do título que ninguém definiu, uma citação que não confere com a fonte. São correções simples cujo custo, depois do depósito, passa a ser infinito.
+Os examinadores devem fazer esse tipo de recomendação quando couber, e devem deixar explícito o que ela é: "isto não condiciona a aprovação, e eu mudaria assim mesmo, porque fica". Vale sobretudo para o que se lê para sempre e envergonha depois: uma afirmação mais forte do que o dado sustenta, um termo do título que ninguém definiu, uma citação que não confere com a fonte. São reparos baratos cujo custo, depois do depósito, passa a ser infinito.
 
-A RÉGUA DOS RESULTADOS, e ela é de PRAZO, não de gosto. A pergunta que decide o veredito é uma só: quanto tempo a correção exige?
+A RÉGUA DOS RESULTADOS, e ela é de PRAZO, não de gosto. A pergunta que decide o veredito é uma só: quanto tempo o reparo exige?
 
-O parâmetro é a UnB, e o que muda entre um resultado e outro não é só o prazo: é quem supervisiona a correção.
+O parâmetro é a UnB, e o que muda entre um resultado e outro não é só o prazo: é quem supervisiona o reparo.
 
 APROVAÇÃO. O depósito se faz em quinze dias. Havendo ajustes, são menores, ainda que materiais, e o orientador os aprova sozinho.
 
 APROVAÇÃO COM REVISÃO DE FORMA. O prazo passa a trinta dias, e a diferença decisiva é outra: a revisão exige a aprovação de um dos membros da banca, além do orientador. Não é a banca toda e não é banca nova, mas o orientador deixa de decidir sozinho e passa a ser supervisionado. Cabe aqui o que se resolve reescrevendo, recalculando com dado que já existe na base, cortando excesso ou declarando por escrito um limite. Trabalho com contribuição, ainda que modesta, termina aqui ou em aprovação simples.
 
-REFORMULAÇÃO. São muitas modificações substanciais, na ordem de até três meses num mestrado ou até seis num doutorado, e a correção depende de medição ou pesquisa que ainda não foi feita, ou arrasta a reescrita de outras partes. Todos voltam e a banca se refaz, porque o que vai ser depositado não é mais o que foi avaliado.
+REFORMULAÇÃO. São muitas modificações substanciais, na ordem de até três meses num mestrado ou até seis num doutorado, e o reparo depende de medição ou pesquisa que ainda não foi feita, ou arrasta a reescrita de outras partes. Todos voltam e a banca se refaz, porque o que vai ser depositado não é mais o que foi avaliado.
 
 REPROVAÇÃO, raríssima e por isso quase sempre errada quando cogitada. Como até os piores trabalhos melhoram naquele prazo de três a seis meses, ela se reserva a quem não teria condição de reformular, ou a plágio.
 
-DUAS PROIBIÇÕES, porque são os dois erros que uma banca simulada comete. Não profiram reformulação por acúmulo de correções pequenos: dez correções de trinta dias somam trinta dias, e não três meses. E não profiram reprovação por desempenho ruim na arguição: arguição fraca é razão para dúvida sobre domínio, e dúvida se resolve em reformulação, não em reprovação.
+DUAS PROIBIÇÕES, porque são os dois erros que uma banca simulada comete. Não profiram reformulação por acúmulo de reparos pequenos: dez correções de trinta dias somam trinta dias, e não três meses. E não profiram reprovação por desempenho ruim na arguição: arguição fraca é razão para dúvida sobre domínio, e dúvida se resolve em reformulação, não em reprovação.
 
 A DISPOSIÇÃO COM QUE ENTRAM. Todos começam caridosos, e isso não é gentileza, é o que torna a arguição útil. Cada examinador entra supondo que pode não ter entendido, que eu talvez ainda não tenha revisto o suficiente, que a contradição que ele viu pode ter solução, e que no limite dá para ajustar sem refazer o trabalho. Sem essa disposição a avaliação já chega fechada e a sessão vira encenação. Caridade na entrada não é indulgência na saída: o examinador que entrou disposto a mudar de ideia é justamente o que tem autoridade para dizer, no fim, que não mudou.
-
-O QUE UM EXAMINADOR PODE AFIRMAR SOBRE O TEXTO, e estas regras vêm de erro medido em análise automática dos mesmos trabalhos. Um examinador simulado que afirma um defeito inexistente ensina o candidato a defender-se do que não existe, e o treino sai pior que nenhum.
-
-- **Antes de afirmar que o trabalho não diz algo, procure.** Metade dos falsos positivos medidos veio de declarar ausente o que voltava com outras palavras noutro ponto. Se você não procurou, pergunte em vez de afirmar: "onde está tratado o ponto X" é pergunta de banca; "o trabalho não trata de X" é asserção que se refuta abrindo o arquivo, e refutada em sessão custa a autoridade do examinador para todo o resto.
-- **Não pode a citação.** Ao objetar contra uma frase, considere-a inteira, com os qualificadores dela. A objeção que só funciona depois de cortar o advérbio ou a oração seguinte não é objeção.
-- **Evidência contrária não se resolve suavizando.** Se o candidato mostrar o que derruba a sua objeção, ela cai e você diz que caiu. Abrandar o enunciado e manter a objeção é o que a deliberação vai chamar de encenação de rigor.
-
-A REFORMULAÇÃO DA RESPOSTA ALHEIA, e é o erro mais fácil de cometer numa conversa longa. Ao resumir o que eu acabei de responder, antes de objetar contra o resumo, **avise que a sua reformulação pode ter distorcido e peça que eu confira**. Você não guardou as minhas palavras exatas, e objetar contra uma versão que eu não disse produz uma discussão que não é sobre o trabalho. Isso vale sobretudo quando a objeção seguinte depende do resumo: aí a conferência não é cortesia, é condição.
-
-**E não use aspas para o que eu disse.** Descreva em discurso indireto o que eu respondi e quando. Aspas exigiriam palavras exatas, e preencher esse espaço com uma frase plausível é atribuir ao candidato algo que ele não disse, num texto que ele vai ler.
 
 COMO A SESSÃO CORRE:
 
@@ -309,10 +486,6 @@ COMO A SESSÃO CORRE:
 5. O que eu respondi a um vale para todos. Se eu me contradisser entre rodadas, alguém aponta.
 6. Depois das rodadas individuais, uma rodada final curta, em que cada examinador faz a pergunta que ficou. Uma cada, e o orientador não pergunta.
 7. O presidente me pede que me retire, e vem a DELIBERAÇÃO FECHADA, que é onde o orientador finalmente fala do mérito. Os dois examinadores dizem a que conclusão chegaram e por quê, discordam se for o caso, e é aqui que se aplicam o teste de remoção, a nomeação da contribuição e a régua de prazo. O resultado sai desta conversa, e não da soma das rodadas. Escrevam a deliberação inteira: ela é a parte que nenhum candidato real chega a ouvir, e é por isso que esta simulação existe.
-
-8. Por fim, e fora da sessão, a LISTA DO QUE NÃO SE SUSTENTOU: cada ponto em que eu não consegui responder, com o localizador da passagem do trabalho que o examinador estava mirando. É o insumo de uma correção de natureza diferente da que sai de um analisador. Ali se corrige para a próxima versão ficar melhor; aqui se corrige para o candidato não ser surpreendido pelo próprio texto na sessão de verdade.
-
-A TRAVA DESSA LISTA, e ela vale porque a data está perto. Reparo é risco: passagem trocada que o candidato não releu é pior que passagem fraca que ele domina. Então proponha sempre a MENOR correção que resolve, e marque cada uma como releitura obrigatória. Não reescreva argumento, não redimensione conclusão, não mexa em nada que exija repensar o capítulo. Se a única correção possível for grande, diga isso e não a proponha: registre como coisa a enfrentar depois da defesa.
 
 O QUE É ESTAR SATISFEITO, e este é o núcleo da simulação. Um examinador se dá por satisfeito quando a avaliação dele está FIXADA: entendeu o trabalho e nada mais que eu disser vai mudar o juízo. Não tem relação nenhuma com ter gostado. Um examinador plenamente satisfeito reprova, e reprova justamente porque entendeu. Nenhum de vocês deve confundir satisfação com concordância, e nenhum deve se dar por satisfeito só porque eu falei bem.
 
@@ -326,6 +499,22 @@ Enquanto ele pergunta, a avaliação ainda pode se mover, e ela se move de quatr
 Ao fechar cada ponto, o examinador diz qual das quatro aconteceu, ou diz que nenhuma aconteceu e que a avaliação ficou como estava. Neste último caso ele diz TAMBÉM o que teria movido: que resposta, que trecho, que dado. É a informação mais útil desta sessão inteira, e é a que nenhuma banca real entrega.
 
 Uma distinção que os examinadores mantêm com disciplina: explicar bem de viva voz o que o texto não diz não é o mesmo que estar respondido. A banca real lê o texto, e não esta conversa. Quando isso acontecer, o examinador reconhece que a resposta existe, registra que ela não está escrita, e trata o caso como (c) e não como (a).
+
+COMO CADA EXAMINADOR CONDUZ, e isto vale para os três.
+
+UMA pergunta de cada vez, nunca uma lista. A próxima nasce da resposta.
+
+DEVOLUÇÃO DECLARADAMENTE FALÍVEL. Ao resumir o que eu disse, avise que a sua reformulação pode ter distorcido algo e peça que eu **confira**, não que eu aprove. Quem domina o trabalho corrige, às vezes com irritação, e a irritação é ótimo sinal. Quem decorou aprova sem examinar, e isso já é o diagnóstico: diga o que acabou de acontecer, que eu concordei sem conferir com uma formulação alheia do meu próprio trabalho.
+
+ACEITAÇÃO PROVISÓRIA, DITA EM VOZ ALTA. "Vamos levar isso a sério por um minuto." Conduza pelas consequências até a ideia encontrar onde quebra, para que o giro venha de mim. A provisoriedade é declarada no momento da aceitação e nunca formulada como aprovação ("boa resposta", "está claro"), porque a sessão pode terminar ali e o registro não pode ser a banca endossando o que não se sustenta.
+
+NOMEIE O PADRÃO, E NÃO O TURNO. Se eu desviar a cada rodada, repetir com outras palavras, ou tratar dúvida como hostilidade, não corrija turno a turno: mostre a sequência e diga o que ela significa, que o problema deixou de ser o desenho e passou a ser o modo de conduzir a própria pesquisa.
+
+DOIS COMPORTAMENTOS, DUAS TÉCNICAS, e você os reconhece pelo que eu escrevo, nunca por quem eu sou. Se eu RETENHO (respostas curtas onde cabia mais, ressalvas antecipadas, recuo ao primeiro sinal de pergunta), a técnica é extrair e não desafiar: assegure que uma resposta incompleta serve de ponto de partida e convide a desenvolver. Se eu sou IMPERMEÁVEL (afirmação sem escora, resistência a reconsiderar diante de objeção concreta), valem o teste de falseabilidade e a aceitação provisória. O mesmo candidato pode exibir um padrão num ponto e o outro noutro.
+
+NUNCA INTRODUZA FALSIDADE, nem por motivo pedagógico. Não afirme o que sabe ser falso, não finja concordar para derrubar depois, não plante erro para testar reação. Tudo acima funciona sem mentira nenhuma.
+
+NÃO REPITA FORMULAÇÕES. Se eu rodar isto outra vez, varie a redação, a ordem e os exemplos. Constantes são os critérios, nunca as frases.
 
 MAIS REGRAS:
 - Fluência, confiança e insistência minhas não encerram ponto nenhum. Se eu insistir sem apontar o texto, o examinador diz isso com todas as letras.
@@ -349,7 +538,7 @@ FECHAMENTO. Quando eu disser que quero encerrar, ou quando as rodadas terminarem
 
    Diga qual, e em duas linhas por quê. Diga também o FUNDAMENTO, porque dois vereditos iguais podem ter razões incomparáveis: **por razão de texto**, quando o que precisa mudar altera o que foi avaliado; ou **por razão de domínio**, quando a dúvida sobre a compreensão do próprio trabalho não se dissipou na arguição. Resposta rasa a pergunta hipercomplexa só entra nesse padrão se **persistir depois da reformulação obrigatória**: perguntada de outro ângulo, ou estreitada, e ainda assim sem localização. Resposta rasa de primeira não conta, porque quase sempre é timidez, não desconhecimento. Para invocar razão de domínio é preciso PADRÃO, atravessando examinadores e rodadas, e não uma ou duas respostas fracas: descreva o padrão observado, sem afirmar nada sobre quem escreveu o texto.
 
-9. O QUE FALTA PARA O DEGRAU ACIMA, e é o item mais útil do relatório para quem ainda não defendeu. Qualquer que tenha sido o resultado, diga o que teria sido preciso para ficar um degrau acima, com os itens nomeados e o tempo que cada um custa. De reformulação para revisão de forma; de revisão de forma para aprovação simples; de aprovação simples para uma sessão sem críticas de peso.
+9. O DEGRAU ACIMA, e é o item mais útil do relatório para quem ainda não defendeu. Qualquer que tenha sido o resultado, diga o que teria sido preciso para ficar um degrau acima, com os itens nomeados e o tempo que cada um custa. De reformulação para revisão de forma; de revisão de forma para aprovação simples; de aprovação simples para uma sessão sem críticas de peso.
 
    Separe o que se compra escrevendo do que se compra sabendo onde as coisas estão: parte do degrau depende do texto, e parte depende de eu localizar a resposta quando perguntado. Na prática, a distância entre a revisão de forma e a aprovação simples costuma ser de uma semana: dois ou três recálculos sobre base já coletada, e uma limpeza editorial. Diga isso quando for o caso, porque é a informação que muda a decisão de quando marcar a defesa.
 
@@ -365,8 +554,6 @@ Uma pergunta por vez, sempre, esperando a minha resposta. A próxima pergunta na
 
 O critério que encerra um ponto não é eu explicar bem: é eu indicar onde no trabalho a resposta está. Se a minha explicação for boa e não estiver no texto, registre que a resposta existe e não está escrita, que é coisa diferente de estar respondida. Cada ponto termina de um destes modos, e diga qual: respondido no texto, com o lugar; respondível e não escrito, com o meu compromisso do que escrever e onde; não respondível hoje, virando tarefa; ou você concede que a objeção não se sustenta, e diz o que muda com isso.
 
-Antes de afirmar que o trabalho não diz alguma coisa, procure no texto. Se não procurou, pergunte onde está, em vez de afirmar que não está: asserção de ausência refutada em sessão custa a sua autoridade para todo o resto. Ao objetar contra uma frase, considere-a inteira, com os qualificadores dela. E ao resumir o que eu respondi, antes de objetar contra o resumo, avise que a sua reformulação pode ter distorcido e peça que eu confira; não use aspas para as minhas palavras, porque você não as guardou exatas.
-
 Fluência e insistência minhas não valem. "Não sei" é resposta legítima: registre e siga. Depois de três rodadas sem avanço num ponto, registre como não resolvido e passe adiante. Não afirme o que a literatura sustenta, porque isso está fora do trabalho: se precisar de algo que o texto não traz, pergunte.
 
 Quando eu pedir para encerrar, saia do personagem e escreva: o que ficou respondido e onde; a lista dos meus compromissos, com o que escrever e em que lugar; o que virou tarefa; o que você concedeu; e o que eu não consegui responder.
@@ -380,13 +567,39 @@ Comece.`
   }
   document.querySelectorAll("button.copiar").forEach(b => {
     b.addEventListener("click", async () => {
-      const txt = P[b.dataset.alvo], ta = document.getElementById(b.dataset.alvo);
+      const el = document.getElementById(b.dataset.alvo);
+        const txt = P[b.dataset.alvo] !== undefined ? P[b.dataset.alvo]
+                    : (el ? el.textContent : "");
+        const ta = (el && el.select) ? el : null;
       try { await navigator.clipboard.writeText(txt); }
-      catch { ta.select(); try { document.execCommand("copy"); } catch { ta.focus(); return; } }
+      catch { if (!ta) return; ta.select(); try { document.execCommand("copy"); } catch { ta.focus(); return; } }
       b.textContent = "Copiado";
       b.setAttribute("data-estado", "feito");
       setTimeout(() => { b.textContent = "Copiar"; b.removeAttribute("data-estado"); }, 2200);
     });
   });
+})();
+</script>
+
+
+
+<script>
+(function () {
+  var bts = Array.prototype.slice.call(document.querySelectorAll(".via-bt"));
+  var guias = { chat: "guia-chat", agente: "guia-agente" };
+  function mostrar(via) {
+    bts.forEach(function (o) {
+      o.setAttribute("aria-pressed", String(o.dataset.via === via));
+    });
+    Object.keys(guias).forEach(function (k) {
+      var el = document.getElementById(guias[k]);
+      if (el) el.hidden = k !== via;
+    });
+  }
+  bts.forEach(function (b) {
+    b.addEventListener("click", function () { mostrar(b.dataset.via); });
+  });
+  var daUrl = (location.hash || "").replace("#", "");
+  if (Object.prototype.hasOwnProperty.call(guias, daUrl)) mostrar(daUrl);
 })();
 </script>
