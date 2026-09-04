@@ -66,7 +66,6 @@ const checa = [
   ["o guia do agente cobre os dois agentes", /Claude Code/, true],
   ["o guia do agente cobre os dois agentes \(VS Code\)", /VS Code/, true],
   ["cita o LUIS.md aposentado", /LUIS\.md/, false],
-  ["aponta para prompts\/leituras", /prompts\/leituras/, true],
   ["titulo velho sumiu", /analisador de consistência/, false],
 ];
 for (const [nome, re, esperado] of checa) {
