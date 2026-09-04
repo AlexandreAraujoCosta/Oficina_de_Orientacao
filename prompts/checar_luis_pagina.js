@@ -2,12 +2,15 @@
 //
 // POR QUE ISTO EXISTE
 //
-// A pagina traz o prompt portatil embutido num <pre>, e o repositorio traz o
-// mesmo prompt em ANALISADOR-PORTATIL.md. Nada obrigava os dois a coincidirem, e
-// em 04/09/2026 eles tinham divergido em mais de mil palavras sem que nada
-// acusasse: a pagina publicada servia uma versao antiga, com a escala de veredito
-// que fora substituida no dia anterior. O Alberto ja tinha conferidor
-// (checar_alberto_pagina.js) e por isso nao sofreu disso.
+// A pagina do Alberto tinha conferidor desde que foi feita, e a do Luis nao. Em
+// 04/09/2026 apareceu o que isso custa: ela servia um prompt embutido mil
+// palavras diferente do arquivo do repositorio, com a escala de veredito
+// substituida no dia anterior, e descrevia o Alberto pelo que ele era antes do
+// redesenho de 03/09. Nada acusava nenhuma das tres coisas.
+//
+// A via de chat saiu da pagina em 04/09: numa conversa a ferramenta e o Alberto,
+// e o prompt que estava aqui destilava o LUIS.md aposentado. O que este programa
+// confere agora e que ela nao volte.
 //
 // Uso:  node checar_luis_pagina.js
 
@@ -16,7 +19,6 @@ const path = require("path");
 
 const AQUI = __dirname;
 const html = fs.readFileSync(path.join(AQUI, "luis.html"), "utf8");
-const md = fs.readFileSync(path.join(AQUI, "ANALISADOR-PORTATIL.md"), "utf8");
 
 let falhas = 0;
 function diz(rot, ok, extra) {
@@ -24,19 +26,12 @@ function diz(rot, ok, extra) {
   if (!ok) falhas++;
 }
 
-// 1. O prompt embutido e identico ao arquivo do repositorio.
-const m = html.match(/<pre id="p-luis">([\s\S]*?)<\/pre>/);
-diz("o <pre> do prompt existe", !!m);
-if (m) {
-  const emb = m[1];
-  diz("prompt embutido identico ao ANALISADOR-PORTATIL.md",
-      emb.trim() === md.trim(),
-      emb.trim().split(/\s+/).length + " palavras na pagina, " +
-      md.trim().split(/\s+/).length + " no arquivo");
-  // Escape: se o .md ganhar < & >, o <pre> quebra a pagina em silencio.
-  diz("o .md nao traz caractere que exija escape em HTML",
-      !/[<>&]/.test(md));
-}
+// 1. A via de chat nao pode voltar: numa conversa a ferramenta e o Alberto.
+diz("nao ha botao de via de chat", !html.includes('data-via="chat"'));
+diz("nao ha guia de chat", !html.includes('id="guia-chat"'));
+diz("nao ha prompt portatil embutido", !html.includes('id="p-luis"'));
+diz("remete ao Alberto para a conversa de chat",
+    html.includes("Numa conversa de chat, a ferramenta é o"));
 
 // 2. Os blocos de script compilam.
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((x) => x[1]);
@@ -56,16 +51,15 @@ diz("controle positivo: codigo quebrado e recusado", recusou);
 const presentes = [
   ["title da pagina", "<title>Luis</title>"],
   ["seletor de vias", 'class="via-bt"'],
-  ["guia do chat", 'id="guia-chat"'],
   ["guia do Claude Code", 'id="guia-claude"'],
   ["guia do VS Code", 'id="guia-vscode"'],
   ["aponta o pipeline", "prompts/leituras/"],
-  ["remete ao Alberto para o chat", "a ferramenta atual é o"],
-  ["escala nova do veredito", "apto a ser aprovado"],
 ];
 const ausentes = [
   ["nao manda rodar o LUIS.md", "Leia prompts/LUIS.md nesta pasta"],
+  ["nao descreve o Alberto pelo desenho anterior a 03/09", "roda em modelo menor"],
   ["escala velha do veredito sumiu", "pronto para ir à banca"],
+  ["nao voltou o prompt embutido", "Luis — versão portátil"],
 ];
 presentes.forEach(function (par) { diz(par[0] + " (presente)", html.includes(par[1])); });
 ausentes.forEach(function (par) { diz(par[0] + " (ausente)", !html.includes(par[1])); });

@@ -1,12 +1,22 @@
 # Luis — versão portátil
 
-Versão de 25/08/2026. Destila `LUIS.md`, **que foi aposentado em 03/09/2026**, de modo que este arquivo
-envelhece junto com ele: quem quer o relatorio numa conversa so usa o
-`prompts/ALBERTO.md`, e quem quer a leitura completa usa o pipeline de
-`prompts/leituras/`. O que segue destila `LUIS.md`, que tem quase vinte mil palavras e
-depende de scripts, subagentes e de uma extração numerada. Esta roda numa conversa
-só, em qualquer assistente, sobre o arquivo que se anexa. **O que se perde está
-declarado ao fim.**
+Versão de 25/08/2026. **Este arquivo saiu de circulação em 04/09/2026** e fica no
+repositório como registro. Ele destila o `LUIS.md`, que foi aposentado em 03/09 por
+devolver dois itens e nenhum de conteúdo numa dissertação inteira, e por isso
+envelhece junto com ele. Quem quer o relatório numa conversa só usa o
+`prompts/ALBERTO.md`, escrito para isso e medido sobre dois trabalhos em quatro vias;
+quem quer a leitura completa usa o pipeline de `prompts/leituras/`. A página do Luis
+deixou de oferecer esta versão em 04/09, e o motivo é que ela ocupava, sem medição que
+a sustentasse, o lugar que o Alberto ocupa com medição.
+
+**O que ficou medido a favor dele, e não se transfere sem cuidado:** em 30/08/2026,
+contra o relatório do prompt monolítico sobre a mesma dissertação, esta versão levantou
+cinco itens que a outra não tinha, no que um leitor atento com as páginas à frente
+enxerga. A comparação era contra o `LUIS.md`, e não contra o pipeline nem contra o
+Alberto, de modo que ela não diz nada sobre o desenho atual.
+
+O que segue roda numa conversa só, em qualquer assistente, sobre o arquivo que se
+anexa. **O que se perde está declarado ao fim.**
 
 ---
 
