@@ -127,11 +127,17 @@
   .eyebrow a:hover, .eyebrow a:focus-visible { opacity: .7; }
   .eyebrow { margin: 0 0 2.4rem; }
   .top h1, header h1, .wrap > h1 { margin-bottom: 1.3rem; }
+
+  /* A faixa tem dois grupos, e o que os separa e uma linha e nao um travessao:
+     o traco no meio do texto se le como pausa, e aqui a divisao e de natureza. */
+  .eyebrow .eb-linha { display: block; }
+  .eyebrow .eb-atual { opacity: .55; }
+  .eyebrow .eb-baixo { margin-top: .3rem; padding-top: .3rem; border-top: 1px solid var(--rule); }
 </style>
 
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow"><a href="https://direito.unb.br/">FD/UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">Oficina de Orientação</a></div>
+    <div class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas</a></span><span class="eb-linha eb-baixo"><a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <span class="eb-atual" aria-current="page">Simulador de banca</span></span></div>
     <h1>Simulador de banca</h1>
     <p class="convite">Você consegue responder ao que vão te perguntar?</p>
     <p>Uma sessão de arguição com dois examinadores e o orientador presidindo, que é a composição de uma banca real. Eles ouvem as suas respostas e ouvem uns aos outros. Não produz relatório: produz a experiência de ser interpelado, e no fim a lista do que você não conseguiu responder.</p>
