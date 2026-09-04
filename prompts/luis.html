@@ -546,11 +546,28 @@
   .feedback p { margin: 0; }
   .feedback b { color: var(--ink); }
   .cuidados h3, .prompts h3 { font-family: var(--serif); font-size: 17px; margin: 22px 0 6px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--medida);
+    margin: 0 0 18px;
+  }
+
+  /* --- faixa de identificacao e navegacao entre as paginas da oficina --- */
+  .eyebrow { line-height: 1.7; }
+  .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+  .eyebrow a:hover, .eyebrow a:focus-visible { opacity: .7; }
+  .eyebrow .eb-sep { opacity: .4; margin: 0 .5em; }
+  .eyebrow .eb-atual { opacity: .55; }
 </style>
 <div class="wrap">
 
   <header class="top">
-  <h1>Luis</h1>
+  <p class="eyebrow"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a><span class="eb-sep">|</span>Oficinas: <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">Orientação</a> · <a href="https://claude.ai/code/artifact/1d29d917-d73f-48b3-9f89-1eaab12cfffd">Projetos</a><span class="eb-sep">|</span>Nesta oficina: <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <span class="eb-atual" aria-current="page">Luis</span> · <a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></p>
+    <h1>Luis</h1>
   <p>Uma leitura que julga o argumento do trabalho: se a tese se sustenta no
   material apresentado, se o método executado é o anunciado, se as conclusões cabem no que foi
   mostrado, e o que o trabalho contribui sem reivindicar.</p>

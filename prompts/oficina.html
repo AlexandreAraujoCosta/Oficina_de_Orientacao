@@ -728,6 +728,13 @@
     color: var(--faint);
     line-height: 1.7;
   }
+
+  /* --- faixa de identificacao e navegacao entre as paginas da oficina --- */
+  .eyebrow { line-height: 1.7; }
+  .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+  .eyebrow a:hover, .eyebrow a:focus-visible { opacity: .7; }
+  .eyebrow .eb-sep { opacity: .4; margin: 0 .5em; }
+  .eyebrow .eb-atual { opacity: .55; }
 </style>
 
 <div class="shell">
@@ -754,7 +761,7 @@
   <main>
 
     <header>
-      <p class="eyebrow">Três ferramentas</p>
+      <p class="eyebrow"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a><span class="eb-sep">|</span>Oficinas: <span class="eb-atual" aria-current="page">Orientação</span> · <a href="https://claude.ai/code/artifact/1d29d917-d73f-48b3-9f89-1eaab12cfffd">Projetos</a><span class="eb-sep">|</span>Nesta oficina: <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></p>
       <h1>Oficina de Orientação</h1>
       <p class="standfirst">Ferramentas de leitura automática de trabalhos acadêmicos, da que roda em segundos, sem modelo nenhum, à que ocupa meia hora e exige processamento incompatível com os planos gratuitos. Cada uma declara o que confere, e é nessa declaração que se lê o que ela deixou de fora.</p>
       <div class="byline">
