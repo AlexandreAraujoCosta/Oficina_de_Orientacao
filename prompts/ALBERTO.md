@@ -1,4 +1,4 @@
-# Alberto — análise geral
+# Alberto — a análise geral
 
 Uma leitura, um relatório, no formato do Luis. Serve na conversa de chat e serve no
 agente, com a diferença que está no fim deste arquivo.
