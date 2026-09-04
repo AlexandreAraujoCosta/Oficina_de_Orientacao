@@ -31,7 +31,7 @@ diz("nao ha botao de via de chat", !html.includes('data-via="chat"'));
 diz("nao ha guia de chat", !html.includes('id="guia-chat"'));
 diz("nao ha prompt portatil embutido", !html.includes('id="p-luis"'));
 diz("remete ao Alberto para a conversa",
-    html.includes("Numa conversa, a ferramenta é o"));
+    html.includes("a ferramenta é o Alberto"));
 diz("diz por que nao ha via de chat, e a razao e a sessao unica",
     html.includes("sessões separadas"));
 diz("nao afirma que conversa nao roda comando",

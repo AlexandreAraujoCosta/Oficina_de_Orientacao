@@ -525,12 +525,8 @@
   <header class="top">
     <h1>Alberto — o relatório rápido</h1>
     <p>Uma leitura só, e um relatório de orientação em oito partes: o veredito, o que está sólido, o que o trabalho tem e não reivindica, as correções, o destino de cada capítulo, os questionamentos, por onde começar, e o alcance da leitura. É o mesmo formato do relatório completo, e o que muda é o quanto se enxerga.</p>
-    <p><b>O tempo depende da via, e a diferença é grande.</b> Medido em 03/09/2026: <b>no agente, em Opus 5, esta leitura leva de 41 a 48 minutos e consome de 270 a 320 mil tokens</b>, já contando a revisão, porque ali ele roda os programas, confere na fonte e monta os arquivos. A leitura completa passa de 1,15 milhão de tokens e leva horas. <b>No chat é uma mensagem só, e o tempo não está medido para este prompt:</b> o número de um a três minutos que esta página trazia era da ferramenta anterior de mesmo nome, a conferência de consistência, e não se transfere.</p>
-    <p><b>O que ele entrega, medido em 03/09/2026 sobre a mesma dissertação: menos, com justificação mais rala, e sem inventar.</b> Vinte e nove afirmações de duas rodadas foram abertas na fonte, uma a uma, e as vinte e nove estavam certas. Mas as duas rodadas devolveram dezessete e doze itens, com seis em comum, contra os trinta e dois da leitura completa. Cada apontamento traz o endereço de onde conferi-lo, e não a cadeia de prova que uma verificação independente produziria. <b>O que ele não aponta não é atestado de que esteja correto.</b></p>
-    <p><b>Se você precisa da leitura completa</b>, ela são quatro leituras por caminhos diferentes, mais a verificação de cada apontamento por quem não o escreveu, e está nos prompts de <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao/tree/main/prompts/leituras">prompts/leituras/</a>. Custa cerca de um milhão de tokens e quase uma hora, e a diferença está medida na <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">página da Oficina</a>.</p>
-    <p>Esta página traz também o <b>medidor de formatação</b>, que abre o <code>.docx</code> no seu navegador e mede forma, ritmo, aparato gráfico e higiene bibliográfica. As medidas dele entram na conversa junto com o prompt, porque num <code>.docx</code> o assistente não enxerga a camada formal.</p>
+    <p><b>Ele vê menos e não inventa.</b> Encontra o defeito exposto e declarado, e passa ao largo do que exige refazer uma conta dentro de uma tabela. <b>O que ele não aponta não é atestado de que esteja correto</b>, e é assim que o relatório deve ser lido. Quem precisa da leitura completa, com quatro travessias e a conferência de cada apontamento por quem não o escreveu, usa o <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a>, cujos prompts estão em <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao/tree/main/prompts/leituras">prompts/leituras/</a>.</p>
     <p class="vias-titulo">Escolha a via pela qual você vai aplicar a ferramenta, para ter as orientações adequadas sobre o seu uso em cada opção.</p>
-
     <div class="vias-grade">
       <button type="button" class="via-bt" data-via="chat">
         <span class="via-nome">Chat</span>
@@ -751,6 +747,21 @@ Ao final me diga quantas suspeitas você examinou, quantas descartou por serem e
     </section>
 
   </div>
+
+
+    <section class="cuidados" id="medido">
+      <h2>O que está medido</h2>
+
+      <p><b>Cobertura, em 03/09/2026, sobre a mesma dissertação.</b> Duas rodadas deste prompt devolveram dezessete e doze itens, com seis em comum, contra os trinta e dois da leitura completa. As vinte e nove afirmações das duas rodadas foram abertas na fonte, uma a uma, e <b>as vinte e nove estavam certas</b>. A perda é de cobertura, e não de veracidade: cada apontamento traz o endereço de onde conferi-lo, e não a cadeia de prova que uma verificação independente produziria.</p>
+
+      <p><b>Tempo e consumo, por via.</b> No agente, em Opus 5, de 41 a 48 minutos e de 270 a 320 mil tokens contados, já com a revisão, porque ali ele roda os programas, confere na fonte e monta os arquivos. No chat do Claude, em Opus 5 com esforço alto, sobre uma tese de 109 páginas em 04/09/2026: <b>15 minutos e 52 segundos</b> de relógio, dos quais 5 minutos e 28 segundos datados por marca de arquivo, e de 140 a 155 mil tokens de contexto único, este por estimativa do próprio assistente. A leitura completa passa de 1,15 milhão e leva horas.</p>
+
+      <p><b>Uma ressalva sobre esses números do chat:</b> aquela conversa tinha execução de código e a usou, rodando os programas e conferindo na fonte, de modo que está mais perto do agente do que de um chat sem ferramentas. Onde a sua conta não oferecer isso, espere menos tempo e menos achado.</p>
+
+      <p><b>E o número que saiu daqui.</b> Esta página já anunciou uma leitura de um a três minutos no chat. Aquilo era a rodada da ferramenta anterior de mesmo nome, a conferência de consistência, e ficou aqui quando o nome mudou de dono em 03/09/2026. Não se transfere.</p>
+
+      <p>O detalhe de cada medição, com o material e o que ficou de fora, está na <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">página da Oficina</a>.</p>
+    </section>
 
   <footer class="creditos">
     <p><strong>Concepção, critérios e prompts:</strong> Prof. Alexandre Araújo Costa, Universidade de Brasília. Desenvolvido com apoio do modelo Opus, da Anthropic, no Claude Code.</p>
