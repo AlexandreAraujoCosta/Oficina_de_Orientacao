@@ -58,7 +58,7 @@ diz("controle positivo: codigo quebrado e recusado", recusou);
 
 // 3. O que a pagina precisa dizer, e o que nao pode mais dizer.
 const presentes = [
-  ["title da pagina", "<title>Luis — a análise minuciosa</title>"],
+  ["title da pagina", "<title>Luis: a análise minuciosa</title>"],
   ["guia do agente", 'id="guia-agente"'],
   ["o guia cobre o Claude Code", "Claude Code"],
   ["o guia cobre o VS Code", "VS Code"],
