@@ -91,7 +91,7 @@ def limpar(html):
         if vivas == partes:
             continue
         if vivas:
-            troca = ", ".join(vivas) + " {" + m.group("corpo") + "}"
+            troca = "\n  " + ", ".join(vivas) + " {" + m.group("corpo") + "}"
             saida.append((m.start(), m.end(), troca))
             fora.append("(parcial) " + " | ".join(x for x in partes if x not in vivas))
         else:

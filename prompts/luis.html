@@ -122,7 +122,8 @@
     text-align: center;
     border: 1px solid var(--rule-firm);
     border-radius: 50%;
-  }.cuidados h2 {
+  }
+  .cuidados h2 {
     font-family: var(--serif);
     font-size: 1.6rem;
     font-weight: 600;
@@ -183,7 +184,8 @@
               margin: 1.4rem 0 0; max-width: var(--measure);
               font-size: .93rem; color: var(--ink-soft); }
   .feedback p { margin: 0; }
-  .feedback b { color: var(--ink); }.cuidados h3 { font-family: var(--serif); font-size: 17px; margin: 22px 0 6px; }
+  .feedback b { color: var(--ink); }
+  .cuidados h3 { font-family: var(--serif); font-size: 17px; margin: 22px 0 6px; }
 
   .eyebrow {
     font-family: var(--mono);
@@ -200,11 +202,17 @@
   /* O nome da pagina respira entre a faixa e o texto que a descreve. */
   .eyebrow { margin: 0 0 2.4rem; }
   .top h1, header h1, .wrap > h1 { margin-bottom: 1.3rem; }
+
+  /* A faixa tem dois grupos, e o que os separa e uma linha e nao um travessao:
+     o traco no meio do texto se le como pausa, e aqui a divisao e de natureza. */
+  .eyebrow .eb-linha { display: block; }
+  .eyebrow .eb-atual { opacity: .55; }
+  .eyebrow .eb-baixo { margin-top: .3rem; padding-top: .3rem; border-top: 1px solid var(--rule); }
 </style>
 <div class="wrap">
 
   <header class="top">
-  <p class="eyebrow"><a href="https://direito.unb.br/">FD/UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">Oficina de Orientação</a></p>
+  <p class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas</a></span><span class="eb-linha eb-baixo"><a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <span class="eb-atual" aria-current="page">Luis</span> · <a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></span></p>
     <h1>Luis</h1>
   <p>Uma leitura que julga o argumento do trabalho: se a tese se sustenta no
   material apresentado, se o método executado é o anunciado, se as conclusões cabem no que foi
