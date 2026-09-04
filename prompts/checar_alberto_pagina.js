@@ -55,8 +55,8 @@ try {
 }
 
 const checa = [
-  ["title novo", /<title>Alberto — o relatório rápido<\/title>/, true],
-  ["h1 novo", /<h1>Alberto — o relatório rápido<\/h1>/, true],
+  ["title novo", /<title>Alberto — análise geral<\/title>/, true],
+  ["h1 novo", /<h1>Alberto — análise geral<\/h1>/, true],
   ["textarea do prompt", /id="textoPrompt"/, true],
   ["seletor de vias", /class="via-bt"/, true],
   ["medidor de .docx", /id="entrada"/, true],
