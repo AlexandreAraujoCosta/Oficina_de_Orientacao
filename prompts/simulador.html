@@ -153,8 +153,10 @@
     <div class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas acadêmicas</a></span><span class="eb-linha eb-baixo">Assistentes: <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <span class="eb-atual" aria-current="page">Simulador de banca</span></span></div>
     <h1>Simulador de banca: o ensaio da defesa</h1>
     <p class="convite">Você consegue responder ao que vão te perguntar?</p>
-    <p>Uma sessão de arguição com dois examinadores e o orientador presidindo, que é a composição de uma banca real. Eles ouvem as suas respostas e ouvem uns aos outros. Não produz relatório: produz a experiência de ser interpelado, e no fim a lista do que você não conseguiu responder.</p>
-    <p class="quando">Rode depois do relatório do Luis, e antes de marcar a defesa. É o relatório que indica qual das lentes o examinador interno deve usar.</p>
+    <p>Uma sessão de arguição com dois examinadores e o orientador presidindo, que é a composição de uma banca real. Eles ouvem as suas respostas e ouvem uns aos outros. Não produz relatório sobre o trabalho: o que fica é a sessão e, no fim, a lista do que você não conseguiu responder. Pelo agente, essa lista sai gravada em arquivo.</p>
+    <p class="quando">Rode antes de marcar a defesa. Com o relatório do <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> em mãos a sessão rende mais, porque é dele que sai a lente do examinador interno. Sem ele a sessão roda do mesmo jeito.</p>
+    <p class="aviso"><strong>Esta página descreve o desenho da ferramenta.</strong> As regras adiante são as que os examinadores recebem por instrução. O comportamento delas em sessão não passou por medição, e a última rodada é anterior à mudança da escala de veredito, em 03/09/2026. É a única das três ferramentas da oficina sem seção de medição.</p>
+
     <div class="byline">
       <p class="author">Ferramentas desenvolvidas por <b>Alexandre Araújo Costa</b></p>
       <p class="affil">
@@ -176,22 +178,23 @@
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSdziEHALH04stCpbVCHqDODK072YKzRRWCaN4ZhsiHojYrKmg/viewform?usp=dialog">este
       formulário</a>: é com esses relatos que dá para saber se ele funciona fora da
       situação para a qual foi escrito.</p>
-      <p style="margin-top:.6rem">Para relatar um resultado, apontar um erro ou sugerir um
-      ajuste, há também <a href="https://forms.gle/BHhKZSQiRq1JUgsE8">este formulário</a>.</p>
+      <p style="margin-top:.6rem">E há <a href="https://forms.gle/BHhKZSQiRq1JUgsE8">um formulário
+      de resultados e comentários</a>, para relatar como correu uma sessão, apontar um erro ou sugerir
+      um ajuste.</p>
     </div>
 
   <section class="primeira">
     <h2>Em que isto difere de uma análise</h2>
-    <p>São operações opostas de propósito, e usar uma no lugar da outra desperdiça as duas.</p>
+    <p>São operações opostas de propósito. Usar uma no lugar da outra desperdiça as duas.</p>
     <div class="contraste">
       <p><strong>Na análise, o isolamento é o mecanismo.</strong> Os passos rodam separados, e a conferência é feita por quem não escreveu os apontamentos, porque o que se quer ali é cobertura e depois filtragem: um leitor que já formou opinião confirma a si mesmo.</p>
-      <p><strong>Aqui, o compartilhamento é o mecanismo.</strong> Numa banca de verdade os examinadores se ouvem, e isso é estrutura, não ruído. Um pega carona no que o outro levantou, discorda do colega na frente do candidato, e às vezes defende o trabalho contra ele. A resposta que você deu ao primeiro passa a valer para todos, e uma resposta ruim contamina o resto da sessão. É essa dinâmica que você precisa treinar, e ela não existe em leituras isoladas.</p>
+      <p><strong>Aqui, o compartilhamento é o mecanismo.</strong> Numa banca de verdade os examinadores se ouvem, e a sessão se organiza em torno dessa escuta. Um pega carona no que o outro levantou, discorda do colega na frente do candidato, e às vezes defende o trabalho contra ele. A resposta que você deu ao primeiro passa a valer para todos, e uma resposta ruim contamina o resto da sessão. É essa dinâmica que você precisa treinar. Leituras isoladas não a produzem.</p>
       <p><strong>E uma coisa que vale saber antes de ler o que sair daqui.</strong> Examinador só pergunta duramente a quem ele acha que pode responder: apertar custa tempo e expõe quem pergunta, e ninguém gasta uma rodada nisso com um trabalho que já desenganou. Uma sessão dura, portanto, não é má notícia. A má notícia é o examinador que se declara satisfeito sem ter apertado em lugar nenhum e sem apontar nada específico do texto, porque isso pode significar que ele não vê o que perguntar. Se o simulador lhe der uma arguição difícil, leia como o que é: alguém achou que havia com quem discutir.</p>
 
-      <p><strong>Por isso a banca aqui é pequena.</strong> Dois examinadores, não cinco. Cobertura é trabalho da análise, e repeti-la aqui alongaria a sessão sem acrescentar: num teste que fizemos, três de cinco examinadores fixaram a avaliação já na primeira pergunta, e os demais produziram confirmação em vez de informação. O que decide numa arguição é a dinâmica, e ela cabe em seis perguntas.</p>
+      <p><strong>Por isso a banca aqui é pequena.</strong> Dois examinadores, não cinco. Cobertura é trabalho da análise, e repeti-la aqui alongaria a sessão sem mudar o que ela produz. O que decide numa arguição é a dinâmica, e ela cabe em seis perguntas.</p>
     </div>
-    <p>Por isso o simulador roda numa conversa só, do começo ao fim, e por isso ele vem depois: o ideal é chegar aqui com o relatório em mãos.</p>
-    <p>O relatório do Luis passa por uma conferência que abre cada ponto e derruba de 10% a 31% do que as leituras levantam. O que chega aqui, portanto, já foi filtrado, e a lente indicada para o examinador interno sai do que sobreviveu.</p>
+    <p>Por isso o simulador roda numa conversa só, do começo ao fim.</p>
+    <p>O relatório do Luis passa por uma conferência que abre cada ponto e derruba parte do que as leituras levantam: de 10% a 31% em sete avaliações de agosto de 2026, no desenho de seis vozes então vigente, sobre outros trabalhos. O que chega aqui já passou por esse filtro, e a lente do examinador interno sai do que sobreviveu.</p>
   </section>
 
       <section>
@@ -231,7 +234,7 @@
           como imagem, e os examinadores enxergam o conteúdo dos quadros e dos gráficos. Num
           .docx eles leem só as legendas, e a pergunta sobre a figura não chega a
           existir.</li>
-          <li><strong>Cole o prompt</strong>, que está no fim desta página, e comece.</li>
+          <li><strong>Cole o prompt</strong> da sessão completa, que está adiante nesta página, e comece.</li>
           <li><strong>Uma conversa só</strong>, do começo ao fim da sessão. Recomeçar noutra
           janela apaga o que os examinadores já sabem de você.</li>
         </ol>
@@ -243,7 +246,7 @@
         coube num anexo, e quando quer o fechamento gravado em arquivo. Dois agentes servem, e
         o que muda entre eles é como se paga: o <b>Claude Code</b> exige assinatura da Claude, e
         o <b>VS Code</b> com a extensão <b>GitHub Copilot</b> aceita chave de API própria, de
-        Anthropic, OpenAI, Gemini ou OpenRouter, cobrada pelo provedor.</p>
+        Anthropic, OpenAI, Gemini ou OpenRouter, cobrada pelo provedor. Os nomes de tela citados abaixo são os de setembro de 2026.</p>
         <ol class="passos">
           <li><strong>Instale o agente.</strong> O Claude Code pelo instalador do site da
           Anthropic, entrando com a sua conta. O VS Code pelo site, e a extensão GitHub Copilot
@@ -309,11 +312,26 @@ preciso escrever, e as perguntas que ficaram sem resposta.</pre>
       ganho.</p>
     </section>
 
+
+  <section>
+    <h2>Sessão completa</h2>
+    <p>A banca inteira, com presidente, revezamento e fechamento. É a versão que reproduz a dinâmica.</p>
+    <div class="barra"><span class="lbl">Prompt · cole inteiro, com o trabalho anexado</span><button class="copiar" type="button" data-alvo="ps">Copiar</button></div>
+    <textarea class="prompt" id="ps" readonly spellcheck="false"></textarea>
+  </section>
+
+  <section>
+    <h2>Arguição por um examinador só</h2>
+    <p>Para treinar um flanco específico, mais fundo e sem revezamento. Útil quando o relatório já apontou onde está o problema.</p>
+    <div class="barra"><span class="lbl">Prompt · escolha a lente na primeira linha</span><button class="copiar" type="button" data-alvo="pu">Copiar</button></div>
+    <textarea class="prompt curta" id="pu" readonly spellcheck="false"></textarea>
+  </section>
+
     <section>
     <h2>As regras que os examinadores seguem</h2>
     <dl class="regras">
-      <dt>Entram caridosos, e isso não é gentileza</dt>
-      <dd>O examinador começa supondo que pode não ter entendido, que você talvez ainda não tenha revisto o suficiente, que a contradição pode ter solução, e que no limite dá para ajustar sem refazer. Essa disposição é o que torna a pergunta útil: sem ela a avaliação já chegou fechada, e a arguição vira encenação. Caridade na entrada não é indulgência na saída.</dd>
+      <dt>Entram supondo que podem não ter entendido</dt>
+      <dd>O examinador começa supondo que pode não ter entendido, que você talvez ainda não tenha revisto o suficiente, que a contradição pode ter solução, e que no limite dá para ajustar sem refazer. Essa disposição é o que torna a pergunta útil: sem ela a avaliação já chegou fechada, e a arguição vira encenação. A disposição da entrada não afeta o juízo da saída.</dd>
 
       <dt>Uma pergunta por vez</dt>
       <dd>Nunca uma lista. Cada pergunta espera a sua resposta, e a próxima nasce dela.</dd>
@@ -334,7 +352,7 @@ preciso escrever, e as perguntas que ficaram sem resposta.</pre>
       <dd>"Vamos levar isso a sério por um minuto e ver aonde chega." O examinador conduz pelas consequências até a ideia encontrar onde quebra, e o giro vem de você, que ensina mais que a objeção antecipada. A provisoriedade é declarada no momento em que se aceita, nunca formulada como aprovação: a sessão pode terminar ali, e o que fica registrado não pode ser a banca endossando um desenho ruim.</dd>
 
       <dt>Nomeiam o padrão, e não o turno</dt>
-      <dd>Se você desvia a cada rodada, repete com outras palavras o que já disse, ou trata toda dúvida como hostilidade, o examinador não corrige turno a turno: mostra a sequência ("perguntei X, você respondeu Y; pedi Z, você mudou para W") e diz o que ela significa. Quem não consegue ouvir uma objeção também não corrige o rumo quando os dados o contrariam, e os dados contrariam em algum ponto. É a informação mais útil da sessão, e nenhuma banca real a entrega.</dd>
+      <dd>Se você desvia a cada rodada, repete com outras palavras o que já disse, ou trata toda dúvida como hostilidade, o examinador não corrige turno a turno: mostra a sequência ("perguntei X, você respondeu Y; pedi Z, você mudou para W") e diz o que ela significa. Quem não consegue ouvir uma objeção também não corrige o rumo quando os dados o contrariam, e os dados contrariam em algum ponto. Numa banca real esse padrão é percebido e não é dito.</dd>
 
       <dt>Nunca inventam para testar</dt>
       <dd>Nenhum examinador afirma o que sabe ser falso, finge concordar para derrubar depois, ou planta erro para ver a reação. A pressão se faz sem nenhuma mentira, e um simulador que mente ensina você a desconfiar do exercício.</dd>
@@ -355,27 +373,14 @@ preciso escrever, e as perguntas que ficaram sem resposta.</pre>
       <dd>Enquanto ele pergunta, a avaliação ainda pode se mover, e ela se move de quatro maneiras. <strong>Complementar:</strong> você mostra o que ele não viu, indicando onde está no trabalho. <strong>Retificar:</strong> você mostra que ele leu errado. <strong>Prometer reavaliação:</strong> você se compromete a refazer, o que não muda o que está escrito e muda o que estará. <strong>Demonstrar alcance:</strong> a pergunta ia além do texto, não havia lacuna a suprir, e a avaliação sobe assim mesmo, porque você mostrou que pensa além do que escreveu.</dd>
 
       <dt>Ele diz qual das quatro aconteceu</dt>
-      <dd>Ao fechar cada ponto, o examinador declara se você complementou, retificou, prometeu, demonstrou alcance, ou se nada aconteceu e a avaliação ficou como estava. Nesse último caso ele diz o que teria movido. É a informação mais útil da sessão inteira, e nenhuma banca real a entrega.</dd>
+      <dd>Ao fechar cada ponto, o examinador declara se você complementou, retificou, prometeu, demonstrou alcance, ou se nada aconteceu e a avaliação ficou como estava. Nesse último caso ele diz o que teria movido. É a informação mais útil da sessão, e nenhuma banca real a entrega ao candidato.</dd>
+
+      <dt>Trabalham com o texto que têm</dt>
+      <dd>Os examinadores são definidos por método e por pergunta, e não por erudição de domínio: nenhum deles afirma o que a doutrina ou a literatura sustentam, porque essa informação está fora do trabalho e eles não a têm. Quando um examinador precisar de algo que o texto não traz, ele pergunta a você em vez de inventar.</dd>
     </dl>
   </section>
 
-  <section>
-    <h2>Sessão completa</h2>
-    <p>A banca inteira, com presidente, revezamento e fechamento. É a versão que reproduz a dinâmica.</p>
-    <div class="barra"><span class="lbl">Prompt · cole inteiro, com o trabalho anexado</span><button class="copiar" type="button" data-alvo="ps">Copiar</button></div>
-    <textarea class="prompt" id="ps" readonly spellcheck="false"></textarea>
-  </section>
-
-  <section>
-    <h2>Arguição por um examinador só</h2>
-    <p>Para treinar um flanco específico, mais fundo e sem revezamento. Útil quando o relatório já apontou onde está o problema.</p>
-    <div class="barra"><span class="lbl">Prompt · escolha a lente na primeira linha</span><button class="copiar" type="button" data-alvo="pu">Copiar</button></div>
-    <textarea class="prompt curta" id="pu" readonly spellcheck="false"></textarea>
-  </section>
-
   <footer class="colofao">
-    <p><strong>Concepção, critérios e prompts:</strong> Prof. Alexandre Araújo Costa, Universidade de Brasília. Desenvolvido com apoio do modelo Opus, da Anthropic, no Claude Code.</p>
-    Os examinadores são definidos por método e por pergunta, nunca por erudição de domínio: nenhum deles afirma o que a doutrina ou a literatura sustentam, porque essa informação está fora do trabalho e eles não a têm. Quando um examinador precisar de algo que o texto não traz, ele pergunta a você em vez de inventar.
   </footer>
 </div>
 
