@@ -15,7 +15,7 @@
        ela diz para onde o cartao leva, e nao enfeita o cartao. */
     --projetos:    #2A5F45;
     --orientacao:  #33477E;
-    --formatacao:  #8A5722;
+    --formatacao:  #6E655C;
 
     --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro", Cambria, Georgia, serif;
     --sans:  "Segoe UI", Inter, system-ui, -apple-system, sans-serif;
@@ -36,7 +36,7 @@
       --rule-soft:   #2A2D32;
       --projetos:    #8FC0A0;
       --orientacao:  #97AAE2;
-      --formatacao:  #D3A163;
+      --formatacao:  #A8A096;
     }
   }
 
@@ -51,7 +51,7 @@
     --rule-soft:   #2A2D32;
     --projetos:    #8FC0A0;
     --orientacao:  #97AAE2;
-    --formatacao:  #D3A163;
+    --formatacao:  #A8A096;
   }
 
   :root[data-theme="light"] {
@@ -65,7 +65,7 @@
     --rule-soft:   #E6E2DA;
     --projetos:    #2A5F45;
     --orientacao:  #33477E;
-    --formatacao:  #8A5722;
+    --formatacao:  #6E655C;
   }
 
   * { box-sizing: border-box; }
@@ -124,7 +124,7 @@
   }
 
   .cartao {
-    border: 1px solid var(--rule-soft);
+    border: 1px solid var(--rule);
     border-left: 3px solid var(--cor);
     background: var(--surface);
     border-radius: 0 3px 3px 0;
@@ -217,17 +217,6 @@
   <p class="lead">Três conjuntos de ferramentas voltadas a planejar investigações,
   avaliar trabalhos acadêmicos e formatá-los adequadamente.</p>
 
-  <div class="byline">
-    <p>Ferramentas desenvolvidas por <b>Alexandre Araújo Costa</b></p>
-    <p class="fina">
-      Doutor em Direito. Professor da Faculdade de Direito da UnB.<br>
-      Coordenador do Programa de Pós-Graduação em Direito, Regulação e Políticas Públicas.<br>
-      Coordenador do Grupo de Pesquisa Cartografias Jurídicas.<br>
-      <a href="mailto:alexandre.araujo.costa@gmail.com">alexandre.araujo.costa@gmail.com</a>
-    </p>
-    <p class="fina">Com assistência do modelo Claude Opus 5, em Claude Code.</p>
-  </div>
-
   <p class="grupo">Na ordem da vida de um trabalho</p>
 
   <div class="cartao projetos">
@@ -240,13 +229,13 @@
     <div class="dentro">
       <div>
         <span class="nome">Miro</span>
-        <span class="oque">Conversa, uma pergunta por vez, sobre a lacuna, a pergunta,
-        a abordagem e o referencial, e sobretudo a consistência entre os quatro.</span>
+        <span class="oque">Assistente que conversa sobre projetos ou ideias de pesquisa,
+        ajudando a desenvolver o projeto.</span>
       </div>
       <div>
         <span class="nome">Selma</span>
-        <span class="oque">Lê o projeto escrito e devolve o que uma banca veria, em
-        cinco dimensões, com a lista de condições para ele ser apresentável.</span>
+        <span class="oque">Assistente que lê o projeto escrito e devolve o relatório que
+        uma banca faria, com a lista de condições para ele ser apresentável.</span>
       </div>
     </div>
   </div>
@@ -263,20 +252,19 @@
     <div class="dentro">
       <div>
         <span class="nome">Alberto</span>
-        <span class="oque">Uma leitura só, por chat ou por agente. Acha o defeito
-        exposto e declarado, e passa ao largo do que exige refazer uma conta dentro
-        de uma tabela.</span>
+        <span class="oque">Leitura única, por chat ou por agente. Identifica qualidades,
+        defeitos e lacunas. Depois sugere uma estratégia para o seu enfrentamento.</span>
       </div>
       <div>
         <span class="nome">Luis</span>
-        <span class="oque">Quatro leituras por caminhos diferentes, mais a
-        conferência de cada apontamento por quem não o escreveu. Só por agente, e
-        cobra horas e mais de um milhão de tokens.</span>
+        <span class="oque">Quatro leituras por caminhos diferentes, mais a conferência de
+        cada apontamento por quem não o escreveu. Só por agente, pois exige múltiplas
+        leituras coordenadas.</span>
       </div>
       <div>
         <span class="nome">Simulador de banca</span>
-        <span class="oque">Sessão de arguição com dois examinadores e o orientador
-        presidindo. Em desenvolvimento: é a única das três que nunca foi medida.</span>
+        <span class="oque">Assistente que conduz uma sessão de arguição, com dois
+        examinadores e o orientador presidindo. Ainda não medido.</span>
       </div>
     </div>
   </div>
@@ -284,25 +272,49 @@
   <div class="cartao formatacao">
     <div class="cartao-cab">
       <h2><a href="https://claude.ai/code/artifact/4d7706bf-3382-419e-97ff-4ad35b65e1eb">Oficina de Formatação</a></h2>
-      <span class="selo">em desenho</span>
+      <span class="selo">nada pronto</span>
     </div>
     <p class="le">Cuida da forma do arquivo, do editor ao PDF</p>
-    <p>A forma do arquivo acadêmico: o <code>.docx</code> que sai do editor com
-    dezoito estilos e formatação direta em quase todos os parágrafos, a página que
-    ninguém viu renderizada, o PDF que vai para a banca. <b>Ela nasceu separada da
-    Oficina de Orientação por causa do risco:</b> lá os programas leem e relatam, e
-    o pior que acontece é um apontamento errado; aqui um deles escreve no arquivo de
-    outra pessoa.</p>
-    <p><b>Nenhuma das três ferramentas está pronta para uso.</b> Uma existe em código
-    e não é recomendada, depois de ter desmontado a capa de uma dissertação que não
-    havia tocado; as outras duas ainda não foram escritas. A página está publicada
-    porque o desenho é aberto desde o começo.</p>
+    <p>Programas para o <code>.docx</code> que sai do editor com dezoito estilos e
+    formatação direta em quase todos os parágrafos, para a página que ninguém viu
+    renderizada, e para o PDF que vai à banca. <b>Ela nasceu separada da Oficina de
+    Orientação por causa do risco:</b> lá os programas leem e relatam, e aqui um deles
+    escreve no arquivo de outra pessoa.</p>
+    <div class="dentro">
+      <div>
+        <span class="nome">Norma</span>
+        <span class="oque">Programa que alinha a formatação do <code>.docx</code>.
+        Existe em código e não é recomendado, depois de ter desmontado a capa de uma
+        dissertação que não havia tocado.</span>
+      </div>
+      <div>
+        <span class="nome">Analisador de design</span>
+        <span class="oque">Programa que renderiza as páginas e avalia o resultado, e
+        não a receita. Ainda não escrito.</span>
+      </div>
+      <div>
+        <span class="nome">Gerador de PDF</span>
+        <span class="oque">Programa que compõe o PDF por LaTeX, deixando o original
+        intacto. Ainda não escrito, à espera da norma de formato do programa.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="byline">
+    <p>Ferramentas desenvolvidas por <b>Alexandre Araújo Costa</b></p>
+    <p class="fina">
+      Doutor em Direito. Professor da Faculdade de Direito da UnB.<br>
+      Coordenador do Programa de Pós-Graduação em Direito, Regulação e Políticas Públicas.<br>
+      Coordenador do Grupo de Pesquisa Cartografias Jurídicas.<br>
+      <a href="mailto:alexandre.araujo.costa@gmail.com">alexandre.araujo.costa@gmail.com</a>
+    </p>
+    <p class="fina">Com assistência do modelo Claude Opus 5, em Claude Code.</p>
   </div>
 
   <div class="nota">
-    <p><b>A ordem entre as oficinas não é rígida, e a volta faz parte.</b> Uma leitura
-    que encontra elemento sem sustentação devolve o projeto à conversa, e um trabalho
-    executado cuja pergunta se revelou mal formulada volta ao plano.</p>
+    <p><b>A ordem entre as oficinas não é rígida.</b> Uma leitura que encontra
+    elemento sem sustentação devolve o projeto à conversa, e nenhuma das ferramentas
+    faz esse retorno sozinha: quem decide voltar é quem escreve.</p>
     <p><b>São protótipos, ainda em fase de testes</b>, e todo feedback (dirigido a
     <a href="mailto:alexandrearcos@unb.br">alexandrearcos@unb.br</a>) será muito útil
     para aperfeiçoá-los. Se você usar estas ferramentas fora do contexto das
@@ -316,9 +328,10 @@
     <p>Os nomes dos assistentes são uma homenagem a <b>Luis Alberto Warat</b>, meu
     grande professor, que desconstruía os meus rascunhos e me punha no rumo de
     construções mais robustas.</p>
-    <p>A maquinaria está aberta em
+    <p>A maquinaria da Oficina de Orientação e da de Formatação está aberta em
     <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao">github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</a>,
-    com o registro de desenho que explica por que cada regra existe.</p>
+    com o registro de desenho que explica por que cada regra existe. Os prompts da
+    Oficina de Projetos ficam nas páginas do Miro e da Selma.</p>
   </footer>
 
 </div>

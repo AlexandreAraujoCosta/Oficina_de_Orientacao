@@ -10,7 +10,7 @@ Até 03/09/2026 este nome designava a conferência de consistência, que continu
 
 O Luis lê o trabalho quatro vezes por caminhos diferentes, confere cada apontamento
 por uma voz que não o escreveu, e devolve trinta itens com o endereço de cada peça
-de prova. Custa cerca de um milhão de tokens e quase uma hora.
+de prova. Custa cerca de um milhão de tokens e mais de uma hora.
 
 Alberto lê uma vez. No chat isso é uma mensagem só; no agente, em Opus 5, leva de
 41 a 48 minutos, porque ali ele roda os programas, confere na fonte e monta os
@@ -67,7 +67,7 @@ entre as duas leituras foram 64 em 277.
 **A outra metade disto é o custo, e quem escolhe precisa dos dois números.** As
 questões que pedem atenção e detalhe a leitura completa acha, e cobra por elas. Medido
 em 03/09/2026: **no agente, em Opus 5, esta leitura custa de 270 a 320 mil tokens e de
-41 a 48 minutos, já contando a revisão; a completa passa de 1,15 milhão e leva horas.**
+41 a 48 minutos, já contando a revisão; a completa passa de 1,15 milhão e de uma hora.**
 Os poucos milhares são o tamanho deste prompt, e não o da rodada.
 
 **No chat o tempo depende do assistente, e a única medida limpa é esta:** no chat do
