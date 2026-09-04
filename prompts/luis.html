@@ -208,6 +208,26 @@
   .eyebrow .eb-linha { display: block; }
   .eyebrow .eb-atual { opacity: .55; }
   .eyebrow .eb-baixo { margin-top: .3rem; padding-top: .3rem; border-top: 1px solid var(--rule); }
+
+  /* --- ficha do autor, na forma da pagina da Oficina --- */
+  .byline {
+    border-left: 2px solid var(--rule);
+    padding: .1rem 0 .1rem 1.1rem;
+    margin: 1.6rem 0 2.2rem;
+    max-width: var(--measure);
+  }
+  .byline p { margin: 0 0 .35rem; }
+  .byline p:last-child { margin-bottom: 0; }
+  .byline .author { font-size: .9rem; color: var(--ink-soft); }
+  .byline .author b { font-weight: 600; color: var(--ink); }
+  .byline .affil { font-size: .85rem; line-height: 1.55; color: var(--ink-faint); }
+  .byline .affil a { text-decoration: none; }
+  .byline .affil a:hover { text-decoration: underline; }
+  .byline .assist { font-size: .85rem; color: var(--ink-faint); }
+
+  /* O titulo respira o proprio corpo acima e abaixo. */
+  .eyebrow { margin: 0; }
+  .top h1, header h1, .wrap > h1 { margin: 1em 0; }
 </style>
 <div class="wrap">
 
@@ -230,6 +250,17 @@
   com o parágrafo citado inserido abaixo de cada item; e a lista de itens para correção.
   <b>Não há via de chat</b>, porque as quatro leituras e a conferência exigem sessões separadas,
   e numa conversa há uma sessão só. Para o relatório numa conversa, a ferramenta é o <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a>.</p>
+
+    <div class="byline">
+      <p class="author">Ferramentas desenvolvidas por <b>Alexandre Araújo Costa</b></p>
+      <p class="affil">
+        Doutor em Direito. Professor da Faculdade de Direito da UnB.<br>
+        Coordenador do Programa de Pós-Graduação em Direito, Regulação e Políticas Públicas.<br>
+        Coordenador do Grupo de Pesquisa Cartografias Jurídicas.<br>
+        <a href="mailto:alexandre.araujo.costa@gmail.com">alexandre.araujo.costa@gmail.com</a>
+      </p>
+      <p class="assist">Com assistência do modelo Claude Opus 5, em Claude Code.</p>
+    </div>
 
   <div class="feedback">
     <p>Trata-se de um protótipo, ainda em fase de testes, e todo feedback (dirigido a
