@@ -535,13 +535,13 @@
       <button type="button" class="via-bt" data-via="chat">
         <span class="via-nome">Chat</span>
         <span class="via-txt">Você tem uma conta de assistente e nada instalado. Mede-se o arquivo aqui, copia-se o resultado, e cola-se junto com o prompt numa conversa nova.</span>
-        <span class="via-volta">Volta um relatório na conversa. Não volta arquivo.</span>
+        <span class="via-volta">Volta o relatório em texto, na conversa, com os endereços por página e posição. Não volta arquivo, e portanto não volta o <code>.docx</code> comentado. Medido: 15 min 52 s e cerca de 150 mil tokens.</span>
       </button>
 
       <button type="button" class="via-bt" data-via="agente">
         <span class="via-nome">Agente</span>
         <span class="via-txt">Você instala um assistente que roda programas na sua máquina, e ele trabalha sobre a pasta onde está o trabalho. Serve o Claude Code, com assinatura, e serve o VS&nbsp;Code com a sua própria chave de API: são dois tipos de agente, e os passos são quase os mesmos.</span>
-        <span class="via-volta">Volta o trabalho anotado, com os apontamentos na margem do Word, e o relatório em PDF.</span>
+        <span class="via-volta">Volta o trabalho anotado, com os apontamentos na margem do Word, e o relatório em PDF com o parágrafo citado inserido abaixo de cada item. Medido em Opus: 41 a 48 min e 270 a 320 mil tokens.</span>
       </button>
     </div>
 
@@ -614,6 +614,24 @@ Ao final me diga quantas suspeitas você examinou, quantas descartou por serem e
 
   <div id="guia-chat" hidden>
 
+    <h3>O que volta daqui, e o que não volta</h3>
+    <p><b>Volta o relatório inteiro em texto, na própria conversa</b>, nas oito partes, com cada
+    apontamento endereçado por <b>página e posição dentro dela</b>: <i>p. 85, último parágrafo
+    antes da figura</i>, <i>a nota 22 da mesma página</i>. Você confere abrindo o PDF no ponto
+    indicado, e o que leva daqui é o que copiar da tela.</p>
+    <p><b>Não volta arquivo</b>, e é isso que separa esta via da outra. Não volta o
+    <code>.docx</code> com cada apontamento como comentário do Word na margem do parágrafo que
+    ele cita, que é o formato em que o autor confere sem procurar e responde ali mesmo. Não
+    voltam os localizadores <code>[P123]</code>, que vêm de uma extração numerada guardada entre
+    passos. E não há a revisão que, no agente, abre cada endereço para conferi-lo.</p>
+    <p><b>O que custa, medido em 04/09/2026</b> sobre uma tese de 109 páginas, no chat do Claude
+    em Opus 5 com esforço alto: <b>15 minutos e 52 segundos</b>, e algo entre <b>140 e 155 mil
+    tokens</b> de contexto único, que é estimativa do próprio assistente e não leitura de
+    contador. Para comparar, a mesma leitura no agente custou de 41 a 48 minutos e de 270 a 320
+    mil tokens contados. <b>O chat sai por cerca de metade</b>, e a diferença é justamente a
+    revisão e as conferências mecânicas, que ali não rodam.</p>
+
+    <h3>Os passos</h3>
     <ol class="passos">
       <li><b>Abra uma conversa nova</b> no seu assistente e <b>cole o prompt</b>, que está <a href="#prompts">mais abaixo nesta página</a>. Tecle enter e espere a resposta. A conversa tem de ser nova: histórico anterior contamina a leitura.</li>
       <li><b>Anexe o trabalho</b> na mesma conversa, pelo botão <b>+</b>. Prefira o PDF: ele entrega as figuras como imagem, e é o que permite ao assistente ver os gráficos.</li>
