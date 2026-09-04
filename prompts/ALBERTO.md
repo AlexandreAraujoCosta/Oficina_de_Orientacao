@@ -70,12 +70,13 @@ em 03/09/2026: **no agente, em Opus 5, esta leitura custa de 270 a 320 mil token
 41 a 48 minutos, já contando a revisão; a completa passa de 1,15 milhão e leva horas.**
 Os poucos milhares são o tamanho deste prompt, e não o da rodada.
 
-**No chat o tempo não está medido para este prompt, e vai dito porque havia um número
-aqui que não era dele.** "De um a três minutos" era a rodada do Alberto anterior, a
-conferência de consistência que hoje está em `CONSISTENCIA.md`, e ficou nesta página
-quando o nome mudou de dono. A única rodada de chat cronometrada com este prompt foi
-uma no ChatGPT, e levou mais que isso. O que se pode afirmar é a forma: **no chat é uma
-mensagem só, e o relatório volta na conversa.**
+**No chat o tempo depende do assistente, e a única medida limpa é esta:** no chat do
+Claude, em Opus 5 com esforço alto, sobre uma tese de 109 páginas em PDF, **15 minutos e
+52 segundos**, em 04/09/2026. **Não existe aqui a leitura de um a três minutos que esta
+oficina já anunciou:** aquele número era da rodada do Alberto anterior, a conferência de
+consistência que hoje está em `CONSISTENCIA.md`, e sobreviveu quando o nome mudou de
+dono. O que se pode afirmar da forma é que **no chat é uma mensagem só, e o relatório
+volta na conversa.**
 
 ## Como o prompt entra na conversa, e isso não é detalhe
 
@@ -524,11 +525,17 @@ Três respostas, e a do meio é a mais valiosa:
 para o achado que a leitura interna não tem como produzir, e não para varrer a
 literatura do campo. Varrer é a leitura completa.
 
-**No chat isto não roda**, e o relatório diz que não rodou, na parte 3 e no alcance.
+**No chat isto depende do assistente, e você não presume: você olha.** Alguns rodam
+busca na web e programa na própria conversa — medido em 04/09/2026, o chat do Claude
+executou vinte e cinco comandos, abriu nove arquivos e pesquisou na web numa leitura —,
+e outros não fazem nada disso. **Diga na parte 3 e no alcance o que de fato rodou**, e
+não o que a via costuma permitir.
 
 ## A revisão, e ela é uma só
 
-No chat, o relatório sai da primeira passada e acaba aí.
+No chat, o relatório sai da primeira passada e acaba aí, mesmo onde o assistente rode
+programa: o que falta ali não é comando, é uma segunda voz que não escreveu o que
+confere.
 
 No agente, roda **uma revisão, e uma só**. Ela recebe o trabalho e o relatório, e
 recebe a instrução de derrubar. **Ela não acrescenta item nenhum**, e não reescreve

@@ -32,8 +32,10 @@ diz("nao ha guia de chat", !html.includes('id="guia-chat"'));
 diz("nao ha prompt portatil embutido", !html.includes('id="p-luis"'));
 diz("remete ao Alberto para a conversa",
     html.includes("Numa conversa, a ferramenta é o"));
-diz("diz por que nao ha via de chat, e a razao e os subagentes",
-    html.includes("vários subagentes"));
+diz("diz por que nao ha via de chat, e a razao e a sessao unica",
+    html.includes("sessões separadas"));
+diz("nao afirma que conversa nao roda comando",
+    !html.includes("não roda comando nenhum"));
 
 // 2. Os blocos de script compilam.
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((x) => x[1]);
