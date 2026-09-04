@@ -172,10 +172,12 @@
   }
 
   .standfirst {
-    font-size: 20px;
-    line-height: 1.5;
+    font-family: var(--serif);
+    font-size: 1.14rem;
+    line-height: 1.55;
     color: var(--ink-soft);
-    margin: 0 0 28px;
+    max-width: var(--measure);
+    margin: 0 0 2rem;
   }
 
   .feedback {
@@ -210,18 +212,16 @@
   }
 
   .byline {
-    border-top: 1px solid var(--rule);
-    padding-top: 16px;
-    margin: 0 0 30px;
+    border-left: 2px solid var(--rule);
+    padding: .1rem 0 .1rem 1.1rem;
+    margin: 0 0 2.6rem;
+    max-width: var(--measure);
   }
 
   .byline .author {
-    font-family: var(--serif);
-    font-size: 17.5px;
-    font-weight: 400;
-    letter-spacing: -0.005em;
+    font-size: .9rem;
     color: var(--ink-soft);
-    margin: 0 0 6px;
+    margin: 0 0 .35rem;
   }
 
   .byline .author b {
@@ -230,23 +230,19 @@
   }
 
   .byline .affil {
-    font-family: var(--sans);
-    font-size: 13.5px;
+    font-size: .85rem;
     line-height: 1.55;
     color: var(--muted);
-    margin: 0;
+    margin: 0 0 .35rem;
   }
 
   .byline .affil a { text-decoration: none; }
   .byline .affil a:hover { text-decoration: underline; }
 
   .byline .assist {
-    font-family: var(--sans);
-    font-size: 12.5px;
-    color: var(--faint);
-    margin: 12px 0 0;
-    padding-top: 10px;
-    border-top: 1px solid var(--rule-soft);
+    font-size: .85rem;
+    color: var(--muted);
+    margin: 0;
   }
 
   /* ---------- principle ---------- */
