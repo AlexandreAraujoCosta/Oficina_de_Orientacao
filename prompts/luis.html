@@ -555,34 +555,18 @@
   material apresentado, se o método executado é o anunciado, se as conclusões cabem no que foi
   mostrado, e o que o trabalho contribui sem reivindicar.</p>
 
-  <p><b>O Luis e o <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> entregam
-  o mesmo relatório e diferem no quanto leem.</b> O Luis lê o trabalho quatro vezes por
-  caminhos diferentes e confere cada apontamento por uma leitura que não o escreveu; o Alberto
-  lê uma vez. Sobre a mesma dissertação, em 03/09/2026, o Luis devolveu 32 itens com 868
-  endereços e o Alberto 26 com 253, e custou cerca de um milhão de tokens contra alguns
-  minutos. <b>O Alberto acha o defeito exposto e declarado; o que depende de contar através do
-  texto inteiro sai no Luis, e caro.</b></p>
+  <p><b>Ele lê quatro vezes por caminhos diferentes e confere cada apontamento por uma leitura
+  que não o escreveu</b>, e é isso que ele tem a mais que o
+  <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a>, que
+  lê uma vez. O Alberto acha o defeito exposto e declarado; <b>o que depende de contar através do
+  texto inteiro sai aqui, e caro.</b></p>
 
-  <p><b>O Luis não tem via de chat, e a razão é de desenho.</b> Numa conversa há uma voz só. Ela
-  pode até rodar programa — medido em 04/09/2026, o chat do Claude executou 25 comandos e
-  pesquisou na web numa leitura —, mas continua sendo uma sessão só. O Luis lê o trabalho por
-  quatro caminhos e confere cada apontamento por uma leitura que não o escreveu, e isso exige
-  sessões separadas, que só existem onde o assistente pode abri-las. É a mesma capacidade que
-  devolve o <code>.docx</code> anotado. <b>Numa conversa, a ferramenta é o
-  <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a></b>,
-  escrito para caber numa passada só. <b>O que se ganha e o que se perde ali está medido:</b>
-  no chat, o relatório volta em texto na conversa, endereçado por página e posição, em 15
-  minutos e 52 segundos de relógio e cerca de 150 mil tokens; não volta arquivo nenhum, e
-  portanto não volta o <code>.docx</code> comentado. Essa rodada teve execução de código na
-  conversa e a usou, de modo que está mais perto do agente do que de um chat sem ferramentas.</p>
+  <p><b>Desta página volta o conjunto:</b> o trabalho anotado em <code>.docx</code>, com cada
+  apontamento como comentário do Word na margem do parágrafo que ele cita; o relatório em PDF,
+  com o parágrafo citado inserido abaixo de cada item; e a lista de itens para correção.
+  <b>Não há via de chat</b>, porque as quatro leituras e a conferência exigem sessões separadas,
+  e numa conversa há uma sessão só. Para o relatório numa conversa, a ferramenta é o Alberto.</p>
 
-  <p><b>Desta página volta o conjunto</b>, e é por isso que ela existe: o trabalho anotado em
-  <code>.docx</code>, com cada apontamento como comentário do Word na margem do parágrafo que ele
-  cita e os comentários do autor preservados ao lado; o relatório em PDF, com o parágrafo citado
-  inserido abaixo de cada item, de modo que se lê sem o trabalho aberto; e a lista de itens para
-  correção. Os endereços são <code>[P123]</code>, que apontam o parágrafo e não a página.
-  <b>O custo é a contrapartida:</b> acima de 1,15 milhão de tokens, contra os 270 a 320 mil de
-  uma leitura só no agente, e o relógio em horas.</p>
   <div class="feedback">
     <p>Trata-se de um protótipo, ainda em fase de testes, e todo feedback (dirigido a
     <a href="mailto:alexandrearcos@unb.br">alexandrearcos@unb.br</a>) será muito útil
@@ -714,6 +698,29 @@ Nao rode git. Nao publique nada. Se faltar alguma coisa, diga o que falta.</pre>
     seletiva sem avisar e entregou uma citação inventada; outro leu tudo e devolveu atestado de
     saúde, com zero parágrafos abertos. Os números estão na
     <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">página da Oficina</a>.</p>
+  </section>
+
+
+  <section class="cuidados" id="medido">
+    <h2>O que está medido</h2>
+
+    <p><b>Cobertura, em 03/09/2026, sobre a mesma dissertação.</b> O Luis devolveu 32 itens com
+    868 endereços de parágrafo; a leitura de uma passada devolveu 26 com 253. A diferença não
+    está no que se acha de mais evidente, e sim no que exige refazer uma conta dentro de uma
+    tabela de resultado e comparar o que ela publica com o que a prosa afirma dela.</p>
+
+    <p><b>Custo.</b> Acima de 1,15 milhão de tokens e horas de relógio, contra os 270 a 320 mil
+    e os 41 a 48 minutos de uma leitura só no agente. É a contrapartida do desenho, e é a razão
+    de existir uma ferramenta mais barata na porta de entrada.</p>
+
+    <p><b>Por que não há via de chat, com o que se mediu.</b> Numa conversa há uma voz só. Ela
+    pode até rodar programa: em 04/09/2026, o chat do Claude executou 25 comandos e pesquisou na
+    web numa leitura, devolvendo o relatório em texto, endereçado por página e posição, em 15
+    minutos e 52 segundos e cerca de 150 mil tokens. <b>Mas continua sendo uma sessão só</b>, e
+    não volta arquivo nenhum: sem o <code>.docx</code> comentado e sem os localizadores
+    <code>[P123]</code>, que dependem de uma extração numerada guardada entre passos. A
+    conferência por quem não escreveu o apontamento, que é onde de 10% a 31% dos achados caem,
+    é o que não cabe ali.</p>
   </section>
 
   <p class="ressalva">Ferramenta de leitura assistida, feita por Alexandre Araújo Costa,
