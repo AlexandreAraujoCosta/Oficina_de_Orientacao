@@ -563,8 +563,13 @@
   minutos. <b>O Alberto acha o defeito exposto e declarado; o que depende de contar através do
   texto inteiro sai no Luis, e caro.</b></p>
 
-  <p><b>Numa conversa de chat, a ferramenta é o Alberto</b>, que foi escrito para caber numa
-  passada só. Esta página é das duas vias com programas, que são as que o Luis exige.</p>
+  <p><b>O Luis não tem via de chat, e a razão é de desenho.</b> Numa conversa há uma voz só, que
+  lê uma vez e não roda comando nenhum. O Luis lê o trabalho por quatro caminhos e confere cada
+  apontamento por uma leitura que não o escreveu, e isso são vários subagentes rodando lado a
+  lado, que só existem onde o assistente pode abrir processos. É a mesma capacidade que gera o
+  <code>.docx</code> anotado. <b>Numa conversa, a ferramenta é o
+  <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a></b>,
+  escrito para caber numa passada só.</p>
   <div class="feedback">
     <p>Trata-se de um protótipo, ainda em fase de testes, e todo feedback (dirigido a
     <a href="mailto:alexandrearcos@unb.br">alexandrearcos@unb.br</a>) será muito útil
@@ -583,66 +588,56 @@
     que o autor já conhece. Nesse estágio o Alberto rende mais.</p>
   </div>
 
-  <p class="vias-titulo">Escolha a via pela qual você vai aplicar a ferramenta, para ter as
-  orientações adequadas sobre o seu uso em cada opção.</p>
-
-  <div class="vias-grade">
-    <button type="button" class="via-bt" data-via="claude">
-      <span class="via-nome">Claude&nbsp;Code</span>
-      <span class="via-txt">É o modo mais testado. O Claude Code trabalha sobre a pasta onde
-      está o trabalho e roda os programas sozinho. Exige assinatura da Claude e alguma
-      instalação.</span>
-      <span class="via-volta">Volta o trabalho anotado, com os apontamentos na margem do Word, e
-      o relatório em PDF.</span>
-    </button>
-
-    <button type="button" class="via-bt" data-via="vscode">
-      <span class="via-nome">VS&nbsp;Code + Agente</span>
-      <span class="via-txt">Com a sua própria chave de API, de Anthropic, OpenAI, Gemini ou
-      OpenRouter. O assistente roda os programas sozinho.</span>
-      <span class="via-volta">Volta o trabalho anotado, com os apontamentos na margem do Word, e
-      o relatório em PDF.</span>
-    </button>
-  </div>
-
-  <p class="vias-nota">Nas duas, escolha o melhor modelo que tiver. Modelo pequeno não serve
-  aqui, e isso está medido: sobre a mesma tese, um substituiu o método por leitura seletiva sem
-  avisar e entregou citação inventada. A medição em quatro modelos está na
-  <a href="https://claude.ai/code/artifact/57a0317d-5d0d-48fd-b571-4d7dfb1fe916">página da Oficina</a>.</p>
-
-  <div class="via-guia" id="guia-claude" hidden>
-    <h2>Pelo Claude Code, sobre a pasta do trabalho</h2>
-    <p>É a via mais testada, e a que devolve o conjunto: o trabalho anotado, o relatório em PDF
-    e a lista de correções.</p>
+  <div class="via-guia" id="guia-agente">
+    <h2>Por um agente, sobre a pasta do trabalho</h2>
+    <p>Agente é o assistente que roda programas na sua máquina, e não só conversa. Serve o
+    <b>Claude Code</b>, que exige assinatura da Claude, e serve o <b>VS Code</b> com a extensão
+    <b>GitHub Copilot</b> e a sua própria chave de API, de Anthropic, OpenAI, Gemini ou
+    OpenRouter, cobrada pelo provedor e sem gastar cota de assinatura. São dois tipos de agente,
+    e o que muda entre eles está escrito no próprio passo.</p>
 
     <ol class="passos">
-      <li><b>Instale o Claude Code</b> pelo instalador do site da Anthropic e entre com a sua
-      conta. Exige assinatura.</li>
-      <li><b>Traga a oficina:</b> num terminal, o comando abaixo. Se não tiver o git, peça
-      ao próprio assistente que o instale.
+      <li><b>Instale o agente.</b> O <b>Claude Code</b> pelo instalador do site da Anthropic,
+      entrando com a sua conta. O <b>VS Code</b> pelo site, e a extensão <b>GitHub Copilot</b>
+      pelo painel de extensões; depois ligue a sua chave no seletor de modelos, em <i>Manage
+      Models</i> ou <i>Add model provider</i>.</li>
+
+      <li><b>Traga a oficina.</b> No <b>Claude Code</b>, o comando abaixo num terminal; se não
+      tiver o git, peça ao próprio assistente que o instale. No <b>VS Code</b>, na tela inicial,
+      <b>Clonar Repositório Git…</b> e cole o mesmo endereço, respondendo que sim quando ele
+      perguntar se quer abrir a pasta, porque é ao abrir que ele lê as instruções.
         <div class="cmd">
           <button type="button" class="copiar" data-alvo="c-clone">Copiar</button>
           <pre id="c-clone">git clone https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</pre>
         </div>
       </li>
+
       <li><b>Ponha o trabalho na pasta</b> que o clone criou, ao lado de <code>scripts/</code> e
       <code>prompts/</code>.</li>
-      <li><b>Abra o Claude Code nessa pasta</b>, entrando nela e chamando o programa.
+
+      <li><b>Abra o agente nessa pasta.</b> No <b>Claude Code</b>, entrando nela e chamando o
+      programa. No <b>VS Code</b>, abrindo o chat com <b>Ctrl+Alt+I</b> e pondo em <b>modo
+      agente</b>, no seletor do alto do painel, onde costuma estar escrito <i>Ask</i>: modo
+      agente é o que tem terminal, e nos outros o assistente explica os comandos em vez de
+      executá-los, sem avisar a diferença.
         <div class="cmd">
           <button type="button" class="copiar" data-alvo="c-abrir">Copiar</button>
           <pre id="c-abrir">cd Oficina_de_Orientacao
 claude</pre>
         </div>
       </li>
-      <li><b>Escolha o melhor modelo disponível.</b> Aqui isso não é detalhe: modelo pequeno
-      entrega relatório que parece bom e não abriu o trabalho.</li>
+
+      <li><b>Escolha o melhor modelo disponível</b>, e evite o modo automático. Aqui isso não é
+      detalhe: modelo pequeno entrega relatório que parece bom e não abriu o trabalho, e modelo
+      escolhido pelo serviço é modelo desconhecido, que não se compara com nenhum outro.</li>
+
       <li><b>Peça a análise</b>, com o pedido abaixo.</li>
     </ol>
 
     <div class="pedido">
-      <button type="button" class="copiar" data-alvo="c-pedido-claude">Copiar</button>
+      <button type="button" class="copiar" data-alvo="c-pedido-agente">Copiar</button>
       <p class="pedido-rot">Cole isto na conversa:</p>
-      <pre class="pedido-txt" id="c-pedido-claude">Leia prompts/leituras/ESTADO.md nesta pasta e rode o pipeline sobre este trabalho,
+      <pre class="pedido-txt" id="c-pedido-agente">Leia prompts/leituras/ESTADO.md nesta pasta e rode o pipeline sobre este trabalho,
 seguindo os prompts numerados de prompts/leituras/ na ordem.
 
 Antes de tudo, se o trabalho for .docx, rode o diagnostico de forma, que le e
@@ -654,11 +649,20 @@ python scripts/conferir_interno.py extracao/trabalho.txt
 O que o diagnostico apontar entra no relatorio como sugestao. Nenhum programa
 daqui altera o arquivo do autor.
 
-Depois faca a leitura completa do Luis sobre a copia limpa, e monte a entrega com
+Depois rode a leitura completa sobre a extracao, e monte a entrega com
 scripts/montar_entrega.py.
 
 Nao rode git. Nao publique nada. Se faltar alguma coisa, diga o que falta.</pre>
     </div>
+
+    <h3>Aprovar os comandos</h3>
+    <p>Os dois agentes pedem permissão para rodar cada comando, e a pasta já traz a lista do que
+    é seguro aprovar e do que eles nunca devem rodar.</p>
+
+    <h3>Sobre o custo</h3>
+    <p>Uma dissertação pelo Luis custa mais que pelo Alberto, porque são quatro leituras mais o
+    cotejo, e porque o modelo é maior: cerca de um milhão de tokens contra alguns minutos de
+    uma passada só. Com assinatura, o custo é a cota; com chave própria, é a conta do provedor.</p>
 
     <h3>Vários trabalhos na mesma sessão</h3>
     <p>Pode. Terminada uma análise, ponha o próximo arquivo na pasta e peça a leitura dele. O
@@ -671,65 +675,6 @@ Nao rode git. Nao publique nada. Se faltar alguma coisa, diga o que falta.</pre>
     <h3>Onde fica a entrega</h3>
     <p>Numa pasta <code>entregas/</code>, com o trabalho anotado em <code>.docx</code>, o
     relatório em PDF e a lista de itens para correção. É o que se manda a quem escreveu.</p>
-  </div>
-
-  <div class="via-guia" id="guia-vscode" hidden>
-    <h2>Pelo VS Code com agente, e a sua própria chave de API</h2>
-    <p>Serve a quem tem crédito de API e não tem assinatura de assistente. Devolve o mesmo
-    conjunto que o Claude Code.</p>
-
-    <ol class="passos">
-      <li><b>Instale o VS Code</b> e, no painel de extensões, a extensão <b>GitHub
-      Copilot</b>.</li>
-      <li><b>Traga a oficina:</b> na tela inicial, <b>Clonar Repositório Git…</b> e cole
-      o endereço abaixo. Responda que sim quando ele perguntar se quer abrir a pasta: é ao
-      abrir que ele lê as instruções.
-        <div class="cmd">
-          <button type="button" class="copiar" data-alvo="c-repo">Copiar</button>
-          <pre id="c-repo">https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</pre>
-        </div>
-      </li>
-      <li><b>Ligue a sua chave:</b> no seletor de modelos, <i>Manage Models</i> ou <i>Add model
-      provider</i>. Aceita Anthropic, OpenAI, Gemini e OpenRouter. O consumo é cobrado pelo
-      provedor e não gasta cota de assinatura.</li>
-      <li><b>Escolha o melhor modelo que a sua chave oferecer</b>, e evite o modo automático:
-      modelo escolhido pelo serviço é modelo desconhecido, e relatório de modelo desconhecido não
-      se compara com nenhum outro.</li>
-      <li><b>Ponha o trabalho na pasta</b>, ao lado de <code>scripts/</code>.</li>
-      <li><b>Abra o chat</b> com <b>Ctrl+Alt+I</b> e <b>ponha em modo agente</b> no seletor do
-      alto do painel, onde costuma estar escrito <i>Ask</i>. Modo agente é o que tem terminal;
-      nos outros o assistente explica os comandos em vez de executá-los, e não avisa a
-      diferença.</li>
-      <li><b>Peça a análise</b>, com o pedido abaixo.</li>
-    </ol>
-
-    <div class="pedido">
-      <button type="button" class="copiar" data-alvo="c-pedido-vscode">Copiar</button>
-      <p class="pedido-rot">Cole isto na conversa:</p>
-      <pre class="pedido-txt" id="c-pedido-vscode">Leia o AGENTS.md nesta pasta e siga o que ele manda.
-
-Antes de tudo, se o trabalho for .docx, rode o diagnostico de forma, que le e
-nao mexe em nada:
-python scripts/diagnostico_forma.py trabalho.docx
-python scripts/extrair.py trabalho.docx
-python scripts/conferir_interno.py extracao/trabalho.txt
-
-O que o diagnostico apontar entra no relatorio como sugestao. Nenhum programa
-daqui altera o arquivo do autor.
-
-Depois rode o pipeline de prompts/leituras/ sobre a copia limpa, e monte a entrega
-com scripts/montar_entrega.py.
-
-Nao rode git. Nao publique nada.</pre>
-    </div>
-
-    <h3>Aprovar os comandos</h3>
-    <p>Ele pede permissão para rodar cada comando. A pasta já traz a lista do que é seguro
-    aprovar e do que ele nunca deve rodar.</p>
-
-    <h3>Sobre a cota</h3>
-    <p>Com chave própria, o consumo é do provedor. Uma dissertação pelo Luis custa mais que pelo
-    Alberto, porque a leitura é mais longa e o modelo é maior.</p>
   </div>
 
 
@@ -764,26 +709,6 @@ Nao rode git. Nao publique nada.</pre>
   desenho que explica por que cada regra existe.</p>
 </div>
 
-<script>
-(function () {
-  var bts = Array.prototype.slice.call(document.querySelectorAll(".via-bt"));
-  var guias = { claude: "guia-claude", vscode: "guia-vscode" };
-  function mostrar(via) {
-    bts.forEach(function (o) {
-      o.setAttribute("aria-pressed", String(o.dataset.via === via));
-    });
-    Object.keys(guias).forEach(function (k) {
-      var el = document.getElementById(guias[k]);
-      if (el) el.hidden = k !== via;
-    });
-  }
-  bts.forEach(function (b) {
-    b.addEventListener("click", function () { mostrar(b.dataset.via); });
-  });
-  var daUrl = (location.hash || "").replace("#", "");
-  if (Object.prototype.hasOwnProperty.call(guias, daUrl)) mostrar(daUrl);
-})();
-</script>
 <script>
 (function () {
   document.querySelectorAll(".copiar").forEach(function (b) {

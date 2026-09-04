@@ -30,12 +30,14 @@ function diz(rot, ok, extra) {
 diz("nao ha botao de via de chat", !html.includes('data-via="chat"'));
 diz("nao ha guia de chat", !html.includes('id="guia-chat"'));
 diz("nao ha prompt portatil embutido", !html.includes('id="p-luis"'));
-diz("remete ao Alberto para a conversa de chat",
-    html.includes("Numa conversa de chat, a ferramenta é o"));
+diz("remete ao Alberto para a conversa",
+    html.includes("Numa conversa, a ferramenta é o"));
+diz("diz por que nao ha via de chat, e a razao e os subagentes",
+    html.includes("vários subagentes"));
 
 // 2. Os blocos de script compilam.
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((x) => x[1]);
-diz("ha dois blocos de script", scripts.length === 2, scripts.length + " encontrados");
+diz("ha um bloco de script", scripts.length === 1, scripts.length + " encontrados");
 scripts.forEach(function (s, i) {
   let ok = true;
   try { new Function(s); } catch (e) { ok = false; }
@@ -50,9 +52,9 @@ diz("controle positivo: codigo quebrado e recusado", recusou);
 // 3. O que a pagina precisa dizer, e o que nao pode mais dizer.
 const presentes = [
   ["title da pagina", "<title>Luis</title>"],
-  ["seletor de vias", 'class="via-bt"'],
-  ["guia do Claude Code", 'id="guia-claude"'],
-  ["guia do VS Code", 'id="guia-vscode"'],
+  ["guia do agente", 'id="guia-agente"'],
+  ["o guia cobre o Claude Code", "Claude Code"],
+  ["o guia cobre o VS Code", "VS Code"],
   ["aponta o pipeline", "prompts/leituras/"],
 ];
 const ausentes = [
@@ -60,6 +62,8 @@ const ausentes = [
   ["nao descreve o Alberto pelo desenho anterior a 03/09", "roda em modelo menor"],
   ["escala velha do veredito sumiu", "pronto para ir à banca"],
   ["nao voltou o prompt embutido", "Luis — versão portátil"],
+  ["nao ha seletor, porque ha uma via so", 'class="via-bt"'],
+  ["nao voltaram os guias separados por produto", 'id="guia-claude"'],
 ];
 presentes.forEach(function (par) { diz(par[0] + " (presente)", html.includes(par[1])); });
 ausentes.forEach(function (par) { diz(par[0] + " (ausente)", !html.includes(par[1])); });
