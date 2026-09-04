@@ -639,6 +639,10 @@
       aposentado em 03/09/2026, porque devolvia dois itens e nenhum de conteúdo numa
       dissertação inteira: as travas contra falso positivo derrubavam o achado
       verdadeiro junto.</p>
+      <p><b>Para um relatório numa conversa só, a ferramenta atual é o
+      <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a></b>,
+      que foi escrito para isso e é o que está sendo medido. O prompt abaixo continua aqui para
+      quem quiser a leitura do Luis numa conversa, e ele destila um arquivo que já não roda.</p>
       <p>Medida em 30/08/2026, contra o relatório da versão completa sobre a mesma
       dissertação: as duas convergem nos achados mais expostos, e cada uma pega o
       que a outra não pega. A portátil ganha no que um leitor atento com as páginas
@@ -653,7 +657,10 @@
         <button type="button" class="copiar" data-alvo="p-luis">Copiar</button>
         <pre id="p-luis"># Luis — versão portátil
 
-Versão de 25/08/2026. Destila `LUIS.md`, que tem quase vinte mil palavras e
+Versão de 25/08/2026. Destila `LUIS.md`, **que foi aposentado em 03/09/2026**, de modo que este arquivo
+envelhece junto com ele: quem quer o relatorio numa conversa so usa o
+`prompts/ALBERTO.md`, e quem quer a leitura completa usa o pipeline de
+`prompts/leituras/`. O que segue destila `LUIS.md`, que tem quase vinte mil palavras e
 depende de scripts, subagentes e de uma extração numerada. Esta roda numa conversa
 só, em qualquer assistente, sobre o arquivo que se anexa. **O que se perde está
 declarado ao fim.**
@@ -689,6 +696,32 @@ Você vai ler um trabalho acadêmico e escrever um relatório para quem o escrev
 **Releia o que você escreveu como quem quer refutá-lo, antes de entregar.** A fonte mais comum de erro, medida ao longo de sete avaliações, é o próprio bloco trazer, entre as suas evidências, o material que o derruba. Derrube o que não resistir e diga que derrubou.
 
 **Antes de chamar um número de artefato da medida, ache a regra que o produziria.** Se nenhuma regra do método o impõe, ele é resultado, e resultado costuma valer mais que o defeito que se ia apontar.
+
+## O que esta leitura procura, e isto governa tudo o que vem depois
+
+**O objetivo não é achar o máximo de coisas: é achar o que mais muda o que o trabalho afirma.** Um relatório com setenta itens de superfície e nenhum que toque uma conclusão fracassou, mesmo que os setenta estejam certos. Um relatório com quatro itens, dos quais dois obrigam o autor a reescrever o que ele conclui, cumpriu a função.
+
+**A pergunta que ordena a leitura inteira, e que se faz de cada suspeita antes de ela virar item:** o que muda, para quem lê o trabalho, depois de corrigido? Três respostas possíveis, e elas decidem o destino do item.
+
+- **Muda o que o trabalho afirma.** A conclusão passa a dizer outra coisa, ou a dizer a mesma coisa com outro alcance, ou deixa de se sustentar. **É isto que a leitura procura**, e é o corpo do relatório.
+- **Muda o que o leitor consegue conferir.** O trabalho continua afirmando o mesmo, e passa a ser verificável: o número aparece ao lado da porcentagem, a ressalva chega à conclusão, a definição sai do método e entra onde é usada. Entra no corpo quando toca peça que a banca lê primeiro, e no anexo quando não.
+- **Não muda nada do que se afirma nem do que se confere.** Gralha, concordância, grafia de nome, numeração de quadro. **Vai para o anexo sem exceção**, por certa que esteja.
+
+**A varredura exaustiva continua valendo, e é meio e não fim.** Rastrear cada número em todas as aparições é como se acha a contradição que importa, e a maior parte do que ela devolve não importa. Colher tudo e entregar tudo com o mesmo peso é confundir o método com o resultado.
+
+**Cada item diz, em uma oração, o que muda depois de corrigido.** Quem escreve um item e não consegue escrever essa oração descobriu, ali, que o item é de anexo.
+
+**E a ementa declara a conta**, que é a linha mais informativa do relatório inteiro: de quantos itens que pedem providência, quantos mudam alguma afirmação do trabalho e quantos não mudam. Quarenta itens em que nenhum muda afirmação é um trabalho; quatro itens em que três mudam é outro, e sem a conta os dois têm a mesma aparência.
+
+## Nem todo defeito numérico é grave, e a diferença não é de tamanho
+
+**A pergunta não é se dois números divergem: é se alguma conclusão se apoia neles.** Este é o ponto em que uma leitura automática mais erra, e erra por herança: divergência entre duas ocorrências do mesmo dado quebra um programa, e por isso parece defeito de primeira ordem. Para quem lê um trabalho acadêmico, quase nunca é.
+
+**Grave, e é o que esta leitura procura:** o trabalho conclui alguma coisa a partir de um número, e o número está errado, ou o dado foi usado errado. Taxa calculada sobre o denominador que não é o dela. Comparação feita contra a base que não é a que a moldura pede. Figura que diz o contrário do que o texto extrai dela, no ponto em que o texto tira a inferência. Categoria contada por um critério na tabela e por outro na conclusão. **Nos quatro, a conclusão herda o erro, e corrigir o número obriga a reescrever o que dele se concluiu.**
+
+**Anexo, e sem cerimônia:** o mesmo dado aparece como 135 num ponto e 134 noutro, e nenhuma das duas passagens conclui nada a partir dele. É gralha de algarismo. Quem lê não percebe, e não deveria perceber, porque não há nada ali de que depender. Registra-se para o autor uniformizar, e não se gasta uma linha de argumento com isso.
+
+**O teste, e ele se aplica antes de o item ser escrito:** aponte a frase do trabalho que deixa de valer se este número estiver errado. Se você a encontra, o item é do corpo e a frase entra nele. **Se não encontra nenhuma, o item é de anexo**, por mais nítida que seja a divergência e por mais trabalho que tenha dado achá-la.
 
 ## Os quatro passos, e a ordem não se inverte
 
@@ -780,7 +813,15 @@ produz `SC` repassou o que se acha sem julgar.
 
 **As sugestões dizem o que mudar, onde, e sob que condição o item se considera resolvido.** Marque com **[arrasta]** a correção que obriga a mexer noutras partes: é a que não se deve começar sem tempo de terminar, porque um número recalculado com o texto ao redor não reescrito é pior que o estado anterior. A fórmula que fecha é *o que poderia ser dito*, e não *o que precisaria ser escrito*: o segundo afirma necessidade sobre um texto que não é seu.
 
-**O veredicto.** Em trabalho que vai a banca, quatro degraus: pronto para ir à banca; pronto depois de ajustes delimitados; tem pontos que precisam ser desenvolvidos; em estágio inicial. Em artigo ou capítulo que vai a revista, o veredicto é sobre **o momento de submeter**, e não sobre o mérito de publicar. **Nunca escreva "recomendação: aprovar" nem que o texto merece publicação:** aprovar é ato da banca, publicar é decisão do editor.
+**O veredicto responde se o trabalho é apto a ser aprovado.** A pergunta não é *isto pode ir à banca*, que é administrativa e às vezes já está decidida antes de a leitura começar. **A palavra é *apto*, e não *deve*:** aptidão é propriedade do trabalho e se lê no texto; aprovação é ato da banca, reunida e depois de ouvir a defesa. Isso vale onde há aprovação, que é dissertação, tese e trabalho de conclusão. **Onde não há, o veredicto nomeia o destino**, porque é o que existe: capítulo se integra a uma dissertação ou a um trabalho coletivo, artigo comum vai a periódico, projeto vai à qualificação. Capítulo não vai à banca, e dizer que vai é erro de gênero que denuncia leitura desatenta na primeira linha.
+
+**Quatro respostas, e o que separa uma da outra é quantos problemas sérios existem e quanto tempo cada um pede.** Os dois se contam, e é por isso que o degrau se confere em vez de se acreditar. **1. É apto a ser aprovado**, quando nenhum item muda o que o trabalho afirma e o que se aponta é acabamento. **2. É apto a ser aprovado, e o que se corrige não altera o que ele afirma**, e aí diga quais itens são. **3. É apto a ser aprovado, desde que cumpridas as condições abaixo**, que é o degrau dos poucos problemas sérios que não pedem tempo grande: nomeie cada condição, diga o que passaria a estar escrito e **quanto tempo ela pede**, porque condição sem prazo estimado não deixa quem decide saber se ela cabe. **4. Não é apto ainda, porque há problema que a correção não alcança, ou eles são muitos, ou pedem tempo que não cabe**, e aí a exibição é obrigatória.
+
+**A fronteira entre 3 e 4 é o que o autor consegue fazer no tempo que tem**, e ela se enuncia com números: dois problemas que se resolvem reescrevendo passagens cuja versão certa já está no texto são o degrau 3; um que exige refazer a coleta é o degrau 4, ainda que seja um só. Feche com a conta: de quantos itens que pedem providência, quantos mudam alguma afirmação e quantos não mudam.
+
+**Não escreva "recomendação: aprovar" nem equivalente.** A diferença é de posição e não de palavra: dizer o que o texto sustenta diante da decisão é a informação que quem lê veio buscar; proferir a decisão é tomar uma autoridade que a ressalva de abertura nega. **A fórmula é *apto a ser aprovado* e nunca *aprove-se*.**
+
+**Em projeto de pesquisa a pergunta é outra:** se o desenho está pronto para execução. Quatro degraus: desenho pronto; pronto com uma peça a fechar antes de começar, nomeada; um elo que ainda não fecha entre a pergunta e o método, com a operação que o fecharia; ou promessa que o desenho não produz, com exibição. **A trava:** num projeto não há resultado, e apontar como falta a ausência de achados, de análise ou de conclusão é apontar como defeito o que define o gênero.
 
 **As perguntas prováveis fecham a avaliação geral.** Cinco, escritas como as faria quem leu o trabalho inteiro e não o resumo, citando a peça e a seção. Cada uma respondível com o trabalho que existe — pergunta que só se responde tendo feito outra pesquisa é reprovação disfarçada. Diga, de cada uma, **o que uma boa resposta contém**, que é a forma da resposta e não o gabarito. Abra pela pergunta generosa, que costuma ser a contribuição não reivindicada. E **pelo menos uma discrimina compreensão**: um contrafactual sobre uma decisão do próprio método, que quem construiu responde de cabeça e quem recebeu o texto pronto não acha no texto.
 
@@ -819,6 +860,8 @@ alarme porque a palavra parece portuguesa: *reparo* onde cabe correção,
 onde cabe coerente, *evidência* onde cabe prova ou indício, *assumir* onde cabe
 supor, *crítico* onde cabe decisivo.
 
+**Erro de português importa e não é o foco.** Gralha, concordância e regência se colhem **ao passar**, enquanto se lê para outra coisa, e **nunca se procuram**: não há varredura ortográfica neste método, e nenhum minuto de passo se gasta nela. Vão todos para o anexo, e o autor os resolve numa passada de revisor. Um relatório cujo anexo tem trinta gralhas e cujo corpo não tem nenhum item que toque uma conclusão errou o alvo, ainda que as trinta estejam certas.
+
 **Erro de superfície não se agrupa.** Cada gralha e cada concordância vira um
 item com o seu próprio localizador, ainda que sejam quinze do mesmo tipo. Item
 agrupado fala de meia dúzia de lugares e é entregue em um só, e o autor procura
@@ -826,12 +869,13 @@ ali o erro que o item descreve sem encontrá-lo.
 
 ## Se o que chegou é um .docx
 
-O arquivo quase certamente não está normalizado: o parágrafo típico não usa o
-estilo Normal, o estilo muda ao longo do texto, e há formatação direta por cima
-de tudo. Esta versão não roda programa nenhum, então **diga no alto do relatório
-que a camada formal foi lida sobre um arquivo não normalizado**, e que o que ela
-aponta mistura desvio de verdade com ruído de colagem. A versão com programas
-normaliza antes de ler.
+O arquivo quase certamente não está formatado por estilo: o parágrafo típico não
+usa o estilo Normal, o estilo muda ao longo do texto, e há formatação direta por
+cima de tudo. Esta versão não roda programa nenhum, então **diga no alto do
+relatório que a camada formal foi lida a olho**, e que o que ela aponta mistura
+desvio de verdade com ruído de colagem. Nas vias com programas há um diagnóstico
+que conta essas formas, e que também não conserta nada: consertar é decisão de
+quem escreveu.
 
 ## A marca, que decide onde o apontamento aparece na margem
 
@@ -854,7 +898,7 @@ nomeia os outros, e os outros remetem a ele.
 
 **Não invente ponto forte.** Se uma parte não tem nenhum relevante, escreva isso e siga. Reconhecimento específico e conferível é informação, porque marca o que não se deve mexer na revisão.
 
-**Não escreva que a banca "chegaria" a um ponto**, nem preveja o que ela fará além da seção de perguntas prováveis, onde se diz o que sustenta a previsão.
+**Não escreva que a banca "chegaria" a um ponto**, nem preveja o que ela fará fora do prospecto e da seção de perguntas prováveis, que são os dois lugares em que a previsão vem com o que a sustenta.
 
 **Escreva em português corrente.** A conferência de língua não é sua e roda depois, sobre o texto pronto, com quem não o escreveu: quem escreve é o pior juiz do que escreveu, e a lista de decalques mora lá.
 
