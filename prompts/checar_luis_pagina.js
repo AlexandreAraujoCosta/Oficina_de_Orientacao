@@ -20,6 +20,11 @@ const path = require("path");
 const AQUI = __dirname;
 const html = fs.readFileSync(path.join(AQUI, "luis.html"), "utf8");
 
+// A prosa se confere sobre o texto sem marcacao: em 04/09/2026 uma checagem
+// quebrou porque o nome de um agente virou link no meio da frase, e a frase
+// continuava certa para quem le.
+const texto = html.replace(/<[^>]+>/g, "");
+
 let falhas = 0;
 function diz(rot, ok, extra) {
   console.log("  %s  %s%s", ok ? "ok  " : "FALHA", rot, extra ? " | " + extra : "");
@@ -31,11 +36,11 @@ diz("nao ha botao de via de chat", !html.includes('data-via="chat"'));
 diz("nao ha guia de chat", !html.includes('id="guia-chat"'));
 diz("nao ha prompt portatil embutido", !html.includes('id="p-luis"'));
 diz("remete ao Alberto para a conversa",
-    html.includes("a ferramenta é o Alberto"));
+    texto.includes("a ferramenta é o Alberto"));
 diz("diz por que nao ha via de chat, e a razao e a sessao unica",
-    html.includes("sessões separadas"));
+    texto.includes("sessões separadas"));
 diz("nao afirma que conversa nao roda comando",
-    !html.includes("não roda comando nenhum"));
+    !texto.includes("não roda comando nenhum"));
 
 // 2. Os blocos de script compilam.
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((x) => x[1]);
