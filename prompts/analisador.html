@@ -86,19 +86,6 @@
     text-wrap: balance;
   }
   .top p { margin: 0; max-width: var(--measure); color: var(--ink-soft); }
-  .top .ressalva {
-    margin: .9rem 0 0; max-width: var(--measure);
-    border-left: 2px solid var(--correcao); padding-left: .9rem;
-    font-size: .93rem; color: var(--ink-soft);
-  }
-  .top .privacidade {
-    margin-top: .85rem;
-    font-family: var(--mono);
-    font-size: .74rem;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    color: var(--medida);
-  }
 
   /* ---------------------------------------------------------- estrutura */
   .cols { display: grid; grid-template-columns: 19rem 1fr; gap: 2.5rem; align-items: start; }
@@ -107,54 +94,17 @@
   .rail { position: sticky; top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
   @media (max-width: 900px) { .rail { position: static; } }
 
-  /* ---------------------------------------------------------- entrada */
-  .rail-titulo { font-family: var(--serif); font-size: 18px; margin: 0 0 6px; }
-
-  .rail-nota { font-size: 14px; color: var(--muted); line-height: 1.5; margin: 0 0 14px; }
-
-
-  .vias {
-    border: 1px solid var(--rule-firm);
-    border-radius: 4px;
-    padding: 18px 20px 14px;
-    margin: 20px 0;
-  }
-
   .vias-titulo {
     font-family: var(--serif);
     font-size: 18px;
     margin: 0 0 14px;
   }
 
-  .via-op { border-top: 1px solid var(--rule); padding: 12px 0 2px; }
-
-  .via-op:first-of-type { border-top: none; padding-top: 0; }
-
-  .via-op h3 { font-family: var(--serif); font-size: 16px; margin: 0 0 4px; }
-
-  .via-op p { margin: 0 0 6px; }
-
   .via-volta { font-size: 14px; color: var(--ink-faint); }
-
-  .vias-nota { font-size: 14px; color: var(--ink-faint); margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); }
-
-
-  .vias { border: 1px solid var(--rule-firm); border-radius: 4px; padding: 18px 20px 14px; margin: 20px 0; }
 
   .vias-titulo { font-family: var(--serif); font-size: 18px; margin: 2.5rem 0 14px; }
 
-  .via-op { border-top: 1px solid var(--rule); padding: 12px 0 2px; }
-
-  .via-op:first-of-type { border-top: none; padding-top: 0; }
-
-  .via-op h3 { font-family: var(--serif); font-size: 16px; margin: 0 0 4px; }
-
-  .via-op p { margin: 0 0 6px; }
-
   .via-volta { font-size: 14px; color: var(--ink-faint); }
-
-  .vias-nota { font-size: 14px; color: var(--ink-faint); margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); }
-
 
   .vias-titulo {
     font-family: var(--serif);
@@ -202,7 +152,6 @@
   .via-guia { margin: 8px 0 26px; }
 
   .via-guia h2 { font-family: var(--serif); margin-bottom: 8px; }
-
 
   .passos {
     counter-reset: p;
@@ -355,8 +304,6 @@
     font-family: var(--mono); font-variant-numeric: tabular-nums;
     font-size: 1.65rem; line-height: 1; color: var(--medida);
   }
-  .metrica .v.alerta { color: var(--correcao); }
-  .metrica .v.bom { color: var(--conforme); }
   .metrica .r {
     font-size: .74rem; text-transform: uppercase; letter-spacing: .07em;
     color: var(--ink-faint); font-family: var(--mono);
@@ -368,9 +315,6 @@
     padding: .1rem .4rem; border: 1px solid currentColor; margin-right: .5rem;
     vertical-align: .08em;
   }
-  .chip.grave { color: var(--correcao); }
-  .chip.atencao { color: var(--medida); }
-  .chip.ok { color: var(--conforme); }
 
   .achado { border-top: 1px solid var(--rule); padding: .8rem 0; }
   .achado:last-child { border-bottom: 1px solid var(--rule); }
@@ -422,47 +366,12 @@
   }
   .cuidados .chamada { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1.5rem; }
   .cuidados > p { max-width: var(--measure); color: var(--ink-soft); }
-
-  .modos { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
-  @media (max-width: 760px) { .modos { grid-template-columns: 1fr; } }
-  .modo { padding: 1rem 1.5rem 1.2rem 0; border-bottom: 1px solid var(--rule); }
-  .modos .modo + .modo { padding-left: 1.5rem; border-left: 1px solid var(--rule); }
-  @media (max-width: 760px) { .modos .modo + .modo { padding-left: 0; border-left: 0; } }
-  .modo .rot {
-    display: block; font-family: var(--mono); font-size: .7rem; letter-spacing: .09em;
-    text-transform: uppercase; color: var(--medida); margin-bottom: .5rem;
-  }
-  .modo p { margin: 0; font-size: .93rem; color: var(--ink-soft); }
-  .modo strong { color: var(--ink); }
-
-  dl.falhas { margin: 0; }
-  dl.falhas dt {
-    font-weight: 600; margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--rule);
-  }
-  dl.falhas dt:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
-  dl.falhas dd { margin: .25rem 0 0; color: var(--ink-soft); font-size: .93rem; max-width: var(--measure); }
-
-  ol.fazer { margin: 0; padding-left: 1.3rem; max-width: var(--measure); }
-  ol.fazer li { margin-bottom: .7rem; color: var(--ink-soft); }
-  ol.fazer strong { color: var(--ink); }
-  ol.fazer li::marker { font-family: var(--mono); font-size: .82rem; color: var(--medida); }
-
   /* ---------------------------------------------------------- prompts */
   .prompts { border-top: 1px solid var(--rule); margin-top: 3rem; padding-top: 1.6rem; }
   .prompts > p { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1rem; }
   .prompts ol.passos { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1.4rem; padding-left: 1.2rem; }
   .prompts ol.passos li { margin-bottom: .3rem; }
   .prompts ol.passos strong { color: var(--ink); }
-
-  .escolha { display: flex; gap: 0; margin-bottom: 1rem; flex-wrap: wrap; }
-  .escolha button {
-    font-family: var(--sans); font-size: .9rem; cursor: pointer;
-    background: transparent; color: var(--ink-soft);
-    border: 1px solid var(--rule-firm); border-right-width: 0;
-    padding: .55rem 1rem;
-  }
-  .escolha button:last-child { border-right-width: 1px; }
-  .escolha button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
   .barra {
     display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
@@ -491,13 +400,6 @@
   }
   footer.creditos p { margin: 0 0 .5rem; }
   footer.creditos strong { color: var(--ink-soft); font-weight: 600; }
-  .top .experimental {
-    margin: 1.1rem 0 0; max-width: var(--measure);
-    border-left: 2px solid var(--conforme); padding-left: .9rem;
-    font-size: .9rem; color: var(--ink-soft);
-  }
-  .experimental p { margin: 0 0 .55rem; }
-  .experimental p:last-child { margin-bottom: 0; }
   a { color: var(--medida); text-decoration: underline; text-underline-offset: 2px; }
   a:hover, a:focus-visible { color: var(--ink); }
   .anexar { margin-top:3.2rem; border-top:2px solid var(--ink); padding-top:1.4rem; }
@@ -519,7 +421,6 @@
   .anexar .aviso { border-left:2px solid var(--correcao); padding-left:1rem;
     margin:1.6rem 0 0; max-width:var(--measure); }
 
-
   .eyebrow {
     font-family: var(--mono);
     font-size: 12px;
@@ -532,7 +433,6 @@
   /* --- faixa de identificacao e navegacao entre as paginas da oficina --- */
   .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
   .eyebrow a:hover, .eyebrow a:focus-visible { opacity: .7; }
-  .eyebrow .eb-atual { opacity: .55; }
   /* O nome da pagina respira entre a faixa e o texto que a descreve. */
   .eyebrow { margin: 0 0 2.4rem; }
   .top h1, header h1, .wrap > h1 { margin-bottom: 1.3rem; }
