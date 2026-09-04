@@ -744,8 +744,6 @@
     <ol>
       <li><a href="#rota"><span class="idx">·</span><span>Ferramentas disponíveis</span></a></li>
       <li class="navgap"></li>
-      <li><a href="#consistencia"><span class="idx">[01]</span><span>Alberto</span></a></li>
-      <li><a href="#ataide"><span class="idx">[02]</span><span>Luis</span></a></li>
       <li><a href="#simulador"><span class="idx">[03]</span><span>Simulador de banca</span></a></li>
       <li class="navgap"></li>
       <li><a href="#vocabulario"><span class="idx">·</span><span>Esclarecimentos terminológicos</span></a></li>
@@ -797,7 +795,7 @@
 
     <section id="rota">
       <h2>Ferramentas disponíveis</h2>
-      <p class="deck"><b>O rápido acha o defeito evidente, e acha mal o que depende de conferir número.</b> Promessa que outra seção nega, seção anunciada e não escrita, afirmação sem dado, resultado que está nos dados e não foi dito: disso ele dá conta, e num trabalho medido chegou ao mesmo veredito do completo e pela mesma razão, acertando a contagem que o completo errou. O que exige refazer a conta dentro de uma tabela de resultado, e comparar o que ela publica com o que a prosa afirma dela, é onde ele passa ao largo. <b>O completo acha essas, e as demais que pedem atenção e detalhe, e cobra quatro vezes mais por isso.</b> Medido em 03/09/2026: no agente, em Opus 5, o rápido custa de 270 a 320 mil tokens e de 41 a 48 minutos, já contando a revisão; o completo passa de 1,15 milhão e leva horas. Em Sonnet ela gastou <b>mais</b> tokens que em Opus, 344 mil, e entregou um quinto das correções. Os dois analisadores fazem a mesma coisa e não fazem igual. <b>O <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> lê uma vez e escreve o relatório inteiro numa passada</b>; o <b><a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> lê quatro vezes por caminhos diferentes, confere cada apontamento por quem não o escreveu, e leva quase uma hora</b>. Medido sobre a mesma dissertação em 03/09/2026: o rápido devolveu dezessete itens numa rodada e doze noutra, com seis em comum, contra os trinta e dois do completo. <b>Os dois pedem desenvolvimento argumentativo suficiente</b>, com resultados apresentados e conclusões escritas: rodados antes disso, julgam o que ainda não existe. <b>E o simulador de banca pede a apresentação pronta</b>, porque é do cotejo entre ela e o trabalho que vem o que o distingue de mais uma leitura.</p>
+      <p class="deck">São dois analisadores e um simulador. <b>Os dois analisadores escrevem o mesmo relatório, e diferem no quanto leem:</b> o rápido faz uma leitura, o completo faz quatro e confere cada apontamento por quem não o escreveu, e a diferença aparece no que exige contar através do texto inteiro. <b>Os dois pedem desenvolvimento argumentativo suficiente</b>, com resultados apresentados e conclusões escritas: rodados antes disso, julgam o que ainda não existe. <b>E o simulador pede a apresentação pronta</b>, porque é do cotejo entre ela e o trabalho que vem o que o distingue de mais uma leitura. <b>O que cada um custa, o que ele acha e o que deixa passar está na página dele</b>, e as medições que sustentam tudo isto estão no fim desta.</p>
       <div class="route">
         <div class="route-row">
           <div class="route-a">
@@ -828,82 +826,10 @@
 
 
       <!-- 01 -->
-      <article class="instrument" id="consistencia">
-        <div class="inst-head">
-          <span class="inst-num">[01]</span>
-          <h3><a class="inst-link" href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a></h3>
-        </div>
-        <p class="inst-sub">Lê o trabalho uma vez, na ordem que mais rende (primeiro o que ele promete, depois o aparato empírico lido de trás para diante, e só então o cruzamento), e escreve o relatório inteiro. É o mesmo formato do [02], e o que muda é o quanto se enxerga.</p>
-
-        <div class="chips">
-          <span class="chip status-good">medido em 03/09/2026, duas rodadas sobre a mesma dissertação</span>
-          <span class="chip"><b>tokens</b> uma mensagem no chat · 270 a 320 mil no agente, em Opus</span>
-          <span class="chip"><b>tempo</b> 41 a 48 min no agente, em Opus · no chat, não medido</span>
-          <span class="chip"><b>roda em</b> Opus; em Sonnet a trava de transcrição cai</span>
-        </div>
-
-        <div class="pair">
-          <div class="does">
-            <h4>Confere</h4>
-            <p>O mesmo que o [02] procura: promessa não cumprida, seção anunciada e ausente, afirmação que o parágrafo citado não sustenta, critério de seleção não declarado, percentual sem denominador, inferência causal em trabalho descritivo, recortes temporais que não coincidem. E o que está nos dados e não foi afirmado em lugar nenhum, que é a parte que o autor não produz sozinho.</p>
-          </div>
-          <div class="doesnt">
-            <h4>Não confere</h4>
-            <p>Se a contribuição é nova no campo, porque isso pede busca externa que esta leitura não faz. E não confere a si mesmo: no chat não há a verificação por quem não escreveu os apontamentos. <strong>O que ele não aponta não é atestado de que esteja correto</strong>, e a diferença de cobertura está medida logo abaixo.</p>
-          </div>
-        </div>
-
-        <p class="when"><b>O que a medição diz, e é o que decide entre as duas ferramentas.</b> Sobre a mesma dissertação, em 03/09/2026, duas rodadas do mesmo prompt devolveram <b>dezessete itens numa vez e doze na outra, com seis em comum</b>, e dezessete endereços comuns em setenta e cinco. As vinte e nove afirmações foram abertas na fonte, uma a uma, e <b>as vinte e nove estavam certas</b>. O rápido não inventa: vê menos, e vê coisa diferente a cada vez.</p>
-
-        <p class="when"><b>O que a extensão degrada é o endereço, e não o achado.</b> Uma passada única mandada escrever sem teto produziu dez mil palavras, e quatorze afirmações em sessenta e sete caíram na conferência, o que parece condená-la. Lidas uma a uma, <b>doze das quatorze derrubam o endereço, a contagem ou uma afirmação acessória, e o apontamento continua de pé</b>: a grafia errada existe e o endereço manda abrir um parágrafo vazio; o argumento do item não depende do número que caiu; a questão sobrevive, e sobrevive melhor com o endereço certo. Sobre vinte e seis itens, dois eram falsos. <b>Por isso o prompt não corta itens:</b> cortar para comprar precisão joga fora o achado verdadeiro junto com o endereço torto.</p>
-
-        <p class="when"><b>No agente ele ganha uma revisão, e ela não acrescenta nada.</b> Recebe o trabalho e o relatório com a instrução de derrubar, e confere os endereços, as afirmações de ausência, os números, as atribuições e os alvos de correção. Antes de retirar um item, pergunta o que caiu: se caiu o endereço e o apontamento se sustenta, conserta o endereço e mantém o item; só sai o item cujo achado morreu. Medido numa dissertação em 03/09/2026: <b>nenhum item retirado, dezesseis endereços consertados e três colisões entre partes desfeitas</b>, em oitenta e duas afirmações abertas na fonte.</p>
-
-        <p class="when"><b>A página traz também o medidor de formatação</b>, que abre o <span class="loc">.docx</span> dentro do navegador, sem instalar nada e sem que o arquivo saia da máquina, e mede forma, ritmo, aparato gráfico e higiene bibliográfica. As medidas entram na conversa junto com o prompt, porque num <span class="loc">.docx</span> o assistente não enxerga a camada formal. <b>Nenhuma medida dali é, por si, um defeito:</b> o que um número significa depende do gênero, e parágrafo curto é defeito em prosa argumentativa e é a forma certa num capítulo de catálogo.</p>
-
-        <p class="when"><b>Nenhum programa daqui altera o arquivo do autor, e a decisão é de 30/08/2026.</b> Um diagnóstico lê a formatação e conta o que há, e isso vira sugestão no relatório. O programa que <em>transformava</em> o arquivo saiu da cadeia depois de desmontar a capa de uma dissertação que não havia tocado, e hoje é a semente da <a href="https://claude.ai/code/artifact/4d7706bf-3382-419e-97ff-4ad35b65e1eb">Oficina de Formatação</a>, que existe separada justamente porque ali um programa escreve no arquivo de outra pessoa.</p>
-
-        <p class="footnote"><strong>O nome mudou de dono em 03/09/2026, e vale registrar.</strong> <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> designava, até então, uma conferência de consistência que dobrava o trabalho sobre si mesmo em quatro níveis (formal, numérico, categorial e textual) sem julgar o argumento. Essa conferência continua existindo, sob o nome do que ela faz, em <span class="loc">prompts/CONSISTENCIA.md</span>, e serve a quem quer só isso, em qualquer fase da escrita. O que herdou o nome foi o relatório rápido, porque é ele que hoje ocupa o lugar de porta de entrada que a conferência ocupava.</p>
-        </article>
+      
 
       <!-- 02 -->
-      <article class="instrument" id="ataide">
-        <div class="inst-head">
-          <span class="inst-num">[02]</span>
-          <h3><a class="inst-link" href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a></h3>
-        </div>
-        <p class="inst-sub">Quatro leituras percorrem o trabalho por caminhos diferentes, uma verificação ataca cada apontamento antes de ele sair, e uma última voz tria e escreve. Nada é apontamento antes de passar pela verificação.</p>
-
-        <div class="chips">
-          <span class="chip status-good">seis prompts, medidos em cinco trabalhos</span>
-          <span class="chip"><b>tokens</b> acima de 1,15 milhão</span>
-          <span class="chip"><b>tempo</b> horas</span>
-          <span class="chip"><b>roda em</b> Opus, com a verificação em Sonnet</span>
-        </div>
-
-        <div class="pair">
-          <div class="does">
-            <h4>Confere</h4>
-            <p>Aritmética, e consistência formal, categorial e textual. Método executado contra método declarado. Sustentação das conclusões no material. Se o vocabulário teórico faz trabalho ou é citado sem tocar a análise. E o que o trabalho permite ver sem reivindicar.</p>
-          </div>
-          <div class="doesnt">
-            <h4>Não confere</h4>
-            <p>Se o trabalho diz algo verdadeiro sobre o objeto, o que exigiria conhecer o campo. Quanto ao ineditismo, responde sobre uma premissa e só sobre ela: a de que a descrição que o próprio trabalho faz do campo é justa.</p>
-          </div>
-        </div>
-
-        <p class="when"><b>O desenho mudou em 01/09/2026, e a razão é medida.</b> Havia um prompt único de vinte e dois mil palavras, e ele devolveu <b>dois itens e nenhum de conteúdo</b> numa dissertação inteira, depois de derrubar oito hipóteses: as travas contra falso positivo derrubavam o achado verdadeiro junto. As travas saíram do levantamento e ficaram só na verificação, e as leituras passaram a percorrer caminhos diferentes em vez de repetirem a mesma travessia. Sobre o mesmo material, o desenho novo devolveu trinta e dois itens.</p>
-
-        <p class="when"><b>Três leituras em paralelo, cada uma entrando por uma porta.</b> A primeira parte do <b>resumo e da conclusão</b>, e procura afirmação sem lastro. A segunda parte da <b>introdução</b>, e procura promessa não cumprida e ressalva atravessada. A terceira parte das <b>figuras e tabelas</b>, lidas antes da prosa que as comenta, e procura resultado desperdiçado e narrativa que contradiz o gráfico. Ler as figuras se paga: numa leitura de 77 delas, o maior achado do trabalho foi uma frase de tópico que diz o contrário do gráfico.</p>
-
-        <p class="when"><b>A quarta pesa as contribuições, e é a única que usa a web.</b> Recebe o que as três marcaram como contribuição ou resultado inexplorado e pergunta o que o trabalho não responde: <b>isto é novo, e para quem?</b> Três saídas, e a do meio é a mais valiosa: já existe, e o autor precisa saber antes da banca; <b>contraria o que existe</b>, que é a contribuição mais forte que um trabalho empírico pode ter e a que os autores mais deixam passar; ou não encontrei, com o que se buscou declarado.</p>
-
-        <p class="when"><b>Depois vem a verificação, e quem confere não escreveu nada do que confere.</b> Cada apontamento é testado contra o texto na ordem do estrago que causaria estar errado: primeiro toda afirmação de que falta algo no trabalho, que é a que se refuta abrindo o arquivo. Antes de conferir, o verificador escreve numa linha a proposição que, se verdadeira, derruba o item, e vai atrás dela. <b>Confirmar a metade que o item concede é o modo de falha mais caro deste passo</b>, porque produz acusação falsa com aparência de conferida, e ela atravessa todas as camadas seguintes.</p>
-
-        <p class="when"><b>Por fim a triagem e a redação.</b> Uma voz que não verificou decide onde cada item entra, pela pergunta que decide tudo: o que muda, para quem lê o trabalho, depois de corrigido? Quem não consegue escrever essa oração descobriu ali que o item é de anexo. E escreve, perguntando primeiro se há mérito, antes de qualquer lista de defeitos, porque somar problemas não é avaliar.</p>
-
-        <p class="footnote"><strong>Nada é apontamento antes de ser conferido.</strong> Os passos 1 e 2 produzem suspeitas, e a razão de o passo 3 conferir todas antes de entregar está escrita na ferramenta: antes de correr o risco de causar sofrimento ao autor com comentário excessivo ou deslocado, confere-se com o texto. O relatório final conta defeitos, e não comentários. Um mesmo defeito visto por duas leituras continua sendo um defeito, e dizer que duas o viram informa que o achado é robusto, não que há dois problemas. <b>Convergência entre leituras independentes é o sinal mais forte que este desenho produz</b>, e é rara: numa dissertação de 235 páginas, duas em 83 apontamentos.</p>
-      </article>
+      
 
       <!-- 03 -->
       <article class="instrument" id="simulador">
