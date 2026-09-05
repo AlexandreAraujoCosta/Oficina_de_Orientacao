@@ -35,6 +35,17 @@ Medidos nesta bancada, e todos os quatro geraram acusação que não existia:
   qualquer posição.
 - Buscar sem ignorar a caixa perde a ocorrência que abre frase. Um contador
   devolveu zero onde havia doze, todas com maiúscula inicial.
+- **A página do arquivo não é a página impressa.** A extração de PDF traz a
+  página que o trabalho imprime; o `Read` sobre o PDF conta a folha do arquivo,
+  e as duas diferem pelo tanto de folhas de rosto que vêm antes da página 1.
+  Em 05/09/2026, num relatório sobre uma dissertação de 145 páginas, oito
+  endereços saíram com a página do arquivo, e só o cotejo os pegou. Diga qual
+  das duas está usando, e prefira a impressa, que é a que quem recebe vê.
+- **Chamadas paralelas de leitura de PDF perdem a imagem sem avisar.** Medido
+  em 05/09/2026: duas rodadas de chamadas simultâneas voltaram com a nota de
+  limite de requisição e sem as figuras, e a leitura seguiu sobre o texto sem
+  perceber. Leia o PDF em chamadas sequenciais, e confira que a imagem veio
+  antes de escrever qualquer coisa sobre ela.
 - Contar parágrafo de `.docx` por `<w:p[ >].*?</w:p>` perde os auto-fechados que
   trazem atributo. Conte `</w:p>` mais `<w:p ... />`.
 - Remover acento antes de contar muda a conta: numa contagem de `controvers`,

@@ -67,8 +67,18 @@ RE_COMENTARIO = re.compile(r"<!--.*?-->", re.S)
 RE_INI_REF = re.compile(
     r"^\s*(REFER[ÊE]NCIAS?|BIBLIOGRAFIA|OBRAS CITADAS"
     r"|REFERENCES?|BIBLIOGRAPHY|WORKS CITED)\b", re.I)
+# O que fecha a lista não é só apêndice e anexo. Em w-v15.txt vem um
+# "Glossário" de 52 verbetes entre a última entrada e o "Apêndice A", e ele
+# entrava na lista: três verbetes viraram entrada, porque "SISP: Sistema de
+# Administração..." e "ETP: Estudo Técnico Preliminar (Lei nº 14...)" têm sigla
+# em caixa alta, dois-pontos e ano. Medido em 05/09/2026.
 RE_FIM_REF = re.compile(
-    r"^\s*(AP[ÊE]NDICES?|ANEXOS?|APPENDI(?:X|CES)|ANNEXE?S?)\b", re.I)
+    r"^\s*(AP[ÊE]NDICES?|ANEXOS?|APPENDI(?:X|CES)|ANNEXE?S?"
+    r"|GLOSS[ÁA]RIO|GLOSSARY"
+    r"|LISTAS?\s+DE\s+(?:SIGLAS|ABREVIATURAS|S[ÍI]MBOLOS)"
+    r"|LIST\s+OF\s+(?:ABBREVIATIONS|ACRONYMS|SYMBOLS)"
+    r"|[ÍI]NDICE\s+(?:REMISSIVO|ONOM[ÁA]STICO|DE\s+ASSUNTOS)"
+    r"|INDEX)\b", re.I)
 
 # Sobrenome em caixa alta seguido de vírgula é a forma da entrada em ABNT.
 RE_SOBRENOME = re.compile(r"([A-ZÀ-Ý][A-ZÀ-Ý'\-]{2,})\s*,")
@@ -378,6 +388,22 @@ def autoteste():
     if faixa_referencias(apendice)[1] != 4:
         falhas.append("o título do apêndice colado ao texto dele não fecha a "
                       "lista (fim %s, esperava 4)" % (faixa_referencias(apendice)[1],))
+    # O glossário que se põe entre a lista e o apêndice, achado em w-v15 em
+    # 05/09/2026: o verbete tem sigla em caixa alta, dois-pontos e ano, e conta
+    # como entrada de quem só souber fechar a lista em apêndice e anexo.
+    glossario = paragrafos(
+        "[P1] Prosa do corpo, com tamanho de sobra para passar no piso de "
+        "quarenta caracteres que o programa aplica.\n\n"
+        "[P2] REFERÊNCIAS\n\n"
+        "[P3] WILLIAMSON, Oliver E. As instituições econômicas do capitalismo. "
+        "São Paulo: Pearson, 2012. Entrada longa o bastante.\n\n"
+        "[P4] Glossário\n\n"
+        "[P5] ETP: Estudo Técnico Preliminar. Documento de planejamento das "
+        "contratações públicas, na Lei nº 14.133, de 2021.\n\n"
+        "[P6] Apêndice A\n")
+    if faixa_referencias(glossario)[1] != 4:
+        falhas.append("o glossário entre a lista e o apêndice não fecha a lista "
+                      "(fim %s, esperava 4)" % (faixa_referencias(glossario)[1],))
     return falhas
 
 

@@ -59,21 +59,29 @@ def reais(tokens, porte="grande"):
 
 # ------------------------------------------------------- as vias, medidas
 #
-# Cada linha e uma rodada REAL, e o trabalho em que foi medida vai junto, para
-# que ninguem leia como promessa o que e uma observacao. Tempo em minutos.
+# Cada linha e uma rodada REAL sobre a MESMA dissertacao (35.708 palavras, 63
+# figuras), em 05/09/2026, e o que foi medido vai junto, para que ninguem leia
+# como promessa o que e uma observacao. Tempo em minutos; `itens` sao as
+# correcoes de conteudo, sem as de superficie.
+#
+# AS VIAS QUE NAO ESTAO AQUI, e a ausencia delas e resultado. As duas
+# configuracoes em modelo pequeno foram medidas e saem do cardapio: acharam 3 e
+# 7 correcoes contra 18 e 24 das mesmas configuracoes em modelo grande, e
+# custaram quase o mesmo. E a via de chat sai por outra razao, que nao e de
+# cobertura: sem programa, ela publicou duas afirmacoes de ausencia falsas como
+# pontos fortes, negando um vocabulario que ocorre 36 vezes e dando por fechada
+# uma contagem que soma 14 numa populacao de 15. Erro de ausencia manda o autor
+# nao fazer nada, e e o mais caro que um relatorio pode ter.
 VIAS = [
-    dict(nome="Alberto no chat, modelo pequeno", tokens=292308, minutos=8,
-         porte="pequeno", itens=3, docx=True,
-         medida="dissertacao de 35.708 palavras e 63 figuras"),
-    dict(nome="Alberto no chat, modelo grande", tokens=279203, minutos=11,
-         porte="grande", itens=24, docx=True,
-         medida="a mesma, lidas 84 das 140 paginas"),
-    dict(nome="Alberto no agente, modelo grande", tokens=441000, minutos=53,
+    dict(nome="Passada unica, sem programas", tokens=306287, minutos=13,
+         porte="grande", itens=18, docx=True,
+         medida="uma leitura, sem programa e sem revisao, 22 paginas de figura"),
+    dict(nome="Alberto no agente, completo", tokens=441000, minutos=53,
          porte="grande", itens=18, docx=True,
          medida="a mesma, com programas, figuras e busca externa"),
     dict(nome="Luis completo", tokens=1699617, minutos=99,
          porte="grande", itens=19, docx=True,
-         medida="a mesma; quatro leituras, verificacao e triagem"),
+         medida="quatro leituras, verificacao e triagem por vozes separadas"),
 ]
 
 
@@ -152,16 +160,17 @@ def recomendar(m):
                 "a conferência das figuras contra a prosa, a aritmética refeita "
                 "e a busca do que já está publicado")
     if medio:
-        return ("Alberto no agente, modelo grande",
+        return ("Alberto no agente, completo",
                 "%d figuras e tabelas e %d parágrafos com número: há o que "
                 "conferir, e não o bastante para quatro travessias."
                 % (pecas, m["com_numero"]),
                 "a verificação por voz que não levantou, e a busca externa")
-    return ("Alberto no chat, modelo grande",
+    return ("Passada unica, sem programas",
             "%d figuras e tabelas e %d parágrafos com número: a travessia dos "
             "dados teria pouco material, e o que decide aqui é a leitura do "
             "argumento." % (pecas, m["com_numero"]),
-            "o arquivo comentado, que só as vias de agente devolvem")
+            "a varredura do aparato bibliográfico, que só o programa faz, e a "
+            "busca do que já está publicado")
 
 
 def escrever(m, alvo=None):
@@ -196,7 +205,8 @@ def escrever(m, alvo=None):
     L.append("")
     L.append("  A MEDIDA MAIOR DO DIA decide mais que a via. O mesmo")
     L.append("  pedido, na mesma via de chat, devolveu 3 correções em")
-    L.append("  modelo pequeno e 24 em modelo grande. Escolher o pequeno")
+    L.append("  modelo pequeno e 24 em modelo grande. No agente, 7 contra 18.")
+    L.append("  Escolher o modelo pequeno")
     L.append("  economiza pouco e é onde se perde o achado que ninguém mais viu.")
     L.append("")
     L.append("  Esta pré-análise conta figura, tabela, número e tamanho. Não lê")
@@ -252,7 +262,7 @@ def autoteste():
         sys.exit("!! achei figura onde nao ha: %r" % m2)
     if m2["maior_peca"] != 0:
         sys.exit("!! sem peca nenhuma, a maior peca tem de ser zero: %r" % m2)
-    if "chat" not in recomendar(m2)[0]:
+    if "Passada unica" not in recomendar(m2)[0]:
         sys.exit("!! o trabalho sem dado nao foi para a via curta: %r"
                  % (recomendar(m2)[0],))
 
