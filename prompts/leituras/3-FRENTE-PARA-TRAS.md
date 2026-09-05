@@ -186,6 +186,34 @@ a uma pergunta que o próprio trabalho levanta. Não peça outra pesquisa.
 Para cada resultado inexplorado, escreva: o número, como se obtém, e **o que ele
 muda** no que o trabalho conclui ou no que ele poderia publicar.
 
+## Passo 4b — três perguntas que mandam calcular
+
+Elas vêm de uma medição de 05/09/2026 contra os comentários de margem de quem
+orienta, sobre a mesma dissertação. Das doze observações dele que a leitura não
+produziu, **três pediam exatamente a aritmética que ela já executava dezenas de
+vezes noutros pontos do mesmo trabalho**. O que faltava era a pergunta, e não a
+capacidade de fazer a conta. Faça as três em toda série e em toda comparação
+temporal:
+
+1. **O que mais mudou na mesma janela?** O trabalho credita uma mudança a uma
+   causa. Percorra o período e liste o que mais mudou nele, dentro dos próprios
+   dados: outra norma, outra composição, outro critério de coleta. Onde houver
+   candidato concorrente que os dados alcançam, o crédito exclusivo não se
+   sustenta.
+2. **O que exatamente entra na categoria contada, e a afirmação sobrevive a outro
+   corte dela?** Abra a definição da categoria, aplique-a ao caso limítrofe, e
+   recalcule. Categoria definida de um jeito e contada de outro é o defeito que,
+   nesta bancada, apareceu em dois trabalhos no mesmo dia, e nos dois ele estava
+   no resumo.
+3. **O que a explicação oferecida pelo próprio texto prediz que se veria nos
+   dados?** Onde o trabalho explica um resultado, derive da explicação a forma que
+   a série teria de ter, e vá conferir. É diferente de apontar que dado e
+   explicação estão misturados: é testar a explicação com o material que já está
+   publicado.
+
+Cada uma que render vira resultado do passo 4. Cada uma que não render vira
+hipótese derrubada, e vai dita.
+
 ## Três regras
 
 1. **Controle positivo.** Antes de qualquer afirmação de ausência, mostre que a sua

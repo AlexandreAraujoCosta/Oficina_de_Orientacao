@@ -141,6 +141,70 @@ quatro células, que é boa.
 
 ---
 
+## 3b. O que o orientador vê e a leitura não vê, medido em 05/09/2026
+
+**A primeira medição com um leitor humano do outro lado.** Quem orienta leu a mesma
+versão de uma dissertação e deixou 33 comentários de margem, depois de as leituras
+terem rodado e sem que nenhuma delas os tivesse visto. Ele próprio classificou os
+33 pela pergunta *isto exige um fato que não está no documento?*: **13 exigem, 4
+são de borda, 16 se respondem só com o documento**.
+
+**Os números.** Dos 16 respondíveis pelo documento, a leitura completa produziu
+**4 inteiros e 2 pela metade**, e a leitura única no agente produziu os mesmos 4 e
+1 pela metade. Três dos quatro são um assunto só. Dos 13 que exigem fato de fora,
+**nenhuma produziu nenhum**, com busca de controle sobre os nomes que só existem no
+acervo dele. E do outro lado: **o orientador já tinha 4 dos 43 itens da completa e
+2 dos 47 da única**. Oito e meio em cada dez de uma e nove em cada dez da outra não
+têm par nos comentários dele.
+
+**As duas leituras quase não se sobrepõem, e não por incompetência de nenhuma.** Em
+sete pontos os dois tocam o mesmo lugar; em seis deles olham a mesma figura e
+produzem observações que não se substituem. A ferramenta faz o que exige fôlego e
+não exige experiência: a afirmação contradita pela figura ao lado, a contagem que
+não fecha, a promessa de reprodução sem dados depositados. O orientador faz o que
+exige o horizonte: o que outra dissertação do grupo já mostrou, quem saiu do
+tribunal e quando, o que a explicação oferecida prediz.
+
+**O achado que muda os prompts, e ele é o único que transfere direto.** Três dos
+doze comentários que as leituras não produziram **pedem exatamente a aritmética que
+elas executam dezenas de vezes noutros pontos do mesmo trabalho**: se a soma dos
+dois ambientes é constante, se a explicação que o texto oferece prediz a forma da
+série, a respeito de quê é a maioria que se conta. **Falta a pergunta que manda
+calcular, e não a capacidade de calcular.** Três perguntas, que quem orienta
+formulou e que nenhum prompt daqui trazia:
+
+1. **O que mais mudou na mesma janela**, além do que se está creditando pela
+   mudança?
+2. **O que exatamente entra na categoria contada**, e a afirmação sobrevive a outro
+   corte dela?
+3. **O que a explicação oferecida pelo próprio texto prediz que se veria nos
+   dados?**
+
+A terceira é a do único ponto em que os dois coincidiram no ato: sobre a mesma
+passagem, o relatório mandou separar dado de explicação, e o orientador derivou a
+previsão da hipótese e foi conferir se os números a confirmavam.
+
+**O que não transfere, e a razão não é de prompt.** Os 13 comentários que dependem
+do acervo pedem um horizonte que o trabalho não contém e a busca pública não
+alcança: a tese de outro orientando, os gráficos de outra dissertação, o que se
+sabe do tribunal por acompanhá-lo. Parte disso é indexável, porque os trabalhos do
+grupo estão em disco com extração numerada, e isso é outra ferramenta. A outra
+parte não é.
+
+**A consequência para o cardápio.** A leitura do produto pronto tem um teto, e o
+teto está onde o desenho foi decidido. Nos três trabalhos desta rodada, os defeitos
+de maior alcance foram decididos antes da escrita: um capítulo prometido e não
+escrito, sete seções marcadas como pendentes, uma comparação condicionada a um
+desfecho seis vezes mais provável num dos lados, uma categoria definida de um jeito
+e contada de outro. A leitura nomeia os quatro; nenhuma desfaz.
+
+**O alcance desta medição.** Um trabalho, um dia, um orientador. A classificação
+dos 33 em 13/4/16 é dele; o pareamento é de uma voz que o cotejou com outra, e essa
+segunda voz derrubou doze afirmações da primeira. Um conferidor da própria medição
+quase produziu acusação falsa por buscar sem acento.
+
+---
+
 ## 4. O que não está medido
 
 **Se o desenho atual bate o pedido cru.** A única medição disso deu **não** (2,5 vezes

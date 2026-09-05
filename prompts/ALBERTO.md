@@ -323,6 +323,8 @@ uma amostra dele, teste de significância responde pergunta que ninguém fez.
 **Vocabulário de significância sem teste.** *Significativamente maior* num trabalho
 que não roda teste nenhum.
 
+**Três perguntas que mandam calcular, e a leitura não as faz sozinha.** Medido em 05/09/2026 contra os comentários de margem de quem orienta: das doze observações dele que a leitura não produziu, três pediam a aritmética que ela já executava dezenas de vezes noutros pontos do mesmo trabalho. Falta a pergunta, e não a capacidade de fazer a conta. *O que mais mudou na mesma janela*, além do que se está creditando pela mudança? *O que exatamente entra na categoria contada*, e a afirmação sobrevive a outro corte dela? *O que a explicação oferecida pelo próprio texto prediz que se veria nos dados?* A terceira é diferente de apontar que dado e explicação estão misturados: é testar a explicação com o material já publicado.
+
 **Recortes temporais que não coincidem.** A base vai de um período, a análise A de
 outro e a análise B de um terceiro, sem que o texto os distinga.
 
