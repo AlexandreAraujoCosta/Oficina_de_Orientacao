@@ -42,7 +42,14 @@ def main():
 
     linhas = ["# Apontamentos, como chegam a quem escreveu o trabalho", "",
               "Cada bloco abaixo e um comentario na margem do trabalho. Quem le",
-              "tem o trabalho aberto e nao acompanhou analise nenhuma.", ""]
+              "tem o trabalho aberto e nao acompanhou analise nenhuma.", "",
+              # Sem esta linha, a conferencia de compreensibilidade reprova por
+              # endereco itens que chegam ancorados. Medido em 05/09/2026: dois
+              # itens reprovados porque a leitora nao tinha como saber que o
+              # comentario sai grudado no paragrafo de que fala.
+              "**Cada comentario chega ancorado no paragrafo a que se refere**, e",
+              "por isso um item pode falar de *esta frase* sem dizer onde ela esta.",
+              "Onde ele mandar corrigir tambem noutros pontos, o texto os nomeia.", ""]
     # A regra tem de ser a mesma do anotar_docx.py, senao este arquivo promete
     # marcas que o Word nao vai receber. Sem `Marca`, o item marca UM ponto; com
     # `Marca`, marca ate o teto. Em 02/09/2026 este texto anunciava 61 pontos

@@ -34,6 +34,24 @@ SEPARADOR = """
 """
 
 
+def anotado(a):
+    """O nome do .docx comentado, que precisa dizer de que relatorio ele veio.
+
+    Ate 05/09/2026 o nome saia so do trabalho, e por isso duas ferramentas
+    diferentes sobre a mesma disserta��o, no mesmo dia, escreviam no mesmo
+    arquivo: a segunda montagem apagou os 38 comentarios da primeira e deixou
+    os 25 dela, sem que nada acusasse. O nome do trabalho fica, porque e por
+    ele que quem recebe reconhece o arquivo; o do relatorio entra junto, e so
+    quando os dois nao coincidem.
+    """
+    trab = Path(a.trabalho).stem
+    rel = Path(a.relatorio).stem
+    if rel.startswith("RELATORIO-"):
+        rel = rel[len("RELATORIO-"):]
+    marca = "" if rel in trab or trab in rel else "-" + rel
+    return "ENTREGA-ANOTADO-" + trab + marca + Path(a.trabalho).suffix
+
+
 def paragrafos(trabalho, destino):
     """Grava, ao lado da entrega, o trabalho com os paragrafos numerados.
 
@@ -323,7 +341,7 @@ def main():
 
         r = subprocess.run([sys.executable, str(RAIZ / "anotar_docx.py"), a.trabalho,
                             str(lista),
-                            "--saida", str(destino.with_name("ENTREGA-ANOTADO-" + Path(a.trabalho).name))]
+                            "--saida", str(destino.with_name(anotado(a)))]
                            + arg_pag,
                            capture_output=True, text=True, encoding="utf-8", errors="replace")
         print((r.stdout or "").rstrip() or (r.stderr or "")[-300:])
@@ -408,7 +426,7 @@ def main():
     # por especie, e nao por nome: todo PDF fica. Guardar so `pdf.name` fazia a
     # segunda montagem mandar o PDF da primeira para complementos.
     paragrafos_md = destino.name.replace("ENTREGA-", "ENTREGA-PARAGRAFOS-", 1)
-    guardar = {("ENTREGA-ANOTADO-" + Path(a.trabalho).name), paragrafos_md}
+    guardar = {anotado(a), paragrafos_md}
     # Com --sem-docx o .docx anotado veio de outra montagem desta mesma rodada,
     # e nao pode ser recolhido por nao ter sido produzido aqui.
     compl = destino.parent / "complementos"

@@ -45,8 +45,17 @@ RE_NEGRITO = re.compile(r"^\s*(?:\d+[.)]\s*)?\*\*([A-Z]{1,2}\d+)[.,:]?\s*(.*?)\*
 # abaixo, em prosa com quebra dura, e ai o titulo saia cortado na primeira
 # quebra: 42 dos 66 comentarios de uma entrega chegaram sem o defeito dito,
 # medido pelo conferidor de compreensibilidade em 29/08/2026.
-RE_TITULO = re.compile(r"^#{2,4}[ \t]*([A-Z]{1,2}\d+)[.,:]?[ \t]*(.*?)[ \t]*$", re.M)
-RE_APONTA = re.compile(r"^\*\*Aponta:\*\*[ \t]*(.+?)(?=\n[ \t]*\n|\Z)", re.M | re.S)
+RE_TITULO = re.compile(
+    r"^#{2,4}[ \t]*([A-Z]{1,2}\d+)[ \t]*[.,:—–·|-]?[ \t]*(.*?)[ \t]*$", re.M)
+# Duas escritas do mesmo campo. O Luis e a Clara escrevem `**Aponta:**` no
+# comeco da linha; o Alberto escreve `- **Aponta**`, dentro de item de lista e
+# sem dois-pontos. Ate 05/09/2026 so a primeira era lida, e por isso os itens
+# de superficie do Alberto chegavam a margem do Word VAZIOS: numa entrega de
+# 39 itens, 13 comentarios em branco, sem que nada acusasse.
+RE_APONTA = re.compile(
+    r"^[-*]?[ \t]*\*\*Aponta:?\*\*[ \t]*(.+?)(?=\n[ \t]*\n|\Z)", re.M | re.S)
+# O campo seguinte fecha o anterior, e ele vem em qualquer das duas escritas.
+PROXIMO_CAMPO = r"\n[ \t]*[-*]?[ \t]*\*\*[A-Za-zÀ-ú][^*\n]{0,40}:?\*\*"
 RE_LOC = re.compile(r"\[P\d+(?:[-–]P?\d+)?\]")
 
 # F e C nao sao correcao: sao ponto forte e contribuicao a reivindicar, e mandar
@@ -75,6 +84,13 @@ def itens(texto, origem, regex):
             ap = RE_APONTA.search(corpo)
             if ap:
                 titulo = " ".join(ap.group(1).split())
+        # O item de superficie do Alberto nao tem campo nenhum: e o codigo em
+        # negrito seguido da prosa, no mesmo paragrafo. Sem isto ele entra com
+        # titulo vazio, e o comentario sai em branco na margem.
+        if not titulo:
+            resto = corpo[m.end() - m.start():].split("\n\n")[0]
+            if resto.strip():
+                titulo = " ".join(resto.split())
 
         # "- **S9**, pela razao acima" e referencia cruzada numa lista de
         # prioridade, e nao o item. O que separa e o titulo ter substancia.
@@ -94,8 +110,8 @@ def itens(texto, origem, regex):
         # margem. Quem corrige quer a providencia, e a consequencia ja esta
         # dita no documento que acompanha.
         fazer = re.search(
-            r"^\*\*O que fazer:\*\*\s*(.+?)"
-            r"(?=\n\s*\n|\s\*\*[A-ZÀ-Ú][^*\n]{0,40}:\*\*|\Z)",
+            r"^[-*]?[ \t]*\*\*O que fazer:?\*\*\s*(.+?)"
+            r"(?=\n\s*\n|" + PROXIMO_CAMPO + r"|\Z)",
             corpo, re.M | re.S)
         if fazer:
             titulo = "%s. O que fazer: %s" % (
@@ -113,7 +129,8 @@ def itens(texto, origem, regex):
         # cortava era este programa. Agora vai ate a linha em branco ou ate o
         # campo seguinte em negrito, como o `O que fazer`.
         mm = re.search(
-            r"^\*\*Marca:\*\*\s*(.+?)(?=\n\s*\n|\s\*\*[A-ZÀ-Ú][^*\n]{0,40}:\*\*|\Z)",
+            r"^[-*]?[ \t]*\*\*Marca:?\*\*\s*(.+?)"
+            r"(?=\n\s*\n|" + PROXIMO_CAMPO + r"|\Z)",
             corpo, re.M | re.S)
         achados.append((cod, titulo, locs, origem, mm.group(1) if mm else None))
     return achados
