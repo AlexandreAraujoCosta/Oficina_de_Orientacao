@@ -11,16 +11,18 @@ duas leituras ficaram cegas para citacoes que nao fecham com ela, que o pedido
 cru achou. Controle do defeito: no mapa antigo de uma dissertacao, `REFER` = 0 e
 `Reboul` = 0. As referencias entram agora.
 
-DUAS FORMAS DE EXTRACAO, E A ANTIGA JA NAO EXISTE NO ACERVO
+DUAS FORMAS DE EXTRACAO, UMA POR EXTRATOR
 
 A forma para a qual este programa nasceu era
     [trabalho] P123 [TIPO] (p.45) texto
-e nenhuma das doze extracoes da bancada a usa mais: `analisar_docx.py` e
-`analisar_pdf.py` escrevem `[P123] texto`, em paragrafo que pode ocupar varias
-linhas e que pode vir precedido de marcador de titulo (`## `), de negrito
-(`**`) ou de citacao (`> `). Em 05/09/2026 o programa morria com `max() arg is
-an empty sequence` sobre qualquer arquivo do acervo, e com ele morria o insumo
-das leituras 1, 2 e 3. As duas formas passam a ser lidas.
+e ela continua viva: `analisar_pdf.py` a escreve, e cinco das treze extracoes
+da bancada estao nela. O que mudou foi o outro extrator. `analisar_docx.py`
+escreve `[P123] texto`, em paragrafo que pode ocupar varias linhas e que pode
+vir precedido de marcador de titulo (`## `), de negrito (`**`) ou de citacao
+(`> `), e as outras oito extracoes estao nessa forma. Em 05/09/2026 o programa
+morria com `max() arg is an empty sequence` sobre qualquer trabalho vindo de
+`.docx`, e com ele morria o insumo das leituras 1, 2 e 3. As duas formas passam
+a ser lidas.
 
 A pagina nao existe na forma nova. Ela entra pelo `--paginas`, o JSON de
 `paginas.py`, e onde nao houver o mapa diz `s.p.` em vez de inventar numero.
