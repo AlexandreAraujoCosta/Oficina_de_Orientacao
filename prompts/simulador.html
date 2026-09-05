@@ -28,6 +28,15 @@
 
     --measure: 66ch;
 
+    /* seis degraus, e nada entre eles */
+    --t-xs: 12px;    /* rotulo em versalete */
+    --t-sm: 14px;    /* texto secundario */
+    --t-md: 16.5px;  /* corpo */
+    --t-lg: 19px;    /* linha de abertura */
+    --t-h3: 20px;
+    --t-h2: 26px;
+
+
     /* nomes proprios desta pagina, apontando para o sistema */
     --paper:       var(--ground);
     --paper-sunk:  var(--sunken);
@@ -104,19 +113,19 @@
 
   * { box-sizing:border-box; }
   body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans);
-    font-size:16.5px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+    font-size: var(--t-md); line-height:1.6; -webkit-font-smoothing:antialiased; }
   .wrap { max-width:900px; margin:0 auto; padding:2.5rem 1.5rem 6rem; }
 
   header.top { border-bottom:2px solid var(--ink); padding-bottom:1.3rem; margin-bottom:2rem; }
-  .eyebrow { font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--medida); margin-bottom:.7rem; }
-  h1 { font-family:var(--serif); font-size:clamp(1.9rem,4vw,2.6rem); font-weight:600; line-height:1.12;
+  .eyebrow { font-family: var(--sans); font-size: var(--t-xs); letter-spacing:.1em; text-transform:uppercase; color:var(--medida); margin-bottom:.7rem; }
+  h1 { font-family:var(--serif); font-size:clamp(34px, 5vw, 48px); font-weight:600; line-height:1.12;
     letter-spacing:-.015em; margin:0 0 .5rem; text-wrap:balance; }
-  .convite { font-family:var(--serif); font-size:1.15rem; color:var(--ink); line-height:1.5; margin:0 0 .8rem; max-width:var(--measure); }
+  .convite { font-family:var(--serif); font-size: var(--t-lg); color:var(--ink); line-height:1.5; margin:0 0 .8rem; max-width:var(--measure); }
   header.top p { margin:0 0 .8rem; max-width:var(--measure); color:var(--ink-soft); }
-  .quando { font-family:var(--mono); font-size:.74rem; letter-spacing:.04em; color:var(--correcao); margin:0; }
+  .quando { font-family:var(--sans); font-size: var(--t-xs); letter-spacing:.04em; color:var(--correcao); margin:0; }
 
-  h2 { font-family:var(--serif); font-size:1.5rem; font-weight:600; margin:0 0 .7rem; }
-  h3 { font-family:var(--mono); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase;
+  h2 { font-family:var(--serif); font-size: var(--t-h2); font-weight:600; margin:0 0 .7rem; }
+  h3 { font-family:var(--sans); font-size: var(--t-xs); letter-spacing:.1em; text-transform:uppercase;
     color:var(--ink-faint); font-weight:600; margin:2rem 0 .7rem; }
   p { max-width:var(--measure); }
   section { border-top:1px solid var(--rule); padding-top:1.6rem; margin-top:2.2rem; }
@@ -130,28 +139,28 @@
   ol.passos { margin:0; padding-left:1.3rem; max-width:var(--measure); }
   ol.passos li { margin-bottom:.6rem; color:var(--ink-soft); }
   ol.passos strong { color:var(--ink); }
-  ol.passos li::marker { font-family:var(--mono); font-size:.85rem; color:var(--medida); }
+  ol.passos li::marker { font-family:var(--sans); font-size: var(--t-sm); color:var(--medida); }
 
   dl.regras { margin:0; }
   dl.regras dt { font-weight:600; margin-top:1rem; padding-top:.8rem; border-top:1px solid var(--rule); }
   dl.regras dt:first-child { border-top:0; padding-top:0; margin-top:0; }
-  dl.regras dd { margin:.25rem 0 0; color:var(--ink-soft); font-size:.93rem; max-width:var(--measure); }
+  dl.regras dd { margin:.25rem 0 0; color:var(--ink-soft); font-size: var(--t-sm); max-width:var(--measure); }
 
   .barra { display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
     border:1px solid var(--rule-firm); border-bottom:0; padding:.7rem .9rem; background:var(--sunken); margin-top:1.4rem; }
-  .barra .lbl { flex:1; min-width:12rem; font-family:var(--mono); font-size:.7rem;
+  .barra .lbl { flex:1; min-width:12rem; font-family:var(--sans); font-size: var(--t-xs);
     letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
-  button.copiar { font-family:var(--sans); font-size:.86rem; font-weight:600;
+  button.copiar { font-family:var(--sans); font-size: var(--t-sm); font-weight:600;
     background:var(--ink); color:var(--paper); border:1px solid var(--ink);
     padding:.42rem 1rem; cursor:pointer; white-space:nowrap; }
   button.copiar[data-estado="feito"] { background:var(--conforme); border-color:var(--conforme); }
   textarea.prompt { display:block; width:100%; height:17rem; resize:vertical;
     border:1px solid var(--rule-firm); background:var(--sunken); color:var(--ink);
-    font-family:var(--mono); font-size:.78rem; line-height:1.6; padding:.9rem; white-space:pre-wrap; }
+    font-family:var(--mono); font-size: var(--t-xs); line-height:1.6; padding:.9rem; white-space:pre-wrap; }
   textarea.prompt.curta { height:10rem; }
 
   footer.colofao { margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--rule);
-    font-size:.86rem; color:var(--ink-faint); max-width:var(--measure); }
+    font-size: var(--t-sm); color:var(--ink-faint); max-width:var(--measure); }
   footer.colofao p { margin:0 0 .6rem; max-width:none; }
   footer.colofao strong { color:var(--ink-soft); font-weight:600; }
   a { color:var(--medida); text-decoration:underline; text-underline-offset:2px; }
@@ -159,7 +168,7 @@
   :focus-visible { outline:2px solid var(--medida); outline-offset:2px; }
 
   /* --- escolha de via, no desenho das paginas do Alberto e do Luis --- */
-  .vias-titulo { font-family: var(--serif); font-size: 19px; margin: 2.2rem 0 12px; }
+  .vias-titulo { font-family: var(--serif); font-size: var(--t-lg); margin: 2.2rem 0 12px; }
   .vias-grade { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
                 margin-bottom: 10px; }
   @media (max-width: 720px) { .vias-grade { grid-template-columns: 1fr; } }
@@ -168,30 +177,30 @@
             border-radius: 4px; padding: 16px 16px 14px; cursor: pointer; }
   .via-bt:hover, .via-bt:focus-visible { border-color: var(--ink-soft); }
   .via-bt[aria-pressed="true"] { background: var(--paper-sunk); border-color: var(--ink-soft); }
-  .via-nome { display: block; font-family: var(--serif); font-size: 23px;
+  .via-nome { display: block; font-family: var(--serif); font-size: var(--t-h3);
               line-height: 1.15; margin-bottom: 8px; }
-  .via-txt { display: block; font-size: 14.5px; line-height: 1.5; margin-bottom: 8px; }
-  .via-volta { display: block; font-size: 13.5px; color: var(--ink-faint); line-height: 1.45; }
+  .via-txt { display: block; font-size: var(--t-sm); line-height: 1.5; margin-bottom: 8px; }
+  .via-volta { display: block; font-size: var(--t-sm); color: var(--ink-faint); line-height: 1.45; }
   .via-guia { margin: 8px 0 26px; }
-  .via-guia h3 { font-family: var(--serif); font-size: 17px; margin: 22px 0 6px; }
-  .vias-nota { font-size: 14px; color: var(--ink-faint); margin: 14px 0 0;
+  .via-guia h3 { font-family: var(--serif); font-size: var(--t-md); margin: 22px 0 6px; }
+  .vias-nota { font-size: var(--t-sm); color: var(--ink-faint); margin: 14px 0 0;
                padding-top: 12px; border-top: 1px solid var(--rule); }
   .pedido { border: 1px solid var(--rule); border-radius: 4px; padding: 14px 16px;
             margin: 16px 0; }
-  .pedido-rot { font-size: 13px; color: var(--ink-faint); margin: 0 0 8px; }
-  .pedido-txt { font-family: var(--mono); font-size: 13px; line-height: 1.5;
+  .pedido-rot { font-size: var(--t-sm); color: var(--ink-faint); margin: 0 0 8px; }
+  .pedido-txt { font-family: var(--mono); font-size: var(--t-sm); line-height: 1.5;
                 white-space: pre-wrap; margin: 0; }
   .pedido { position: relative; padding-right: 6.5rem; }
   .cmd { position: relative; border: 1px solid var(--rule); border-radius: 3px;
          background: var(--sunken); padding: .7rem 6.5rem .7rem .9rem;
          margin: .55rem 0 .9rem; }
-  .cmd pre { font-family: var(--mono); font-size: 13px; line-height: 1.5;
+  .cmd pre { font-family: var(--mono); font-size: var(--t-sm); line-height: 1.5;
              white-space: pre-wrap; word-break: break-all; margin: 0; }
   .cmd button.copiar, .pedido button.copiar { position: absolute; top: .5rem; right: .5rem; }
   .feedback { border-left: 3px solid var(--good); background: var(--good-soft);
     padding: .8rem 1.1rem; border-radius: 0 3px 3px 0;
     margin: 1.4rem 0 0; max-width: var(--measure);
-    font-size: .93rem; color: var(--ink-soft); }
+    font-size: var(--t-sm); color: var(--ink-soft); }
   .feedback p { margin: 0; }
   .feedback b { color: var(--ink); }
 
@@ -216,12 +225,12 @@
   }
   .byline p { margin: 0 0 .35rem; }
   .byline p:last-child { margin-bottom: 0; }
-  .byline .author { font-size: .9rem; color: var(--ink-soft); }
+  .byline .author { font-size: var(--t-sm); color: var(--ink-soft); }
   .byline .author b { font-weight: 600; color: var(--ink); }
-  .byline .affil { font-size: .85rem; line-height: 1.55; color: var(--ink-faint); }
+  .byline .affil { font-size: var(--t-sm); line-height: 1.55; color: var(--ink-faint); }
   .byline .affil a { text-decoration: none; }
   .byline .affil a:hover { text-decoration: underline; }
-  .byline .assist { font-size: .85rem; color: var(--ink-faint); }
+  .byline .assist { font-size: var(--t-sm); color: var(--ink-faint); }
 
   /* O titulo respira o proprio corpo acima e abaixo. */
   .eyebrow { margin: 0; }
@@ -229,8 +238,8 @@
 
   /* --- escala do sistema: uma so em todas as paginas da oficina --- */
   h1, .top h1, header h1, .wrap > h1 { font-family: var(--serif); font-size: clamp(34px, 5vw, 48px); }
-  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: 26px; font-weight: 600; }
-  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: 20px; font-weight: 600;
+  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 600; }
+  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 600;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
   /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
   .wrap p, .wrap li, .wrap dd, .shell p, .shell li, .shell dd { max-width: var(--measure); }
@@ -238,7 +247,7 @@
 
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas acadêmicas</a></span><span class="eb-linha eb-baixo">Assistentes: <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <span class="eb-atual" aria-current="page">Simulador de banca</span></span></div>
+    <div class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas Acadêmicas</a></span><span class="eb-linha eb-baixo">Assistentes: <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <span class="eb-atual" aria-current="page">Simulador de banca</span></span></div>
     <h1>Simulador de banca: o ensaio da defesa</h1>
     <p class="convite">Você consegue responder ao que vão te perguntar?</p>
     <p>Uma sessão de arguição com dois examinadores e o orientador presidindo, que é a composição de uma banca real. Eles ouvem as suas respostas e ouvem uns aos outros. Não produz relatório sobre o trabalho: o que fica é a sessão e, no fim, a lista do que você não conseguiu responder. Pelo agente, essa lista sai gravada em arquivo.</p>
