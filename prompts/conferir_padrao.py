@@ -40,8 +40,8 @@ ESCURO = {
     "accent": "#97AAE2", "warn": "#D3A163", "good": "#83B78D", "danger": "#E07A6E",
 }
 # A regua tipografica: seis degraus, e nada entre eles.
-DEGRAUS = (("--t-xs", "12px"), ("--t-sm", "14px"), ("--t-md", "16.5px"),
-           ("--t-lg", "19px"), ("--t-h3", "20px"), ("--t-h2", "26px"))
+DEGRAUS = (("--t-xs", "14px"), ("--t-sm", "16px"), ("--t-md", "18px"),
+           ("--t-lg", "22px"), ("--t-h3", "19px"), ("--t-h2", "24px"))
 
 # Texto: tudo isto tem de passar de 4,5 sobre o papel do proprio tema.
 TEXTO = ("ink", "ink-soft", "muted", "faint", "accent", "warn", "good", "danger")
@@ -114,14 +114,16 @@ def confere(caminho):
 
     # 5. corpo, medida e a regua de seis degraus
     exige(re.search(r"body\s*\{[^}]*font-size:\s*var\(--t-md\)", css), "o corpo nao esta no degrau --t-md")
-    exige(re.search(r"body\s*\{[^}]*font-family:\s*var\(--sans\)", css),
-          "o corpo nao esta na fonte sem serifa do sistema")
+    exige(re.search(r"body\s*\{[^}]*font-family:\s*var\(--serif\)", css),
+          "o corpo nao esta na fonte de texto do sistema (Lora)")
+    exige("fonts.googleapis.com" in s and "Mulish" in s and "Lora" in s,
+          "a pagina nao carrega Mulish e Lora do Google Fonts")
     exige("--measure: 66ch" in css, "a medida nao e 66ch")
     exige("escala do sistema" in css, "falta o bloco da escala de titulos")
     for token, valor in DEGRAUS:
         exige(re.search(r"%s:\s*%s\s*;" % (token, re.escape(valor)), css),
               "o degrau %s nao e %s" % (token, valor))
-    exige(re.search(r"h1[^{]*\{[^}]*clamp\(34px, 5vw, 48px\)", css), "o h1 foge da escala")
+    exige(re.search(r"h1[^{]*\{[^}]*clamp\(24px, 5vw, 30px\)", css), "o h1 foge da escala")
     exige(re.search(r"h2[^{]*\{[^}]*font-size:\s*var\(--t-h2\)", css), "o h2 foge da escala")
     exige(re.search(r"h3[^{]*\{[^}]*font-size:\s*var\(--t-h3\)", css), "o h3 foge da escala")
 
@@ -137,7 +139,8 @@ def confere(caminho):
                 faltas.append("mono fora de texto de maquina: %s" % sel[:40])
 
     # 6. restos do sistema antigo, que passam despercebidos por serem parecidos
-    for velho in ("#eef0ef", "#e4e7e5", "#141c24", "#3e6b7a", "#93969D", "Constantia,"):
+    for velho in ("#eef0ef", "#e4e7e5", "#141c24", "#3e6b7a", "#93969D",
+                  "Constantia,"):
         if velho.lower() in css.lower():
             faltas.append("resta o valor antigo %s" % velho)
 
