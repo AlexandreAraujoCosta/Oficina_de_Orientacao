@@ -187,6 +187,80 @@ outra coisa?
 dados e não foi afirmado em lugar nenhum. É a parte que o autor não produz sozinho,
 porque ele já sabe o que quis dizer.
 
+**6. A inferência.** Está na seção seguinte, e é o passo principal.
+
+## O exame da inferência, e é o que um examinador faz
+
+Os passos anteriores conferem o que o trabalho **diz**: se o número fecha, se a
+frase corresponde à figura, se a categoria contada é a definida. **Este confere o
+que ele infere.** O trabalho de quem examina não é avaliar o que se diz, e sim a
+qualidade da inferência: a pergunta é se as conclusões se inferem dos dados.
+
+**Separe o que se diz do que se infere.** O que o trabalho afirma sobre o campo,
+sobre o instituto, sobre o estado da discussão, se prova na literatura. O que ele
+infere do material que reuniu se prova na análise dos dados ou das fontes que ele
+próprio apresenta. **Asserção de inferência apoiada só em fonte está apoiada no
+lugar errado**, ainda que a fonte exista e seja boa: quer dizer que o trabalho foi
+buscar fora a sustentação do que ele mesmo se propôs a medir.
+
+**Enumere as interpretações antes de julgar qualquer uma**, com o localizador de
+cada. Interpretação é toda passagem em que o trabalho vai além de descrever o que
+mediu: *aumentou porque*, *isso indica*, *o dado mostra que*, *revela uma
+tendência*, *sugere que*.
+
+**A pergunta que abre cada exame é se o dado carrega aquilo, e a forma que mais
+rende é a negativa: esta interpretação extrai mais do que o desenho permite?**
+Quatro modos de extrair demais, os quatro medidos nesta bancada em cadeias que
+terminavam em dado e passavam por boas:
+
+- **a comparação está condicionada.** Os dois conjuntos comparados foram
+  selecionados por um processo que os afeta de modo diferente, e a diferença
+  medida mistura o efeito com a seleção.
+- **o agregado vira caso.** A taxa média sustenta a afirmação sobre o conjunto, e
+  a asserção fala de cada unidade.
+- **a coincidência vira mecanismo.** As duas séries andam juntas, e a asserção diz
+  que uma produz a outra.
+- **o desfecho vira intenção.** O dado mede o que o texto faz, e a asserção diz o
+  que quem o escreveu quis.
+
+Sobre cada interpretação que sobreviver, cinco perguntas, que se respondem contra
+o próprio trabalho e por isso produzem item com endereço. **O que mais mudou na
+mesma janela**, além do que se está creditando? **O agregado pode estar escondendo
+processos distintos** que o corte já coletado separaria? **A teoria que o próprio
+trabalho adota oferece o mecanismo**, prediz outro, ou não fala disso? **O que essa
+explicação prediz que se veria**, e se vê? **De quantas variáveis a afirmação
+precisa**, e o trabalho as tem?
+
+**Não invente a explicação alternativa.** O candidato concorrente tem de estar no
+material: nos dados, na narrativa do trabalho, ou na literatura que ele mesmo
+cita. Explicação trazida de fora sem fonte é onde esta leitura passa a inventar.
+
+### Diga o que custa sustentar cada inferência
+
+Consertar inferência quase nunca é reescrever uma frase, e o autor pode não ter
+como pagar o conserto no prazo que tem. Classifique cada item num destes quatro:
+
+- **Uma frase.** Descer o alcance até onde o dado chega, ou declarar o limite.
+- **Uma tarde.** Refazer a conta, repartir pelo corte já coletado.
+- **Integrar o que já foi coletado.** As variáveis existem na base e nunca foram
+  postas juntas: o cruzamento que separaria duas explicações, o controle que a
+  coleta permite e a análise não usou. **É o degrau mais frequente**, e custa
+  análise, não campo. Diga quais variáveis integrar e o que o cruzamento decidiria.
+- **Coleta nova.** Variável que a base não tem, classificação a refazer caso a
+  caso, período não levantado.
+
+**A fronteira entre os dois últimos é a que decide**, porque integrar é trabalho de
+dias e coletar pode ser impossível no prazo. Antes de dizer que pede coleta,
+percorra a descrição da base e confira que a variável não está lá: chamar de coleta
+o que é integração manda o autor desistir do que ele faria numa semana.
+
+**Onde vários itens do mesmo capítulo pedirem coleta nova**, aquilo deixa de ser
+lista de correções e vira decisão sobre a peça: reduzir o que ela afirma até onde
+os dados chegam, ou tirá-la do corpo. Escreva as duas saídas e o que a conclusão
+perde em cada uma. Caso medido em 05/09/2026: numa dissertação com dois capítulos
+empíricos, a saída escolhida foi abandonar o primeiro, porque ajustar as
+inferências dele às do segundo pedia coleta que não cabia no prazo.
+
 ## Não há teto de itens, e há teto de precisão
 
 **Escreva todo achado que a leitura sustentar.** Uma leitura só já vê pouco, e o

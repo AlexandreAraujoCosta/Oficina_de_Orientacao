@@ -128,9 +128,12 @@ Os cinco destinos perguntam **quem consome o capítulo**. Falta perguntar **se o
 que ele afirma se sustenta no nível que o argumento exige**, e é por aí que entra
 a saída que o autor às vezes escolhe e que nenhum dos cinco descreve.
 
-Para cada peça, conte quantos dos seus itens de inferência pedem coleta nova, na
-classificação do passo 4c da leitura de dados. **Onde vários caírem aí, o
-capítulo não tem lista de correções: tem uma decisão.** As saídas são duas, e as
+Para cada peça, conte os itens de inferência dela pelos quatro degraus de custo
+do passo 4c da leitura de dados. **O degrau que decide é o último**, o da
+coleta nova; o penúltimo, o de integrar variáveis que a base já tem, é trabalho
+de dias, e confundir os dois manda o autor desistir do que ele faria numa
+semana. **Onde vários itens da peça caírem no último, o capítulo não tem lista
+de correções: tem uma decisão.** As saídas são duas, e as
 duas se escrevem: **reduzir o que a peça afirma até o que os dados carregam**, ou
 **tirá-la do corpo**, com o que a conclusão perde em cada caso.
 

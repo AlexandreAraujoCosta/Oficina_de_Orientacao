@@ -279,21 +279,33 @@ mais dado, mais variável, mais classificação, e essa exigência tem um preço
 autor pode não ter como pagar no tempo que tem. Apontar a fragilidade sem dizer o
 preço entrega uma tarefa impossível com aparência de correção simples.
 
-Classifique cada item de inferência num destes três, e escreva qual:
+Classifique cada item de inferência num destes quatro, e escreva qual:
 
 - **Cabe numa frase.** Descer o alcance até onde o dado chega, ou declarar o
   limite. Não pede dado nenhum.
-- **Cabe numa tarde.** Refazer a conta, repartir pelo corte já coletado, cruzar
-  duas variáveis que a base tem. Pede trabalho e não pede coleta.
+- **Cabe numa tarde.** Refazer a conta, repartir pelo corte já coletado. Pede
+  trabalho sobre o que já está calculado.
+- **Pede integrar o que já foi coletado.** As variáveis existem na base e nunca
+  foram postas juntas: o cruzamento que separaria as duas explicações, o controle
+  que a coleta permite e a análise não usou, a série repartida por um corte que já
+  está lá. **É o degrau mais frequente e o mais confundido com o seguinte.** Custa
+  análise e não custa campo: é trabalho de dias, e não de meses. Diga quais
+  variáveis integrar e o que o cruzamento decidiria.
 - **Pede coleta nova.** Variável que a base não tem, classificação que teria de
   ser refeita caso a caso, período que não foi levantado. **Diga isso com todas as
   letras**, e diga o que a inferência passaria a sustentar se a coleta fosse
   feita.
 
-**Onde vários itens do mesmo capítulo caírem no terceiro**, isso deixa de ser
-lista de correções e vira uma decisão sobre a peça: reduzir o que ela afirma até o
-que os dados carregam, ou tirá-la do corpo. Essa decisão é de quem escreve e de
-quem orienta, e o relatório existe para que ela seja tomada com o número na frente.
+**A fronteira entre o terceiro e o quarto é a que decide**, porque o terceiro é
+trabalho de dias e o quarto pode ser impossível no prazo. Antes de classificar um
+item como coleta nova, percorra a descrição da base e confira que a variável
+realmente não está lá. Chamar de coleta o que é integração manda o autor desistir
+do que ele poderia fazer numa semana.
+
+**Onde vários itens do mesmo capítulo caírem no quarto**, isso deixa de ser lista
+de correções e vira uma decisão sobre a peça: reduzir o que ela afirma até o que
+os dados carregam, ou tirá-la do corpo. Essa decisão é de quem escreve e de quem
+orienta, e o relatório existe para que ela seja tomada com o número na frente.
 Caso medido em 05/09/2026: numa dissertação, a saída escolhida foi abandonar um
 capítulo inteiro, porque ajustar as inferências dele às do capítulo seguinte não
 cabia no prazo.
