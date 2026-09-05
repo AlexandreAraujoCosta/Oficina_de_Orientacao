@@ -41,15 +41,26 @@ for fluxo in (sys.stdout, sys.stderr):
     except Exception:
         pass
 
-# `### S6. titulo` ate o proximo `###` ou `##` de mesmo nivel ou maior.
+# TRES ESCRITAS DO MESMO ITEM, E O EXTRATOR CONHECIA UMA
+#
+# O relatorio sai de uma leitura, e cada leitura escreve os campos a sua maneira:
+# `- **Aponta**` em item de lista, `**Aponta:**` com dois-pontos, `**Aponta.**`
+# com ponto e fora de lista. O separador entre o codigo e o titulo tambem varia
+# (ponto, travessao, meio-travessao, ponto medio). Em 05/09/2026 o extrator
+# devolveu ZERO correcoes sobre um relatorio de dezessete, calado, porque
+# conhecia so uma das escritas. Contagem certa e conteudo vazio e o defeito mais
+# caro que este programa pode ter, porque a conferencia seguinte olha o numero.
+SEP = r"[ \t]*[.,:—–·|-]?[ \t]*"
 RE_S = re.compile(
-    r"^### (S\d+)\.\s*(.+?)\s*$\n(.*?)(?=^#{2,3} |\Z)", re.M | re.S)
+    r"^#{3,4} (S\d+)" + SEP + r"(.+?)\s*$\n(.*?)(?=^#{2,4} |\Z)", re.M | re.S)
 RE_CAMPO = re.compile(
-    r"^- \*\*(Tipo|Aponta|O que fazer|O que muda)\*\*\s*(.*?)"
-    r"(?=^- \*\*|\Z)", re.M | re.S)
+    r"^[-*]?[ \t]*\*\*(Tipo|Aponta|O que fazer|O que muda)[.:]?\*\*[.:]?\s*(.*?)"
+    r"(?=^[-*]?[ \t]*\*\*(?:Tipo|Aponta|O que fazer|O que muda|Marca|Abrir|Ordem)"
+    r"[.:]?\*\*|\Z)", re.M | re.S)
 # `**SC1.** texto` ate a linha em branco que precede o proximo SC.
 RE_SC = re.compile(
-    r"^\*\*(SC\d+)\.\*\*\s*(.*?)(?=^\*\*SC\d+\.\*\*|^#{2,3} |\Z)", re.M | re.S)
+    r"^\*\*(SC\d+)[.:]?\*\*\s*(.*?)(?=^\*\*SC\d+[.:]?\*\*|^#{2,4} |\Z)",
+    re.M | re.S)
 RE_LOC = re.compile(r"\[P(\d+)\]")
 
 
@@ -124,6 +135,26 @@ CONTROLE = """### S1. Um titulo qualquer
 **SC2.** [P40] e [P30] repetem a mesma legenda.
 """
 
+# A segunda escrita, com travessao no titulo e ponto no campo, fora de lista.
+CONTROLE_PONTO = """### S1 — Um titulo qualquer
+
+**Tipo:** uma categoria.
+
+**Aponta.** O problema esta em [P10] e tambem em [P20].
+
+**O que fazer.** Consertar [P10].
+
+**O que muda.** Passa a fechar.
+
+---
+
+### S2 · Outro titulo
+
+**Aponta:** Nada aqui tem localizador.
+
+**O que fazer:** Nada.
+"""
+
 
 def provar():
     """O extrator tem de achar o que esta la e reprovar o que foi adulterado."""
@@ -136,16 +167,29 @@ def provar():
     ]
     if itens != esperado:
         sys.exit("o extrator nao le o controle:\n%r" % (itens,))
+    # A MESMA COISA NA SEGUNDA ESCRITA, e ela tem de dar o mesmo resultado.
+    outros = extrair(CONTROLE_PONTO)
+    if [(c, t) for c, t, _ in outros] != [
+            ("S1", "Um titulo qualquer. Consertar [P10]."),
+            ("S2", "Outro titulo. Nada.")]:
+        sys.exit("o extrator nao le a escrita com ponto e travessao:\n%r" % (outros,))
+    if outros[0][2] != ["[P10]", "[P20]"]:
+        sys.exit("os localizadores da segunda escrita nao foram lidos: %r" % (outros[0],))
     # adulterado: sem o campo Aponta, o item tem de sumir
     ruim = extrair(CONTROLE.replace("- **Aponta** O problema", "- **Xponta** O problema"))
     if any(c == "S1" for c, _, _ in ruim):
         sys.exit("o extrator aceita item sem o campo Aponta; nao confie nele")
-    # adulterado: cabecalho de nivel errado nao e item
-    ruim = extrair(CONTROLE.replace("### S1.", "#### S1."))
+    # O NIVEL DO CABECALHO. Os itens saem em `###` ou `####`, conforme a leitura
+    # os aninhe ou nao sob a subsecao de custo; o `##` e cabecalho de SECAO do
+    # relatorio ("## 4. As correcoes") e nao pode virar item.
+    if not any(c == "S1" for c, _, _ in extrair(CONTROLE.replace("### S1.", "#### S1."))):
+        sys.exit("o extrator perde o item aninhado em quarto nivel")
+    ruim = extrair(CONTROLE.replace("### S1.", "## S1."))
     if any(c == "S1" for c, _, _ in ruim):
-        sys.exit("o extrator aceita cabecalho de outro nivel; nao confie nele")
-    print("controle: o extrator le os quatro itens do controle e reprova as "
-          "duas adulteracoes")
+        sys.exit("o extrator toma cabecalho de secao por item; nao confie nele")
+    print("controle: o extrator le os quatro itens do controle nas duas "
+          "escritas, perde o item sem campo Aponta, acha o aninhado em "
+          "quarto nivel e recusa o cabecalho de secao")
 
 
 def main():
