@@ -342,28 +342,15 @@
       pelo painel de extensões; depois ligue a sua chave no seletor de modelos, em <i>Manage
       Models</i> ou <i>Add model provider</i>.</li>
 
-      <li><b>Traga a oficina.</b> No <b>Claude Code</b>, o comando abaixo num terminal; se não
-      tiver o git, peça ao próprio assistente que o instale. No <b>VS Code</b>, na tela inicial,
-      <b>Clonar Repositório Git…</b> e cole o mesmo endereço, respondendo que sim quando ele
-      perguntar se quer abrir a pasta, porque é ao abrir que ele lê as instruções.
-        <div class="cmd">
-          <button type="button" class="copiar" data-alvo="c-clone">Copiar</button>
-          <pre id="c-clone">git clone https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</pre>
-        </div>
-      </li>
-
-      <li><b>Ponha o trabalho na pasta</b> que o clone criou, ao lado de <code>scripts/</code> e
-      <code>prompts/</code>.</li>
-
-      <li><b>Abra o agente nessa pasta.</b> No <b>Claude Code</b>, entrando nela e chamando o
-      programa. No <b>VS Code</b>, abrindo o chat com <b>Ctrl+Alt+I</b> e pondo em <b>modo
-      agente</b>, no seletor do alto do painel, onde costuma estar escrito <i>Ask</i>: modo
-      agente é o que tem terminal, e nos outros o assistente explica os comandos em vez de
-      executá-los, sem avisar a diferença.
+      <li><b>Abra o agente na pasta onde está o trabalho.</b> Não é preciso baixar nada
+      antes: o pedido do fim desta lista traz a oficina para dentro dessa pasta, ao lado do
+      trabalho. No <b>Claude Code</b>, entre na pasta e chame o programa. No <b>VS Code</b>,
+      abra o chat com <b>Ctrl+Alt+I</b> e ponha em <b>modo agente</b>, no seletor do alto do
+      painel, onde costuma estar escrito <i>Ask</i>: modo agente é o que tem terminal, e nos
+      outros o assistente explica os comandos em vez de executá-los, sem avisar a diferença.
         <div class="cmd">
           <button type="button" class="copiar" data-alvo="c-abrir">Copiar</button>
-          <pre id="c-abrir">cd Oficina_de_Orientacao
-claude</pre>
+          <pre id="c-abrir">claude</pre>
         </div>
       </li>
 
@@ -377,22 +364,27 @@ claude</pre>
     <div class="pedido">
       <button type="button" class="copiar" data-alvo="c-pedido-agente">Copiar</button>
       <p class="pedido-rot">Cole isto na conversa:</p>
-      <pre class="pedido-txt" id="c-pedido-agente">Leia prompts/leituras/ESTADO.md nesta pasta e rode o pipeline sobre este trabalho,
-seguindo os prompts numerados de prompts/leituras/ na ordem.
+      <pre class="pedido-txt" id="c-pedido-agente">Clone o repositório da oficina nesta pasta:
 
-Antes de tudo, se o trabalho for .docx, rode o diagnostico de forma, que le e
-nao mexe em nada:
-python scripts/diagnostico_forma.py trabalho.docx
-python scripts/extrair.py trabalho.docx
-python scripts/conferir_interno.py extracao/trabalho.txt
+git clone https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao
+
+Leia por inteiro, dentro dele, o AGENTS.md e o prompts/leituras/ESTADO.md, e
+escreva a última frase de cada um, para eu conferir que a leitura chegou ao fim.
+
+Depois rode o pipeline sobre o trabalho desta pasta, seguindo os prompts
+numerados de prompts/leituras/ na ordem. Se o trabalho for .docx, comece pelo
+diagnostico de forma, que le e nao mexe em nada:
+
+python Oficina_de_Orientacao/scripts/analisar.py "NOME DO ARQUIVO"
 
 O que o diagnostico apontar entra no relatorio como sugestao. Nenhum programa
 daqui altera o arquivo do autor.
 
 Depois rode a leitura completa sobre a extracao, e monte a entrega com
-scripts/montar_entrega.py.
+Oficina_de_Orientacao/scripts/montar_entrega.py.
 
-Nao rode git. Nao publique nada. Se faltar alguma coisa, diga o que falta.</pre>
+Nao rode git alem do clone. Nao publique nada. Se faltar alguma coisa, diga o
+que falta.</pre>
     </div>
 
     <h3>Aprovar os comandos</h3>
