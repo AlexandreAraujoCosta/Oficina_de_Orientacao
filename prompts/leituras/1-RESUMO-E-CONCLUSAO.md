@@ -86,6 +86,46 @@ Marque à parte a cadeia **estreita**: o suporte existe e é menor que a afirma�
 (sustenta um tribunal, um recorte, um subconjunto, e a asserção fala do todo). E a
 cadeia que termina em dado que **contradiz** a asserção.
 
+### Antes de percorrer, separe o que se diz do que se infere
+
+**São duas espécies de asserção, e a prova que cada uma pede é outra.** O que o
+trabalho **diz** sobre o campo, sobre o instituto, sobre o estado da discussão, se
+prova na literatura, e ali o término bom é FONTE. O que ele **infere** do material
+que reuniu se prova na análise dos dados ou das fontes que ele próprio apresenta, e
+ali FONTE não serve: o término bom é DADO.
+
+Classifique cada asserção nas duas espécies antes de percorrer a cadeia, porque a
+classificação muda o que conta como término bom. **Asserção de inferência que
+termina em FONTE está apoiada no lugar errado**, ainda que a fonte exista e seja
+boa: quer dizer que o trabalho foi buscar fora a sustentação do que ele próprio se
+propôs a medir.
+
+### Término bom não é término suficiente
+
+Terminar em dado responde *isto se apoia em alguma coisa?*. Falta a segunda
+pergunta, **o que sustenta basta para o que se afirma?**, e é nela que está a
+qualidade da inferência, que é o objeto principal de quem examina.
+
+Para toda cadeia que terminar em DADO, pergunte: **o dado carrega a força da
+asserção?** Quatro modos de não carregar, e os quatro já apareceram nesta bancada
+com o término marcado como bom:
+
+- **a comparação está condicionada.** Os dois conjuntos comparados foram
+  selecionados por um processo que os afeta de modo diferente, e a diferença
+  medida mistura o efeito com a seleção.
+- **o agregado vira caso.** A taxa média sustenta a afirmação sobre o conjunto, e a
+  asserção fala de cada unidade.
+- **a coincidência vira mecanismo.** As duas séries andam juntas, e a asserção diz
+  que uma produz a outra.
+- **o desfecho vira intenção.** O dado mede o que o texto faz, e a asserção diz o
+  que quem o escreveu quis.
+
+Onde o dado não carregar, o item **não manda retirar a asserção**: manda descer o
+alcance dela até onde o dado chega, e diz até onde. Caso medido em 05/09/2026: numa
+dissertação, quarenta e uma de quarenta e seis cadeias terminaram em DADO e foram
+dadas por boas, e uma delas comparava dois ambientes cuja probabilidade de entrar
+na comparação diferia seis vezes.
+
 Caso medido, para calibrar dois términos. Uma conclusão arrolava "segurança jurídica"
 entre os valores mobilizados, e a expressão ocorria uma única vez na dissertação
 inteira, na própria frase da conclusão: **NADA**. E três teses devolviam como achado a
