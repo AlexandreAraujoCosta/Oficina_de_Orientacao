@@ -412,7 +412,21 @@ que falta.</pre>
     <h3>Onde fica a entrega</h3>
     <p>Numa pasta <code>entregas/</code>, com o trabalho anotado em <code>.docx</code>, o
     relatório em PDF e a lista de itens para correção. É o que se manda a quem escreveu.</p>
-  </div>
+  
+        <h3>Rodar outro assistente de dentro do agente</h3>
+        <p>O agente pode dirigir o navegador e usar um assistente de outra
+        empresa, como o ChatGPT, em lugar da leitura dele. Isto foi testado em
+        05/09/2026, no Claude Code com a extensão <i>Claude in Chrome</i>, e em
+        nenhuma outra combinação. Depende de três coisas: a extensão instalada e
+        ligada ao seu Chrome; uma sessão já autenticada no serviço, porque o
+        agente não cria conta nem digita senha; e a sua autorização a cada vez,
+        porque anexar o trabalho envia para fora o arquivo de outra pessoa.</p>
+        <p>Duas limitações apareceram na medição. A conta gratuita do ChatGPT
+        <b>não lê as imagens do PDF</b>, e por isso nenhum achado que dependa de
+        figura sai por ali. E o relatório volta endereçado por página, e não por
+        parágrafo, o que impede montar o arquivo comentado a partir dele: o que
+        se recebe é o texto da leitura, para conferir e aproveitar à mão.</p>
+      </div>
 
 
   <section class="cuidados" id="cuidados">

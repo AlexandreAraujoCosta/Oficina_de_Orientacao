@@ -121,11 +121,19 @@ def fronteiras(P):
     def peca(padrao):
         return [n for n in acha(P, padrao) if not DE.match(P[n][2])]
 
-    resumo = (peca(r"^RESUMO\b") or [None])[0]
-    abstract = (peca(r"^ABSTRACT\b") or [None])[0]
-    refer = ultima(r"^REFER[EÊ]NCIAS?\b")
-    concl = ultima(r"^(CONCLUS[AÃ]O|CONSIDERA[CÇ][OÕ]ES FINAIS)\b")
-    intro = ultima(r"^INTRODU[CÇ][AÃ]O\b")
+    # O TRABALHO PODE ESTAR EM INGLES, E O MAPA ERA MONOLINGUE. Medido em
+    # 05/09/2026: numa tese de doutorado da UnB escrita em ingles, com secoes
+    # "1. Introduction", "6. Conclusion" e "REFERENCES", o mapa disse que nao
+    # havia conclusao nem referencias, e teria cegado as leituras que partem
+    # dessas duas pecas. O numero de secao tambem entra, porque o trabalho
+    # numera os titulos no corpo.
+    NUM = r"(?:\d{1,2}[.)]?\s+)?"
+    resumo = (peca(NUM + r"RESUMO\b") or [None])[0]
+    abstract = (peca(NUM + r"ABSTRACT\b") or [None])[0]
+    refer = ultima(NUM + r"(REFER[EÊ]NCIAS?|REFERENCES|BIBLIOGRAPHY)\b")
+    concl = ultima(NUM + r"(CONCLUS[AÃ]O|CONSIDERA[CÇ][OÕ]ES FINAIS|CONCLUSIONS?"
+                   r"|FINAL REMARKS|CONCLUDING REMARKS)\b")
+    intro = ultima(NUM + r"(INTRODU[CÇ][AÃ]O|INTRODUCTION)\b")
     if intro is None or (refer and intro > refer):
         # o corpo comeca depois do sumario e das listas, e a ultima linha
         # pontilhada e o fim deles
@@ -207,6 +215,33 @@ def montar(P, fr, nome):
     return txt
 
 
+CONTROLE_INGLES = u"""##EXTRACAO fonte=controle_en.docx
+
+## [P1] ABSTRACT
+
+[P2] This dissertation asks whether a concept can be built at all, and the
+paragraph is long enough not to be mistaken for a heading by any of the length
+filters that this program applies to the pieces it looks for.
+
+## [P3] 1. Introduction
+
+[P4] The question this work asks comes from a controversy that the literature
+has registered for a long time, and the introduction states it plainly so that
+nobody has to infer it from the rest of the text.
+
+### [P5] 1.1 Method
+
+[P6] A paragraph about method.
+
+## [P7] 6. Conclusion
+
+[P8] The work concludes what it promised.
+
+## [P9] REFERENCES
+
+[P10] AUTHOR, One. A title. City: Press, 2020.
+"""
+
 CONTROLE = u"""##EXTRACAO fonte=controle.docx
 
 ## [P1] RESUMO
@@ -277,9 +312,21 @@ def autoteste():
     if fr3["resumo"] is not None:
         sys.exit("!! o programa toma 'Resumo dos achados' por resumo do trabalho; "
                  "nao confie nele")
+    # O MESMO CONTROLE EM INGLES: sem ele, o mapa volta a ser monolingue sem
+    # que nada acuse, e as leituras que partem do resumo e da conclusao ficam
+    # cegas num trabalho inteiro.
+    alvo.write_text(CONTROLE_INGLES, encoding="utf-8")
+    fr4 = fronteiras(ler(str(alvo)))
+    esperado_en = dict(resumo=None, abstract=1, intro=3, conclusao=7, referencias=9)
+    for k, v in esperado_en.items():
+        if fr4[k] != v:
+            sys.exit("!! no controle em ingles, %s deu %r e o esperado e %r"
+                     % (k, fr4[k], v))
+
     print("  autoteste: as cinco fronteiras do controle sao achadas, o mapa "
           "traz as sete pecas esperadas, as duas adulteradas se perdem e o "
-          "titulo 'Resumo dos achados' nao passa por resumo")
+          "titulo 'Resumo dos achados' nao passa por resumo; e o controle "
+          "em ingles acha introduction, conclusion e references")
 
 
 def main():
