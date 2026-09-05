@@ -10,7 +10,10 @@ escolha, o que foi derrubado, o que não está medido, e onde parou cada trabalh
 
 **São duas ferramentas, e não uma.** O pipeline daqui é a leitura completa. Ao lado dele
 existe agora `prompts/ALBERTO.md`, o relatório rápido: uma leitura, o mesmo formato de
-oito partes, uma revisão quando roda no agente, e um a três minutos. O nome era da
+oito partes e uma revisão quando roda no agente. O "um a três minutos" que este
+arquivo trazia era da ferramenta anterior de mesmo nome, a conferência de
+consistência, e não se transfere: medido em 04/09/2026, o Alberto no chat levou
+15 minutos e 52 segundos numa tese de 109 páginas. O nome era da
 conferência de consistência, que passou a `prompts/CONSISTENCIA.md`.
 
 **O `prompts/LUIS.md` foi aposentado**, e o que ele tinha e o pipeline não tinha veio para
