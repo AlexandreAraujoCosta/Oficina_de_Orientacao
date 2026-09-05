@@ -106,13 +106,23 @@ def fronteiras(P):
     def ultima(padrao, minimo=0):
         c = [n for n in acha(P, padrao) if n > minimo]
         return c[-1] if c else None
-    # O limite de comprimento nao e enfeite: sem ele, `^RESUMO\b` casa o
-    # titulo "Resumo do perfil decisorio do controle concentrado por ambiente",
-    # no fim de um trabalho que nao tem resumo nenhum, e o mapa passa a dizer
-    # que ha resumo. Medido em 05/09/2026.
-    curto = lambda ns: [n for n in ns if len(P[n][2]) <= 40]
-    resumo = (curto(acha(P, r"^RESUMO\b")) or [None])[0]
-    abstract = (curto(acha(P, r"^ABSTRACT\b")) or [None])[0]
+    # SEPARAR O RESUMO DO TITULO QUE COMECA COM A MESMA PALAVRA
+    #
+    # `^RESUMO\b` casa tambem "Resumo do perfil decisorio do controle
+    # concentrado por ambiente", que e titulo de secao no fim de um trabalho
+    # sem resumo nenhum, e o mapa passava a dizer que ha resumo. Medido em
+    # 05/09/2026. O comprimento sozinho nao separa os dois, porque na extracao
+    # de PDF o titulo vem grudado no texto que ele encabeca, e o resumo
+    # verdadeiro ocupa um paragrafo inteiro. O que separa e a palavra seguinte:
+    # "Resumo DO perfil" nomeia o resumo de outra coisa; o resumo do trabalho e
+    # seguido do proprio texto, ou de nada.
+    DE = re.compile(r"^(RESUMO|ABSTRACT)\s+(?:d[aoe]s?|of|from)\b", re.I)
+
+    def peca(padrao):
+        return [n for n in acha(P, padrao) if not DE.match(P[n][2])]
+
+    resumo = (peca(r"^RESUMO\b") or [None])[0]
+    abstract = (peca(r"^ABSTRACT\b") or [None])[0]
     refer = ultima(r"^REFER[EÊ]NCIAS?\b")
     concl = ultima(r"^(CONCLUS[AÃ]O|CONSIDERA[CÇ][OÕ]ES FINAIS)\b")
     intro = ultima(r"^INTRODU[CÇ][AÃ]O\b")
@@ -245,15 +255,24 @@ def autoteste():
             sys.exit("!! o mapa do controle nao traz %r" % s)
 
     # adulterado: sem os titulos, as fronteiras tem de se perder
-    ruim = ler(str(alvo)) and None
     alvo.write_text(CONTROLE.replace("CONCLUSÃO", "CONVERSA")
                             .replace("REFERÊNCIAS", "REFERIDOS"), encoding="utf-8")
     fr2 = fronteiras(ler(str(alvo)))
     if fr2["conclusao"] is not None or fr2["referencias"] is not None:
         sys.exit("!! o programa acha conclusao e referencias onde nao ha; "
                  "nao confie nele")
+
+    # o falso positivo medido: um trabalho SEM resumo, com uma secao chamada
+    # "Resumo dos achados". O programa nao pode chama-la de resumo.
+    alvo.write_text(CONTROLE.replace("## [P1] RESUMO", "## [P1] Resumo dos achados"),
+                    encoding="utf-8")
+    fr3 = fronteiras(ler(str(alvo)))
+    if fr3["resumo"] is not None:
+        sys.exit("!! o programa toma 'Resumo dos achados' por resumo do trabalho; "
+                 "nao confie nele")
     print("  autoteste: as cinco fronteiras do controle sao achadas, o mapa "
-          "traz as sete pecas esperadas, e as duas adulteradas se perdem")
+          "traz as sete pecas esperadas, as duas adulteradas se perdem e o "
+          "titulo 'Resumo dos achados' nao passa por resumo")
 
 
 def main():

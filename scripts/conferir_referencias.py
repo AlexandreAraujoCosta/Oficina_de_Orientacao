@@ -47,6 +47,14 @@ RE_MARCA_A = re.compile(r"\[P(\d+)\]")
 RE_MARCA_B = re.compile(r"^\[[^\]]+\]\s*P(\d+)\s", re.M)
 RE_PREFIXO_B = re.compile(r"^\s*(?:\[[^\]]*\]\s*)?(?:\(p\.\s*\d+\)\s*)?")
 
+# A extração escreve o marcador de seção (##, **, >) no começo da linha, e no
+# formato A ele cai depois do corte, colado ao fim do parágrafo ANTERIOR. Com
+# ele ali, a linha do sumário "REFERÊNCIAS BIBLIOGRÁFICAS 131" deixa de terminar
+# em número de página, escapa da guarda que existe para recusá-la, e a lista
+# passa a começar no sumário. Medido em 05/09/2026, num trabalho real.
+RE_MARCA_VAZADA = re.compile(r"\n[ \t]*(?:#{1,6}|>|\*{1,3})[ \t]*$")
+RE_COMENTARIO = re.compile(r"<!--.*?-->", re.S)
+
 # Em inglês também, porque há tese em inglês neste acervo, e procurar o termo em
 # português devolve zero com a mesma cara de trabalho sem lista de referências.
 # Medido em 03/09/2026, numa tese de doutorado escrita em inglês.
@@ -58,6 +66,11 @@ RE_FIM_REF = re.compile(
 
 # Sobrenome em caixa alta seguido de vírgula é a forma da entrada em ABNT.
 RE_SOBRENOME = re.compile(r"([A-ZÀ-Ý][A-ZÀ-Ý'\-]{2,})\s*,")
+# Mais estreita que a de cima: aqui o sobrenome tem de ABRIR o parágrafo, que é
+# a forma da entrada em ABNT. Separa a entrada da prosa do corpo, que traz
+# "(STF, 2022)" no meio da frase e casaria um crivo de posição livre.
+RE_ENTRADA_ABNT = re.compile(
+    r"^[\"\u201c'(\[]?\s*[A-ZÀ-Ý][A-ZÀ-Ý'\-]{2,}(?:\s+[A-ZÀ-Ý][A-ZÀ-Ý'\-]*)*\s*,")
 RE_ANO = re.compile(r"\b((?:19|20)\d{2})")
 
 # As duas formas de chamada: Autor (ano) e (AUTOR, ano).
@@ -76,6 +89,13 @@ CAPITULO SECAO ITEM NOTA FONTE PAGINA VOLUME SUPREMO TRIBUNAL SUPERIOR JUSTICA
 CONSTITUICAO SUMULA VINCULANTE BRASIL DISTRITO FEDERAL""".split())
 
 
+def limpar(t):
+    """Tira do parágrafo o que é marcação da extração, e não texto do trabalho."""
+    t = RE_COMENTARIO.sub("", t)
+    t = RE_MARCA_VAZADA.sub("", t.rstrip())
+    return t.rstrip().rstrip("*").rstrip()
+
+
 def sem_acento(s):
     return "".join(c for c in unicodedata.normalize("NFD", s.upper())
                    if unicodedata.category(c) != "Mn")
@@ -92,11 +112,11 @@ def paragrafos(texto):
         # "[TITULO] (p.124) REFERÊNCIAS". Foi assim que este conferidor devolveu
         # "não encontrei a lista" no primeiro trabalho real, em 03/09/2026.
         corpo = RE_PREFIXO_B.sub("", corpo, count=1)
-        achados[int(m.group(1))] = corpo
+        achados[int(m.group(1))] = limpar(corpo)
     if achados:
         return achados
     ped = RE_MARCA_A.split(texto)
-    return {int(ped[i]): ped[i + 1] for i in range(1, len(ped) - 1, 2)}
+    return {int(ped[i]): limpar(ped[i + 1]) for i in range(1, len(ped) - 1, 2)}
 
 
 def e_linha_de_sumario(t):
@@ -108,26 +128,67 @@ def e_linha_de_sumario(t):
     return bool(re.search(r"[.…]{4,}", t) or re.search(r"\s\d{1,4}\s*$", t))
 
 
+def forma_de_entrada(t):
+    """O parágrafo abre por sobrenome em caixa alta com vírgula, e traz ano."""
+    t = t.strip()
+    return bool(len(t) >= 40 and RE_ENTRADA_ABNT.match(t) and RE_ANO.search(t))
+
+
+def confirma_vizinhanca(pars, n, janela=10, piso=0.6):
+    """Depois de n vem lista, ou vem o resto do sumário e o corpo do trabalho?
+
+    A linha do sumário casa o mesmo título da seção e nem sempre se denuncia
+    sozinha: a que não traz pontilhado nem número de página é idêntica ao
+    título, e o que as separa é o que vem depois de cada uma.
+    """
+    seguintes = [pars[m].strip() for m in sorted(pars) if m > n]
+    seguintes = [t for t in seguintes if len(t) >= 40][:janela]
+    if not seguintes:
+        # Sem vizinhança não há o que confirmar, e também não há sumário depois:
+        # o título no fim do arquivo, ou colado à única entrada, passa.
+        return True
+    return sum(1 for t in seguintes if forma_de_entrada(t)) >= piso * len(seguintes)
+
+
 def faixa_referencias(pars):
-    """(início, fim) da lista de referências, pelos títulos que a abrem e fecham.
+    """(início, fim, nota) da lista, pelos títulos que a abrem e fecham.
 
     O título nem sempre está sozinho no parágrafo: num trabalho medido em
     03/09/2026 a extração fundiu REFERÊNCIAS com a primeira entrada, e a guarda
     de tamanho, que existia para recusar a linha do sumário, recusava a lista
     inteira junto. Hoje a linha do sumário se recusa pelo que ela é, e o título
     passa mesmo quando vem colado a uma entrada.
+
+    A forma do parágrafo, sozinha, não basta. Em 05/09/2026 a extração pôs o
+    marcador de seção do parágrafo seguinte no fim da linha do sumário; a lista
+    começou na página 131 do sumário, com 699 parágrafos de corpo dentro dela e
+    zero chamada achada no corpo, sem aviso nenhum. Cada candidato a título
+    agora se confirma pelo que vem depois dele, e a nota diz quando nenhum se
+    confirmou, em vez de a faixa errada sair calada.
     """
-    ini = fim = None
+    candidatos = []
     for n in sorted(pars):
         t = pars[n].strip()
-        if ini is None and RE_INI_REF.match(t) and not e_linha_de_sumario(t):
+        if RE_INI_REF.match(t) and not e_linha_de_sumario(t):
             if len(t) < 80 or (RE_SOBRENOME.search(t) and RE_ANO.search(t)):
-                ini = n
-        elif ini is not None and RE_FIM_REF.match(t) and not e_linha_de_sumario(t) \
-                and len(t) < 80:
-            fim = n
-            break
-    return ini, (fim if fim else (max(pars) + 1 if pars else 0))
+                candidatos.append(n)
+    nota = None
+    ini = next((n for n in candidatos if confirma_vizinhanca(pars, n)), None)
+    if ini is None and candidatos:
+        ini = candidatos[0]
+        nota = ("nenhum dos %d candidatos a título da lista tem lista depois de si; "
+                "ancorei no primeiro (P%d), e a faixa pode estar errada"
+                % (len(candidatos), ini))
+    fim = None
+    if ini is not None:
+        for n in sorted(pars):
+            if n <= ini:
+                continue
+            t = pars[n].strip()
+            if RE_FIM_REF.match(t) and not e_linha_de_sumario(t) and len(t) < 80:
+                fim = n
+                break
+    return ini, (fim if fim else (max(pars) + 1 if pars else 0)), nota
 
 
 def entradas(pars, ini, fim, minimo):
