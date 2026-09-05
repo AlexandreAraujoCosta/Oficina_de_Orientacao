@@ -346,7 +346,7 @@
   .cartao p:last-child { margin-bottom: 0; }
   .dentro { display: grid; gap: .1rem; margin: .9rem 0 0;
             border-top: 1px solid var(--rule-soft); padding-top: .8rem; }
-  .dentro div { display: grid; grid-template-columns: 7rem 1fr; gap: .8rem;
+  .dentro div { display: grid; grid-template-columns: 9.5rem 1fr; gap: .8rem;
                 align-items: baseline; padding: .28rem 0; }
   .dentro .nome { font-family: var(--serif); font-size: var(--t-sm); color: var(--ink); }
   .dentro .oque { font-size: var(--t-sm); color: var(--muted); }
@@ -385,20 +385,23 @@
         <span class="selo">chat ou agente</span>
       </div>
       <p class="le">A an&aacute;lise geral</p>
-      <p>Uma leitura, e o mesmo relat&oacute;rio de oito partes do Luis: veredito, o que
+      <div class="dentro">
+        <div>
+          <span class="nome">O que faz?</span>
+          <span class="oque">Uma leitura, e o mesmo relat&oacute;rio de oito partes do Luis: veredito, o que
       est&aacute; s&oacute;lido, o que o trabalho tem e n&atilde;o reivindica, as
       corre&ccedil;&otilde;es, o destino de cada cap&iacute;tulo, os questionamentos, por
       onde come&ccedil;ar e o alcance. <b>Devolve um relat&oacute;rio</b> numa leitura
-      s&oacute;, e v&ecirc; menos.</p>
-      <div class="dentro">
+      s&oacute;, e v&ecirc; menos.</span>
+        </div>
         <div>
-          <span class="nome">Volta</span>
+          <span class="nome">O que retorna?</span>
           <span class="oque">No agente, o relat&oacute;rio em PDF e o trabalho anotado em
           <code>.docx</code>. No chat, o relat&oacute;rio em texto, com os endere&ccedil;os
           por p&aacute;gina e posi&ccedil;&atilde;o.</span>
         </div>
         <div>
-          <span class="nome">Custo</span>
+          <span class="nome">Custos</span>
           <span class="oque">No agente, em Opus 5: de 270 a 320 mil tokens e de 41 a 48
           minutos. No chat do Claude, 15 minutos e 52 segundos numa tese de 109
           p&aacute;ginas.</span>
@@ -412,19 +415,22 @@
         <span class="selo">s&oacute; por agente</span>
       </div>
       <p class="le">A an&aacute;lise minuciosa</p>
-      <p>O mesmo relat&oacute;rio, produzido por quatro leituras que percorrem o trabalho
-      por caminhos diferentes, uma delas com busca externa, e por uma
-      verifica&ccedil;&atilde;o que ataca cada apontamento antes de ele sair. <b>Devolve um
-      relat&oacute;rio</b>, com a cadeia de prova de cada item.</p>
       <div class="dentro">
         <div>
-          <span class="nome">Volta</span>
+          <span class="nome">O que faz?</span>
+          <span class="oque">O mesmo relat&oacute;rio, produzido por quatro leituras que percorrem o trabalho
+      por caminhos diferentes, uma delas com busca externa, e por uma
+      verifica&ccedil;&atilde;o que ataca cada apontamento antes de ele sair. <b>Devolve um
+      relat&oacute;rio</b>, com a cadeia de prova de cada item.</span>
+        </div>
+        <div>
+          <span class="nome">O que retorna?</span>
           <span class="oque">O trabalho anotado em <code>.docx</code>, com cada apontamento
           na margem do par&aacute;grafo que ele cita; o relat&oacute;rio em PDF; e a lista
           de itens para corre&ccedil;&atilde;o.</span>
         </div>
         <div>
-          <span class="nome">Custo</span>
+          <span class="nome">Custos</span>
           <span class="oque">Acima de 1,15 milh&atilde;o de tokens e mais de uma hora de
           rel&oacute;gio.</span>
         </div>
@@ -437,12 +443,15 @@
         <span class="selo">em desenvolvimento</span>
       </div>
       <p class="le">O ensaio da defesa</p>
-      <p>Uma sess&atilde;o de argui&ccedil;&atilde;o com dois examinadores e o orientador
-      presidindo, a partir do cotejo entre a apresenta&ccedil;&atilde;o e o trabalho. <b>N&atilde;o
-      devolve documento:</b> o que fica &eacute; a conversa, e o fechamento que ela produz.</p>
       <div class="dentro">
         <div>
-          <span class="nome">Volta</span>
+          <span class="nome">O que faz?</span>
+          <span class="oque">Uma sess&atilde;o de argui&ccedil;&atilde;o com dois examinadores e o orientador
+      presidindo, a partir do cotejo entre a apresenta&ccedil;&atilde;o e o trabalho. <b>N&atilde;o
+      devolve documento:</b> o que fica &eacute; a conversa, e o fechamento que ela produz.</span>
+        </div>
+        <div>
+          <span class="nome">O que retorna?</span>
           <span class="oque">A lista do que o candidato n&atilde;o conseguiu responder. Pelo
           agente, ela sai gravada em arquivo.</span>
         </div>

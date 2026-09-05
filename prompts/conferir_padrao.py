@@ -39,6 +39,10 @@ ESCURO = {
     "rule": "#34373D", "rule-firm": "#454A52", "rule-soft": "#2A2D32",
     "accent": "#97AAE2", "warn": "#D3A163", "good": "#83B78D", "danger": "#E07A6E",
 }
+# O acento e a cor da oficina. Estas sao as tres, nos dois temas.
+ACENTOS = {"claro":  {"#33477E", "#2A5F45", "#6E655C"},
+           "escuro": {"#97AAE2", "#8FC0A0", "#A8A096"}}
+
 # A regua tipografica: seis degraus, e nada entre eles.
 DEGRAUS = (("--t-2xs", "12px"), ("--t-xs", "14px"), ("--t-sm", "16px"),
            ("--t-md", "18px"), ("--t-lg", "22px"), ("--t-h3", "19px"),
@@ -76,6 +80,8 @@ def confere(caminho):
     css = s[:s.find("</style>")] if "</style>" in s else s
     faltas = []
 
+    t_pagina = {}
+
     def exige(ok, queixa):
         if not ok:
             faltas.append(queixa)
@@ -101,12 +107,22 @@ def confere(caminho):
         for k, v in esperado.items():
             if k not in achado:
                 faltas.append("tema %s: falta --%s" % (nome, k))
+            elif k == "accent":
+                # O acento e a cor da oficina, e nao um valor unico: azul na
+                # Orientacao, verde na de Projetos, cinza na de Formatacao. O que
+                # se exige dele e o contraste, conferido logo abaixo.
+                if achado[k].upper() not in ACENTOS[nome]:
+                    faltas.append("tema %s: --accent e %s, e nao e cor de oficina nenhuma"
+                                  % (nome, achado[k]))
+                t_pagina[nome] = achado[k]
             elif achado[k].upper() != v.upper():
                 faltas.append("tema %s: --%s e %s, e o sistema diz %s"
                               % (nome, k, achado[k], v))
 
     # 4. contraste do texto sobre o proprio papel, nos dois temas
-    for nome, t in (("claro", CLARO), ("escuro", ESCURO)):
+    for nome, t in (("claro", dict(CLARO)), ("escuro", dict(ESCURO))):
+        if t_pagina.get(nome):
+            t["accent"] = t_pagina[nome]
         for k in TEXTO:
             c = contraste(t[k], t["ground"])
             if c < PISO:
