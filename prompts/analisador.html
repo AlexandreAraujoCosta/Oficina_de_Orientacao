@@ -574,23 +574,27 @@
 
         <li><b>Instale o agente.</b> No <b>Claude Code</b>, pelo instalador do site da Anthropic, e depois entre com a sua conta. No <b>VS Code</b>, instale o editor e, no painel de extensões dele, a extensão <b>GitHub Copilot</b>; em seguida ligue a sua chave pelo seletor de modelos, em <i>Manage Models</i> ou <i>Add model provider</i>. É a única instalação que você faz sozinho; o resto se pede ao assistente.</li>
 
-        <li><b>Traga a oficina.</b> No <b>Claude Code</b>, peça a ele que baixe, ou use <b>Code › Download ZIP</b> na página do repositório e descompacte. No <b>VS Code</b>, na tela inicial, clique em <b>Clonar Repositório Git…</b> e cole o endereço abaixo; ele pergunta onde guardar, cria a pasta ali dentro, e pergunta se quer abrir: <b>responda que sim</b>, porque é ao abrir que ele lê as instruções.
-          <div class="cmd"><button type="button" class="copiar" data-alvo="c-repo">Copiar</button><pre id="c-repo">https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</pre></div>
-        </li>
-
-        <li><b>Ponha o trabalho na pasta</b>, ao lado de <code>scripts/</code> e <code>prompts/</code>.</li>
+        <li><b>Abra o agente na pasta onde está o trabalho.</b> Não é preciso baixar nada antes: o pedido do fim desta lista traz a oficina para dentro dessa pasta, ao lado do trabalho.</li>
 
         <li><b>Escolha o melhor modelo</b> que a sua assinatura ou a sua chave oferecer, e entre os Claude a ordem é Opus, depois Sonnet. <b>Evite o modo automático:</b> modelo escolhido pelo serviço é modelo desconhecido, e relatório de modelo desconhecido não se compara com nenhum outro, nem com o mesmo trabalho na semana passada.</li>
 
         <li><b>Só no VS Code: ponha o chat em modo agente.</b> Abra-o com <b>Ctrl+Alt+I</b>, ou pelo menu <i>Exibir › Chat</i>, e troque no seletor do alto do painel, onde costuma estar escrito <i>Ask</i>. Modo agente é o que tem terminal; nos outros o assistente explica os comandos em vez de executá-los, e não avisa a diferença. O Claude Code já é um agente e já tem terminal, então ali não há o que ajustar.</li>
 
-        <li><b>Peça a análise</b>, com o pedido abaixo. Ele roda os programas, julga as suspeitas e monta a entrega.</li>
+        <li><b>Peça a análise</b>, com o pedido abaixo. Ele traz a oficina, lê as instruções, roda os programas, julga as suspeitas e monta a entrega.</li>
       </ol>
 
       <div class="pedido"><p class="pedido-rot">Cole isto na conversa:</p>
-        <pre class="pedido-txt" id="c-pedido-1">Leia o AGENTS.md nesta pasta e siga o que ele manda.
+        <pre class="pedido-txt" id="c-pedido-1">Clone o repositório da oficina nesta pasta:
 
-O trabalho a analisar é o único .docx ou .pdf que está aqui. Rode a cadeia de programas, julgue uma a uma as suspeitas que eles levantarem, abrindo na extração o parágrafo que cada uma cita, e monte a entrega.
+git clone https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao
+
+Leia por inteiro, dentro dele, o AGENTS.md e o prompts/ALBERTO.md, e escreva a última frase de cada um, para eu conferir que a leitura chegou ao fim.
+
+O trabalho a analisar é o único .docx ou .pdf que está nesta pasta. Rode a cadeia de programas sobre ele:
+
+python Oficina_de_Orientacao/scripts/analisar.py "NOME DO ARQUIVO"
+
+Julgue uma a uma as suspeitas que os programas levantarem, abrindo na extração o parágrafo que cada uma cita, e monte a entrega.
 
 Não digite trecho do trabalho, nem entre aspas nem parafraseado entre aspas: indique o parágrafo pelo número e deixe o programa inserir o texto.
 

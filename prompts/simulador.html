@@ -333,21 +333,14 @@
           Anthropic, entrando com a sua conta. O VS Code pelo site, e a extensão GitHub Copilot
           pelo painel de extensões, ligando a sua chave no seletor de modelos, em <em>Manage
           Models</em> ou <em>Add model provider</em>.</li>
-          <li><strong>Traga a oficina:</strong> no Claude Code, o comando abaixo num terminal;
-          no VS Code, <strong>Clonar Repositório Git…</strong> na tela inicial com o mesmo
-          endereço. Ponha o trabalho na pasta que ele criar.
-            <div class="cmd">
-              <button class="copiar" type="button" data-alvo="c-clone">Copiar</button>
-              <pre id="c-clone">git clone https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</pre>
-            </div>
-          </li>
-          <li><strong>Abra o agente nessa pasta.</strong> No Claude Code, entrando nela e
-          chamando o programa. No VS Code, abrindo o chat com <strong>Ctrl+Alt+I</strong> e
-          pondo em <strong>modo agente</strong>, que é o que tem terminal.
+          <li><strong>Abra o agente na pasta onde está o trabalho.</strong> Não é preciso
+          baixar nada antes: o pedido do fim desta lista traz a oficina para dentro dessa
+          pasta. No Claude Code, entre na pasta e chame o programa. No VS Code, abra o chat
+          com <strong>Ctrl+Alt+I</strong> e ponha em <strong>modo agente</strong>, que é o
+          que tem terminal.
             <div class="cmd">
               <button class="copiar" type="button" data-alvo="c-abrir">Copiar</button>
-              <pre id="c-abrir">cd Oficina_de_Orientacao
-claude</pre>
+              <pre id="c-abrir">claude</pre>
             </div>
           </li>
           <li><strong>Escolha o melhor modelo disponível.</strong> Examinador que não entendeu
@@ -358,14 +351,18 @@ claude</pre>
         <div class="pedido">
           <button class="copiar" type="button" data-alvo="c-pedido">Copiar</button>
           <p class="pedido-rot">Cole isto na conversa:</p>
-          <pre class="pedido-txt" id="c-pedido">Leia prompts/BANCA.md nesta pasta e conduza a sessao comigo,
-sobre o trabalho que esta na pasta.
+          <pre class="pedido-txt" id="c-pedido">Clone o repositório da oficina nesta pasta:
 
-Leia o trabalho inteiro antes de comecar, e nao me pergunte nada
-antes disso.
+git clone https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao
 
-Ao fim, grave o fechamento em banca/fechamento.md: a lista do que
-preciso escrever, e as perguntas que ficaram sem resposta.</pre>
+Leia por inteiro, dentro dele, o prompts/BANCA.md, e escreva a ultima frase
+dele, para eu conferir que a leitura chegou ao fim.
+
+Depois conduza a sessao comigo, sobre o trabalho que esta nesta pasta. Leia o
+trabalho inteiro antes de comecar, e nao me pergunte nada antes disso.
+
+Ao fim, grave o fechamento em banca/fechamento.md: a lista do que preciso
+escrever, e as perguntas que ficaram sem resposta.</pre>
         </div>
         <h3>Se o relatório do Luis existir, use-o</h3>
         <p>Se você já rodou o <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> sobre este trabalho, ponha o
