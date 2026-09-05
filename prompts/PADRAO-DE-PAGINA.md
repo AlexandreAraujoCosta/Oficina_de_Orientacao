@@ -43,7 +43,8 @@ explícitas.
 
     --measure: 66ch;
 
-    /* seis degraus, na medida de arcos.org.br/direito-ciencia */
+    /* os degraus, na medida de arcos.org.br/direito-ciencia */
+    --t-2xs: 12px;   /* faixa de identificacao */
     --t-xs: 14px;    /* rotulo em versalete */
     --t-sm: 16px;    /* texto secundario */
     --t-md: 18px;    /* corpo, em Lora */
@@ -93,7 +94,7 @@ da página:
 ```css
   /* --- escala do sistema: uma so em todas as paginas da oficina --- */
   h1, .top h1, header h1, .wrap > h1 { font-family: var(--sans); font-weight: 700;
-    font-size: clamp(24px, 5vw, 30px); line-height: 1.2; }
+    font-size: clamp(28px, 5vw, 36px); line-height: 1.2; }
   .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--sans); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
   .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--sans); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
@@ -101,9 +102,23 @@ da página:
   .wrap p, .wrap li, .wrap dd, .shell p, .shell li, .shell dd { max-width: var(--measure); }
 ```
 
-30 / 24 / 19 / 18, com 22 na abertura e 16 e 14 no que é secundário. **Nenhum
-tamanho fora desses seis degraus**: eram 52 valores distintos de `font-size` nas
-cinco páginas, e é isso que fazia a leitura parecer caótica.
+36 / 24 / 19 / 18, com 22 na abertura, 16 e 14 no que é secundário e 12 na faixa
+de identificação. **Nenhum tamanho fora desses degraus**: eram 52 valores
+distintos de `font-size` nas cinco páginas, e é isso que fazia a leitura parecer
+caótica.
+
+**O h1 do modelo é 30px, e aqui ele é 36.** Lá cada página é curta e tem o
+cabeçalho do site em volta; a da Oficina tem 27 mil pixels de altura e dez
+seções, e a 30px o título ficava a 1,25 vez o título de seção.
+
+**A abertura fica na fonte do texto que ela abre.** Em Lora, 22px, cor `--muted`.
+Ela é parte do artigo, e trocar de família no primeiro fôlego de leitura é ruído.
+
+**Texto corrido é `--t-md`, ainda quando está dentro de um bloco.** A primeira
+aplicação da régua mandou para `--t-sm` tudo o que era menor que o corpo, e na
+página da Oficina isso deixou **85 dos 107 parágrafos longos a 16px**: a página
+declarava corpo em 18 e era lida em 16. `--t-sm` é para legenda, ficha e rótulo,
+não para prosa.
 
 **Rótulo não é título**: `.verbete h4`, `.chip`, `.route-sub` e afins ficam em
 `--t-xs`, em versalete e na Mulish, e o seletor deles é mais específico, o que já

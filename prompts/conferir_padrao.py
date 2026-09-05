@@ -40,8 +40,9 @@ ESCURO = {
     "accent": "#97AAE2", "warn": "#D3A163", "good": "#83B78D", "danger": "#E07A6E",
 }
 # A regua tipografica: seis degraus, e nada entre eles.
-DEGRAUS = (("--t-xs", "14px"), ("--t-sm", "16px"), ("--t-md", "18px"),
-           ("--t-lg", "22px"), ("--t-h3", "19px"), ("--t-h2", "24px"))
+DEGRAUS = (("--t-2xs", "12px"), ("--t-xs", "14px"), ("--t-sm", "16px"),
+           ("--t-md", "18px"), ("--t-lg", "22px"), ("--t-h3", "19px"),
+           ("--t-h2", "24px"))
 
 # Texto: tudo isto tem de passar de 4,5 sobre o papel do proprio tema.
 TEXTO = ("ink", "ink-soft", "muted", "faint", "accent", "warn", "good", "danger")
@@ -123,7 +124,7 @@ def confere(caminho):
     for token, valor in DEGRAUS:
         exige(re.search(r"%s:\s*%s\s*;" % (token, re.escape(valor)), css),
               "o degrau %s nao e %s" % (token, valor))
-    exige(re.search(r"h1[^{]*\{[^}]*clamp\(24px, 5vw, 30px\)", css), "o h1 foge da escala")
+    exige(re.search(r"h1[^{]*\{[^}]*clamp\(28px, 5vw, 36px\)", css), "o h1 foge da escala")
     exige(re.search(r"h2[^{]*\{[^}]*font-size:\s*var\(--t-h2\)", css), "o h2 foge da escala")
     exige(re.search(r"h3[^{]*\{[^}]*font-size:\s*var\(--t-h3\)", css), "o h3 foge da escala")
 
