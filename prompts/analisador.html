@@ -1,63 +1,106 @@
+<meta charset="utf-8">
 <title>Alberto: a análise geral</title>
 
 <style>
   :root {
-    --paper:      #eef0ef;
-    --paper-sunk: #e4e7e5;
-    --ink:        #141c24;
-    --ink-soft:   #4a5560;
-    --ink-faint:  #7c868f;
-    --rule:       #c9cfce;
-    --rule-firm:  #a8b1b0;
-    --correcao:   #a32b23;
-    --medida:     #3e6b7a;
-    --conforme:   #4a7a52;
+    --ground:      #FBFAF7;
+    --surface:     #F3F1EC;
+    --sunken:      #EAE7E0;
+    --ink:         #191B1F;
+    --ink-soft:    #3D4149;
+    --muted:       #5F636B;
+    --faint:       #6C7079;
+    --rule:        #D9D5CC;
+    --rule-firm:   #BFBAAE;
+    --rule-soft:   #E6E2DA;
+    --accent:      #33477E;
+    --accent-soft: #E1E5F1;
+    --warn:        #8A5722;
+    --warn-soft:   #F2E7D8;
+    --good:        #37613F;
+    --good-soft:   #E0EBE1;
+    --danger:      #A3352B;
+    --danger-soft: #F6E6E3;
 
-    --serif: Constantia, Cambria, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-    --sans:  "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-    --mono:  "Cascadia Mono", Consolas, "SF Mono", ui-monospace, Menlo, monospace;
+    --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro", Cambria, Georgia, serif;
+    --sans: "Segoe UI", Inter, system-ui, -apple-system, sans-serif;
+    --mono: "Cascadia Mono", "JetBrains Mono", ui-monospace, Consolas, "SF Mono", monospace;
 
     --measure: 66ch;
+
+    /* nomes proprios desta pagina, apontando para o sistema */
+    --paper:       var(--ground);
+    --paper-sunk:  var(--sunken);
+    --ink-faint:   var(--muted);
+    --correcao:    var(--danger);
+    --medida:      var(--accent);
+    --conforme:    var(--good);
     --gap: 1.5rem;
   }
 
   @media (prefers-color-scheme: dark) {
-    :root {
-      --paper:      #10161b;
-      --paper-sunk: #171f26;
-      --ink:        #e3e8ea;
-      --ink-soft:   #9aa6ad;
-      --ink-faint:  #6b767d;
-      --rule:       #2a343c;
-      --rule-firm:  #3c4850;
-      --correcao:   #e07a6e;
-      --medida:     #74aabb;
-      --conforme:   #7fb287;
+    :root:not([data-theme="light"]) {
+      --ground:      #16171A;
+      --surface:     #1D1F23;
+      --sunken:      #24262B;
+      --ink:         #E9E6E0;
+      --ink-soft:    #C4C2BD;
+      --muted:       #94979E;
+      --faint:       #8A8D94;
+      --rule:        #34373D;
+      --rule-firm:   #454A52;
+      --rule-soft:   #2A2D32;
+      --accent:      #97AAE2;
+      --accent-soft: #23283A;
+      --warn:        #D3A163;
+      --warn-soft:   #33291B;
+      --good:        #83B78D;
+      --good-soft:   #1E2A20;
+      --danger:      #E07A6E;
+      --danger-soft: #2E1E1C;
     }
   }
+
   :root[data-theme="dark"] {
-    --paper:      #10161b;
-    --paper-sunk: #171f26;
-    --ink:        #e3e8ea;
-    --ink-soft:   #9aa6ad;
-    --ink-faint:  #6b767d;
-    --rule:       #2a343c;
-    --rule-firm:  #3c4850;
-    --correcao:   #e07a6e;
-    --medida:     #74aabb;
-    --conforme:   #7fb287;
+    --ground:      #16171A;
+    --surface:     #1D1F23;
+    --sunken:      #24262B;
+    --ink:         #E9E6E0;
+    --ink-soft:    #C4C2BD;
+    --muted:       #94979E;
+    --faint:       #8A8D94;
+    --rule:        #34373D;
+    --rule-firm:   #454A52;
+    --rule-soft:   #2A2D32;
+    --accent:      #97AAE2;
+    --accent-soft: #23283A;
+    --warn:        #D3A163;
+    --warn-soft:   #33291B;
+    --good:        #83B78D;
+    --good-soft:   #1E2A20;
+    --danger:      #E07A6E;
+    --danger-soft: #2E1E1C;
   }
+
   :root[data-theme="light"] {
-    --paper:      #eef0ef;
-    --paper-sunk: #e4e7e5;
-    --ink:        #141c24;
-    --ink-soft:   #4a5560;
-    --ink-faint:  #7c868f;
-    --rule:       #c9cfce;
-    --rule-firm:  #a8b1b0;
-    --correcao:   #a32b23;
-    --medida:     #3e6b7a;
-    --conforme:   #4a7a52;
+    --ground:      #FBFAF7;
+    --surface:     #F3F1EC;
+    --sunken:      #EAE7E0;
+    --ink:         #191B1F;
+    --ink-soft:    #3D4149;
+    --muted:       #5F636B;
+    --faint:       #6C7079;
+    --rule:        #D9D5CC;
+    --rule-firm:   #BFBAAE;
+    --rule-soft:   #E6E2DA;
+    --accent:      #33477E;
+    --accent-soft: #E1E5F1;
+    --warn:        #8A5722;
+    --warn-soft:   #F2E7D8;
+    --good:        #37613F;
+    --good-soft:   #E0EBE1;
+    --danger:      #A3352B;
+    --danger-soft: #F6E6E3;
   }
 
   * { box-sizing: border-box; }
@@ -67,12 +110,12 @@
     background: var(--paper);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.55;
+    font-size: 16.5px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
-  .wrap { max-width: 1240px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
 
   /* ---------------------------------------------------------- cabeçalho */
   .top { border-bottom: 2px solid var(--ink); padding-bottom: 1.1rem; margin-bottom: 2rem; }
@@ -197,7 +240,8 @@
 
   .via-guia h3 { font-family: var(--serif); font-size: 17px; margin: 22px 0 6px; }
 
-  .pedido { border: 1px solid var(--rule); border-radius: 4px; padding: 14px 16px; margin: 16px 0; }
+  .pedido { border: 1px solid var(--rule); border-radius: 3px; background: var(--sunken);
+           padding: 14px 16px; margin: 16px 0; }
 
   .pedido-rot { font-size: 13px; color: var(--ink-faint); margin: 0 0 8px; }
 
@@ -205,7 +249,7 @@
 
   .solta {
     border: 1px dashed var(--rule-firm);
-    background: var(--paper-sunk);
+    background: var(--sunken);
     padding: 1.5rem 1.25rem;
     text-align: center;
     cursor: pointer;
@@ -279,7 +323,7 @@
   .abertura ul { margin: 0 0 1.4rem; padding-left: 1.1rem; color: var(--ink-soft); }
   .abertura li { margin-bottom: .3rem; }
   .abertura .aviso {
-    border-left: 2px solid var(--correcao);
+    border-left: 3px solid var(--danger);
     padding-left: .9rem;
     color: var(--ink);
   }
@@ -352,7 +396,7 @@
   }
   .faixa .legenda i { display: inline-block; width: .7rem; height: .7rem; margin-right: .35rem; vertical-align: -.05em; }
 
-  .erro { border-left: 2px solid var(--correcao); padding-left: .9rem; color: var(--ink); max-width: var(--measure); }
+  .erro { border-left: 3px solid var(--danger); padding-left: .9rem; color: var(--ink); max-width: var(--measure); }
   .vazio { color: var(--ink-faint); font-style: italic; }
 
   :focus-visible { outline: 2px solid var(--medida); outline-offset: 2px; }
@@ -392,7 +436,7 @@
     font-family: var(--mono); font-size: .8rem; line-height: 1.62;
     padding: 1rem; white-space: pre-wrap;
   }
-  .prompts .rodape { margin-top: 1rem; max-width: var(--measure); font-size: .9rem; color: var(--ink-soft); border-left: 2px solid var(--medida); padding-left: .9rem; }
+  .prompts .rodape { margin-top: 1rem; max-width: var(--measure); font-size: .9rem; color: var(--ink-soft); border-left: 3px solid var(--accent); padding-left: .9rem; }
 
   footer.creditos {
     margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
@@ -412,13 +456,13 @@
     text-transform:uppercase; color:var(--medida); font-weight:600; }
   dl.formatos dd { margin:.3rem 0 0; color:var(--ink-soft); font-size:.95rem; }
   dl.formatos dd b { color:var(--ink); }
-  .cmd { position:relative; border:1px solid var(--rule); border-radius:4px;
-    background:var(--paper-sunk); padding:.7rem 6.5rem .7rem .9rem; margin:.55rem 0 .9rem; }
+  .cmd { position:relative; border:1px solid var(--rule); border-radius: 3px;
+    background: var(--sunken); padding:.7rem 6.5rem .7rem .9rem; margin:.55rem 0 .9rem; }
   .cmd pre { font-family:var(--mono); font-size:13px; line-height:1.5;
     white-space:pre-wrap; word-break:break-all; margin:0; }
   .pedido { position:relative; padding-right:6.5rem; }
   .cmd .copiar, .pedido .copiar { position:absolute; top:.5rem; right:.5rem; }
-  .anexar .aviso { border-left:2px solid var(--correcao); padding-left:1rem;
+  .anexar .aviso { border-left: 3px solid var(--danger); padding-left:1rem;
     margin:1.6rem 0 0; max-width:var(--measure); }
 
   .eyebrow {
@@ -462,6 +506,14 @@
   /* O titulo respira o proprio corpo acima e abaixo. */
   .eyebrow { margin: 0; }
   .top h1, header h1, .wrap > h1 { margin: 1em 0; }
+
+  /* --- escala do sistema: uma so em todas as paginas da oficina --- */
+  h1, .top h1, header h1, .wrap > h1 { font-family: var(--serif); font-size: clamp(34px, 5vw, 48px); }
+  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: 26px; font-weight: 600; }
+  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: 20px; font-weight: 600;
+    letter-spacing: normal; text-transform: none; color: var(--ink); }
+  /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
+  .wrap p, .wrap li, .wrap dd, .shell p, .shell li, .shell dd { max-width: var(--measure); }
 </style>
 
 <div class="wrap">
