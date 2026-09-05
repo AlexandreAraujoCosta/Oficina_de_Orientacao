@@ -187,6 +187,13 @@ controle positivo: antes de aprovar qualquer página, ele adultera um token e
 verifica que a conferência reprova.
 
 **O que ele não confere, e exige o navegador:** quantos tratamentos de caixa a
-página tem, a largura real da linha em caracteres, e se algum bloco ficou sem
-espaço. Isso se mede rodando um servidor local sobre a pasta e lendo a página
-com o `medir.js` desta pasta.
+página tem, a largura real da linha em caracteres, o contraste calculado contra o
+fundo real de cada elemento, e **se sobrou coluna vazia**. Isso se mede rodando um
+servidor local sobre a pasta e lendo a página com o `medir.js` desta pasta.
+
+`medir.js` devolve `colunaSobrando`, que compara a largura do texto com a do
+container e acusa abaixo de metade. Foi escrito depois do caso: em 05/09/2026 a
+página da Oficina virou cartões e perdeu o `<nav>`, a grade de duas colunas ficou,
+e o `main` caiu na faixa de 208px reservada à barra lateral. O texto corria a
+**18%** do container, e a página tinha 5.875px de altura para 473 palavras. Nenhuma
+leitura do arquivo mostra isso.
