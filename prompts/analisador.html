@@ -28,6 +28,15 @@
 
     --measure: 66ch;
 
+    /* seis degraus, e nada entre eles */
+    --t-xs: 12px;    /* rotulo em versalete */
+    --t-sm: 14px;    /* texto secundario */
+    --t-md: 16.5px;  /* corpo */
+    --t-lg: 19px;    /* linha de abertura */
+    --t-h3: 20px;
+    --t-h2: 26px;
+
+
     /* nomes proprios desta pagina, apontando para o sistema */
     --paper:       var(--ground);
     --paper-sunk:  var(--sunken);
@@ -110,7 +119,7 @@
     background: var(--paper);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 16.5px;
+    font-size: var(--t-md);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
@@ -121,7 +130,7 @@
   .top { border-bottom: 2px solid var(--ink); padding-bottom: 1.1rem; margin-bottom: 2rem; }
   .top h1 {
     font-family: var(--serif);
-    font-size: clamp(1.9rem, 4vw, 2.75rem);
+    font-size: clamp(34px, 5vw, 48px);
     font-weight: 600;
     letter-spacing: -0.015em;
     line-height: 1.1;
@@ -139,19 +148,19 @@
 
   .vias-titulo {
     font-family: var(--serif);
-    font-size: 18px;
+    font-size: var(--t-lg);
     margin: 0 0 14px;
   }
 
-  .via-volta { font-size: 14px; color: var(--ink-faint); }
+  .via-volta { font-size: var(--t-sm); color: var(--ink-faint); }
 
-  .vias-titulo { font-family: var(--serif); font-size: 18px; margin: 2.5rem 0 14px; }
+  .vias-titulo { font-family: var(--serif); font-size: var(--t-lg); margin: 2.5rem 0 14px; }
 
-  .via-volta { font-size: 14px; color: var(--ink-faint); }
+  .via-volta { font-size: var(--t-sm); color: var(--ink-faint); }
 
   .vias-titulo {
     font-family: var(--serif);
-    font-size: 19px;
+    font-size: var(--t-lg);
     margin: 22px 0 12px;
   }
 
@@ -183,14 +192,14 @@
   .via-nome {
     display: block;
     font-family: var(--serif);
-    font-size: 23px;
+    font-size: var(--t-h3);
     line-height: 1.15;
     margin-bottom: 8px;
   }
 
-  .via-txt { display: block; font-size: 14.5px; line-height: 1.5; margin-bottom: 8px; }
+  .via-txt { display: block; font-size: var(--t-sm); line-height: 1.5; margin-bottom: 8px; }
 
-  .via-volta { display: block; font-size: 13.5px; color: var(--ink-faint); line-height: 1.45; }
+  .via-volta { display: block; font-size: var(--t-sm); color: var(--ink-faint); line-height: 1.45; }
 
   .via-guia { margin: 8px 0 26px; }
 
@@ -216,8 +225,8 @@
     position: absolute;
     left: 0;
     top: 1px;
-    font-family: var(--mono);
-    font-size: 13px;
+    font-family: var(--sans);
+    font-size: var(--t-sm);
     width: 22px;
     height: 22px;
     line-height: 22px;
@@ -231,21 +240,21 @@
   .cuidados h2,
   .passo-titulo {
     font-family: var(--serif);
-    font-size: 1.6rem;
+    font-size: var(--t-h2);
     font-weight: 600;
     margin: 0 0 .6rem;
   }
 
   .passo-nota { color: var(--ink-faint); line-height: 1.55; margin: 0 0 18px; }
 
-  .via-guia h3 { font-family: var(--serif); font-size: 17px; margin: 22px 0 6px; }
+  .via-guia h3 { font-family: var(--serif); font-size: var(--t-md); margin: 22px 0 6px; }
 
   .pedido { border: 1px solid var(--rule); border-radius: 3px; background: var(--sunken);
            padding: 14px 16px; margin: 16px 0; }
 
-  .pedido-rot { font-size: 13px; color: var(--ink-faint); margin: 0 0 8px; }
+  .pedido-rot { font-size: var(--t-sm); color: var(--ink-faint); margin: 0 0 8px; }
 
-  .pedido-txt { font-family: var(--mono); font-size: 13px; line-height: 1.5; white-space: pre-wrap; margin: 0 0 12px; }
+  .pedido-txt { font-family: var(--mono); font-size: var(--t-sm); line-height: 1.5; white-space: pre-wrap; margin: 0 0 12px; }
 
   .solta {
     border: 1px dashed var(--rule-firm);
@@ -257,15 +266,15 @@
   }
   .solta:hover, .solta:focus-visible { border-color: var(--medida); }
   .solta.ativa { border-color: var(--medida); background: color-mix(in srgb, var(--medida) 10%, var(--paper-sunk)); }
-  .solta strong { display: block; font-family: var(--serif); font-size: 1.1rem; margin-bottom: .3rem; }
-  .solta span { font-size: .82rem; color: var(--ink-soft); }
+  .solta strong { display: block; font-family: var(--serif); font-size: var(--t-md); margin-bottom: .3rem; }
+  .solta span { font-size: var(--t-sm); color: var(--ink-soft); }
   .solta input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 
   /* ---------------------------------------------------------- ficha */
   .ficha { border-top: 1px solid var(--ink); padding-top: .75rem; }
   .ficha h2, .indice h2 {
-    font-family: var(--mono);
-    font-size: .72rem;
+    font-family: var(--sans);
+    font-size: var(--t-xs);
     letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--ink-faint);
@@ -273,12 +282,12 @@
     font-weight: 600;
   }
   .ficha dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: .28rem .8rem; }
-  .ficha dt { color: var(--ink-soft); font-size: .85rem; }
+  .ficha dt { color: var(--ink-soft); font-size: var(--t-sm); }
   .ficha dd {
     margin: 0;
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-variant-numeric: tabular-nums;
-    font-size: .85rem;
+    font-size: var(--t-sm);
     text-align: right;
   }
 
@@ -287,25 +296,25 @@
   .indice a {
     display: flex; justify-content: space-between; gap: .6rem;
     color: var(--ink-soft); text-decoration: none;
-    font-size: .87rem; padding: .18rem 0;
+    font-size: var(--t-sm); padding: .18rem 0;
     border-bottom: 1px solid transparent;
   }
   .indice a:hover, .indice a:focus-visible { color: var(--ink); border-bottom-color: var(--rule-firm); }
-  .indice .marca { font-family: var(--mono); font-size: .74rem; }
+  .indice .marca { font-family: var(--sans); font-size: var(--t-xs); }
 
   .acoes { display: flex; flex-direction: column; gap: .5rem; }
-  .acoes .ajuda { margin: 0; font-size: .8rem; line-height: 1.45; color: var(--ink-faint); }
+  .acoes .ajuda { margin: 0; font-size: var(--t-xs); line-height: 1.45; color: var(--ink-faint); }
   button.acao.destaque { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 600; text-align: center; }
   button.acao.destaque:disabled { background: transparent; color: var(--ink); border-color: var(--rule-firm); font-weight: 400; }
   button.acao.destaque[data-estado="feito"] { background: var(--conforme); border-color: var(--conforme); }
-  .acoes details summary { font-size: .82rem; color: var(--ink-soft); cursor: pointer; }
+  .acoes details summary { font-size: var(--t-sm); color: var(--ink-soft); cursor: pointer; }
   .acoes details textarea {
     width: 100%; height: 11rem; margin-top: .5rem; resize: vertical;
     border: 1px solid var(--rule-firm); background: var(--paper-sunk); color: var(--ink);
-    font-family: var(--mono); font-size: .72rem; line-height: 1.5; padding: .6rem;
+    font-family: var(--mono); font-size: var(--t-xs); line-height: 1.5; padding: .6rem;
   }
   button.acao {
-    font-family: var(--sans); font-size: .88rem;
+    font-family: var(--sans); font-size: var(--t-sm);
     background: transparent; color: var(--ink);
     border: 1px solid var(--rule-firm); padding: .5rem .8rem;
     cursor: pointer; text-align: left;
@@ -318,7 +327,7 @@
   .painel { min-width: 0; }
 
   .abertura { max-width: var(--measure); }
-  .abertura h2 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin: 0 0 .6rem; }
+  .abertura h2 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 600; margin: 0 0 .6rem; }
   .abertura p { color: var(--ink-soft); margin: 0 0 1.1rem; }
   .abertura ul { margin: 0 0 1.4rem; padding-left: 1.1rem; color: var(--ink-soft); }
   .abertura li { margin-bottom: .3rem; }
@@ -332,30 +341,30 @@
   .bloco:first-of-type { border-top: 2px solid var(--ink); }
   .bloco > h2 {
     font-family: var(--serif);
-    font-size: 1.3rem; font-weight: 600;
+    font-size: var(--t-h3); font-weight: 600;
     margin: 0 0 .2rem; letter-spacing: -.01em;
   }
   .bloco > h2 .num {
-    font-family: var(--mono); font-size: .78rem; color: var(--ink-faint);
+    font-family: var(--sans); font-size: var(--t-xs); color: var(--ink-faint);
     margin-right: .55rem; letter-spacing: .04em;
   }
-  .bloco > .nota { margin: 0 0 1rem; color: var(--ink-soft); font-size: .92rem; max-width: var(--measure); }
+  .bloco > .nota { margin: 0 0 1rem; color: var(--ink-soft); font-size: var(--t-sm); max-width: var(--measure); }
 
   /* números destacados */
   .metricas { display: flex; flex-wrap: wrap; gap: 1.75rem; margin: 0 0 1.1rem; }
   .metrica { display: flex; flex-direction: column; gap: .1rem; }
   .metrica .v {
-    font-family: var(--mono); font-variant-numeric: tabular-nums;
-    font-size: 1.65rem; line-height: 1; color: var(--medida);
+    font-family: var(--sans); font-variant-numeric: tabular-nums;
+    font-size: var(--t-h2); line-height: 1; color: var(--medida);
   }
   .metrica .r {
-    font-size: .74rem; text-transform: uppercase; letter-spacing: .07em;
-    color: var(--ink-faint); font-family: var(--mono);
+    font-size: var(--t-xs); text-transform: uppercase; letter-spacing: .07em;
+    color: var(--ink-faint); font-family: var(--sans);
   }
 
   .chip {
-    display: inline-block; font-family: var(--mono);
-    font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
+    display: inline-block; font-family: var(--sans);
+    font-size: var(--t-xs); letter-spacing: .08em; text-transform: uppercase;
     padding: .1rem .4rem; border: 1px solid currentColor; margin-right: .5rem;
     vertical-align: .08em;
   }
@@ -364,34 +373,34 @@
   .achado:last-child { border-bottom: 1px solid var(--rule); }
   .achado .cab { display: flex; align-items: baseline; gap: .1rem; flex-wrap: wrap; }
   .achado .titulo { font-weight: 600; }
-  .achado .detalhe { color: var(--ink-soft); font-size: .92rem; margin: .25rem 0 0; max-width: var(--measure); }
+  .achado .detalhe { color: var(--ink-soft); font-size: var(--t-sm); margin: .25rem 0 0; max-width: var(--measure); }
   .achado ul.ex { margin: .5rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .25rem; }
   .achado ul.ex li {
-    font-size: .85rem; color: var(--ink-soft);
+    font-size: var(--t-sm); color: var(--ink-soft);
     padding-left: 3.6rem; text-indent: -3.6rem;
   }
   .par {
-    font-family: var(--mono); font-size: .78rem; color: var(--medida);
+    font-family: var(--sans); font-size: var(--t-xs); color: var(--medida);
     letter-spacing: .02em;
   }
-  .assinatura { font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); }
+  .assinatura { font-family: var(--sans); font-size: var(--t-xs); color: var(--ink-soft); }
 
-  table.dados { width: 100%; border-collapse: collapse; font-size: .87rem; }
+  table.dados { width: 100%; border-collapse: collapse; font-size: var(--t-sm); }
   .rolagem { overflow-x: auto; }
   table.dados th, table.dados td { text-align: left; padding: .34rem .7rem .34rem 0; border-bottom: 1px solid var(--rule); }
   table.dados th {
-    font-family: var(--mono); font-size: .7rem; text-transform: uppercase;
+    font-family: var(--sans); font-size: var(--t-xs); text-transform: uppercase;
     letter-spacing: .07em; color: var(--ink-faint); font-weight: 600; white-space: nowrap;
   }
-  table.dados td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
-  table.dados td.marca { color: var(--correcao); font-family: var(--mono); font-size: .78rem; white-space: nowrap; }
+  table.dados td.n { font-family: var(--sans); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  table.dados td.marca { color: var(--correcao); font-family: var(--sans); font-size: var(--t-xs); white-space: nowrap; }
 
   /* faixa de ritmo */
   .faixa { margin: .2rem 0 1rem; }
   .faixa canvas { width: 100%; height: 132px; display: block; }
   .faixa .legenda {
     display: flex; gap: 1.2rem; flex-wrap: wrap;
-    font-family: var(--mono); font-size: .72rem; color: var(--ink-faint);
+    font-family: var(--sans); font-size: var(--t-xs); color: var(--ink-faint);
     letter-spacing: .04em; margin-top: .4rem;
   }
   .faixa .legenda i { display: inline-block; width: .7rem; height: .7rem; margin-right: .35rem; vertical-align: -.05em; }
@@ -405,7 +414,7 @@
   /* ---------------------------------------------------------- cuidados */
   .cuidados { border-top: 2px solid var(--ink); margin-top: 3.5rem; padding-top: 1.6rem; }
   .cuidados h3 {
-    font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
+    font-family: var(--sans); font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase;
     color: var(--ink-faint); font-weight: 600; margin: 2rem 0 .7rem;
   }
   .cuidados .chamada { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 1.5rem; }
@@ -422,9 +431,9 @@
     border: 1px solid var(--rule-firm); border-bottom: 0;
     padding: .8rem 1rem; background: var(--paper-sunk);
   }
-  .barra .desc { flex: 1; min-width: 14rem; font-size: .88rem; color: var(--ink-soft); }
+  .barra .desc { flex: 1; min-width: 14rem; font-size: var(--t-sm); color: var(--ink-soft); }
   button.copiar {
-    font-family: var(--sans); font-size: .9rem; font-weight: 600;
+    font-family: var(--sans); font-size: var(--t-sm); font-weight: 600;
     background: var(--ink); color: var(--paper); border: 1px solid var(--ink);
     padding: .5rem 1.1rem; cursor: pointer; white-space: nowrap;
   }
@@ -433,14 +442,14 @@
   textarea.prompt {
     display: block; width: 100%; height: 22rem; resize: vertical;
     border: 1px solid var(--rule-firm); background: var(--paper-sunk); color: var(--ink);
-    font-family: var(--mono); font-size: .8rem; line-height: 1.62;
+    font-family: var(--mono); font-size: var(--t-xs); line-height: 1.62;
     padding: 1rem; white-space: pre-wrap;
   }
-  .prompts .rodape { margin-top: 1rem; max-width: var(--measure); font-size: .9rem; color: var(--ink-soft); border-left: 3px solid var(--accent); padding-left: .9rem; }
+  .prompts .rodape { margin-top: 1rem; max-width: var(--measure); font-size: var(--t-sm); color: var(--ink-soft); border-left: 3px solid var(--accent); padding-left: .9rem; }
 
   footer.creditos {
     margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
-    font-size: .86rem; color: var(--ink-faint); max-width: var(--measure);
+    font-size: var(--t-sm); color: var(--ink-faint); max-width: var(--measure);
   }
   footer.creditos p { margin: 0 0 .5rem; }
   footer.creditos strong { color: var(--ink-soft); font-weight: 600; }
@@ -449,16 +458,16 @@
   .anexar { margin-top:3.2rem; border-top:2px solid var(--ink); padding-top:1.4rem; }
   .anexar .chamada { max-width:var(--measure); margin:0 0 1.2rem; }
   dl.formatos { margin:0; max-width:var(--measure); }
-  dl.formatos dt { font-family:var(--mono); font-size:.95rem; font-weight:600; margin-top:1.1rem;
+  dl.formatos dt { font-family:var(--sans); font-size: var(--t-sm); font-weight:600; margin-top:1.1rem;
     padding-top:.9rem; border-top:1px solid var(--rule); display:flex; gap:.7rem; align-items:baseline; flex-wrap:wrap; }
   dl.formatos dt:first-child { border-top:0; padding-top:0; margin-top:0; }
-  dl.formatos dt .rot { font-family:var(--sans); font-size:.72rem; letter-spacing:.08em;
+  dl.formatos dt .rot { font-family:var(--sans); font-size: var(--t-xs); letter-spacing:.08em;
     text-transform:uppercase; color:var(--medida); font-weight:600; }
-  dl.formatos dd { margin:.3rem 0 0; color:var(--ink-soft); font-size:.95rem; }
+  dl.formatos dd { margin:.3rem 0 0; color:var(--ink-soft); font-size: var(--t-sm); }
   dl.formatos dd b { color:var(--ink); }
   .cmd { position:relative; border:1px solid var(--rule); border-radius: 3px;
     background: var(--sunken); padding:.7rem 6.5rem .7rem .9rem; margin:.55rem 0 .9rem; }
-  .cmd pre { font-family:var(--mono); font-size:13px; line-height:1.5;
+  .cmd pre { font-family:var(--mono); font-size: var(--t-sm); line-height:1.5;
     white-space:pre-wrap; word-break:break-all; margin:0; }
   .pedido { position:relative; padding-right:6.5rem; }
   .cmd .copiar, .pedido .copiar { position:absolute; top:.5rem; right:.5rem; }
@@ -466,8 +475,8 @@
     margin:1.6rem 0 0; max-width:var(--measure); }
 
   .eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
+    font-family: var(--sans);
+    font-size: var(--t-xs);
     letter-spacing: .06em;
     text-transform: uppercase;
     color: var(--medida);
@@ -496,12 +505,12 @@
   }
   .byline p { margin: 0 0 .35rem; }
   .byline p:last-child { margin-bottom: 0; }
-  .byline .author { font-size: .9rem; color: var(--ink-soft); }
+  .byline .author { font-size: var(--t-sm); color: var(--ink-soft); }
   .byline .author b { font-weight: 600; color: var(--ink); }
-  .byline .affil { font-size: .85rem; line-height: 1.55; color: var(--ink-faint); }
+  .byline .affil { font-size: var(--t-sm); line-height: 1.55; color: var(--ink-faint); }
   .byline .affil a { text-decoration: none; }
   .byline .affil a:hover { text-decoration: underline; }
-  .byline .assist { font-size: .85rem; color: var(--ink-faint); }
+  .byline .assist { font-size: var(--t-sm); color: var(--ink-faint); }
 
   /* O titulo respira o proprio corpo acima e abaixo. */
   .eyebrow { margin: 0; }
@@ -509,8 +518,8 @@
 
   /* --- escala do sistema: uma so em todas as paginas da oficina --- */
   h1, .top h1, header h1, .wrap > h1 { font-family: var(--serif); font-size: clamp(34px, 5vw, 48px); }
-  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: 26px; font-weight: 600; }
-  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: 20px; font-weight: 600;
+  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 600; }
+  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 600;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
   /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
   .wrap p, .wrap li, .wrap dd, .shell p, .shell li, .shell dd { max-width: var(--measure); }
@@ -518,7 +527,7 @@
 
 <div class="wrap">
   <header class="top">
-    <p class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas acadêmicas</a></span><span class="eb-linha eb-baixo">Assistentes: <span class="eb-atual" aria-current="page">Alberto</span> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></span></p>
+    <p class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas Acadêmicas</a></span><span class="eb-linha eb-baixo">Assistentes: <span class="eb-atual" aria-current="page">Alberto</span> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></span></p>
     <h1>Alberto: a análise geral</h1>
     <p>Uma leitura só, e um relatório de orientação em oito partes: o veredito, o que está sólido, o que o trabalho tem e não reivindica, as correções, o destino de cada capítulo, os questionamentos, por onde começar, e o alcance da leitura. É o mesmo formato do relatório completo, e o que muda é o quanto se enxerga.</p>
     <p><b>Ele vê menos e não inventa.</b> Encontra o defeito exposto e declarado, e passa ao largo do que exige refazer uma conta dentro de uma tabela. <b>O silêncio dele sobre um ponto significa que a leitura não passou por ali</b>, e não que o ponto esteja correto. Para a leitura completa, com quatro leituras por caminhos diferentes e a conferência de cada apontamento por quem não o escreveu, a ferramenta é o <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a>.</p>

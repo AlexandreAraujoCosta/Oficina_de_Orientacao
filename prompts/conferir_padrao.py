@@ -39,6 +39,10 @@ ESCURO = {
     "rule": "#34373D", "rule-firm": "#454A52", "rule-soft": "#2A2D32",
     "accent": "#97AAE2", "warn": "#D3A163", "good": "#83B78D", "danger": "#E07A6E",
 }
+# A regua tipografica: seis degraus, e nada entre eles.
+DEGRAUS = (("--t-xs", "12px"), ("--t-sm", "14px"), ("--t-md", "16.5px"),
+           ("--t-lg", "19px"), ("--t-h3", "20px"), ("--t-h2", "26px"))
+
 # Texto: tudo isto tem de passar de 4,5 sobre o papel do proprio tema.
 TEXTO = ("ink", "ink-soft", "muted", "faint", "accent", "warn", "good", "danger")
 PISO = 4.5
@@ -108,15 +112,29 @@ def confere(caminho):
                 faltas.append("tema %s: --%s da %.2f sobre o papel, e o piso e %.1f"
                               % (nome, k, c, PISO))
 
-    # 5. corpo, medida e escala
-    exige(re.search(r"body\s*\{[^}]*font-size:\s*16\.5px", css), "o corpo nao esta em 16.5px")
+    # 5. corpo, medida e a regua de seis degraus
+    exige(re.search(r"body\s*\{[^}]*font-size:\s*var\(--t-md\)", css), "o corpo nao esta no degrau --t-md")
     exige(re.search(r"body\s*\{[^}]*font-family:\s*var\(--sans\)", css),
           "o corpo nao esta na fonte sem serifa do sistema")
     exige("--measure: 66ch" in css, "a medida nao e 66ch")
     exige("escala do sistema" in css, "falta o bloco da escala de titulos")
+    for token, valor in DEGRAUS:
+        exige(re.search(r"%s:\s*%s\s*;" % (token, re.escape(valor)), css),
+              "o degrau %s nao e %s" % (token, valor))
     exige(re.search(r"h1[^{]*\{[^}]*clamp\(34px, 5vw, 48px\)", css), "o h1 foge da escala")
-    exige(re.search(r"h2[^{]*\{[^}]*font-size:\s*26px", css), "o h2 foge da escala")
-    exige(re.search(r"h3[^{]*\{[^}]*font-size:\s*20px", css), "o h3 foge da escala")
+    exige(re.search(r"h2[^{]*\{[^}]*font-size:\s*var\(--t-h2\)", css), "o h2 foge da escala")
+    exige(re.search(r"h3[^{]*\{[^}]*font-size:\s*var\(--t-h3\)", css), "o h3 foge da escala")
+
+    # 5b. nenhum tamanho fora da regua, e mono so em texto de maquina
+    for tam in re.findall(r"font-size:\s*([^;}]+)", css):
+        t = tam.strip()
+        if not (t.startswith("var(--t-") or t.startswith("clamp(") or t == "inherit"):
+            faltas.append("tamanho fora da regua: %s" % t)
+    for m in re.finditer(r"([^{}]+)\{([^{}]*)\}", css):
+        if "var(--mono)" in m.group(2):
+            sel = " ".join(m.group(1).split())
+            if not re.search(r"code|pre|textarea|\.mono|\.loc|\.cmd|\.pedido-txt|\.prompt", sel):
+                faltas.append("mono fora de texto de maquina: %s" % sel[:40])
 
     # 6. restos do sistema antigo, que passam despercebidos por serem parecidos
     for velho in ("#eef0ef", "#e4e7e5", "#141c24", "#3e6b7a", "#93969D", "Constantia,"):

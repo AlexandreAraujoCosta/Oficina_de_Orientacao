@@ -27,6 +27,15 @@
     --mono: "Cascadia Mono", "JetBrains Mono", ui-monospace, Consolas, "SF Mono", monospace;
 
     --measure: 66ch;
+
+    /* seis degraus, e nada entre eles */
+    --t-xs: 12px;    /* rotulo em versalete */
+    --t-sm: 14px;    /* texto secundario */
+    --t-md: 16.5px;  /* corpo */
+    --t-lg: 19px;    /* linha de abertura */
+    --t-h3: 20px;
+    --t-h2: 26px;
+
   }
 
   @media (prefers-color-scheme: dark) {
@@ -100,7 +109,7 @@
     background: var(--ground);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 16.5px;
+    font-size: var(--t-md);
     line-height: 1.6;
     margin: 0;
     -webkit-font-smoothing: antialiased;
@@ -155,7 +164,7 @@
     gap: 10px;
     align-items: baseline;
     font-family: var(--sans);
-    font-size: 13px;
+    font-size: var(--t-sm);
     line-height: 1.35;
     color: var(--muted);
     text-decoration: none;
@@ -167,8 +176,8 @@
   nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   nav .idx {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: var(--t-xs);
     color: var(--faint);
     letter-spacing: -0.02em;
     flex: none;
@@ -184,8 +193,8 @@
   }
 
   .eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
+    font-family: var(--sans);
+    font-size: var(--t-xs);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--accent);
@@ -194,7 +203,7 @@
 
   h1 {
     font-family: var(--serif);
-    font-size: clamp(38px, 6.5vw, 58px);
+    font-size: clamp(34px, 5vw, 48px);
     line-height: 1.03;
     letter-spacing: -0.022em;
     font-weight: 600;
@@ -204,7 +213,7 @@
 
   .standfirst {
     font-family: var(--serif);
-    font-size: 1.14rem;
+    font-size: var(--t-lg);
     line-height: 1.55;
     color: var(--ink-soft);
     max-width: var(--measure);
@@ -212,7 +221,7 @@
   }
 
   .feedback {
-    font-size: 15px;
+    font-size: var(--t-sm);
     line-height: 1.6;
     color: var(--ink-soft);
     background: var(--good-soft);
@@ -225,7 +234,7 @@
   .feedback b { color: var(--ink); font-weight: 600; }
 
   .dedication {
-    font-size: 15.5px;
+    font-size: var(--t-sm);
     line-height: 1.58;
     color: var(--muted);
     border-left: 2px solid var(--rule);
@@ -239,7 +248,7 @@
 
   .dedication .pledge {
     color: var(--ink-soft);
-    font-size: 15px;
+    font-size: var(--t-sm);
   }
 
   .byline {
@@ -250,7 +259,7 @@
   }
 
   .byline .author {
-    font-size: .9rem;
+    font-size: var(--t-sm);
     color: var(--ink-soft);
     margin: 0 0 .35rem;
   }
@@ -261,7 +270,7 @@
   }
 
   .byline .affil {
-    font-size: .85rem;
+    font-size: var(--t-sm);
     line-height: 1.55;
     color: var(--muted);
     margin: 0 0 .35rem;
@@ -271,7 +280,7 @@
   .byline .affil a:hover { text-decoration: underline; }
 
   .byline .assist {
-    font-size: .85rem;
+    font-size: var(--t-sm);
     color: var(--muted);
     margin: 0;
   }
@@ -288,11 +297,11 @@
 
   .principle p {
     margin: 0;
-    font-size: 18px;
+    font-size: var(--t-lg);
     line-height: 1.5;
   }
 
-  .principle p + p { margin-top: 12px; font-size: 16px; color: var(--ink-soft); }
+  .principle p + p { margin-top: 12px; font-size: var(--t-md); color: var(--ink-soft); }
 
   /* ---------- sections ---------- */
 
@@ -300,7 +309,7 @@
 
   h2 {
     font-family: var(--serif);
-    font-size: 26px;
+    font-size: var(--t-h2);
     font-weight: 600;
     letter-spacing: -0.012em;
     line-height: 1.15;
@@ -312,7 +321,7 @@
 
   h2 + .deck {
     color: var(--muted);
-    font-size: 16px;
+    font-size: var(--t-md);
     margin: 14px 0 0;
   }
 
@@ -326,7 +335,7 @@
 
   code, .loc {
     font-family: var(--mono);
-    font-size: 0.88em;
+    font-size: var(--t-sm);
     background: var(--sunken);
     padding: 1px 5px;
     border-radius: 2px;
@@ -343,7 +352,7 @@
 
   .verbete h4 {
     font-family: var(--sans);
-    font-size: 12px;
+    font-size: var(--t-xs);
     letter-spacing: 0.09em;
     text-transform: uppercase;
     font-weight: 700;
@@ -351,7 +360,7 @@
     margin: 0 0 8px;
   }
 
-  .verbete p { font-size: 15.5px; line-height: 1.55; margin: 0; }
+  .verbete p { font-size: var(--t-sm); line-height: 1.55; margin: 0; }
 
   /* ---------- routing table ---------- */
 
@@ -375,15 +384,15 @@
   .route-q { color: var(--ink-soft); }
 
   .route-n {
-    font-family: var(--mono); font-size: 12px; color: var(--faint);
+    font-family: var(--sans); font-size: var(--t-xs); color: var(--faint);
     letter-spacing: -0.02em; margin-right: 10px; vertical-align: 3px;
   }
   .route-sub {
-    display: block; font-family: var(--sans); font-size: 14px; font-weight: 400;
+    display: block; font-family: var(--sans); font-size: var(--t-sm); font-weight: 400;
     letter-spacing: 0; color: var(--muted); margin-top: 3px;
   }
   .route-a {
-    font-family: var(--serif); font-size: 25px; line-height: 1.12;
+    font-family: var(--serif); font-size: var(--t-h2); line-height: 1.12;
   }
 
   /* ---------- instrument blocks ---------- */
@@ -405,8 +414,8 @@
   }
 
   .inst-num {
-    font-family: var(--mono);
-    font-size: 13px;
+    font-family: var(--sans);
+    font-size: var(--t-sm);
     color: var(--accent);
     letter-spacing: -0.02em;
   }
@@ -424,7 +433,7 @@
 
   h3 {
     font-family: var(--serif);
-    font-size: 21px;
+    font-size: var(--t-h3);
     line-height: 1.15;
     letter-spacing: -0.018em;
     font-weight: 600;
@@ -433,7 +442,7 @@
 
   .inst-sub {
     color: var(--muted);
-    font-size: 16.5px;
+    font-size: var(--t-md);
     margin: 6px 0 18px;
   }
 
@@ -447,8 +456,8 @@
   }
 
   .chip {
-    font-family: var(--mono);
-    font-size: 11.5px;
+    font-family: var(--sans);
+    font-size: var(--t-xs);
     letter-spacing: -0.01em;
     padding: 3px 9px;
     border: 1px solid var(--rule);
@@ -466,11 +475,11 @@
 
   .via:first-of-type { border-top: none; padding-top: 6px; }
 
-  .via h4 { font-family: var(--serif); font-size: 19px; margin-bottom: 4px; }
+  .via h4 { font-family: var(--serif); font-size: var(--t-lg); margin-bottom: 4px; }
 
-  .via-num { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-right: 8px; }
+  .via-num { font-family: var(--sans); font-size: var(--t-xs); color: var(--accent); margin-right: 8px; }
 
-  .via-devolve { font-size: 14.5px; color: var(--muted); margin-top: 8px; }
+  .via-devolve { font-size: var(--t-sm); color: var(--muted); margin-top: 8px; }
 
   .pair {
     display: grid;
@@ -496,7 +505,7 @@
 
   .pair h4 {
     font-family: var(--sans);
-    font-size: 11.5px;
+    font-size: var(--t-xs);
     letter-spacing: 0.09em;
     text-transform: uppercase;
     margin: 0 0 10px;
@@ -506,17 +515,17 @@
   .pair .does h4 { color: var(--good); }
   .pair .doesnt h4 { color: var(--warn); }
 
-  .pair p { font-size: 15.5px; line-height: 1.55; margin-bottom: 10px; }
+  .pair p { font-size: var(--t-sm); line-height: 1.55; margin-bottom: 10px; }
 
   .when {
-    font-size: 16px;
+    font-size: var(--t-md);
     color: var(--ink-soft);
   }
 
   .when b { color: var(--ink); }
 
   .footnote {
-    font-size: 15px;
+    font-size: var(--t-sm);
     color: var(--muted);
     border-left: 2px solid var(--rule);
     padding-left: 16px;
@@ -539,7 +548,7 @@
 
   .track-label {
     font-family: var(--sans);
-    font-size: 11.5px;
+    font-size: var(--t-xs);
     letter-spacing: 0.09em;
     text-transform: uppercase;
     font-weight: 700;
@@ -562,8 +571,8 @@
   }
 
   .step .n {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: var(--t-xs);
     color: var(--faint);
     display: block;
     margin-bottom: 5px;
@@ -571,7 +580,7 @@
 
   .step .t {
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: var(--t-sm);
     font-weight: 600;
     line-height: 1.28;
     display: block;
@@ -579,7 +588,7 @@
   }
 
   .step .d {
-    font-size: 13px;
+    font-size: var(--t-sm);
     line-height: 1.4;
     color: var(--muted);
   }
@@ -596,9 +605,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--mono);
+    font-family: var(--sans);
     color: var(--faint);
-    font-size: 15px;
+    font-size: var(--t-sm);
   }
 
   /* ---------- table ---------- */
@@ -613,7 +622,7 @@
     border-collapse: collapse;
     width: 100%;
     min-width: 480px;
-    font-size: 15px;
+    font-size: var(--t-sm);
   }
 
   th, td {
@@ -625,7 +634,7 @@
 
   thead th {
     font-family: var(--sans);
-    font-size: 11.5px;
+    font-size: var(--t-xs);
     letter-spacing: 0.07em;
     text-transform: uppercase;
     font-weight: 700;
@@ -637,9 +646,9 @@
   tbody tr:last-child td { border-bottom: 0; }
 
   td.num, th.num {
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-variant-numeric: tabular-nums;
-    font-size: 14px;
+    font-size: var(--t-sm);
     text-align: right;
     white-space: nowrap;
   }
@@ -648,14 +657,14 @@
 
   td.num .brl {
     display: block;
-    font-size: 12.5px;
+    font-size: var(--t-xs);
     font-weight: 400;
     color: var(--muted);
     margin-top: 2px;
   }
 
   .tnote {
-    font-size: 14.5px;
+    font-size: var(--t-sm);
     color: var(--muted);
     margin: 14px 0 0;
   }
@@ -674,7 +683,7 @@
 
   .ledger-item h4 {
     font-family: var(--sans);
-    font-size: 15px;
+    font-size: var(--t-sm);
     font-weight: 600;
     margin: 0 0 6px;
     display: flex;
@@ -683,8 +692,8 @@
   }
 
   .ledger-item .mark {
-    font-family: var(--mono);
-    font-size: 12px;
+    font-family: var(--sans);
+    font-size: var(--t-xs);
     flex: none;
     padding: 1px 7px;
     border-radius: 2px;
@@ -693,7 +702,7 @@
   .mark.m-yes { background: var(--good-soft); color: var(--good); }
   .mark.m-no  { background: var(--warn-soft); color: var(--warn); }
 
-  .ledger-item p { font-size: 15.5px; color: var(--ink-soft); margin: 0; }
+  .ledger-item p { font-size: var(--t-sm); color: var(--ink-soft); margin: 0; }
 
   /* ---------- final caveat ---------- */
 
@@ -706,7 +715,7 @@
 
   .caveat h3 {
     font-family: var(--sans);
-    font-size: 12px;
+    font-size: var(--t-xs);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--warn);
@@ -715,7 +724,7 @@
   }
 
   .caveat p {
-    font-size: 15.5px;
+    font-size: var(--t-sm);
     line-height: 1.58;
     margin: 0;
   }
@@ -725,8 +734,8 @@
     margin-top: 72px;
     padding-top: 20px;
     border-top: 1px solid var(--rule);
-    font-family: var(--mono);
-    font-size: 12px;
+    font-family: var(--sans);
+    font-size: var(--t-xs);
     color: var(--faint);
     line-height: 1.7;
   }
@@ -749,8 +758,8 @@
 
   /* --- escala do sistema: uma so em todas as paginas da oficina --- */
   h1, .top h1, header h1, .wrap > h1 { font-family: var(--serif); font-size: clamp(34px, 5vw, 48px); }
-  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: 26px; font-weight: 600; }
-  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: 20px; font-weight: 600;
+  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 600; }
+  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 600;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
   /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
   .wrap p, .wrap li, .wrap dd, .shell p, .shell li, .shell dd { max-width: var(--measure); }
@@ -777,7 +786,7 @@
   <main>
 
     <header>
-      <p class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas acadêmicas</a></span><span class="eb-linha eb-baixo">Assistentes: <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></span></p>
+      <p class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas Acadêmicas</a></span><span class="eb-linha eb-baixo">Assistentes: <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></span></p>
       <h1>Oficina de Orientação</h1>
       <p class="standfirst">Ferramentas de leitura automática de trabalhos acadêmicos, da que roda em segundos, sem modelo nenhum, à que ocupa meia hora e exige processamento incompatível com os planos gratuitos. Cada uma declara o que confere, e é nessa declaração que se lê o que ela deixou de fora.</p>
       <div class="byline">
