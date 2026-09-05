@@ -63,8 +63,15 @@ RE_CAMPO = re.compile(
 # escreveu sete itens seguidos na mesma linha (`**SC4.** [P464], o mesmo.
 # **SC5.** [P511] e um marcador...`), e o extrator pegou so o primeiro de cada
 # linha. Sete de quarenta e oito sumiram sem que nada acusasse.
+#
+# E O ULTIMO ITEM ENGOLIA O QUE VINHA DEPOIS DELE. O relatorio termina com a
+# ressalva de alcance, que nao e cabecalho e por isso nao parava a captura: o
+# item de acabamento chegava a leitura fria com a taxa de erro do proprio
+# relatorio colada dentro. Medido em 05/09/2026, e foi a leitura fria que
+# apanhou. A regra horizontal e a citacao em bloco tambem fecham o item.
 RE_SC = re.compile(
-    r"\*\*(SC\d+)[.:]?\*\*\s*(.*?)(?=\*\*SC\d+[.:]?\*\*|^#{2,4} |\Z)",
+    r"\*\*(SC\d+)[.:]?\*\*\s*(.*?)"
+    r"(?=\*\*SC\d+[.:]?\*\*|^#{2,4} |^---\s*$|^> |\Z)",
     re.M | re.S)
 RE_LOC = re.compile(r"\[P(\d+)\]")
 

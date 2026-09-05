@@ -214,6 +214,69 @@ temporal:
 Cada uma que render vira resultado do passo 4. Cada uma que não render vira
 hipótese derrubada, e vai dita.
 
+## Passo 4c — a inferência é objeto de exame, e não só o texto
+
+Os passos anteriores conferem o que o trabalho **diz**: se o número fecha, se a
+frase corresponde à figura, se a categoria contada é a definida. **Este confere o
+que ele infere**, que é outra coisa e é onde mora a contribuição empírica.
+
+**Comece enumerando, e não procurando.** O passo 5 percorre os dados atrás do que
+não foi afirmado. Este percorre o caminho oposto: **liste as interpretações, uma a
+uma, e volte de cada uma ao dado que a sustenta.** Interpretação é toda passagem
+em que o trabalho vai além de descrever o que mediu: *aumentou porque*, *isso
+indica*, *o dado mostra que*, *revela uma tendência*, *sugere que*. Numere-as com
+o localizador antes de julgar qualquer uma, como no passo 1 da leitura do resumo.
+
+**A pergunta que abre cada exame é uma só: o dado carrega isto?** E ela tem uma
+forma negativa que é a que mais rende, porque a extração excessiva não parece
+erro: **esta interpretação extrai mais do que o desenho permite?** Quatro modos de
+extrair demais, todos vistos nesta bancada:
+
+- **do agregado para o caso**, quando a taxa média vira afirmação sobre cada
+  unidade;
+- **da coincidência para o mecanismo**, quando duas séries que sobem juntas viram
+  uma causando a outra;
+- **do subconjunto para o universo**, quando o que se mediu num recorte é dito do
+  todo, e às vezes o próprio trabalho declarou o recorte;
+- **do desfecho para a intenção**, quando o que o texto faz vira o que o autor
+  dele quis.
+
+Onde a interpretação extrair demais, o item não pede que se retire a
+interpretação: pede que **o alcance dela desça até onde o dado chega**, e diz até
+onde. Retirar é perda; ajustar o alcance é o que a torna defensável na banca.
+
+Depois disso, examine cada interpretação que sobreviver com estas cinco
+perguntas. Elas se respondem contra o próprio trabalho, e por isso produzem item
+com endereço.
+
+1. **O que mais mudou na mesma janela?** Se outro fator plausível muda no mesmo
+   período, o crédito exclusivo não se sustenta. Procure candidatos nos próprios
+   dados e no que o trabalho narra sobre o contexto.
+2. **A relação agregada pode estar escondendo processos distintos?** Reparta pelo
+   corte que o trabalho já coletou (classe, ano, órgão, tipo) e veja se a direção
+   se mantém em todos. Onde ela se inverter num subconjunto, o agregado descreve
+   uma média de coisas diferentes.
+3. **A teoria que o próprio trabalho adota oferece o mecanismo?** Ele cita uma
+   literatura; ela prediz esta relação, prediz outra, ou não fala disso? Explicação
+   sem mecanismo na teoria que o trabalho invocou é asserção, e vai dita como tal.
+4. **O que essa explicação prediz que se veria, e se vê?** Derive da explicação a
+   forma que os dados teriam de ter e confira contra o que está publicado.
+5. **De quantas variáveis a afirmação precisa para se sustentar, e o trabalho as
+   tem?** Onde faltar, a pergunta é se elas estavam ao alcance da coleta que ele
+   fez. Faltar variável que a base tem é resultado inexplorado; faltar variável
+   que a base não tem é limite, e limite declarado fortalece o trabalho.
+
+**Cada exame termina em um de três lugares, e é isso que o torna conferível.** O
+trabalho tem o que precisa e não disse: vira sugestão de acrescentar a frase. Tem
+os dados e não fez a conta: vira resultado inexplorado, no passo 4. Não tem: vira
+limite a declarar, com o endereço da passagem que hoje afirma mais do que o
+desenho alcança.
+
+**Não invente a explicação alternativa.** O candidato concorrente tem de estar no
+material: nos dados, na narrativa do trabalho, ou na literatura que ele mesmo
+cita. Explicação alternativa trazida de fora sem fonte é onde esta leitura passa a
+inventar, e ela não entra.
+
 ## Três regras
 
 1. **Controle positivo.** Antes de qualquer afirmação de ausência, mostre que a sua
