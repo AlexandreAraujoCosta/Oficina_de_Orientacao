@@ -164,6 +164,20 @@ def main():
     print("cada uma e a proxima etapa, e e leitura.")
     print("")
     print("A saida ficou em %s, que e a entrada de quem julga." % destino.name)
+
+    # A PRE-ANALISE: que leitura se paga neste material, e quanto custa.
+    #
+    # Ate 05/09/2026 a escolha da via era do gosto de quem rodava e o custo so
+    # aparecia depois. Ela sai aqui porque e aqui que a pessoa ainda nao gastou
+    # nada: depois de escolher, o custo ja foi.
+    try:
+        sys.path.insert(0, str(RAIZ))
+        from recomendar_via import escrever, medir  # noqa: E402
+        print(escrever(medir(str(Path("extracao") / (alvo.stem + ".txt")))))
+    except Exception as e:
+        print("\n  a pre-analise nao rodou (%s). A cadeia acima nao depende dela."
+              % e)
+
     quem = nome_provavel(Path("extracao") / (alvo.stem + ".txt"))
     if quem:
         curto = "".join(quem.split()[:2]).lower()
