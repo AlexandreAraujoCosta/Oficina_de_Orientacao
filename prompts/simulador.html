@@ -235,6 +235,17 @@
     letter-spacing: normal; text-transform: none; color: var(--ink); }
   /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
   .wrap p, .wrap li, .wrap dd { max-width: var(--measure); }
+  /* Os dois paragrafos da ficha sao o mesmo comentario, e vao na mesma fonte,
+     no mesmo corpo e na mesma cor. */
+  .byline p, .byline .author, .byline .affil, .byline .assist, .byline .fina {
+    font-family: var(--sans);
+    font-size: var(--t-sm);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 .5rem;
+  }
+  .byline p:last-child { margin-bottom: 0; }
+  .byline b { color: var(--ink); font-weight: 600; }
 </style>
 
 <div class="wrap">
@@ -248,7 +259,7 @@
 
     <div class="byline">
       <p class="author">Ferramentas desenvolvidas por <a href="https://sigaa.unb.br/sigaa/public/docente/portal.jsf?siape=2332291"><b>Alexandre Araújo Costa</b></a> (Doutor em Direito, Professor da UnB, Coordenador do PMPD), com assistência do modelo Claude Opus 5, em Claude Code. O código está no repositório <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao">Oficina_de_Orientacao</a>.</p>
-      <p>Trata-se de um protótipo, ainda em fase de testes, e todo feedback (dirigido a <a href="mailto:alexandrearcos@unb.br">alexandrearcos@unb.br</a>) será muito útil para aperfeiçoá-lo. <b>Se você usar o simulador de banca fora do contexto das disciplinas</b>, envie um relato por <a href="https://docs.google.com/forms/d/e/1FAIpQLSdziEHALH04stCpbVCHqDODK072YKzRRWCaN4ZhsiHojYrKmg/viewform?usp=dialog">este formulário</a>: é com esses relatos que dá para saber se ele funciona fora da situação para a qual foi escrito.</p>
+      <p>Trata-se de protótipos, ainda em fase de testes, e todo <a href="mailto:alexandrearcos@unb.br">feedback</a> será muito útil para aperfeiçoá-los. Se você usar as ferramentas, envie por favor um relato por <a href="https://docs.google.com/forms/d/e/1FAIpQLSdziEHALH04stCpbVCHqDODK072YKzRRWCaN4ZhsiHojYrKmg/viewform?usp=dialog">este formulário</a>, pois, a partir deles, é possível compreender o funcionamento dos prompts em situações reais.</p>
     </div>
 
   </header>
