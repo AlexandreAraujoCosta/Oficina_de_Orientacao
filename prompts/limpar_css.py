@@ -64,13 +64,27 @@ def limpar(html):
     i = html.index("<style>")
     j = html.index("</style>")
     css, corpo = html[i + len("<style>"):j], html[j:]
+    # Comentario colado num seletor entrava na regra e era reescrito junto com ela:
+    # em 05/09/2026 isso comeu um "*/" e abriu um comentario que engolia o resto da
+    # folha. Aqui os comentarios saem da varredura, e voltam no fim.
+    guardados = []
+
+    def guarda(m):
+        guardados.append(m.group(0))
+        return "\x00%d\x00" % (len(guardados) - 1)
+
+    css = re.sub(r"/\*.*?\*/", guarda, css, flags=re.S)
     # O prompt embutido nao e corpo da pagina, e traz palavras que enganariam.
     corpo_util = re.sub(r"const P_UNICO = \".*", "", corpo, flags=re.S)
     usadas = classes_do_corpo(corpo_util)
 
     fora, saida, pos = [], [], 0
     for m in RE_REGRA.finditer(css):
-        sel = m.group("sel").strip()
+        # O comentario que precede a regra virou marca, e nao entra no seletor:
+        # ele fica na folha ainda quando a regra sai.
+        marcas = re.findall(r"\x00\d+\x00", m.group("sel"))
+        guardar = ("\n  " + " ".join(marcas)) if marcas else ""
+        sel = re.sub(r"\x00\d+\x00", "", m.group("sel")).strip()
         # Preserva o que nao e regra de classe: @media, :root, elementos, ids.
         if sel.startswith("@") or "{" in sel:
             continue
@@ -91,11 +105,11 @@ def limpar(html):
         if vivas == partes:
             continue
         if vivas:
-            troca = "\n  " + ", ".join(vivas) + " {" + m.group("corpo") + "}"
+            troca = guardar + "\n  " + ", ".join(vivas) + " {" + m.group("corpo") + "}"
             saida.append((m.start(), m.end(), troca))
             fora.append("(parcial) " + " | ".join(x for x in partes if x not in vivas))
         else:
-            saida.append((m.start(), m.end(), ""))
+            saida.append((m.start(), m.end(), guardar))
             fora.append(sel)
 
     novo = css
@@ -104,6 +118,7 @@ def limpar(html):
     # Bloco de media que ficou sem nenhuma regra dentro nao faz nada.
     novo = re.sub(r"@media[^{]*\{\s*\}\s*", "", novo)
     novo = re.sub(r"\n{3,}", "\n\n", novo)
+    novo = re.sub(r"\x00(\d+)\x00", lambda m: guardados[int(m.group(1))], novo)
     return html[:i + len("<style>")] + novo + corpo, fora, corpo
 
 

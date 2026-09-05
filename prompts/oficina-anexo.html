@@ -572,7 +572,18 @@
     margin: 0 0 1.1rem;
     max-width: var(--measure);
   }
-  </style>
+    /* Os dois paragrafos da ficha sao o mesmo comentario, e vao na mesma fonte,
+     no mesmo corpo e na mesma cor. */
+  .byline p, .byline .author, .byline .affil, .byline .assist, .byline .fina {
+    font-family: var(--sans);
+    font-size: var(--t-sm);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 .5rem;
+  }
+  .byline p:last-child { margin-bottom: 0; }
+  .byline b { color: var(--ink); font-weight: 600; }
+</style>
 
 <div class="shell">
   <main>
@@ -582,7 +593,7 @@
       <p class="standfirst">O que fica fora da p&aacute;gina da oficina: o vocabul&aacute;rio em uso, as duas formas de rodar, o fluxo de trabalho, quem responde pelo relat&oacute;rio, como ele &eacute; organizado, o que se entrega, quanto custa e o que est&aacute; medido.</p>
       <div class="byline">
         <p class="author">Ferramentas desenvolvidas por <a href="https://sigaa.unb.br/sigaa/public/docente/portal.jsf?siape=2332291"><b>Alexandre Araújo Costa</b></a> (Doutor em Direito, Professor da UnB, Coordenador do PMPD), com assistência do modelo Claude Opus 5, em Claude Code. O código está no repositório <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao">Oficina_de_Orientacao</a>.</p>
-        <p>Trata-se de protótipos, ainda em fase de testes, e todo feedback (dirigido a <a href="mailto:alexandrearcos@unb.br">alexandrearcos@unb.br</a>) será muito útil para aperfeiçoá-los. <b>Se você usar estas ferramentas fora do contexto das disciplinas</b>, envie um relato por <a href="https://docs.google.com/forms/d/e/1FAIpQLSdziEHALH04stCpbVCHqDODK072YKzRRWCaN4ZhsiHojYrKmg/viewform?usp=dialog">este formulário</a>: é com esses relatos que dá para saber se elas funcionam fora da situação para a qual foram escritos.</p>
+        <p>Trata-se de protótipos, ainda em fase de testes, e todo <a href="mailto:alexandrearcos@unb.br">feedback</a> será muito útil para aperfeiçoá-los. Se você usar as ferramentas, envie por favor um relato por <a href="https://docs.google.com/forms/d/e/1FAIpQLSdziEHALH04stCpbVCHqDODK072YKzRRWCaN4ZhsiHojYrKmg/viewform?usp=dialog">este formulário</a>, pois, a partir deles, é possível compreender o funcionamento dos prompts em situações reais.</p>
       </div>
     </header>
     <div class="principle">
