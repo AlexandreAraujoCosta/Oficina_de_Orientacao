@@ -31,6 +31,7 @@
 
     /* seis degraus, na medida de arcos.org.br/direito-ciencia */
     --t-xs: 14px;    /* rotulo em versalete */
+    --t-2xs: 12px;   /* faixa de identificacao */
     --t-sm: 16px;    /* texto secundario */
     --t-md: 18px;    /* corpo, em Lora */
     --t-lg: 22px;    /* linha de abertura */
@@ -195,7 +196,7 @@
 
   .eyebrow {
     font-family: var(--sans);
-    font-size: var(--t-xs);
+    font-size: var(--t-2xs);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--accent);
@@ -204,7 +205,7 @@
 
   h1 {
     font-family: var(--serif);
-    font-size: clamp(24px, 5vw, 30px);
+    font-size: clamp(28px, 5vw, 36px);
     line-height: 1.03;
     letter-spacing: -0.022em;
     font-weight: 600;
@@ -213,7 +214,7 @@
   }
 
   .standfirst {
-    font-family: var(--sans);
+    font-family: var(--serif);
     font-size: var(--t-lg);
     line-height: 1.55;
     color: var(--ink-soft);
@@ -222,7 +223,7 @@
   }
 
   .feedback {
-    font-size: var(--t-sm);
+    font-size: var(--t-md);
     line-height: 1.6;
     color: var(--ink-soft);
     background: var(--good-soft);
@@ -235,7 +236,7 @@
   .feedback b { color: var(--ink); font-weight: 600; }
 
   .dedication {
-    font-size: var(--t-sm);
+    font-size: var(--t-md);
     line-height: 1.58;
     color: var(--muted);
     border-left: 2px solid var(--rule);
@@ -361,7 +362,7 @@
     margin: 0 0 8px;
   }
 
-  .verbete p { font-size: var(--t-sm); line-height: 1.55; margin: 0; }
+  .verbete p { font-size: var(--t-md); line-height: 1.55; margin: 0; }
 
   /* ---------- routing table ---------- */
 
@@ -480,7 +481,7 @@
 
   .via-num { font-family: var(--sans); font-size: var(--t-xs); color: var(--accent); margin-right: 8px; }
 
-  .via-devolve { font-size: var(--t-sm); color: var(--muted); margin-top: 8px; }
+  .via-devolve { font-size: var(--t-md); color: var(--muted); margin-top: 8px; }
 
   .pair {
     display: grid;
@@ -516,7 +517,7 @@
   .pair .does h4 { color: var(--good); }
   .pair .doesnt h4 { color: var(--warn); }
 
-  .pair p { font-size: var(--t-sm); line-height: 1.55; margin-bottom: 10px; }
+  .pair p { font-size: var(--t-md); line-height: 1.55; margin-bottom: 10px; }
 
   .when {
     font-size: var(--t-md);
@@ -526,7 +527,7 @@
   .when b { color: var(--ink); }
 
   .footnote {
-    font-size: var(--t-sm);
+    font-size: var(--t-md);
     color: var(--muted);
     border-left: 2px solid var(--rule);
     padding-left: 16px;
@@ -665,7 +666,7 @@
   }
 
   .tnote {
-    font-size: var(--t-sm);
+    font-size: var(--t-md);
     color: var(--muted);
     margin: 14px 0 0;
   }
@@ -703,7 +704,7 @@
   .mark.m-yes { background: var(--good-soft); color: var(--good); }
   .mark.m-no  { background: var(--warn-soft); color: var(--warn); }
 
-  .ledger-item p { font-size: var(--t-sm); color: var(--ink-soft); margin: 0; }
+  .ledger-item p { font-size: var(--t-md); color: var(--ink-soft); margin: 0; }
 
   /* ---------- final caveat ---------- */
 
@@ -725,7 +726,7 @@
   }
 
   .caveat p {
-    font-size: var(--t-sm);
+    font-size: var(--t-md);
     line-height: 1.58;
     margin: 0;
   }
@@ -759,7 +760,7 @@
 
   /* --- escala do sistema: uma so em todas as paginas da oficina --- */
   h1, .top h1, header h1, .wrap > h1 { font-family: var(--sans); font-weight: 700;
-    font-size: clamp(24px, 5vw, 30px); line-height: 1.2; }
+    font-size: clamp(28px, 5vw, 36px); line-height: 1.2; }
   .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--sans); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
   .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--sans); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
