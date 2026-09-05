@@ -27,7 +27,24 @@
   const cores = new Set();
   document.querySelectorAll('p,li,dd,dt,span,h1,h2,h3,b,strong').forEach(e => { if (e.textContent.trim()) cores.add(cs(e).color); });
 
+  // Coluna sobrando: o texto ocupa quanto do container que o carrega? Em
+  // 05/09/2026 a pagina da Oficina virou cartoes e perdeu o <nav>, e a grade de
+  // duas colunas continuou; sem o nav, o main caiu na faixa de 208px e o texto
+  // corria a 29% do container. Isso nao aparece lendo o arquivo.
+  const sobra = (() => {
+    const alvo = document.querySelector('main') || document.querySelector('.wrap') || document.body;
+    const caixa = alvo.parentElement || document.body;
+    const lt = Math.max(...larguras, 0);
+    const lc = caixa.getBoundingClientRect().width;
+    const fracao = lc ? +(lt / lc).toFixed(2) : null;
+    return { texto: Math.round(lt), container: Math.round(lc), fracao,
+             suspeita: fracao !== null && fracao < 0.5
+               ? 'o texto ocupa menos de metade do container: ha coluna reservada e vazia?'
+               : null };
+  })();
+
   return {
+    colunaSobrando: sobra,
     corpo: px(cs(document.body).fontSize)+'px/'+cs(document.body).lineHeight+' '+cs(document.body).fontFamily.split(',')[0],
     alturaDoc: Math.round(document.documentElement.scrollHeight),
     paragrafos: paras.length,
