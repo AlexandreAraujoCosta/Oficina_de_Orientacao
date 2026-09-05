@@ -122,6 +122,24 @@ normalmente é nada.
 **SAI.** Não é consumido e não tem valor próprio. É o destino mais raro, e o que mais
 exige prova.
 
+## O sexto critério: a peça sustenta o que afirma?
+
+Os cinco destinos perguntam **quem consome o capítulo**. Falta perguntar **se o
+que ele afirma se sustenta no nível que o argumento exige**, e é por aí que entra
+a saída que o autor às vezes escolhe e que nenhum dos cinco descreve.
+
+Para cada peça, conte quantos dos seus itens de inferência pedem coleta nova, na
+classificação do passo 4c da leitura de dados. **Onde vários caírem aí, o
+capítulo não tem lista de correções: tem uma decisão.** As saídas são duas, e as
+duas se escrevem: **reduzir o que a peça afirma até o que os dados carregam**, ou
+**tirá-la do corpo**, com o que a conclusão perde em cada caso.
+
+Caso medido em 05/09/2026: numa dissertação com dois capítulos empíricos, a saída
+escolhida por quem escreve e por quem orienta foi abandonar o primeiro, porque
+ajustar as inferências dele às do segundo pedia coleta que não cabia no prazo.
+Nenhum dos cinco destinos alcançava essa decisão, e nenhum item isolado a
+apontava: ela aparece ao contar quantos itens do capítulo pedem coleta nova.
+
 ## Os dois campos que cada item de correção carrega
 
 Um programa lê os dois, e cada um tem uma função que o outro não cumpre.

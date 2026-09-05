@@ -272,6 +272,32 @@ os dados e não fez a conta: vira resultado inexplorado, no passo 4. Não tem: v
 limite a declarar, com o endereço da passagem que hoje afirma mais do que o
 desenho alcança.
 
+### Diga o que custa sustentar a inferência, porque nem sempre se pode pagar
+
+**Consertar uma inferência quase nunca é reescrever uma frase.** Costuma exigir
+mais dado, mais variável, mais classificação, e essa exigência tem um preço que o
+autor pode não ter como pagar no tempo que tem. Apontar a fragilidade sem dizer o
+preço entrega uma tarefa impossível com aparência de correção simples.
+
+Classifique cada item de inferência num destes três, e escreva qual:
+
+- **Cabe numa frase.** Descer o alcance até onde o dado chega, ou declarar o
+  limite. Não pede dado nenhum.
+- **Cabe numa tarde.** Refazer a conta, repartir pelo corte já coletado, cruzar
+  duas variáveis que a base tem. Pede trabalho e não pede coleta.
+- **Pede coleta nova.** Variável que a base não tem, classificação que teria de
+  ser refeita caso a caso, período que não foi levantado. **Diga isso com todas as
+  letras**, e diga o que a inferência passaria a sustentar se a coleta fosse
+  feita.
+
+**Onde vários itens do mesmo capítulo caírem no terceiro**, isso deixa de ser
+lista de correções e vira uma decisão sobre a peça: reduzir o que ela afirma até o
+que os dados carregam, ou tirá-la do corpo. Essa decisão é de quem escreve e de
+quem orienta, e o relatório existe para que ela seja tomada com o número na frente.
+Caso medido em 05/09/2026: numa dissertação, a saída escolhida foi abandonar um
+capítulo inteiro, porque ajustar as inferências dele às do capítulo seguinte não
+cabia no prazo.
+
 **Não invente a explicação alternativa.** O candidato concorrente tem de estar no
 material: nos dados, na narrativa do trabalho, ou na literatura que ele mesmo
 cita. Explicação alternativa trazida de fora sem fonte é onde esta leitura passa a
