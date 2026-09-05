@@ -117,21 +117,12 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Sem a barra lateral, a pagina e uma coluna so: a grade de duas colunas
+     jogava o main na faixa de 208px e produzia uma coluna de texto estreita. */
   .shell {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    max-width: 1180px;
+    max-width: 47rem;
     margin: 0 auto;
-    padding: 0 24px 96px;
-  }
-
-  @media (min-width: 1000px) {
-    .shell {
-      grid-template-columns: 208px minmax(0, 1fr);
-      column-gap: 56px;
-      padding: 0 40px 120px;
-    }
+    padding: 0 1.4rem 6rem;
   }
 
   /* ---------- navigation ---------- */

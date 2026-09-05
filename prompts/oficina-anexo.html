@@ -117,21 +117,12 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Sem a barra lateral, a pagina e uma coluna so: a grade de duas colunas
+     jogava o main na faixa de 208px e produzia uma coluna de texto estreita. */
   .shell {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    max-width: 1180px;
+    max-width: 47rem;
     margin: 0 auto;
-    padding: 0 24px 96px;
-  }
-
-  @media (min-width: 1000px) {
-    .shell {
-      grid-template-columns: 208px minmax(0, 1fr);
-      column-gap: 56px;
-      padding: 0 40px 120px;
-    }
+    padding: 0 1.4rem 6rem;
   }
 
   /* ---------- navigation ---------- */
@@ -177,16 +168,6 @@
   nav a:hover { color: var(--accent); }
   nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  nav .idx {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    color: var(--faint);
-    letter-spacing: -0.02em;
-    flex: none;
-  }
-
-  nav .navgap { height: 14px; }
-
   /* ---------- masthead ---------- */
 
   header {
@@ -222,19 +203,6 @@
     margin: 0 0 2rem;
   }
 
-  .feedback {
-    font-size: var(--t-md);
-    line-height: 1.6;
-    color: var(--ink-soft);
-    background: var(--good-soft);
-    border-left: 3px solid var(--good);
-    padding: 14px 18px;
-    border-radius: 0 3px 3px 0;
-    margin: 0 0 26px;
-  }
-  .feedback p { margin: 0; }
-  .feedback b { color: var(--ink); font-weight: 600; }
-
   .dedication {
     font-size: var(--t-md);
     line-height: 1.58;
@@ -269,22 +237,6 @@
   .byline .author b {
     font-weight: 600;
     color: var(--ink);
-  }
-
-  .byline .affil {
-    font-size: var(--t-sm);
-    line-height: 1.55;
-    color: var(--muted);
-    margin: 0 0 .35rem;
-  }
-
-  .byline .affil a { text-decoration: none; }
-  .byline .affil a:hover { text-decoration: underline; }
-
-  .byline .assist {
-    font-size: var(--t-sm);
-    color: var(--muted);
-    margin: 0;
   }
 
   /* ---------- principle ---------- */
@@ -364,75 +316,6 @@
 
   .verbete p { font-size: var(--t-md); line-height: 1.55; margin: 0; }
 
-  /* ---------- routing table ---------- */
-
-  .route {
-    margin: 28px 0 0;
-    border-top: 1px solid var(--rule);
-  }
-
-  .route-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 4px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-
-  @media (min-width: 620px) {
-    .route-row { grid-template-columns: 270px 1fr; gap: 26px; align-items: baseline; }
-  }
-
-  .route-q { color: var(--ink-soft); }
-
-  .route-n {
-    font-family: var(--sans); font-size: var(--t-xs); color: var(--faint);
-    letter-spacing: -0.02em; margin-right: 10px; vertical-align: 3px;
-  }
-  .route-sub {
-    display: block; font-family: var(--sans); font-size: var(--t-sm); font-weight: 400;
-    letter-spacing: 0; color: var(--muted); margin-top: 3px;
-  }
-  .route-a {
-    font-family: var(--serif); font-size: var(--t-h2); line-height: 1.12;
-  }
-
-  /* ---------- instrument blocks ---------- */
-
-  .instrument {
-    margin: 44px 0 0;
-    padding-top: 30px;
-    border-top: 2px solid var(--ink);
-  }
-
-  .instrument:first-of-type { margin-top: 34px; }
-
-  .inst-head {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
-
-  .inst-num {
-    font-family: var(--sans);
-    font-size: var(--t-sm);
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-
-  .inst-link, .route-a a {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .inst-link:hover, .route-a a:hover {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-
   h3 {
     font-family: var(--serif);
     font-size: var(--t-h3);
@@ -441,35 +324,6 @@
     font-weight: 600;
     margin: 0;
   }
-
-  .inst-sub {
-    color: var(--muted);
-    font-size: var(--t-md);
-    margin: 6px 0 18px;
-  }
-
-  /* chips */
-
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 0 0 22px;
-  }
-
-  .chip {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    letter-spacing: -0.01em;
-    padding: 3px 9px;
-    border: 1px solid var(--rule);
-    color: var(--muted);
-    border-radius: 2px;
-    white-space: nowrap;
-  }
-
-  .chip b { font-weight: 400; color: var(--ink-soft); }
-  .chip.status-warn { background: var(--warn-soft); border-color: transparent; color: var(--warn); }
 
   /* does / does not */
 
@@ -482,57 +336,6 @@
   .via-num { font-family: var(--sans); font-size: var(--t-xs); color: var(--accent); margin-right: 8px; }
 
   .via-devolve { font-size: var(--t-md); color: var(--muted); margin-top: 8px; }
-
-  .pair {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin: 0 0 20px;
-    border: 1px solid var(--rule);
-  }
-
-  @media (min-width: 640px) {
-    .pair { grid-template-columns: 1fr 1fr; }
-  }
-
-  .pair > div { padding: 18px 20px; }
-
-  .pair > div + div {
-    border-top: 1px solid var(--rule);
-  }
-
-  @media (min-width: 640px) {
-    .pair > div + div { border-top: 0; border-left: 1px solid var(--rule); }
-  }
-
-  .pair h4 {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    margin: 0 0 10px;
-    font-weight: 700;
-  }
-
-  .pair .does h4 { color: var(--good); }
-  .pair .doesnt h4 { color: var(--warn); }
-
-  .pair p { font-size: var(--t-md); line-height: 1.55; margin-bottom: 10px; }
-
-  .when {
-    font-size: var(--t-md);
-    color: var(--ink-soft);
-  }
-
-  .when b { color: var(--ink); }
-
-  .footnote {
-    font-size: var(--t-md);
-    color: var(--muted);
-    border-left: 2px solid var(--rule);
-    padding-left: 16px;
-    margin-top: 18px;
-  }
 
   /* ---------- chain diagram ---------- */
 
@@ -749,26 +552,18 @@
   .eyebrow { margin: 0 0 2.4rem; }
   header h1 { margin-bottom: 1.3rem; }
 
-  .eyebrow.oficinas { margin: -14px 0 2.4rem; }
-  .eyebrow .eb-nota { text-transform: none; letter-spacing: 0; opacity: .6; }
-
   /* A faixa tem dois grupos, e o que os separa e uma linha e nao um travessao:
      o traco no meio do texto se le como pausa, e aqui a divisao e de natureza. */
   .eyebrow .eb-linha { display: block; }
-  .eyebrow .eb-atual { opacity: .55; }
   .eyebrow .eb-baixo { margin-top: .3rem; padding-top: .3rem; border-top: 1px solid var(--rule); }
-
   /* --- escala do sistema: uma so em todas as paginas da oficina --- */
-  h1, .top h1, header h1, .wrap > h1 { font-family: var(--serif); font-weight: 700;
+  h1, header h1 { font-family: var(--serif); font-weight: 700;
     font-size: clamp(28px, 5vw, 36px); line-height: 1.2; }
-  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
-  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
+  .shell h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
+  .shell h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
-  /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
-  .wrap p, .wrap li, .wrap dd, .shell p, .shell li, .shell dd { max-width: var(--measure); }
-
-  /* ---- os cartoes, na forma da pagina das Oficinas Academicas ---- */
-  .cartao {
+  /* a medida vale para todo texto corrido, .shell p, .shell li, .shell dd { max-width: var(--measure); }
+  /* ---- os cartoes {
     border: 1px solid var(--rule-firm);
     border-left: 3px solid var(--cor);
     background: var(--surface);
@@ -777,32 +572,7 @@
     margin: 0 0 1.1rem;
     max-width: var(--measure);
   }
-  .cartao.alberto   { --cor: var(--accent); }
-  .cartao.luis      { --cor: var(--good); }
-  .cartao.simulador { --cor: var(--warn); }
-  .cartao-cab { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap;
-                margin-bottom: .1rem; }
-  .cartao h2 { font-family: var(--serif); font-weight: 600; line-height: 1.2;
-               letter-spacing: -.005em; margin: 0; color: var(--cor); }
-  .cartao h2 a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
-  .cartao h2 a:hover, .cartao h2 a:focus-visible { border-bottom-color: currentColor; }
-  .selo { font-family: var(--sans); font-size: var(--t-xs); letter-spacing: .08em;
-          text-transform: uppercase; color: var(--cor); border: 1px solid currentColor;
-          padding: .1rem .4rem; white-space: nowrap; }
-  .le { font-size: var(--t-sm); color: var(--muted); margin: .15rem 0 .7rem; }
-  .cartao p { margin: 0 0 .7rem; font-size: var(--t-sm); color: var(--ink-soft); }
-  .cartao p:last-child { margin-bottom: 0; }
-  .dentro { display: grid; gap: .1rem; margin: .9rem 0 0;
-            border-top: 1px solid var(--rule-soft); padding-top: .8rem; }
-  .dentro div { display: grid; grid-template-columns: 7rem 1fr; gap: .8rem;
-                align-items: baseline; padding: .28rem 0; }
-  .dentro .nome { font-family: var(--serif); font-size: var(--t-sm); color: var(--ink); }
-  .dentro .oque { font-size: var(--t-sm); color: var(--muted); }
-  @media (max-width: 33rem) { .dentro div { grid-template-columns: 1fr; gap: .1rem; } }
-  .cartao h2 { font-size: var(--t-h2); }
-  .nota-anexo { max-width: var(--measure); font-size: var(--t-sm); color: var(--ink-soft);
-                border-left: 2px solid var(--rule); padding-left: 1.1rem; margin: 2rem 0 0; }
-</style>
+  </style>
 
 <div class="shell">
   <main>
