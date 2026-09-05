@@ -254,9 +254,17 @@ def sem_localizador(texto, mapa, pars=None, pags=None):
             return '["%s", em %s]' % (ini, s)
         if ini:
             return '["%s"]' % ini
-        return ("[%s]" % s) if s else ""
+        # O LOCALIZADOR QUE NAO SE RESOLVE FICA, E NAO SOME.
+        #
+        # Ate 05/09/2026 esta linha devolvia "" quando nao havia secao nem
+        # palavras iniciais, e o localizador desaparecia da frase. Ele ocupa
+        # lugar de substantivo: sumindo, a frase chega sem sujeito. Medido numa
+        # entrega, e apanhado pela leitura fria: o comentario dizia "esta em
+        # corpo 16, sozinho no documento", sem dizer o que estava. Numero de
+        # paragrafo cru serve menos que as palavras iniciais e serve muito mais
+        # que nada, porque o arquivo dos paragrafos numerados vai junto.
+        return ("[%s]" % s) if s else ("[P%d]" % n)
     t = re.sub(r"\[P(\d+)\]", troca, texto)
-    t = re.sub(r"\[P\d+(?:[-–]P?\d+)?\]", "", t)
     # Espaco solto antes da pontuacao, quando um localizador some sem secao
     # conhecida. O grupo tem de voltar na substituicao: a versao anterior
     # apagava a pontuacao junto, e a frase chegava sem o ponto final.
