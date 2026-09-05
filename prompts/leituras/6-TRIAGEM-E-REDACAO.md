@@ -269,6 +269,41 @@ Isso não custa leitura a mais, porque quem confere já abriu o item para confer
 o trecho novo. Custa uma frase no pedido, e é essa frase que decide se o item
 sai conferido ou só remendado.
 
+## A lista é de incongruências; a congruência é uma decisão
+
+**Depois de triar e antes de redigir, agrupe os itens de corpo pela decisão que
+os resolve.** Não pela seção em que ocorrem, nem pelo trabalho que dão.
+
+Uma incongruência é um par que não fecha, e fechá-lo exige escolher qual dos dois
+lados fica. A escolha depende do que o trabalho quer sustentar, e por isso é do
+autor. **O relatório entrega os pares; entregando só isso, o autor toma a mesma
+decisão várias vezes sem perceber, às vezes em direções opostas.**
+
+**Como achar a decisão.** Para cada item de corpo, escreva a pergunta que o autor
+tem de responder para executá-lo. Itens cuja pergunta é a mesma formam um grupo,
+ainda que estejam em capítulos diferentes e tenham códigos distantes. A pergunta
+é do tipo *qual dos dois critérios conta*, *sobre que universo o percentual se
+calcula*, *o capítulo descreve ou explica*, e nunca do tipo *como corrigir esta
+frase*.
+
+Dois casos medidos em 05/09/2026. Numa dissertação, o resumo dizia metade e
+metade, a definição da categoria dava 46 e 22, e a conclusão repetia as metades:
+três itens em três lugares, **uma decisão**, a de qual critério de menção conta.
+Noutra, a comparação inteira entre dois ambientes era condicionada a um desfecho
+seis vezes mais provável num deles, e nenhum item isolado dizia isso: dizia a
+soma de vários, entregues separados.
+
+**O que entra no relatório.** Antes das correções, uma seção curta com as
+decisões, **três a seis no relatório inteiro**, cada uma numa frase, com os
+códigos dos itens que ela resolve e o que muda em cada um conforme a resposta.
+As correções continuam ordenadas por custo de execução, que é o que serve a quem
+tem prazo curto. **Os dois agrupamentos convivem**: o de decisão diz o que
+pensar, o de custo diz por onde começar.
+
+**Onde um item não pertencer a decisão nenhuma, ele fica fora da seção**, e isso é
+o esperado: gralha, remissão quebrada e acabamento não pedem decisão. Seção de
+decisões que recolhe todos os itens não agrupou nada.
+
 ## Itens que se atropelam, e a leitura item a item não os pega
 
 Cada item se lê sozinho e se executa em conjunto. **Antes de fechar o relatório,
@@ -658,6 +693,7 @@ O teste é o mesmo das sugestões, aplicado ao contrário: **quem ler só a fras
 | 1 | Pontos fortes |
 | 2 | Contribuições a reivindicar |
 | 3 | Avaliação geral |
+| 3.1 | As decisões que este relatório pede |
 | 4 | Sugestões de correção |
 | 4.1 | Basta cortar |
 | 4.2 | Basta corrigir a frase |
