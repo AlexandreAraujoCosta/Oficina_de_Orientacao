@@ -38,7 +38,6 @@
     --t-h3: 19px;
     --t-h2: 24px;
 
-
     /* as cores das oficinas sao endereco: dizem para onde o cartao leva */
     --projetos:    #2A5F45;
     --orientacao:  #33477E;
@@ -167,7 +166,6 @@
   .byline p { margin: 0 0 .35rem; font-size: var(--t-sm); color: var(--ink-soft); }
   .byline p:last-child { margin-bottom: 0; }
   .byline b { color: var(--ink); }
-  .byline .fina { font-size: var(--t-sm); color: var(--muted); line-height: 1.55; }
 
   /* ---- os cartoes ---- */
   .cartao {
@@ -229,20 +227,13 @@
   @media (max-width: 33rem) {
     .dentro div { grid-template-columns: 1fr; gap: .1rem; }
   }
-
-  /* A ficha, a nota e o rodape tem a mesma forma: barra a esquerda, corpo miudo.
-     E a forma geral do comentario que fecha a pagina. */
-  .nota {
+  /* A ficha, a nota e o rodape tem a mesma forma: barra a esquerda {
     border-left: 2px solid var(--rule);
     border-top: 0;
     padding: .1rem 0 .1rem 1.1rem;
     max-width: var(--measure);
     font-size: var(--t-sm); color: var(--ink-soft);
   }
-  .nota   { margin: 2.6rem 0 0; }
-  .nota b { color: var(--ink); }
-  .nota p { margin: 0 0 .8rem; }
-  .nota p:last-child { margin-bottom: 0; }
 
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -251,13 +242,11 @@
      o traco no meio do texto se le como pausa, e aqui a divisao e de natureza. */
   .eyebrow .eb-linha { display: block; }
   .eyebrow .eb-atual { opacity: .55; }
-  .eyebrow .eb-baixo { margin-top: .3rem; padding-top: .3rem; border-top: 1px solid var(--rule); }
-
   /* --- escala do sistema: uma so em todas as paginas da oficina --- */
-  h1, .top h1, header h1, .wrap > h1 { font-family: var(--serif); font-weight: 700;
+  h1, header h1, .wrap > h1 { font-family: var(--serif); font-weight: 700;
     font-size: clamp(28px, 5vw, 36px); line-height: 1.2; }
-  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
-  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
+  .wrap h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
+  .wrap h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
   /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
   .wrap p, .wrap li, .wrap dd { max-width: var(--measure); }
@@ -278,6 +267,7 @@
 
   <div class="byline">
     <p>Ferramentas desenvolvidas por <a href="https://sigaa.unb.br/sigaa/public/docente/portal.jsf?siape=2332291"><b>Alexandre Araújo Costa</b></a> (Doutor em Direito, Professor da UnB, Coordenador do PMPD), com assistência do modelo Claude Opus 5, em Claude Code. Os códigos estão nos repositórios <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Projetos">Oficina_de_Projetos</a> e <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao">Oficina_de_Orientacao</a>; o da Oficina de Formatação ainda é privado.</p>
+    <p>Trata-se de protótipos, ainda em fase de testes, e todo feedback (dirigido a <a href="mailto:alexandrearcos@unb.br">alexandrearcos@unb.br</a>) será muito útil para aperfeiçoá-los. <b>Se você usar estas ferramentas fora do contexto das disciplinas</b>, envie um relato por <a href="https://docs.google.com/forms/d/e/1FAIpQLSdziEHALH04stCpbVCHqDODK072YKzRRWCaN4ZhsiHojYrKmg/viewform?usp=dialog">este formulário</a>: é com esses relatos que dá para saber se elas funcionam fora da situação para a qual foram escritos.</p>
   </div>
 
   <div class="cartao projetos">
@@ -353,16 +343,6 @@
         intacto. Em desenvolvimento, à espera da norma de formato do programa.</span>
       </div>
     </div>
-  </div>
-
-  <div class="nota">
-    <p><b>São protótipos, ainda em fase de testes</b>, e todo feedback (dirigido a
-    <a href="mailto:alexandrearcos@unb.br">alexandrearcos@unb.br</a>) será muito útil
-    para aperfeiçoá-los. Se você usar estas ferramentas fora do contexto das
-    disciplinas, envie um relato por
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdziEHALH04stCpbVCHqDODK072YKzRRWCaN4ZhsiHojYrKmg/viewform?usp=dialog">este
-    formulário</a>: é com esses relatos que dá para saber se elas funcionam fora da
-    situação para a qual foram escritas.</p>
   </div>
 
 </div>
