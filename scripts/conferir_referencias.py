@@ -14,6 +14,12 @@ com dois acréscimos que vieram de defeitos achados em trabalho real em 03/09/20
 a entrada com os autores invertidos em relação ao corpo, e a chamada cujo ano não
 existe em entrada nenhuma daquele sobrenome.
 
+Em 05/09/2026 ele devolveu uma saída inteiramente falsa sobre um trabalho real,
+com o autoteste passando: ancorou a lista na linha do sumário que anuncia as
+referências, e disse zero chamada no corpo de um trabalho que cita em toda
+página. Daí vêm a limpeza da marcação da extração e a confirmação da âncora pela
+vizinhança, que estão em faixa_referencias.
+
 O QUE ELE FAZ, E O QUE ELE NÃO FAZ
 
 Ele **acha candidatos e não julga**. Parte do que ele devolve é artefato legítimo:
@@ -66,11 +72,16 @@ RE_FIM_REF = re.compile(
 
 # Sobrenome em caixa alta seguido de vírgula é a forma da entrada em ABNT.
 RE_SOBRENOME = re.compile(r"([A-ZÀ-Ý][A-ZÀ-Ý'\-]{2,})\s*,")
-# Mais estreita que a de cima: aqui o sobrenome tem de ABRIR o parágrafo, que é
-# a forma da entrada em ABNT. Separa a entrada da prosa do corpo, que traz
+# Mais estreita que a de cima: aqui o nome do autor tem de ABRIR o parágrafo,
+# que é a forma da entrada em ABNT. Separa a entrada da prosa do corpo, que traz
 # "(STF, 2022)" no meio da frase e casaria um crivo de posição livre.
+# O ponto entra junto com a vírgula porque a autoria institucional é a forma
+# dominante de lista inteira neste acervo: "BRASIL. Lei nº...", "ASSOCIAÇÃO
+# BRASILEIRA DE NORMAS TÉCNICAS. ABNT NBR...". Com só a vírgula, a guarda
+# recusava a lista de dois dos onze trabalhos medidos em 05/09/2026.
 RE_ENTRADA_ABNT = re.compile(
-    r"^[\"\u201c'(\[]?\s*[A-ZÀ-Ý][A-ZÀ-Ý'\-]{2,}(?:\s+[A-ZÀ-Ý][A-ZÀ-Ý'\-]*)*\s*,")
+    r"^[\"\u201c'(\[]?\s*[A-ZÀ-Ý][A-ZÀ-Ý'\-]{2,}"
+    r"(?:\s+[A-ZÀ-Ý][A-ZÀ-Ý'\-]*)*\s*[,.]")
 RE_ANO = re.compile(r"\b((?:19|20)\d{2})")
 
 # As duas formas de chamada: Autor (ano) e (AUTOR, ano).
@@ -129,7 +140,7 @@ def e_linha_de_sumario(t):
 
 
 def forma_de_entrada(t):
-    """O parágrafo abre por sobrenome em caixa alta com vírgula, e traz ano."""
+    """O parágrafo abre por autor em caixa alta, com vírgula ou ponto, e traz ano."""
     t = t.strip()
     return bool(len(t) >= 40 and RE_ENTRADA_ABNT.match(t) and RE_ANO.search(t))
 
@@ -179,13 +190,20 @@ def faixa_referencias(pars):
         nota = ("nenhum dos %d candidatos a título da lista tem lista depois de si; "
                 "ancorei no primeiro (P%d), e a faixa pode estar errada"
                 % (len(candidatos), ini))
+    # O fechamento tinha a guarda de tamanho que a abertura já perdera em
+    # 03/09/2026, e falhava pelo mesmo motivo: em y.txt a extração funde
+    # "APÊNDICE – A" com o primeiro parágrafo do apêndice, o parágrafo passa dos
+    # 80 caracteres e a lista engolia 509 parágrafos de apêndice. No lugar da
+    # guarda de tamanho, recusa-se o parágrafo que tenha forma de entrada, que é
+    # o que ela protegia.
     fim = None
     if ini is not None:
         for n in sorted(pars):
             if n <= ini:
                 continue
             t = pars[n].strip()
-            if RE_FIM_REF.match(t) and not e_linha_de_sumario(t) and len(t) < 80:
+            if RE_FIM_REF.match(t) and not e_linha_de_sumario(t) \
+                    and not forma_de_entrada(t):
                 fim = n
                 break
     return ini, (fim if fim else (max(pars) + 1 if pars else 0)), nota
@@ -245,7 +263,7 @@ def autoteste():
     pars = paragrafos(fonte)
     if len(pars) != 6:
         falhas.append("o extrator de parágrafo devolveu %d, esperava 6" % len(pars))
-    ini, fim = faixa_referencias(pars)
+    ini, fim, _ = faixa_referencias(pars)
     if ini != 3:
         falhas.append("a lista de referências foi localizada em %s, esperava 3" % ini)
     ents, _ = entradas(pars, ini, fim, 3)
@@ -293,6 +311,73 @@ def autoteste():
     if faixa_referencias(misto)[0] != 3:
         falhas.append("confunde a linha do sumário com a lista, ou recusa o título "
                       "colado à primeira entrada (achou %s)" % (faixa_referencias(misto)[0],))
+    # O caso que quebrou em 05/09/2026, e que a versão anterior deste programa
+    # reprova: a extração encosta o marcador de seção do parágrafo seguinte no
+    # fim da linha do sumário, e com ele ali a linha não termina mais em número
+    # de página. O conferidor ancorava no sumário, punha 699 parágrafos de corpo
+    # dentro da lista e devolvia zero chamada no corpo, sem um aviso.
+    vazado = paragrafos(
+        "[P155] REFERÊNCIAS BIBLIOGRÁFICAS 131\n\n\n"
+        "## [P160] ÍNDICE DE GRÁFICOS\n\n"
+        "[P400] Prosa do corpo do trabalho, com tamanho de sobra para o piso.\n\n"
+        "## [P1209] REFERÊNCIAS BIBLIOGRÁFICAS\n\n"
+        "[P1211] ABBOUD, Georges. Monocráticas do STF são solução e não "
+        "problema. Conjur, Brasília, 26 maio 2026.\n\n"
+        "[P1213] ADAMY, Pedro. Plenário Virtual em matéria tributária e o "
+        "déficit deliberativo. Revista Direito Tributário Atual, n. 46, 2020.\n\n"
+        "[P1215] BASTOS, Ana Carolina. STF: sugestões para o aperfeiçoamento "
+        "do plenário virtual. Jota, Brasília, 2021.\n")
+    if faixa_referencias(vazado)[0] != 1209:
+        falhas.append("o marcador de seção colado à linha do sumário põe a lista "
+                      "no sumário (achou %s, esperava 1209)"
+                      % (faixa_referencias(vazado)[0],))
+    # A linha do sumário sem pontilhado e sem número de página é idêntica ao
+    # título da seção, e nada na forma dela a denuncia: só o que vem depois.
+    sem_pagina = paragrafos(
+        "[P1] REFERÊNCIAS BIBLIOGRÁFICAS\n\n"
+        "[P2] Prosa do corpo, longa o bastante para passar em qualquer piso de "
+        "tamanho que o programa venha a aplicar adiante.\n\n"
+        "[P3] Mais prosa do corpo, igualmente longa, e sem forma nenhuma de "
+        "entrada bibliográfica, para que a vizinhança fale.\n\n"
+        "[P4] Terceira prosa do corpo, do mesmo feitio das duas de cima, e sem "
+        "sobrenome em caixa alta abrindo o parágrafo.\n\n"
+        "[P5] REFERÊNCIAS BIBLIOGRÁFICAS\n\n"
+        "[P6] ABBOUD, Georges. Monocráticas do STF são solução e não problema. "
+        "Conjur, Brasília, 26 maio 2026.\n\n"
+        "[P7] ADAMY, Pedro. Plenário Virtual em matéria tributária e o déficit "
+        "deliberativo. Revista Direito Tributário Atual, n. 46, 2020.\n\n"
+        "[P8] BASTOS, Ana Carolina. STF: sugestões para o aperfeiçoamento do "
+        "plenário virtual. Jota, Brasília, 2021.\n")
+    if faixa_referencias(sem_pagina)[0] != 5:
+        falhas.append("ancora no anúncio do sumário que não traz número de página "
+                      "(achou %s, esperava 5)" % (faixa_referencias(sem_pagina)[0],))
+    # Controle da própria guarda de vizinhança: ela não pode recusar a lista de
+    # um trabalho que traga apêndice logo depois das poucas entradas.
+    curta = paragrafos(
+        "[P1] Prosa do corpo, com tamanho de sobra para passar no piso "
+        "de quarenta caracteres que o programa aplica.\n\n"
+        "[P2] REFERÊNCIAS\n\n"
+        "[P3] REBOUL, Olivier. Introdução à retórica. São Paulo: Martins "
+        "Fontes, 1998. Entrada longa o bastante para contar.\n\n"
+        "[P4] APÊNDICE A\n")
+    if faixa_referencias(curta)[0] != 2:
+        falhas.append("a guarda de vizinhança recusa lista curta seguida de "
+                      "apêndice (achou %s, esperava 2)" % (faixa_referencias(curta)[0],))
+    # O mesmo defeito na outra ponta, achado em 05/09/2026: o título do apêndice
+    # vem colado ao primeiro parágrafo dele, e a lista ia até o fim do arquivo.
+    apendice = paragrafos(
+        "[P1] Prosa do corpo, com tamanho de sobra para passar no piso de "
+        "quarenta caracteres que o programa aplica.\n\n"
+        "[P2] REFERÊNCIAS\n\n"
+        "[P3] REBOUL, Olivier. Introdução à retórica. São Paulo: Martins "
+        "Fontes, 1998. Entrada longa o bastante para contar.\n\n"
+        "[P4] APÊNDICE – A Este apêndice reúne a decomposição analítica dos "
+        "acórdãos, e passa dos oitenta caracteres com folga.\n\n"
+        "[P5] SOLITARIO, Nunca Citado. Obra que está no apêndice e não na "
+        "lista. Brasília: Ed., 2010. Entrada longa o bastante.\n")
+    if faixa_referencias(apendice)[1] != 4:
+        falhas.append("o título do apêndice colado ao texto dele não fecha a "
+                      "lista (fim %s, esperava 4)" % (faixa_referencias(apendice)[1],))
     return falhas
 
 
@@ -313,17 +398,21 @@ def main():
             print("    %s" % f)
         return 2
     print("  autoteste: passou (acha o que existe, não inventa o que não existe,")
-    print("  entende os dois formatos de extração, e não acha lista onde não há)")
+    print("  entende os dois formatos de extração, não acha lista onde não há, e")
+    print("  não ancora a lista na linha do sumário que anuncia as referências)")
 
     texto = Path(a.extracao).read_text(encoding="utf-8", errors="replace")
     pars = paragrafos(texto)
     if not pars:
         print("\n  não encontrei parágrafo numerado nenhum. A extração está no formato certo?")
         return 2
-    ini, fim = faixa_referencias(pars)
+    ini, fim, nota = faixa_referencias(pars)
     if ini is None:
         print("\n  não encontrei a lista de referências. Nada a conferir.")
         return 1
+    if nota:
+        print("\n  ATENÇÃO, a ancoragem não se confirmou: %s." % nota)
+        print("  Confira a faixa abaixo antes de usar qualquer número desta saída.")
 
     ents, ordem = entradas(pars, ini, fim, a.minimo)
     cits = chamadas(pars, min(pars), ini, a.minimo)
@@ -341,9 +430,15 @@ def main():
     def nome(k):
         return "%s%s %s" % (k[0][0], k[0][1:].lower(), k[1])
 
-    print("\n  %d entradas na lista, %d pares autor-ano chamados no corpo"
+    # O que se conta são pares autor-ano, e não entradas: a entrada com três
+    # autores rende três pares. Dizer "entradas" convidava a cotejar este número
+    # com a contagem de parágrafos da lista, que é outra coisa.
+    na_faixa = [n for n in pars if ini < n < fim and len(pars[n].strip()) >= 40]
+    print("\n  %d pares autor-ano na lista, %d chamados no corpo"
           % (len(ents), len(cits)))
-    print("  lista de referências: parágrafos %d a %d" % (ini, fim - 1))
+    print("  lista de referências: título em P%d, %d parágrafos com texto de P%d a P%d"
+          % (ini, len(na_faixa),
+             min(na_faixa) if na_faixa else ini, max(na_faixa) if na_faixa else fim - 1))
 
     print("\n  PARES AMBÍGUOS (o mesmo autor-ano com mais de uma entrada): %d" % len(ambiguos))
     for k, v in ambiguos[:a.teto]:

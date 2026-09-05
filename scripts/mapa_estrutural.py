@@ -173,7 +173,14 @@ def montar(P, fr, nome):
                 or P[n][1].startswith("T"))]
     partes.append(bloco("Títulos de seção", tit))
 
-    leg = [n for n in P if re.match(r"^(Quadro|Tabela|Gráfico|Figura|Imagem)\s*\d+", P[n][2])
+    # O `\d{1,3}\s+` do comeco nao e enfeite: na extracao de PDF, o numero da
+    # pagina impressa cola no inicio do paragrafo seguinte, e a legenda da
+    # Tabela 6 de uma dissertacao comecava por "98 Tabela 6 - ...". Ancorada
+    # sem essa folga, ela sumia do mapa, e uma leitura passou a tratar como
+    # ausente a legenda que existe. Medido em 05/09/2026.
+    leg = [n for n in P
+           if re.match(r"^(?:\d{1,3}\s+)?(Quadro|Tabela|Gráfico|Figura|Imagem)\s*\d+",
+                       P[n][2])
            and len(P[n][2]) < 330]
     partes.append(bloco("Legendas de quadros, tabelas, gráficos e figuras", leg))
 

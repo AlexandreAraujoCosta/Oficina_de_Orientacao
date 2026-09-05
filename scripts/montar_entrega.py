@@ -34,6 +34,43 @@ SEPARADOR = """
 """
 
 
+def nota_de_custo(a):
+    """A ultima secao da entrega: quanto custou produzi-la.
+
+    POR QUE VAI NO PRODUTO, E NAO SO NO TERMINAL
+
+    Quem recebe decide quanto confiar no relatorio, e o custo e um dos dados
+    dessa decisao: leitura de cinquenta minutos e leitura de tres horas nao
+    veem a mesma coisa, e ate 05/09/2026 essa diferenca ficava no terminal de
+    quem rodou. Vai dito tambem o que o numero NAO cobre, porque custo sem
+    alcance declarado se le como custo total.
+
+    Os numeros vem de fora, por argumento, porque este programa monta a entrega
+    e nao conduz a analise: quem sabe o tempo e o consumo e quem orquestrou.
+    """
+    if not (a.tempo or a.tokens):
+        return ""
+    partes = []
+    if a.tempo:
+        partes.append("**Relógio:** %s." % a.tempo.strip().rstrip("."))
+    if a.tokens:
+        t = str(a.tokens).strip()
+        if t.isdigit():
+            t = "{:,}".format(int(t)).replace(",", ".")
+        partes.append("**Tokens:** %s." % t)
+    corpo = [SEPARADOR.strip("\n"), "",
+             "## O que esta análise custou", "", " ".join(partes), ""]
+    if a.custo_detalhe:
+        corpo += [a.custo_detalhe.strip(), ""]
+    corpo += [
+        "O tempo é de relógio, do primeiro pedido à montagem deste arquivo, e "
+        "inclui as conferências. Os tokens somam o que cada passo consumiu. "
+        "**Nenhum dos dois cobre a sessão que conduziu a rodada**, que não é "
+        "medida aqui, de modo que o custo real é maior do que o escrito acima.",
+        ""]
+    return "\n" + "\n".join(corpo)
+
+
 def anotado(a):
     """O nome do .docx comentado, que precisa dizer de que relatorio ele veio.
 
@@ -124,6 +161,15 @@ def main():
     ap.add_argument("--pdf", help="o PDF da MESMA versão do trabalho, para o mapa de páginas")
     ap.add_argument("--sem-paginas", action="store_true",
                     help="não gera o mapa de páginas nem abre o Word")
+    ap.add_argument("--tempo",
+                    help="tempo de relogio da rodada, como '1h43' ou '52 min'. "
+                         "Escreve a secao de custo no fim da entrega.")
+    ap.add_argument("--tokens",
+                    help="tokens somados dos passos da rodada. Numero puro sai "
+                         "com separador de milhar.")
+    ap.add_argument("--custo-detalhe",
+                    help="uma ou duas frases sobre a reparticao do custo, "
+                         "inseridas antes da ressalva de alcance.")
     ap.add_argument("--sem-paragrafos", action="store_true",
                     help="nao grava o ENTREGA-PARAGRAFOS-<nome>.md ao lado")
     a = ap.parse_args()
@@ -284,7 +330,8 @@ def main():
         extra = SEPARADOR + norm.read_text(encoding="utf-8").lstrip()
         print("  anexo da normalização incluído: %s" % norm.name)
 
-    destino.write_text(rel + SEPARADOR + anx + extra + "\n", encoding="utf-8")
+    destino.write_text(rel + SEPARADOR + anx + extra + nota_de_custo(a) + "\n",
+                       encoding="utf-8")
     print("  montado: %s" % destino)
 
     docx = a.trabalho.lower().endswith(".docx")
