@@ -62,6 +62,12 @@ explícitas.
 O arquivo `tokens.py` monta os quatro blocos com estes valores, e foi com ele que
 as cinco páginas foram convertidas.
 
+**Toda cor definida no tema claro tem de existir no escuro.** É a regra que pega a
+cor própria da página, que o sistema não conhece: em 05/09/2026 as três cores de
+oficina do índice ficaram só no `:root` claro, e no escuro os títulos dos cartões
+caíram para **1,84, 2,22 e 2,89** de contraste sobre o fundo do cartão, contra o
+mínimo de 3 para texto grande. O conferidor passou a exigir isso.
+
 **Piso de contraste: 4,5 sobre o papel do próprio tema**, para toda cor que
 carregue texto. É por isso que `--faint` não pode voltar a ser `#93969D` (2,84) e
 que `--muted` desceu para `#5F636B`. O conferidor calcula os dezesseis pares.

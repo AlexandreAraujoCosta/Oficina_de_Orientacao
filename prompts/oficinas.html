@@ -65,6 +65,9 @@
       --good-soft:   #1E2A20;
       --danger:      #E07A6E;
       --danger-soft: #2E1E1C;
+      --projetos:    #8FC0A0;
+      --orientacao:  #97AAE2;
+      --formatacao:  #A8A096;
     }
   }
 
@@ -87,6 +90,9 @@
     --good-soft:   #1E2A20;
     --danger:      #E07A6E;
     --danger-soft: #2E1E1C;
+    --projetos:    #8FC0A0;
+    --orientacao:  #97AAE2;
+    --formatacao:  #A8A096;
   }
 
   :root[data-theme="light"] {
@@ -108,6 +114,9 @@
     --good-soft:   #E0EBE1;
     --danger:      #A3352B;
     --danger-soft: #F6E6E3;
+    --projetos:    #2A5F45;
+    --orientacao:  #33477E;
+    --formatacao:  #6E655C;
   }
 
   * { box-sizing: border-box; }
@@ -162,7 +171,7 @@
 
   /* ---- os cartoes ---- */
   .cartao {
-    border: 1px solid var(--rule);
+    border: 1px solid var(--rule-firm);
     border-left: 3px solid var(--cor);
     background: var(--surface);
     border-radius: 0 3px 3px 0;
@@ -179,9 +188,11 @@
   }
   /* A cor fica no titulo, e nao no link: a Formatacao nao esta publicada, e o
      cartao dela traz o nome sem ancora. */
+  /* Vem depois do bloco da escala, que tambem alcanca .wrap h2, e por isso
+     traz o tamanho por extenso: o cartao e o objeto desta pagina. */
   .cartao h2 {
     font-family: var(--serif); font-weight: 600;
-    font-size: var(--t-h3); line-height: 1.2; letter-spacing: -.005em;
+    line-height: 1.2; letter-spacing: -.005em;
     margin: 0; color: var(--cor);
   }
   .cartao h2 a { color: inherit; text-decoration: none;
@@ -250,6 +261,10 @@
     letter-spacing: normal; text-transform: none; color: var(--ink); }
   /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
   .wrap p, .wrap li, .wrap dd { max-width: var(--measure); }
+
+  /* O titulo do cartao vem depois da escala, porque e o objeto desta pagina e
+     nao um titulo de secao. Aqui ele fica explicito, e nao por heranca. */
+  .cartao h2 { font-size: var(--t-h2); }
 </style>
 
 <div class="wrap">

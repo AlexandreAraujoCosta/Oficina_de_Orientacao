@@ -139,6 +139,16 @@ def confere(caminho):
             if not re.search(r"code|pre|textarea|\.mono|\.loc|\.cmd|\.pedido-txt|\.prompt", sel):
                 faltas.append("mono fora de texto de maquina: %s" % sel[:40])
 
+    # 5c. toda cor definida no tema claro tem de existir no escuro. E a regra que
+    # pega a cor propria da pagina, que o sistema nao conhece: em 05/09/2026 as
+    # tres cores de oficina ficaram so no claro, e no escuro os titulos dos
+    # cartoes desceram a 1,84 de contraste.
+    claro_t = tokens_do_bloco(css, ":root {") or {}
+    escuro_t = tokens_do_bloco(css, ':root[data-theme="dark"]') or {}
+    for k in claro_t:
+        if k not in escuro_t:
+            faltas.append("--%s existe no tema claro e nao no escuro" % k)
+
     # 6. restos do sistema antigo, que passam despercebidos por serem parecidos
     for velho in ("#eef0ef", "#e4e7e5", "#141c24", "#3e6b7a", "#93969D",
                   "Constantia,"):
