@@ -88,11 +88,13 @@ não verificou. Devolve os mesmos arquivos.
 contra o documento original. Confere o trabalho contra ele mesmo e contra o que
 está publicado.
 
-**Uma escolha dentro dela, e a única que baratear vale a pena:** com ou sem a
-busca externa. Sem ela, cai para 78 minutos e R$ 47, e o que sai é saber se a
-contribuição já está publicada. Nesta dissertação, foi a busca externa que
-descobriu que os números de um capítulo inteiro já estavam numa dissertação de
-2022 que o trabalho cita uma vez só.
+**A busca externa não se tira dela.** Ela é a quarta leitura, custa 21 dos 99
+minutos, e é a única que sai do trabalho. Foi ela que descobriu, nesta
+dissertação, que os números de um capítulo inteiro já estavam publicados numa
+dissertação de 2022 que o trabalho cita uma vez só, e que os dados prometidos
+como públicos não estão em nenhum dos três repositórios declarados. Uma leitura
+que confere o trabalho só contra ele mesmo não responde se há contribuição, e é
+essa a pergunta que decide se o trabalho vale a publicação.
 
 ### 3. Conferência externa, avulsa
 
