@@ -177,16 +177,6 @@
   nav a:hover { color: var(--accent); }
   nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  nav .idx {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    color: var(--faint);
-    letter-spacing: -0.02em;
-    flex: none;
-  }
-
-  nav .navgap { height: 14px; }
-
   /* ---------- masthead ---------- */
 
   header {
@@ -271,22 +261,6 @@
     color: var(--ink);
   }
 
-  .byline .affil {
-    font-size: var(--t-sm);
-    line-height: 1.55;
-    color: var(--muted);
-    margin: 0 0 .35rem;
-  }
-
-  .byline .affil a { text-decoration: none; }
-  .byline .affil a:hover { text-decoration: underline; }
-
-  .byline .assist {
-    font-size: var(--t-sm);
-    color: var(--muted);
-    margin: 0;
-  }
-
   /* ---------- principle ---------- */
 
   .principle {
@@ -321,12 +295,6 @@
     border-bottom: 1px solid var(--rule);
   }
 
-  h2 + .deck {
-    color: var(--muted);
-    font-size: var(--t-md);
-    margin: 14px 0 0;
-  }
-
   p { margin: 0 0 16px; }
   p:last-child { margin-bottom: 0; }
 
@@ -334,103 +302,13 @@
   em { font-style: italic; }
 
   a { color: var(--accent); }
-
-  code, .loc {
+  code {
     font-family: var(--mono);
     font-size: var(--t-sm);
     background: var(--sunken);
     padding: 1px 5px;
     border-radius: 2px;
     letter-spacing: -0.01em;
-  }
-
-  /* ---------- glossary ---------- */
-
-  .verbete {
-    margin: 22px 0 0;
-    padding: 16px 20px;
-    border-left: 2px solid var(--rule);
-  }
-
-  .verbete h4 {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: var(--accent);
-    margin: 0 0 8px;
-  }
-
-  .verbete p { font-size: var(--t-md); line-height: 1.55; margin: 0; }
-
-  /* ---------- routing table ---------- */
-
-  .route {
-    margin: 28px 0 0;
-    border-top: 1px solid var(--rule);
-  }
-
-  .route-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 4px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-
-  @media (min-width: 620px) {
-    .route-row { grid-template-columns: 270px 1fr; gap: 26px; align-items: baseline; }
-  }
-
-  .route-q { color: var(--ink-soft); }
-
-  .route-n {
-    font-family: var(--sans); font-size: var(--t-xs); color: var(--faint);
-    letter-spacing: -0.02em; margin-right: 10px; vertical-align: 3px;
-  }
-  .route-sub {
-    display: block; font-family: var(--sans); font-size: var(--t-sm); font-weight: 400;
-    letter-spacing: 0; color: var(--muted); margin-top: 3px;
-  }
-  .route-a {
-    font-family: var(--serif); font-size: var(--t-h2); line-height: 1.12;
-  }
-
-  /* ---------- instrument blocks ---------- */
-
-  .instrument {
-    margin: 44px 0 0;
-    padding-top: 30px;
-    border-top: 2px solid var(--ink);
-  }
-
-  .instrument:first-of-type { margin-top: 34px; }
-
-  .inst-head {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
-
-  .inst-num {
-    font-family: var(--sans);
-    font-size: var(--t-sm);
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-
-  .inst-link, .route-a a {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .inst-link:hover, .route-a a:hover {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
   }
 
   h3 {
@@ -440,184 +318,6 @@
     letter-spacing: -0.018em;
     font-weight: 600;
     margin: 0;
-  }
-
-  .inst-sub {
-    color: var(--muted);
-    font-size: var(--t-md);
-    margin: 6px 0 18px;
-  }
-
-  /* chips */
-
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 0 0 22px;
-  }
-
-  .chip {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    letter-spacing: -0.01em;
-    padding: 3px 9px;
-    border: 1px solid var(--rule);
-    color: var(--muted);
-    border-radius: 2px;
-    white-space: nowrap;
-  }
-
-  .chip b { font-weight: 400; color: var(--ink-soft); }
-  .chip.status-warn { background: var(--warn-soft); border-color: transparent; color: var(--warn); }
-
-  /* does / does not */
-
-  .via { border-top: 1px solid var(--rule); padding: 18px 0 4px; }
-
-  .via:first-of-type { border-top: none; padding-top: 6px; }
-
-  .via h4 { font-family: var(--serif); font-size: var(--t-lg); margin-bottom: 4px; }
-
-  .via-num { font-family: var(--sans); font-size: var(--t-xs); color: var(--accent); margin-right: 8px; }
-
-  .via-devolve { font-size: var(--t-md); color: var(--muted); margin-top: 8px; }
-
-  .pair {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin: 0 0 20px;
-    border: 1px solid var(--rule);
-  }
-
-  @media (min-width: 640px) {
-    .pair { grid-template-columns: 1fr 1fr; }
-  }
-
-  .pair > div { padding: 18px 20px; }
-
-  .pair > div + div {
-    border-top: 1px solid var(--rule);
-  }
-
-  @media (min-width: 640px) {
-    .pair > div + div { border-top: 0; border-left: 1px solid var(--rule); }
-  }
-
-  .pair h4 {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    margin: 0 0 10px;
-    font-weight: 700;
-  }
-
-  .pair .does h4 { color: var(--good); }
-  .pair .doesnt h4 { color: var(--warn); }
-
-  .pair p { font-size: var(--t-md); line-height: 1.55; margin-bottom: 10px; }
-
-  .when {
-    font-size: var(--t-md);
-    color: var(--ink-soft);
-  }
-
-  .when b { color: var(--ink); }
-
-  .footnote {
-    font-size: var(--t-md);
-    color: var(--muted);
-    border-left: 2px solid var(--rule);
-    padding-left: 16px;
-    margin-top: 18px;
-  }
-
-  /* ---------- chain diagram ---------- */
-
-  .chain {
-    margin: 30px 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 26px;
-  }
-
-  .track {
-    border: 1px solid var(--rule);
-    padding: 20px;
-  }
-
-  .track-label {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: var(--accent);
-    margin: 0 0 4px;
-  }
-
-  .steps {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    gap: 0;
-  }
-
-  .step {
-    flex: 1 1 130px;
-    min-width: 118px;
-    border: 1px solid var(--rule);
-    padding: 12px 13px;
-  }
-
-  .step .n {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    color: var(--faint);
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .step .t {
-    font-family: var(--sans);
-    font-size: var(--t-sm);
-    font-weight: 600;
-    line-height: 1.28;
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .step .d {
-    font-size: var(--t-sm);
-    line-height: 1.4;
-    color: var(--muted);
-  }
-
-  .step.gate {
-    background: var(--warn-soft);
-    border-left: 3px solid var(--warn);
-  }
-
-  .step.gate .n { color: var(--warn); }
-
-  .arrow {
-    flex: 0 0 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--sans);
-    color: var(--faint);
-    font-size: var(--t-sm);
-  }
-
-  /* ---------- table ---------- */
-
-  .tablewrap {
-    overflow-x: auto;
-    margin: 26px 0 0;
-    border: 1px solid var(--rule);
   }
 
   table {
@@ -647,90 +347,6 @@
 
   tbody tr:last-child td { border-bottom: 0; }
 
-  td.num, th.num {
-    font-family: var(--sans);
-    font-variant-numeric: tabular-nums;
-    font-size: var(--t-sm);
-    text-align: right;
-    white-space: nowrap;
-  }
-
-  tr.highlight td { background: var(--accent-soft); font-weight: 600; }
-
-  td.num .brl {
-    display: block;
-    font-size: var(--t-xs);
-    font-weight: 400;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  .tnote {
-    font-size: var(--t-md);
-    color: var(--muted);
-    margin: 14px 0 0;
-  }
-
-  /* ---------- measured / not measured ---------- */
-
-  .ledger {
-    margin: 26px 0 0;
-    border-top: 1px solid var(--rule);
-  }
-
-  .ledger-item {
-    padding: 18px 0;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-
-  .ledger-item h4 {
-    font-family: var(--sans);
-    font-size: var(--t-sm);
-    font-weight: 600;
-    margin: 0 0 6px;
-    display: flex;
-    gap: 10px;
-    align-items: baseline;
-  }
-
-  .ledger-item .mark {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    flex: none;
-    padding: 1px 7px;
-    border-radius: 2px;
-  }
-
-  .mark.m-yes { background: var(--good-soft); color: var(--good); }
-  .mark.m-no  { background: var(--warn-soft); color: var(--warn); }
-
-  .ledger-item p { font-size: var(--t-md); color: var(--ink-soft); margin: 0; }
-
-  /* ---------- final caveat ---------- */
-
-  .caveat {
-    margin: 48px 0 0;
-    padding: 22px 26px;
-    background: var(--warn-soft);
-    border-left: 3px solid var(--warn);
-  }
-
-  .caveat h3 {
-    font-family: var(--sans);
-    font-size: var(--t-xs);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--warn);
-    margin: 0 0 14px;
-    font-weight: 700;
-  }
-
-  .caveat p {
-    font-size: var(--t-md);
-    line-height: 1.58;
-    margin: 0;
-  }
-
   footer {
     max-width: var(--measure);
     margin-top: 72px;
@@ -749,49 +365,61 @@
   .eyebrow { margin: 0 0 2.4rem; }
   header h1 { margin-bottom: 1.3rem; }
 
-  .eyebrow.oficinas { margin: -14px 0 2.4rem; }
-  .eyebrow .eb-nota { text-transform: none; letter-spacing: 0; opacity: .6; }
-
   /* A faixa tem dois grupos, e o que os separa e uma linha e nao um travessao:
      o traco no meio do texto se le como pausa, e aqui a divisao e de natureza. */
   .eyebrow .eb-linha { display: block; }
-  .eyebrow .eb-atual { opacity: .55; }
   .eyebrow .eb-baixo { margin-top: .3rem; padding-top: .3rem; border-top: 1px solid var(--rule); }
-
   /* --- escala do sistema: uma so em todas as paginas da oficina --- */
-  h1, .top h1, header h1, .wrap > h1 { font-family: var(--serif); font-weight: 700;
+  h1, header h1 { font-family: var(--serif); font-weight: 700;
     font-size: clamp(28px, 5vw, 36px); line-height: 1.2; }
-  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
-  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
+  .shell h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
+  .shell h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
-  /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
-  .wrap p, .wrap li, .wrap dd, .shell p, .shell li, .shell dd { max-width: var(--measure); }
+  /* a medida vale para todo texto corrido, .shell p, .shell li, .shell dd { max-width: var(--measure); }
+
+  /* ---- os cartoes, na forma da pagina das Oficinas Academicas ---- */
+  .cartao {
+    border: 1px solid var(--rule-firm);
+    border-left: 3px solid var(--cor);
+    background: var(--surface);
+    border-radius: 0 3px 3px 0;
+    padding: 1.3rem 1.4rem 1.2rem;
+    margin: 0 0 1.1rem;
+    max-width: var(--measure);
+  }
+  .cartao.alberto   { --cor: var(--accent); }
+  .cartao.luis      { --cor: var(--good); }
+  .cartao.simulador { --cor: var(--warn); }
+  .cartao-cab { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap;
+                margin-bottom: .1rem; }
+  .cartao h2 { font-family: var(--serif); font-weight: 600; line-height: 1.2;
+               letter-spacing: -.005em; margin: 0; color: var(--cor); }
+  .cartao h2 a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+  .cartao h2 a:hover, .cartao h2 a:focus-visible { border-bottom-color: currentColor; }
+  .selo { font-family: var(--sans); font-size: var(--t-xs); letter-spacing: .08em;
+          text-transform: uppercase; color: var(--cor); border: 1px solid currentColor;
+          padding: .1rem .4rem; white-space: nowrap; }
+  .le { font-size: var(--t-sm); color: var(--muted); margin: .15rem 0 .7rem; }
+  .cartao p { margin: 0 0 .7rem; font-size: var(--t-sm); color: var(--ink-soft); }
+  .cartao p:last-child { margin-bottom: 0; }
+  .dentro { display: grid; gap: .1rem; margin: .9rem 0 0;
+            border-top: 1px solid var(--rule-soft); padding-top: .8rem; }
+  .dentro div { display: grid; grid-template-columns: 7rem 1fr; gap: .8rem;
+                align-items: baseline; padding: .28rem 0; }
+  .dentro .nome { font-family: var(--serif); font-size: var(--t-sm); color: var(--ink); }
+  .dentro .oque { font-size: var(--t-sm); color: var(--muted); }
+  @media (max-width: 33rem) { .dentro div { grid-template-columns: 1fr; gap: .1rem; } }
+  .cartao h2 { font-size: var(--t-h2); }
+  .nota-anexo { max-width: var(--measure); font-size: var(--t-sm); color: var(--ink-soft);
+                border-left: 2px solid var(--rule); padding-left: 1.1rem; margin: 2rem 0 0; }
 </style>
 
 <div class="shell">
-
-  <nav aria-label="Sumário">
-    <ol>
-      <li><a href="#rota"><span class="idx">·</span><span>Ferramentas disponíveis</span></a></li>
-      <li class="navgap"></li>
-      <li class="navgap"></li>
-      <li><a href="#vocabulario"><span class="idx">·</span><span>Esclarecimentos terminológicos</span></a></li>
-      <li><a href="#vias"><span class="idx">·</span><span>Duas formas de uso</span></a></li>
-      <li><a href="#cadeia"><span class="idx">·</span><span>Fluxo de trabalho</span></a></li>
-      <li><a href="#responde"><span class="idx">·</span><span>Quem responde</span></a></li>
-      <li><a href="#estrutura"><span class="idx">·</span><span>Como o relatório é organizado</span></a></li>
-      <li><a href="#entrega"><span class="idx">·</span><span>O que se entrega</span></a></li>
-      <li><a href="#custo"><span class="idx">·</span><span>Quanto custa</span></a></li>
-      <li><a href="#medido"><span class="idx">·</span><span>Os testes e o que sugerem</span></a></li>
-    </ol>
-  </nav>
-
   <main>
-
     <header>
       <p class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas Acadêmicas</a></span><span class="eb-linha eb-baixo">Assistentes: <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></span></p>
       <h1>Oficina de Orientação</h1>
-      <p class="standfirst">Ferramentas de leitura automática de trabalhos acadêmicos, da que roda em segundos, sem modelo nenhum, à que ocupa meia hora e exige processamento incompatível com os planos gratuitos. Cada uma declara o que confere, e é nessa declaração que se lê o que ela deixou de fora.</p>
+      <p class="standfirst">Três ferramentas para trabalho acadêmico já escrito. Duas leituras devolvem o mesmo relatório e diferem no quanto leem; a terceira conduz uma sessão de arguição. Cada página diz o que a ferramenta confere, o que ela deixa de fora e quanto custa.</p>
       <div class="byline">
         <p class="author">Ferramentas desenvolvidas por <a href="https://sigaa.unb.br/sigaa/public/docente/portal.jsf?siape=2332291"><b>Alexandre Araújo Costa</b></a> (Doutor em Direito, Professor da UnB, Coordenador do PMPD), com assistência do modelo Claude Opus 5, em Claude Code. O código está no repositório <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao">Oficina_de_Orientacao</a>.</p>
       </div>
@@ -806,577 +434,91 @@
       </div>
     </header>
 
-
-    <section id="rota">
-      <h2>Ferramentas disponíveis</h2>
-      <p class="deck">São dois analisadores e um simulador. <b>Os dois analisadores escrevem o mesmo relatório, e diferem no quanto leem:</b> o rápido faz uma leitura, o completo faz quatro e confere cada apontamento por quem não o escreveu, e a diferença aparece no que exige contar através do texto inteiro. <b>Os dois pedem desenvolvimento argumentativo suficiente</b>, com resultados apresentados e conclusões escritas: rodados antes disso, julgam o que ainda não existe. <b>E o simulador pede a apresentação pronta</b>, porque é do cotejo entre ela e o trabalho que vem o que o distingue de mais uma leitura. <b>O que cada um custa, o que ele acha e o que deixa passar está na página dele</b>, e as medições que sustentam tudo isto estão no fim desta.</p>
-      <div class="route">
-        <div class="route-row">
-          <div class="route-a">
-            <span class="route-n">01</span><a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a>
-            <span class="route-sub">a análise geral</span>
-          </div>
-          <div class="route-q">Uma leitura, e o mesmo relatório de oito partes do Luis: veredito, o que está sólido, o que o trabalho tem e não reivindica, as correções, o destino de cada capítulo, os questionamentos, por onde começar e o alcance. <b>Devolve um relatório</b> numa leitura só, e vê menos.</div>
+    <div class="cartao alberto">
+      <div class="cartao-cab">
+        <h2><a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a></h2>
+        <span class="selo">chat ou agente</span>
+      </div>
+      <p class="le">A an&aacute;lise geral</p>
+      <p>Uma leitura, e o mesmo relat&oacute;rio de oito partes do Luis: veredito, o que
+      est&aacute; s&oacute;lido, o que o trabalho tem e n&atilde;o reivindica, as
+      corre&ccedil;&otilde;es, o destino de cada cap&iacute;tulo, os questionamentos, por
+      onde come&ccedil;ar e o alcance. <b>Devolve um relat&oacute;rio</b> numa leitura
+      s&oacute;, e v&ecirc; menos.</p>
+      <div class="dentro">
+        <div>
+          <span class="nome">Volta</span>
+          <span class="oque">No agente, o relat&oacute;rio em PDF e o trabalho anotado em
+          <code>.docx</code>. No chat, o relat&oacute;rio em texto, com os endere&ccedil;os
+          por p&aacute;gina e posi&ccedil;&atilde;o.</span>
         </div>
-        <div class="route-row">
-          <div class="route-a">
-            <span class="route-n">02</span><a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a>
-            <span class="route-sub">a análise minuciosa</span>
-          </div>
-          <div class="route-q">O mesmo relatório, produzido por quatro leituras que percorrem o trabalho por caminhos diferentes, uma delas com busca externa, e por uma verificação que ataca cada apontamento antes de ele sair. <b>Devolve um relatório</b>, com a cadeia de prova de cada item.</div>
-        </div>
-        <div class="route-row">
-          <div class="route-a">
-            <span class="route-n">03</span><a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a>
-            <span class="route-sub">o ensaio da defesa · em desenvolvimento</span>
-          </div>
-          <div class="route-q">Uma sessão de arguição com dois examinadores e o orientador presidindo, a partir do cotejo entre a apresentação e o trabalho. <b>Não devolve documento:</b> o que fica é a conversa, e o fechamento que ela produz. <b>Está em desenvolvimento.</b></div>
+        <div>
+          <span class="nome">Custo</span>
+          <span class="oque">No agente, em Opus 5: de 270 a 320 mil tokens e de 41 a 48
+          minutos. No chat do Claude, 15 minutos e 52 segundos numa tese de 109
+          p&aacute;ginas.</span>
         </div>
       </div>
-    </section>
+    </div>
+
+    <div class="cartao luis">
+      <div class="cartao-cab">
+        <h2><a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a></h2>
+        <span class="selo">s&oacute; por agente</span>
+      </div>
+      <p class="le">A an&aacute;lise minuciosa</p>
+      <p>O mesmo relat&oacute;rio, produzido por quatro leituras que percorrem o trabalho
+      por caminhos diferentes, uma delas com busca externa, e por uma
+      verifica&ccedil;&atilde;o que ataca cada apontamento antes de ele sair. <b>Devolve um
+      relat&oacute;rio</b>, com a cadeia de prova de cada item.</p>
+      <div class="dentro">
+        <div>
+          <span class="nome">Volta</span>
+          <span class="oque">O trabalho anotado em <code>.docx</code>, com cada apontamento
+          na margem do par&aacute;grafo que ele cita; o relat&oacute;rio em PDF; e a lista
+          de itens para corre&ccedil;&atilde;o.</span>
+        </div>
+        <div>
+          <span class="nome">Custo</span>
+          <span class="oque">Acima de 1,15 milh&atilde;o de tokens e mais de uma hora de
+          rel&oacute;gio.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cartao simulador">
+      <div class="cartao-cab">
+        <h2><a href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></h2>
+        <span class="selo">em desenvolvimento</span>
+      </div>
+      <p class="le">O ensaio da defesa</p>
+      <p>Uma sess&atilde;o de argui&ccedil;&atilde;o com dois examinadores e o orientador
+      presidindo, a partir do cotejo entre a apresenta&ccedil;&atilde;o e o trabalho. <b>N&atilde;o
+      devolve documento:</b> o que fica &eacute; a conversa, e o fechamento que ela produz.</p>
+      <div class="dentro">
+        <div>
+          <span class="nome">Volta</span>
+          <span class="oque">A lista do que o candidato n&atilde;o conseguiu responder. Pelo
+          agente, ela sai gravada em arquivo.</span>
+        </div>
+        <div>
+          <span class="nome">Medi&ccedil;&atilde;o</span>
+          <span class="oque">Nenhuma. &Eacute; a &uacute;nica das tr&ecirc;s que nunca foi
+          medida, e n&atilde;o roda desde que a escala de veredito mudou, em
+          03/09/2026.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="nota-anexo">Como cada leitura &eacute; feita, o vocabul&aacute;rio em uso, o fluxo de trabalho, o que se entrega, quanto custa e <b>o que est&aacute; medido</b> est&atilde;o no <a href="https://claude.ai/code/artifact/28a171d1-f1b3-4209-a09f-35a3b415aeaa">anexo desta oficina</a>.</p>
 
     <div class="principle">
       <p><strong>Retornar claramente o que é mais fácil para a máquina que para o humano. Retornar como sugestão, com ressalva de razão nomeada, o que a máquina capta e o humano capaz faz com mais precisão.</strong></p>
       <p>Disso saem os três registros que atravessam todas as ferramentas. <em>Resultado</em> se confere abrindo o arquivo, e vem escrito afirmativo, com a operação que um terceiro refaria. <em>Sugestão</em> vem marcada, com a limitação específica nomeada. <em>Questão</em> é pergunta a quem tem o conhecimento, e vai com a indicação de quem decide. Ressalva sem razão nomeada é hedge, e hedge não passa.</p>
     </div>
-
-      <div class="dedication">
+    <div class="dedication">
         <p>Os nomes dos assistentes são uma homenagem a <b>Luis Alberto Warat</b>, meu grande professor. Durante quase uma década, eu desenvolvia minhas ideias e as levava para a crítica afetuosa e contundente de Luis, que desconstruía meus rascunhos e me colocava no rumo de construções mais robustas e consistentes. Infelizmente, não podemos mais contar com as análises incomparáveis de Luis, mas sigo o seu exemplo de buscar fazer esclarecimentos que ajudem no desenvolvimento dos trabalhos.</p>
         <p class="pledge"></p>
       </div>
-
-    <section id="ferramentas">
-      
-
-
-      <!-- 01 -->
-      
-
-      <!-- 02 -->
-      
-
-      <!-- 03 -->
-      <article class="instrument" id="simulador">
-        <div class="inst-head">
-          <h3><a class="inst-link" href="https://claude.ai/code/artifact/b141616f-0520-4d73-a7df-43d90e3574d1">Simulador de banca</a></h3>
-        </div>
-        <p class="inst-sub">Sessão de defesa, com regras declaradas de conduta dos examinadores.</p>
-
-        <div class="chips">
-          <span class="chip status-warn">em desenvolvimento, não medido</span>
-          <span class="chip"><b>tokens</b> não apurado</span>
-          <span class="chip"><b>tempo</b> conversacional</span>
-          <span class="chip"><b>modos</b> sessão completa · um examinador</span>
-        </div>
-
-        <div class="pair">
-          <div class="does">
-            <h4>Produz</h4>
-            <p>Arguição, réplica, e a insistência quando a resposta desvia. O modo de examinador único permite treinar uma linha de ataque até o fim, que é onde a defesa realmente quebra.</p>
-          </div>
-          <div class="doesnt">
-            <h4>Não produz</h4>
-            <p>Diagnóstico do trabalho. Aqui o objeto é o desempenho do candidato, e a qualidade da simulação depende de já existir um relatório que apontou os problemas.</p>
-          </div>
-        </div>
-
-        <p class="when"><b>Roda depois do [02], e parte do relatório dele.</b> Descobrir o problema e treinar a resposta são operações distintas, e misturá-las produz um simulacro que confirma o candidato em vez de pressioná-lo. O relatório entra para calibrar, e não para ditar a pauta: diz qual lente o examinador interno deve usar e o que já caiu na conferência, e as perguntas continuam vindo do trabalho.</p>
-        <p class="footnote"><b>E o que sai da sessão vira reparo, desde 27/08/2026.</b> A lista do que o candidato não sustentou é o insumo de uma correção de natureza diferente da que sai do analisador: ali se corrige para a próxima versão ficar melhor, e aqui se corrige para o candidato não ser surpreendido pelo próprio texto. Por isso a regra é a menor correção possível, com cada mudança marcada como releitura obrigatória. Passagem trocada que ele não releu é pior que passagem fraca que ele domina.</p>
-      </article>
-
-    </section>
-
-<section id="vocabulario">
-      <h2>Esclarecimentos terminológicos</h2>
-      <p class="deck">A página é para quem orienta e para quem é orientado, e não supõe familiaridade com inteligência artificial. Estes termos aparecem na seção acima e em todas as seguintes.</p>
-
-      <div class="verbete">
-        <h4>Token</h4>
-        <p>A unidade em que se mede o texto que entra e sai de um programa de inteligência artificial. Em português, uma palavra comum costuma valer um ou dois tokens: a dissertação usada nos testes tem 36 mil palavras e cerca de 55 mil tokens. Interessa por duas razões práticas: <b>é a unidade em que se cobra</b>, e é o limite do que o programa consegue considerar de uma vez.</p>
-      </div>
-
-      <div class="verbete">
-        <h4>Modelo</h4>
-        <p>O programa que efetivamente lê e escreve. Aqui aparecem dois, ambos da família Claude. O <b>Opus</b> é o mais capaz dos dois, e o <b>Sonnet</b> é mais rápido e barato, e é o que costuma estar disponível para quem usa sem pagar. <b>Opus não é o mais caro da família:</b> desde 2026 há modelos que custam o dobro dele, e a escolha aqui segue aquilo em que estas ferramentas foram testadas. Trocar de modelo muda a qualidade da leitura, e por isso as ferramentas dizem em qual foram testadas.</p>
-      </div>
-
-      <div class="verbete">
-        <h4>Extração</h4>
-        <p>Nenhuma ferramenta lê o seu <span class="loc">.docx</span> ou o seu PDF diretamente. Antes de tudo, um programa comum converte o arquivo num texto limpo, sem formatação, sem cabeçalho e sem quebra de página, com <b>os parágrafos numerados de um até o fim</b>. É sobre esse texto que toda a análise acontece, e é dele que sai a numeração usada em cada apontamento.</p>
-        <p style="margin-top:10px">Isso tem uma consequência que precisa estar dita: <b>a análise é da extração, não do seu arquivo.</b> Se a conversão juntou dois parágrafos, perdeu uma nota de rodapé ou desmontou uma tabela, o apontamento que depender daquele trecho herdou o defeito. É por isso que o apontamento volta ancorado no seu próprio arquivo, e não numa cópia: no <span class="loc">.docx</span> anotado, o comentário fica na margem do parágrafo, onde você lê o que de fato escreveu. <b>Quando o apontamento não corresponder ao seu texto, a discordância é legítima e ele cai.</b></p>
-      </div>
-
-      <div class="verbete">
-        <h4>Localizador</h4>
-        <p>A marca <span class="loc">[P123]</span> significa parágrafo 123 daquele texto extraído. Todo apontamento traz uma, e há uma regra rígida por trás: <b>nenhuma ferramenta digita trecho do trabalho</b>. O modelo indica o parágrafo, e um programa busca o texto e o insere no relatório. Assim não existe citação com uma palavra trocada, que é o defeito mais difícil de perceber e o mais grave numa análise que se pretende conferível.</p>
-        <p style="margin-top:10px">O número não é intuitivo para quem escreveu o trabalho, porque ninguém redige uma dissertação contando parágrafos. É para isso que serve o caderno: nele os apontamentos aparecem marcados ao lado do próprio texto, e quando três deles tocam o mesmo parágrafo, isso significa que ali o problema se concentra, e não que há três problemas.</p>
-      </div>
-    </section>
-
-    
-
-    <section id="vias">
-      <h2>Duas formas de uso das ferramentas</h2>
-      <p class="deck">A mesma ferramenta opera por dois mecanismos, com o mesmo método e com
-      retornos diferentes. <b>O que os separa é uma voz contra várias, e não rodar programa ou
-      não rodar.</b> Isto foi medido em 04/09/2026 e corrigiu o que esta página dizia antes:
-      numa leitura no chat do Claude, em Opus, <b>o assistente executou 25 comandos, abriu nove
-      arquivos e pesquisou na web</b>, extraindo o texto do PDF com marcação de página, abrindo
-      as oito figuras e rodando conferências de contagem e de referências. <b>Chat que roda
-      programa existe</b>, e depende do assistente: na rodada equivalente no ChatGPT não houve
-      nada disso.</p>
-
-      <p class="deck"><b>O que nenhuma conversa dá são três coisas.</b> Não devolve arquivo, de
-      modo que não há <span class="loc">.docx</span> com os apontamentos na margem. Não traz os
-      localizadores <span class="loc">[P123]</span>, porque estes vêm de uma extração numerada
-      que se guarda entre passos, e o que sobra é citar por página. E <b>não há segunda voz</b>:
-      a conferência de cada apontamento por quem não o escreveu exige sessões separadas, e uma
-      conversa é uma sessão só, mesmo quando executa comandos. <b>Essa conferência é a etapa em
-      que de 10% a 31% dos achados caem.</b></p>
-
-      <p class="deck">Daí a divisão entre as ferramentas: o
-      <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a>
-      é uma leitura só e roda nas duas formas; o
-      <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> são
-      quatro leituras mais o cotejo, e <b>só existe no agente</b>, porque as vozes que ele
-      precisa abrir não cabem numa conversa.</p>
-
-      <div class="via">
-        <h4><span class="via-num">1</span>No chat, e é a via aberta a todos</h4>
-        <p>Copiar o prompt, colar como primeira mensagem num assistente e anexar o trabalho. Não instala nada, não custa nada, e funciona com a conta gratuita que a pessoa já tem.</p>
-        <p class="via-devolve"><b>Devolve texto na conversa.</b> Os quatro passos viram uma passada só, sem a conferência feita por quem não escreveu os apontamentos. Os localizadores <span class="loc">[P123]</span> não existem, porque não há extração numerada, e nada volta como arquivo.</p>
-        <p class="via-devolve"><b>No ChatGPT, confira se o prompt entrou como texto e não como anexo.</b> Prompt longo colado costuma virar arquivo automaticamente, com um nome truncado, e há um botão que o converte de volta em texto, chamado <span class="loc">Mostrar no campo de texto</span>. Use-o antes de enviar. <b>Sobre o modo Pensar, a resposta depende do que você está rodando</b>, e a nota abaixo diz o que se mediu.</p>
-      </div>
-
-      <div class="via">
-        <h4><span class="via-num">2</span>Por um agente, que é o que roda comandos</h4>
-        <p>Um assistente instalado que trabalha sobre a pasta onde está o trabalho. Dois servem,
-        e a diferença entre eles é como se paga. <b>O Claude Code</b> exige assinatura da Claude,
-        é o modo mais testado, e o custo é a cota: uma leitura completa consumiu 17% da cota
-        semanal numa medição de agosto de 2026. <b>O VS Code com a extensão GitHub Copilot</b>
-        aceita chave de API própria, de Anthropic, OpenAI, Gemini, Azure ou OpenRouter, e a usa
-        no modo agente, que é o que tem terminal; o consumo é cobrado pelo provedor e não esbarra
-        em cota. <b>É o caminho mais curto para quem quer o trabalho anotado sem montar um
-        ambiente de desenvolvimento.</b></p>
-        <p class="via-devolve"><b>Devolve o arquivo.</b> O agente roda os programas e monta a
-        entrega, com o trabalho anotado na margem, o relatório em PDF e a lista de correções.
-        Acrescenta a extração canônica com impressão digital e, no <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a>, os quatro passos com o
-        cotejo em sessão separada. Exige Python, com PyMuPDF se o trabalho for PDF, e pandoc com
-        xelatex para o PDF. É a única forma em que a comparação entre duas versões do mesmo
-        trabalho já está encadeada.</p>
-        <p class="via-devolve"><b>Sobre o agregador, duas ressalvas:</b> não há aqui comparação
-        sólida entre os modelos de um agregador, e o preço depende de o serviço repassar o
-        desconto de reenvio.</p>
-      </div>
-
-      <p class="tnote"><b>Por que o botão importa, e está medido.</b> Dois assistentes conversacionais, de seis mil e de nove mil e seiscentas palavras de prompt, foram rodados numa conta gratuita do ChatGPT variando uma coisa só: a instrução chegar como anexo ou como corpo da mensagem. Mesmo prompt, mesmo rascunho, mesmas falas do estudante, mesma conta. <b>Como anexo, o assistente descumpriu quatro regras, e as quatro são do mesmo tipo: as que mandam recusar alguma coisa.</b> Aceitou e elogiou um exemplo que o prompt manda recusar por não testar nada; não encerrou quando o estudante pediu, obrigando a pedir duas vezes; deixou passar um fato que o estudante desviou; e, num deles, escreveu vinte linhas no lugar do estudante depois de um pedido direto, que é a regra que aquele prompt guarda com mais força. <b>Como corpo da mensagem, o mesmo modelo, na mesma conta, cumpriu as quatro:</b> recusou o exemplo distante e pediu outro, voltou ao fato desviado, encerrou entregando a avaliação, e respondeu ao pedido de escrever por ele que podia apontar o caminho e não escrever a passagem.</p>
-
-      <p class="tnote"><b>O que isso significa para quem usa, e o que ainda não se sabe.</b> O formato explica as falhas, e não o modelo: quando o texto vira anexo, o ChatGPT parece tratá-lo mais como documento a comentar do que como instrução a seguir, e as regras que exigem contrariar o usuário são as primeiras a cair. Rodando por engano como anexo, espere um assistente mais complacente, que aceita resposta fraca, evita contrariar e cede quando você pedir que ele escreva por você. <b>O alcance:</b> uma execução por condição, sem repetição, com o estudante interpretado por quem conduziu o teste e não por um estudante real. Indica direção e não mede tamanho. Outros modelos e a conta paga não foram testados.</p>
-      <p class="tnote"><b>O modo Pensar ajuda numa tarefa e atrapalha noutra, e as duas foram medidas no mesmo dia.</b> Nos dois assistentes conversacionais, aqueles em que o programa conduz um diálogo e recusa respostas fracas, ligar o Pensar <b>piorou o resultado e não mudou o tempo</b>. Na leitura de uma dissertação inteira, de 235 páginas, ligá-lo mudou bastante: a rodada sem ele errou a contagem que a própria ementa anuncia, dizendo 18 itens e entregando 21, e a rodada com ele acertou os 32; ela também escolheu sozinha a escala de veredicto certa, a de quem lê um trabalho que já está na banca, e localizou um artigo derivado da pesquisa e a base de dados pública associada, que nenhuma das outras três leituras do mesmo trabalho encontrou. Custou 5 minutos e 12 segundos contra 41 segundos. <b>A fronteira provável, e é hipótese com dois casos de cada lado:</b> o Pensar rende onde há muito a reconciliar numa passada só, e atrapalha onde a tarefa é conversar e contrariar.</p>
-
-      <p class="tnote"><b>E a conta gratuita tem limite de conversas com arquivo, que foi alcançado.</b> Depois de três conversas com <span class="loc">.docx</span> ou PDF anexado na mesma manhã, o ChatGPT pausou a conta e informou a hora em que o uso seria reposto. Isso responde, em parte, a uma das duas coisas que esta página listava como não medidas sobre a via gratuita: a cota não corta no meio de um trabalho, e sim ao fim de algumas análises. Quem for usar a via do chat conta com poucas leituras por dia.</p>
-
-      <p class="tnote"><b>A segunda via saiu do repositório fechado em 27/08/2026, e ainda não foi rodada fora daqui.</b> Os programas, os prompts e as instruções para assistentes estão públicos em <span class="loc">github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</span>. O que falta deixou de ser o código: é instalador, e é alguém executando a cadeia numa máquina que não a de quem a escreveu. O caminho provável é abrir o repositório no VS Code e deixar o assistente rodar os programas, e ele depende de duas coisas por medir: se a cota da assinatura basta para uma análise, e quais modelos ela oferece. Enquanto isso não for medido, a via de todos continua sendo a primeira.</p>
-
-      <p class="tnote"><b>O que a segunda via acrescenta é o arquivo de volta, e não a leitura.</b> Com um modelo bom, o prompt cola em qualquer conversa e devolve uma boa análise. O que nenhuma conversa devolve é <b>o documento da autora com cada apontamento como comentário do Word na margem do parágrafo que ele cita</b>, com os comentários que ela já tinha escrito preservados ao lado. Ela abre no Word, vê a observação na altura certa e responde ali; quem orienta lê a resposta no próprio arquivo. A alternativa é um relatório de cem páginas ao lado do documento, em que casar uma coisa com a outra é trabalho do autor.</p>
-
-      <p class="tnote"><b>E a razão é uma assimetria que não se resolve com engenharia.</b> O que é texto atravessa a fronteira entre a página e o chat, porque se copia e se cola: o prompt, as medidas, o relatório. O que é binário não atravessa, mesmo com todo o código para produzi-lo já escrito e testado dentro da página.</p>
-    </section>
-
-    
-
-    <section id="cadeia">
-      <h2>Fluxo de trabalho</h2>
-      
-
-      <div class="chain">
-        <div class="track">
-          <p class="track-label">Pelo chat</p>
-          <div class="steps">
-            <div class="step">
-              <span class="n">você</span>
-              <span class="t">Preparo</span>
-              <span class="d">Conversa nova, o prompt colado e o trabalho anexado. De preferência o PDF: nele o assistente enxerga gráficos e quadros como imagem, e num <span class="loc">.docx</span> não.</span>
-            </div>
-            <div class="arrow" aria-hidden="true">→</div>
-            <div class="step">
-              <span class="n">analisador:</span>
-              <span class="t">Alberto</span>
-              <span class="d"><b>Retorna o relatório inteiro em texto, na própria conversa, numa mensagem só.</b> O chat não gera arquivo: não volta <span class="loc">.docx</span> anotado nem PDF, e não há localizador de parágrafo, porque quem os cria é um programa. O que você leva daqui é o que copiar da tela.</span>
-            </div>
-            <div class="arrow" aria-hidden="true">→</div>
-            <div class="step gate">
-              <span class="n">humano</span>
-              <span class="t">Revisão</span>
-              <span class="d">Nada sai daqui sem uma pessoa ler. O arquivo segue como veio, e não volta anotado na margem.</span>
-            </div>
-          </div>
-        </div>
-        <div class="track">
-          <p class="track-label">Com agente, no Claude Code ou no VS Code</p>
-          <div class="steps">
-            <div class="step">
-              <span class="n">analisadores:</span>
-              <span class="t">Alberto ou Luis</span>
-              <span class="d"><b>Fase 1, se houver <span class="loc">.docx</span>:</b> um diagnóstico lê a formatação e conta o que existe, sem alterar nada, e o que ele apontar entra no relatório como sugestão. <b>Fase 2, a leitura:</b> os programas levantam as suspeitas e o modelo julga uma a uma. <b>Fase 3, o acabamento:</b> aplica as correções cuja versão certa já existe no texto, e confere os próprios apontamentos <b>numa sessão nova</b>, com um leitor que não os escreveu, porque quem escreve é o pior juiz de se o que escreveu se entende. Alguns minutos, e cerca de 80 mil tokens numa dissertação de 130 páginas.</span>
-            </div>
-            <div class="arrow" aria-hidden="true">→</div>
-            <div class="step">
-              <span class="n">retorno:</span>
-              <span class="t">Relatório e Sugestões</span>
-              <span class="d">O relatório em PDF traz cada item com o parágrafo citado inserido abaixo dele. <b>Quando a origem é <span class="loc">.docx</span></b>, vai junto o arquivo comentado: cada apontamento é um comentário na margem do parágrafo que ele cita, e diz em que página ocorre. <b>Quando a origem é PDF</b>, e não há margem em que comentar, sai no lugar dele um <span class="loc">.md</span> com o trabalho e os parágrafos numerados, que é o que resolve os localizadores do relatório.</span>
-            </div>
-            <div class="arrow" aria-hidden="true">→</div>
-            <div class="step gate">
-              <span class="n">humano</span>
-              <span class="t">Revisão</span>
-              <span class="d">Nada sai daqui sem uma pessoa ler. A taxa de erro da ferramenta depois do cotejo não foi medida, e por isso a leitura humana não é recomendação: é condição. O que a revisão aceitar volta ao arquivo como alteração controlada.</span>
-            </div>
-            <div class="arrow" aria-hidden="true">→</div>
-            <div class="step">
-              <span class="n">arguição</span>
-              <span class="t">Simulador de banca</span>
-              <span class="d">Perto da data, com a versão fechada, e não antes: aqui já não se corrige o texto, ensaia-se a defesa dele. Recebe o relatório do Luis e conduz uma sessão com dois examinadores, que insistem onde a resposta não se sustenta. Ao fim, a lista do que precisa ser escrito e as perguntas que ficaram sem resposta.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p class="tnote"><strong>Perto da data, correção é risco.</strong> Passagem trocada que o candidato não releu é pior que passagem fraca que ele domina. O reparo que sai do simulador de banca é, por isso, a menor correção possível, e cada mudança vai marcada como releitura obrigatória. É onde a regra de correção muda dentro da mesma trilha: até ali se corrige para a próxima versão sair melhor, e a partir dali se corrige para o candidato não ser surpreendido pelo próprio texto.</p>
-
-      <p class="tnote">Nenhum reparo roda sem insumo. Sem relatório nem transcrição da sessão, não há o que consertar, e o que sai é reescrita por conta própria.</p>
-    </section>
-
-    <section id="responde">
-      <h2>Quem responde pelo relatório</h2>
-      <p class="deck">O relatório é automático, e é automático sempre. Ler e encaminhar não muda o que o produziu: muda quem responde por ele.</p>
-
-      <p><strong>A ferramenta produz, e quem encaminha responde.</strong> O orientador que lê e manda passa a responder pelos apontamentos, e é o nome dele que vai na abertura, porque encaminhar é endossar: mandar crítica automática não lida e sem nome é o pior arranjo possível, com toda a contundência e nenhuma responsabilidade. Se o próprio autor roda no seu trabalho, não há orientador no circuito, e pôr nome de terceiro seria atribuição falsa. <strong>O que não muda em nenhum dos dois casos é a origem do texto.</strong></p>
-      <p><strong>O estado sem revisão tem de ser visível</strong>, e não o silêncio padrão: relatório que não diz que ninguém o leu chega como se alguém tivesse lido. É a mesma regra que limita o <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> ao que ele confere.</p>
-
-      <p><strong>Procedência declarada não é coautoria</strong>, e a distinção é de responsabilidade: coautoria divide, e aqui não se divide, porque quem endossa responde por inteiro. A ferramenta levantou e redigiu; o humano decidiu o que sobrevive. A proporção, aliás, é declarável item a item, porque os três registros já a marcam: um achado de resultado é substancialmente da ferramenta, já que se confere abrindo o arquivo, e um questão é substancialmente de quem orienta, já que é pergunta que só quem conhece o campo formula.</p>
-
-      <p><strong>O que cria problema de integridade não é usar, é usar sem dizer.</strong> Com a procedência escrita na abertura e a lista de correções anexada, a intervenção automática fica auditável: a lista registra cada parágrafo alterado por programa e de qual outro parágrafo veio o texto, de modo que um terceiro consegue refazer a conferência.</p>
-
-      <p><strong>E o relatório não vai sozinho.</strong> Vai com o trabalho anotado, em que cada apontamento é um comentário do Word na margem do parágrafo que ele cita. Isso resolve um problema que o relatório sozinho não resolve: a instrução que aparece em toda sugestão de correção, a de conferir abrindo o arquivo no parágrafo indicado, <b>é inexecutável para quem recebe</b>, porque ninguém escreve uma dissertação contando parágrafos e o editor não mostra essa contagem. Entregar a crítica sem o meio de conferi-la seria pedir que ela fosse aceita no escuro.</p>
-    </section>
-
-    <section id="estrutura">
-      <h2>Como o relatório é organizado</h2>
-      <p class="deck">A ordem das seções é uma decisão sobre a atenção de quem lê, e mudou várias vezes até chegar aqui. Quem recebe tem uma hora, e a maior parte dela vai para o começo.</p>
-
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th>Seção</th><th>O que traz</th><th class="num">Código</th></tr></thead>
-          <tbody>
-            <tr class="highlight"><td><b>Ementa</b></td><td>O estágio do trabalho, numa frase, com a justificativa. Quantos itens estão no corpo e quantos no anexo, e por quê.</td><td class="num">—</td></tr>
-            <tr><td>Como ler este relatório</td><td>Os dois leitores do documento, as siglas, e o alcance da leitura: ela examina o trabalho por dentro e não valida nada por fora.</td><td class="num">—</td></tr>
-            <tr><td>1. Pontos fortes</td><td>Cinco ou seis escolhidos entre muitos, mais um de projeção: o que o trabalho deixa citável por outras pesquisas.</td><td class="num">F</td></tr>
-            <tr><td>2. Contribuições a reivindicar</td><td>O que o trabalho fez e não disse que fez. Não há o que corrigir; há o que passar a escrever.</td><td class="num">C</td></tr>
-            <tr><td>3. Avaliação geral</td><td>O veredicto, o que concentra risco de arguição, por onde começar, e as perguntas que a banca provavelmente fará.</td><td class="num">—</td></tr>
-            <tr><td>4. Sugestões</td><td>Das mais simples às mais complexas. Cada uma diz o que mudar, onde, e sob que condição está resolvida.</td><td class="num">S · D</td></tr>
-            <tr class="highlight"><td><b>Anexo</b></td><td>Depois da quebra de página: os itens que não couberam no corpo, inteiros, as pequenas correções e a lista que um programa aplica.</td><td class="num">SC</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p class="tnote"><b>Três seções saíram em 25/08/2026, e vale dizer por quê.</b> As <em>questões</em> viravam pergunta de banca quando eram boas, e consulta de regulamento quando não eram. <em>O que este relatório não examinou</em> era inventário de ressalvas que o leitor saltava, e o que tinha de informativo cabe num parágrafo, no alto, onde se decide o peso do que vem. E as <em>pequenas correções</em> desceram inteiras ao anexo, que é insumo da correção automática. Ficou a decisão mais antiga: a avaliação geral vem <em>antes</em> das sugestões, porque como fecho a lista de prioridades caía depois de centenas de linhas de citação e ninguém chegava lá.</p>
-
-      <div class="verbete">
-        <h4>Os pontos fortes são escolhidos, e não inventariados</h4>
-        <p>É de esperar que um trabalho de pós-graduação tenha muita coisa elogiável, e por isso listar tudo não informa: uma lista de dezoito virtudes não discrimina entre um trabalho e outro, e o autor sai dela sem saber o que tem de melhor. <b>A escolha é o ato relevante da seção.</b> A ferramenta percorre cinco dimensões (o recorte, a metodologia, a clareza dos resultados, a robustez das análises, a pertinência da discussão) e responde a cada uma; onde a resposta for morna, a dimensão não entra, e o silêncio ali informa tanto quanto o elogio noutra. Não se credita robustez de análise a um trabalho cujas correções complexas são quase todas de análise, porque o autor lê as duas seções.</p>
-        <p style="margin-top:10px">É também a única seção em que o trecho citado <b>não</b> é inserido. Ninguém confere elogio, e enfiar o parágrafo debaixo de cada ponto forte onera a leitura da única seção que o autor lê inteira e por gosto. O número do parágrafo fica, para quem quiser abrir.</p>
-      </div>
-
-      <div class="verbete">
-        <h4>Um documento para o autor, e um arquivo que fica com a ferramenta</h4>
-        <p>Relatório e anexo saem <b>num arquivo só</b>, separados por quebra de página. Eram dois até 25/08/2026, e a razão de fundir é banal: dois arquivos viram um perdido, porque quem recebe abre o primeiro e o segundo fica no e-mail. A separação que importa não é de arquivo, é de posição — o corpo cabe numa sessão de leitura, o anexo vem depois e é declarado como material de consulta e de máquina.</p>
-        <p style="margin-top:10px"><b>O anexo tem dois leitores, e nenhum precisa lê-lo inteiro.</b> O primeiro é a correção automática, que recebe o trabalho, o relatório e o anexo e propõe as reescritas item a item, devolvendo o arquivo com as mudanças marcadas; para essa leitura, lista completa é vantagem e concisão é perda. O segundo é quem quiser conferir um apontamento e achar a operação que o sustenta.</p>
-        <p style="margin-top:10px">Fora dessa entrega fica a <b>memória de avaliações</b>, que responde a outra pergunta: quanto se pode confiar nesta ferramenta. Cobertura, taxa de queda, distribuição por leitura, tensões não resolvidas. <b>O critério do corte é o leitor, e não a delicadeza:</b> nada se suprime por ser desabonador, e sim por não ter uso para quem recebe. Uma taxa de queda de 31% é informação preciosa para quem decide adotar a ferramenta, e ruído para quem vai corrigir a própria dissertação. É um arquivo só, que cresce, porque a pergunta que interessa só se responde na série.</p>
-      </div>
-    </section>
-
-    <section id="entrega">
-      <h2>O que se entrega, e em que formato</h2>
-      <p class="deck">Um relatório que o destinatário não consegue abrir, ou não consegue conferir, não foi entregue. Estas quatro peças saem juntas, e três delas existem por causa de problemas que só apareceram quando alguém de fora tentou usar o material.</p>
-
-      <div class="verbete">
-        <h4>O relatório com os trechos dentro</h4>
-        <p>A regra do localizador resolve a fidelidade e cria um problema de leitura: o relatório só faz sentido com o trabalho aberto ao lado, e quem cansa do vaivém para de conferir e passa a acreditar. Por isso um programa lê os localizadores, busca cada parágrafo citado e o insere no próprio relatório, como citação recuada.</p>
-        <p style="margin-top:10px">Um exemplo do que isso muda. Um apontamento dizia que dois parágrafos eram a mesma passagem em duas versões, e que a segunda devia ficar. Antes, restava confiar. Com os dois inseridos um sob o outro, vê-se em segundos que a segunda acrescenta a razão e a regra de uso, e que a primeira para na ressalva genérica. <b>Quem transcreveu foi o programa</b>, então continua não havendo palavra trocada. O relatório cresce de quatro a cinco vezes, e vale.</p>
-      </div>
-
-      <div class="verbete">
-        <h4>O trabalho anotado</h4>
-        <p>O próprio arquivo do autor, devolvido com cada apontamento como comentário do Word na margem do parágrafo que ele cita, e com os comentários que ele já tinha escrito preservados ao lado. Cada comentário diz também <b>em que páginas o item ocorre</b>, porque o número de parágrafo é da extração e não existe dentro do Word. Serve para achar qualquer localizador sem contar parágrafos, para ver quando vários apontamentos se concentram no mesmo ponto, e para responder na margem, que é onde quem orienta lê a resposta. <b>Substituiu o caderno de conferência</b>, que era uma cópia numerada em separado, desde que o arquivo anotado passou a ser gerado.</p>
-      </div>
-
-      <div class="verbete">
-        <h4>PDF, em dois formatos</h4>
-        <p>O original é Markdown, que é o formato certo para o que os programas fazem com ele: texto puro, que um script altera com segurança. Mas ninguém recebe uma dissertação de volta em Markdown. Um gerador converte para PDF, com dois temas.</p>
-        <p style="margin-top:10px"><b>Margem larga</b>, no estilo de Tufte: o parágrafo na coluna principal e os apontamentos que o citam na margem, ao lado. É o formato natural do caderno, porque caderno é texto anotado. <b>Notas de rodapé</b>, com margens normais: menos elegante e mais robusto, porque quando muitos parágrafos citados vêm seguidos as notas de margem colidem.</p>
-      </div>
-
-      <div class="verbete">
-        <h4>E, sempre, uma versão em HTML</h4>
-        <p>Abre em qualquer navegador com dois cliques, sem instalar nada, permite buscar com Ctrl+F e imprimir em PDF pelo próprio navegador. É a saída que nunca falha, e existe porque as outras dependem de programas que nem todo computador tem.</p>
-        <p style="margin-top:10px"><b>Se você receber um arquivo <span class="loc">.md</span> e não souber o que fazer com ele:</b> ele é texto puro, e abre em qualquer editor, inclusive no Bloco de Notas, apenas sem formatação. Para ver formatado sem instalar nada, peça a versão em HTML. Para editar com conforto, há editores gratuitos de Markdown, e o Visual Studio Code, que é gratuito, mostra a versão formatada ao lado do texto.</p>
-      </div>
-    </section>
-
-    <section id="custo">
-      <h2>Quanto custa?</h2>
-      <p class="deck">Esta seção existe para explicar por que a oficina não oferece uso gratuito, e não para vender coisa alguma.</p>
-
-      <p><strong>O que se distribui aqui são as instruções e os programas, não um serviço em funcionamento.</strong> A diferença é de custeio. Um serviço a que qualquer pessoa se conectasse exigiria um motor ligado executando os prompts, e cada análise que ele fizesse seria cobrada de alguém. Esse alguém seria o docente, do próprio bolso, ou o programa de pós-graduação (PMPD). Como não há financiamento para isso, cada um roda no seu próprio acesso, e é por essa razão que os números abaixo interessam a quem for usar: são a conta que você vai pagar, ou o limite de uso que você vai consumir.</p>
-
-      <p><strong>É também o que justifica existir uma versão barata.</strong> Sem serviço custeado, exigir quase uma hora de processamento por trabalho tornaria a ferramenta inacessível a quem mais precisa dela. O <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> deixa de ser um recurso menor e passa a ser a porta de entrada, e o que ele cobra por isso está medido: vê menos, e vê coisa diferente a cada rodada.</p>
-
-      <p>O cartão de cada ferramenta declara o consumo em tokens, e não em dinheiro, porque o token é o mesmo número em qualquer serviço: o que muda de um para outro é o preço, não o consumo. Esta seção faz a conversão para quem liga a ferramenta diretamente ao serviço da Anthropic. Quem usa a Claude por assinatura mensal não vê estes números: paga um valor fixo e esbarra num limite de uso. Eles aparecem para quem liga a ferramenta diretamente ao serviço da Anthropic, onde se cobra por token processado. Medido na dissertação de 36.457 palavras, cerca de 55 mil tokens.</p>
-
-      <p>Preços de junho de 2026, por milhão de tokens: <b>Opus</b> a US$ 5,00 o que entra e US$ 25,00 o que sai; <b>Sonnet</b> a US$ 2,00 e US$ 10,00, que é preço promocional e <b>vence em 31 de agosto de 2026</b>, subindo para US$ 3,00 e US$ 15,00. Depois disso a coluna do Sonnet cresce cerca de metade. Sai mais caro do que entra porque escrever custa mais do que ler. Os valores em reais são aproximados, convertidos a US$ 1,00 = R$ 5,22, cotação de 16 de agosto de 2026, e envelhecem com o câmbio.</p>
-
-      <p><b>Duas expressões da tabela.</b> <em>Cadeia completa</em> é uma passagem inteira do <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> pelo trabalho: as leituras, a conferência de cada apontamento e a montagem do relatório. <b>Os valores da tabela são do desenho de seis vozes, que vigorou até 25/08/2026.</b> A fusão em quatro passos mediu, numa dissertação, redução de 64% no consumo, de 1.570 mil para 559 mil unidades. <b>O desenho de 01/09/2026, que é o de hoje, voltou a subir para cerca de 1,2 milhão</b>, porque as leituras deixaram de repetir a mesma travessia e passaram a percorrer caminhos diferentes, cada uma carregando o material de que precisa. A tabela abaixo continua com os valores antigos porque foram os medidos, e um caso não é série. <em>Reaproveitamento</em> traduz o que o serviço chama de <span class="loc">prompt caching</span>: como cada leitura reenvia o trabalho a cada passo, o serviço guarda o que já viu e cobra um décimo por reenviar o mesmo texto, desde que o programa peça isso explicitamente.</p>
-
-      <div class="tablewrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Operação</th>
-              <th class="num">Tokens</th>
-              <th class="num">Opus 5</th>
-              <th class="num">Sonnet 5</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Ler o arquivo uma vez (piso teórico)</td>
-              <td class="num">55 mil</td>
-              <td class="num">US$ 0,27<span class="brl">R$ 1,40</span></td>
-              <td class="num">US$ 0,11<span class="brl">R$ 0,60</span></td>
-            </tr>
-            <tr>
-              <td>Os programas de medição</td>
-              <td class="num">0</td>
-              <td class="num">US$ 0<span class="brl">R$ 0</span></td>
-              <td class="num">US$ 0<span class="brl">R$ 0</span></td>
-            </tr>
-            <tr>
-              <td>Uma voz do <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a></td>
-              <td class="num">130–380 mil</td>
-              <td class="num">US$ 1 a 2<span class="brl">R$ 5 a 10</span></td>
-              <td class="num">US$ 0,40 a 0,80<span class="brl">R$ 2 a 4</span></td>
-            </tr>
-            <tr class="highlight">
-              <td>Cadeia completa, com reaproveitamento</td>
-              <td class="num">~1,5 M</td>
-              <td class="num">US$ 8 a 12<span class="brl">R$ 40 a 65</span></td>
-              <td class="num">US$ 3 a 5<span class="brl">R$ 15 a 25</span></td>
-            </tr>
-            <tr>
-              <td>Cadeia completa, sem reaproveitamento</td>
-              <td class="num">~6–9 M</td>
-              <td class="num">US$ 40 a 70<span class="brl">R$ 210 a 365</span></td>
-              <td class="num">US$ 16 a 28<span class="brl">R$ 85 a 145</span></td>
-            </tr>
-            <tr>
-              <td>Cadeia completa, com reaproveitamento e fila</td>
-              <td class="num">~1,5 M</td>
-              <td class="num">US$ 4 a 6<span class="brl">R$ 20 a 30</span></td>
-              <td class="num">US$ 1,50 a 2,50<span class="brl">R$ 8 a 13</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p class="tnote"><strong>A linha que decide é a do reaproveitamento.</strong> Cada leitura avança em dezenas de passos, e a cada passo o programa reenvia tudo o que já leu. Quem monta a ferramenta e não pede o reaproveitamento paga o trabalho inteiro de novo a cada passo, e o custo fica de quatro a seis vezes maior. Não é detalhe de otimização: é a diferença entre R$ 50 e R$ 300 por análise.</p>
-
-      <p class="tnote"><strong>A fila</strong> é a opção de mandar a análise e receber o resultado em algumas horas em vez de na hora, pela metade do preço. Cabe bem aqui, porque a leitura já demora meia hora e ninguém está esperando na frente da tela.</p>
-
-      <p class="tnote"><strong>Ressalva da medida.</strong> O contador que registrou esses números soma o que entrou e o que saiu sem separar os dois, e a faixa acima supõe que noventa por cento é entrada. É estimativa com base medida, e não fatura.</p>
-
-      <p class="tnote"><strong>O custo de API não é a restrição.</strong> Cinquenta reais por um trabalho que levou meses não detém ninguém. As restrições reais são que a leitura demora meia hora e que o relatório precisa de revisão humana antes de ser entregue. Para o estudante no plano gratuito a conta é outra: ele não paga em dinheiro, paga em limite de uso, e um milhão e meio de tokens estoura qualquer sessão gratuita. É por isso que o <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> existe.</p>
-    </section>
-
-    <section id="medido">
-      <h2>Os testes feitos e o que eles sugerem</h2>
-      <p class="deck"><b>Última atualização: 29 de agosto de 2026.</b> Esta seção é a condição de distribuição, e ela foi cumprida em 17 de agosto de 2026. <b>E uma medição vale para toda esta página:</b> ressalva global é ignorada por quem lê; registro por item não é. É por isso que cada apontamento carrega o seu próprio, em vez de haver um aviso no alto. O que resta em vermelho não impede o uso com orientador ao lado; impede a distribuição a quem for rodar sozinho, sem pagar.</p>
-
-      <div class="ledger">
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Quantas suspeitas não se sustentavam</h4>
-          <p>Cada apontamento levantado pelas leituras foi aberto e conferido contra o parágrafo citado, no desenho de seis vozes então vigente. Sete avaliações entre 13 e 18 de agosto de 2026, e a taxa vai de <b>10% a 31%</b>. As cinco últimas, com o número absoluto: 16% (13 de 83), 31% (27 de 87), 21% (18 de 87), 15% (6 de 39) e 10% (7 de 72). As mais altas são as dos trabalhos que não participaram da construção da ferramenta.</p>
-        </div>
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> O quanto a medição piora quando o trabalho não ajudou a construir a ferramenta</h4>
-          <p>As três primeiras dissertações participaram do desenho: o que se aprendeu lendo-as virou regra. As duas últimas em ordem cronológica nunca foram vistas por ele, e nelas a taxa é de trinta e um e vinte e um por cento, contra dezesseis na melhor das circulares. <strong>Os números baixos eram, em parte, a ferramenta reencontrando o que já sabia.</strong> É o mesmo defeito que ela procura nos trabalhos que lê, cometido por quem a construiu. A diferença entre as duas não circulares não é limpa: entre uma e outra foram escritas regras que atacavam exatamente as causas nomeadas nas quedas da primeira, de modo que parte da melhora é da ferramenta e parte pode ser do trabalho.</p>
-        </div>
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Quantos elogios estavam errados</h4>
-          <p>O relatório abre pelo mérito, e o mérito é a parte que ninguém confere. Na quinta dissertação, as virtudes creditadas por uma das leituras foram conferidas uma a uma, pela primeira vez: de vinte e três, uma era falsa, duas tinham fundamento errado e uma estava subcontada. <strong>Dezessete por cento, taxa da mesma ordem da dos apontamentos.</strong> A falsa elogiava o autor por uma cautela que o texto não tem. Elogio sem base é pior de descobrir do que crítica sem base, porque chega primeiro e ninguém o abre.</p>
-        </div>
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Quantos achados verdadeiros a ferramenta joga fora</h4>
-          <p>Toda regra que evita apontamento falso compra precisão pagando em cobertura, e esse preço nunca tinha sido olhado. Uma das leituras registrou seis junções que abandonou por ter encontrado, no próprio trabalho, a reivindicação que elas diziam faltar. Conferidas as seis: <strong>as seis foram abandonadas com razão, e nenhum achado verdadeiro se perdeu.</strong> Numa delas, porém, o motivo declarado não se sustentava e o abandono estava certo por outro fundamento, o que significa que ali a regra acertou sem que o raciocínio funcionasse.</p>
-        </div>
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Quantas suspeitas verdadeiras citavam a prova errada</h4>
-          <p>Além das quedas, os verificadores registram os defeitos <em>dentro</em> de apontamentos que se sustentam: citação trocada, alcance mais largo do que o texto autoriza, nota invocada como prova daquilo que ela na verdade limita. Na terceira dissertação foram cerca de vinte e um em setenta; na quarta, <strong>sessenta e um em sessenta</strong>, pouco mais de um por apontamento sobrevivente. Um relatório entregue sem a conferência levaria ao autor vinte e sete apontamentos falsos e sessenta e uma citações defeituosas em oitenta e sete itens. <strong>A etapa conserta mais do que descarta, e sem ela o resto não é utilizável.</strong></p>
-        </div>
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Quanto as leituras se repetem</h4>
-          <p>Treze das cinquenta suspeitas eram a mesma coisa dita por outra leitura, e se concentravam em três defeitos. É por isso que o relatório conta defeitos e não comentários: sem isso, três problemas pareceriam treze.</p>
-        </div>
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Quantos erros sobrevivem à conferência</h4>
-          <p>É o número que de fato interessa, porque é o que chega ao autor. Uma etapa não mede o próprio resíduo, então os sessenta apontamentos aprovados na quarta dissertação foram entregues a três conferentes novos, com uma instrução só: derrubar. <strong>Sessenta e nove por cento resistiram inteiros. Vinte e seis por cento tiveram de encolher, porque afirmavam mais do que o texto autoriza. Quatro e meio por cento eram falsos.</strong> Antes da primeira conferência os falsos eram trinta e um por cento: a etapa divide o erro por sete.</p>
-        </div>
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Onde a conferência falha, e por quê</h4>
-          <p>Ela mata quase todo apontamento falso e quase não corta exagero. O motivo apareceu no exame: quando o conferente acha que o apontamento <em>subestima</em> o problema, ele acrescenta a parte que falta. <strong>Esse acréscimo nasce dentro da conferência e ninguém o confere</strong>, ao contrário da suspeita original, que foi escrita para ser atacada e foi atacada. Em sete de oito encolhimentos de uma das leituras, o que saiu foi acréscimo do próprio conferente. Foi corrigido: o acréscimo agora exige prova mais forte que a suspeita, e vem marcado para que o próximo o mire.</p>
-        </div>
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Quanto se perde ao rodar no modelo mais barato</h4>
-          <p>Duas leituras da mesma dissertação, uma de cada tipo, nos dois modelos, com a mesma conferência aplicada aos dois resultados para que a diferença não viesse do filtro. O modelo caro levantou 38 apontamentos e 24 sobreviveram; o barato levantou 14 e sobreviveram 5. <strong>Um quinto dos achados aproveitáveis, com quase o dobro da taxa de erro.</strong></p>
-        </div>
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Que tipo de erro a ferramenta comete, e que esse tipo mudou</h4>
-          <p>Mais informativo do que a taxa. Nas três primeiras avaliações a causa dominante das quedas era uma só: afirmar que falta algo no trabalho sem executar a busca que desmentiria a afirmação, catorze de vinte e sete num dos casos. Depois das travas escritas em 16 e 17 de agosto, que miravam exatamente essa causa, ela deixou de ser dominante, e o que passou a derrubar hipótese foi outra coisa: <b>a própria hipótese citar, dentro do seu bloco, o material que a derruba</b>. As duas taxas mais baixas da série são as das duas avaliações posteriores a essas travas, o que é compatível com elas terem funcionado, e não prova que funcionaram.</p>
-        </div>
-
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> O que muda ao trocar de modelo, com quatro deles</h4>
-            <p>Em 28 de agosto de 2026, a mesma dissertação de 1.434 parágrafos foi lida por quatro modelos, pelo mesmo caminho e com os mesmos programas, na primeira vez que a oficina rodou fora da máquina de quem a escreveu.</p>
-            <div class="tablewrap">
-              <table>
-                <thead><tr><th>modelo</th><th>itens</th><th>parágrafos citados</th><th>o que fez</th></tr></thead>
-                <tbody>
-                  <tr><td>Opus 5</td><td>15</td><td>67</td><td>julgou</td></tr>
-                  <tr><td>Sonnet 4.5</td><td>15</td><td>68</td><td>julgou a forma, cego no fundo</td></tr>
-                  <tr><td>Haiku</td><td>10</td><td>17</td><td>substituiu o método</td></tr>
-                  <tr><td>Gemini 3.1 Pro</td><td>4</td><td>9</td><td>repassou os programas e deu alta</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p style="margin-top:14px"><b>As três falhas são de espécies diferentes, e isso não estava previsto.</b> O <b>Sonnet</b> julgou de verdade e achou coisas que o Opus não achou, um prenome divergente e oito pares de referências, e não achou nenhum dos cinco apontamentos em que o trabalho discorda de si mesmo. O <b>Haiku</b>, em duas rodadas e com o prompt proibindo na segunda, executou um procedimento que o prompt não contém, anunciando-o como sendo o do prompt; leu 650 dos 1.434 parágrafos sob o título de leitura integral; e entregou entre aspas uma frase de abertura verdadeira com continuação inventada, que descrevia o propósito da pesquisa em palavras que a autora nunca escreveu. O <b>Gemini</b> leu o trabalho inteiro, respondeu certo à pergunta de controle, e devolveu a saída dos programas reescrita em prosa, com um relatório afirmando que nada crítico foi encontrado.</p>
-            <p style="margin-top:14px"><b>A alta é o pior dos quatro resultados.</b> Relatório magro o autor percebe; um atestado de que está tudo bem faz concluir que o trabalho está pronto. A afirmação de que não há contradição entre o que os dados provam e o que a autora infere é falsa e conferível: um parágrafo de resumo diz que há mais divergência num dos ambientes e, na frase seguinte, publica os números que dizem o contrário.</p>
-            <p style="margin-top:14px"><b>E há um modelo mais caro que o Opus, que foi testado e não entrou.</b> O Fable custa o dobro por token, e foi posto a escrever, sobre a mesma base documental, um texto que o Opus já havia escrito. A comparação não mostrou benefício que justificasse o preço: onde o Opus foi conferir os arquivos no disco e mediu uma diferença de nove bytes entre um relatório e o seu backup, o Fable não tentou. Não é medida de capacidade, é uma comparação num caso, e foi o que houve.</p>
-            <p style="margin-top:14px"><b>Uma rodada cada, num trabalho só</b>, salvo o Haiku, que teve duas. É indício forte e não série. E foi esta medição que tornou a conferência de citações bloqueante na montagem: dos dois modelos que violaram a trava de transcrição, o que rodou o conferidor corrigiu antes de entregar, e o que não rodou entregou.</p>
-          </div>
-
-          <div class="ledger-item">
-            <h4><span class="mark m-yes">medido</span> O que o modelo barato faz quando não precisa procurar</h4>
-            <p>O teste anterior mandou o modelo barato vasculhar 62 mil palavras, e é aí que ele falha. <b>O <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> não pede isso:</b> um programa levanta os pontos a olhar e o modelo julga algumas dezenas de trechos já localizados, que é outra tarefa. Ela foi medida em 28/08/2026, sobre os candidatos numéricos de uma dissertação, e o resultado não é "roda" ou "não roda". É uma condição.</p>
-            <p style="margin-top:12px"><b>Com a lista suja, ele amostrou; com a lista limpa, julgou tudo.</b> Na primeira tentativa a lista tinha 66 candidatos, dos quais 84% eram ruído de um defeito dos programas: a linha do índice de figuras contava como se fosse a legenda, e o par entre as duas aparecia como suspeita. Ele viu que era ruído, disse isso corretamente, e abriu 6 dos 66. Corrigido o defeito, a lista caiu para 20, e na segunda tentativa ele abriu os 20.</p>
-            <p style="margin-top:12px"><b>E achou o que ninguém tinha achado.</b> Entre os 20 havia um erro verdadeiro: a mesma fala de um ministro datada de dois anos diferentes em dois pontos do trabalho, uma delas na epígrafe que abre a dissertação. Ele o encontrou, e nenhuma das outras três leituras daquele dia o encontrara, porque nas listas anteriores ele estava enterrado no ruído. Junto vieram três apontamentos falsos, em dezenove casos legítimos, e todos se derrubam abrindo o parágrafo.</p>
-            <p style="margin-top:12px"><b>A lição não é sobre o modelo, é sobre a entrada.</b> A mesma instrução e o mesmo modelo produziram comportamentos opostos conforme a qualidade da lista. Lista suja convida ao atalho, e nenhuma instrução vence o convite. O caminho para usar modelo pequeno é limpar o que se entrega a ele.</p>
-            <p style="margin-top:12px"><b>O que isto não autoriza dizer.</b> Foi medida a camada numérica, com vinte candidatos; a formal, com 35 parágrafos de corpo e 18 referências, não passou por julgamento nessa rodada. É uma observação única, ao passo que o fracasso do mesmo modelo na leitura completa está replicado em duas. E a trava de transcrição aguentou aqui, sem nenhuma citação a conferir, depois de ter sido violada pelo mesmo modelo na leitura completa: a diferença plausível é o formato de tabela, que não abre espaço para prosa citada, e nesse caso o mérito é do formato.</p></div>
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Quanto a leitura de uma passada só vê, e o que ela erra</h4>
-          <p>Em 03/09/2026, duas rodadas do mesmo prompt rápido sobre a mesma dissertação devolveram <b>dezessete itens numa vez e doze na outra, com seis em comum</b>, e dezessete endereços comuns em setenta e cinco, contra os trinta e dois do relatório completo. As vinte e nove afirmações foram abertas na fonte, uma a uma, e <b>as vinte e nove estavam certas</b>. A perda é de cobertura, e não de veracidade.</p>
-          <p style="margin-top:12px"><b>O que a extensão degrada é o endereço, e não o achado.</b> Uma passada única mandada escrever sem teto produziu dez mil palavras, e quatorze afirmações em sessenta e sete caíram na conferência. Lidas uma a uma, doze das quatorze derrubam o endereço, a contagem ou uma afirmação acessória, e o apontamento continua de pé; duas matam o achado. Sobre vinte e seis itens, <b>dois eram falsos</b>. A primeira leitura desse número tinha sido outra, e produziu um teto de itens no prompt rápido que foi retirado no mesmo dia: cortar item para comprar precisão joga fora o achado verdadeiro junto com o endereço torto, que é exatamente o defeito que aposentou o prompt monolítico.</p>
-          <p style="margin-top:12px"><b>E a revisão do agente conserta mais do que retira.</b> Numa dissertação, em 03/09/2026: oitenta e duas afirmações abertas na fonte, <b>nenhum item retirado, dezesseis endereços consertados</b> e três colisões entre partes desfeitas. As causas foram página impressa trocada pela página do arquivo, número de passo errado, nota de rodapé errada e um enquadramento invertido que, reescrito, ficou mais forte.</p>
-        </div>
-
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> O que a leitura rápida faz no chat, em Opus</h4>
-          <p>Em 04/09/2026, o prompt rápido rodou no chat do Claude, em Opus 5 com esforço alto,
-          sobre a mesma tese de 109 páginas, com o prompt entrando como texto no campo e a tese
-          anexada em PDF. <b>Levou 15 minutos e 52 segundos</b> de relógio, dos quais 5 minutos e 28
-          segundos são datados por marca de arquivo e cobrem a parte pesada (extrair as 109
-          páginas, ler as 40 mil palavras em sete blocos, abrir as oito figuras). Devolveu 7.139 palavras, 23
-          correções, 16 itens de anexo, seis pontos fortes e quatro questionamentos, citando 54
-          páginas distintas e <b>zero trechos entre aspas</b>. Para comparar, no agente e em Opus
-          a mesma leitura deu 7.723 palavras, 20 correções e 226 endereços de parágrafo.</p>
-          <p style="margin-top:12px"><b>Contar itens engana, e este par mostra por quê.</b> Os 23
-          contra 20 não são cobertura maior: onde o agente escreveu um item sobre a figura da
-          p. 85 (o total do título diverge do total da nota, e a prosa arredonda para baixo o
-          que a barra mostra), o chat escreveu dois. Conferidos na fonte, os dois estão certos:
-          a figura traz 1.287 ocasiões e a nota 22 traz 1.308, e a barra da quinta-feira ou
-          depois marca 2,2% onde a prosa diz menos de dois por cento.</p>
-          <p style="margin-top:12px"><b>E uma ressalva que muda a leitura de tudo isto:</b>
-          essa conversa tinha execução de código e a usou, rodando os programas e conferindo na
-          fonte. <b>Ela está mais perto do agente do que de um chat sem ferramentas</b>, e os
-          números acima não descrevem uma conta que não ofereça isso.</p>
-
-          <p style="margin-top:12px"><b>Onde ele foi pior:</b> a conferência mecânica achou três
-          ocorrências de vocabulário de trabalho no relatório do chat, termos do método que não
-          devem chegar ao autor, contra nenhuma no do agente. <b>E onde foi bem:</b> registrou
-          uma hipótese própria que caiu, com o motivo, que é o que a disciplina pede e quase
-          nunca aparece.</p>
-          <p style="margin-top:12px"><b>O consumo em tokens, e a convenção que faltava.</b> O
-          chat não expõe contador, e o que existe é a estimativa que o próprio assistente deu ao
-          fim da rodada: <b>contexto único de 140 a 155 mil tokens</b>, e, se somado o reenvio a
-          cada uma das cerca de 23 chamadas, de 1,8 a 2,2 milhões de entrada quase toda em cache.
-          <b>São duas convenções, e a linha do agente nunca disse qual usava.</b> A conta
-          resolve: a extração desta tese tem 41.373 palavras, algo como 62 mil tokens por
-          passada, e os 268 mil do agente equivalem a 4,3 passadas. É a ordem de grandeza do
-          conteúdo único, e não a da soma bruta, que estaria nos milhões. <b>Os dois números
-          são comparáveis, então, e a rodada de chat custou cerca de metade</b>, o que é
-          coerente com ela não ter rodado nem o conferidor mecânico nem a revisão. <b>A ressalva
-          é de origem:</b> o número do agente vem de contador, e o do chat é estimativa do
-          próprio modelo sobre si.</p>
-        </div>
-
-        <div class="ledger-item">
-          <h4><span class="mark m-no">indício</span> Se a forma como o prompt entra na conversa derruba a trava da transcrição</h4>
-          <p>Colado inteiro, um prompt longo costuma virar anexo. Esta página já registra a medição de que, <b>como anexo, o assistente descumpre justamente as regras que mandam recusar alguma coisa</b>. Em 03/09/2026 apareceu um indício de que isso alcança a mais antiga das travas: de duas rodadas da leitura rápida em chat, <b>a que recebeu o prompt como texto devolveu zero trechos entre aspas, e a que o recebeu como conteúdo colado devolveu 84</b>.</p>
-          <p style="margin-top:12px"><b>Indício e não medida, e o confundidor tem nome:</b> as duas rodadas foram em assistentes diferentes, de modo que o modelo variou junto com a forma de entrega. E o modelo pesa sozinho: no agente, com o prompt entrando do mesmo jeito nos dois, um modelo deu zero e o outro 122. <b>O que decidiria é uma variável só:</b> o mesmo assistente, a mesma conta, o mesmo trabalho, o prompt entrando uma vez como texto e outra como colado.</p>
-          <p style="margin-top:12px"><b>A instrução prática não depende de resolver isso.</b> Depois de colar, ponha o prompt no campo de texto se houver o botão, e rode o conferidor mecânico antes de entregar: foi ele que pegou as 122, sem precisar saber por que apareceram.</p>
-        </div>
-
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Em que modelo a leitura rápida pode rodar</h4>
-          <p>Opus e Sonnet leram a mesma tese, com o mesmo prompt, no mesmo dia e com a mesma cegueira.</p>
-          <div class="tablewrap"><table>
-            <thead><tr><th>modelo</th><th class="num">palavras</th><th class="num">endereços</th><th class="num">correções</th><th class="num">entre aspas</th><th class="num">tokens</th><th class="num">relógio</th></tr></thead>
-            <tbody>
-              <tr><td>Opus 5</td><td class="num">7.723</td><td class="num">226</td><td class="num">20</td><td class="num">0</td><td class="num">268 mil</td><td class="num">36 min</td></tr>
-              <tr><td>Sonnet</td><td class="num">4.914</td><td class="num">60</td><td class="num">4</td><td class="num">122</td><td class="num">344 mil</td><td class="num">21 min</td></tr>
-            </tbody>
-          </table></div>
-          <p style="margin-top:14px"><b>O Sonnet gastou mais tokens e entregou um quinto das correções</b>, e foi mais rápido no relógio, que é o único ponto a favor dele. <b>E quebrou a trava da transcrição:</b> dos 122 trechos entre aspas, o conferidor mecânico achou 56 que não existem na fonte. Nos outros três relatórios sobre a mesma tese — o completo, o Opus e o ChatGPT — o número é zero. É o mesmo modo de falha já medido no modelo pequeno com o prompt anterior.</p>
-          <p style="margin-top:12px"><b>Duas coisas ele fez bem:</b> acertou o veredito e a razão dele, iguais aos dos outros três, e usou o conferidor de referências como se deve, descartando os falsos positivos com o motivo escrito. <b>Quem só tiver modelo dessa faixa roda assim mesmo e roda o conferidor mecânico antes de entregar</b>, que foi o que pegou as 56.</p>
-        </div>
-
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> O que a leitura rápida acha e o que ela deixa passar</h4>
-          <p>As duas leituras rodaram sobre os mesmos dois trabalhos em 03/09/2026, a rápida às cegas. <b>Numa tese com seções por escrever, as duas deram o mesmo veredito pela mesma razão, e divergiram na contagem: sete, pela rápida, e oito, pela completa.</b> Endereços comuns: 123 de 358. <b>Esta página deu a rápida por certa, e uma conferência na fonte em 04/09/2026 mostrou que as duas contavam coisas diferentes e nenhuma errava.</b> Sete parágrafos trazem o dizer <span class="loc">[TO DO]</span> e são sete seções; as anunciadas no sumário e vazias são oito, porque a seção 5.1 traz, no lugar do marcador, uma nota da autora sobre o que ainda escreverá. <b>A lição é sobre a conferência e não sobre as leituras:</b> comparar dois números sem reenunciar o que cada um conta produz um vencedor onde não havia disputa. <b>Numa dissertação em que as três contas erradas estavam dentro de tabelas de resultado, os comuns caíram para 64 de 277</b>, e a completa abriu 199 parágrafos contra 106.</p>
-          <p style="margin-top:12px"><b>A forma do que ela deixa passar é sempre a mesma:</b> o item que exige refazer a conta dentro de uma tabela e comparar o que a tabela publica com o que a prosa afirma dela. E há uma classe que ela não produz sozinha, a de saber se a contribuição já está publicada, que exige sair do trabalho.</p>
-          <p style="margin-top:12px"><b>E a via do chat entrega o veredito e perde a conferência.</b> Rodada no ChatGPT sobre a mesma tese, a leitura rápida acertou o núcleo em nove correções e devolveu <b>zero localizadores</b>, porque ali não há extração numerada. Serve para decidir o que fazer; não serve para o autor corrigir sem procurar cada ponto no arquivo.</p>
-        </div>
-
-        <div class="ledger-item">
-          <h4><span class="mark m-yes">medido</span> Se um segundo conferidor derruba as mesmas coisas</h4>
-          <p>Era a única coisa que esta página listava como não medida sobre o desenho inteiro, e foi medida em 03/09/2026: dois cotejos independentes atacaram o mesmo relatório com a mesma instrução de derrubar. <b>Convergiram em seis achados, e cada um pegou quatro que o outro não pegou.</b> Discordaram num ponto, sobre se um parágrafo dizia o mesmo que outro por outro caminho, e a divergência se decidiu abrindo os dois. <b>Nenhum item foi retirado do relatório:</b> todas as quedas foram de endereço, número ou afirmação acessória.</p>
-        </div>
-
-        <div class="ledger-item">
-          <h4><span class="mark m-no">não medido</span> Se o mesmo conferidor, rodado duas vezes, derrubaria as mesmas coisas</h4>
-          <p>Toda a série depende de uma etapa que confere e de ninguém que confira a conferência. Taxa de queda baixa pode significar leitura mais disciplinada, e pode significar conferidor mais frouxo, e o formato atual não separa as duas. O teste que separaria é conhecido e ainda não foi feito: refazer a conferência de uma avaliação inteira com outro conferidor, sobre as mesmas hipóteses, e comparar as quedas.</p>
-        </div>
-
-        <div class="ledger-item">
-          <h4><span class="mark m-no">não medido</span> O que o simulador de banca faz numa sessão</h4>
-          <p>É a única das três ferramentas que nunca passou por medição, e não foi rodada
-          desde que a escala de veredito mudou, em 03/09/2026. O que existe são sessões de uso,
-          sem conferência do que os examinadores afirmaram sobre o trabalho.</p>
-        </div>
-
-        <div class="ledger-item">
-          <h4><span class="mark m-no">não medido</span> Se funciona fora do direito</h4>
-          <p>A estrutura da ferramenta não depende de área, e os exemplos e as convenções que ela reconhece são do direito, e ficam reunidos num trecho separado justamente para poderem ser trocados. Só que não há trabalho de outra área neste projeto para testar, então isso é hipótese fundamentada e não resultado.</p>
-        </div>
-      </div>
-
-      <p class="tnote" style="margin-top:22px"><b>Onde conferir o que está escrito aqui.</b> Cada regra da ferramenta está no <span class="loc">REGISTRO-DE-DESENHO.md</span>, com a medição que a originou e a data; sem ele, o repositório é um punhado de programas sem razão declarada. Os prompts estão em <span class="loc">prompts/</span>, e a política sobre material de terceiro em <span class="loc">POLITICA.md</span>. Tudo em <a href="https://github.com/AlexandreAraujoCosta/Oficina_de_Orientacao">github.com/AlexandreAraujoCosta/Oficina_de_Orientacao</a>. <b>A série de avaliações não se publica</b>, porque identifica trabalho de pessoa, e é por isso que os números desta seção aparecem sem o arquivo que os guarda.</p>
-
-      <p class="tnote" style="margin-top:22px"><strong>Três medidas da própria ferramenta foram descartadas por medirem a ferramenta e não o trabalho</strong>, e o registro fica porque esse é o tema do projeto. A distância entre parágrafos citados mudava conforme a regra de contagem que se adotasse. Um índice de clareza das instruções subia porque a ferramenta passava a apontar menos coisas. E uma previsão foi dada por confirmada quando o teste de controle, feito sem a alteração que supostamente a causava, alcançou o mesmo valor.</p>
-    </section>
-
-    <div class="caveat">
-      <h3>Ressalva da ferramenta</h3>
-      <p>Esta avaliação foi produzida por leituras automáticas, feitas por programas de inteligência artificial, e reunida do mesmo modo. Nenhuma delas avalia se o trabalho diz algo verdadeiro sobre o seu objeto, o que exigiria conhecer o campo. Quanto ao ineditismo, a resposta vale sobre uma premissa e só sobre ela: a de que a descrição que o próprio trabalho faz do estágio da pesquisa na área é justa; verificar se o que se diz novo é mesmo novo continua sendo tarefa de quem conhece a literatura. Os apontamentos de consistência são os mais confiáveis, porque se conferem abrindo o arquivo no parágrafo indicado; os demais exigem julgamento e são material para leitura humana, não conclusão. Quando os apontamentos desta ferramenta foram conferidos um a um contra os parágrafos que citavam, em agosto de 2026, a proporção dos que não se sustentaram foi de dez a trinta e um por cento conforme o trabalho, e as maiores medidas são as dos trabalhos que não participaram da construção da ferramenta. Entre os que se sustentaram, pouco mais de um em cada um citava a prova errada e foi corrigido antes desta entrega. Nenhum veredito aqui substitui a leitura de quem vai responder por ele.</p>
-    </div>
   </main>
 </div>
