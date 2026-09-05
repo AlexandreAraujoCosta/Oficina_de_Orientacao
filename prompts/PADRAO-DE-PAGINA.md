@@ -37,11 +37,19 @@ explícitas.
     --good:        #37613F;   --good-soft:   #E0EBE1;
     --danger:      #A3352B;   --danger-soft: #F6E6E3;
 
-    --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro", Cambria, Georgia, serif;
-    --sans: "Segoe UI", Inter, system-ui, -apple-system, sans-serif;
+    --serif: Lora, "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
+    --sans: Mulish, "Segoe UI", Inter, system-ui, -apple-system, sans-serif;
     --mono: "Cascadia Mono", "JetBrains Mono", ui-monospace, Consolas, "SF Mono", monospace;
 
     --measure: 66ch;
+
+    /* seis degraus, na medida de arcos.org.br/direito-ciencia */
+    --t-xs: 14px;    /* rotulo em versalete */
+    --t-sm: 16px;    /* texto secundario */
+    --t-md: 18px;    /* corpo, em Lora */
+    --t-lg: 22px;    /* linha de abertura */
+    --t-h3: 19px;
+    --t-h2: 24px;
   }
   /* escuro: --ground #16171A, --surface #1D1F23, --sunken #24262B,
      --ink #E9E6E0, --ink-soft #C4C2BD, --muted #94979E, --faint #8A8D94,
@@ -68,23 +76,38 @@ valendo:
 
 ## 2. A escala
 
-Corpo em `var(--sans)`, **16.5px**, entrelinha 1.6. Títulos em `var(--serif)`.
+**As duas famílias vêm de <https://arcos.org.br/direito-ciencia/>, e os papéis são
+os de lá:** *Lora* no texto corrido, *Mulish* nos títulos, nas aberturas e nos
+rótulos. A fonte de máquina fica só para código. As duas se carregam do Google
+Fonts, que é o único servidor de fontes que o invólucro do artifact admite, e a
+linha vai antes do `<title>`:
+
+```html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap">
+```
+
+Corpo em `var(--serif)`, **18px**, entrelinha 1.65, que é a medida do modelo.
 Este bloco vai no fim do `<style>`, depois de tudo, para vencer as regras antigas
 da página:
 
 ```css
   /* --- escala do sistema: uma so em todas as paginas da oficina --- */
-  h1, .top h1, header h1, .wrap > h1 { font-family: var(--serif); font-size: clamp(34px, 5vw, 48px); }
-  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: 26px; font-weight: 600; }
-  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: 20px; font-weight: 600;
+  h1, .top h1, header h1, .wrap > h1 { font-family: var(--sans); font-weight: 700;
+    font-size: clamp(24px, 5vw, 30px); line-height: 1.2; }
+  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--sans); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
+  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--sans); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
   /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
   .wrap p, .wrap li, .wrap dd, .shell p, .shell li, .shell dd { max-width: var(--measure); }
 ```
 
-48 / 26 / 20 / 16.5. **Rótulo não é título**: `.verbete h4`, `.chip`, `.route-sub`
-e afins continuam pequenos e em versalete, e o seletor deles é mais específico, o
-que já os preserva.
+30 / 24 / 19 / 18, com 22 na abertura e 16 e 14 no que é secundário. **Nenhum
+tamanho fora desses seis degraus**: eram 52 valores distintos de `font-size` nas
+cinco páginas, e é isso que fazia a leitura parecer caótica.
+
+**Rótulo não é título**: `.verbete h4`, `.chip`, `.route-sub` e afins ficam em
+`--t-xs`, em versalete e na Mulish, e o seletor deles é mais específico, o que já
+os preserva.
 
 A medida está no bloco porque declarar `--measure` não basta: antes disso, o Luis
 tinha parágrafos de **96 caracteres** por linha, fora de qualquer restrição.
@@ -130,8 +153,10 @@ ficaram com a régua de 1px.
 python conferir_padrao.py oficina.html analisador.html luis.html simulador.html oficinas.html
 ```
 
-Ele confere o charset, os quatro blocos de tema, cada valor de token, os dezesseis
-contrastes, o corpo, a medida, a escala e os restos do sistema antigo. Tem
+Ele confere o charset, o carregamento das duas fontes, os quatro blocos de tema,
+cada valor de token, os dezesseis contrastes, o corpo, a medida, os seis degraus,
+os tamanhos fora deles, a fonte de máquina fora de código e os restos do sistema
+antigo. Tem
 controle positivo: antes de aprovar qualquer página, ele adultera um token e
 verifica que a conferência reprova.
 
