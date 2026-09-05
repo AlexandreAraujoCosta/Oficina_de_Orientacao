@@ -252,7 +252,7 @@
   <header class="top">
     <div class="eyebrow"><span class="eb-linha"><a href="https://direito.unb.br/">Faculdade de Direito da UnB</a> · <a href="https://pmpd.unb.br/">PMPD</a> · <a href="https://claude.ai/code/artifact/4fe98c90-3461-4d03-8c83-7ba2fe0c1c72">Oficinas Acadêmicas</a></span><span class="eb-linha eb-baixo">Assistentes: <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a> · <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> · <span class="eb-atual" aria-current="page">Simulador de banca</span></span></div>
     <h1>Simulador de banca: o ensaio da defesa</h1>
-    <p class="convite">Você consegue responder ao que vão te perguntar?</p>
+    <p class="convite">A sessão serve para descobrir, antes da banca, o que você ainda não consegue responder.</p>
     <p>Uma sessão de arguição com dois examinadores e o orientador presidindo, que é a composição de uma banca real. Eles ouvem as suas respostas e ouvem uns aos outros. Não produz relatório sobre o trabalho: o que fica é a sessão e, no fim, a lista do que você não conseguiu responder. Pelo agente, essa lista sai gravada em arquivo.</p>
     <p class="quando">Rode antes de marcar a defesa. Com o relatório do <a href="https://claude.ai/code/artifact/13aa2c5a-6df6-4b99-abfa-dcc258671fd1">Luis</a> em mãos a sessão rende mais, porque é dele que sai a lente do examinador interno. Sem ele a sessão roda do mesmo jeito.</p>
     <p class="aviso"><strong>Esta página descreve o desenho da ferramenta.</strong> As regras adiante são as que os examinadores recebem por instrução. O comportamento delas em sessão não passou por medição, e a última rodada é anterior à mudança da escala de veredito, em 03/09/2026. É a única das três ferramentas da oficina sem seção de medição.</p>
@@ -272,7 +272,7 @@
       <p><strong>Aqui, o compartilhamento é o mecanismo.</strong> Numa banca de verdade os examinadores se ouvem, e a sessão se organiza em torno dessa escuta. Um pega carona no que o outro levantou, discorda do colega na frente do candidato, e às vezes defende o trabalho contra ele. A resposta que você deu ao primeiro passa a valer para todos, e uma resposta ruim contamina o resto da sessão. É essa dinâmica que você precisa treinar. Leituras isoladas não a produzem.</p>
       <p><strong>E uma coisa que vale saber antes de ler o que sair daqui.</strong> Examinador só pergunta duramente a quem ele acha que pode responder: apertar custa tempo e expõe quem pergunta, e ninguém gasta uma rodada nisso com um trabalho que já desenganou. Uma sessão dura, portanto, não é má notícia. A má notícia é o examinador que se declara satisfeito sem ter apertado em lugar nenhum e sem apontar nada específico do texto, porque isso pode significar que ele não vê o que perguntar. Se o simulador lhe der uma arguição difícil, leia como o que é: alguém achou que havia com quem discutir.</p>
 
-      <p><strong>Por isso a banca aqui é pequena.</strong> Dois examinadores, não cinco. Cobertura é trabalho da análise, e repeti-la aqui alongaria a sessão sem mudar o que ela produz. O que decide numa arguição é a dinâmica, e ela cabe em seis perguntas.</p>
+      <p><strong>Por isso a banca aqui é pequena.</strong> Dois examinadores, não cinco. Cobertura é trabalho da análise, e repeti-la aqui alongaria a sessão sem mudar o que ela produz. O que decide numa arguição é a dinâmica, e ela cabe em oito perguntas: três de cada examinador nas rodadas individuais, e uma de cada na rodada final.</p>
     </div>
     <p>Por isso o simulador roda numa conversa só, do começo ao fim.</p>
     <p>O relatório do Luis passa por uma conferência que abre cada ponto e derruba parte do que as leituras levantam: de 10% a 31% em sete avaliações de agosto de 2026, no desenho de seis vozes então vigente, sobre outros trabalhos. O que chega aqui já passou por esse filtro, e a lente do examinador interno sai do que sobreviveu.</p>
@@ -324,8 +324,8 @@
       <div class="via-guia" id="guia-agente" hidden>
         <h3>Por um agente, sobre a pasta do trabalho</h3>
         <p>Serve quando você quer que os examinadores leiam o trabalho inteiro, e não só o que
-        coube num anexo, e quando quer o fechamento gravado em arquivo. Dois agentes servem, e
-        o que muda entre eles é como se paga: o <b>Claude Code</b> exige assinatura da Claude, e
+        coube num anexo, e quando quer o fechamento gravado em arquivo. Dois agentes servem. A
+        diferença entre eles é como se paga: o <b>Claude Code</b> exige assinatura da Claude, e
         o <b>VS Code</b> com a extensão <b>GitHub Copilot</b> aceita chave de API própria, de
         Anthropic, OpenAI, Gemini ou OpenRouter, cobrada pelo provedor. Os nomes de tela citados abaixo são os de setembro de 2026.</p>
         <ol class="passos">
@@ -335,7 +335,7 @@
           Models</em> ou <em>Add model provider</em>.</li>
           <li><strong>Abra o agente na pasta onde está o trabalho.</strong> Não é preciso
           baixar nada antes: o pedido do fim desta lista traz a oficina para dentro dessa
-          pasta. No Claude Code, entre na pasta e chame o programa. No VS Code, abra o chat
+          pasta. No Claude Code, chame o programa dentro dela. No VS Code, abra o chat
           com <strong>Ctrl+Alt+I</strong> e ponha em <strong>modo agente</strong>, que é o
           que tem terminal.
             <div class="cmd">
@@ -345,8 +345,8 @@
           </li>
           <li><strong>Escolha o melhor modelo disponível.</strong> Examinador que não entendeu
           o trabalho pergunta o que não interessa.</li>
-          <li><strong>Comece a sessão</strong> com o pedido abaixo. No VS Code, troque a
-          primeira linha por <em>Leia o AGENTS.md nesta pasta</em>.</li>
+          <li><strong>Comece a sessão</strong> com o pedido abaixo. Ele traz a oficina,
+          lê o prompt da banca e conduz a sessão.</li>
         </ol>
         <div class="pedido">
           <button class="copiar" type="button" data-alvo="c-pedido">Copiar</button>
@@ -400,7 +400,7 @@ escrever, e as perguntas que ficaram sem resposta.</pre>
 
   <section>
     <h2>Arguição por um examinador só</h2>
-    <p>Para treinar um flanco específico, mais fundo e sem revezamento. Útil quando o relatório já apontou onde está o problema.</p>
+    <p>Para treinar um flanco específico, mais fundo e sem revezamento. Útil quando o relatório já apontou onde está o problema. São cinco lentes, e a primeira linha do prompt traz as cinco para você apagar quatro: o desenho da pesquisa, os números, o argumento, o examinador externo hostil e a originalidade da tese.</p>
     <div class="barra"><span class="lbl">Prompt · escolha a lente na primeira linha</span><button class="copiar" type="button" data-alvo="pu">Copiar</button></div>
     <textarea class="prompt curta" id="pu" readonly spellcheck="false"></textarea>
   </section>
@@ -424,7 +424,7 @@ escrever, e as perguntas que ficaram sem resposta.</pre>
       <dd>Um examinador retoma o que o colega levantou, acrescenta, ou discorda dele abertamente. Discordância entre eles é esperada e aparece na sessão.</dd>
 
       <dt>Devolvem o que você disse, avisando que podem ter distorcido</dt>
-      <dd>Ao resumir a sua resposta, o examinador avisa que a reformulação dele pode ter deturpado algo e pede que você <strong>confira</strong>, não que aprove. É o movimento mais banal de uma sala de defesa e o que mais discrimina: quem domina o trabalho corrige, às vezes com irritação, e a irritação é ótimo sinal; quem decorou aprova sem examinar, e isso já é o diagnóstico. Nesse caso o examinador diz o que acabou de acontecer.</dd>
+      <dd>Ao resumir a sua resposta, o examinador avisa que a reformulação dele pode ter deturpado algo e pede que você <strong>confira</strong>, não que aprove. É o movimento mais banal de uma sala de defesa e o que mais discrimina: quem domina o trabalho corrige, às vezes com irritação, e a irritação é ótimo sinal; quem decorou aprova sem examinar. Isso já é o diagnóstico. Nesse caso o examinador diz o que acabou de acontecer.</dd>
 
       <dt>Aceitam provisoriamente, e dizem que é provisório</dt>
       <dd>"Vamos levar isso a sério por um minuto e ver aonde chega." O examinador conduz pelas consequências até a ideia encontrar onde quebra, e o giro vem de você, que ensina mais que a objeção antecipada. A provisoriedade é declarada no momento em que se aceita, nunca formulada como aprovação: a sessão pode terminar ali, e o que fica registrado não pode ser a banca endossando um desenho ruim.</dd>
