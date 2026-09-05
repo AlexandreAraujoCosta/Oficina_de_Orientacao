@@ -127,8 +127,8 @@ ficaram com a régua de 1px.
 
 ## 4. O cabeçalho, na mesma sequência
 
-1. faixa de topo (`.eyebrow`), em mono maiúsculo, duas linhas:
-   `Faculdade de Direito da UnB · PMPD · Oficinas acadêmicas`, e, nas páginas de
+1. faixa de topo (`.eyebrow`), em Mulish maiúscula e espaçada, duas linhas:
+   `Faculdade de Direito da UnB · PMPD · Oficinas Acadêmicas`, e, nas páginas de
    uma oficina, `Assistentes: <nomes>`. A página atual vem sem link, marcada com
    `class="eb-atual" aria-current="page"`.
 2. `h1`, com `1em` de espaço acima e abaixo, medido no próprio corpo do título.
