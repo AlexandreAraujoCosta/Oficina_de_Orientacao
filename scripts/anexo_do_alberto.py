@@ -57,9 +57,14 @@ RE_CAMPO = re.compile(
     r"^[-*]?[ \t]*\*\*(Tipo|Aponta|O que fazer|O que muda)[.:]?\*\*[.:]?\s*(.*?)"
     r"(?=^[-*]?[ \t]*\*\*(?:Tipo|Aponta|O que fazer|O que muda|Marca|Abrir|Ordem)"
     r"[.:]?\*\*|\Z)", re.M | re.S)
-# `**SC1.** texto` ate a linha em branco que precede o proximo SC.
+# `**SC1.** texto` ate o proximo SC ou o proximo cabecalho.
+#
+# SEM ANCORA DE INICIO DE LINHA, e isso e conserto de 05/09/2026: um relatorio
+# escreveu sete itens seguidos na mesma linha (`**SC4.** [P464], o mesmo.
+# **SC5.** [P511] e um marcador...`), e o extrator pegou so o primeiro de cada
+# linha. Sete de quarenta e oito sumiram sem que nada acusasse.
 RE_SC = re.compile(
-    r"^\*\*(SC\d+)[.:]?\*\*\s*(.*?)(?=^\*\*SC\d+[.:]?\*\*|^#{2,4} |\Z)",
+    r"\*\*(SC\d+)[.:]?\*\*\s*(.*?)(?=\*\*SC\d+[.:]?\*\*|^#{2,4} |\Z)",
     re.M | re.S)
 RE_LOC = re.compile(r"\[P(\d+)\]")
 
@@ -133,6 +138,8 @@ CONTROLE = """### S1. Um titulo qualquer
 **SC1.** [P30] tem uma gralha.
 
 **SC2.** [P40] e [P30] repetem a mesma legenda.
+
+**SC3.** [P50] tem um marcador de pendencia. **SC4.** [P60], o mesmo. **SC5.** [P70], o mesmo.
 """
 
 # A segunda escrita, com travessao no titulo e ponto no campo, fora de lista.
@@ -164,6 +171,10 @@ def provar():
         ("S2", "Outro titulo. Nada.", []),
         ("SC1", "[P30] tem uma gralha.", ["[P30]"]),
         ("SC2", "[P40] e [P30] repetem a mesma legenda.", ["[P40]", "[P30]"]),
+        # OS TRES NA MESMA LINHA, que o extrator perdia por exigir inicio de linha
+        ("SC3", "[P50] tem um marcador de pendencia.", ["[P50]"]),
+        ("SC4", "[P60], o mesmo.", ["[P60]"]),
+        ("SC5", "[P70], o mesmo.", ["[P70]"]),
     ]
     if itens != esperado:
         sys.exit("o extrator nao le o controle:\n%r" % (itens,))
