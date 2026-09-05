@@ -161,6 +161,30 @@ def main():
     if achados:
         bloqueia = True
 
+    # ---- TRANSCRICAO SEM ASPAS
+    #
+    # A conferencia de aspas apanha a citacao inventada e nao apanha o oposto: o
+    # trecho copiado do trabalho e apresentado como prosa de quem escreve. Sem
+    # aspas, quem le nao distingue a palavra do autor da parafrase do leitor.
+    # Medido em 05/09/2026: um relatorio declarava na abertura que nao transcrevia
+    # nada, tinha zero aspas e vinte e duas sequencias identicas a dissertacao,
+    # catorze delas prosa da autora, uma com dezoito palavras. Quem achou foi um
+    # cotejo por voz separada; nenhum programa da cadeia olhava para isso.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from conferir_transcricao import achar  # noqa: E402
+    literais = achar(rel, Path(a.extracao).read_text(encoding="utf-8"))
+    longas = [x for x in literais if len(x.split()) >= 9]
+    print("\n  TRANSCRICAO SEM ASPAS: %d sequencia(s) de 7+ palavras, %d de 9+"
+          % (len(literais), len(longas)))
+    for x in sorted(literais, key=lambda y: -len(y.split()))[:12]:
+        print("     %2d palavras  %s" % (len(x.split()), x[:92]))
+    if longas:
+        bloqueia = True
+        print("     Sequencia longa identica ao trabalho e transcricao, ainda que")
+        print("     sem aspas. Troque pelo localizador, ou ponha entre aspas e")
+        print("     deixe o programa inserir o trecho. Designacao do campo nao")
+        print("     conta: julgue uma a uma antes de mexer.")
+
     # ---- perífrase
     per = [(rel[:m.start()].count("\n") + 1, normalizar(m.group()))
            for m in RE_CONTAGEM.finditer(rel)]
