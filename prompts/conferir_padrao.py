@@ -115,10 +115,10 @@ def confere(caminho):
 
     # 5. corpo, medida e a regua de seis degraus
     exige(re.search(r"body\s*\{[^}]*font-size:\s*var\(--t-md\)", css), "o corpo nao esta no degrau --t-md")
-    exige(re.search(r"body\s*\{[^}]*font-family:\s*var\(--serif\)", css),
-          "o corpo nao esta na fonte de texto do sistema (Lora)")
-    exige("fonts.googleapis.com" in s and "Mulish" in s and "Lora" in s,
-          "a pagina nao carrega Mulish e Lora do Google Fonts")
+    exige(re.search(r"body\s*\{[^}]*font-family:\s*var\(--sans\)", css),
+          "o corpo nao esta na fonte de texto do sistema (Mulish)")
+    exige("fonts.googleapis.com" in s and "Mulish" in s and "Literata" in s,
+          "a pagina nao carrega Literata e Mulish do Google Fonts")
     exige("--measure: 66ch" in css, "a medida nao e 66ch")
     exige("escala do sistema" in css, "falta o bloco da escala de titulos")
     for token, valor in DEGRAUS:

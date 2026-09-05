@@ -37,9 +37,9 @@ explícitas.
     --good:        #37613F;   --good-soft:   #E0EBE1;
     --danger:      #A3352B;   --danger-soft: #F6E6E3;
 
-    --serif: Lora, "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
+    --serif: Literata, "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
     --sans: Mulish, "Segoe UI", Inter, system-ui, -apple-system, sans-serif;
-    --mono: "Cascadia Mono", "JetBrains Mono", ui-monospace, Consolas, "SF Mono", monospace;
+    --mono: "IBM Plex Mono", "Cascadia Mono", ui-monospace, Consolas, "SF Mono", monospace;
 
     --measure: 66ch;
 
@@ -47,7 +47,7 @@ explícitas.
     --t-2xs: 12px;   /* faixa de identificacao */
     --t-xs: 14px;    /* rotulo em versalete */
     --t-sm: 16px;    /* texto secundario */
-    --t-md: 18px;    /* corpo, em Lora */
+    --t-md: 18px;    /* corpo, em Mulish */
     --t-lg: 22px;    /* linha de abertura */
     --t-h3: 19px;
     --t-h2: 24px;
@@ -77,26 +77,31 @@ valendo:
 
 ## 2. A escala
 
-**As duas famílias vêm de <https://arcos.org.br/direito-ciencia/>, e os papéis são
-os de lá:** *Lora* no texto corrido, *Mulish* nos títulos, nas aberturas e nos
-rótulos. A fonte de máquina fica só para código. As duas se carregam do Google
-Fonts, que é o único servidor de fontes que o invólucro do artifact admite, e a
-linha vai antes do `<title>`:
+**Título serifado, texto sem serifa:** *Literata* nos títulos e nos nomes de
+ferramenta, *Mulish* no texto corrido, nas aberturas e nos rótulos, e *IBM Plex
+Mono* no código. A Mulish vem de <https://arcos.org.br/direito-ciencia/>, de onde
+saíram também os tamanhos. As três se carregam do Google Fonts, que é o único
+servidor de fontes que o invólucro do artifact admite, e a linha vai antes do
+`<title>`:
 
 ```html
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 ```
 
-Corpo em `var(--serif)`, **18px**, entrelinha 1.65, que é a medida do modelo.
+**Rótulo não é título.** Versalete e corpo miúdo (`--t-xs`, `--t-2xs`) ficam na
+Mulish, ainda quando o seletor é um `h3`: a serifa em caixa alta a 14px vira
+ornamento.
+
+Corpo em `var(--sans)`, **18px**, entrelinha 1.6.
 Este bloco vai no fim do `<style>`, depois de tudo, para vencer as regras antigas
 da página:
 
 ```css
   /* --- escala do sistema: uma so em todas as paginas da oficina --- */
-  h1, .top h1, header h1, .wrap > h1 { font-family: var(--sans); font-weight: 700;
+  h1, .top h1, header h1, .wrap > h1 { font-family: var(--serif); font-weight: 600;
     font-size: clamp(28px, 5vw, 36px); line-height: 1.2; }
-  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--sans); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
-  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--sans); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
+  .wrap h2, .shell h2, .via-guia h2, .cuidados h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 600; line-height: 1.2; }
+  .wrap h3, .shell h3, .via-guia h3, .cuidados h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 600; line-height: 1.2;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
   /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
   .wrap p, .wrap li, .wrap dd, .shell p, .shell li, .shell dd { max-width: var(--measure); }
@@ -111,7 +116,7 @@ caótica.
 cabeçalho do site em volta; a da Oficina tem 27 mil pixels de altura e dez
 seções, e a 30px o título ficava a 1,25 vez o título de seção.
 
-**A abertura fica na fonte do texto que ela abre.** Em Lora, 22px, cor `--muted`.
+**A abertura fica na fonte do texto que ela abre.** Em Mulish, 22px, cor `--muted`.
 Ela é parte do artigo, e trocar de família no primeiro fôlego de leitura é ruído.
 
 **Texto corrido é `--t-md`, ainda quando está dentro de um bloco.** A primeira
