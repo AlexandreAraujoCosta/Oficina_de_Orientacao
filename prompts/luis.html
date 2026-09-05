@@ -344,7 +344,7 @@
 
       <li><b>Abra o agente na pasta onde está o trabalho.</b> Não é preciso baixar nada
       antes: o pedido do fim desta lista traz a oficina para dentro dessa pasta, ao lado do
-      trabalho. No <b>Claude Code</b>, entre na pasta e chame o programa. No <b>VS Code</b>,
+      trabalho. No <b>Claude Code</b>, chame o programa dentro dela. No <b>VS Code</b>,
       abra o chat com <b>Ctrl+Alt+I</b> e ponha em <b>modo agente</b>, no seletor do alto do
       painel, onde costuma estar escrito <i>Ask</i>: modo agente é o que tem terminal, e nos
       outros o assistente explica os comandos em vez de executá-los, sem avisar a diferença.
@@ -388,8 +388,11 @@ que falta.</pre>
     </div>
 
     <h3>Aprovar os comandos</h3>
-    <p>Os dois agentes pedem permissão para rodar cada comando, e a pasta já traz a lista do que
-    é seguro aprovar e do que eles nunca devem rodar.</p>
+    <p>Os dois agentes pedem permissão para rodar cada comando. O que os programas
+    daqui fazem é ler o trabalho e escrever numa pasta, e não há entre eles comando
+    que apague ou envie coisa alguma; se aprovar um a um cansar, afrouxe. Volte ao
+    modo corrente antes de instalar qualquer coisa ou de usar git, porque é ali que a
+    aprovação guarda algo.</p>
 
     <h3>Sobre o custo</h3>
     <p>Uma dissertação pelo Luis custa mais que pelo <a href="https://claude.ai/code/artifact/4e0e3b73-5b3b-41a1-b4a9-7430cf7644c6">Alberto</a>, porque são quatro leituras mais o
@@ -433,7 +436,7 @@ que falta.</pre>
     <h3>Modelo pequeno não serve</h3>
     <p>Medido em quatro modelos sobre a mesma dissertação: um substituiu o método por leitura
     seletiva sem avisar e entregou uma citação inventada; outro leu tudo e devolveu atestado de
-    saúde, com zero parágrafos abertos. Os números estão na
+    saúde, com zero parágrafos abertos. Os números estão no
     <a href="https://claude.ai/code/artifact/28a171d1-f1b3-4209-a09f-35a3b415aeaa">anexo da Oficina</a>.</p>
   </section>
 
