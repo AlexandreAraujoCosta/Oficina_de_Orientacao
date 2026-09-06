@@ -157,8 +157,14 @@ def itens(texto, origem, regex):
         # isso `**O que muda:**` entrava junto, e ele e do relatorio, nao da
         # margem. Quem corrige quer a providencia, e a consequencia ja esta
         # dita no documento que acompanha.
+        # `O que poderia ser dito depois` e o campo de providencia das sugestoes
+        # de desenvolvimento, que nao mandam consertar e sim acrescentar. Ate
+        # 06/09/2026 so `O que fazer` era lido, e por isso os tres itens desse
+        # genero de um relatorio chegavam a margem so com o diagnostico; a
+        # conferencia de compreensibilidade reprovou os tres, pela mesma causa.
         fazer = re.search(
-            r"^[-*]?[ \t]*\*\*O que fazer:?\*\*\s*(.+?)"
+            r"^[-*]?[ 	]*\*\*(?:O que fazer|O que poderia ser dito depois):?\*\*"
+            r"\s*(.+?)"
             r"(?=\n\s*\n|" + PROXIMO_CAMPO + r"|\Z)",
             corpo, re.M | re.S)
         if fazer:
