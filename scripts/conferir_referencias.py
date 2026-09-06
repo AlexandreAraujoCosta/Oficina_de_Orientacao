@@ -64,8 +64,14 @@ RE_COMENTARIO = re.compile(r"<!--.*?-->", re.S)
 # Em inglês também, porque há tese em inglês neste acervo, e procurar o termo em
 # português devolve zero com a mesma cara de trabalho sem lista de referências.
 # Medido em 03/09/2026, numa tese de doutorado escrita em inglês.
+# E o titulo vem numerado com frequencia: "6. REFERENCIAS", "7 REFERENCES".
+# Medido em 06/09/2026: numa dissertacao com o titulo assim, o conferidor
+# devolveu "nao encontrei a lista de referencias", que se le como trabalho sem
+# lista, e nao como programa que nao a achou. Um numero, com ponto ou sem, e
+# um algarismo romano, sao os dois modos de numerar que aparecem no acervo.
 RE_INI_REF = re.compile(
-    r"^\s*(REFER[ÊE]NCIAS?|BIBLIOGRAFIA|OBRAS CITADAS"
+    r"^\s*(?:[0-9]{1,2}[.)]?|[IVXL]{1,5}[.)]?)?[ \t]*"
+    r"(REFER[ÊE]NCIAS?|BIBLIOGRAFIA|OBRAS CITADAS"
     r"|REFERENCES?|BIBLIOGRAPHY|WORKS CITED)\b", re.I)
 # O que fecha a lista não é só apêndice e anexo. Em w-v15.txt vem um
 # "Glossário" de 52 verbetes entre a última entrada e o "Apêndice A", e ele
@@ -318,6 +324,23 @@ def autoteste():
         "characters so that it clears the floor, 1999.\n")
     if faixa_referencias(ingles)[0] != 2:
         falhas.append("não acha a lista num trabalho em inglês")
+    # O caso de 06/09/2026: o título vem numerado, "6. REFERÊNCIAS", e o
+    # conferidor devolvia "não encontrei a lista de referências", que se lê
+    # como trabalho sem lista e não como programa que não a achou.
+    numerado = paragrafos(
+        "[P1] Prosa qualquer do corpo do trabalho, com bastante texto.\n"
+        "[P2] 6. REFERÊNCIAS\n"
+        "[P3] ADEODATO, João. Uma obra com mais de quarenta caracteres para "
+        "passar no piso, 1999.\n")
+    if faixa_referencias(numerado)[0] != 2:
+        falhas.append("não acha a lista quando o título vem numerado")
+    # e o número não pode fazer o padrão engolir qualquer linha que termine
+    # falando de referências
+    falso = paragrafos(
+        "[P1] Uma frase que menciona 3 referências e não é título de nada, "
+        "com texto suficiente para não ser confundida com entrada curta.\n")
+    if faixa_referencias(falso)[0] is not None:
+        falhas.append("o número no padrão fez achar lista onde não há")
     if faixa_referencias(misto)[0] != 3:
         falhas.append("confunde a linha do sumário com a lista, ou recusa o título "
                       "colado à primeira entrada (achou %s)" % (faixa_referencias(misto)[0],))
