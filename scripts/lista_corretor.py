@@ -80,7 +80,11 @@ RE_LOC = re.compile(r"\[P\d+(?:[-–]P?\d+)?\]")
 # F e C nao sao correcao: sao ponto forte e contribuicao a reivindicar, e mandar
 # o corretor "consertar" um ponto forte e o pior erro que este arquivo poderia
 # induzir.
-EXECUTAVEIS = ("S", "D", "SC")
+# `A` e o prefixo que uma das leituras usa para o item de anexo, onde as outras
+# usam `SC`. As duas convivem: renumerar item para caber no programa e o que a
+# regra de estabilidade de codigo proibe. Medido em 06/09/2026: sete itens de
+# anexo de um relatorio ficavam fora da lista, e a saida so dizia "28 itens".
+EXECUTAVEIS = ("S", "D", "SC", "A")
 
 
 def fronteiras(texto):
