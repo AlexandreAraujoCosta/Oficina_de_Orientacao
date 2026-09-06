@@ -175,6 +175,42 @@ esteve lá. `scripts/conferir_margem.py` acusa as remissões que a margem não
 resolve.
 
 
+
+### Grave a lista de itens como dado, num arquivo ao lado
+
+Além do relatório, grave `<nome do relatório>.itens.json`, uma lista JSON com um
+objeto por item, nesta forma:
+
+```json
+[
+ {"codigo": "S1",
+  "titulo": "O denominador declarado em [P440] desaparece no parágrafo seguinte",
+  "o_que_fazer": "escrever a base ao lado do percentual em [P498] e em [P579]",
+  "marca": null,
+  "abrir": ["P440", "P498", "P579"]}
+]
+```
+
+`marca` só quando a mesma correção se repete em vários pontos e cabe numa linha;
+nos demais, `null`. `abrir` traz os parágrafos na forma `P123`, sem colchete.
+Inclua **todos** os itens, inclusive os que não são de correção: o programa
+descarta o que não executa.
+
+**Por que isto existe, e é o defeito mais caro que esta oficina mediu.** Até
+06/09/2026 o programa que escreve os comentários da margem reconstruía esta lista
+lendo a prosa do relatório com expressão regular. Num só dia, dez defeitos dele
+foram achados, e nenhum por programa: vieram de conferências de leitura. Sete
+eram a mesma coisa em variantes diferentes — itálico no título fazia o item
+sumir, código no meio da linha não era visto, item atravessava cabeçalho e
+engolia o seguinte, o localizador escrito de três modos e só um lido. Dois
+consertos quebraram o que o anterior tinha arrumado. Em todos, **a contagem saía
+certa e o conteúdo não**, que é a forma de erro que nenhuma conferência posterior
+apanha, porque ela olha o número.
+
+Com o arquivo ao lado, não há prosa a interpretar. O leitor de prosa continua
+existindo para os relatórios já escritos, e a saída do programa diz qual dos dois
+caminhos usou.
+
 **`**Tipo:**` é categoria, e não ação.** Ele agrupa o índice, e existe para que a
 lista de correções chegue como plano de trabalho em vez de placar. Isso exige
 que o mesmo tipo se repita: **quatro a seis tipos para um relatório inteiro**, e

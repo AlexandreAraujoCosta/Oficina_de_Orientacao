@@ -20,6 +20,8 @@ corretor precisa dos dois.
     python lista_corretor.py <relatorio.md> [anexo.md] [--saida X.md]
 """
 import argparse
+import io
+import json
 import re
 import sys
 from pathlib import Path
@@ -149,6 +151,70 @@ def fronteiras(texto):
     return sorted(pos)
 
 
+# ---------------------------------------------------------------------------
+# O CAMINHO CURTO: a leitura entrega os itens como dado, e nao ha o que analisar
+#
+# Em 06/09/2026, dez defeitos deste programa foram achados num dia, e NENHUM por
+# programa: vieram de conferencias de leitura. Sete deles eram a mesma coisa, e
+# so mudava a variante: fronteira do corpo entre as duas escritas de item;
+# codigo em negrito no meio da linha; item atravessando cabecalho; italico no
+# titulo; remissao cruzada virando fronteira; titulo quebrando em duas linhas;
+# localizador escrito de tres modos. Dois deles quebraram o que o anterior
+# consertara. A causa e uma so: **este programa reconstroi por expressao regular
+# uma estrutura que o modelo escreveu em prosa livre**, e prosa livre tem
+# variantes que nenhum padrao cobre.
+#
+# A saida nao e um padrao melhor: e nao haver padrao. A leitura grava, ao lado do
+# relatorio, um arquivo `<relatorio>.itens.json` com os itens ja estruturados, e
+# este programa o le. O leitor de prosa fica como saida de emergencia, para os
+# relatorios ja escritos e para quem rodar a oficina sem o arquivo.
+
+CAMPOS = ("codigo", "titulo", "o_que_fazer", "marca", "abrir")
+
+
+def caminho_json(relatorio):
+    return Path(str(Path(relatorio).with_suffix("")) + ".itens.json")
+
+
+def itens_do_json(caminho):
+    """Le o bloco estruturado. Devolve a lista no mesmo formato do leitor de prosa.
+
+    Recusa em vez de adivinhar: campo obrigatorio ausente, codigo repetido ou
+    localizador malformado interrompem, porque item pela metade que chega calado
+    a margem e o defeito que este arquivo existe para acabar.
+    """
+    dados = json.loads(io.open(str(caminho), encoding="utf-8").read())
+    if not isinstance(dados, list):
+        sys.exit("!! %s nao traz uma lista de itens" % caminho)
+    fora, vistos = [], set()
+    for i, d in enumerate(dados):
+        if not isinstance(d, dict):
+            sys.exit("!! item %d de %s nao e um objeto" % (i + 1, caminho))
+        cod = str(d.get("codigo", "")).strip()
+        tit = " ".join(str(d.get("titulo", "")).split())
+        if not cod or not tit:
+            sys.exit("!! item %d de %s sem codigo ou sem titulo" % (i + 1, caminho))
+        if cod in vistos:
+            sys.exit("!! codigo repetido em %s: %s" % (caminho, cod))
+        vistos.add(cod)
+        if not cod.rstrip("0123456789") in EXECUTAVEIS:
+            continue
+        fazer = " ".join(str(d.get("o_que_fazer") or "").split())
+        if fazer:
+            tit = "%s. O que fazer: %s" % (tit.rstrip("."), fazer)
+        locs = []
+        for l in (d.get("abrir") or []):
+            s = str(l).strip().strip("[]")
+            if not re.match(r"^P\d+$", s):
+                sys.exit("!! localizador malformado em %s, item %s: %r"
+                         % (caminho, cod, l))
+            if ("[%s]" % s) not in locs:
+                locs.append("[%s]" % s)
+        marca = " ".join(str(d.get("marca") or "").split()) or None
+        fora.append((cod, tit, locs, "relatório", marca))
+    return fora
+
+
 def itens(texto, origem, regex):
     achados = []
     marcas = list(regex.finditer(texto))
@@ -247,6 +313,8 @@ def main():
     ap.add_argument("relatorio")
     ap.add_argument("anexo", nargs="?")
     ap.add_argument("--saida")
+    ap.add_argument("--itens-json", dest="itens_json",
+                    help="o bloco estruturado; por padrão <relatorio>.itens.json")
     a = ap.parse_args()
 
     def ler(caminho, origem):
@@ -263,7 +331,14 @@ def main():
                 melhor[cod] = (cod, tit, locs, org, mrc or (ant[4] if ant else None))
         return list(melhor.values())
 
-    todos = ler(a.relatorio, "relatório")
+    js = Path(a.itens_json) if a.itens_json else caminho_json(a.relatorio)
+    if js.exists():
+        todos = itens_do_json(js)
+        print("  itens lidos de %s (sem analisar prosa)" % js.name)
+    else:
+        todos = ler(a.relatorio, "relatório")
+        print("  %s nao existe; itens reconstruidos da prosa, que e a saida de "
+              "emergencia" % js.name)
     if a.anexo and Path(a.anexo).exists():
         vistos = {c for c, *_ in todos}
         todos += [x for x in ler(a.anexo, "anexo") if x[0] not in vistos]

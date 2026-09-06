@@ -17,7 +17,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from lista_corretor import RE_NEGRITO, RE_TITULO, itens, localizadores  # noqa: E402
+from lista_corretor import (RE_NEGRITO, RE_TITULO, itens, localizadores,  # noqa: E402
+                            itens_do_json)
 
 for fluxo in (sys.stdout, sys.stderr):
     try:
@@ -177,6 +178,54 @@ cai na frase central de 4.3.1.**
 """
 
 
+def bloco_json():
+    """O caminho curto: itens lidos como dado, e recusa em vez de adivinhacao."""
+    import json
+    import tempfile
+    from pathlib import Path
+    falhas = []
+
+    def escrever(dados):
+        p = Path(tempfile.gettempdir()) / "_itens_autoteste.json"
+        p.write_text(json.dumps(dados, ensure_ascii=False), encoding="utf-8")
+        return p
+
+    bom = escrever([
+        {"codigo": "S1", "titulo": "O denominador some no parágrafo seguinte",
+         "o_que_fazer": "escrever a base ao lado do percentual em [P498]",
+         "marca": None, "abrir": ["P440", "P498"]},
+        {"codigo": "F1", "titulo": "Um ponto forte, que não é executável",
+         "o_que_fazer": None, "marca": None, "abrir": ["P100"]},
+    ])
+    lidos = itens_do_json(bom)
+    if len(lidos) != 1:
+        falhas.append("devia ler 1 item executavel e leu %d" % len(lidos))
+    elif "O que fazer:" not in lidos[0][1]:
+        falhas.append("a providencia nao entrou no titulo: %r" % lidos[0][1][:60])
+    elif lidos[0][2] != ["[P440]", "[P498]"]:
+        falhas.append("localizadores errados: %r" % (lidos[0][2],))
+
+    # os tres casos que ele tem de RECUSAR, e nao adivinhar
+    import subprocess
+    import sys as _s
+    for nome, dados in (
+            ("codigo repetido", [{"codigo": "S1", "titulo": "a", "abrir": []},
+                                 {"codigo": "S1", "titulo": "b", "abrir": []}]),
+            ("titulo vazio", [{"codigo": "S1", "titulo": "", "abrir": []}]),
+            ("localizador torto", [{"codigo": "S1", "titulo": "x",
+                                    "abrir": ["pagina 4"]}])):
+        p = escrever(dados)
+        r = subprocess.run(
+            [_s.executable, "-c",
+             "import sys; sys.path.insert(0, r'%s');"
+             "from lista_corretor import itens_do_json; itens_do_json(r'%s')"
+             % (str(Path(__file__).resolve().parent), str(p))],
+            capture_output=True, text=True)
+        if r.returncode == 0:
+            falhas.append("aceitou %s em vez de recusar" % nome)
+    return falhas
+
+
 def loc():
     """As tres escritas do localizador, e o que nao pode virar localizador."""
     casos = [
@@ -279,6 +328,11 @@ def main():
     ruim = ler(ALBERTO.replace("- **Aponta** O sumario", "- **Xponta** O sumario"))
     if "[P249]" in ruim.get("S1", ("", []))[0]:
         sys.exit("o programa acha campo que nao existe; nao confie nele")
+
+    # ---- O BLOCO ESTRUTURADO
+    bj = bloco_json()
+    if bj:
+        sys.exit("leitor do bloco de itens: " + "; ".join(bj))
 
     # ---- AS TRES ESCRITAS DO LOCALIZADOR
     lo = loc()
