@@ -245,13 +245,51 @@ Onde a interpretação extrair demais, o item não pede que se retire a
 interpretação: pede que **o alcance dela desça até onde o dado chega**, e diz até
 onde. Retirar é perda; ajustar o alcance é o que a torna defensável na banca.
 
+### Antes das cinco perguntas: a lista do que mudou na janela
+
+**Monte, uma vez só, a lista do que mudou dentro do período que o trabalho mede.**
+Não pergunte isso por inferência: enumere antes, como fez com as interpretações.
+A lista sai do próprio trabalho, e são cinco lugares onde procurar:
+
+- **Norma.** Toda emenda, resolução, lei ou ato citado com data, e o que cada um
+  mudou no procedimento medido.
+- **Composição do órgão.** Quem entrou e quem saiu no período, e o que o trabalho
+  diz sobre a posição de cada um a respeito do objeto. **É o lugar mais esquecido**,
+  e o caso que originou esta regra está abaixo.
+- **A coleta.** Mudança de base, de critério de inclusão, de sistema de registro,
+  de disponibilidade de dado. O trabalho costuma declarar isso na metodologia.
+- **O contexto que o próprio trabalho narra.** Pandemia, crise, mudança de
+  presidência, alteração de competência.
+- **A série de fundo.** O volume total subiu ou caiu no período, de modo que uma
+  proporção pode mudar sem que nada mude no numerador.
+
+**Depois, confronte cada inferência com a lista inteira.** Para cada uma, diga
+quais candidatos os dados do trabalho conseguem descartar e quais não, e onde não
+conseguem, esse é o limite a declarar.
+
+**E pergunte, de cada uma, se não é acaso.** Série de poucos pontos oscila
+sozinha; diferença entre subconjuntos pequenos aparece sem causa nenhuma. Onde a
+base for pequena, a pergunta não é qual a explicação, é se há o que explicar.
+
+**Caso medido em 05/09/2026, e ele é a razão de este passo existir.** Numa
+dissertação que mede divergência entre dois ambientes de julgamento entre 2020 e
+2025, uma nota do próprio trabalho registra que um ministro foi grande opositor
+daquele ambiente e o foi **até a sua aposentadoria**, ocorrida dentro da janela
+medida. A série de divergência atravessa a saída dele, e nenhuma passagem do
+trabalho pergunta se uma coisa afeta a outra. **Onze leituras automáticas do mesmo
+trabalho, por vias e modelos diferentes, passaram por cima**: nenhuma delas
+menciona o nome, que está no texto, no mapa gerado por programa e no arquivo de
+suspeitas. Alcance: a busca foi feita sobre os relatórios da versão de agosto,
+com controle; um arquivo intermediário da leitura longa traz o nome, citando outro
+artigo, e o relatório final não o levou adiante.
+
 Depois disso, examine cada interpretação que sobreviver com estas cinco
 perguntas. Elas se respondem contra o próprio trabalho, e por isso produzem item
 com endereço.
 
-1. **O que mais mudou na mesma janela?** Se outro fator plausível muda no mesmo
-   período, o crédito exclusivo não se sustenta. Procure candidatos nos próprios
-   dados e no que o trabalho narra sobre o contexto.
+1. **O que mais mudou na mesma janela?** Confronte com a lista que você acabou de
+   montar. Se outro fator plausível muda no mesmo período, o crédito exclusivo não
+   se sustenta.
 2. **A relação agregada pode estar escondendo processos distintos?** Reparta pelo
    corte que o trabalho já coletou (classe, ano, órgão, tipo) e veja se a direção
    se mantém em todos. Onde ela se inverter num subconjunto, o agregado descreve

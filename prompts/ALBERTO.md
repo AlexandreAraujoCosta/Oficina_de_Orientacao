@@ -223,9 +223,37 @@ terminavam em dado e passavam por boas:
 - **o desfecho vira intenção.** O dado mede o que o texto faz, e a asserção diz o
   que quem o escreveu quis.
 
+### Antes das perguntas, monte a lista do que mudou na janela
+
+**Enumere, uma vez só, o que mudou dentro do período que o trabalho mede**, do
+mesmo modo como enumerou as interpretações. A lista sai do próprio trabalho, e são
+cinco lugares onde procurar: **norma** (emenda, resolução, ato citado com data, e o
+que cada um mudou no procedimento medido); **composição do órgão** (quem entrou e
+quem saiu, e o que o trabalho diz da posição de cada um sobre o objeto), que é o
+lugar mais esquecido; **a coleta** (mudança de base, de critério de inclusão, de
+sistema de registro); **o contexto que o próprio trabalho narra**; e **a série de
+fundo**, porque uma proporção muda quando o denominador se mexe.
+
+**E pergunte, de cada inferência, se não é acaso**: série de poucos pontos oscila
+sozinha, e diferença entre subconjuntos pequenos aparece sem causa nenhuma.
+
+**Caso medido em 05/09/2026.** Numa dissertação que mede divergência entre dois
+ambientes de julgamento entre 2020 e 2025, uma nota do próprio trabalho registra
+que um ministro foi grande opositor daquele ambiente **até a sua aposentadoria**,
+ocorrida dentro da janela medida. A série atravessa a saída dele, e nenhuma
+passagem pergunta se uma coisa afeta a outra, e o nome está no texto do trabalho
+e no mapa gerado por programa. Alcance da medição: onze relatórios sobre a versão
+de agosto não trazem o nome, com busca de controle na mesma varredura; um arquivo
+intermediário da leitura longa traz, citando outro artigo, e o relatório final dela
+não o levou adiante. Não sei dizer se a lista feita antes conserta isso, porque a
+falha medida está um passo atrás, na enumeração das interpretações, que não incluiu
+as duas passagens.
+
 Sobre cada interpretação que sobreviver, cinco perguntas, que se respondem contra
 o próprio trabalho e por isso produzem item com endereço. **O que mais mudou na
-mesma janela**, além do que se está creditando? **O agregado pode estar escondendo
+mesma janela**, além do que se está creditando? Confronte com a lista que você
+acabou de montar, item por item, e diga quais candidatos os dados do trabalho
+descartam e quais não. **O agregado pode estar escondendo
 processos distintos** que o corte já coletado separaria? **A teoria que o próprio
 trabalho adota oferece o mecanismo**, prediz outro, ou não fala disso? **O que essa
 explicação prediz que se veria**, e se vê? **De quantas variáveis a afirmação
