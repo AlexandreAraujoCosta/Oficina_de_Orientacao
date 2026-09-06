@@ -47,7 +47,13 @@ for fluxo in (sys.stdout, sys.stderr):
 # **S9**") e a exigencia de ponto final antes e de conteudo depois.
 RE_NEGRITO = re.compile(
     r"(?:^\s*(?:\d+[.)]\s*)?|(?<=[.!?])[ 	]+)"
-    r"\*\*([A-Z]{1,2}\d+)[.,:]?\s*(.*?)\*\*", re.M)
+    # O titulo ATRAVESSA A QUEBRA DE LINHA quando e longo, e `.` nao casa
+    # quebra. Ate 06/09/2026 o item cujo titulo ocupava duas linhas nao era
+    # reconhecido: num relatorio de 31 itens o programa achou seis, e a saida
+    # dizia "6 itens" sem que nada acusasse. Quebra simples entra; linha em
+    # branco nao, senao um `**` que nunca fecha engoliria o arquivo.
+    r"\*\*([A-Z]{1,2}\d+)[.,:]?[ \t\n]*"
+    r"((?:[^*\n]|\n(?![ \t]*\n))*?)\*\*", re.M)
 # O [ \t]* no lugar de \s* nao e detalhe: \s atravessa a quebra de
 # linha, e por isso o titulo ia buscar a primeira linha do paragrafo
 # seguinte. Com o Luis isso nunca aparecia, porque ele escreve o nome do

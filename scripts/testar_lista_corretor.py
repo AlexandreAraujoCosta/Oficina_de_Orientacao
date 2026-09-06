@@ -133,6 +133,45 @@ def agrupados():
     return falhas
 
 
+# Titulo em negrito que ocupa duas linhas, que e como o Luis escreve os itens
+# longos. Sem a quebra simples no padrao, um relatorio de 31 itens devolvia seis.
+QUEBRADO = u"""### 4.2 Basta corrigir a frase
+
+**S3. O denominador declarado em [P440] desaparece no paragrafo seguinte e nao
+volta ao texto.**
+
+**Aponta:** o valor de 48,0% corre sobre outra base.
+
+**O que fazer:** escrever a base ao lado do percentual.
+
+**Abrir:** [P440], [P498]
+
+**S4. A figura de duracao e apresentada pelo conjunto maior e mede o menor.**
+
+**Aponta:** a legenda diz uma coisa e o eixo diz outra.
+
+**Abrir:** [P452]
+"""
+
+
+def quebrado():
+    """Titulo que atravessa a quebra de linha tem de ser lido inteiro."""
+    m = ler(QUEBRADO)
+    falhas = []
+    for c in ("S3", "S4"):
+        if c not in m:
+            falhas.append("%s ficou de fora" % c)
+    if "S3" in m:
+        tit = m["S3"][0]
+        if "volta ao texto" not in tit:
+            falhas.append("o titulo de S3 saiu cortado na quebra: %r" % tit[:70])
+        if "O que fazer" not in tit:
+            falhas.append("a providencia de S3 nao entrou")
+        if "[P452]" in m["S3"][1]:
+            falhas.append("S3 engoliu o localizador de S4")
+    return falhas
+
+
 def misto():
     """O corpo de um item nao pode atravessar o item seguinte de outra escrita."""
     m = ler(MISTO)
@@ -184,6 +223,11 @@ def main():
     ruim = ler(ALBERTO.replace("- **Aponta** O sumario", "- **Xponta** O sumario"))
     if "[P249]" in ruim.get("S1", ("", []))[0]:
         sys.exit("o programa acha campo que nao existe; nao confie nele")
+
+    # ---- TITULO QUE ATRAVESSA A QUEBRA DE LINHA
+    q = quebrado()
+    if q:
+        sys.exit("titulo em duas linhas: " + "; ".join(q))
 
     # ---- VARIOS ITENS NO MESMO PARAGRAFO
     g = agrupados()
