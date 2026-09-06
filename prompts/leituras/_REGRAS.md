@@ -46,6 +46,20 @@ Medidos nesta bancada, e todos os quatro geraram acusação que não existia:
   limite de requisição e sem as figuras, e a leitura seguiu sobre o texto sem
   perceber. Leia o PDF em chamadas sequenciais, e confira que a imagem veio
   antes de escrever qualquer coisa sobre ela.
+- **Quando houver `.docx`, tire as figuras dele e não do PDF.** O `.docx` é um
+  zip, e as imagens estão inteiras em `word/media/`. Basta
+  `unzip -o -q trabalho.docx "word/media/*" -d pasta`. Três coisas mudam, e as
+  três foram medidas em 06/09/2026 sobre a mesma dissertação:
+  **a resolução**, porque a página de PDF vem reduzida e a imagem do `.docx` vem
+  como o autor a inseriu, com os rótulos de dado legíveis um a um;
+  **o custo**, porque a restrição de paralelo é da leitura de *página de PDF* e
+  não da de arquivo de imagem: duas imagens pedidas na mesma mensagem voltaram
+  as duas, de modo que quatro figuras custam uma chamada em vez de quatro;
+  **e o que se pode afirmar**, porque rótulo truncado na imagem do `.docx` é
+  defeito do trabalho, e rótulo ilegível numa página de PDF pode ser só a
+  redução.
+  A ordem das imagens em `word/media/` é a de inserção, e não traz legenda:
+  case cada uma com a legenda do texto antes de citá-la.
 - Contar parágrafo de `.docx` por `<w:p[ >].*?</w:p>` perde os auto-fechados que
   trazem atributo. Conte `</w:p>` mais `<w:p ... />`.
 - Remover acento antes de contar muda a conta: numa contagem de `controvers`,
