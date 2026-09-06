@@ -46,11 +46,40 @@ escolhe sozinho:** TCC em formato de artigo vai à banca e artigo comum vai a
 periódico, e um e outro têm a mesma cara, de modo que quem encomenda a leitura diz
 qual é.
 
-## As quatro respostas, e cada uma tem a conta que a autoriza
+## As quatro respostas, e o que decide o degrau
 
-O que separa uma da outra é **quantos problemas sérios existem e quanto tempo cada
-um pede**. Os dois se contam, e é por isso que o degrau se confere em vez de se
-acreditar.
+O que separa uma da outra é **se as inferências do trabalho se sustentam nos dados
+que ele apresenta, de modo que as conclusões se sustentem, e se resta uma
+contribuição**. Não é quantos problemas existem nem quanto tempo pedem: vinte
+correções que não tocam nenhuma afirmação não movem o degrau, e uma só inferência
+que o dado não carrega o move inteiro.
+
+**A objeção se enuncia contra uma inferência, e nunca contra o desenho.** As duas
+costumam ser a mesma coisa dita de dois modos, e o segundo modo abre uma discussão
+que não fecha: quem lê que o desenho está errado discute se aquele era o desenho
+certo, o que é argumento sobre método em abstrato. Quem lê que a afirmação de
+[P502] não é carregada pela comparação que a apoia, e que o cruzamento que a
+carregaria está nas duas bases, abre o trabalho e confere. **Traduza sempre para a
+segunda forma:** nomeie a afirmação, o dado em que ela se apoia, e o que falta para
+o dado carregá-la.
+
+**A contribuição negativa é contribuição.** Mostrar que a hipótese não pode ser
+confirmada com os dados disponíveis é resultado, e um trabalho que faça isso bem
+não perde degrau por isso. O que faz perder é afirmar a hipótese sem que os dados
+a carreguem.
+
+**Trabalho descritivo tem poucas inferências, ou nenhuma**, e ali a régua muda de
+apoio sem afrouxar. O que se confere é se **cada descrição corresponde ao dado**: se
+o número escrito na prosa é o da tabela, se a frase que lê a figura diz o que a
+figura mostra, se a categoria contada é a que a definição delimita, se o total fecha
+com as parcelas. Descrição que não confere com o dado é o mesmo defeito da
+inferência que o dado não carrega, um degrau antes dela, e move o veredito do mesmo
+modo. Depois dessa, a pergunta que resta é se a descrição é ela própria a
+contribuição, e o que a mede é o que o trabalho passa a permitir dizer e antes não
+se dizia.
+
+**O prazo continua sendo dito**, porque quem decide precisa dele para saber se a
+condição cabe. Deixa de decidir o degrau.
 
 **1. É apto a ser aprovado.** Nenhum item muda o que o trabalho afirma, e o que se
 aponta é acabamento para o depósito. Autoriza este degrau a lista de itens ser toda
@@ -59,10 +88,18 @@ de acabamento, e isso se confere contando.
 **2. É apto a ser aprovado, e o que se corrige não altera o que ele afirma.** Diga
 quais itens são, porque é essa lista que a ata registra.
 
-**3. É apto a ser aprovado, desde que cumpridas as condições abaixo.** É o degrau dos
-poucos problemas sérios que não pedem tempo grande. **Nomeie cada condição**, diga
-de cada uma o que passaria a estar escrito, e **diga quanto tempo pede**. Condição
-sem prazo estimado não permite a quem decide saber se ela cabe.
+**3. É apto a ser aprovado, desde que cumpridas as condições abaixo.** Resta
+inferência que o dado não carrega, e ela se responde dentro do que o trabalho
+já tem: refazendo a análise com dados já coletados, ou reduzindo a afirmação até
+onde os dados chegam. As duas saídas respondem à objeção, e a segunda quase sempre
+existe. **Nomeie cada condição**, diga de cada uma o que passaria a estar escrito, e
+**diga quanto tempo pede**. Condição sem prazo estimado não permite a quem decide
+saber se ela cabe.
+
+**A primeira linha do veredito nomeia a afirmação que ainda não se sustenta, e não
+o prazo do conserto.** Quem lê *apto desde que* e encontra em seguida uma frase
+sobre semanas entende que falta acabamento. Neste degrau falta uma afirmação
+passar a se sustentar, e é isso que a abertura tem de dizer.
 
 **4. Não é apto ainda, porque há problema que a correção não alcança, ou eles são
 muitos, ou pedem tempo que não cabe.** Desenho que não produz a conclusão, categoria que contém na definição o
@@ -71,10 +108,20 @@ a definição e a conclusão lado a lado, o elo que deixa o solo. Sem exibição
 acusação e não achado, e num relatório que chega a um examinador isso é o pior que
 pode sair daqui.
 
-**A fronteira entre 3 e 4 é o que o autor consegue fazer no tempo que tem**, e ela
-se enuncia com números: quantos problemas sérios, e o que cada um pede. Dois que se
-resolvem reescrevendo passagens cuja versão certa já está no texto são o degrau 3;
-um que exige refazer a coleta é o degrau 4, ainda que seja um só.
+**A fronteira entre 3 e 4 é se a inferência se conserta com o que existe.** A que
+se resolve reduzindo a afirmação até onde o dado chega, ou cruzando variáveis que a
+base já registra, é degrau 3, ainda que sejam várias. A que exige dado não coletado
+é degrau 4, ainda que seja uma só. E a peça que não existe é a outra porta do grau
+4: um trabalho sem a conclusão escrita não tem inferência mal apoiada nenhuma, e
+mesmo assim não é apto.
+
+**Por que a régua mudou, e é caso medido.** Até 06/09/2026 o que separava os dois
+degraus era contagem e prazo, e um relatório real justificou o degrau 3 escrevendo
+que as condições eram *trabalho de semanas, não de meses*, enquanto estava de pé
+uma afirmação central que o dado não carregava. O prazo era verdadeiro e não era o
+que decidia. A primeira versão desta correção falava em *objeção ao desenho*, e ela
+saiu no mesmo dia: enunciar a objeção contra o desenho abria discussão sobre método
+em abstrato, e a mesma objeção enunciada contra a inferência se confere no texto.
 
 ## O molde, e ele tem um encaixe obrigatório para um fato concreto
 
