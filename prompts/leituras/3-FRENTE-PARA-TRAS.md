@@ -40,10 +40,45 @@ dissertação comparava dois regimes e a base menor tinha 285 casos, número que
 aparecia em lugar nenhum do texto, de modo que nenhum percentual da seção era
 conferível pelo leitor.
 
+## Passo 2a — as figuras sozinhas, antes da prosa que as comenta
+
+**Este passo vem antes do 2 e é cego de propósito.** Ler a figura depois do texto é
+conferir o que o texto disse; ler antes é ver o que a figura permite. A diferença
+entre as duas leituras é o achado.
+
+Rode `python scripts/figuras_do_docx.py <trabalho.docx> --extracao <extracao.txt>`,
+que tira as imagens de `word/media/`, casa cada uma com a legenda vizinha e com o
+`[P###]`, e devolve a tabela. **Depois peça as imagens numa mensagem só**, várias por
+mensagem. Duas coisas justificam isso, e as duas foram medidas em 06/09/2026: a
+restrição de chamada paralela é da leitura de *página de PDF* e não de arquivo de
+imagem, de modo que seis imagens pedidas juntas voltaram as seis; e a imagem do
+`.docx` vem como o autor a inseriu, com os rótulos de dado legíveis um a um,
+enquanto a página de PDF vem reduzida. Onde só houver PDF, a leitura é página a
+página e sequencial.
+
+De cada figura, **sem abrir ainda a prosa que a comenta**: o que ela mostra; o que
+ela **permite afirmar**, incluindo a conta que ela permite e não rotula (soma das
+barras, razão entre categorias, complemento de um percentual, normalização de
+faixas de largura diferente); o que ela **não** permite (o denominador, a unidade
+contada, o critério de inclusão); e o que só o texto poderia dizer.
+
+**E diga, de cada figura, quando ela não permite item nenhum.** Tela de portal,
+diagrama conceitual e tabela de definições não sustentam afirmação empírica. Se
+todas as figuras renderem achado, o passo está fabricando, e é isso que esta guarda
+existe para pegar.
+
+Medido em 06/09/2026, sobre treze figuras de uma tese, tendo como controle a leitura
+das mesmas figuras feita com a prosa ao lado: o passo cego devolveu cinco achados
+que ela não tinha, entre eles duas faixas de largura diferente tratadas como iguais
+no eixo e uma comparação de contagens brutas entre relatores com tempos de exercício
+muito diferentes. Recusou três das treze. Custou cinco minutos.
+
 ## Passo 2 — cada figura, contra o que o texto extrai dela
 
-Para cada figura, quadro e tabela: o que ela contém, o que o texto tira dela, e qual
-destes cinco estados descreve a relação.
+Agora sim com a prosa ao lado, e **o que você anotou no passo 2a não se apaga**: a
+diferença entre o que a figura permite e o que o texto extrai dela é a matéria deste
+passo. Para cada figura, quadro e tabela: o que ela contém, o que o texto tira dela,
+e qual destes cinco estados descreve a relação.
 
 - **BEM USADA** — o texto extrai o que ela sustenta.
 - **SUBEXPLORADA** — o texto extrai menos do que ela permite: afirma sem o

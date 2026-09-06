@@ -174,6 +174,28 @@ leia o comentário.
 
 Este é o passo que mais rende, e é o que se perde na ordem normal.
 
+**Antes de ler a prosa que as comenta, leia as figuras sozinhas.** Rode
+`python scripts/figuras_do_docx.py <trabalho.docx> --extracao <extracao.txt>`:
+ele tira as imagens de `word/media/`, casa cada uma com a legenda vizinha e com o
+`[P###]`, e devolve a tabela. Depois **peça as imagens numa mensagem só**, várias
+por mensagem: a restrição de chamada paralela é da leitura de página de PDF, e não
+de arquivo de imagem, e a imagem do `.docx` vem inteira, com os rótulos de dado
+legíveis um a um, enquanto a página de PDF vem reduzida.
+
+De cada figura, antes de saber o que o texto diz que ela mostra: o que ela
+mostra, o que ela **permite afirmar** (inclusive a conta que ela permite e não
+rotula: soma das barras, razão entre categorias, complemento de um percentual), o
+que ela **não** permite (o denominador, a unidade contada, o critério de inclusão)
+e o que só o texto poderia dizer. **E diga, de cada uma, quando ela não permite
+item nenhum:** figura que ilustra a interface de um sítio não sustenta afirmação
+empírica, e preencher todas é sinal de que se está fabricando.
+
+Medido em 06/09/2026, sobre treze figuras de uma tese, com a leitura feita com a
+prosa ao lado como controle: o passo cego devolveu cinco achados que ela não
+tinha, todos sobre o que a figura permite e a prosa nunca perguntou, e recusou
+três das treze. Custou cinco minutos e catorze chamadas.
+
+
 **3. O material de apoio.** A lista de referências contra o corpo e o corpo contra a
 lista. As notas de rodapé, que guardam o que o corpo devia dizer. Os realces,
 comentários e marcas de revisão do arquivo, que dizem onde o autor já sabia que
@@ -524,6 +546,18 @@ Os campos são estes:
     Aponta       o que está errado e onde, com os dois endereços.
     O que fazer  a providência, numa frase, executável sem perguntar nada a
                  ninguém. É o único campo que o autor lerá ao lado do texto.
+                 **Ele viaja sozinho e nomeia tudo de que fala:** o balão do
+                 Word traz o título e este campo, e mais nada. Nada de *a conta
+                 acima*, *a lista acima*, *como em S7*, *o termo que colide*,
+                 *as cinco obras*, *a palavra trocada*. Escreva a conta, o
+                 termo, as obras pelo nome, a palavra que está e a que entra.
+                 O teste: tape o resto do relatório e leia só o título mais
+                 este campo. O que faltar para agir, entra aqui. Medido entre
+                 05 e 06/09/2026, em cinco conferências seguidas sobre cinco
+                 relatórios: cerca de trinta e cinco itens reprovados, quase
+                 todos por isto. Não é descuido, é posição: o campo se escreve
+                 depois da demonstração, e quem o escreve acabou de nomear a
+                 coisa. Quem lê na margem não esteve lá.
     O que muda   o que o trabalho passa a sustentar depois de corrigido.
 
 **A providência é sugestão de correção, e nunca determinação.** Quem determina é quem

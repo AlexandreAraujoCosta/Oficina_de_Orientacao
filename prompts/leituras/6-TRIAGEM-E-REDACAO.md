@@ -154,6 +154,27 @@ providência, e uma conferência de compreensibilidade em 01/09/2026 reprovou po
 isso quatro de vinte e seis itens: a frase que a leitora escrevia começava por
 "procurar". **Todo item de correção traz o campo.**
 
+**E ele viaja sozinho, de modo que nomeia tudo de que fala.** O balão do Word traz
+o título e este campo, e mais nada: não traz a demonstração, não traz o campo
+`Abrir`, não traz o item vizinho e não traz o parágrafo anterior do relatório.
+Então **não escreva ali `a conta acima`, `a lista acima`, `as duas passagens
+abaixo`, `como em S7`, `o mesmo problema de SC44`, `o termo que colide`, `as cinco
+obras`, `a palavra trocada` ou `as duas variáveis`**. Escreva a conta, o termo, as
+cinco obras pelo nome, a palavra que está e a que entra.
+
+O teste é de um segundo: **tape o resto do relatório e leia só o título mais este
+campo.** Se para agir você precisar de alguma coisa que ficou de fora, ela entra
+aqui.
+
+**Medido entre 05 e 06/09/2026**, em cinco conferências de compreensibilidade
+seguidas, sobre cinco relatórios de dois assistentes diferentes: cerca de trinta e
+cinco itens reprovados, e quase todos pela mesma causa. Não é descuido de redação,
+e por isso não adianta pedir cuidado: o campo se escreve depois da demonstração, e
+quem o escreve acabou de nomear a coisa e a tem na cabeça. Quem lê na margem não
+esteve lá. `scripts/conferir_margem.py` acusa as remissões que a margem não
+resolve.
+
+
 **`**Tipo:**` é categoria, e não ação.** Ele agrupa o índice, e existe para que a
 lista de correções chegue como plano de trabalho em vez de placar. Isso exige
 que o mesmo tipo se repita: **quatro a seis tipos para um relatório inteiro**, e

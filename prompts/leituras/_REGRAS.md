@@ -62,6 +62,17 @@ Medidos nesta bancada, e todos os quatro geraram acusação que não existia:
   case cada uma com a legenda do texto antes de citá-la.
 - Contar parágrafo de `.docx` por `<w:p[ >].*?</w:p>` perde os auto-fechados que
   trazem atributo. Conte `</w:p>` mais `<w:p ... />`.
+
+**As buscas de ausência vão todas numa chamada.** Escreva a lista inteira, cada
+linha com o termo e o termo de controle, e rode
+`python scripts/buscar_lote.py <extracao.txt> <lote.txt>`. Ele devolve, de cada
+termo, as ocorrências e os localizadores, e **acusa quando o controle também dá
+zero**, que é quando a busca está quebrada e o zero do termo principal não vale
+nada. Vinte buscas numa chamada, e não vinte chamadas: medido em 06/09/2026, a
+correlação entre número de chamadas e tempo de relógio foi de 0,82 em dezesseis
+execuções, enquanto a correlação entre tamanho do contexto e tempo por chamada
+foi negativa.
+
 - Remover acento antes de contar muda a conta: numa contagem de `controvers`,
   faz *controvérsia* entrar, e 9 vira 20.
 - `grep -c` conta **linhas**, não ocorrências. Uma linha pode ter duas.
