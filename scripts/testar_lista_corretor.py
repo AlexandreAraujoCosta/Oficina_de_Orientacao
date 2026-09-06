@@ -67,6 +67,35 @@ justificativa repete a promessa em [P162].
 """
 
 
+# O caso de 06/09/2026: uma secao em negrito seguida de outra em titulo. O ultimo
+# item em negrito nao encontra outro negrito adiante, e antes ia ate o fim do
+# arquivo, engolindo os itens seguintes e os campos deles.
+MISTO = u"""## 3. As decisoes
+
+**D5. Primeira pergunta do trabalho**
+
+Resolve S9. Se for *sim*, entra a razao entre procedentes e ajuizadas de [P872].
+
+**D6. Segunda pergunta do trabalho**
+
+Resolve S1. Se for *nao*, os ordinais saem de [P853] e ficam as contagens.
+
+**Onde os itens se atropelam.** Executar a primeira via de D2 deixa S18 sem objeto.
+
+## 4. As correcoes
+
+#### S1 - O numero da normalizacao esta errado
+
+**Aponta:** A conta de [P853] usa denominador de 68 onde a autora fixou 46.
+
+**O que fazer:** escrever 27,9% em [P853] e em [P889].
+
+**Marca:** fixar o sujeito da afirmacao nas passagens abaixo.
+
+**Abrir:** [P853], [P889]
+"""
+
+
 def ler(txt):
     fora = {}
     for cod, tit, locs, org, mrc in itens(txt, "teste", RE_NEGRITO) + \
@@ -74,6 +103,52 @@ def ler(txt):
         if cod not in fora or len(tit) > len(fora[cod][0]):
             fora[cod] = (tit, locs)
     return fora
+
+
+# Varios itens de superficie no mesmo paragrafo, que e como o Alberto os escreve.
+AGRUPADOS = u"""## 8. As correcoes que nao mudam nenhuma afirmacao
+
+**SC5.** [P511] e um marcador de pendencia. **SC6.** [P513], o mesmo. **SC7.**
+[P515], o mesmo.
+
+**SC8.** [P594] traz uma anotacao de trabalho em portugues dentro de uma frase
+em ingles. Resolver a pendencia e apagar a anotacao. Como ja se disse em **S9**,
+a pendencia e a mesma.
+"""
+
+
+def agrupados():
+    """Item que abre depois de ponto final, no meio do paragrafo, tem de entrar."""
+    m = ler(AGRUPADOS)
+    falhas = []
+    for c in ("SC5", "SC6", "SC7", "SC8"):
+        if c not in m:
+            falhas.append("%s ficou de fora" % c)
+        elif not m[c][0].strip():
+            falhas.append("%s entrou com titulo vazio" % c)
+    if "SC6" in m and "[P515]" in m["SC6"][1]:
+        falhas.append("SC6 engoliu o localizador de SC7")
+    if "S9" in m:
+        falhas.append("a referencia cruzada **S9** entrou como item")
+    return falhas
+
+
+def misto():
+    """O corpo de um item nao pode atravessar o item seguinte de outra escrita."""
+    m = ler(MISTO)
+    falhas = []
+    if "D6" not in m:
+        return ["D6 nao foi reconhecido"]
+    tit, locs = m["D6"]
+    if "27,9" in tit or "O que fazer" in tit:
+        falhas.append("D6 engoliu a providencia de S1: %r" % tit[:90])
+    if len(locs) > 4:
+        falhas.append("D6 recebeu %d localizadores; sao 2 no item" % len(locs))
+    if "S1" not in m:
+        falhas.append("S1 se perdeu")
+    elif "27,9" not in m["S1"][0]:
+        falhas.append("S1 perdeu a propria providencia")
+    return falhas
 
 
 def main():
@@ -110,9 +185,20 @@ def main():
     if "[P249]" in ruim.get("S1", ("", []))[0]:
         sys.exit("o programa acha campo que nao existe; nao confie nele")
 
+    # ---- VARIOS ITENS NO MESMO PARAGRAFO
+    g = agrupados()
+    if g:
+        sys.exit("itens agrupados num paragrafo: " + "; ".join(g))
+
+    # ---- FRONTEIRA ENTRE AS DUAS ESCRITAS
+    f = misto()
+    if f:
+        sys.exit("fronteira entre negrito e titulo: " + "; ".join(f))
+
     print("controle: as duas escritas de item sao lidas, nenhum titulo sai "
           "vazio, a providencia entra e o `O que muda` fica de fora; e o "
-          "programa perde o item quando o codigo ou o campo e adulterado")
+          "programa perde o item quando o codigo ou o campo e adulterado; e o item "
+          "em negrito para no item seguinte, ainda que ele venha em titulo")
 
 
 if __name__ == "__main__":

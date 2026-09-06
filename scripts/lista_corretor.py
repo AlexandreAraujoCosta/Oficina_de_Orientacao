@@ -37,7 +37,17 @@ for fluxo in (sys.stdout, sys.stderr):
 # 27/08/2026 o anexo so era lido na forma de titulo, e por isso os itens de
 # anexo de dois dos trabalhos medidos, que usam negrito, ficavam de fora sem
 # que nada acusasse. As duas passam a valer nos dois arquivos.
-RE_NEGRITO = re.compile(r"^\s*(?:\d+[.)]\s*)?\*\*([A-Z]{1,2}\d+)[.,:]?\s*(.*?)\*\*", re.M)
+# O codigo em negrito abre a linha OU vem depois de ponto final, dentro do
+# paragrafo. A segunda forma nao era lida ate 06/09/2026, e o Alberto a usa nos
+# itens de superficie, que ele agrupa varios por paragrafo:
+#     **SC5.** [P511] e um marcador de pendencia. **SC6.** [P513], o mesmo.
+# Numa entrega de 59 itens, seis ficavam de fora sem que nada acusasse, e a
+# contagem nao mostrava porque os que sobravam eram numerados na sequencia.
+# O que separa isto de uma referencia cruzada em prosa ("como ja se disse em
+# **S9**") e a exigencia de ponto final antes e de conteudo depois.
+RE_NEGRITO = re.compile(
+    r"(?:^\s*(?:\d+[.)]\s*)?|(?<=[.!?])[ 	]+)"
+    r"\*\*([A-Z]{1,2}\d+)[.,:]?\s*(.*?)\*\*", re.M)
 # O [ \t]* no lugar de \s* nao e detalhe: \s atravessa a quebra de
 # linha, e por isso o titulo ia buscar a primeira linha do paragrafo
 # seguinte. Com o Luis isso nunca aparecia, porque ele escreve o nome do
@@ -64,14 +74,43 @@ RE_LOC = re.compile(r"\[P\d+(?:[-–]P?\d+)?\]")
 EXECUTAVEIS = ("S", "D", "SC")
 
 
+def fronteiras(texto):
+    """Onde comeca cada item, nas DUAS escritas juntas.
+
+    Ate 06/09/2026 cada escrita era varrida por sua conta, e o corpo de um item
+    terminava na proxima marca DA MESMA escrita. Num relatorio em que a secao das
+    decisoes usa negrito (`**D6. ...**`) e a das correcoes usa titulo
+    (`#### S1 - ...`), o ultimo D em negrito nao encontrava outro negrito adiante
+    e ia ate o fim do arquivo: engolia a secao inteira das correcoes. O item D6 de
+    uma entrega saiu com a providencia de S1 colada, a linha `Marca` de S3, e um
+    campo `Abrir` com 111 localizadores, que eram os de todos os itens somados.
+    Quem achou foi a conferencia de compreensibilidade; nenhum programa acusava,
+    e o meu controle so olhava para item CURTO DEMAIS.
+    """
+    pos = set()
+    for rx in (RE_NEGRITO, RE_TITULO):
+        for m in rx.finditer(texto):
+            pos.add(m.start())
+    # Titulo de secao tambem fecha item: nenhum item atravessa um cabecalho.
+    # Sem isto, o ULTIMO item de uma secao ia ate o proximo item, e engolia a
+    # prosa que fecha a secao mais a abertura da seguinte. Medido em 06/09/2026:
+    # o item S18 de uma entrega saiu com 57 localizadores, dos quais 27 eram
+    # dele e 30 vinham dos cinco mil caracteres de prosa que ele engoliu.
+    for m in re.finditer(r"^#{1,6}[ 	]", texto, re.M):
+        pos.add(m.start())
+    return sorted(pos)
+
+
 def itens(texto, origem, regex):
     achados = []
     marcas = list(regex.finditer(texto))
+    corte = fronteiras(texto)
     for i, m in enumerate(marcas):
         cod, titulo = m.group(1), m.group(2).strip()
         if not cod.rstrip("0123456789") in EXECUTAVEIS:
             continue
-        fim = marcas[i + 1].start() if i + 1 < len(marcas) else len(texto)
+        adiante = [c for c in corte if c > m.start()]
+        fim = adiante[0] if adiante else len(texto)
         corpo = texto[m.start():fim]
         locs = []
         for l in RE_LOC.findall(corpo):
@@ -93,8 +132,17 @@ def itens(texto, origem, regex):
                 titulo = " ".join(resto.split())
 
         # "- **S9**, pela razao acima" e referencia cruzada numa lista de
-        # prioridade, e nao o item. O que separa e o titulo ter substancia.
-        if len(titulo) < 25 and len(corpo.strip()) < 200:
+        # prioridade, e nao o item. O que separa e o bloco TER CAMPO de item;
+        # o tamanho so decide onde nao ha campo nenhum.
+        #
+        # Ate 06/09/2026 a regra era so de tamanho (titulo curto e corpo abaixo
+        # de 200 caracteres). Ela funcionava por acidente: o corpo do ultimo
+        # item de uma escrita ia ate o fim do arquivo, e por isso nunca era
+        # curto. Consertada a fronteira, um item legitimo de campo curto passou
+        # a ser descartado, e o controle acusou.
+        tem_campo = re.search(
+            r"^[-*]?[ 	]*\*\*(?:Aponta|O que fazer|Tipo)[.:]?\*\*", corpo, re.M)
+        if not tem_campo and not locs and len(titulo) < 25                 and len(corpo.strip()) < 200:
             continue
 
         # O TITULO DIAGNOSTICA; O COMENTARIO NA MARGEM TEM DE DIZER O QUE FAZER.

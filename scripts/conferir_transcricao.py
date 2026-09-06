@@ -99,7 +99,21 @@ def achar(relatorio, fonte, n=JANELA):
             i = fim
         else:
             i += 1
-    return [s for s in fora if not any(c in s for c in DO_CAMPO)]
+    return [s for s in fora
+            if not any(c in s for c in DO_CAMPO) and not so_numeros(s)]
+
+
+def so_numeros(s):
+    """Sequencia que e quase toda numero nao e transcricao, e sim dado.
+
+    Uma linha de totais republicada por quem refez a conta ("22, 12, 34, 34...")
+    normaliza para uma sequencia de palavras e casa com a fonte, porque os numeros
+    sao os mesmos: e disso que a reconciliacao trata. Bloquear ali mandaria a
+    leitura esconder a evidencia que ela produziu. O limiar e alto de proposito,
+    porque prosa com dois ou tres numeros dentro continua sendo prosa.
+    """
+    p = s.split()
+    return sum(1 for x in p if x.isdigit()) >= max(4, int(0.8 * len(p)))
 
 
 CONTROLE_FONTE = (
@@ -130,6 +144,16 @@ def autoteste():
     # e o localizador nao pode virar coincidencia
     if achar(u"Ver [P12] [P13] [P14] [P15] [P16] [P17] [P18]", CONTROLE_FONTE):
         sys.exit("!! conta localizador como texto")
+    # linha de totais refeita: e dado, e nao pode ser acusada
+    fonte_num = u"os onze totais publicados sao 22 12 34 34 11 19 25 4 17 5 1 no fecho"
+    if achar(u"recontei e os totais 22 12 34 34 11 19 25 4 17 5 1 coincidem", fonte_num):
+        sys.exit("!! acusa linha de totais republicada como transcricao")
+    # e a guarda dos numeros nao pode engolir prosa com numero dentro
+    fonte_pr = (u"em 2020 o tribunal decidiu 125 reclamacoes e a metade delas "
+                u"repetiu o mesmo argumento de sempre")
+    if not achar(u"o tribunal decidiu 125 reclamacoes e a metade delas repetiu o mesmo "
+                 u"argumento", fonte_pr):
+        sys.exit("!! a guarda dos numeros engoliu prosa que tem numero dentro")
     print("  autoteste: acha a sequencia copiada, nao acusa a parafrase que diz o "
           "mesmo, e ignora os localizadores")
 
