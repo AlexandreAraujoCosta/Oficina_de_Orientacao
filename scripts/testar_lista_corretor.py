@@ -154,6 +154,47 @@ volta ao texto.**
 """
 
 
+# Titulo com italico dentro, e remissoes cruzadas em negrito no corpo do item.
+# Os dois derrubaram o programa em 06/09/2026, e por caminhos opostos: o italico
+# fechava o titulo antes da hora e o item sumia; a remissao contava como inicio de
+# item e fechava o anterior, que perdia o campo Abrir.
+ITALICO = u"""### 3.3 As decisoes
+
+**D4. A introducao descreve o desenho executado ou o planejado?** Resolve **S14**,
+**S15**, **S16** e **S17**. As quatro reescrevem paragrafos da mesma peca.
+**Abrir:** [P126], [P133], [P50], [P405].
+
+### 4.3 Pede rever o que a frase afirma
+
+**S18. *Chamber* traduz Turma no capitulo 1 e gabinete no capitulo 4, e a colisao
+cai na frase central de 4.3.1.**
+
+**Aponta:** os dois sentidos convivem sem glossario.
+
+**O que fazer:** fixar um par de termos, mantendo *Panel* para Turma.
+
+**Abrir:** [P82], [P417], [P422]
+"""
+
+
+def italico():
+    """Italico no titulo nao pode fazer o item sumir, nem a remissao fechar item."""
+    m = ler(ITALICO)
+    falhas = []
+    if "S18" not in m:
+        falhas.append("S18 sumiu: o italico fechou o titulo antes da hora")
+    elif "Chamber" not in m["S18"][0]:
+        falhas.append("o titulo de S18 saiu sem o termo em italico: %r" % m["S18"][0][:60])
+    if "D4" not in m:
+        falhas.append("D4 sumiu")
+    elif "[P405]" not in m["D4"][1]:
+        falhas.append("D4 perdeu o Abrir: as remissoes **S15** fecharam o item")
+    for c in ("S14", "S15", "S16", "S17"):
+        if c in m:
+            falhas.append("a remissao **%s** entrou como item" % c)
+    return falhas
+
+
 def quebrado():
     """Titulo que atravessa a quebra de linha tem de ser lido inteiro."""
     m = ler(QUEBRADO)
@@ -223,6 +264,11 @@ def main():
     ruim = ler(ALBERTO.replace("- **Aponta** O sumario", "- **Xponta** O sumario"))
     if "[P249]" in ruim.get("S1", ("", []))[0]:
         sys.exit("o programa acha campo que nao existe; nao confie nele")
+
+    # ---- ITALICO NO TITULO E REMISSAO CRUZADA EM NEGRITO
+    it = italico()
+    if it:
+        sys.exit("italico e remissao: " + "; ".join(it))
 
     # ---- TITULO QUE ATRAVESSA A QUEBRA DE LINHA
     q = quebrado()

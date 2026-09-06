@@ -53,7 +53,10 @@ RE_NEGRITO = re.compile(
     # dizia "6 itens" sem que nada acusasse. Quebra simples entra; linha em
     # branco nao, senao um `**` que nunca fecha engoliria o arquivo.
     r"\*\*([A-Z]{1,2}\d+)[.,:]?[ \t\n]*"
-    r"((?:[^*\n]|\n(?![ \t]*\n))*?)\*\*", re.M)
+    # O asterisco simples fica: o titulo traz italico (`*Chamber*`), e uma
+    # classe que o proibisse fecharia o titulo antes da hora. Um item de uma
+    # entrega sumiu inteiro por isso, sem que a contagem mudasse de aspecto.
+    r"((?:[^*\n]|\*(?!\*)|\n(?![ \t]*\n))*?)\*\*", re.M)
 # O [ \t]* no lugar de \s* nao e detalhe: \s atravessa a quebra de
 # linha, e por isso o titulo ia buscar a primeira linha do paragrafo
 # seguinte. Com o Luis isso nunca aparecia, porque ele escreve o nome do
@@ -96,6 +99,19 @@ def fronteiras(texto):
     pos = set()
     for rx in (RE_NEGRITO, RE_TITULO):
         for m in rx.finditer(texto):
+            # `**S15**` sozinho, numa lista de remissoes ("Resolve S14, S15 e
+            # S16"), nao abre item: e referencia cruzada. Contando como fronteira,
+            # ela FECHAVA o item anterior ali, e o campo `Abrir` que vinha depois
+            # se perdia. Medido em 06/09/2026: um item de decisao chegou a margem
+            # sem localizador nenhum por causa das proprias remissoes.
+            #
+            # O que separa a remissao do item de titulo vazio e a PONTUACAO dentro
+            # do negrito: `**SC6.**` e item, e a prosa vem depois, fora dele.
+            # Olhar so para o titulo vazio derrubava os dois, e os itens de
+            # superficie agrupados voltavam a se engolir.
+            if ("**" in m.group(0) and not m.group(2).strip()
+                    and not re.search(r"[A-Z]{1,2}\d+[.,:]", m.group(0))):
+                continue
             pos.add(m.start())
     # Titulo de secao tambem fecha item: nenhum item atravessa um cabecalho.
     # Sem isto, o ULTIMO item de uma secao ia ate o proximo item, e engolia a
@@ -114,6 +130,13 @@ def itens(texto, origem, regex):
     for i, m in enumerate(marcas):
         cod, titulo = m.group(1), m.group(2).strip()
         if not cod.rstrip("0123456789") in EXECUTAVEIS:
+            continue
+        # `**S15**` numa lista de remissoes nao e item, pela mesma regra que o
+        # exclui das fronteiras: titulo vazio E sem pontuacao dentro do negrito.
+        # Sem isto ele entrava como item, herdava o corpo do item verdadeiro que
+        # o cita e levava para a margem os localizadores dele.
+        if ("**" in m.group(0) and not titulo
+                and not re.search(r"[A-Z]{1,2}\d+[.,:]", m.group(0))):
             continue
         adiante = [c for c in corte if c > m.start()]
         fim = adiante[0] if adiante else len(texto)
