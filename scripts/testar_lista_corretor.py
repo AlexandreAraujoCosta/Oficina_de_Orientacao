@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from lista_corretor import RE_NEGRITO, RE_TITULO, itens  # noqa: E402
+from lista_corretor import RE_NEGRITO, RE_TITULO, itens, localizadores  # noqa: E402
 
 for fluxo in (sys.stdout, sys.stderr):
     try:
@@ -177,6 +177,21 @@ cai na frase central de 4.3.1.**
 """
 
 
+def loc():
+    """As tres escritas do localizador, e o que nao pode virar localizador."""
+    casos = [
+        (u"o trabalho registra, em P439, que 41 temas", ["[P439]"]),
+        (u"com o nome de quem o subscreveu [P504, P508, P509]",
+         ["[P504]", "[P508]", "[P509]"]),
+        (u"abrir [P123] e a faixa [P12-P18]", ["[P123]", "[P12]", "[P18]"]),
+        (u"a norma esta na p. 439 da edicao", []),
+        (u"o Tema 460 e o RE 1234", []),
+        (u"a sigla PGFN2011 nao e localizador", []),
+    ]
+    return ["%r -> %r, esperado %r" % (c[:44], localizadores(c), e)
+            for c, e in casos if localizadores(c) != e]
+
+
 def italico():
     """Italico no titulo nao pode fazer o item sumir, nem a remissao fechar item."""
     m = ler(ITALICO)
@@ -264,6 +279,11 @@ def main():
     ruim = ler(ALBERTO.replace("- **Aponta** O sumario", "- **Xponta** O sumario"))
     if "[P249]" in ruim.get("S1", ("", []))[0]:
         sys.exit("o programa acha campo que nao existe; nao confie nele")
+
+    # ---- AS TRES ESCRITAS DO LOCALIZADOR
+    lo = loc()
+    if lo:
+        sys.exit("leitor de localizadores: " + "; ".join(lo))
 
     # ---- ITALICO NO TITULO E REMISSAO CRUZADA EM NEGRITO
     it = italico()

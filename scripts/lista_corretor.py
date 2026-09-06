@@ -75,7 +75,29 @@ RE_APONTA = re.compile(
     r"^[-*]?[ \t]*\*\*Aponta:?\*\*[ \t]*(.+?)(?=\n[ \t]*\n|\Z)", re.M | re.S)
 # O campo seguinte fecha o anterior, e ele vem em qualquer das duas escritas.
 PROXIMO_CAMPO = r"\n[ \t]*[-*]?[ \t]*\*\*[A-Za-zÀ-ú][^*\n]{0,40}:?\*\*"
-RE_LOC = re.compile(r"\[P\d+(?:[-–]P?\d+)?\]")
+# Tres escritas do localizador convivem nos relatorios, e so a primeira era lida:
+#     [P123]              a forma do contrato
+#     P123                em prosa, sem colchete
+#     [P504, P508, P509]  varios dentro de um colchete so
+# Medido em 06/09/2026: num relatorio de 39 itens, 33 chegariam a margem do Word
+# SEM ANCORA, e a saida dizia "39 itens". A leitura nao violou nada que estivesse
+# escrito: o contrato do localizador nunca esteve num lugar que ela lesse.
+#
+# O `(?<![A-Za-z0-9])` impede casar dentro de palavra, e a exigencia de P maiusculo
+# impede casar "p. 439", que e numero de pagina e nao de paragrafo.
+RE_LOC = re.compile(r"(?<![A-Za-z0-9])\[?P(\d+)(?:[-–]P?(\d+))?\]?")
+
+
+def localizadores(texto):
+    """Devolve os localizadores do trecho, na forma canonica [P###], sem repetir."""
+    fora = []
+    for m in RE_LOC.finditer(texto):
+        for g in (m.group(1), m.group(2)):
+            if g:
+                s = "[P%d]" % int(g)
+                if s not in fora:
+                    fora.append(s)
+    return fora
 
 # F e C nao sao correcao: sao ponto forte e contribuicao a reivindicar, e mandar
 # o corretor "consertar" um ponto forte e o pior erro que este arquivo poderia
@@ -145,10 +167,7 @@ def itens(texto, origem, regex):
         adiante = [c for c in corte if c > m.start()]
         fim = adiante[0] if adiante else len(texto)
         corpo = texto[m.start():fim]
-        locs = []
-        for l in RE_LOC.findall(corpo):
-            if l not in locs:
-                locs.append(l)
+        locs = localizadores(corpo)
         # Formato de contrato: o codigo sozinho no titulo, e o texto no bloco
         # **Aponta:**. Sem isto o item entra com titulo vazio e o comentario
         # sai em branco na margem.
