@@ -49,7 +49,15 @@ for fluxo in (sys.stdout, sys.stderr):
 
 # [P123] ou P123, faixa com hifen simples ou longo. Colchete opcional porque uma
 # das agregacoes ja entregues escreveu sem ele 499 vezes.
-RE_REF = re.compile(r"(?<![A-Za-z0-9])\[?P(\d+)(?:\s*[-–]\s*P?(\d+))?\]?")
+# A faixa se escreve com hifen (`[P12-P18]`) e tambem por extenso, com a
+# preposicao entre os dois colchetes: `de [P380] a [P516]`. A segunda forma nao
+# era reconhecida ate 06/09/2026, e cada extremo entrava como localizador
+# solitario: uma entrega acusou seis paragrafos inexistentes que eram, todos,
+# extremo de faixa usada para declarar ALCANCE DE BUSCA, e nao endereco de
+# conteudo. Lida como faixa, ela cai no LIMITE_FAIXA e sai calada, que e o
+# comportamento certo: ninguem quer 136 paragrafos citados dentro de um item.
+RE_REF = re.compile(
+    r"(?<![A-Za-z0-9])\[?P(\d+)\]?(?:\s*(?:[-–]\s*|a\s+)\[?P(\d+)\]?)?")
 
 # Titulo de item: "## D12.", "### H3 —", "### 3.1.1 ".
 RE_ITEM = re.compile(r"^#{1,4}\s+((?:[A-Z]{1,3})?\d+(?:\.\d+)*[a-z]?)[\.\)\s—–-]")
@@ -469,6 +477,28 @@ def processar(relatorio, trabalho, saida, limite, todas, max_por_item=None,
     return destino
 
 
+def autoteste():
+    """Prova o leitor de localizadores antes de usa-lo.
+
+    O caso que originou: `de [P380] a [P516]` era lido como dois localizadores
+    solitarios, e os dois extremos, que sao numeros de paragrafo vazio, viravam
+    acusacao de endereco inexistente. O controle negativo importa tanto quanto o
+    positivo: `em [P30] a autora afirma` NAO e faixa, e ler assim engoliria o
+    paragrafo seguinte inteiro.
+    """
+    casos = [
+        (u"no capitulo 4 inteiro (de [P380] a [P516]) as expressoes", [("380", "516")]),
+        (u"a faixa [P12-P18] continua sendo faixa", [("12", "18")]),
+        (u"os localizadores [P12], [P13] e [P14]", [("12", ""), ("13", ""), ("14", "")]),
+        (u"em [P30] a autora afirma", [("30", "")]),
+    ]
+    falhas = ["%r -> %r, esperado %r" % (c[:40], RE_REF.findall(c), e)
+              for c, e in casos if RE_REF.findall(c) != e]
+    if falhas:
+        sys.exit("!! o leitor de localizadores esta quebrado: "
+                 + "; ".join(falhas))
+
+
 def main():
     ap = argparse.ArgumentParser(
         description="Insere no relatório o texto dos parágrafos que ele cita.")
@@ -494,4 +524,5 @@ def main():
 
 
 if __name__ == "__main__":
+    autoteste()
     sys.exit(main())
