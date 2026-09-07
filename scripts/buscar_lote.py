@@ -85,8 +85,19 @@ def paragrafos(caminho):
         for m in re.finditer(r"^\[[^\]]+\]\s*P(\d+)\s*(?:\[[A-Z]+\])?\s*(?:\(p\.[^)]*\))?\s*(.*)$",
                              t, re.M):
             fora[int(m.group(1))] = m.group(2)
-    # A nota pode abrir a linha ou vir no meio dela, depois do texto do paragrafo.
-    for m in re.finditer(r"\[nota (\d+)\]([^\[]*)", t):
+    # A nota so conta quando ABRE a linha, que e como a extracao grava o bloco de
+    # notas ao fim do arquivo. O mesmo `[nota 29]` aparece no meio do paragrafo
+    # como chamada, e ali ele nao introduz texto de nota nenhum: introduz a
+    # continuacao do proprio paragrafo.
+    #
+    # Medido em 07/09/2026, e quem achou foi uma leitura, nao um teste meu. A
+    # versao anterior casava a chamada inline e indexava o resto do paragrafo
+    # como se fosse a nota, de modo que aquele texto era contado DUAS vezes: uma
+    # sob [P###] e outra sob a nota. Cinco contagens de controle entraram
+    # infladas num relatorio, e uma delas levou a leitura a atribuir a uma nota
+    # conteudo que estava no corpo. O defeito infla e nao zera, entao as
+    # afirmacoes de ausencia daquele relatorio continuam de pe.
+    for m in re.finditer(r"(?m)^\W{0,4}\[nota (\d+)\]\s*(.*)$", t):
         n = -int(m.group(1))
         fora[n] = fora.get(n, "") + " " + m.group(2)
     return fora
@@ -123,13 +134,14 @@ def autoteste():
     fonte = ("[P1] O ministro pediu aposentadoria em 2021, e a Corte mudou.\n"
              "\n[P2] A INSEGURANCA juridica aparece aqui, e nao a outra palavra.\n"
              "\n[P3] Uma tabela com 22, 12 e 34 casos julgados.\n"
+             "\n[P4] alfa bravo[nota 9] charlie delta.\n"
              "\n[nota 12] Cf. Nino, 2003; Zurn, 2007.\n")
     tmp = Path(__file__).resolve().parent / "_lote_autoteste.txt"
     tmp.write_text(fonte, encoding="utf-8")
     try:
         ps = paragrafos(str(tmp))
         falhas = []
-        if sorted(k for k in ps if k > 0) != [1, 2, 3]:
+        if sorted(k for k in ps if k > 0) != [1, 2, 3, 4]:
             falhas.append("nao leu os tres paragrafos: %r" % sorted(ps))
         if -12 not in ps:
             falhas.append("nao leu a nota de rodape")
@@ -149,6 +161,15 @@ def autoteste():
         if procurar(ps, "zurn")[0] != [-12]:
             falhas.append("nao acha o que so esta na nota de rodape: %r"
                           % (procurar(ps, "zurn")[0],))
+        # CONTAGEM EM DOBRO: a chamada `[nota 9]` no meio do paragrafo nao abre
+        # nota nenhuma, e o que vem depois dela e o proprio paragrafo. Contar
+        # aquilo duas vezes inflou cinco controles num relatorio de 07/09/2026.
+        if procurar(ps, "charlie") != ([4], 1):
+            falhas.append("conta em dobro o texto que segue a chamada de nota "
+                          "no meio do paragrafo: %r" % (procurar(ps, "charlie"),))
+        if procurar(ps, "bravo") != ([4], 1):
+            falhas.append("perde a palavra colada na chamada de nota: %r"
+                          % (procurar(ps, "bravo"),))
         return falhas
     finally:
         try:
