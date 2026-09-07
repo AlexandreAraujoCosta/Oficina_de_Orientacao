@@ -65,7 +65,18 @@ def normal(t):
 
 
 def paragrafos(caminho):
-    """Le as duas escritas de extracao: `[P12] texto` e `[trab] P12 [TIPO] (p.3) texto`."""
+    """Le as duas escritas de extracao, e le TAMBEM as notas de rodape.
+
+    A nota de rodape nao tem numero de paragrafo: a extracao a escreve como
+    `[nota 12] texto`. Toda busca indexada por `[P###]` a ignorava, e o zero que
+    ela devolvia tinha a mesma cara do zero de coisa inexistente. Medido em
+    06/09/2026: uma leitura afirmou que dois autores nao eram citados no trabalho,
+    com termo de controle passando, e os dois estao na nota 12; a consequencia do
+    item foi construida sobre a ausencia falsa.
+
+    As notas entram com chave negativa (-12 para a nota 12), de modo que a saida
+    as distingue do paragrafo e nada as confunde com ele.
+    """
     t = io.open(caminho, encoding="utf-8", errors="replace").read()
     fora = {}
     for m in re.finditer(r"^\W{0,4}\[P(\d+)\]\s*(.*)$", t, re.M):
@@ -74,6 +85,10 @@ def paragrafos(caminho):
         for m in re.finditer(r"^\[[^\]]+\]\s*P(\d+)\s*(?:\[[A-Z]+\])?\s*(?:\(p\.[^)]*\))?\s*(.*)$",
                              t, re.M):
             fora[int(m.group(1))] = m.group(2)
+    # A nota pode abrir a linha ou vir no meio dela, depois do texto do paragrafo.
+    for m in re.finditer(r"\[nota (\d+)\]([^\[]*)", t):
+        n = -int(m.group(1))
+        fora[n] = fora.get(n, "") + " " + m.group(2)
     return fora
 
 
@@ -107,15 +122,17 @@ def autoteste():
     """Prova a busca antes de usa-la, com os defeitos deste ambiente na mira."""
     fonte = ("[P1] O ministro pediu aposentadoria em 2021, e a Corte mudou.\n"
              "\n[P2] A INSEGURANCA juridica aparece aqui, e nao a outra palavra.\n"
-             "\n[P3] Uma tabela com 22, 12 e 34 casos julgados.\n")
+             "\n[P3] Uma tabela com 22, 12 e 34 casos julgados.\n"
+             "\n[nota 12] Cf. Nino, 2003; Zurn, 2007.\n")
     tmp = Path(__file__).resolve().parent / "_lote_autoteste.txt"
     tmp.write_text(fonte, encoding="utf-8")
     try:
         ps = paragrafos(str(tmp))
         falhas = []
-        if len(ps) != 3:
+        if sorted(k for k in ps if k > 0) != [1, 2, 3]:
             falhas.append("nao leu os tres paragrafos: %r" % sorted(ps))
-        # acento: a busca sem acento acha a palavra acentuada
+        if -12 not in ps:
+            falhas.append("nao leu a nota de rodape")
         if procurar(ps, "aposentadoria")[0] != [1]:
             falhas.append("nao acha palavra acentuada quando o termo vem sem acento")
         # caixa: o termo minusculo acha o texto em maiuscula
@@ -128,6 +145,10 @@ def autoteste():
         # controle negativo: o que nao existe devolve vazio
         if procurar(ps, "plenario virtual")[0]:
             falhas.append("acha o que nao esta la")
+        # a nota de rodape tem de ser alcancada, e vir marcada como nota
+        if procurar(ps, "zurn")[0] != [-12]:
+            falhas.append("nao acha o que so esta na nota de rodape: %r"
+                          % (procurar(ps, "zurn")[0],))
         return falhas
     finally:
         try:
@@ -154,14 +175,16 @@ def main():
             print("    %s" % f)
         return 2
     print("  autoteste: acha palavra acentuada e em caixa alta, acha termo dentro de "
-          "outra palavra, e nao acha o que nao esta la")
+          "outra palavra, alcanca a nota de rodape, e nao acha o que nao esta la")
 
     ps = paragrafos(a.extracao)
     if not ps:
         print("  nao reconheci nenhum paragrafo em %s" % a.extracao)
         return 2
-    print("  %s: %d paragrafos, de P%d a P%d\n"
-          % (Path(a.extracao).name, len(ps), min(ps), max(ps)))
+    pos = [k for k in ps if k > 0]
+    notas = [k for k in ps if k < 0]
+    print("  %s: %d paragrafos, de P%d a P%d, mais %d nota(s) de rodape\n"
+          % (Path(a.extracao).name, len(pos), min(pos), max(pos), len(notas)))
 
     if a.lote:
         buscas = ler_lote(a.lote)
@@ -180,7 +203,8 @@ def main():
     quebradas = 0
     for termo, controle in buscas:
         achados, total = procurar(ps, termo)
-        loc = ", ".join("[P%d]" % n for n in achados[:a.max_loc])
+        loc = ", ".join(("[nota %d]" % -n) if n < 0 else ("[P%d]" % n)
+                        for n in achados[:a.max_loc])
         if len(achados) > a.max_loc:
             loc += " ... (+%d)" % (len(achados) - a.max_loc)
         print("  %-42s %3d ocorrencia(s) em %3d paragrafo(s)"
