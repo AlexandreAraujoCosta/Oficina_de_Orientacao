@@ -507,6 +507,22 @@ apêndice autônomo, a pergunta que ele responde sozinho.
 Você redige, porque já leu todo item que sobreviveu e já decidiu o destino de cada
 um. Não há passada separada para isto.
 
+## Antes das cinco seções, o veredito, e ele é o título da abertura
+
+Leia `VEREDITO.md`, nesta mesma pasta, que traz os quatro degraus por extenso, a
+escala que o formato do arquivo indica e o molde da abertura. **Ele não é opcional e
+não depende de quem despacha a leitura lembrar de anexá-lo**: até 07/09/2026 esse
+arquivo não era citado por passo nenhum, e a régua chegava ao relatório só quando
+quem operava a entregava à mão.
+
+O que decide o degrau: **se as inferências do trabalho se sustentam nos dados que
+ele apresenta, de modo que as conclusões se sustentem, e se resta uma contribuição**.
+Não é quantos problemas existem nem quanto tempo pedem. Vinte correções que não
+tocam nenhuma afirmação não movem o degrau, e uma só inferência que o dado não
+carrega o move inteiro. A objeção se enuncia sempre contra uma inferência nomeada,
+com o dado em que ela se apoia e o que falta para o dado carregá-la, nunca contra o
+desenho.
+
 ## As cinco seções, e cada uma vem de uma leitura
 
 1. **O que é forte.** Das leituras 1, 2 e 3. **Elogio afirmado por uma voz só entra

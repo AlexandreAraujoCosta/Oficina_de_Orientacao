@@ -232,3 +232,65 @@ linha mudou duas vezes. Era *a dissertação sustenta o mecanismo que documenta,
 não sustenta a taxa que a fez nascer*; virou *a comparação que sustenta o argumento
 central ainda não foi feita*; e é hoje *quatro afirmações ainda não se sustentam nos
 dados que o trabalho apresenta, e as quatro se corrigem com o que ele já tem*.
+
+---
+
+## 07/09/2026 — Quatro travas contextuais, tiradas numa passada só
+
+**O caso.** Revisão do `ALBERTO.md` (8.211 palavras, crescidas 37% num dia) sob a
+pergunta de quais limites entraram por um caso particular e hoje restringem.
+Diagnóstico agrupado, e uma alteração só, em vez de sete remendos.
+
+**1. A régua do veredito não chegava a leitura nenhuma.** O `ALBERTO.md` carregava
+a régua velha, por contagem e prazo, que o próprio `VEREDITO.md` registra como o
+defeito corrigido em 06/09. E nenhum arquivo de `prompts/leituras/` citava o
+`VEREDITO.md`: o único ponteiro estava no `AGENTS.md`, que é nota para quem opera.
+A régua chegava ao relatório porque quem despachava a leitura entregava o arquivo à
+mão. Corrigido nos dois: o Alberto recebeu a régua nova por extenso (ele é colado
+inteiro e não pode remeter a arquivo); o `6-TRIAGEM-E-REDACAO.md` ganhou uma seção
+de abertura que manda ler o `VEREDITO.md` e repete o critério do degrau.
+
+**2. A proibição de olhar figura em `.docx`.** A seção `## Se o que chegou é um
+.docx` mandava não descrever nenhuma figura e declarar no alto do relatório que as
+imagens não chegaram. Duzentas linhas antes, o passo 2a manda extrair as imagens do
+`word/media/` e lê-las em lote. Escrita quando a extração não abria o `.zip`.
+**Alcance conferido antes de reportar:** nenhum dos três relatórios sobre `.docx`
+carrega a declaração falsa, de modo que a proibição estava inerte. A seção saiu e a
+única frase viva dela (o PDF já mostra as figuras) foi para o passo 2a.
+
+**3. A revisão não podia registrar o que via.** A regra dizia *não acrescenta item
+nenhum, e não reescreve o relatório*. A razão medida cobre a reescrita: a passada
+que redige de novo troca o vago pelo preciso e a precisão nova sai errada. Não
+cobre o registro. A segunda voz, que é a única que lê frio, ficava sem onde pôr uma
+inferência mal apoiada que o relatório não vira. Separado: não reescreve o corpo, e
+grava o que achar numa lista `ACHADOS NOVOS` ao fim do arquivo de revisão, com o
+endereço e o que teria de ser conferido para o item entrar.
+
+**4. A divisão chat/agente, que o próprio arquivo desmentia.** O título dizia `No
+agente: duas coisas que o chat não faz`, e setenta linhas adiante o arquivo
+registrava que o chat do Claude executou vinte e cinco comandos e pesquisou na web
+numa leitura. Mais duas absolutas da mesma família: *no chat não há essa numeração*
+(falso desde que a extração passou a caber no pedido) e *no chat o crédito é
+interno*. As três viraram condição sobre o que a via de fato faz. E o teto de *duas
+ou três proposições* na busca externa virou ponto de partida.
+
+**Junto, porque estavam medidos e não instruídos:** `buscar_lote.py` aparecia só
+num parágrafo de medição e entrou na regra de ausência; `conferir_bloco.py` não
+aparecia e entrou ao lado do pedido do bloco JSON.
+
+**O que se esperava, escrito antes:** o degrau do veredito deixa de ser justificado
+por prazo em relatório nenhum; o prompt encolhe entre 400 e 700 palavras.
+
+**O que aconteceu com a segunda previsão: errou de sinal.** O prompt foi de 8.211 a
+8.975 palavras, **+764**. A régua nova é três vezes maior que a velha, porque
+carrega o caso do trabalho descritivo e a fronteira entre os degraus 3 e 4, e os
+dois programas entraram com bloco de comando. O que saiu (a seção `.docx`, a
+duplicação do parágrafo sobre o chat) não pagou. A previsão de tamanho estava
+errada; a de conteúdo continua por medir.
+
+**O falseamento da primeira, ainda de pé:** se a próxima leitura sobre trabalho com
+hipótese justificar o degrau pela contagem de itens ou pelo prazo, a régua nova não
+pegou e o problema não estava onde ela está escrita.
+
+**Origem:** o diagnóstico é meu, lendo o arquivo; as quatro operações foram
+autorizadas pelo orientador. Nenhuma medida ainda.

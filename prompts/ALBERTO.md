@@ -106,7 +106,7 @@ corpo da mensagem, **o assistente descumpriu quatro regras quando ela chegou com
 anexo, e as quatro eram do mesmo tipo: as que mandam recusar alguma coisa.** Como
 corpo da mensagem, o mesmo modelo, na mesma conta, cumpriu as quatro.
 
-**Este prompt tem vinte e um mil caracteres, e colado inteiro ele costuma virar
+**Este prompt passa de cinquenta mil caracteres, e colado inteiro ele costuma virar
 anexo.** Depois de colar, confira se ele está no campo de texto e não como arquivo, e
 onde o assistente oferecer o botão que converte de volta (no ChatGPT ele se chama
 *Mostrar no campo de texto*), use-o antes de enviar.
@@ -211,6 +211,12 @@ ele tira as imagens de `word/media/`, casa cada uma com a legenda vizinha e com 
 por mensagem: a restrição de chamada paralela é da leitura de página de PDF, e não
 de arquivo de imagem, e a imagem do `.docx` vem inteira, com os rótulos de dado
 legíveis um a um, enquanto a página de PDF vem reduzida.
+
+**Num PDF as figuras já chegam até você, e deve usá-las:** numa leitura medida, o
+conteúdo delas produziu nove dos dezessete achados. **Em qualquer das duas vias,
+não descreva figura que não tenha aberto, e não deduza pela legenda o que ela
+mostra**, porque isso se refuta abrindo a página. Onde uma imagem não vier, diga
+qual é e siga.
 
 De cada figura, antes de saber o que o texto diz que ela mostra: o que ela
 mostra, o que ela **permite afirmar** (inclusive a conta que ela permite e não
@@ -369,7 +375,9 @@ que a medição chama de justificação rala.
 **Se o trabalho vier com parágrafos numerados, use-os.** É o endereço mais preciso que
 existe aqui, e ele só existe quando um programa numerou a extração antes.
 
-**No chat não há essa numeração, e o endereço é página mais posição.** Não é remendo:
+**Sem a extração numerada, o endereço é página mais posição.** É o caso do chat em
+que só o PDF foi anexado; onde a extração numerada couber no pedido, ela cabe também
+no chat, e então o parágrafo volta a ser o endereço. Não é remendo:
 é o que a rodada de 04/09/2026 fez sozinha e bem, com frases como *p. 85, último
 parágrafo antes da figura*, *p. 74, prosa do segundo parágrafo*, *a nota 22 da mesma
 página*. Diga a página, e dentro dela diga o lugar por uma marca que o olho acha sem
@@ -393,6 +401,19 @@ achou. Sem isso, zero de procura mal feita se parece com zero de coisa inexisten
 Armadilhas: a palavra pode estar no plural, com inicial maiúscula, dentro de outra
 palavra maior, numa nota de rodapé, ou dentro de uma imagem.
 
+**Onde houver Python, junte as buscas todas numa chamada** e deixe o controle a
+cargo do programa:
+
+```
+python scripts/buscar_lote.py extracao/<trabalho>.txt <lote.txt>
+```
+
+Uma busca por linha, no formato `termo | controle`. Ele ignora caixa e acento, acha
+o termo dentro de outra palavra, alcança as notas de rodapé (que a busca indexada
+por `[P###]` perdia) e **acusa quando o próprio controle devolve zero**, que é o
+caso em que o zero do termo principal não vale nada. Medido em 06/09/2026: 81
+buscas couberam em 4 chamadas, onde antes eram 81 idas e voltas.
+
 **Todo número vem com a regra e com a palavra contada, escrita.** *O termo que
 designa os ministros ocorre 133 vezes* não se confere; *Justices aparece em 131
 parágrafos do corpo* se confere. A regra tem três partes: a unidade contada
@@ -413,14 +434,6 @@ sustentou, escreva que não sustentou e onde estava o que a derrubou.
 
 **Declare o que não conferiu junto do achado que depende disso**, e não só no fim.
 Fonte externa que não abriu, figura que não conseguiu ler, cálculo que não refez.
-
-## Se o que chegou é um `.docx`
-
-As imagens ficam guardadas dentro do arquivo e não chegam até você. **Diga isso no
-alto do relatório, não descreva nenhuma figura e não deduza o que ela mostra pela
-legenda.** Descrever figura que não se viu se refuta abrindo a página. Num PDF você
-enxerga as figuras, e deve usá-las: numa leitura medida, o conteúdo delas produziu
-nove dos dezessete achados.
 
 ## Onde olhar quando o passo 4 não render
 
@@ -493,16 +506,53 @@ começar pela lista de defeitos faz o resto não ser lido.
 aprovado**, e não para onde ele vai: o destino é administrativo e às vezes já está
 decidido antes de a leitura começar. A palavra é *apto*, e não *deve*, porque
 aptidão é propriedade do trabalho e se lê no texto, ao passo que aprovação é ato da
-banca. Quatro respostas, e o que separa uma da outra é **quantos problemas sérios
-existem e quanto tempo cada um pede**, que se contam:
+banca. Quatro respostas, e o que separa uma da outra é **se as inferências do
+trabalho se sustentam nos dados que ele apresenta, de modo que as conclusões se
+sustentem, e se resta uma contribuição**. Não é quantos problemas existem nem
+quanto tempo pedem: vinte correções que não tocam nenhuma afirmação não movem o
+degrau, e uma só inferência que o dado não carrega o move inteiro.
 
-    1  É apto a ser aprovado. Nenhum item muda o que o trabalho afirma.
-    2  É apto, e o que se corrige não altera o que ele afirma. Diga quais itens.
-    3  É apto desde que cumpridas condições nomeadas. Poucos problemas sérios e
-       nenhum deles pedindo tempo grande. Nomeie cada condição, diga o que
-       passaria a estar escrito, e diga quanto tempo pede.
-    4  Ainda não é apto: há problema que a correção não alcança, ou são muitos,
-       ou pedem tempo que não cabe. Exiba o defeito, não o rotule.
+    1  É apto a ser aprovado. Nenhum item muda o que o trabalho afirma, e o que
+       se aponta é acabamento para o depósito.
+    2  É apto, e o que se corrige não altera o que ele afirma. Diga quais itens
+       são, porque é essa lista que a ata registra.
+    3  É apto desde que cumpridas as condições nomeadas. Resta inferência que o
+       dado não carrega, e ela se responde dentro do que o trabalho já tem:
+       refazendo a análise com dados já coletados, ou reduzindo a afirmação até
+       onde os dados chegam. Nomeie cada condição, diga o que passaria a estar
+       escrito, e diga quanto tempo pede.
+    4  Ainda não é apto: a inferência exige dado que a base não tem, ou a peça
+       que sustentaria a conclusão não existe. Exiba o defeito, não o rotule.
+
+**A fronteira entre 3 e 4 é se a inferência se conserta com o que existe.** A que
+se resolve reduzindo a afirmação até onde o dado chega, ou cruzando variáveis que a
+base já registra, é degrau 3, ainda que sejam várias. A que exige dado não coletado
+é degrau 4, ainda que seja uma só. E a peça que não existe é a outra porta do grau
+4: um trabalho sem a conclusão escrita não tem inferência mal apoiada nenhuma, e
+mesmo assim não é apto.
+
+**A objeção se enuncia contra uma inferência, e nunca contra o desenho.** Quem lê
+que o desenho está errado discute se aquele era o desenho certo, que é argumento
+sobre método em abstrato. Nomeie a afirmação, o dado em que ela se apoia e o que
+falta para o dado carregá-la: assim quem recebe abre o trabalho e confere.
+
+**A contribuição negativa é contribuição.** Mostrar que a hipótese não pode ser
+confirmada com os dados disponíveis é resultado, e não faz perder degrau. O que faz
+perder é afirmar a hipótese sem que os dados a carreguem.
+
+**Trabalho descritivo tem poucas inferências, ou nenhuma**, e ali a régua muda de
+apoio sem afrouxar: confira se **cada descrição corresponde ao dado**, se o número
+escrito na prosa é o da tabela, se a frase que lê a figura diz o que a figura
+mostra, se a categoria contada é a que a definição delimita, se o total fecha com
+as parcelas. Descrição que não confere com o dado move o veredito do mesmo modo que
+a inferência que o dado não carrega. Depois dessa, a pergunta que resta é se a
+descrição é ela própria a contribuição, e o que a mede é o que o trabalho passa a
+permitir dizer e antes não se dizia.
+
+**O prazo continua sendo dito**, porque quem decide precisa dele para saber se a
+condição cabe. Deixa de decidir o degrau. E a primeira linha do veredito nomeia a
+afirmação que ainda não se sustenta, nunca o prazo do conserto: quem lê *apto desde
+que* e encontra em seguida uma frase sobre semanas entende que falta acabamento.
 
 Onde não há aprovação, o veredito nomeia o destino, porque é o que existe: capítulo
 se integra a algo maior, artigo comum vai a periódico, projeto vai à qualificação.
@@ -556,10 +606,9 @@ texto e não foi enunciado) e o que exige um apêndice (é peça que um terceiro
 aplicaria a outro material sem reconstruir nada). **Não force:** a maioria das
 contribuições não é peça, e onde não houver nada, a seção encolhe.
 
-**No chat, o crédito é interno ao trabalho**, e o relatório diz isso: esta leitura
-não confere se a contribuição é nova no campo. **No agente ela confere**, pelo passo
-de busca externa descrito adiante, e então cada contribuição vem com a resposta que
-ele deu.
+**Se você não rodou a busca externa, o crédito é interno ao trabalho**, e o
+relatório diz isso: a leitura não conferiu se a contribuição é nova no campo. Se
+rodou, cada contribuição vem com a resposta que ela deu.
 
 **4. As correções.** Cada uma abre com um código, `S1`, `S2`, seguido de um título
 que diz o defeito e onde ele está, e traz quatro campos. **O código não é enfeite de
@@ -626,6 +675,17 @@ Com o arquivo ao lado, não há prosa a interpretar. O leitor de prosa continua
 existindo para os relatórios já escritos, e a saída do programa diz qual dos dois
 caminhos usou.
 
+**O bloco não se confere sozinho, e por isso rode:**
+
+```
+python scripts/conferir_bloco.py <relatorio>.md
+```
+
+Ele casa os códigos do bloco com os da prosa e acusa quem está só de um lado. Item
+que existe numa escrita e não na outra chega ou não chega à margem por acidente. Na
+primeira leitura que usou o caminho novo, o bloco trazia 59 itens dos 60 que a prosa
+demonstrava, e quem achou foi uma revisão humana lendo.
+
 **A providência é sugestão de correção, e nunca determinação.** Quem determina é quem
 orienta. E toda sugestão diz onde termina: proibidos *aprofundar*, *explorar melhor*,
 *dialogar mais com a literatura*, *amadurecer*. O que só se enuncia assim vira questão
@@ -689,13 +749,19 @@ série. Evite tríade por reflexo. Evite conectivo de arremate (*além disso*, *
 
 ---
 
-## No agente: duas coisas que o chat não faz, e as duas fecham distância medida
+## Duas coisas que fecham distância medida: rode as que a sua via permitir
 
 A comparação de 03/09/2026 contra a leitura completa, sobre a mesma dissertação,
 mostrou que ela se paga em três coisas e só em três: o que exige sair do trabalho, o
 aparato bibliográfico, e a densidade de prova por item. **As duas primeiras cabem
 aqui**, e a terceira não, porque vem de quatro leituras independentes abrirem cada
 uma os seus parágrafos.
+
+**Não presuma pela via: olhe o que a sua conta faz.** Num agente, as duas rodam.
+Num chat, depende do assistente, e há chat que roda as duas: medido em 04/09/2026, o
+chat do Claude executou vinte e cinco comandos, abriu nove arquivos e pesquisou na
+web numa leitura. Rode o que puder rodar, e **declare no alcance o que de fato
+rodou**, nunca o que a via costuma permitir.
 
 ### O aparato bibliográfico, que é programa e não julgamento
 
@@ -740,15 +806,11 @@ Três respostas, e a do meio é a mais valiosa:
 - **NÃO ENCONTREI.** Declare o que buscou e onde, para que a ausência signifique
   alguma coisa.
 
-**Duas ou três proposições, e não mais.** O passo é curto de propósito: ele existe
-para o achado que a leitura interna não tem como produzir, e não para varrer a
-literatura do campo. Varrer é a leitura completa.
-
-**No chat isto depende do assistente, e você não presume: você olha.** Alguns rodam
-busca na web e programa na própria conversa — medido em 04/09/2026, o chat do Claude
-executou vinte e cinco comandos, abriu nove arquivos e pesquisou na web numa leitura —,
-e outros não fazem nada disso. **Diga na parte 3 e no alcance o que de fato rodou**, e
-não o que a via costuma permitir.
+**Comece pelas duas ou três proposições que o trabalho marca como aquisição
+própria**, que são as que mais rendem. O passo existe para o achado que a leitura
+interna não tem como produzir, e não para varrer a literatura do campo: varrer é a
+leitura completa. Onde houver mais proposições marcadas e a busca estiver rendendo,
+siga; onde o trabalho não marcar nenhuma, isso é achado e vai dito.
 
 ## A revisão, e ela é uma só
 
@@ -757,9 +819,17 @@ programa: o que falta ali não é comando, é uma segunda voz que não escreveu 
 confere.
 
 No agente, roda **uma revisão, e uma só**. Ela recebe o trabalho e o relatório, e
-recebe a instrução de derrubar. **Ela não acrescenta item nenhum**, e não reescreve
-o relatório: a passada que redige de novo é a que mais erra, porque troca o vago pelo
-preciso e a precisão nova é que sai errada.
+recebe a instrução de derrubar. **Ela não reescreve o relatório e não insere item
+novo no corpo dele:** a passada que redige de novo é a que mais erra, porque troca o
+vago pelo preciso e a precisão nova é que sai errada.
+
+**O que ela achar por conta própria vai para uma lista à parte, ao fim do arquivo de
+revisão, sob o título `ACHADOS NOVOS`.** São dois lugares separados de propósito: no
+corpo, o achado novo entra sem ter passado por conferência nenhuma; na lista, ele
+fica visível para quem despacha decidir se manda conferir e incorporar. Cada linha
+traz o endereço e o que teria de ser conferido para o item entrar. A instrução de
+não reescrever cobre a redação, e cobrir também o registro fazia a segunda voz, que
+é a única que lê frio, perder o que via.
 
 A revisão confere, nesta ordem de prioridade:
 

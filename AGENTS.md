@@ -403,6 +403,53 @@ coisa.
 ele reconstrói o que o apontamento quis dizer, que é justamente o que se quer
 medir.
 
+## Quando abrir subagente, e o critério é a ignorância
+
+Subagente custa: ele relê o prompt e o trabalho num contexto novo, e o relógio
+disso é grande. Numa medição de 06/09/2026, sobre dezesseis execuções do mesmo
+dia, a correlação entre número de chamadas de ferramenta e tempo de relógio foi
+de 0,82, e a correlação entre tamanho do contexto e tempo por chamada foi
+negativa: o cache servia 98,4% da entrada. O custo está nas idas e voltas, e
+cada subagente é uma travessia inteira.
+
+Por isso a regra não é *use sempre* nem *evite*. É esta: **abra subagente quando
+o valor do que ele devolve depender de ele não ter visto alguma coisa.** Assim a
+decisão se confere em vez de se sentir.
+
+**Cinco operações passam nesse teste, e as cinco produziram achado no dia em que
+a regra foi escrita.**
+
+- **A conferência de compreensibilidade**, que não pode ter visto o trabalho nem
+  o relatório: com eles em mãos, quem confere reconstrói o que o apontamento quis
+  dizer, que é o que se quer medir.
+- **A leitura do trabalho**, que não pode ter visto a conversa em que o desenho
+  foi discutido. Uma sessão de trabalho carrega as medições, os defeitos, os
+  outros trabalhos e o que o orientador disse de cada um; tudo isso vaza para o
+  que a leitura vai reparar, e o foco tem de ser o trabalho.
+- **A crítica fria de uma mudança de prompt**, que não pode ter visto a conversa
+  que a motivou. O pedido está em `prompts/CRITICA-DE-MUDANCA.md`.
+- **A leitura cega das figuras**, que não pode ter visto a prosa que as comenta.
+  Ler a figura depois do texto é conferir o que o texto disse; ler antes é ver o
+  que a figura permite. Numa medição de 06/09/2026, o passo cego sobre treze
+  figuras devolveu cinco achados que a leitura com a prosa ao lado não tinha, e
+  recusou três das treze figuras, o que mostra que não estava preenchendo por
+  preencher.
+- **O cotejo de um relatório**, que não pode tê-lo escrito.
+
+**Fora dessas, sessão.** A cadeia mecânica inteira (extração, mapa, lista de
+itens, conferidores, montagem) e o conserto dos itens não pedem ignorância de
+nada, e cada uma delas aberta em subagente é uma travessia paga à toa.
+
+**Um subagente pode servir a várias leituras, e isso tem limite.** Reaproveitar o
+mesmo conferidor para duas listas de itens não fere o critério, porque ele
+continua sem ter visto trabalho nenhum, e poupa a releitura do método. O que se
+perde é que a segunda conferência passa a ser feita por quem já sabe o que a
+primeira achou, e tende a procurar a mesma classe de defeito em vez de ler. A
+regra prática: **reaproveite onde o critério é fixo** (a compreensibilidade corre
+contra um método escrito), **e abra novo onde a operação é de descoberta** (a
+leitura, a crítica fria, o passo cego).
+
+
 Os itens reprovados voltam para você reescrever, com a condição que os reprovou:
 a primeira frase diz o defeito e o lugar, sem categoria que você tenha inventado
 para organizar a própria leitura.
