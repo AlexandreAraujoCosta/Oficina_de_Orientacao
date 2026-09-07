@@ -66,8 +66,28 @@ entre as duas leituras foram 64 em 277.
 
 **A outra metade disto é o custo, e quem escolhe precisa dos dois números.** As
 questões que pedem atenção e detalhe a leitura completa acha, e cobra por elas. Medido
-em 03/09/2026: **no agente, em Opus 5, esta leitura custa de 270 a 320 mil tokens e de
-41 a 48 minutos, já contando a revisão; a completa passa de 1,15 milhão e de uma hora.**
+em 03/09/2026: **no agente, em Opus 5, esta leitura custava de 270 a 320 mil tokens e
+de 41 a 48 minutos, já contando a revisão; a completa passa de 1,15 milhão e de uma
+hora.**
+
+**Remedido em 06/09/2026, depois que as figuras passaram a sair do `.docx` em vez do
+PDF.** Sobre a mesma dissertação e o mesmo modelo, a leitura caiu de 126 chamadas e
+50 minutos para **79 chamadas e 30 minutos, com 325 mil tokens**, e isso já contando
+o passo cego das figuras, que é trabalho a mais. O que sumiu foram as leituras de
+página de PDF, que foram a zero, e as buscas soltas: 81 buscas couberam em 4
+chamadas do `buscar_lote.py`.
+
+**E há uma banda por dentro dessa, que depende de uma coisa só.** Noutra rodada do
+mesmo dia, sobre um trabalho maior, as figuras foram pedidas **uma por mensagem**,
+31 vezes: 36 minutos e **382 mil tokens**. Pedir em lote e pedir uma a uma difere
+pouco no relógio, porque a imagem carrega depressa, e difere muito no custo, porque
+cada mensagem é uma travessia que reenvia o contexto inteiro. A ordem de grandeza
+medida é de **um quinto do custo total da leitura**.
+
+**O gargalo, hoje, não é ler o trabalho.** Na rodada que contou o próprio percurso,
+32 das 79 chamadas foram a revisão contra o conferidor de transcrição: quatro
+execuções e vinte e oito edições de uma frase cada. Ler o trabalho inteiro custou
+menos do que corrigi-lo.
 Os poucos milhares são o tamanho deste prompt, e não o da rodada.
 
 **No chat o tempo depende do assistente, e a única medida limpa é esta:** no chat do
@@ -173,6 +193,16 @@ dados mostram, com endereço, sem olhar o que o autor diz que eles mostram. Depo
 leia o comentário.
 
 Este é o passo que mais rende, e é o que se perde na ordem normal.
+
+- **A correção que o conferidor pede vai numa passada só, e não numa edição por
+  frase.** Rode o conferidor uma vez e receba a lista inteira; decida todas as
+  reescritas antes de tocar no arquivo; aplique-as num script único, com os pares
+  de texto velho e novo; rode o conferidor de novo para confirmar. Medido em
+  06/09/2026, numa leitura que contou o próprio percurso: o conferidor de
+  transcrição acusou dezoito sequências, e a revisão gastou **32 das 79 chamadas
+  da leitura inteira**, sendo quatro execuções do conferidor e vinte e oito
+  edições de uma frase cada. Foi o que mais consumiu chamadas naquela leitura,
+  mais do que ler o trabalho. As vinte e oito cabem em uma.
 
 **Antes de ler a prosa que as comenta, leia as figuras sozinhas.** Rode
 `python scripts/figuras_do_docx.py <trabalho.docx> --extracao <extracao.txt>`:

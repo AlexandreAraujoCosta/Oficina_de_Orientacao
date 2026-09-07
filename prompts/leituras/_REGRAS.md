@@ -63,6 +63,16 @@ Medidos nesta bancada, e todos os quatro geraram acusação que não existia:
 - Contar parágrafo de `.docx` por `<w:p[ >].*?</w:p>` perde os auto-fechados que
   trazem atributo. Conte `</w:p>` mais `<w:p ... />`.
 
+- **A correção que o conferidor pede vai numa passada só, e não numa edição por
+  frase.** Rode o conferidor uma vez e receba a lista inteira; decida todas as
+  reescritas antes de tocar no arquivo; aplique-as num script único, com os pares
+  de texto velho e novo; rode o conferidor de novo para confirmar. Medido em
+  06/09/2026, numa leitura que contou o próprio percurso: o conferidor de
+  transcrição acusou dezoito sequências, e a revisão gastou **32 das 79 chamadas
+  da leitura inteira**, sendo quatro execuções do conferidor e vinte e oito
+  edições de uma frase cada. Foi o que mais consumiu chamadas naquela leitura,
+  mais do que ler o trabalho. As vinte e oito cabem em uma.
+
 **As buscas de ausência vão todas numa chamada.** Escreva a lista inteira, cada
 linha com o termo e o termo de controle, e rode
 `python scripts/buscar_lote.py <extracao.txt> <lote.txt>`. Ele devolve, de cada
