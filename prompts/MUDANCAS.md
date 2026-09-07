@@ -294,3 +294,46 @@ pegou e o problema não estava onde ela está escrita.
 
 **Origem:** o diagnóstico é meu, lendo o arquivo; as quatro operações foram
 autorizadas pelo orientador. Nenhuma medida ainda.
+
+---
+
+## 07/09/2026 — Experimento: a fragmentação do prompt custa tempo?
+
+**A hipótese, do orientador:** o prompt pede operações em linha em vez de uma
+leitura que integra as análises, e as operações viram múltiplas consultas
+ineficientes.
+
+**O que varia, uma coisa.** Braço A é o `ALBERTO.md` como está publicado hoje
+(8.975 palavras, cinco programas nomeados, revisão, bloco JSON). Braço B é o mesmo
+arquivo com **2.121 palavras removidas por script** (`scratchpad/braco_b.py`), todas
+de operação: o bloco JSON e o seu conferidor, o aparato bibliográfico e a busca
+externa, a revisão inteira, a correção do conferidor de transcrição, o comando que
+extrai as figuras, o buscador em lote e o conferidor de entrega. **A análise é
+idêntica nos dois**: ordem de leitura, exame da inferência, disciplina, estrutura do
+relatório, régua do veredito e regras de escrita saem intactas.
+
+**O material, o mesmo nos dois:** o capítulo 6 da dissertação T,
+`[P721]` a `[P793]`, 4.377 palavras, 53 parágrafos, 13 notas, três gráficos. Vai ser
+transformado em artigo independente, e os dois braços são informados disso, porque a
+escala do veredito depende do estágio. A extração não carrega os comentários de
+margem do orientador (conferido: zero ocorrências).
+
+**Os três gráficos entram como arquivo nos dois braços**, identificados à mão, porque
+o `figuras_do_docx.py` casou as 117 imagens com a lista de gráficos do início do
+documento e não com a posição no corpo. É defeito do casador e fica registrado; dar
+as figuras prontas aos dois evita que ele vire variável.
+
+**O que espero, escrito antes:** B fica entre um terço e metade do relógio e das
+chamadas de A. Previsão fraca, porque uma rodada enxuta anterior já deu 9,5 min e 14
+chamadas contra 32,3 e 64.
+
+**O que decide, e não é o tempo:** quantos achados de A o B não tem, e de que
+espécie. O cotejo vai a uma voz que não escreveu nenhum dos dois, recebendo os dois
+sem saber qual é qual.
+
+**A hipótese vence** se B for mais rápido e não perder achado de inferência nenhum.
+**A hipótese cai** se B perder inferência, ou se afirmar coisa que A conferiu e
+derrubou, que é o modo de falha medido do chat: absolver sem testar.
+
+**Confundidor declarado:** os dois braços herdam o `CLAUDE.md` desta máquina, que
+carrega a mesma disciplina. Nenhum dos dois mede o prompt sozinho.
