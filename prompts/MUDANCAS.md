@@ -337,3 +337,50 @@ derrubou, que é o modo de falha medido do chat: absolver sem testar.
 
 **Confundidor declarado:** os dois braços herdam o `CLAUDE.md` desta máquina, que
 carrega a mesma disciplina. Nenhum dos dois mede o prompt sozinho.
+
+### O resultado, 07/09/2026
+
+| | A (programas e revisão) | B (integrada) |
+|---|---|---|
+| relógio | 40 min 07 s | 12 min 43 s |
+| chamadas | 40 | 7 |
+| tokens | 274 mil | 148 mil |
+| itens | 42 | 48 |
+| das 7 observações do orientador | 2 | 1 |
+| afirmações conferidas / caídas | 37 / 0 | 31 / 4 |
+
+**A hipótese cai.** B é 3,2 vezes mais rápido e alcança menos, e o cotejo cego,
+que não sabia qual era qual, escolheu A pela taxa de erro. Entre as afirmações
+caídas de B há acusação de defeito que o capítulo não tem: em `[P787]` ele diz que
+a explicação aparece sem marca de ser alheia, e o parágrafo fecha com a fonte.
+
+**A previsão de tempo errou para o lado de A**: eu escrevera entre um terço e
+metade, e as chamadas deram 17,5%.
+
+**O cotejo também errou, e vai registrado.** Ele atribuiu a B duas acusações
+falsas; conferindo os dois parágrafos, uma se sustenta e a outra não: o item de B
+sobre `[P739]` diz que os quatro parágrafos seguintes apresentam como fato o que
+aquele marca como hipótese, e isso está certo. Por isso a tabela traz 4 e não 5.
+
+**O que os 33 minutos compraram foi a conferência, e não o achado.** Os dois
+chegaram ao mesmo veredito e ao mesmo achado principal (o denominador que o
+Gráfico 25 nunca publica, cuja soma anual excede os 5.179 processos declarados).
+A revisão de A retirou um item e consertou dezoito endereços ou providências,
+duas das quais mandavam escrever no capítulo afirmação que as figuras dele
+desmentem.
+
+**O número que decide não é sobre fragmentação: de sete observações do orientador
+alcançáveis de dentro do capítulo, o melhor braço fez duas.** Cinco escaparam aos
+dois. Duas delas (que monocráticas são essas, e produtividade contra produção)
+são a pergunta da unidade contada, passo que estava no prompt e **saiu em
+06/09/2026 por reprovar na rodada limpa**. Não se pode afirmar que ele as teria
+pego; pode-se afirmar que saiu e que elas passaram.
+
+**Consequência para a fila, e não é executada aqui:** a distância entre esta
+leitura e um examinador não encolhe trocando arquitetura, porque as duas
+arquiteturas testadas hoje deram 2 e 1 sobre 7. Encolhe com pergunta escrita.
+
+**Um achado que o experimento não pedia:** o braço A isolou um defeito no
+`buscar_lote.py`. A chamada `[nota 29]` no meio do parágrafo fazia o resto do
+parágrafo ser indexado duas vezes. Consertado no mesmo dia, com controle positivo
+provado contra a versão velha.
