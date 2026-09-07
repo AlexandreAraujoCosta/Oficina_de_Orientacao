@@ -384,3 +384,13 @@ arquiteturas testadas hoje deram 2 e 1 sobre 7. Encolhe com pergunta escrita.
 `buscar_lote.py`. A chamada `[nota 29]` no meio do parágrafo fazia o resto do
 parágrafo ser indexado duas vezes. Consertado no mesmo dia, com controle positivo
 provado contra a versão velha.
+
+**Nota ao commit 0a50b55.** Ele carrega, além do resultado do experimento, a
+reescrita do `figuras_do_docx.py` (624 linhas), que entrou por `git add -A` sem
+que eu a tivesse lido, e a mensagem do commit não a menciona. Conferida depois:
+ela endereça os três gráficos do capítulo 6 em `[P751]`, `[P763]` e `[P775]`,
+que é o que a conferência manual deste dia havia apurado, casa 897 de 897
+parágrafos com a extração, agrupa as peças de cada figura e nomeia a que carrega
+o dado. O autoteste dela traz oito controles, um dos quais recusa extração
+deslocada de um parágrafo. **O defeito foi de processo e não de código:
+`git add -A` num diretório com trabalho de terceiro em curso.**
