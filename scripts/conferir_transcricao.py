@@ -100,7 +100,56 @@ def achar(relatorio, fonte, n=JANELA):
         else:
             i += 1
     return [s for s in fora
-            if not any(c in s for c in DO_CAMPO) and not so_numeros(s)]
+            if not any(c in s for c in DO_CAMPO) and not so_numeros(s)
+            and not so_nomes(s, relatorio) and not em_italico(s, relatorio)]
+
+
+def so_nomes(s, relatorio):
+    """Sequencia quase toda de nome proprio nao e transcricao, e sim designacao.
+
+    Quatro ministros nomeados em ordem cronologica saem iguais em qualquer texto
+    que os nomeie; o mesmo vale para dispositivo (art. 324 do RISTF) e para o
+    titulo do trabalho, que o relatorio repete no proprio titulo. Nao ha como
+    reescrever com palavras proprias o nome de uma pessoa.
+
+    Medido em 08/09/2026: das quatro sequencias que este conferidor acusou num
+    relatorio, as quatro eram artefato deste tipo, e a que bloqueava era a lista
+    de quatro ministros. Reprovar ali obriga a escolher entre nao montar a entrega
+    e escrever errado o nome de alguem.
+
+    A conferencia se faz na CAIXA do relatorio, e nao na sequencia normalizada,
+    que ja perdeu as maiusculas. O limiar e alto porque prosa com um nome dentro
+    continua sendo prosa.
+    """
+    p = s.split()
+    if len(p) < 4:
+        return False
+    achadas = 0
+    for x in p:
+        if len(x) < 3:
+            achadas += 1          # de, da, e, do ligam nomes e nao contam contra
+            continue
+        if re.search(r"\b%s\b" % re.escape(x[0].upper() + x[1:]), relatorio):
+            achadas += 1
+    return achadas >= max(4, int(0.75 * len(p)))
+
+
+def em_italico(s, relatorio):
+    """O que o proprio prompt manda escrever assim nao pode ser reprovado aqui.
+
+    A disciplina publicada diz: palavra que voce contou ou que esta em discussao
+    vai em italico, com o paragrafo em que esta. Um conferidor que bloqueie isso
+    poe a leitura entre cumprir o prompt e passar na conferencia.
+
+    So vale para trecho curto: italico longo e transcricao com enfeite.
+    """
+    if len(s.split()) > 8:
+        return False
+    for m in re.finditer(r"\*([^*\n]{3,120})\*", relatorio):
+        dentro = " ".join(re.sub(r"[^\w\s]", " ", m.group(1).lower()).split())
+        if s in dentro:
+            return True
+    return False
 
 
 def so_numeros(s):
