@@ -207,7 +207,8 @@ Este é o passo que mais rende, e é o que se perde na ordem normal.
 **Antes de ler a prosa que as comenta, leia as figuras sozinhas.** Rode
 `python scripts/figuras_do_docx.py <trabalho.docx> --extracao <extracao.txt>`:
 ele tira as imagens de `word/media/`, casa cada uma com a legenda vizinha e com o
-`[P###]`, e devolve a tabela. Depois **peça as imagens numa mensagem só**, várias
+`[P###]` do parágrafo em que ela está, e diz qual arquivo carrega o dado. Onde ele
+disser que não sabe qual carrega, peça todos os arquivos daquela figura. Depois **peça as imagens numa mensagem só**, várias
 por mensagem: a restrição de chamada paralela é da leitura de página de PDF, e não
 de arquivo de imagem, e a imagem do `.docx` vem inteira, com os rótulos de dado
 legíveis um a um, enquanto a página de PDF vem reduzida.

@@ -48,7 +48,8 @@ entre as duas leituras é o achado.
 
 Rode `python scripts/figuras_do_docx.py <trabalho.docx> --extracao <extracao.txt>`,
 que tira as imagens de `word/media/`, casa cada uma com a legenda vizinha e com o
-`[P###]`, e devolve a tabela. **Depois peça as imagens numa mensagem só**, várias por
+`[P###]` do parágrafo em que ela está, e diz qual arquivo carrega o dado. Onde ele
+disser que não sabe qual carrega, peça todos os arquivos daquela figura. **Depois peça as imagens numa mensagem só**, várias por
 mensagem. Duas coisas justificam isso, e as duas foram medidas em 06/09/2026: a
 restrição de chamada paralela é da leitura de *página de PDF* e não de arquivo de
 imagem, de modo que seis imagens pedidas juntas voltaram as seis; e a imagem do

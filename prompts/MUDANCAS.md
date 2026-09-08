@@ -394,3 +394,205 @@ parágrafos com a extração, agrupa as peças de cada figura e nomeia a que car
 o dado. O autoteste dela traz oito controles, um dos quais recusa extração
 deslocada de um parágrafo. **O defeito foi de processo e não de código:
 `git add -A` num diretório com trabalho de terceiro em curso.**
+
+---
+
+## 07/09/2026 — `figuras_do_docx.py` passa a endereçar por posição
+
+**Os dois defeitos, medidos sobre `t-agosto.docx`.** O programa
+produzia 122 entradas de figura; 93 delas traziam endereço, e as 93 caíam entre
+`[P161]` e `[P228]`, que é o índice de gráficos das primeiras páginas. O índice
+repete a legenda do corpo palavra por palavra, e o casador ficava com a primeira
+ocorrência do texto. Os três gráficos do capítulo 6 estão em `[P751]`, `[P763]` e
+`[P775]`; o programa dizia `[P182]`, `[P183]` e `[P184]`. O segundo defeito é que
+a legenda casava com mais de um arquivo onde o gráfico está partido em arquivos
+separados dentro de `word/media`: o corpo do gráfico, o rótulo do eixo e a
+legenda de cores. Só um deles mostra o dado. No Gráfico 22 são `image33.png`
+(50 KB) contra `image31.png` (2 KB, que traz só o texto "Ano da decisão") e
+`image32.png` (4 KB, que traz só a legenda de cores). **O alcance disso é menor
+do que a primeira redação desta ficha dizia:** dos 107 parágrafos com imagem,
+noventa e oito têm um arquivo só, seis têm dois e três têm três.
+
+**Três coisas mudaram.** A contagem de parágrafos passou a andar a árvore do XML
+com a mesma regra do extrator, em lugar de expressão regular. **São dois defeitos
+que se compensam em parte, e a primeira redação desta ficha descrevia só um.**
+`<w:p ...>.*?</w:p>` trata o parágrafo vazio auto-fechado
+`<w:p w14:paraId="..."/>` como abertura e engole o parágrafo seguinte inteiro:
+são seis desses, e custam seis. Na outra ponta, a alternativa `<w:p[^>]*/>` casa
+dois elementos que não são parágrafo, `<w:pgSz .../>` e `<w:pgMar .../>`, no
+`sectPr` final e fora de qualquer parágrafo. A conta é 1.434 − 6 + 2 = 1.430,
+conferida contando os casamentos um a um. O endereço passou a ser a
+posição, de modo que o n-ésimo parágrafo do corpo é o `[Pn]` da extração; a
+extração deixou de servir para achar endereço e passou a conferir o alinhamento
+parágrafo a parágrafo, com recusa a endereçar abaixo de 90% de casamento. E as
+imagens de um mesmo parágrafo viraram uma figura só, com o portador do dado
+escolhido por dois sinais: arquivo que aparece em mais de uma figura é peça
+compartilhada, e entre os restantes decide a área em que o Word exibe a imagem
+(`wp:extent`), exigida três vezes maior que a segunda.
+
+**Por que a área e não os bytes.** Nos nove parágrafos com mais de uma imagem, a
+razão entre a maior área exibida e a segunda vai de **8,4 a 36,4** (a primeira
+redação desta ficha dizia 8,4 a 28, porque só seis dos nove tinham sido
+calculados; o teto real é o `[P483]`). Por tamanho em disco a menor razão é 2,1,
+e naquele caso o arquivo pequeno era mesmo o acessório: `image10.png` tem 19 KB
+sendo apenas a legenda de cores do Gráfico 9, conferido abrindo o arquivo. O
+tamanho em disco entra só onde não há `wp:extent`.
+
+**Os oito controles do autoteste, e a contagem certa é de dois ou de cinco.**
+Cinco trazem um ramo `CONTROLE MORTO`, que reprova quando o caso de teste deixa
+de exercer o defeito: a contagem, o endereço, a extração deslocada, a contraprova
+de três imagens em parágrafos diferentes e a recusa de eleger portador com áreas
+próximas. Desses cinco, **dois** rodam a implementação antiga dentro do teste e
+exigem que ela erre: `_contagem_por_regex_antiga`, que tem de contar 3 onde há 4,
+e `_endereco_por_texto_antigo`, que tem de errar para `[P2]`. Os outros três são
+as quatro escritas de legenda contra três prosas que começam pela mesma palavra,
+o agrupamento das três imagens de um parágrafo e o reconhecimento da peça
+compartilhada sem apoio em tamanho. **A primeira redação desta ficha dizia três,
+que não é nenhuma das duas leituras**, e ainda arrolava a extração deslocada
+entre os controles sem ramo, quando ela tem um.
+
+**O efeito esperado.** O alvo é anterior à mudança e veio do orientador: os três
+gráficos do capítulo 6 endereçados em `[P751]`, `[P763]` e `[P775]`, e o
+apontamento de qual dos três arquivos de cada um carrega o dado.
+
+**O que se mediu depois de rodar:** 107 figuras em 113 arquivos embutidos,
+nenhum endereço entre `[P161]` e `[P228]`, faixa de `[P281]` a `[P1184]`, 897 de
+897 parágrafos casando com a extração. Os três gráficos saem em `[P751]`,
+`[P763]` e `[P775]`, com `image33.png`, `image35.png` e `image37.png`.
+
+**A comparação de listas, corrigida.** A primeira redação desta ficha dizia que a
+lista para pedir em lote caiu de 113 para 104 arquivos, e os dois números são da
+versão nova. A versão antiga não tinha lista de lote: imprimia 122 linhas com 116
+nomes distintos, três deles (`hdphoto1.wdp` a `hdphoto3.wdp`) apanhados porque
+ela varria `r:embed=` no bloco inteiro e pegava o do `a14:imgLayer`. A redução de
+trabalho para quem lê é de 122 pedidos, ou 116 arquivos distintos, para 104.
+
+**O que mostraria que a mudança foi inútil**, num `.docx` do acervo que ainda não
+passou por aqui, com o limiar dito: abrir todos os arquivos apontados como
+portadores do dado e contar quantos são rótulo de eixo ou legenda de cores; acima
+de 5%, a régua da área foi calibrada no ruído deste trabalho e `RAZAO` não
+generaliza. É o sinal que decide, porque é o único calibrado aqui. Junto, dois
+sinais de endereço: figura cujo `[P###]` não bata com a conferência manual da
+legenda no texto extraído, em qualquer quantidade, derruba o casamento por
+posição, que ou vale para todas ou não vale; e a guarda de alinhamento tem de
+recusar endereçar quando se lhe der a extração de outra versão do mesmo trabalho.
+**Sai da lista o sinal que a primeira redação punha em primeiro lugar**, endereço
+que caia na faixa do índice de listas: a versão nova não consulta o texto da
+legenda para endereçar, de modo que ela quase não pode falhar por ali, e
+falseador que o desenho torna improvável mede pouco.
+
+**Carimbo.** A ficha está escrita depois de rodar, ao contrário do que este
+arquivo exige. O que é anterior à mudança é o alvo dos três gráficos, apurado à
+mão pelo orientador e já registrado na seção do experimento acima. O alcance
+medido é de um documento.
+
+**Dois prompts publicados corrigidos junto, porque a mudança os tornou falsos.**
+`ALBERTO.md` e `3-FRENTE-PARA-TRAS.md` diziam que o programa devolve uma tabela,
+e ele devolve uma lista por figura. A frase passou a dizer que o `[P###]` é o do
+parágrafo em que a figura está e que o programa nomeia o arquivo que carrega o
+dado, com uma instrução nova: onde ele disser que não sabe qual carrega, peça
+todos os arquivos daquela figura. `.claude/agents/alberto.md` foi gerado de novo.
+
+**O cotejo, e o que ele derrubou.** A pedido do orientador, as vinte e uma
+afirmações desta ficha foram numeradas num arquivo e entregues a uma voz que não
+as escreveu, com ordem de conferir cada uma por método próprio e de escrever o
+próprio contador em vez de contar a saída do programa. **Quatro caíram**, e as
+quatro estão corrigidas acima: a aritmética dos 1.430 (dois defeitos, não um), o
+teto da razão de área (36,4 e não 28), a comparação de listas (113 e 104 são
+ambos da versão nova) e a contagem dos controles positivos (dois ou cinco, nunca
+três). Caiu também a generalização de que cada legenda casava com três arquivos,
+que vale para nove dos 107 parágrafos com imagem. **Confirmei as quatro por
+medição própria antes de corrigir**, porque relatório de conferidor é hipótese
+até ser conferido. As dezessete restantes se sustentaram, incluídas as que
+exigiam abrir a imagem.
+
+**A crítica ao falseamento veio do mesmo cotejo**, e é a que mais muda esta
+ficha: os três sinais eram decidíveis um a um, e nenhum dizia quantas ocorrências
+tornam a mudança inútil, de modo que qualquer falha isolada os satisfazia. O
+limiar de 5% escrito acima **entrou por decisão e não por medição**, e fica
+carimbado assim; o que é medido é a razão de área nos nove parágrafos, que não é
+amostra independente.
+
+**Alcance do cotejo:** um documento, e mutação de uma regra por vez no autoteste
+(oito mutações, cada uma acusada pelo controle correspondente). O confundidor
+está declarado: a segunda voz herda o `CLAUDE.md` desta máquina, a mesma
+disciplina que eu segui, e não é leitura independente dela.
+
+## 07/09/2026 — A segunda voz sobre o código, e o que ela derrubou
+
+A voz que leu o código recebeu ordem de quebrar cada regra de propósito numa
+cópia e ver se o controle correspondente acusava. **Ela achou defeito de
+comportamento em três lugares, e todos foram consertados.**
+
+**1. O defeito 2 estava consertado pela metade.** O agrupamento era por
+parágrafo, e a fragmentação atravessa parágrafos. No Gráfico 26 o corpo está em
+`[P835]` e a tarja de cores em `[P836]`, cada um no seu: saíam duas figuras, as
+duas com motivo "arquivo único", e a tarja de cores entrava na lista dos
+arquivos que carregam dado, que é a chamada que o programa existe para poupar.
+São **dez grupos assim** em `t-agosto.docx`, incluídos os três em que
+`image48.png` (a tarja compartilhada) era eleita portadora do dado. A condição
+nova é estreita: juntam-se parágrafos vizinhos, colados e de imagem pura. Um
+parágrafo vazio entre eles separa, e é por isso que as capturas de tela do
+apêndice continuam figuras distintas. Efeito medido em dez `.docx`: 107 para 97
+figuras nos dois trabalhos do trabalho T, e **nenhuma junção nos outros
+oito**. Conferido abrindo os arquivos: `image38.png` é o corpo do Gráfico 26,
+com rótulo de dado em cada coluna, e `image39.png` é a tarja "Plenário Virtual /
+Plenário Presencial".
+
+**2. A busca da legenda tinha viés para a frente.** A ordem era
+`0, +1, +2, +3, -1, -2, -3`, e o parágrafo três à frente ganhava do que estava
+logo atrás. Em `x-v3.docx` a imagem de `[P528]`, cuja legenda está em
+`[P527]` logo acima, saía como "Gráfico 9. Plenário Presencial" de `[P530]`, e os
+dois gráficos saíam com o mesmo endereço. A ordem passou a ser por distância, com
+empate a favor da legenda de cima. Efeito medido: **seis endereços corrigidos em
+cada um dos quatro arquivos do trabalho X**, dois em `t-agosto.docx` e um
+em `t.docx`; conferi os oito primeiros um a um, e os oito passaram a
+apontar para a legenda imediatamente acima da imagem.
+
+**3. A guarda de alinhamento passava com extração parcial.** O próprio
+`analisar_docx.py` sugere extrair por faixa (`--de 1 --ate 300`), e a extração
+dos 300 primeiros parágrafos casa 208 de 208, imprime 100% e não confere nenhum
+dos 1.134 parágrafos onde estão todas as figuras. A guarda passou a dizer até
+onde os marcadores vão, e a marcar com `?` a figura que fica além disso.
+
+**Dois defeitos de silêncio, corrigidos junto:** `--extracao` com caminho
+inexistente caía na mensagem "sem --extracao", de modo que um erro de digitação
+convertia corrida conferida em corrida não conferida; e `.docx` sem
+`word/document.xml` saía com traceback.
+
+**O achado mais grave não é nenhum dos três: os controles não tocavam a tese.**
+`_par()` produzia sempre parágrafo filho direto do `<w:body>`, então nenhum dos
+oito controles tinha tabela, `w:sdt` ou aninhamento. **Tirar `w:tbl` do conjunto
+de descida leva a contagem de 1.434 para 1.319 neste trabalho e de 1.347 para 801
+na `x-v3.docx`, e o autoteste continuava verde.** A regra de descida é a
+tese inteira do conserto por posição, e era a única coisa que não se testava.
+
+**A bateria de sabotagem virou o critério, e ela é o que mede um controle.** Doze
+sabotagens, uma regra quebrada por vez: as doze são acusadas. Duas delas
+mostraram controle fraco que eu tinha escrito como forte: o da extração deslocada
+passava com a comparação de texto **desligada**, porque um marcador fora da faixa
+carregava sozinho o veredito, e o limiar testado não era o que o programa usa.
+Os controles foram de oito para dezessete.
+
+**O que a segunda voz não conseguiu conferir, e importa mais que o resto:** a
+calibragem de `RAZAO = 3.0` fora do trabalho em que foi feita. Nos outros oito
+`.docx` do acervo há uma imagem por parágrafo, e `repartir` nunca chega ao
+limiar. O `ANOTADO-plenario-virtual.docx` não serve, porque é o mesmo trabalho
+(os 117 arquivos de `word/media` têm os 117 mesmos MD5). **A conferência de
+`RAZAO` continua circular por falta de material, e não por falta de esforço.**
+
+**Fica na fila, medido e não consertado:** `RE_LEGENDA` roda com `re.I`, de modo
+que `[A-Z]` casa minúscula e "Tabela 1 apresenta os dados" é lido como legenda
+(latente: as 408 legendas atribuídas no acervo são todas legendas de verdade, e a
+janela de mais ou menos três parágrafos hoje protege, mas `--vizinhanca` não tem
+teto). A leitura das relações por expressão regular exige `Id` antes de `Target` e
+devolve lista vazia em silêncio se a ordem inverter. Nenhum dos dois ocorre nos 30
+`.docx` do acervo.
+
+**Confundidor declarado:** a voz do código herda o `CLAUDE.md` desta máquina, a
+mesma disciplina que eu segui, e não é leitura independente dela.
+
+**Origem:** os dois defeitos iniciais foram relatados pelo orientador, com os
+casos; o conserto, os controles e os defeitos desta segunda rodada são meus, e
+foram achados por uma segunda voz que o orientador mandou abrir. A nota ao commit
+`a05d5bc` registra que a reescrita entrou no `0a50b55` sem ter sido lida.

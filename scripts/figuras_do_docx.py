@@ -18,27 +18,42 @@ coisas mudam quando as figuras saem do `.docx`:
                 insercao e sem legenda nenhuma. Este programa casa cada arquivo
                 com o paragrafo em que ele aparece e com a legenda vizinha.
 
-O ENDERECO SAI DA POSICAO, E NAO DO TEXTO DA LEGENDA
+DE ONDE SAI O ENDERECO
 
 Medido em 07/09/2026 sobre `t-agosto.docx`: as 117 imagens sairam
 todas enderecadas em [P161]-[P228], que e o indice de graficos das primeiras
 paginas. A causa e que o indice repete a legenda do corpo palavra por palavra, e
-o casador por texto ficava com a PRIMEIRA ocorrencia. Os tres graficos do
-capitulo 6 estao em [P751], [P763] e [P775]; o programa dizia [P182], [P183] e
-[P184].
+o casador buscava o texto da legenda na extracao inteira, ficando com a PRIMEIRA
+ocorrencia. Os tres graficos do capitulo 6 estao em [P751], [P763] e [P775]; o
+programa dizia [P182], [P183] e [P184].
 
-O conserto casa por POSICAO: a contagem de paragrafos aqui repete a regra do
-extrator, de modo que o n-esimo paragrafo do corpo e o [Pn] da extracao. A
-extracao deixou de ser consultada para achar endereco e passou a servir de
-CONFERENCIA do alinhamento, paragrafo a paragrafo.
+A contagem de paragrafos aqui repete a regra do extrator, de modo que o n-esimo
+paragrafo do corpo e o [Pn] da extracao, e a extracao passou a servir de
+CONFERENCIA do alinhamento em vez de fonte do endereco.
+
+Dito com precisao, porque a primeira redacao deste cabecalho dizia que o
+endereco sai da posicao e nao do texto: quem localiza a LEGENDA continua sendo
+casamento de texto (`RE_LEGENDA`), so que dentro de uma janela de mais ou menos
+`--vizinhanca` paragrafos em torno da imagem, e nao no documento inteiro. O que
+saiu da busca por texto foi o endereco, que agora e a posicao do paragrafo
+encontrado.
 
 UMA FIGURA PODE ESTAR PARTIDA EM VARIOS ARQUIVOS
 
-No mesmo trabalho, cada grafico estava partido em tres imagens: o corpo do
-grafico, o rotulo do eixo e a legenda de cores, gravados como arquivos
-separados. So um deles mostra o dado. O programa agrupa as imagens do mesmo
-paragrafo e diz qual carrega o dado, pela area em que a imagem e exibida
-(`wp:extent`) e pelo reaproveitamento do arquivo em mais de uma figura.
+Alguns graficos deste trabalho estao partidos em arquivos separados: o corpo do
+grafico, o rotulo do eixo e a legenda de cores. So um deles mostra o dado. O
+alcance disso e menor do que a primeira redacao dizia: dos 97 grupos de imagem,
+oitenta e um tem um arquivo so.
+
+A fragmentacao vem de duas formas, e a primeira versao deste conserto so pegava
+uma. Dentro de um paragrafo (o Grafico 22, com tres arquivos em [P752]) e
+ATRAVESSANDO paragrafos (o Grafico 26, com o corpo em [P835] e a tarja de cores
+em [P836]). Sao dez grupos da segunda forma neste trabalho, e neles o programa
+elegia a tarja de cores como portadora do dado, com o motivo "arquivo unico".
+
+O programa junta os paragrafos de imagem pura que estejam colados e diz qual
+arquivo carrega o dado, pela area em que a imagem e exibida (`wp:extent`) e pelo
+reaproveitamento do arquivo em mais de uma figura.
 
 O QUE ELE NAO FAZ
 
@@ -78,11 +93,16 @@ DESCE = {W + "tbl", W + "sdt", W + "sdtContent", W + "tr", W + "tc",
          W + "customXml", W + "smartTag"}
 
 # Quantas vezes a maior imagem do grupo precisa ser maior que a segunda para que
-# se afirme que e ela que carrega o dado. Medido no acervo: nos nove paragrafos
-# com mais de uma imagem, a razao entre a maior area exibida e a segunda vai de
-# 8,4 a 28. Por bytes a separacao e bem pior (a menor razao e 2,1, e naquele
-# caso o arquivo pequeno era mesmo so a legenda de cores), e por isso a area
-# manda e o tamanho em disco entra so como recurso.
+# se afirme que e ela que carrega o dado. Medido: nos nove grupos com mais de uma
+# imagem de `t-agosto.docx`, a razao entre a maior area exibida e a
+# segunda vai de 8,4 a 36,4. Por bytes a separacao e bem pior (a menor razao e
+# 2,1, e naquele caso o arquivo pequeno era mesmo so a legenda de cores), e por
+# isso a area manda e o tamanho em disco entra so como recurso.
+#
+# ALCANCE DESTA CALIBRAGEM, e ele e estreito: o limiar saiu de UM trabalho.
+# Nos demais `.docx` do acervo nao ha grupo com mais de uma imagem, de modo que
+# `repartir` nunca chega ao limiar neles e a calibragem continua circular. Falta
+# material, e nao esforco.
 RAZAO = 3.0
 
 # Abaixo desta proporcao de paragrafos casados, a extracao nao corresponde a
@@ -108,26 +128,36 @@ RE_MARCADOR = re.compile(r"^[>\s]*[#*`]*\s*\[P(\d+)\][^\n]*", re.M)
 
 # --------------------------------------------------------------- leitura do docx
 
-def paragrafos_do_docx(fonte):
+def paragrafos_do_docx(fonte, desce=None):
     """Devolve, na ordem, (texto, imagens) de cada paragrafo do corpo.
 
     A posicao na lista e o endereco: o item de indice k e o [P(k+1)] da
     extracao. Para que isso valha, a contagem repete a regra do extrator
     (`collect_paragraphs` em analisar_docx.py): anda a arvore, conta `<w:p>` e
-    desce em tabela, sdt, linha, celula e smartTag.
+    desce em tabela, sdt, linha, celula e smartTag. Descer errado desloca todo
+    endereco, e em silencio: tirar so a tabela do conjunto muda a contagem de
+    1.434 para 1.319 neste trabalho e de 1.347 para 801 na `x-v3.docx`.
+    O parametro `desce` existe para o autoteste poder provar isso.
 
-    Expressao regular nao serve aqui, e o defeito e do tipo que passa
-    despercebido porque some no total. `<w:p ...>.*?</w:p>` trata o paragrafo
-    vazio auto-fechado `<w:p w:rsidR="00AB"/>` como abertura, porque o `[ >]`
-    casa o espaco antes dos atributos, e engole o paragrafo seguinte inteiro.
-    Em `t-agosto.docx` sao seis desses, e a contagem saia 1.430 para
-    1.434 paragrafos reais. Quatro de deslocamento erram todo endereco a partir
-    do primeiro.
+    Expressao regular nao serve aqui, e sao DOIS defeitos que se compensam em
+    parte, o que faz o erro caber num total de aparencia plausivel:
+
+        `<w:p ...>.*?</w:p>` trata o paragrafo vazio auto-fechado
+        `<w:p w14:paraId="..."/>` como abertura, porque o `[ >]` casa o espaco
+        antes dos atributos, e engole o paragrafo seguinte inteiro. Sao seis
+        desses em `t-agosto.docx`, e custam seis.
+
+        A alternativa `<w:p[^>]*/>` casa `<w:pgSz .../>` e `<w:pgMar .../>`,
+        que ficam no `sectPr` final e nao sao paragrafo. Sao dois, e entram.
+
+    A conta e 1.434 - 6 + 2 = 1.430, que era o que a versao anterior devolvia.
 
     Cada imagem vem como (arquivo, cx, cy), com cx e cy em EMU, que e a area em
     que o Word a exibe. Vale zero quando o desenho nao traz `wp:extent` (VML
     antigo), e nesse caso o desempate cai no tamanho em disco.
     """
+    if desce is None:
+        desce = DESCE
     fechar = False
     if isinstance(fonte, zipfile.ZipFile):
         z = fonte
@@ -135,8 +165,13 @@ def paragrafos_do_docx(fonte):
         z = zipfile.ZipFile(fonte)
         fechar = True
     try:
-        xml = z.read("word/document.xml")
-        rels = z.read("word/_rels/document.xml.rels").decode("utf-8", "replace")
+        try:
+            xml = z.read("word/document.xml")
+            rels = z.read("word/_rels/document.xml.rels").decode("utf-8",
+                                                                 "replace")
+        except KeyError as erro:
+            raise SystemExit("  este .zip nao tem a peca que o .docx deveria "
+                             "ter, e nao leio nada dele: %s" % erro)
     finally:
         if fechar:
             z.close()
@@ -155,7 +190,7 @@ def paragrafos_do_docx(fonte):
             if filho.tag == W + "p":
                 texto = "".join(t.text or "" for t in filho.iter(W + "t"))
                 fora.append((texto.strip(), imagens_do_paragrafo(filho, alvo)))
-            elif filho.tag in DESCE:
+            elif filho.tag in desce:
                 anda(filho)
 
     anda(corpo)
@@ -221,13 +256,21 @@ def normalizar(s):
 def conferir_alinhamento(ps, extracao, largura=40):
     """Confere que o k-esimo paragrafo do docx e o [Pk] da extracao.
 
-    Devolve (casados, divergentes, exemplos). Sem isto o endereco por posicao
-    seria fe: bastaria a extracao ser de outra versao do trabalho para todo
-    [P###] sair errado sem sinal nenhum.
+    Devolve (casados, divergentes, exemplos, maior_marcador). Sem isto o
+    endereco por posicao seria fe: bastaria a extracao ser de outra versao do
+    trabalho para todo [P###] sair errado sem sinal nenhum.
+
+    `maior_marcador` existe porque taxa alta nao e cobertura. O proprio
+    `analisar_docx.py` sugere, ao fim do relatorio, extrair uma FAIXA
+    (`--de 1 --ate 300`), e a extracao dos 300 primeiros paragrafos de
+    `t-agosto.docx` casa 208 de 208, imprime 100% e nao confere
+    nenhum dos 1.134 paragrafos restantes, que e onde estao todas as figuras.
     """
     casados, divergentes, exemplos = 0, 0, []
+    maior = 0
     for m in RE_MARCADOR.finditer(extracao):
         idx = int(m.group(1))
+        maior = max(maior, idx)
         if not 1 <= idx <= len(ps):
             divergentes += 1
             if len(exemplos) < 5:
@@ -243,7 +286,7 @@ def conferir_alinhamento(ps, extracao, largura=40):
             divergentes += 1
             if len(exemplos) < 5:
                 exemplos.append((idx, doc, ext))
-    return casados, divergentes, exemplos
+    return casados, divergentes, exemplos, maior
 
 
 # ------------------------------------------------------------- montagem da figura
@@ -263,16 +306,16 @@ def repartir(imgs, uso, tamanhos):
     que e o que se quer: melhor dizer que nao sabe.
     """
     if len(imgs) == 1:
-        return imgs[0], [], "único arquivo"
+        return imgs[0], [], "arquivo único"
     proprios = [i for i in imgs if uso[i[0]] == 1]
     pool = proprios or list(imgs)
     if len(pool) == 1:
         return pool[0], [i for i in imgs if i is not pool[0]], \
-            "os outros se repetem em outras figuras"
+            "porque os outros se repetem em outras figuras"
     if all(area(i) for i in pool):
-        chave, nome = area, "área exibida"
+        chave, nome = area, "pela área exibida"
     else:
-        chave, nome = (lambda i: tamanhos.get(i[0], 0)), "tamanho em disco"
+        chave, nome = (lambda i: tamanhos.get(i[0], 0)), "pelo tamanho em disco"
     ordem = sorted(pool, key=chave, reverse=True)
     if chave(ordem[1]) <= 0 or chave(ordem[0]) < RAZAO * chave(ordem[1]):
         return None, list(imgs), "tamanhos próximos"
@@ -280,29 +323,69 @@ def repartir(imgs, uso, tamanhos):
     return principal, [i for i in imgs if i is not principal], nome
 
 
+def grupos_de_imagem(ps):
+    """Junta em uma figura os paragrafos SEGUIDOS que so tem imagem.
+
+    Medido em 07/09/2026, e e o defeito que a primeira versao deste conserto
+    deixou de pe: a fragmentacao nem sempre cabe num paragrafo. No Grafico 26 de
+    `t-agosto.docx` o corpo esta em [P835] e a tarja de cores em
+    [P836], cada um no seu paragrafo, e o programa dava duas figuras, as duas com
+    motivo "arquivo unico", pondo a tarja de cores na lista dos arquivos que
+    carregam dado. Mesma coisa no Grafico 27 ([P841] e [P842]).
+
+    A condicao e estreita de proposito: so juntam paragrafos VIZINHOS e SEM
+    TEXTO. Um paragrafo vazio no meio separa, e e por isso que as capturas de
+    tela do apendice ([P679], [P681], [P686]), que tem um paragrafo vazio entre
+    si, continuam figuras distintas. Prosa junto da imagem tambem separa.
+    """
+    grupos = []
+    for k, (texto, imgs) in enumerate(ps):
+        if not imgs:
+            continue
+        # junta ao grupo anterior so se este paragrafo e o anterior forem os
+        # dois de imagem pura e estiverem colados.
+        if grupos and not texto and grupos[-1][-1] == k - 1 and not ps[k - 1][0]:
+            grupos[-1].append(k)
+        else:
+            grupos.append([k])
+    return grupos
+
+
 def montar_figuras(ps, vizinhanca, tamanhos):
-    """Agrupa as imagens por paragrafo e acha a legenda de cada grupo.
+    """Agrupa as imagens e acha a legenda de cada grupo.
 
     O endereco da figura e o do paragrafo da LEGENDA quando ha uma, porque e por
     ele que a leitura acha a figura no texto extraido; o paragrafo da imagem vai
     junto, e costuma ser o seguinte.
+
+    A legenda e a MAIS PROXIMA, medida em paragrafos, com empate resolvido a
+    favor da que vem antes (que e onde a norma poe o titulo de grafico). A ordem
+    anterior era `0, +1, +2, +3, -1, -2, -3`, que fazia o paragrafo tres a frente
+    ganhar do que estava logo atras: em `x-v3.docx` a imagem de [P528],
+    cuja legenda esta em [P527] logo acima, saia como "Grafico 9 ... Plenario
+    Presencial" de [P530], que e o grafico seguinte, e os dois graficos saiam com
+    o mesmo endereco.
     """
-    com_imagem = [(k, p) for k, p in enumerate(ps) if p[1]]
-    uso = Counter(nome for _, p in com_imagem for nome, _, _ in p[1])
+    grupos = grupos_de_imagem(ps)
+    uso = Counter(nome for g in grupos for k in g for nome, _, _ in ps[k][1])
     figuras = []
-    for k, (texto, imgs) in com_imagem:
+    for g in grupos:
+        inicio, fim = g[0], g[-1]
+        imgs = [i for k in g for i in ps[k][1]]
         legenda, leg_idx = "", None
-        for d in list(range(0, vizinhanca + 1)) + \
-                 [-x for x in range(1, vizinhanca + 1)]:
-            j = k + d
+        candidatos = [inicio]
+        for d in range(1, vizinhanca + 1):
+            candidatos += [inicio - d, fim + d]
+        for j in candidatos:
             if 0 <= j < len(ps) and RE_LEGENDA.match(ps[j][0]):
                 legenda = re.sub(r"\s+", " ", ps[j][0])
                 leg_idx = j + 1
                 break
         principal, acessorios, motivo = repartir(imgs, uso, tamanhos)
         figuras.append({
-            "onde": leg_idx or (k + 1),
-            "p_imagem": k + 1,
+            "onde": leg_idx or (inicio + 1),
+            "p_imagem": inicio + 1,
+            "p_ultimo": fim + 1,
             "p_legenda": leg_idx,
             "legenda": legenda,
             "principal": principal,
@@ -325,6 +408,20 @@ _NS = ('xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" '
        'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
        'xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
        'xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"')
+
+
+def _tabela(*linhas):
+    """Uma <w:tbl> de teste, uma celula por texto de cada linha."""
+    fora = ""
+    for celulas in linhas:
+        fora += "<w:tr>%s</w:tr>" % "".join(
+            "<w:tc>%s</w:tc>" % _par(c) for c in celulas)
+    return "<w:tbl>%s</w:tbl>" % fora
+
+
+def _sdt(*paragrafos):
+    """Um <w:sdt> de teste, que o extrator atravessa sem contar."""
+    return "<w:sdt><w:sdtContent>%s</w:sdtContent></w:sdt>" % "".join(paragrafos)
 
 
 def _par(texto="", imgs=()):
@@ -406,8 +503,9 @@ def autoteste():
                 "A figura de duração é apresentada"):
         if RE_LEGENDA.match(mau):
             falhas.append("confunde prosa com legenda: %r" % mau)
-    provas.append("reconhece as quatro escritas de legenda e recusa três prosas "
-                  "que começam pela mesma palavra")
+    if not falhas:
+        provas.append("reconhece as quatro escritas de legenda e recusa três "
+                      "prosas que começam pela mesma palavra")
 
     # 2. contagem de paragrafo, com o paragrafo vazio auto-fechado que fazia a
     #    expressao regular antiga engolir o seguinte.
@@ -427,6 +525,32 @@ def autoteste():
     else:
         provas.append("conta 4 parágrafos onde a expressão regular antiga conta "
                       "%d, por tratar `<w:p .../>` vazio como abertura" % antiga)
+
+    # 2b. a REGRA DE DESCIDA, que e a tese inteira do conserto e que nenhum
+    #     controle tocava: os `<w:p>` de dentro de tabela e de sdt contam, e
+    #     contam na posicao em que estao. Descer errado desloca todo endereco em
+    #     silencio (tirar so a tabela leva 1.434 a 1.319 no trabalho de prova).
+    pars = [_par("antes"),
+            _tabela(["celula um", "celula dois"], ["celula tres"]),
+            _sdt(_par("dentro do sdt")),
+            _par("depois")]
+    ps = paragrafos_do_docx(zipfile.ZipFile(_zip_de_teste(pars)))
+    esperado = ["antes", "celula um", "celula dois", "celula tres",
+                "dentro do sdt", "depois"]
+    if [t for t, _ in ps] != esperado:
+        falhas.append("regra de descida: %r em vez de %r"
+                      % ([t for t, _ in ps], esperado))
+    else:
+        magro = DESCE - {W + "tbl"}
+        ps_magro = paragrafos_do_docx(zipfile.ZipFile(_zip_de_teste(pars)),
+                                      desce=magro)
+        if len(ps_magro) == len(ps):
+            falhas.append("CONTROLE MORTO: sem w:tbl no conjunto de descida a "
+                          "contagem nao muda, e o caso nao exerce a regra")
+        else:
+            provas.append("conta os parágrafos de dentro de tabela e de sdt na "
+                          "posição em que estão (6 aqui; sem descer em w:tbl "
+                          "seriam %d)" % len(ps_magro))
 
     # 3. o endereco vem da posicao, e nao do texto: o indice de graficos das
     #    primeiras paginas repete a legenda do corpo palavra por palavra.
@@ -461,22 +585,112 @@ def autoteste():
     else:
         provas.append("endereça a figura em [P6], o corpo, onde o casador por "
                       "texto dava [P2], a linha do índice de gráficos")
-    casados, divergentes, _ = conferir_alinhamento(ps, ext)
+    casados, divergentes, _, ate = conferir_alinhamento(ps, ext)
     if casados != 6 or divergentes:
         falhas.append("alinhamento: %d casados e %d divergentes, esperava 6 e 0"
                       % (casados, divergentes))
+    if ate != 8:
+        falhas.append("alinhamento: o maior marcador deu [P%d] e não [P8]" % ate)
 
-    # 4. o alinhamento tem de acusar extracao que nao e deste .docx.
-    ext_torta = "\n".join("[P%d] %s" % (i + 2, ps[i][0]) for i in range(len(ps))
-                          if ps[i][0])
-    casados, divergentes, _ = conferir_alinhamento(ps, ext_torta)
-    if casados >= divergentes:
+    # 4. o alinhamento tem de acusar extracao que nao e deste .docx, e a
+    #    assercao e contra o limiar que o programa usa de verdade, e nao contra
+    #    "mais divergentes que casados", que quatro sabotagens da guarda passam.
+    #    Todo marcador fica DENTRO da faixa de paragrafos de proposito: com um
+    #    marcador fora da faixa, o controle reprovava por ele e passava mesmo com
+    #    a comparacao de texto desligada, que e falso conforto.
+    ext_torta = "\n".join("[P%d] %s" % (i + 2, ps[i][0])
+                          for i in range(len(ps) - 1) if ps[i][0])
+    casados, divergentes, _, _ = conferir_alinhamento(ps, ext_torta)
+    taxa = casados / float(casados + divergentes or 1)
+    if taxa >= ALINHAMENTO_MINIMO:
         falhas.append("CONTROLE MORTO: extracao deslocada em um paragrafo "
-                      "passou com %d casados e %d divergentes"
-                      % (casados, divergentes))
+                      "passou com taxa de %.0f%%, acima do limiar de %.0f%%"
+                      % (100 * taxa, 100 * ALINHAMENTO_MINIMO))
     else:
-        provas.append("recusa extração deslocada de um parágrafo (%d casados "
-                      "contra %d divergentes)" % (casados, divergentes))
+        provas.append("recusa extração deslocada de um parágrafo, sem marcador "
+                      "fora da faixa para carregar o veredito: taxa de %.0f%%"
+                      % (100 * taxa))
+
+    # 4c. a normalizacao tem de tolerar o que o extrator acrescenta ao texto (a
+    #     chamada de nota vira [nota N]) e nada alem disso.
+    ext_nota = "\n".join(["[P1] ÍNDICE DE GRÁFICOS",
+                          "[P2] %s 79" % legenda,
+                          "[P3] Gráfico 23 - Outra coisa 82",
+                          "[P5] prosa qualquer[nota 37] no meio do trabalho",
+                          "**[P6] %s**" % legenda,
+                          "[P8] Fonte: elaborado[nota 38] pela autora"])
+    casados, divergentes, _, _ = conferir_alinhamento(ps, ext_nota)
+    if divergentes:
+        falhas.append("normalizacao: %d divergentes com [nota N] no texto, "
+                      "esperava 0" % divergentes)
+    else:
+        cru = normalizar("prosa qualquer[nota 37] no meio do trabalho")
+        if cru == normalizar("prosa qualquer no meio do trabalho"):
+            provas.append("casa o texto apesar do [nota N] que o extrator "
+                          "insere, e o controle é a comparação crua")
+        else:
+            falhas.append("CONTROLE MORTO: normalizar nao esta tirando [nota N] "
+                          "e mesmo assim os seis marcadores casaram")
+
+    # 4b. taxa alta nao e cobertura: extracao que para antes da figura casa 100%
+    #     e nao confere nada onde interessa. O programa tem de saber ate onde a
+    #     extracao vai.
+    ext_curta = "\n".join(["[P1] ÍNDICE DE GRÁFICOS", "[P2] %s 79" % legenda])
+    casados, divergentes, _, ate = conferir_alinhamento(ps, ext_curta)
+    taxa = casados / float(casados + divergentes or 1)
+    if taxa < ALINHAMENTO_MINIMO:
+        falhas.append("CONTROLE MORTO: a extracao parcial ja reprova por taxa, "
+                      "e o caso nao exerce a cobertura")
+    elif ate >= 6:
+        falhas.append("cobertura: a extracao parcial vai ate [P%d], e devia "
+                      "parar em [P2]" % ate)
+    else:
+        provas.append("sabe que uma extração de taxa 100%% pode parar em [P%d] "
+                      "e não cobrir a figura de [P6]" % ate)
+
+    # 4d. o marcador so vale no comeco da linha, e a largura da comparacao tem
+    #     de ser larga o bastante para separar textos de comeco igual.
+    ps_curto = paragrafos_do_docx(zipfile.ZipFile(_zip_de_teste(
+        [_par("Fonte: elaborado pela autora a partir do STF"),
+         _par("Fonte: elaborado pela autora a partir do STJ")])))
+    ext_ref = ("[P1] Fonte: elaborado pela autora a partir do STF\n"
+               "[P2] Fonte: elaborado pela autora a partir do STJ\n"
+               "prosa que cita o [P999] no meio da linha, e não é marcador\n")
+    casados, divergentes, _, ate = conferir_alinhamento(ps_curto, ext_ref)
+    if casados != 2 or divergentes:
+        falhas.append("marcador/largura: %d casados e %d divergentes, esperava "
+                      "2 e 0" % (casados, divergentes))
+    elif ate != 2:
+        falhas.append("CONTROLE MORTO: o marcador do meio da linha entrou, e o "
+                      "maior virou [P%d]" % ate)
+    else:
+        trocado = ("[P1] Fonte: elaborado pela autora a partir do STJ\n"
+                   "[P2] Fonte: elaborado pela autora a partir do STF\n")
+        c2, d2, _, _ = conferir_alinhamento(ps_curto, trocado)
+        if d2 != 2:
+            falhas.append("CONTROLE MORTO: com os dois 'Fonte:' trocados a "
+                          "comparacao ainda aprovou %d; a largura e curta demais"
+                          % c2)
+        else:
+            provas.append("ignora [P###] no meio da linha e separa dois textos "
+                          "que só divergem depois do 30º caractere")
+
+    # 4e. o mesmo arquivo duas vezes no mesmo paragrafo (mc:AlternateContent) e
+    #     uma imagem so, e fica a ocorrencia de maior area.
+    dobrado = [_par("Figura 9 - uma só", [("rId1", 100, 100),
+                                          ("rId1", 3000, 3000)])]
+    ps_dobro = paragrafos_do_docx(zipfile.ZipFile(
+        _zip_de_teste(dobrado, [("rId1", "unica.png", 5000)])))
+    achou = ps_dobro[0][1]
+    if len(achou) != 1:
+        falhas.append("CONTROLE MORTO: o mesmo arquivo duas vezes no paragrafo "
+                      "virou %d imagens" % len(achou))
+    elif achou[0][1] != 3000:
+        falhas.append("deduplicacao: ficou a ocorrencia de area %d, e devia "
+                      "ficar a de 3000" % achou[0][1])
+    else:
+        provas.append("conta uma vez só o arquivo que aparece duas vezes no "
+                      "mesmo parágrafo, ficando com a ocorrência maior")
 
     # 5. agrupamento: tres arquivos no mesmo paragrafo sao uma figura so, e o
     #    dado esta no maior.
@@ -501,18 +715,80 @@ def autoteste():
         provas.append("junta as três imagens de um mesmo parágrafo numa figura "
                       "e aponta o arquivo que carrega o dado")
 
-    # ... e o controle: em paragrafos diferentes nao pode virar grupo.
+    # 5b. a fragmentacao que atravessa paragrafo: o caso do Grafico 26, em que o
+    #     corpo esta num paragrafo e a tarja de cores no seguinte. Sao uma figura.
+    partido = [_par("Gráfico 26 - Inclusões em pauta por ano"),
+               _par("", [("rId3", 5400040, 3603625)]),
+               _par("", [("rId2", 1638300, 534955)]),
+               _par("Fonte: elaborado pela autora")]
+    ps = paragrafos_do_docx(zipfile.ZipFile(_zip_de_teste(partido, media)))
+    figs = montar_figuras(ps, 3, tam)
+    if len(figs) != 1:
+        falhas.append("fragmentacao entre paragrafos: %d figuras em vez de 1; "
+                      "a tarja de cores volta a ser eleita portadora do dado"
+                      % len(figs))
+    elif not figs[0]["principal"] or figs[0]["principal"][0] != "corpo.png":
+        falhas.append("fragmentacao entre paragrafos: o dado saiu em %r"
+                      % (figs[0]["principal"] and figs[0]["principal"][0],))
+    else:
+        provas.append("junta o corpo do gráfico e a tarja de cores quando estão "
+                      "em parágrafos colados, sem texto entre eles")
+
+    # ... e os dois controles: imagens separadas por parágrafo vazio (as capturas
+    #     de tela do apêndice) e imagens com prosa junto NAO podem virar grupo.
     soltos = [_par("Figura 1 - a"), _par("", [("rId1", 885825, 187146)]),
-              _par("Figura 2 - b"), _par("", [("rId2", 1638300, 534955)]),
-              _par("Figura 3 - c"), _par("", [("rId3", 5400040, 3603625)])]
+              _par(""), _par("", [("rId2", 1638300, 534955)]),
+              _par(""), _par("", [("rId3", 5400040, 3603625)])]
     ps = paragrafos_do_docx(zipfile.ZipFile(_zip_de_teste(soltos, media)))
     figs = montar_figuras(ps, 3, tam)
     if len(figs) != 3:
-        falhas.append("CONTROLE MORTO: tres imagens em paragrafos diferentes "
-                      "viraram %d figura(s); o agrupamento junta o que nao devia"
-                      % len(figs))
+        falhas.append("CONTROLE MORTO: tres imagens separadas por paragrafo "
+                      "vazio viraram %d figura(s); o agrupamento junta o que "
+                      "nao devia" % len(figs))
     else:
-        provas.append("não junta imagens que estão em parágrafos diferentes")
+        provas.append("não junta imagens separadas por parágrafo vazio, que são "
+                      "as capturas de tela em sequência do apêndice")
+
+    com_prosa = [_par("prosa e imagem", [("rId1", 885825, 187146)]),
+                 _par("mais prosa", [("rId3", 5400040, 3603625)])]
+    ps = paragrafos_do_docx(zipfile.ZipFile(_zip_de_teste(com_prosa, media)))
+    if len(montar_figuras(ps, 3, tam)) != 2:
+        falhas.append("CONTROLE MORTO: paragrafos com prosa junto da imagem "
+                      "viraram um grupo so")
+    else:
+        provas.append("não junta parágrafos que tenham prosa junto da imagem")
+
+    # 5c. a legenda e a MAIS PROXIMA: o caso da x-v3, em que a de tras
+    #     estava a um paragrafo e a da frente a dois, e ganhava a da frente.
+    duas = [_par("Gráfico 8. Plenário Virtual"),
+            _par("", [("rId3", 5400040, 3603625)]),
+            _par("Fonte: elaborado pela autora"),
+            _par("Gráfico 9. Plenário Presencial"),
+            _par("", [("rId2", 1638300, 534955)])]
+    ps = paragrafos_do_docx(zipfile.ZipFile(_zip_de_teste(duas, media)))
+    figs = montar_figuras(ps, 3, tam)
+    onde = [(f["p_imagem"], f["onde"]) for f in figs]
+    if onde != [(2, 1), (5, 4)]:
+        falhas.append("legenda mais proxima: %r, esperava [(2, 1), (5, 4)]"
+                      % (onde,))
+    else:
+        provas.append("dá a cada figura a legenda mais próxima, e não a de três "
+                      "parágrafos à frente quando há uma logo atrás")
+
+    # 5d. no empate de distancia ganha a de cima, que e onde a norma poe o
+    #     titulo de grafico. Sem isto a escolha ficaria ao acaso da ordem.
+    empate = [_par("Gráfico 1 - a de cima"),
+              _par("", [("rId3", 5400040, 3603625)]),
+              _par("Gráfico 2 - a de baixo")]
+    ps = paragrafos_do_docx(zipfile.ZipFile(_zip_de_teste(empate, media)))
+    figs = montar_figuras(ps, 3, tam)
+    if not figs or figs[0]["onde"] != 1:
+        falhas.append("empate de distancia: a figura ficou em [P%s], e devia "
+                      "ficar na legenda de cima, [P1]"
+                      % (figs and figs[0]["onde"]))
+    else:
+        provas.append("com legenda a um parágrafo acima e outra a um abaixo, "
+                      "fica com a de cima")
 
     # 6. duas figuras de tamanho parecido no mesmo paragrafo: nao se afirma qual
     #    carrega o dado.
@@ -592,37 +868,55 @@ def main():
     print("  %d parágrafos no corpo" % len(ps))
 
     ext = ""
-    if a.extracao and Path(a.extracao).exists():
+    if a.extracao:
+        if not Path(a.extracao).exists():
+            # Antes isto caia na mensagem "sem --extracao", e um erro de
+            # digitacao no caminho virava corrida sem conferencia nenhuma, com o
+            # programa dizendo que o argumento nao fora dado.
+            print("  --extracao aponta para arquivo que não existe: %s"
+                  % a.extracao)
+            return 2
         ext = io.open(a.extracao, encoding="utf-8", errors="replace").read()
 
-    endereca = True
+    figuras = montar_figuras(ps, a.vizinhanca, tamanhos)
+    ultima = max([f["onde"] for f in figuras] + [0])
+
+    endereca, ate = True, 0
     if ext:
-        casados, divergentes, exemplos = conferir_alinhamento(ps, ext)
+        casados, divergentes, exemplos, ate = conferir_alinhamento(ps, ext)
         total = casados + divergentes
         taxa = casados / float(total) if total else 0.0
-        print("  alinhamento com a extração: %d de %d parágrafos casam (%.1f%%)"
-              % (casados, total, 100 * taxa))
+        print("  alinhamento com a extração: %d de %d marcadores casam (%.1f%%),"
+              " e eles vão até [P%d] de %d parágrafos"
+              % (casados, total, 100 * taxa, ate, len(ps)))
         if taxa < ALINHAMENTO_MINIMO:
             endereca = False
             print("  a extração não corresponde a este .docx, e por isso NÃO "
                   "dou endereço nenhum.")
             for idx, d, e in exemplos:
                 print("    [P%d] docx=%r extração=%r" % (idx, d[:32], e[:32]))
+        elif ate < ultima:
+            print("  a extração é PARCIAL e para antes da última figura, em "
+                  "[P%d]: taxa alta aí não é\n  cobertura, e as figuras depois "
+                  "desse ponto saem sem endereço conferido." % ate)
     else:
         print("  sem --extracao: o [P###] sai da contagem de parágrafos e não "
               "foi conferido contra nada.")
-
-    figuras = montar_figuras(ps, a.vizinhanca, tamanhos)
     print("")
     for n, f in enumerate(figuras, 1):
+        conferido = endereca and (not ext or f["onde"] <= ate)
         onde = ("[P%d]" % f["onde"]) if endereca else "—"
+        if endereca and not conferido:
+            onde += "?"
         print("  %-3d %-8s %s" % (n, onde,
                                   f["legenda"][:88] or "(sem legenda por perto)"))
-        img_em = ("imagem em [P%d]" % f["p_imagem"]) if endereca else "imagem"
+        faixa = ("[P%d]" % f["p_imagem"] if f["p_imagem"] == f["p_ultimo"]
+                 else "[P%d]-[P%d]" % (f["p_imagem"], f["p_ultimo"]))
+        img_em = ("imagem em %s" % faixa) if endereca else "imagem"
         if f["principal"]:
             nome = f["principal"][0]
             marca = ("" if len(f["imgs"]) == 1
-                     else "  (o dado está aqui, por %s)" % f["motivo"])
+                     else "  (o dado está aqui, %s)" % f["motivo"])
             print("      %s: %s, %s%s"
                   % (img_em, nome, kb(tamanhos.get(nome, 0)), marca))
         else:
@@ -651,7 +945,14 @@ def main():
         print("  %d arquivo(s) em word/media/ não aparecem no corpo: cabeçalho, "
               "logotipo, miniatura ou imagem removida." % orfas)
 
-    principais = [f["principal"][0] for f in figuras if f["principal"]]
+    # Um mesmo arquivo pode carregar o dado de mais de uma figura: no acervo,
+    # image48.png aparece sozinho em tres paragrafos. Pedir tres vezes o mesmo
+    # arquivo gasta chamada a toa.
+    principais, ja = [], set()
+    for f in figuras:
+        if f["principal"] and f["principal"][0] not in ja:
+            ja.add(f["principal"][0])
+            principais.append(f["principal"][0])
     if principais:
         print("\n  Os %d arquivos que carregam dado, para pedir NUMA MENSAGEM SÓ "
               "(a restrição\n  de chamada paralela é da página de PDF, e não do "
