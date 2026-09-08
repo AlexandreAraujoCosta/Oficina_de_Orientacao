@@ -596,3 +596,47 @@ mesma disciplina que eu segui, e não é leitura independente dela.
 casos; o conserto, os controles e os defeitos desta segunda rodada são meus, e
 foram achados por uma segunda voz que o orientador mandou abrir. A nota ao commit
 `a05d5bc` registra que a reescrita entrou no `0a50b55` sem ter sido lida.
+
+### O falseamento, rodado em 07/09/2026
+
+**Primeiro achado, e ele é sobre o acervo e não sobre o programa: há 52 arquivos
+`.docx` nos dois repositórios e oito obras distintas.** A conta é por impressão
+digital das imagens (MD5 de cada arquivo de `word/media`), e ela junta
+`plenario-virtual.docx`, `trabalho.docx`, `trabalho-normalizado.docx`,
+`ENTREGA-ANOTADO-t-agosto.docx` e mais quatro nomes numa obra só. As
+cópias anotadas, normalizadas e entregues multiplicam nomes e não material.
+
+**O sinal do endereço, sobre obra intocada.** `v-tese.docx`, autora
+diferente, 13 figuras, 704 parágrafos. Alinhamento de 617 de 617 marcadores,
+cobrindo até `[P704]`. **Os 13 endereços conferidos um a um, abrindo os
+parágrafos vizinhos de cada figura: 13 certos.** O caso interessante é que essa
+tese põe a legenda ACIMA da imagem nas figuras 1 a 6 e ABAIXO nas 7 a 13, e a
+regra de distância acertou as duas disposições, que é o que a mudança de hoje
+tinha de fazer. Onde o programa diz `Figure X. Source: prepared by the author`, o
+parágrafo é mesmo esse: a autora deixou o título por preencher, e o defeito é do
+trabalho.
+
+**O sinal que decide, e ele não pôde ser rodado em material independente.** A
+régua da área só é exercitada onde há grupo com mais de um arquivo, e nas oito
+obras isso ocorre em duas: `t-agosto.docx`, que é onde `RAZAO` foi
+calibrada, e `t.docx`, que é a versão anterior do mesmo trabalho, da
+mesma autora e com o mesmo hábito de colar gráfico do Excel. Rodei na versão
+anterior, que tem 78 imagens, 69 grupos e **dez grupos em que a régua decide**.
+
+**Resultado: dez eleitos abertos, dez são corpo de gráfico com dado.** E a outra
+metade do teste, que é a que pegaria o erro grave: **sete descartes distintos
+abertos, sete são legenda de cores** (`image2`, `image4`, `image11`, `image19`,
+`image30`, `image32`, `image63`). Zero erros em dez, contra um limiar que
+reprovava com um. Em três desses grupos quem decidiu foi o reaproveitamento, e
+não a área, o que interessa porque é o sinal que não depende de tamanho.
+
+**O que este resultado não autoriza a dizer.** Não é medição independente: mesma
+autora, mesma ferramenta de gráfico, e o próprio arquivo de imagem `image11.png`
+reaparece em três grupos como no trabalho de agosto. O que ele mostra é que a
+régua não se prende ao conjunto exato de figuras em que foi calibrada; o que
+falta continua faltando, e é obra de outro autor com figura fragmentada.
+
+**Fica na fila, e é a condição de fechar este falseamento:** achar ou produzir um
+`.docx` de outro autor com gráfico partido em arquivos. Enquanto não houver, a
+linha honesta na ficha é que `RAZAO` foi calibrada e conferida num só trabalho,
+em duas de suas versões.
