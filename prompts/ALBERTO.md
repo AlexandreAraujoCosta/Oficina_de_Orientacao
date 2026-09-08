@@ -732,7 +732,11 @@ numeração oficial, termo de edital) não recebe sugestão de correção: vira 
 dizendo qual é a divergência e a quem cabe decidir.
 
 Antes de fechar a seção, percorra os itens procurando pares em que executar um desfaz
-o outro. Onde houver, diga a ordem.
+o outro. Onde houver, diga a ordem. **Não procure isso lendo a lista inteira de
+memória:** o `enderecos_em_lote.py --tudo` traz no cabeçalho os pares que dividem três
+ou mais parágrafos, que é onde a colisão mora. Desconte os pares em que os dois lados
+são largos, porque dois itens que falam de todas as figuras coincidem por serem
+largos e não por disputarem a passagem.
 
 **5. O que cada peça faz pelo argumento.** Capítulo a capítulo: fica, sai, se funde,
 vira artigo separado, ou se reescreve. **Diga, de cada peça, em que partes
@@ -881,11 +885,39 @@ traz o endereço e o que teria de ser conferido para o item entrar. A instruçã
 não reescrever cobre a redação, e cobrir também o registro fazia a segunda voz, que
 é a única que lê frio, perder o que via.
 
+**Antes de abrir a revisão, monte o arquivo que ela vai ler:**
+
+```
+python scripts/enderecos_em_lote.py <relatorio>.md extracao/<trabalho>.txt --tudo
+```
+
+Ele devolve **tudo num arquivo**: o trabalho inteiro, parágrafo por parágrafo na
+ordem, com os códigos dos itens que citam cada um ao lado do número; depois o
+relatório inteiro. A revisão lê esse arquivo uma vez e não vai à extração procurar
+passagem: ela já está ali, debaixo do número que o item cita.
+
+**Medido em 08/09/2026**, na leitura que verifica um levantamento: buscar cada
+passagem custou 66,6 minutos, 102 chamadas e 466 mil tokens; com tudo num arquivo,
+14,0 minutos, 28 chamadas e 271 mil. O arquivo inteiro custa menos da metade de um
+pareamento item a item, porque não repete o parágrafo uma vez por item que o cita.
+
+O cabeçalho traz duas coisas que a leitura item a item não dá. **A ordem por carga:**
+os parágrafos de que mais itens dependem, com cada item pesado por 1 dividido pelo
+número de parágrafos que ele cita. Comece por eles, porque uma leitura errada ali não
+custa um item, custa o bloco: num caso medido, nove itens pousavam na legenda de um
+único gráfico. **E os pares que dividem três ou mais parágrafos**, que é onde executar
+um item pode desfazer o outro.
+
 A revisão confere, nesta ordem de prioridade:
 
-1. **Os endereços.** Abra cada parágrafo, seção ou figura citada: está lá o que se diz
-   que está? Erros medidos: o endereço aponta um parágrafo vizinho; o ordinal está
-   errado; a faixa inclui parágrafos que não têm nada a ver; a figura é outra.
+1. **Os endereços.** Está no parágrafo o que o item diz que está? O arquivo já traz o
+   parágrafo ao lado do item; abrir o trabalho fica para a figura e para o que não
+   tiver localizador. Erros medidos: o endereço aponta um parágrafo vizinho; o ordinal
+   está errado; a faixa inclui parágrafos que não têm nada a ver; a figura é outra.
+   **Três espécies de erro apareceram em leituras entregues e as três se acham aqui:**
+   a condicional convertida (o item troca *a maior parte de A é B* por *a maior parte
+   de B é A*), o sujeito trocado (o item fala do conjunto e o parágrafo fala de um
+   subconjunto), e a atribuição declarada ausente que está impressa no fecho.
 2. **As afirmações de ausência.** Procure você mesmo o que o relatório diz que não
    existe, e procure de mais de um jeito. Uma ausência que se desfaz é o erro mais
    caro, porque manda o autor escrever o que já está escrito.

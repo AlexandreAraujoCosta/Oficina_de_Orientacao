@@ -1004,3 +1004,38 @@ apurada, e esse seria pior do que não ter. **Retirado.**
 **Origem:** a formulação é do orientador; a medição de extraibilidade é minha, de
 hoje. Sem falseamento próprio: é troca de palavra e acréscimo de um sentido à
 pergunta, não regra nova.
+
+---
+
+## 08/09/2026 — A conferência barata vai do Luis para o Alberto
+
+**O caso.** As melhorias da tarde entraram no passo 5 do Luis e não no Alberto, que
+é justamente o que deveria ser rápido. O orientador apontou a inconsistência.
+
+**O que muda.** A revisão do Alberto deixa de ir à extração buscar cada passagem e
+passa a ler o arquivo do `enderecos_em_lote.py --tudo`: o trabalho inteiro, com os
+códigos dos itens ao lado de cada parágrafo, mais o relatório. Ganha a ordem por
+carga e a lista de colisões, e a procura de pares que se desfazem deixa de ser feita
+de memória.
+
+**Entram na lista do que a revisão procura as três espécies que apareceram em
+leituras entregues:** a condicional convertida, o sujeito trocado e a atribuição
+declarada ausente que está impressa. As três foram achadas em 07 e 08/09 sobre um
+mesmo relatório, e as três se acham no arquivo pareado sem abrir mais nada.
+
+**O que sustenta.** No Luis, a mesma troca levou a verificação de 66,6 min, 102
+chamadas e 466 mil tokens para 14,0 min, 28 chamadas e 271 mil.
+
+**O que ainda não se sabe, e por isso a troca vai medida e não decidida.** A revisão
+do Alberto faz seis coisas (endereços, ausências, números, atribuições, alvos de
+correção, colisões) e a conferência em lote faz a primeira muito bem e as outras em
+parte. **Não é substituição, é troca com perda a medir.**
+
+**A medição que decide**, e é o que roda a seguir: a mesma conferência em lote sobre
+o `ALBERTO-R-v4.md`, cujo relatório já passou pela revisão cara dentro dos
+49,8 minutos da rodada. Se ela acusar o que a revisão cara acusou, a troca se paga;
+se acusar menos nas classes que não são endereço, a perda fica dimensionada.
+
+**Falseamento:** se a conferência em lote sobre a v4 não achar nenhum dos 19
+endereços ou providências que a revisão cara consertou, ela não substitui aquele
+passo e volta a ser primeira passada, com a cara depois.
