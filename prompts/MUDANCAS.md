@@ -962,3 +962,45 @@ alteração ficou sem commit até os resultados chegarem, e é este o commit.
 defeito na ferramenta: a fronteira do item era só o item seguinte, e o último item
 de cada seção engolia a prosa posterior. Consertado no mesmo dia, com a fronteira
 passando a ser o próximo item **ou** o próximo cabeçalho.
+
+---
+
+## 08/09/2026 — A parte 5 pergunta nos dois sentidos, e a metáfora de encanamento sai
+
+**O caso.** O orientador apontou que *consome* é palavra ruim para uma boa
+pergunta, e propôs a formulação certa: **que partes se baseiam em partes
+anteriores**. Duas coisas saíram daí.
+
+**A palavra já tinha viajado.** *Quem consome esta seção* aparece quatro vezes nos
+relatórios de 08/09, copiada da minha redação no prompt. É o tique que a regra
+prevê: categoria de trabalho não fica na conversa, vai para o documento entregue a
+quem nunca viu a invenção. Trocada aqui e nos dois lugares do
+`6-TRIAGEM-E-REDACAO.md` que governam texto entregue. Onde *consumir* é tempo,
+token, semana ou linha de lista, fica: ali é a palavra portuguesa.
+
+**E a pergunta estava só num sentido.** *Quem consome cada capítulo* olha para a
+frente e acha a peça isolada, que serve à decisão de cortar. *Em que partes
+anteriores esta se baseia* olha para trás e acha a afirmação sem apoio, que é o
+sentido que a régua nova do veredito tornou decisivo em 06/09. **A parte 5 é
+anterior à régua e nunca foi revista depois dela.** Agora pede os dois, com o
+endereço de cada elo.
+
+**Junto entrou o que a medição de hoje mostrou ser extraível e o que não é.** Sobre
+os 402 parágrafos do trabalho R: verbo de inferência em 62 parágrafos e conector de
+consequência em 46, de modo que a lista de candidatas a inferência sai de programa.
+Mas só 61 parágrafos trazem remissão explícita, e a maior parte é dêitica (*acima*,
+*supra*, *como visto*), que registra a existência do elo e não o destino.
+
+**Daí a regra que entrou:** o elo se declara e não se deduz da vizinhança, e
+remissão dêitica sem destino nomeado é achado por si, porque o leitor de um artigo
+independente não terá o *acima*.
+
+**O que isso derruba, e é proposta minha de uma hora atrás.** Eu havia proposto um
+grafo de dependência computado da coincidência de localizadores entre itens do
+relatório. Os números acima mostram que isso seria um grafo do que a leitura
+aponta, apresentado como se fosse o do argumento. Grafo tem aparência de coisa
+apurada, e esse seria pior do que não ter. **Retirado.**
+
+**Origem:** a formulação é do orientador; a medição de extraibilidade é minha, de
+hoje. Sem falseamento próprio: é troca de palavra e acréscimo de um sentido à
+pergunta, não regra nova.

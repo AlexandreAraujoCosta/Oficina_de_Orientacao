@@ -108,8 +108,8 @@ dizendo o que entra.
 devolve o estado de cada promessa; aqui se julga o conjunto. Promessa declarada e não
 executada é defeito da introdução tanto quanto do capítulo que deveria cumpri-la.
 
-**Capítulo teórico.** Função: fornecer categoria que o argumento consome. É onde os
-cinco destinos abaixo mais se aplicam, e onde mora o andaime.
+**Capítulo teórico.** Função: fornecer a categoria em que o argumento se baseia
+depois. É onde os cinco destinos abaixo mais se aplicam, e onde mora o andaime.
 
 **Capítulo empírico.** Função: expor o material e o que dele se extrai. Falha típica:
 as bases não são enunciadas no texto, e ficam só nas figuras.
@@ -122,8 +122,8 @@ conclusão não o nomeia, ou quando promete reprodução que ele não permite.
 
 ## Os cinco destinos
 
-**FICA.** O argumento o consome. Outra parte do trabalho depende do que ele
-estabelece, e sem ele a conclusão não se sustenta.
+**FICA.** Outra parte do trabalho se baseia no que ele estabelece, e sem ele a
+conclusão não se sustenta. Diga qual parte, com o endereço.
 
 **ANDAIME, VIRA APÊNDICE COMPLEMENTAR.** O capítulo é bom, foi necessário **ao
 estudante** para entender o problema e fixar as categorias, e o argumento final não

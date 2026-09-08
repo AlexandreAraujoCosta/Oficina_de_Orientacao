@@ -735,8 +735,22 @@ Antes de fechar a seção, percorra os itens procurando pares em que executar um
 o outro. Onde houver, diga a ordem.
 
 **5. O que cada peça faz pelo argumento.** Capítulo a capítulo: fica, sai, se funde,
-vira artigo separado, ou se reescreve. Diga quem consome cada capítulo e o que a
-conclusão perde se ele sair.
+vira artigo separado, ou se reescreve. **Diga, de cada peça, em que partes
+anteriores ela se baseia, e que partes posteriores se baseiam nela**, com o
+endereço de cada elo.
+
+Os dois sentidos respondem a coisas diferentes e os dois são pedidos. **Para a
+frente** acha a peça isolada, aquela em que nenhuma outra se baseia: ali a decisão
+é cortar, ou é resultado que o trabalho não explorou, e o relatório diz qual dos
+dois. **Para trás** acha a afirmação sem apoio, e é o sentido que decide o veredito,
+porque o degrau depende de as conclusões se sustentarem no que o trabalho
+apresenta.
+
+**O elo se declara, e não se deduz da vizinhança.** Onde o trabalho remete por
+dêitico (*acima*, *supra*, *como visto*) sem nomear o destino, isso é achado por si:
+num trabalho medido, dezenove parágrafos remetiam assim, e o leitor de um artigo
+independente não terá o *acima*. Diga qual é o destino que você atribuiu e por quê,
+ou registre que não conseguiu atribuir.
 
 **6. Questionamentos.** O que você não conseguiu decidir, e o que precisaria para
 decidir. É diferente de correção, e a diferença fica visível. **Se o trabalho vai a
