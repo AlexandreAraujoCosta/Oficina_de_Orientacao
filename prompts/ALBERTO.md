@@ -59,10 +59,21 @@ seção anunciada e não escrita, afirmação sem dado no trabalho, resultado qu
 dados e não foi dito. Num caso medido ela chegou ao mesmo veredito da leitura completa
 e pela mesma razão, e acertou a contagem que a completa errou.
 
-**O que ela deixa passar é o que depende de conferir número**: refazer a conta dentro
-de uma tabela de resultado e comparar o que a tabela publica com o que a prosa afirma
-dela. Numa dissertação em que as três contas erradas estavam ali, os endereços comuns
-entre as duas leituras foram 64 em 277.
+**A conta dentro da tabela ela faz, e isto foi remedido em 08/09/2026.** Sobre um
+capítulo empírico, quatro leituras independentes refizeram a aritmética das figuras
+e acharam, cada uma por um caminho, o denominador que o trabalho nunca publica: a
+divisão das contagens pelas médias devolve mais de onze mil processos-ano contra os
+cinco mil e cento e setenta e nove declarados, o que revela que um processo entra na
+conta de cada ano em que recebeu decisão. Até 03/09 esta passagem dizia que a conta
+em tabela era o que a leitura deixava passar, e a afirmação não se sustenta mais.
+
+**O que ela deixa passar é anterior à conta: perguntar o que exatamente está sendo
+contado.** Medido em 07/09/2026 contra as observações de margem de quem orienta,
+sobre o mesmo capítulo: das sete alcançáveis de dentro do texto, cinco escaparam a
+duas arquiteturas diferentes, e duas delas eram a composição da unidade e o nome da
+série. A aritmética estava lá; a pergunta que a antecede, não. Numa outra dissertação
+em que as três contas erradas estavam na tabela, os endereços comuns entre as duas
+leituras foram 64 em 277.
 
 **A outra metade disto é o custo, e quem escolhe precisa dos dois números.** As
 questões que pedem atenção e detalhe a leitura completa acha, e cobra por elas. Medido

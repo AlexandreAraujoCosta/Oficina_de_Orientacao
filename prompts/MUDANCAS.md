@@ -820,3 +820,94 @@ inverte o sinal do tamanho em disco. **O alcance continua sendo dois autores.**
 **Fica disponível para uma segunda rodada**, e não foi feita: outro arquivo de
 `Downloads`, com 41 imagens em 15 grupos e 14 decididos pela régua, de terceiro
 autor. Se a intenção for fechar o alcance em três autores, é ali.
+
+---
+
+## 08/09/2026 — A pergunta da unidade contada rodou, e o falseamento como estava escrito teria dado vitória
+
+**O desenho.** Dois braços, mesma dissertação, mesmo modelo, pedido idêntico
+palavra por palavra, **uma variável só**: o `ALBERTO.md` de antes do `9ecdf76`
+contra o de depois, e o `diff` entre os dois é exatamente as 16 linhas da
+alteração. Material igual ao do experimento de ontem (capítulo 6, `[P721]` a
+`[P793]`, 56 parágrafos marcados, 4.422 palavras), com uma melhora: as três
+figuras entraram pelo `figuras_do_docx.py`, com o arquivo do dado já apontado, em
+vez de identificadas à mão, que era confundidor declarado na ficha de ontem.
+**Uma execução de cada lado**, e portanto o que segue é indício.
+
+**Metade (a), a composição da unidade: os dois braços produziram o item.** O de
+controle chegou por `[P736]`, a citação de Reis e Oliveira que o próprio capítulo
+traz, e enunciou contra `[P793]`. O braço novo chegou pela moldura do próprio
+capítulo (`[P731]`, o art. 97 e a reserva de plenário) contra `[P748]`, e enunciou
+contra `[P793]`; ainda registrou a limitação declarada como ponto forte e
+produziu uma **segunda** pergunta de composição, sobre outra série (a categoria
+Plenário Presencial não separa os julgamentos em lista das demais colegiadas).
+**O acréscimo não pode ser creditado por fazer o item aparecer.** No máximo, por
+ancorá-lo na moldura do trabalho em vez da literatura, e por produzir o segundo.
+
+**Metade (b), o nome da série: nenhum dos dois produziu.** A oportunidade estava
+lá, e isto vem com controle: `produtiv*` ocorre onze vezes no recorte, em
+`[P757]`, `[P758]`, `[P759]` e `[P789]`. É exatamente a observação do orientador
+que motivou o retorno da pergunta (produtividade contra produção). O acréscimo
+falhou aqui.
+
+**O confundidor que impede a leitura causal, e ele não é do prompt:** o braço de
+controle **não abriu a segunda voz** e o braço novo abriu. Os dois prompts a
+exigem igualmente (treze menções em cada). A revisão do braço novo derrubou três
+deslizes do próprio rascunho e levantou um ponto novo. A diferença de quantidade
+(17 itens contra 11) não é atribuível ao acréscimo enquanto isso não for repetido.
+
+**E o achado que decide sobre a ficha: o falseamento como estava escrito teria
+declarado vitória.** Ele pergunta se o braço novo produz item sobre a composição
+**ou** sobre o nome da série; o braço novo produziu sobre a composição, e pela
+letra a alteração sobrevive. O que impede essa leitura é o braço de controle, que
+a própria ficha mandava rodar e cujo resultado o critério não usava. **Critério
+de uma perna só, sobre mudança que existe para produzir diferença.**
+
+**O critério em vigor passa a ser comparativo e por metade**, e fica escrito antes
+da próxima rodada: a alteração se sustenta se, em três rodadas, o braço novo
+produzir a pergunta do nome da série pelo menos uma vez e o de controle nenhuma;
+e a metade da composição sai do critério, porque está medido que aparece sem ela.
+Se as três rodadas passarem sem o nome da série, o acréscimo não fez o que se
+esperava e sai.
+
+**Defeito de ambiente achado de passagem, e é do prompt publicado.** O
+`ALBERTO.md` manda rodar seis programas como `python scripts/<nome>.py` sem dizer
+de que diretório. A leitura roda em `D:\Claude\TCC`, onde `scripts\` **existe e
+tem 35 programas**, nenhum deles os seis nomeados, que moram só na Oficina. É pior
+que arquivo faltando: a pasta existe e traz nomes vizinhos, de modo que uma
+leitura pode rodar o programa errado sem desconfiar. Os dois braços caíram nisso e
+substituíram por equivalentes manuais, o que afeta os dois igualmente e não
+invalida o cotejo. **Não corrigido nesta rodada**, para não mexer em prompt
+publicado no meio de uma medição.
+
+---
+
+## 08/09/2026 — A frase que dizia que o Alberto não confere conta em tabela era falsa
+
+**O caso.** Uma voz externa apontou que o `ALBERTO.md` afirmava, sobre si mesmo,
+que *o que ela deixa passar é o que depende de conferir número: refazer a conta
+dentro de uma tabela de resultado e comparar o que a tabela publica com o que a
+prosa afirma dela*. A frase descrevia uma medição de 03/09.
+
+**O que a derruba, e são quatro execuções do mesmo dia.** Sobre o capítulo empírico
+da dissertação T, os braços A, B, BUSCA e PRONTO refizeram a
+aritmética das figuras e chegaram, cada um por um caminho, ao denominador que o
+capítulo nunca publica: as contagens do Gráfico 22 divididas pelas médias do
+Gráfico 25 somam mais de onze mil processos-ano contra os 5.179 declarados em
+`[P749]`. O braço PRONTO ainda calculou a série proporcional a partir dos números
+impressos em `[P757]`, que o capítulo não calcula, e fez dela o achado central.
+
+**O que entra no lugar.** A afirmação corrigida, mais a lacuna onde ela de fato
+está: perguntar o que exatamente está sendo contado. Medido em 07/09 contra as
+observações de margem do orientador, cinco das sete alcançáveis escaparam a duas
+arquiteturas, e duas eram a composição da unidade e o nome da série.
+
+**Não é regra nova, é correção de fato.** Por isso entra sem falseamento próprio:
+o que a sustenta são as quatro execuções, e o que a derrubaria é uma leitura que
+não faça a conta quando ela decide o item.
+
+**Ressalva sobre a evidência que a voz externa trouxe.** Ela citou um agente de
+desk que fez a conta de uma tabela sem instrução no prompt dele. Isso não mede o
+modelo sem a regra: os subagentes desta máquina herdam o `CLAUDE.md`, que carrega a
+disciplina de contagem. E os números do achado dela não vieram com informação de
+terem sido conferidos na fonte.
