@@ -1039,3 +1039,57 @@ se acusar menos nas classes que não são endereço, a perda fica dimensionada.
 **Falseamento:** se a conferência em lote sobre a v4 não achar nenhum dos 19
 endereços ou providências que a revisão cara consertou, ela não substitui aquele
 passo e volta a ser primeira passada, com a cara depois.
+
+---
+
+## 08/09/2026 — O resultado do dia, e ele é contra as alterações do dia
+
+### O cotejo cego de três, sobre a dissertação R
+
+Alberto de 06/09, Alberto de 08/09 e Luis, renomeados e sem dizer qual era qual.
+
+| | inferência | descrição | estrutura | superfície | total |
+|---|---|---|---|---|---|
+| Alberto v2 (06/09) | 11 | 12 | 7 | 29 | 67 |
+| Alberto v4 (08/09) | 15 | 14 | 6 | **50** | 91 |
+| Luis | 23 | 7 | 15 | 10 | 67 |
+
+**A vantagem numérica da v4 é quase toda de superfície.** Nas duas classes que
+decidem, os três estão perto: 23, 29 e 30 itens.
+
+**O cotejo escolheu o Luis**, e não por tamanho: a v4 funda o veredito numa conta
+inválida que o Luis faz, vê o mesmo dado de `[P439]` e se recusa a fechar,
+escrevendo o que faltaria.
+
+### Os dois defeitos da v4 são meus
+
+**A conta inválida é o erro que esta oficina cometeu em 06/09 e corrigiu**: descontar
+quarenta e um temas de uma matéria de um lado só da comparação, fazendo 7,6 pontos
+"caírem" para 2,7. Voltou em 08/09, e desta vez abre o relatório, entra no veredito e
+volta como primeira pergunta de banca. **Entrou nos dois prompts como armadilha
+nomeada**, porque não é descuido: é a conta que o material convida a fazer.
+
+**Os oito itens de figura endereçam `[P444]`, `[P478]`, `[P515]` e `[P522]`**, que não
+existem na extração. A causa é o `figuras_do_docx.py`, que imprimia *imagem em
+[P444]* para a posição da imagem, e posição de imagem não é endereço, porque o
+parágrafo que a carrega não tem texto e a extração não lhe dá marcador. Consertado no
+mesmo dia: a posição sai sem colchetes e com a frase que diz que o endereço é o da
+legenda. Controle: dos sete localizadores impressos, zero inexistentes, contra quatro
+antes.
+
+### A revisão barata sobre a v4
+
+**91 itens, 13,6 minutos, 21 chamadas, 249 mil tokens, zero aberturas fora do
+arquivo.** Sobre um relatório que **já tinha passado pela revisão cara** dentro dos
+49,8 minutos da rodada, ela achou mais 1 item caído e 5 endereços errados, e oito
+achados próprios, entre eles que os cinco n do capítulo 4 somam 160 e não 170.
+
+**O falseamento que eu escrevi não podia disparar**, e é o terceiro do dia com esse
+defeito: eu perguntei se a barata acharia os 19 endereços que a cara consertou, e a
+cara já os tinha consertado no arquivo que a barata leu. O que se mediu foi outra
+coisa, e melhor: **a barata acha o que a cara deixou passar, por um quarto do
+tempo.**
+
+**Nove dos 91 itens não puderam ser conferidos**, todos pela mesma causa: dependem de
+valor impresso nas figuras, cujos localizadores eram os mortos acima. O defeito da
+ferramenta custou 10% da conferência.

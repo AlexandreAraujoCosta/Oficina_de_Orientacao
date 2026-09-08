@@ -176,6 +176,15 @@ testes sem elas:
   nome da série contra a definição dela**, e não contra o sentido comum: nome que
   afirma mais do que a contagem mede é achado de uma linha, e é o resumo que o
   carrega adiante.
+- **Ao descontar uma subclasse, desconte dos dois lados.** Quando o trabalho isolar
+  um subconjunto e você quiser saber quanto da diferença vem dele, refaça as duas
+  taxas sem ele. Descontar de um lado e comparar com o bruto do outro devolve a soma
+  da diferença com o desconto, e ela sempre parece menor. Medido duas vezes nesta
+  oficina, as duas produzidas por leitura nossa: retirar quarenta e um temas de uma
+  matéria de um lado fez uma diferença de 7,6 pontos "cair" para 2,7, e o outro lado
+  continuava com a matéria dentro. **Onde o trabalho não publicar o denominador do
+  outro lado sem a subclasse, a comparação não se completa**, e é isso que se
+  escreve: a conta não fecha com os dados publicados, e qual dado a fecharia.
 
 Onde alguma guarda falhar, **o pedido ao autor muda**: deixa de ser "calcule o p" e
 passa a ser "declare sob que modelo o senhor compara, e por quê". Onde o trabalho enuncia uma ausência de diferença, calcule o intervalo: **a

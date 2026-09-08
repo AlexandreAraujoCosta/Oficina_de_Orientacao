@@ -304,6 +304,26 @@ terminavam em dado e passavam por boas:
 - **o desfecho vira intenção.** O dado mede o que o texto faz, e a asserção diz o
   que quem o escreveu quis.
 
+### Ao descontar uma subclasse, desconte dos dois lados
+
+Quando o trabalho isolar um subconjunto (um tema, um órgão, um ano) e você quiser
+saber quanto da diferença vem dele, **refaça as duas taxas sem ele**. Descontar de
+um lado e comparar com o número bruto do outro não devolve diferença nenhuma:
+devolve a soma da diferença com o desconto, e ela sempre parece menor.
+
+**Medido duas vezes, e a segunda foi produzida por esta oficina.** Numa dissertação
+que compara duas taxas de negativa, retirar do lado dos representativos os quarenta
+e um temas de uma matéria fez a diferença cair de 7,6 pontos para 2,7. O outro lado
+continuava com a matéria dentro. **A comparação correta não se completa com o que o
+trabalho publica**, porque ele não dá o denominador do outro lado sem aquela
+matéria, e isso é o que se escreve: a conta não fecha com os dados publicados, e
+qual dado a fecharia.
+
+Em 06/09/2026 o mesmo erro saiu em dois relatórios entregues e foi corrigido; em
+08/09 voltou, e desta vez abria o relatório, entrava no veredito e voltava como
+primeira pergunta de banca. **Não é descuido: é a conta que o material convida a
+fazer**, porque o trabalho isola a subclasse de um lado só.
+
 ### Antes das perguntas, monte a lista do que mudou na janela
 
 **Enumere, uma vez só, o que mudou dentro do período que o trabalho mede**, do
