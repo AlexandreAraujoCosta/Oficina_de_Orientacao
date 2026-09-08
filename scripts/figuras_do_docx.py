@@ -99,10 +99,17 @@ DESCE = {W + "tbl", W + "sdt", W + "sdtContent", W + "tr", W + "tc",
 # 2,1, e naquele caso o arquivo pequeno era mesmo so a legenda de cores), e por
 # isso a area manda e o tamanho em disco entra so como recurso.
 #
-# ALCANCE DESTA CALIBRAGEM, e ele e estreito: o limiar saiu de UM trabalho.
-# Nos demais `.docx` do acervo nao ha grupo com mais de uma imagem, de modo que
-# `repartir` nunca chega ao limiar neles e a calibragem continua circular. Falta
-# material, e nao esforco.
+# CONFERIDO FORA DO TRABALHO EM QUE FOI CALIBRADO, em 08/09/2026, sobre a
+# dissertacao de outro autor achada em `Downloads` (44 imagens, 34 grupos, onze
+# deles com mais de um arquivo): os onze eleitos abertos um a um sao corpo de
+# grafico com dado, e os descartes sao legenda de cores.
+#
+# E o caso e mais duro que o da calibragem, porque ali a area e os bytes
+# concordavam. Neste, em OITO dos onze grupos o arquivo descartado e MAIOR em
+# bytes que o eleito, porque a legenda daquele trabalho e um bloco de sete a nove
+# linhas de texto: `image19.png` tem 111 KB de legenda contra 45 KB do grafico. O
+# desempate por tamanho em disco teria errado os oito, e num deles por sorte
+# (47.923 contra 49.037 bytes, razao de 1,02, onde a area da 5,1 para 1).
 RAZAO = 3.0
 
 # Abaixo desta proporcao de paragrafos casados, a extracao nao corresponde a

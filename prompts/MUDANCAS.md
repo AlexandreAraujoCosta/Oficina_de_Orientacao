@@ -782,3 +782,41 @@ de lugar não resolveu e ela sai de novo, desta vez sem retorno.
 
 **Origem: raciocínio meu sobre uma medição do orientador.** A pergunta é dele, e
 a decisão de mudar o lugar em vez da redação veio da ficha de 05/09. Não medida.
+
+---
+
+## 08/09/2026 — O falseamento do `RAZAO` fechou, em obra de outro autor
+
+**O que faltava, escrito na ficha de ontem:** um `.docx` de outro autor com
+gráfico partido em arquivos. Nas oito obras do acervo só as duas versões da mesma
+dissertação exercitavam a régua, e a conferência era circular.
+
+**Onde estava.** `Downloads` tem 285 arquivos `.docx`. A varredura leu só a
+estrutura de imagens, sem abrir texto, e achou cinco obras novas com grupo de
+mais de um arquivo. A escolhida foi a dissertação em elaboração de outro
+orientando (1.759 parágrafos, 44 imagens, 34 grupos, **onze deles decididos pela
+régua**). As versões de julho e junho do "Plenário Virtual" ficaram de fora por
+serem do mesmo trabalho já usado.
+
+**Resultado: onze eleitos abertos um a um, onze são corpo de gráfico com dado.**
+Os descartes conferidos são legenda de cores, incluído `image3.png`, que aparece
+em duas figuras e por isso foi tratado como peça compartilhada sem consulta a
+tamanho. Zero erros, contra um limiar que reprovava com um.
+
+**O caso é mais duro que o da calibragem, e é isso que dá valor ao resultado.**
+No trabalho em que `RAZAO` foi calibrada, a área e os bytes concordavam. Aqui
+discordam: **em oito dos onze grupos o arquivo descartado é maior em bytes que o
+eleito**, porque a legenda desse trabalho é um bloco de sete a nove linhas de
+texto corrido. `image19.png` tem 111 KB de legenda contra 45 KB do gráfico
+`image18.png`. O desempate por tamanho em disco teria errado os oito, e num deles
+por margem de sorte: 47.923 contra 49.037 bytes, razão de 1,02, onde a área
+separa 5,1 para 1.
+
+**O que isto autoriza a dizer, e só isso:** a régua da área não se prende ao
+trabalho em que foi calibrada, e a escolha da área em lugar dos bytes, que ontem
+se apoiava em nove grupos de uma autora, agora tem contraprova em material que
+inverte o sinal do tamanho em disco. **O alcance continua sendo dois autores.**
+
+**Fica disponível para uma segunda rodada**, e não foi feita: outro arquivo de
+`Downloads`, com 41 imagens em 15 grupos e 14 decididos pela régua, de terceiro
+autor. Se a intenção for fechar o alcance em três autores, é ali.
