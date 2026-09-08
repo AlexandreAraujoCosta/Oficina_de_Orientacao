@@ -93,9 +93,19 @@ def itens(caminho):
             continue
         vistos.add(cod)
         limpo.append((pos, cod, tit))
+    # A FRONTEIRA E O PROXIMO ITEM **OU O PROXIMO CABECALHO**, o que vier antes.
+    # Sem o cabecalho, o ultimo item de uma secao engole a prosa que vem depois
+    # dela e os localizadores dessa prosa. Medido em 08/09/2026, no relatorio do
+    # Luis sobre o trabalho R: `C17` ficou com 5.415 caracteres e 20 localizadores,
+    # tendo absorvido a secao 3.1 inteira. Quem achou foi a conferencia, ao notar
+    # que o indice cruzado atribuia a C17 paragrafos que nao sao dele.
+    cabecalhos = [m.start() for m in re.finditer(r"(?m)^#{1,5}[ \t]", t)]
     fora = []
     for i, (pos, cod, tit) in enumerate(limpo):
         fim = limpo[i + 1][0] if i + 1 < len(limpo) else len(t)
+        seguintes = [c for c in cabecalhos if pos < c < fim]
+        if seguintes:
+            fim = seguintes[0]
         fora.append((cod, tit, t[pos:fim]))
     return fora
 
