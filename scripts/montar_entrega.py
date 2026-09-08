@@ -476,10 +476,24 @@ def main():
     guardar = {anotado(a), paragrafos_md}
     # Com --sem-docx o .docx anotado veio de outra montagem desta mesma rodada,
     # e nao pode ser recolhido por nao ter sido produzido aqui.
+    #
+    # E A REGRA E POR ESPECIE TAMBEM AQUI, pelo mesmo motivo do PDF acima. Ate
+    # 07/09/2026 `guardar` trazia so as pecas da montagem CORRENTE, de modo que
+    # a segunda montagem mandava para complementos o .docx anotado e os
+    # paragrafos numerados da primeira. Medido nas entregas de 06/09/2026: as
+    # pastas do trabalho T e do trabalho V chegaram com o trabalho
+    # anotado pelo Luis a vista e o anotado pelo Alberto um nivel abaixo, e
+    # quem abre a pasta ve uma leitura so. O defeito nao apaga nada e esconde
+    # metade da entrega, que e pior de notar.
+    def especie_da_raiz(nome):
+        return (nome.startswith("ENTREGA-ANOTADO-") and nome.lower().endswith(".docx")
+                or nome.startswith("ENTREGA-PARAGRAFOS-") and nome.lower().endswith(".md"))
+
     compl = destino.parent / "complementos"
     recolhidos = 0
     for peca in sorted(destino.parent.iterdir()):
-        if peca.is_dir() or peca.name in guardar or peca.suffix.lower() == ".pdf":
+        if (peca.is_dir() or peca.name in guardar or peca.suffix.lower() == ".pdf"
+                or especie_da_raiz(peca.name)):
             continue
         compl.mkdir(exist_ok=True)
         peca.replace(compl / peca.name)
