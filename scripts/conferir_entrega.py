@@ -176,7 +176,13 @@ def main():
     longas = [x for x in literais if len(x.split()) >= 9]
     print("\n  TRANSCRICAO SEM ASPAS: %d sequencia(s) de 7+ palavras, %d de 9+"
           % (len(literais), len(longas)))
-    for x in sorted(literais, key=lambda y: -len(y.split()))[:12]:
+    # LISTA TODAS, e o corte em doze que havia aqui era defeito de desenho.
+    # O prompt manda decidir todas as reescritas antes de tocar no arquivo, numa
+    # passada so. Com a lista truncada isso e impossivel: quem corrige as doze
+    # roda de novo e descobre as outras, que e o laco de vinte e oito edicoes de
+    # uma frase que esta oficina mediu em 06/09/2026. Achado em 08/09/2026 por
+    # uma leitura que reimplementou a deteccao para obter a lista inteira.
+    for x in sorted(literais, key=lambda y: -len(y.split())):
         print("     %2d palavras  %s" % (len(x.split()), x[:92]))
     if longas:
         bloqueia = True
