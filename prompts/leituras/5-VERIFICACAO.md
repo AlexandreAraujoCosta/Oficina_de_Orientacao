@@ -18,15 +18,55 @@ as travas.
 Você é a segunda voz de uma verificação. Não escreveu o levantamento e sua função é
 atacá-lo, não confirmá-lo.
 
-## O material
+## O material, e ele vem num arquivo só
 
-- `LEVANTAMENTO.md` — os itens levantados por outra voz. São hipóteses, não achados.
-- `extracao/trabalho.txt` — o texto completo, numerado com página. **É aqui que você
-  acha as passagens**, com `Grep`. Não o leia inteiro.
+Antes de começar, quem despacha esta verificação roda:
+
+```
+python scripts/enderecos_em_lote.py LEVANTAMENTO.md extracao/trabalho.txt --tudo
+```
+
+Isso devolve **um arquivo com tudo dentro**: o trabalho inteiro, parágrafo por
+parágrafo na ordem, com os códigos dos itens que citam cada um marcados ao lado do
+número; depois o levantamento inteiro. Leia esse arquivo **uma vez**. Não vá à
+extração procurar passagem: ela já está ali, debaixo do número que o item cita.
+
+**Por que assim, e é medido.** Sobre a mesma dissertação, o mesmo levantamento e o
+mesmo modelo, a verificação que ia à extração buscar cada passagem custou 66,6
+minutos, 102 chamadas e 466 mil tokens; com tudo num arquivo, custou 14,0 minutos,
+28 chamadas e 271 mil. Uma execução de cada lado, com dois dias entre elas, de modo
+que é indício e não medida. O modo novo ainda achou o que o outro não tinha como
+achar: distância entre parágrafos e extensão de seção, que não têm localizador para
+procurar.
+
+**E o ganho é daqui, e não de toda conferência.** A mesma troca sobre um relatório
+já triado não rendeu nada: 16,9 minutos e 30 chamadas no modo antigo contra 15,3 e
+31 no novo. A diferença tem causa: o levantamento espalha itens de quatro leituras
+por centenas de parágrafos e o método antigo ia buscar cada um; num relatório
+triado os itens já estão organizados, e não havia o que economizar.
+
+O cabeçalho traz duas coisas que a leitura item a item não dá:
+
+- **A ordem por carga.** Os parágrafos de que mais itens dependem, com o peso de
+  cada item dividido pelo número de parágrafos que ele cita. **Comece por eles:**
+  uma leitura errada ali não custa um item, custa o bloco. Num caso medido, nove
+  itens pousavam na legenda de um único gráfico.
+- **Os pares que dividem três ou mais parágrafos**, que é onde executar um item
+  pode desfazer o outro.
+
+Ainda cabe abrir:
+
 - `trabalho.pdf` — use `Read` com faixa de páginas **só quando o item depender de ver
   a tabela ou a figura**, e no máximo três vezes.
+- Uma busca no texto, quando você precisar procurar o que **não** está citado por
+  item nenhum: é assim que se testa afirmação de ausência.
 
 Não abra relatório, cotejo, conferência ou verificação anterior sobre este trabalho.
+
+**E há uma coisa que só este material permite, porque o levantamento vem de quatro
+leituras independentes:** duas delas podem ter dito coisas opostas sobre o mesmo
+parágrafo. Diga onde isso acontece, com os dois códigos e o localizador. Não é erro
+de nenhuma das duas, é divergência entre vozes, e quem tria precisa dela.
 
 ## O veredicto, e são três saídas
 

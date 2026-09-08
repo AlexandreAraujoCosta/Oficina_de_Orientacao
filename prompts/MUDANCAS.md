@@ -911,3 +911,54 @@ desk que fez a conta de uma tabela sem instrução no prompt dele. Isso não med
 modelo sem a regra: os subagentes desta máquina herdam o `CLAUDE.md`, que carrega a
 disciplina de contagem. E os números do achado dela não vieram com informação de
 terem sido conferidos na fonte.
+
+---
+
+## 08/09/2026 — O passo 5 do Luis passa a receber o trabalho inteiro num arquivo
+
+**A ficha com os falseamentos foi escrita antes dos resultados**, em
+`D:/Claude/TCC/experimento/FICHA-PASSO-5-E-6.md`.
+
+**O resultado, uma execução de cada lado, sobre a dissertação R:**
+
+| | tokens | relógio | chamadas |
+|---|---|---|---|
+| passo 5 antigo (confere o levantamento) | 466.278 | 66,6 min | 102 |
+| passo 5 novo | 270.698 | 14,0 min | 28 |
+| conferência do relatório já triado, antiga | 262.840 | 16,9 min | 30 |
+| a mesma, no modo novo | 249.023 | 15,3 min | 31 |
+
+**O ganho é do levantamento e não de toda conferência**, e isso entrou no prompt
+como delimitação: o levantamento espalha itens de quatro leituras por centenas de
+parágrafos e o método antigo ia buscar cada um; num relatório triado os itens já
+estão organizados e não há o que economizar.
+
+**Falseamento 1, e eu escolhi mal o limiar.** Eu escrevera *se passar de 30
+chamadas, não escala*. Deu 31 pela contagem do sistema e 30 pela do agente: caiu em
+cima da linha. Limiar de valor exato com duas contagens possíveis não testa nada. O
+que sustenta a alteração sem depender dele é a escala: o trabalho cresceu de 56 para
+402 parágrafos, sete vezes, e as chamadas foram de 14 para 28, cerca de duas.
+
+**Falseamento 2 continua aberto: não há medida de recall.** O passo 5 antigo
+consolidou o levantamento em 44 itens `V` e a conferência nova percorreu 113
+códigos. Se os 44 cobriam o mesmo terreno de forma agrupada, os 79% de queda são
+reais; se não, estão inflados. **Não sei qual é o caso.**
+
+**Falseamento 3, testado pela metade.** A ordem por carga sobrevive ao desconto dos
+itens largos: os quatro parágrafos do topo continuam no topo. Se ela muda alguma
+decisão de triagem continua por medir.
+
+**E o método novo devolveu o que o antigo não devolvia:** quatro divergências entre
+as quatro leituras, com os dois códigos e o localizador. Sobre `[P460]`-`[P473]`, a
+leitura 1 diz que as quatorze categorias estão no corpo e a leitura 4 diz que só
+sete estão, e nenhuma das duas confere. Isso não entra na conta de custo, e é o que
+quatro leituras dão e uma não dá.
+
+**Divergência registrada.** Eu propus esperar as conferências antes de alterar os
+prompts; o orientador mandou fazer, e depois endossou a ordem que eu propusera. A
+alteração ficou sem commit até os resultados chegarem, e é este o commit.
+
+**Achado colateral, e ele veio das próprias conferências.** As duas acharam o mesmo
+defeito na ferramenta: a fronteira do item era só o item seguinte, e o último item
+de cada seção engolia a prosa posterior. Consertado no mesmo dia, com a fronteira
+passando a ser o próximo item **ou** o próximo cabeçalho.

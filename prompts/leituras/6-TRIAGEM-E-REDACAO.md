@@ -20,6 +20,26 @@ cada um entra no relatório.
 
 - `VERIFICACAO.md` — os itens com veredicto CONFIRMA, ENCOLHE ou NÃO CONFERÍVEL. Os
   que CAÍRAM não chegam até você e não entram no relatório.
+- **A ordem por carga e a lista de colisões**, que vêm no cabeçalho do arquivo que a
+  verificação usou. A carga de um parágrafo é o número de itens que dependem dele,
+  cada um pesado por 1 dividido pelo número de parágrafos que ele próprio cita.
+
+**Comece pelos parágrafos de maior carga, e não pela ordem dos itens.** Num caso
+medido, nove itens pousavam na legenda de um único gráfico, e quatro deles eram
+substantivos: decidir aquele parágrafo decidia os nove de uma vez. A ordem dos
+itens faz você tomar nove decisões que já estavam tomadas na primeira.
+
+**E a lista de colisões é onde a leitura item a item é cega.** Dois itens que
+dividem três ou mais parágrafos podem mandar reescrever a mesma passagem em
+sentidos diferentes, ou um pode cumprir o outro. Percorra a lista antes de fechar a
+seção de correções, e onde houver colisão diga a ordem de execução, ou funda os
+dois. **Desconte os pares em que os dois lados são largos:** dois itens que falam
+de todas as figuras coincidem por serem largos, e não por disputarem a passagem.
+
+**A divergência entre leituras é matéria sua, e não defeito de nenhuma.** Quando a
+verificação registrar que duas das quatro leituras disseram coisas opostas sobre o
+mesmo parágrafo, isso não é item: é decisão que você toma, e que vai à parte das
+questões quando você não puder tomá-la.
 
 ## A pergunta que decide, e é uma só
 
