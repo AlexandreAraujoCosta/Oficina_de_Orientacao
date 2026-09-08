@@ -686,3 +686,19 @@ Nenhuma diz que a mesma exigência vale para procurar arquivo, e as duas leitura
 rodam em máquina onde ninguém as corrige. **Fica proposto e não executado**, para
 não entrar prompt novo sem caso medido do lado da leitura: os dois casos de hoje
 são meus, na condução da sessão, e não de uma leitura.
+
+**Levada aos prompts em 07/09/2026, por decisão do orientador.** A regra maior é a
+do alcance, e não a do nome de arquivo: *declarar o alcance não autoriza concluir
+para fora dele*. Entrou nos sete lugares em que a leitura pode produzir a frase
+larga: os seis passos do Luis (nas cinco escritas diferentes que a regra 2 tem
+neles) e a disciplina do `ALBERTO.md`. O passo 6 não carrega o bloco das três
+regras, porque não busca, e recebeu outra formulação: é ele que redige, e é na
+redação que *não ocorre no capítulo 4* vira *o trabalho não trata do assunto*.
+O caso do nome de arquivo entrou só no `_REGRAS.md` e no `ALBERTO.md`, junto dos
+defeitos de ambiente, que é onde ele é.
+
+**Objeção minha, registrada e vencida:** os dois casos medidos são meus, na
+condução da sessão, e não de uma leitura, de modo que a regra entra sem caso do
+lado que o prompt governa. **O falseamento:** se em três leituras seguidas nenhuma
+frase de alcance largo aparecer nos relatórios anteriores a esta mudança, ela era
+enfeite e sai.

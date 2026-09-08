@@ -507,6 +507,12 @@ apêndice autônomo, a pergunta que ele responde sozinho.
 Você redige, porque já leu todo item que sobreviveu e já decidiu o destino de cada
 um. Não há passada separada para isto.
 
+**Ao redigir, não alargue o alcance que a leitura declarou.** As leituras dizem
+onde procuraram, e a redação é onde isso se perde: *a expressão não ocorre no
+capítulo 4* vira *o trabalho não trata do assunto*, e a segunda é afirmação sobre
+o trabalho inteiro, que o autor refuta abrindo outro capítulo. Onde o item vier
+com alcance, o alcance vai junto na frase.
+
 ## Antes das cinco seções, o veredito, e ele é o título da abertura
 
 Leia `VEREDITO.md`, nesta mesma pasta, que traz os quatro degraus por extenso, a

@@ -406,7 +406,7 @@ inventar, e ela não entra.
    Onde houver Python, use `scripts/contagem.py`, que traz isso em código e se
    recusa a carregar se o próprio autoteste falhar.
 
-2. **Alcance declarado.** Diga quantas figuras abriu, de quantas existem, e quais.
+2. **Alcance declarado.** Diga quantas figuras abriu, de quantas existem, e quais. **E declarar o alcance não autoriza concluir para fora dele:** quem varreu o capítulo 4 pode escrever que a expressão não ocorre no capítulo 4, e não que o trabalho não trata do assunto. A frase que sai do alcance vira afirmação sobre o trabalho inteiro, e é ela que chega ao autor.
 3. **Hipótese sua que caiu é resultado**, e diga **onde estava o que a salvou**: no próprio parágrafo, num apêndice, noutro capítulo, ou só depois de você refazer a conta. Essa localização decide se a queda vira sugestão ao autor. Registre, e sobretudo quando ela caía contra
    o autor: numa leitura medida, o achado negativo da autora sobreviveu ao teste com
    p = 0,22, e sem esse passo o relatório teria acusado de erro o que era só falta de

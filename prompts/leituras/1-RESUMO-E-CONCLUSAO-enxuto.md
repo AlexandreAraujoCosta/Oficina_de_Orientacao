@@ -84,7 +84,7 @@ voz, e hipótese que cai lá é resultado.
    Onde houver Python, use `scripts/contagem.py`, que traz isso em código e se
    recusa a carregar se o próprio autoteste falhar.
 
-2. **Alcance declarado**: o que leu e o que não leu.
+2. **Alcance declarado**: o que leu e o que não leu. **E declarar o alcance não autoriza concluir para fora dele:** quem varreu o capítulo 4 pode escrever que a expressão não ocorre no capítulo 4, e não que o trabalho não trata do assunto. A frase que sai do alcance vira afirmação sobre o trabalho inteiro, e é ela que chega ao autor.
 3. **Hipótese sua que caiu é resultado**, e diga **onde estava o que a salvou**: no próprio parágrafo, num apêndice, noutro capítulo, ou só depois de você refazer a conta. Essa localização decide se a queda vira sugestão ao autor.
 
 ## Saída

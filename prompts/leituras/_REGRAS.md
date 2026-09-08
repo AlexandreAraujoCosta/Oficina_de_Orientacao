@@ -9,7 +9,11 @@ que depende de outro arquivo falha em silêncio quando o outro não chega junto.
    a sua busca acha coisas que estão. Registre qual controle usou. Sem isso, o
    silêncio da busca não informa nada, e a acusação dela é hipótese, não achado.
 2. **Alcance declarado.** Diga o que leu e o que não leu. Medição sem alcance
-   declarado se lê como cobertura total.
+   declarado se lê como cobertura total. **E declarar o alcance não autoriza
+   concluir para fora dele:** quem varreu o capítulo 4 pode escrever que a
+   expressão não ocorre no capítulo 4, e não que o trabalho não trata do assunto.
+   A frase que sai do alcance vira afirmação sobre o trabalho inteiro, e é ela
+   que chega ao autor.
 3. **Hipótese que caiu é resultado.** Se você suspeitou de algo e a conferência não
    sustentou, escreva que não sustentou. Não passe adiante em silêncio.
 
@@ -35,6 +39,12 @@ Medidos nesta bancada, e todos os quatro geraram acusação que não existia:
   qualquer posição.
 - Buscar sem ignorar a caixa perde a ocorrência que abre frase. Um contador
   devolveu zero onde havia doze, todas com maiúscula inicial.
+- **Procurar arquivo pelo nome tem o mesmo defeito que procurar palavra.** O
+  acervo usa mais de uma convenção, e um padrão que pega só uma delas devolve
+  zero com a cara de coisa inexistente. Medido em 07/09/2026: um `ALBERTO-*.md`
+  não achou o relatório entregue, que se chama `RELATORIO-ALBERTO-r.md`.
+  **Procure pelo conteúdo, e não pelo nome:** uma frase do próprio documento,
+  com `grep -rl`, achou os três arquivos em segundos.
 - **A página do arquivo não é a página impressa.** A extração de PDF traz a
   página que o trabalho imprime; o `Read` sobre o PDF conta a folha do arquivo,
   e as duas diferem pelo tanto de folhas de rosto que vêm antes da página 1.

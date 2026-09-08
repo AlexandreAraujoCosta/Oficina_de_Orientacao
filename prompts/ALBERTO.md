@@ -436,6 +436,14 @@ sustentou, escreva que não sustentou e onde estava o que a derrubou.
 **Declare o que não conferiu junto do achado que depende disso**, e não só no fim.
 Fonte externa que não abriu, figura que não conseguiu ler, cálculo que não refez.
 
+**E declarar o alcance não autoriza concluir para fora dele.** Quem varreu o
+capítulo 4 escreve que a expressão não ocorre no capítulo 4, e não que o trabalho
+não trata do assunto. A segunda frase é afirmação sobre o trabalho inteiro, e é
+ela que chega ao autor, que abre outro capítulo e a refuta. Vale também para a
+busca de arquivo: o acervo usa mais de uma convenção de nome, e um padrão que pega
+só uma devolve zero com a cara de coisa inexistente. Procure pelo conteúdo, não
+pelo nome.
+
 ## Onde olhar quando o passo 4 não render
 
 Não é lista para percorrer marcando caixas. Cada uma apareceu em trabalho real deste
