@@ -52,8 +52,15 @@ for fluxo in (sys.stdout, sys.stderr):
 
 # As escritas de item que o acervo usa: titulo, negrito abrindo linha, e codigo e
 # titulo dentro do mesmo negrito. As tres convivem no mesmo relatorio.
+# As leituras escrevem o codigo de tres modos incompativeis, e um padrao que leia
+# so um descarta item em silencio. Medido em 08/09/2026 sobre as quatro leituras do
+# trabalho R: a 1 escreve `| AC01` dentro de tabela, a 2 escreve `## PR-1` e a 3
+# `### C-1`, com hifen. O padrao antigo achava 40 codigos onde havia 160, com a
+# contagem certa e o conteudo faltando. Era este o defeito por tras do aviso de uma
+# conferencia de que "o lote mapeia 76 codigos e os outros 37 nao reconheceu".
 RE_ITEM = re.compile(
-    r"(?m)^(?:#{2,5}[ \t]*\**[ \t]*|\*\*)([A-Z]{1,2}\d+)\b[.,:—–·|\-]?[ \t]*([^\n]{0,110})")
+    r"(?m)^(?:\|[ \t]*|#{2,5}[ \t]*\**[ \t]*|\*\*)([A-Z]{1,2})-?(\d+)\b"
+    r"[.,:—–·|\-]?[ \t]*([^\n]{0,110})")
 
 # As tres escritas de localizador. A faixa por extenso ("de [P380] a [P516]") vira
 # os dois extremos, e nao os quinhentos do meio: quem confere abre as pontas.
@@ -84,7 +91,8 @@ def paragrafos(caminho):
 def itens(caminho):
     """Devolve [(codigo, titulo, corpo)], com o corpo indo ate o item seguinte."""
     t = io.open(caminho, encoding="utf-8", errors="replace").read()
-    marcas = [(m.start(), m.group(1), " ".join(m.group(2).split()))
+    # o codigo canonico junta as duas partes: `PR-1` e `PR1` sao o mesmo item
+    marcas = [(m.start(), m.group(1) + m.group(2), " ".join(m.group(3).split()))
               for m in RE_ITEM.finditer(t)]
     # o mesmo codigo pode aparecer numa remissao; fica a primeira ocorrencia de cada
     vistos, limpo = set(), []
