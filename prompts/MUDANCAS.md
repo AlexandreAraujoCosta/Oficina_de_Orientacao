@@ -640,3 +640,49 @@ falta continua faltando, e é obra de outro autor com figura fragmentada.
 `.docx` de outro autor com gráfico partido em arquivos. Enquanto não houver, a
 linha honesta na ficha é que `RAZAO` foi calibrada e conferida num só trabalho,
 em duas de suas versões.
+
+---
+
+## 07/09/2026 — A busca por nome de arquivo também tem alcance, e o meu era curto
+
+**O caso.** Auditando as entregas, comparei o relatório do Alberto que a autora do trabalho R
+recebeu com os arquivos do acervo e afirmei ao orientador que **o relatório
+entregue não existia no disco**, sendo uma terceira linhagem de origem
+desconhecida. A conclusão saiu de um `ls ALBERTO-*.md`.
+
+Existem duas convenções de nome, e o padrão pegava só uma:
+
+    RELATORIO-ALBERTO-<orientanda>.md   o relatório de producao, o que vai à entrega
+    ALBERTO-<ORIENTANDA>-v2.md          as rodadas de medição, feitas depois
+
+O arquivo estava lá o tempo todo, em `RELATORIO-ALBERTO-r.md`, escrito às
+20:22, vinte e sete minutos **antes** da primeira rodada de medição. Os itens
+diferem porque são leituras diferentes do mesmo trabalho, e não versões do mesmo
+texto. Não havia divergência de linhagem nenhuma.
+
+**A regra que eu quebrei é a que esta oficina publica.** *Toda afirmação de
+ausência vem provada: procure alguma coisa que você sabe que está, do mesmo tipo,
+e diga que achou.* Eu a aplico a busca de texto dentro de um trabalho e não a
+apliquei a uma busca por nome de arquivo. **O zero de um padrão de nome estreito
+tem exatamente a mesma cara do zero de coisa inexistente**, e produz afirmação
+mais grave, porque afirmar que um arquivo entregue não existe põe em dúvida a
+entrega inteira.
+
+**O controle que teria bastado**, e custa uma linha: antes de afirmar que um
+arquivo não existe, procurar pelo conteúdo e não pelo nome. `grep -rl` numa frase
+do próprio documento devolveu os três arquivos em segundos, e foi assim que o erro
+caiu.
+
+**É a segunda vez no mesmo dia.** Horas antes eu afirmara que não existia arquivo
+com 33 comentários do orientador sobre o trabalho T, tendo varrido só
+`D:\Claude\TCC`; o arquivo estava em `Downloads`. Ali eu declarei o alcance e a
+afirmação ficou tecnicamente correta, mas a **conclusão** que tirei dela (que a
+tarefa nunca teve material) não era coberta pelo alcance declarado. Declarar o
+alcance não autoriza concluir para fora dele.
+
+**Se transfere para os prompts?** A regra de ausência com controle já está escrita
+no `ALBERTO.md` e no `_REGRAS.md`, e as duas falam de procurar palavra no trabalho.
+Nenhuma diz que a mesma exigência vale para procurar arquivo, e as duas leituras
+rodam em máquina onde ninguém as corrige. **Fica proposto e não executado**, para
+não entrar prompt novo sem caso medido do lado da leitura: os dois casos de hoje
+são meus, na condução da sessão, e não de uma leitura.
