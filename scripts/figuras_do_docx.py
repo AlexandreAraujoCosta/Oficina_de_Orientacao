@@ -946,9 +946,17 @@ def main():
             onde += "?"
         print("  %-3d %-8s %s" % (n, onde,
                                   f["legenda"][:88] or "(sem legenda por perto)"))
-        faixa = ("[P%d]" % f["p_imagem"] if f["p_imagem"] == f["p_ultimo"]
-                 else "[P%d]-[P%d]" % (f["p_imagem"], f["p_ultimo"]))
-        img_em = ("imagem em %s" % faixa) if endereca else "imagem"
+        # A POSICAO DA IMAGEM NAO E ENDERECO, e por isso nao sai entre colchetes.
+        # O paragrafo que carrega a imagem nao tem texto, de modo que a extracao
+        # nao lhe da marcador: escrever [P444] aqui convida a copia-lo para o
+        # relatorio, e la ele nao abre. Medido em 08/09/2026: um relatorio saiu com
+        # oito itens de figura enderecados em [P444], [P478], [P515] e [P522],
+        # nenhum dos quais existe na extracao; os enderecos certos eram os da
+        # legenda, que o programa ja imprimia na linha de cima. Sai sem colchete e
+        # com a palavra que diz o que e.
+        faixa = ("posicao %d" % f["p_imagem"] if f["p_imagem"] == f["p_ultimo"]
+                 else "posicao %d a %d" % (f["p_imagem"], f["p_ultimo"]))
+        img_em = ("imagem na %s, e o endereço é o da legenda acima" % faixa) if endereca else "imagem"
         if f["principal"]:
             nome = f["principal"][0]
             marca = ("" if len(f["imgs"]) == 1
