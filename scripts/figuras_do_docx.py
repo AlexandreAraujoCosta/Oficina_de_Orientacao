@@ -114,11 +114,24 @@ ALINHAMENTO_MINIMO = 0.90
 # O identificador nem sempre e numero. Numa tese do acervo as figuras sao
 # "Figure A", "Figure B" e tres delas "Figure X", o que e defeito do trabalho e
 # nao do programa: exigir digito deixava treze figuras sem legenda reconhecida.
+#
+# O `(?i:...)` cobre SO a palavra do tipo, e nao a expressao inteira. Com `re.I`
+# global, o `[A-Z]` do identificador casava minuscula e "Figura a - y" era lido
+# como legenda. Medido em 07/09/2026 sobre as oito obras distintas do acervo:
+# a troca nao muda nada (os mesmos 360 paragrafos casam, e as mesmas figuras
+# ficam com legenda), porque as 360 legendas escrevem o tipo com inicial
+# maiuscula (Grafico 308, Tabela 17, Quadro 14, Figure 13, Figura 8). Tirar o
+# `re.I` inteiro, que foi o que se cogitou, tambem nao mudaria nada ali e
+# custaria "TABELA 4" e "GRAFICO 12", que sao grafia corrente.
+_TIPO = r"(?i:(Gr[áa]fico|Figura|Tabela|Quadro|Imagem|Chart|Table|Figure))"
+# A segunda alternativa aceita numero sem separador, e e ela, e nao o `re.I`, que
+# faz "Tabela 1 apresenta os dados" passar por legenda. Fica como esta porque e
+# necessaria: dispara 4 vezes em 360, todas na `dissertacao-nova`, onde a legenda
+# ao lado da imagem e o texto "Grafico 1" sozinho. Aperta-la para exigir que nada
+# sobre depois do numero rejeitaria tambem "Chart 3 Something".
 RE_LEGENDA = re.compile(
-    r"^\s*(Gr[áa]fico|Figura|Tabela|Quadro|Imagem|Chart|Table|Figure)"
-    r"\s*(\d{1,3}|[A-Z]|[IVXL]{1,5})\s*[-–—.:]\s*(.*)$"
-    r"|^\s*(Gr[áa]fico|Figura|Tabela|Quadro|Imagem|Chart|Table|Figure)"
-    r"\s*(\d{1,3})\s*(.*)$", re.I)
+    r"^\s*" + _TIPO + r"\s*(\d{1,3}|[A-Z]|[IVXL]{1,5})\s*[-–—.:]\s*(.*)$"
+    r"|^\s*" + _TIPO + r"\s*(\d{1,3})\s*(.*)$")
 
 # O marcador de paragrafo da extracao so vale no comeco da linha, depois do que
 # o extrator poe antes dele (**, #, >). No meio da linha, "[P757]" e referencia
@@ -494,18 +507,34 @@ def autoteste():
     """
     falhas, provas = [], []
 
-    # 1. o leitor de legenda
+    # 1. o leitor de legenda. "TABELA 4" e "GRÁFICO 12" estao aqui porque sao o
+    #    que se perde ao tirar o `re.I` inteiro, e "Figura a - y" porque e o que
+    #    se ganha ao restringi-lo a palavra do tipo.
     for bom in ("Gráfico 22 – Decisões por ano", "TABELA 4 - Distribuição",
-                "Figura 2: série histórica", "Chart 3 Something"):
+                "GRÁFICO 12 – Algo", "Figura 2: série histórica",
+                "Figure A. Judgement Sessions Portal", "Chart 3 Something",
+                "Gráfico 1"):
         if not RE_LEGENDA.match(bom):
             falhas.append("nao reconhece legenda: %r" % bom)
     for mau in ("O gráfico acima mostra que", "Tabelas de contingência sobre",
-                "A figura de duração é apresentada"):
+                "A figura de duração é apresentada", "Figura a - y"):
         if RE_LEGENDA.match(mau):
             falhas.append("confunde prosa com legenda: %r" % mau)
-    if not falhas:
-        provas.append("reconhece as quatro escritas de legenda e recusa três "
-                      "prosas que começam pela mesma palavra")
+    # Estes dois continuam passando por legenda, e ficam escritos para que
+    # ninguem os descubra de novo como se fossem novidade: sao a segunda
+    # alternativa, que aceita numero sem separador, e nao a caixa das letras.
+    for conhecido in ("Tabela 1 apresenta os dados", "tabela 3 de resultados"):
+        if not RE_LEGENDA.match(conhecido):
+            falhas.append("o falso positivo conhecido %r sumiu, e o comentario "
+                          "acima da expressao ficou desatualizado" % conhecido)
+    velha = re.compile(RE_LEGENDA.pattern.replace("(?i:", "(?:"), re.I)
+    if not velha.match("Figura a - y"):
+        falhas.append("CONTROLE MORTO: a expressao com re.I global tambem recusa "
+                      "'Figura a - y', e o caso nao exerce o defeito")
+    elif not falhas:
+        provas.append("reconhece sete escritas de legenda, incluídas TABELA e "
+                      "GRÁFICO em caixa alta, e recusa quatro prosas, entre elas "
+                      "'Figura a - y', que o `re.I` global aceitava")
 
     # 2. contagem de paragrafo, com o paragrafo vazio auto-fechado que fazia a
     #    expressao regular antiga engolir o seguinte.

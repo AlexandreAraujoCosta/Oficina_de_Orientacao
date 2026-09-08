@@ -169,6 +169,13 @@ testes sem elas:
   evento que ocorre a taxas muito diferentes nos dois grupos não compara o que parece.
 - **As unidades são independentes?** Decisões do mesmo relator, do mesmo órgão ou do
   mesmo processo não são, e o teste supõe que sejam.
+- **O que exatamente entra na contagem?** Procure a passagem em que o trabalho diz.
+  Se a unidade reúne espécies que a afirmação trata como uma só, o item se enuncia
+  contra a afirmação e não contra a coleta; se o trabalho não declara nada, a
+  pergunta vai à parte das questões, porque você não sabe a resposta. E confira **o
+  nome da série contra a definição dela**, e não contra o sentido comum: nome que
+  afirma mais do que a contagem mede é achado de uma linha, e é o resumo que o
+  carrega adiante.
 
 Onde alguma guarda falhar, **o pedido ao autor muda**: deixa de ser "calcule o p" e
 passa a ser "declare sob que modelo o senhor compara, e por quê". Onde o trabalho enuncia uma ausência de diferença, calcule o intervalo: **a

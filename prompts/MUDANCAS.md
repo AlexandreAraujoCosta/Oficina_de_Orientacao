@@ -702,3 +702,83 @@ condução da sessão, e não de uma leitura, de modo que a regra entra sem caso
 lado que o prompt governa. **O falseamento:** se em três leituras seguidas nenhuma
 frase de alcance largo aparecer nos relatórios anteriores a esta mudança, ela era
 enfeite e sai.
+
+---
+
+## 07/09/2026 — O `re.I` do `RE_LEGENDA`, e a medição contrariou o pedido
+
+**O pedido do orientador foi tirar o `re.I` e medir o efeito.** A medição
+contrariou a premissa, e o que entrou foi outra coisa, escolhida por ele depois
+de ver o número.
+
+**O `re.I` fazia duas coisas, e só uma é defeito.** Ele deixa a palavra do tipo
+ser reconhecida em qualquer caixa (`TABELA 4`, `GRÁFICO 12`) e deixa o `[A-Z]` do
+identificador casar minúscula, de modo que `Figura a - y` era lido como legenda.
+Tirá-lo inteiro perde a primeira junto com a segunda.
+
+**Efeito medido de tirá-lo: zero.** Nas oito obras distintas do acervo os mesmos
+360 parágrafos casam a expressão, as mesmas figuras ficam com legenda e nenhum
+endereço muda. A razão está na grafia: **as 360 legendas escrevem o tipo com
+inicial maiúscula** (Gráfico 308, Tabela 17, Quadro 14, Figure 13, Figura 8), sem
+uma ocorrência em caixa alta ou minúscula. O `re.I` não protegia nada aqui, e
+tirá-lo não custaria nada aqui; o custo seria em trabalho futuro que escreva
+`TABELA 4`, grafia corrente que falta a estas oito por acaso.
+
+**O falso positivo que motivou o pedido não vem do `re.I`.** `Tabela 1 apresenta
+os dados` casa pela segunda alternativa, que aceita número sem separador, e
+continua casando com ou sem `re.I`. Essa alternativa dispara **4 vezes em 360**,
+todas na `dissertacao-nova`, onde a legenda ao lado da imagem é o texto
+`Gráfico 1` sozinho, e por isso ela fica. Apertá-la para exigir que nada sobre
+depois do número rejeitaria também `Chart 3 Something`.
+
+**O que entrou:** o `(?i:...)` cobre só a palavra do tipo. `Figura a - y` para de
+passar, `TABELA 4` e `GRÁFICO 12` continuam passando. **Conferido nas oito obras:
+360 casamentos contra 360, mesmas legendas, zero endereços mudados.** O controle
+do autoteste roda a expressão com `re.I` global e exige que ela aceite
+`Figura a - y`, senão o caso deixou de exercer o defeito.
+
+**O que continua passando, e fica escrito para não ser redescoberto como
+novidade:** `Tabela 1 apresenta os dados` e `tabela 3 de resultados`. O autoteste
+agora **exige** que os dois casem, de modo que o dia em que pararem de casar, o
+comentário acima da expressão terá ficado desatualizado e o teste avisa.
+
+**Carimbo:** é guarda contra defeito latente, e não correção de defeito
+observado. Nenhuma das 408 legendas atribuídas no acervo estava errada por esta
+causa. O que a medição mostrou é que o diagnóstico anterior atribuía ao `re.I` um
+falso positivo que é da segunda alternativa.
+
+---
+
+## 07/09/2026 — A pergunta da unidade contada volta, e muda de lugar
+
+**Por que volta.** Ela saiu em 05/09 por ter sido reprovada numa rodada limpa, e a
+ficha daquela retirada registrou o motivo com precisão: *o passo disparou quando o
+pedido o repetia e não quando só o prompt o trazia; isso não mostra que o conteúdo
+não sirva, mostra que, escrito naquele lugar, ele não compete com o resto. Quem
+quiser retomá-lo tem de mudar o lugar, não a redação.*
+
+**A evidência nova, de 07/09.** No cotejo do capítulo 6 do trabalho T contra as
+observações de margem do orientador, duas das cinco que escaparam aos dois braços
+são exatamente esta pergunta: que espécie de decisão está contada como monocrática
+(`[P773]`), e se a palavra que nomeia a série diz o que a série mede (`[P770]`).
+São observações de outro trabalho, feitas por quem orienta, e não por mim.
+
+**O que mudou de lugar, e é a alteração inteira.** Deixou de ser passo à parte e
+passou a pender de uma regra que já dispara: *todo número vem com a regra e com a
+palavra contada*, que governa os números do relatório e funciona. O acréscimo diz
+que a mesma exigência vale para os números do trabalho, e desdobra em duas: a
+composição da unidade e o nome da série. No `3-FRENTE-PARA-TRAS.md` entrou como
+mais uma guarda na lista que já existe, ao lado de censo, seleção e independência.
+
+**Custo:** 130 palavras no `ALBERTO.md` contra as 358 que a versão de passo tinha,
+e 80 no `3-FRENTE`. **Sem exemplo concreto**, porque o exemplo que eu escrevera na
+versão anterior voltou atribuído à dissertação, com localizador, e a palavra não
+ocorria uma vez em 1.434 parágrafos.
+
+**O falseamento, escrito antes de rodar.** Uma leitura sobre trabalho com série
+contada, com o prompt de antes como braço de controle. Se o braço novo não produzir
+item nem questão sobre a composição da unidade ou sobre o nome da série, a mudança
+de lugar não resolveu e ela sai de novo, desta vez sem retorno.
+
+**Origem: raciocínio meu sobre uma medição do orientador.** A pergunta é dele, e
+a decisão de mudar o lugar em vez da redação veio da ficha de 05/09. Não medida.

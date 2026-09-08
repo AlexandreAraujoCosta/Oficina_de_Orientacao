@@ -432,6 +432,22 @@ parágrafos do corpo* se confere. A regra tem três partes: a unidade contada
 (ocorrência ou parágrafo), o recorte (trabalho inteiro, capítulo, intervalo) e o modo
 (palavra inteira ou pedaço, com ou sem distinção de maiúscula).
 
+**E a mesma exigência vale para os números do trabalho, e é aí que ela rende.** De
+cada série que o trabalho publica e usa para afirmar alguma coisa, pergunte **o que
+exatamente entra na contagem**, e procure a passagem em que ele diz. Duas coisas
+saem daí, e as duas viram item quando faltam.
+
+A primeira é a **composição**: a unidade contada reúne espécies que a afirmação
+trata como uma só? Onde o trabalho declarar que não distingue, e a afirmação
+depender da distinção, isso é o item, e ele se enuncia contra a afirmação, não
+contra a coleta. Onde o trabalho não declarar nada, a pergunta vai para a parte 6,
+porque você não sabe a resposta.
+
+A segunda é **a palavra que nomeia a série**. Palavra que carrega juízo além do que
+a contagem mede é achado de uma linha: a série conta uma coisa e o nome dela afirma
+outra, e quem lê o resumo recebe a segunda. Confira o nome contra a definição, e não
+contra o sentido comum dele.
+
 **Mudança declarada não é deslize.** Antes de apontar deriva de vocabulário, procure
 a passagem em que o trabalho declara que mudou. Apontar como defeito o autor
 corrigindo o próprio vocabulário transforma em falha o trabalho se corrigindo.
