@@ -1093,3 +1093,30 @@ tempo.**
 **Nove dos 91 itens não puderam ser conferidos**, todos pela mesma causa: dependem de
 valor impresso nas figuras, cujos localizadores eram os mortos acima. O defeito da
 ferramenta custou 10% da conferência.
+
+---
+
+## 08/09/2026 — `grep -i` não dobra maiúscula acentuada, e a raiz curta não casa a flexão
+
+**O caso, e quem o achou foi uma conferência contra si mesma.** A revisão do
+`ALBERTO-R-v5` declarou que três dos seus próprios controles produziram o
+achado em vez de o encontrarem, e que nos três o relatório conferido estava certo e
+ela errada. As causas são duas, e as duas são deste ambiente:
+
+- **O locale é C**, e ali o `-i` do `grep` dobra `a` com `A` e não dobra `á` com
+  `Á`. Então `grep -i "época"` acha no meio da frase e perde no começo dela.
+- **Raiz curta não casa a palavra flexionada com acento:** `pandem` não acha
+  *pandêmico*, porque o acento entra no meio da raiz.
+
+**Controle, e ele foi rodado antes de publicar a regra.** Num arquivo com duas
+ocorrências, uma abrindo frase com maiúscula, `grep -i "época"` devolve 1 e
+`grep "época"` devolve 1: o `-i` não muda nada. O `buscar_lote.py` devolve 2,
+porque tira o acento antes de comparar.
+
+**A regra entrou nos dois lugares onde os defeitos de ambiente moram**, com a saída
+junto: buscar as duas formas, ou usar o `buscar_lote.py`.
+
+**Por que isto importa mais do que parece.** É a família de defeito que produz
+afirmação de ausência falsa, que é o erro mais caro desta oficina, porque manda o
+autor escrever o que já está escrito. E aqui ele estava dentro do próprio
+instrumento de conferência.

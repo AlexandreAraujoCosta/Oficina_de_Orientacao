@@ -39,6 +39,16 @@ Medidos nesta bancada, e todos os quatro geraram acusação que não existia:
   qualquer posição.
 - Buscar sem ignorar a caixa perde a ocorrência que abre frase. Um contador
   devolveu zero onde havia doze, todas com maiúscula inicial.
+- **E `grep -i` não conserta isso quando a letra é acentuada.** Neste ambiente o
+  locale é C, e ali o `-i` dobra `a` com `A` e não dobra `á` com `Á`. Então
+  `grep -i "época"` acha no meio da frase e perde no começo dela. Medido em
+  08/09/2026: três controles de uma conferência produziram o achado em vez de o
+  encontrarem, e nos três o relatório conferido estava certo. **Onde a palavra
+  puder abrir frase e tiver acento, busque as duas formas, ou use
+  `scripts/buscar_lote.py`, que tira o acento antes de comparar.**
+- **Raiz curta não casa a palavra flexionada com acento.** `pandem` não acha
+  *pandêmico*, porque o acento entra no meio da raiz. Corte a raiz antes do
+  acento, ou busque a palavra inteira nas formas que ela toma.
 - **Procurar arquivo pelo nome tem o mesmo defeito que procurar palavra.** O
   acervo usa mais de uma convenção, e um padrão que pega só uma delas devolve
   zero com a cara de coisa inexistente. Medido em 07/09/2026: um `ALBERTO-*.md`

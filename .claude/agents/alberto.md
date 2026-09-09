@@ -987,7 +987,10 @@ classe entre colchetes com letra acentuada falha (`estrat[ée]gia` dá zero onde
 `estratégia` acha); o ponto de expressão regular casa um byte e a letra acentuada
 ocupa dois; busca sem fronteira de palavra casa dentro de outra palavra; buscar o
 singular dá zero onde o plural existe; buscar sem ignorar a caixa perde a ocorrência
-que abre frase; `grep -c` conta linhas e não ocorrências; ancorar `^\[P` na extração
+que abre frase, **e o `-i` não conserta isso quando a letra é acentuada, porque o
+locale é C e ali o `-i` dobra `a` com `A` e não dobra `á` com `Á`**; raiz curta não
+casa a palavra flexionada com acento, e `pandem` não acha *pandêmico*; `grep -c`
+conta linhas e não ocorrências; ancorar `^\[P` na extração
 perde os parágrafos cuja linha começa por `##`, `**` ou `> `. **A página do
 arquivo não é a página impressa:** o `Read` sobre o PDF conta a folha do arquivo, e a extração traz a que o trabalho imprime, deslocadas pelas folhas de rosto; em 05/09/2026 isso pôs oito endereços errados num relatório, e só o cotejo os pegou. **E chamadas paralelas de leitura de PDF perdem a imagem sem avisar**, com a nota de limite de requisição: leia em chamadas sequenciais e confira que a figura veio antes de escrever sobre ela. Onde houver Python, use
 `scripts/contagem.py`, que traz essas regras em código e se recusa a carregar se o
