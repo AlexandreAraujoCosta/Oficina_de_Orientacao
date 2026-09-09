@@ -118,13 +118,37 @@ def marcas(caminho):
     return {m.group(1): m.group(2).strip() for m in RE_MARCA.finditer(txt)}
 
 
-def enderecos(locs, pags, secoes, pars, teto=8):
+def so_da_providencia(locs, providencia):
+    """Os enderecos que a PROVIDENCIA nomeia, e nao os que o item cita como prova.
+
+    O item cita dois grupos de endereco: onde o defeito esta e onde a prova dele
+    esta. A margem so pode listar o primeiro, porque o que ela pede e a correcao.
+
+    Medido em 08/09/2026, e quem apontou foi o orientador lendo os comentarios: um
+    item dizia "Ocorre nas pp. 32, 34, 61, 70 e 79" e mandava corrigir em tres
+    delas. Quem le abre cinco paginas e acha o defeito em tres, e passa a duvidar
+    das outras acusacoes.
+    """
+    if not providencia:
+        return locs
+    daqui = {int(x) for x in re.findall(r"\[?P(\d+)\]?", providencia)}
+    fora = [n for n in locs if int(n) in daqui]
+    return fora or locs
+
+
+def enderecos(locs, pags, secoes, pars, teto=8, providencia=None):
     """Onde o item ocorre, escrito no proprio comentario.
 
     A pagina quando ela existe, porque e o endereco que quem recebe ja sabe
     usar; a secao ou as palavras iniciais quando nao ha PDF da mesma versao.
     Acima do teto a lista para e diz quantos ficaram de fora, porque enumerar
-    trinta paginas numa margem nao ajuda ninguem."""
+    trinta paginas numa margem nao ajuda ninguem.
+
+    **So entram os enderecos que a providencia nomeia**, e nao os que o item cita
+    como prova: a margem pede correcao, e listar onde a prova esta manda a autora
+    a paginas em que nao ha nada a fazer.
+    """
+    locs = so_da_providencia(locs, providencia)
     if len(locs) < 2:
         return ""
     p = [(pags or {}).get(str(n)) or (pags or {}).get(n) for n in locs]
@@ -431,7 +455,7 @@ def main():
         # falava de "as duas glosas do capitulo 4" sem dizer quais: uma leitura
         # fria dos 53 itens desta entrega reprovou treze deles porque a frase
         # de reformulacao comecava com "procurar".
-        onde = enderecos(validos, pags, secoes, pars)
+        onde = enderecos(validos, pags, secoes, pars, providencia=aponta)
         # O apontamento chega do anexo como titulo de item, e muitas vezes sem
         # ponto final. Dentro do comentario ele vira frase, e emenda no endereco
         # que vem logo abaixo.
