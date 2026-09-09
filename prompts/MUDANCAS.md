@@ -1120,3 +1120,45 @@ junto: buscar as duas formas, ou usar o `buscar_lote.py`.
 afirmação de ausência falsa, que é o erro mais caro desta oficina, porque manda o
 autor escrever o que já está escrito. E aqui ele estava dentro do próprio
 instrumento de conferência.
+
+---
+
+## 08/09/2026 — O passo 5 novo, medido inteiro, e a lista de colisões que não serve
+
+**O passo 5, sobre a dissertação R, com o mesmo levantamento:**
+
+| | antigo | novo |
+|---|---|---|
+| relógio | 66,6 min | **19,4 min** |
+| chamadas | 102 | **44** |
+| tokens | 466 mil | **330 mil** |
+| itens conferidos | 44 | **169** |
+
+**Isto fecha o falseamento 2, que ficara aberto de manhã.** Eu não sabia se os 44
+itens `V` do método antigo cobriam o mesmo terreno de forma agrupada. Não cobriam:
+o novo confere **quatro vezes mais itens em menos de um terço do tempo**, e o
+antigo consolidava.
+
+**A primeira tentativa deste mesmo passo conferiu 113 itens e não 169**, porque o
+`enderecos_em_lote.py` lia uma só das três escritas de código. O conserto vale 56
+itens de cobertura.
+
+**Sete divergências entre as quatro leituras**, contra a uma que se conhecia, cada
+uma resolvida com o texto: sobre os 32,6% decide a favor da leitura 3; sobre quantas
+categorias residuais `[P473]` nomeia, duas leituras dizem seis e uma diz sete, e são
+seis. Isso é o que quatro leituras dão e uma não dá, e agora sai por escrito.
+
+### A lista de colisões que eu construí hoje não serve
+
+Das **quatro colisões reais** que a verificação achou, **nenhuma** está nas oito que
+o meu cabeçalho apontou. Das oito apontadas, quatro são o mesmo item visto por duas
+leituras e quatro são complementares. **Precisão zero e recall zero.**
+
+A causa é o critério: dividir três ou mais parágrafos mede coincidência de material,
+e colisão é coincidência de **providência**. Dois itens que mandam reescrever a
+mesma frase colidem ainda que citem parágrafos diferentes; dois que citam a mesma
+figura por razões distintas não colidem.
+
+**Fica retirada do cabeçalho na próxima passada**, ou muda de critério para comparar
+o campo da providência em vez do conjunto de localizadores. A ordem por carga, que é
+a outra metade do cabeçalho, continua: a verificação a usou e disse que vale.
