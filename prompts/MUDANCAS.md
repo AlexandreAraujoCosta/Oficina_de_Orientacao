@@ -1162,3 +1162,33 @@ figura por razões distintas não colidem.
 **Fica retirada do cabeçalho na próxima passada**, ou muda de critério para comparar
 o campo da providência em vez do conjunto de localizadores. A ordem por carga, que é
 a outra metade do cabeçalho, continua: a verificação a usou e disse que vale.
+
+---
+
+## 08/09/2026 — Três defeitos de operação achados pelas próprias leituras
+
+**1. O scratchpad compartilhado sobrescreveu arquivo de trabalho.** O passo 6 do trabalho R reportou que dois arquivos dele foram sobrescritos por conteúdo de outro
+trabalho no meio da redação, porque várias rodadas paralelas gravam no mesmo
+scratchpad de sessão. Ele detectou, mudou para arquivos dentro da pasta do projeto
+e conferiu que nada vazou. **A versão silenciosa desse acidente é um relatório com
+parágrafo de outro trabalho dentro.** Daqui em diante cada rodada recebe pasta
+própria no pedido.
+
+**2. O programa de endereços toma a sigla do trabalho por código de item.** No
+trabalho do trabalho K, `GF1`, `VP2` e `VP3` são siglas de lacuna **do próprio autor**,
+e o `enderecos_em_lote.py` as capturou como se fossem itens do levantamento. São os
+sete fantasmas da diferença entre os 88 que o programa contou e os 81 que a
+verificação conferiu. A causa é o padrão aceitar qualquer `[A-Z]{1,2}\d+` no começo
+da linha, e a sigla do trabalho tem essa forma.
+
+**3. Os prompts não fixam convenção de prefixo, e é a causa-raiz do resto.** A
+leitura 3 do trabalho K procurou a convenção no `3-FRENTE-PARA-TRAS.md`, no `_REGRAS.md`
+e no `LUIS.md`, não achou, **definiu os três prefixos que usou e declarou o
+significado no cabeçalho**, que é o comportamento certo diante da lacuna. Mas é por
+isso que as quatro leituras escrevem código de quatro modos, e foi disso que saíram
+os consertos de hoje no `montar_levantamento.py` e no `enderecos_em_lote.py`.
+
+**Os três ficam registrados e nenhum é consertado agora**, para não trocar
+ferramenta no meio de duas rodadas em curso. O terceiro é o que vale mais: fixar a
+convenção nos prompts torna desnecessária metade da tolerância que os programas
+ganharam hoje.
