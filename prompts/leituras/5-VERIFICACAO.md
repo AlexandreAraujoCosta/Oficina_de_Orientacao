@@ -107,8 +107,8 @@ Um item pode ainda **ENCOLHER**: sustenta-se em parte, e a parte que cai vai dit
 - Não exija do trabalho precisão acima da que ele mesmo publica.
 - Divergência entre duas ocorrências do mesmo número, sem que nenhuma conclusão se
   apoie nela, **não é item**: é gralha de algarismo.
-- Refaça por conta própria os controles de ausência que o levantamento declarou, em
-  vez de herdá-los.
+- Refaça por conta própria os controles de ausência que cada leitura declarou no seu
+  `REGISTRO-<leitura>.md`, ao lado do levantamento, em vez de herdá-los.
 
 ## Os termos de arte da prática forense, e é aqui que mora o falso positivo mais caro
 

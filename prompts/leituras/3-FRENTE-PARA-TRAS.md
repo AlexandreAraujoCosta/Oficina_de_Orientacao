@@ -17,7 +17,32 @@ imprimir as contagens absolutas que o texto não enuncia.
 Você lê o aparato empírico de um trabalho acadêmico já concluído. Sou membro da
 banca. Não abra relatório, cotejo ou conferência anterior sobre este trabalho.
 
-## O material
+## O material, e ele vem num arquivo só
+
+`MATERIAL.md`, montado por quem despacha esta leitura:
+
+```
+python scripts/montar_material.py <trabalho.docx> extracao/<trabalho>.txt        -o MATERIAL.md --mapa MAPA.md
+```
+
+Ele traz, num arquivo: o sumário como o trabalho o escreve, a tabela de figuras já
+extraídas do `.docx` com o parágrafo da legenda de cada uma, o mapa estrutural, e
+**o trabalho inteiro na ordem, parágrafo por parágrafo**, mais as notas de rodapé.
+
+**Você não precisa ir buscar passagem: ela está aí.** Nem todo número existe, porque
+parágrafo sem texto não recebe marcador, e afirmar que um localizador está morto sem
+conferir no arquivo é erro.
+
+**Medido em 08/09/2026**, sobre a mesma leitura e o mesmo trabalho: buscando passagem
+por passagem, 41 chamadas e 16,1 minutos; com tudo num arquivo, 18 chamadas e 13,7
+minutos, **e zero buscas de passagem**. É a mesma economia que a verificação já tinha,
+e ela é da relação e não da busca: o arquivo não repete o parágrafo uma vez por item
+que o cita.
+
+**As imagens vêm à parte, e vêm numa mensagem só.** O `MATERIAL.md` traz o endereço e
+o arquivo de cada figura, e não a figura.
+
+Onde o `MATERIAL.md` não tiver chegado, o material antigo serve e custa mais:
 
 - `MAPA.md` — legendas de todas as figuras, quadros e tabelas, com página, mais o
   resumo, a introdução e a conclusão. Leia primeiro, e use as legendas para escolher
@@ -30,11 +55,11 @@ banca. Não abra relatório, cotejo ou conferência anterior sobre este trabalho
 
 ## Passo 1 — reconstituir as bases, e é o controle de tudo o que vem depois
 
-Antes de qualquer análise: **quantos casos há em cada grupo comparado?** Reconstitua
+Primeiro identifique as inferências centrais e confira se as categorias e a seleção dos casos permitem sustentá-las. Para as comparações que dependem de totais, pergunte: **quantos casos há em cada grupo comparado?** Reconstitua
 os totais a partir das figuras, **por dois caminhos independentes** (por exemplo, a
 soma por classe e a soma por tipo), e confira se fecham.
 
-Se não fecharem, pare e reporte isso: é o achado, e todo o resto herdaria o defeito.
+Se não fecharem, registre a divergência e suspenda apenas as conclusões que dependem desses totais. Continue examinando os argumentos independentes.
 Se fecharem, **verifique se esses totais aparecem no texto**. Caso medido: uma
 dissertação comparava dois regimes e a base menor tinha 285 casos, número que não
 aparecia em lugar nenhum do texto, de modo que nenhum percentual da seção era
@@ -46,16 +71,41 @@ conferível pelo leitor.
 conferir o que o texto disse; ler antes é ver o que a figura permite. A diferença
 entre as duas leituras é o achado.
 
-Rode `python scripts/figuras_do_docx.py <trabalho.docx> --extracao <extracao.txt>`,
-que tira as imagens de `word/media/`, casa cada uma com a legenda vizinha e com o
-`[P###]` do parágrafo em que ela está, e diz qual arquivo carrega o dado. Onde ele
-disser que não sabe qual carrega, peça todos os arquivos daquela figura. **Depois peça as imagens numa mensagem só**, várias por
-mensagem. Duas coisas justificam isso, e as duas foram medidas em 06/09/2026: a
-restrição de chamada paralela é da leitura de *página de PDF* e não de arquivo de
-imagem, de modo que seis imagens pedidas juntas voltaram as seis; e a imagem do
-`.docx` vem como o autor a inseriu, com os rótulos de dado legíveis um a um,
-enquanto a página de PDF vem reduzida. Onde só houver PDF, a leitura é página a
-página e sequencial.
+**A via se escolhe por figura, e não por trabalho.** Medido em 09/09/2026, sobre as
+mesmas treze figuras de uma tese, com uma variável só: por faixas de vinte páginas
+de PDF, seis chamadas de imagem e 4m38s, e **cinco figuras ficaram sem rótulo
+legível**; pedindo a imagem de cada figura no `.docx`, cerca de treze chamadas e
+3m25s, e as treze legíveis. **Menos da metade das chamadas e mais tempo**: a
+correlação entre chamadas e relógio, que vale entre execuções de tamanhos muito
+diferentes, não se sustenta dentro de um trabalho só.
+
+**As cinco perdidas eram todas captura de tela**, e das três primeiras não saiu
+valor nenhum. Dos sete gráficos de dados, nenhum se perdeu.
+
+Daí a regra:
+
+- **Gráfico, quadro e tabela: faixa de páginas do PDF**, faixas de umas vinte
+  páginas, uma chamada por faixa, **sequenciais** — chamada paralela de leitura de
+  página de PDF volta sem a imagem e sem avisar.
+- **Captura de tela, interface e diagrama com texto miúdo: a imagem do `.docx`.**
+  Rode `python scripts/figuras_do_docx.py <trabalho.docx> --extracao <extracao.txt>`,
+  que tira as imagens de `word/media/`, casa cada uma com a legenda vizinha e com o
+  `[P###]` do parágrafo em que ela está, e diz qual arquivo carrega o dado quando a
+  figura vem partida em vários. Peça **essas** numa mensagem só, várias por
+  mensagem: a restrição de paralelo é da página de PDF, e não do arquivo de imagem.
+
+O gênero de cada figura sai da legenda, e o inventário já o traz. Onde a legenda não
+disser, abra pelo PDF primeiro e vá ao `.docx` no que não se ler.
+
+**E rótulo ilegível na página reduzida não é achado.** Rótulo truncado na imagem do
+`.docx` é defeito do trabalho; rótulo que não se lê numa página de PDF pode ser só a
+redução. Antes de escrever que a figura não rotula, abra a imagem dela.
+
+**Onde não houver PDF**, a via do `.docx` é a única, e aí as imagens vão todas em
+poucas mensagens, várias por mensagem.
+
+**O endereço de uma figura é o parágrafo da legenda**, e a posição da imagem não é
+endereço.
 
 De cada figura, **sem abrir ainda a prosa que a comenta**: o que ela mostra; o que
 ela **permite afirmar**, incluindo a conta que ela permite e não rotula (soma das
@@ -73,6 +123,69 @@ das mesmas figuras feita com a prosa ao lado: o passo cego devolveu cinco achado
 que ela não tinha, entre eles duas faixas de largura diferente tratadas como iguais
 no eixo e uma comparação de contagens brutas entre relatores com tempos de exercício
 muito diferentes. Recusou três das treze. Custou cinco minutos.
+
+### E a descrição sai em forma de tabela, porque um programa a lê
+
+O que você escrever aqui é a única versão dos números da figura que existirá
+depois. Escrito em prosa, morre neste relatório: a leitura seguinte reabre a
+imagem, a conferência não confere nada e o autor não recebe nada. Escrito na forma
+abaixo, `scripts/base_das_figuras.py` o converte em base de dados, e daí saem
+a conferência da figura contra a prosa e a entrega ao orientando.
+
+Cada figura vira uma seção assim, no `REGISTRO-DADOS.md`, e a forma é obrigatória,
+não é sugestão de estilo:
+
+```
+## Gráfico 7 — a legenda como o trabalho a escreve
+
+**Endereço.** [P812], parágrafo da legenda.
+
+**Legenda e fonte declarada.** Como o trabalho a escreve, e a fonte que declara.
+
+**O que é.** Série temporal, distribuição, comparação entre grupos, pizza,
+organograma, captura de tela.
+
+**Eixos.** O que está em cada um, com a unidade, e onde a escala começa.
+
+**Séries.** Quantas são, o que cada uma nomeia, como se distinguem.
+
+**Valores impressos.**
+
+| Categoria | Série A | Série B |
+|---|---|---|
+| 2020 | 41,2 | 58,8 |
+
+**Valores lidos.**
+
+| Categoria | Leitura | Margem |
+|---|---|---|
+| 2020 | ~180 | ±15 |
+
+**Controle da minha leitura.** A soma fecha com o total declarado? O percentual
+soma 100? Diga o que conferiu.
+
+**O que falta.** Denominador, unidade contada, critério de inclusão, período, n.
+```
+
+- O título começa por `Gráfico`, `Figura`, `Tabela` ou `Quadro` mais o número, **e
+  o número é o que o trabalho usa**. Figura sem número no trabalho não ganha um
+  número inventado: identifique-a pelo arquivo de imagem.
+- `**Valores impressos.**` e `**Valores lidos.**` são marcadores literais, e os dois
+  aparecem. Onde não houver valor de uma das espécies, escreva o marcador e
+  "Nenhum", sem tabela.
+- A tabela vem logo depois do marcador, com no máximo três linhas de prosa entre eles.
+- A primeira coluna é a categoria do eixo; as demais são séries; uma coluna chamada
+  `Margem` gruda na série imediatamente à esquerda.
+- Valor lido leva `~` na frente; valor impresso, não. **Essa distinção é o produto:**
+  valor impresso confere por igualdade, valor lido confere pela margem, e publicar
+  os dois numa coluna só entrega estimativa como se fosse medida.
+- Não invente tabela onde a figura não tem valor.
+
+**Não faça a aritmética entre figuras aqui.** Some, divida e compare **dentro** de
+cada figura, para o controle da sua própria leitura. As relações entre figuras
+distantes saem de uma passada sobre a base montada, depois, e ali elas saem uma vez.
+Medido em 09/09/2026: quatro leituras que dividiram as figuras de uma dissertação
+entre si deduziram, **três delas separadamente**, o mesmo deslocamento de painéis.
 
 ## Passo 2 — cada figura, contra o que o texto extrai dela
 
@@ -155,8 +268,7 @@ conclusão da seção com o valor certo.**
 
 ## Passo 3 — refazer as contas
 
-**Não confie no número impresso: recalcule.** Some as colunas e refaça as
-porcentagens.
+**Confira as contas que sustentam as inferências examinadas.** Refaça as somas e porcentagens necessárias para decidir se essas afirmações se sustentam. Amplie a conferência quando a divergência indicar um problema compartilhado; uma tabela correta não valida a definição das categorias.
 
 **Antes de propor teste de significância, pergunte se cabe inferência.** Três guardas,
 e as três vieram de um cotejo de 01/09/2026 que as cobrou de uma leitura que fizera os
@@ -297,6 +409,15 @@ Onde a interpretação extrair demais, o item não pede que se retire a
 interpretação: pede que **o alcance dela desça até onde o dado chega**, e diz até
 onde. Retirar é perda; ajustar o alcance é o que a torna defensável na banca.
 
+**A objeção ao desenho entra por uma porta só, e ela tem duas condições.** Quando
+o defeito for anterior à inferência (a comparação condicionada, a categoria que
+contém a conclusão, a unidade que mistura espécies), enuncie-o assim mesmo, com
+duas coisas junto: a inferência que ele derruba, com o localizador, e a decisão
+que o resolve, num dos quatro degraus de custo abaixo. Onde o texto não disser o
+que a base registra, e por isso você não souber entre integrar e coletar, escreva
+os dois degraus e o que decide entre eles. O item fica entre os de inferência, e a
+decisão que ele pede entra na seção de decisões do relatório.
+
 ### Antes das cinco perguntas: a lista do que mudou na janela
 
 **Monte, uma vez só, a lista do que mudou dentro do período que o trabalho mede.**
@@ -428,8 +549,51 @@ inventar, e ela não entra.
    p = 0,22, e sem esse passo o relatório teria acusado de erro o que era só falta de
    mostrar o intervalo.
 
-## Saída
+## A primeira linha de cada item diz o que muda
 
-Grave em `LEITURA-DADOS.md`. Devolva no texto final: as bases reconstituídas e se
-fecham, a contagem por estado do passo 2, e a lista dos resultados inexplorados com o
-número de cada um.
+Todo item nasce com a primeira linha dizendo **o que muda no trabalho se ele
+estiver certo**, e a resposta é uma de três:
+
+- **A afirmação muda**: inverte, cai, encolhe, ou passa a valer sobre outro
+  conjunto. Nomeie-a, com o localizador. Promessa não cumprida entra aqui,
+  porque a afirmação de que o trabalho entrega algo (um produto, um capítulo,
+  uma base) é a que cai.
+- **A afirmação fica igual e passa a ser conferível**: o denominador ao lado do
+  percentual, a base depositada, o procedimento escrito, a referência que
+  sustenta uma premissa. Marque **CONFERE**.
+- **Nada muda**: gralha, numeração, referência sem chamada no corpo, número
+  divergente de que nenhuma afirmação depende. Marque **ACABAMENTO**.
+
+O denominador decide entre as duas primeiras: se ele muda o conjunto sobre o
+qual a afirmação vale, a afirmação muda; se só falta ao lado do percentual, é
+CONFERE. A marca decide onde o item entra no relatório (corpo, primeira lista do
+anexo, segunda lista), e ela se decide aqui, por quem viu o material.
+
+**Isto não é teto de itens.** Escreva todo achado que a leitura sustentar.
+
+Calibragem: num cotejo de 08/09/2026, 50 dos 91 itens de um relatório não mudavam
+nada, e nenhum trazia a afirmação que mudava, porque ninguém a tinha pedido.
+
+## Saída, em dois arquivos
+
+**`LEITURA-DADOS.md` traz os itens, e cada um nasce na forma em que chega ao aluno.**
+Não há tradução depois: a verificação confere e derruba, a triagem decide o lugar,
+e a redação pode ajustar a linguagem. Mudanças de conteúdo exigem nova verificação contra a fonte. A forma, e ela é obrigatória:
+
+    ### D1. Título que afirma sobre o trabalho, e não sobre a leitura
+    Aponta       o que está errado e onde, com os localizadores necessários à demonstração; um basta quando a passagem demonstra o problema
+    O que fazer  em [P###], verbo, objeto, substituto; a razão depois de ponto final
+    O que muda   o que o trabalho passa a sustentar; ou a marca CONFERE ou ACABAMENTO
+
+O prefixo desta leitura é `D`, com numeração contínua. Contribuição não
+reivindicada e ponto forte entram na mesma forma, com `DC` e `DF`. Nada do
+percurso entra no item: nem término, nem estado, nem hipótese caída, nem controle
+de busca, nem o nome do passo que o produziu. O teste: tape o resto do arquivo e
+leia só o item; quem escreveu o trabalho sabe o que abrir e o que fazer.
+
+**`REGISTRO-DADOS.md` traz o percurso, e não vai ao aluno.** Ali ficam as bases reconstituídas, a contagem por estado do passo 2, as tabelas de figura do passo 2a (é este arquivo que `base_das_figuras.py` recebe) e as figuras abertas, as hipóteses que
+caíram e onde estava o que as salvou, o alcance, e os controles de busca. As listas
+de trabalho dos passos vão ali, e não no arquivo dos itens. É o que a verificação
+e a triagem consultam quando um item pede prova.
+
+Devolva no texto final os dois caminhos e a conta dos itens por marca.

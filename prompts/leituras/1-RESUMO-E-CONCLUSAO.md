@@ -16,7 +16,32 @@ leitura 2 parte do que ele promete e pergunta onde se cumpre.
 Você lê um trabalho acadêmico já concluído. Sou membro da banca. Não abra relatório,
 cotejo ou conferência anterior sobre ele.
 
-## O material
+## O material, e ele vem num arquivo só
+
+`MATERIAL.md`, montado por quem despacha esta leitura:
+
+```
+python scripts/montar_material.py <trabalho.docx> extracao/<trabalho>.txt        -o MATERIAL.md --mapa MAPA.md
+```
+
+Ele traz, num arquivo: o sumário como o trabalho o escreve, a tabela de figuras já
+extraídas do `.docx` com o parágrafo da legenda de cada uma, o mapa estrutural, e
+**o trabalho inteiro na ordem, parágrafo por parágrafo**, mais as notas de rodapé.
+
+**Você não precisa ir buscar passagem: ela está aí.** Nem todo número existe, porque
+parágrafo sem texto não recebe marcador, e afirmar que um localizador está morto sem
+conferir no arquivo é erro.
+
+**Medido em 08/09/2026**, sobre a mesma leitura e o mesmo trabalho: buscando passagem
+por passagem, 41 chamadas e 16,1 minutos; com tudo num arquivo, 18 chamadas e 13,7
+minutos, **e zero buscas de passagem**. É a mesma economia que a verificação já tinha,
+e ela é da relação e não da busca: o arquivo não repete o parágrafo uma vez por item
+que o cita.
+
+**As imagens vêm à parte, e vêm numa mensagem só.** O `MATERIAL.md` traz o endereço e
+o arquivo de cada figura, e não a figura.
+
+Onde o `MATERIAL.md` não tiver chegado, o material antigo serve e custa mais:
 
 - `MAPA.md` — resumo, palavras-chave, abstract, introdução, títulos de seção, legendas
   de quadros, tabelas e gráficos, apêndices, conclusão inteira e lista de referências,
@@ -196,8 +221,51 @@ publicou não permite refazer o que se fez.
 2. **Alcance declarado.** Diga o que leu e o que não leu. **E declarar o alcance não autoriza concluir para fora dele:** quem varreu o capítulo 4 pode escrever que a expressão não ocorre no capítulo 4, e não que o trabalho não trata do assunto. A frase que sai do alcance vira afirmação sobre o trabalho inteiro, e é ela que chega ao autor.
 3. **Hipótese sua que caiu é resultado**, e diga **onde estava o que a salvou**: no próprio parágrafo, num apêndice, noutro capítulo, ou só depois de você refazer a conta. Essa localização decide se a queda vira sugestão ao autor. Registre.
 
-## Saída
+## A primeira linha de cada item diz o que muda
 
-Grave em `LEITURA-RESUMO-CONCLUSAO.md`. Devolva no texto final: quantas asserções
-fortes, a contagem por término do passo 3, e a lista das divergências de alcance e dos
-términos NADA e ASSERÇÃO.
+Todo item nasce com a primeira linha dizendo **o que muda no trabalho se ele
+estiver certo**, e a resposta é uma de três:
+
+- **A afirmação muda**: inverte, cai, encolhe, ou passa a valer sobre outro
+  conjunto. Nomeie-a, com o localizador. Promessa não cumprida entra aqui,
+  porque a afirmação de que o trabalho entrega algo (um produto, um capítulo,
+  uma base) é a que cai.
+- **A afirmação fica igual e passa a ser conferível**: o denominador ao lado do
+  percentual, a base depositada, o procedimento escrito, a referência que
+  sustenta uma premissa. Marque **CONFERE**.
+- **Nada muda**: gralha, numeração, referência sem chamada no corpo, número
+  divergente de que nenhuma afirmação depende. Marque **ACABAMENTO**.
+
+O denominador decide entre as duas primeiras: se ele muda o conjunto sobre o
+qual a afirmação vale, a afirmação muda; se só falta ao lado do percentual, é
+CONFERE. A marca decide onde o item entra no relatório (corpo, primeira lista do
+anexo, segunda lista), e ela se decide aqui, por quem viu o material.
+
+**Isto não é teto de itens.** Escreva todo achado que a leitura sustentar.
+
+Calibragem: num cotejo de 08/09/2026, 50 dos 91 itens de um relatório não mudavam
+nada, e nenhum trazia a afirmação que mudava, porque ninguém a tinha pedido.
+
+## Saída, em dois arquivos
+
+**`LEITURA-RESUMO-CONCLUSAO.md` traz os itens, e cada um nasce na forma em que chega ao aluno.**
+Não há tradução depois: a verificação confere e derruba, a triagem decide o lugar,
+e a redação pode ajustar a linguagem. Mudanças de conteúdo exigem nova verificação contra a fonte. A forma, e ela é obrigatória:
+
+    ### A1. Título que afirma sobre o trabalho, e não sobre a leitura
+    Aponta       o que está errado e onde, com os localizadores necessários à demonstração; um basta quando a passagem demonstra o problema
+    O que fazer  em [P###], verbo, objeto, substituto; a razão depois de ponto final
+    O que muda   o que o trabalho passa a sustentar; ou a marca CONFERE ou ACABAMENTO
+
+O prefixo desta leitura é `A`, com numeração contínua. Contribuição não
+reivindicada e ponto forte entram na mesma forma, com `AC` e `AF`. Nada do
+percurso entra no item: nem término, nem estado, nem hipótese caída, nem controle
+de busca, nem o nome do passo que o produziu. O teste: tape o resto do arquivo e
+leia só o item; quem escreveu o trabalho sabe o que abrir e o que fazer.
+
+**`REGISTRO-RESUMO-CONCLUSAO.md` traz o percurso, e não vai ao aluno.** Ali ficam a lista das asserções fortes e a contagem por término do passo 3, as hipóteses que
+caíram e onde estava o que as salvou, o alcance, e os controles de busca. As listas
+de trabalho dos passos vão ali, e não no arquivo dos itens. É o que a verificação
+e a triagem consultam quando um item pede prova.
+
+Devolva no texto final os dois caminhos e a conta dos itens por marca.

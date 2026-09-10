@@ -18,7 +18,12 @@ valem**.
 
 - `LEITURA-RESUMO-CONCLUSAO.md`, `LEITURA-INTRODUCAO.md`, `LEITURA-DADOS.md` — o que
   cada uma marcou como contribuição não reivindicada ou resultado inexplorado.
-- `extracao/trabalho.txt` e `trabalho.pdf`, para conferir o que for preciso.
+- `MATERIAL.md`, montado por `scripts/montar_material.py`: o trabalho inteiro na
+  ordem, parágrafo por parágrafo, mais o sumário, a tabela de figuras e as notas.
+  **Não vá buscar passagem com `Grep`: ela está aí.** Medido em 08/09/2026, sobre
+  outra leitura: 41 chamadas e 16,1 minutos buscando, contra 18 e 13,7 com tudo num
+  arquivo, e zero buscas.
+- `extracao/trabalho.txt` e `trabalho.pdf`, onde o `MATERIAL.md` não tiver chegado.
 - **A web.** Use busca para responder à pergunta que o trabalho não responde.
 
 ## As duas espécies, e elas não se misturam
@@ -126,7 +131,14 @@ quê, depois que isto for reivindicado?** E classifique o destino:
 2. **Alcance declarado.** Diga o que buscou, onde, e o que ficou fora do seu alcance. **E declarar o alcance não autoriza concluir para fora dele:** quem varreu o capítulo 4 pode escrever que a expressão não ocorre no capítulo 4, e não que o trabalho não trata do assunto. A frase que sai do alcance vira afirmação sobre o trabalho inteiro, e é ela que chega ao autor.
 3. **Hipótese sua que caiu é resultado**, e diga **onde estava o que a salvou**: no próprio parágrafo, num apêndice, noutro capítulo, ou só depois de você refazer a conta. Essa localização decide se a queda vira sugestão ao autor. Inclusive quando ela caía a favor do autor.
 
-## Saída
+## Saída, em dois arquivos
 
-Grave em `PESO-DAS-CONTRIBUICOES.md`, com as duas espécies separadas e, para cada
-candidato, a resposta do passo 1 com a referência quando houver.
+`PESO-DAS-CONTRIBUICOES.md` contém os candidatos confirmados, escritos para o autor:
+título sobre o trabalho, o que foi encontrado com os localizadores necessários,
+o que pode ser desenvolvido e qual contribuição isso permitiria sustentar.
+Use códigos C1, C2, mantendo separados resultados existentes e propostas que
+exigem análise adicional. Não transforme uma possibilidade em resultado obtido.
+
+`REGISTRO-CONTRIBUICOES.md` contém buscas, fontes consultadas, alcance e hipóteses
+descartadas. A verificação consulta esse arquivo junto com a fonte quando necessário.
+Revisões de linguagem são permitidas; mudanças de conteúdo exigem nova conferência.

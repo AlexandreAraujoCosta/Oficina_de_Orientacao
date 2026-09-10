@@ -49,7 +49,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 # nome do tipo -> (prompt de origem, modelo, descricao para quem escolhe)
 TIPOS = {
     "alberto": (
-        "prompts/ALBERTO.md",
+        ("prompts/ALBERTO.md", "prompts/OPERADOR-ALBERTO.md"),
         "opus",
         "A analise geral de um trabalho academico completo: le o trabalho inteiro, "
         "confere os numeros contra as figuras, examina a qualidade das inferencias "
@@ -76,8 +76,14 @@ model: %s
 
 
 def gerar(nome, origem, modelo, descricao):
-    texto = io.open(str(RAIZ / origem), encoding="utf-8").read()
-    return (CABECA % (nome, descricao, FERRAMENTAS, modelo, origem)) + texto
+    # A origem pode ser mais de um arquivo: desde 10/09/2026 a analise (ALBERTO.md)
+    # e a operacao (OPERADOR-ALBERTO.md) moram separadas, e o agente recebe as duas.
+    arquivos = (origem,) if isinstance(origem, str) else tuple(origem)
+    partes = [io.open(str(RAIZ / o), encoding="utf-8").read().rstrip(chr(10))
+              for o in arquivos]
+    texto = (chr(10) * 2).join(partes) + chr(10)
+    rotulo = " + ".join(arquivos)
+    return (CABECA % (nome, descricao, FERRAMENTAS, modelo, rotulo)) + texto
 
 
 def destinos(extra):
@@ -110,7 +116,8 @@ def main():
             pasta.mkdir(parents=True, exist_ok=True)
             alvo.write_text(conteudo, encoding="utf-8")
             print("  %s  (%d palavras de %s)"
-                  % (alvo, len(conteudo.split()), origem))
+                  % (alvo, len(conteudo.split()),
+                     origem if isinstance(origem, str) else " + ".join(origem)))
 
     if a.conferir:
         if problemas:

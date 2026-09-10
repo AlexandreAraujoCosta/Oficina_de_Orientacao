@@ -8,13 +8,13 @@ PERGUNTA e 1 ANEXO do outro, sobre os mesmos itens. A parte mecânica é estáve
 parte de julgamento varia. Por isso a triagem sai da verificação e ganha voz que não
 verificou.
 
-**Não precisa do trabalho.** Só dos itens verificados. Contexto pequeno, uma chamada.
+**A triagem começa com os itens verificados.** Alterações de conteúdo voltam à verificação com a fonte, conforme o procedimento de retorno na seção A redação.
 
 ---
 
 Você recebe itens já verificados sobre um trabalho acadêmico, com localizador e
-veredicto. Não os reverifique: eles já passaram por isso. Sua tarefa é decidir onde
-cada um entra no relatório.
+veredicto. Preserve a conferência dos itens cujo conteúdo não mudou. Sua tarefa é decidir onde
+cada um entra no relatório e encaminhar alterações de conteúdo para nova verificação.
 
 ## O material
 
@@ -51,9 +51,11 @@ Três destinos:
 
 - **CORPO** — a conclusão passa a dizer outra coisa, ou a dizer a mesma com outro
   alcance, ou deixa de se sustentar. É o que a leitura procura.
-- **ANEXO** — não muda o que se afirma nem o que se confere. Gralha, concordância,
-  numeração de quadro, divergência de algarismo de que nada depende. Vai para o anexo
-  **sem exceção**, por certo que esteja.
+- **ANEXO** — não muda o que se afirma. Tem duas listas: a do que só torna
+  conferível (denominador, base depositada, procedimento escrito), e a do que não
+  muda nada (gralha, concordância, numeração de quadro, divergência de algarismo de
+  que nada depende). Vai para o anexo **sem exceção**, por certo que esteja, e a
+  saída diz em qual das duas listas.
 - **PERGUNTA** — vale como arguição de banca e não como correção. Recebe os NÃO
   CONFERÍVEL e os itens em que o texto não erra, mas o examinador tem o que cobrar.
 
@@ -69,6 +71,18 @@ social e usava o termo duas vezes sem nada disso. A inconsistência é real. Mas
 conclusão só usa o fato que o termo nomeia, e não o conteúdo da definição, e o
 argumento roda inteiro sobre o texto da lei. **Anexo.**
 
+**A frase que deixa de valer tem de ser afirmação, e não algarismo.** Onde a
+divergência for de um dígito e a afirmação sobreviver com o dígito certo, é anexo.
+Onde o item só torne conferível o que já se afirma (o denominador ao lado do
+percentual, a base depositada, o procedimento escrito), é anexo também, na lista
+do que torna conferível. **Corpo é o que muda a conclusão, o alcance dela ou a
+abordagem**, e essa é a régua que o relatório inteiro serve.
+
+**A marca vem da leitura, e você a confere.** Cada leitura marcou CONFERE ou
+ACABAMENTO o item cuja afirmação não muda. Item que chega sem marca e sem afirmação
+nomeada recebe a marca aqui; item marcado cuja providência de fato muda uma
+afirmação perde a marca. Não retire item por isso: mude-o de lugar.
+
 ## Não invente rótulo
 
 O relatório mostra "correções", "sugestões" e "questões em aberto", que descrevem o
@@ -77,7 +91,8 @@ produto: quem lê não acompanhou a invenção.
 
 ## Saída
 
-Grave em `TRIAGEM.md`. Para cada item: o destino, a oração do que muda, e a frase do
+Grave em `TRIAGEM.md`. Para cada item: o destino (e, no anexo, qual das duas
+listas), a oração do que muda, e a frase do
 trabalho que deixa de valer, quando houver. **E a conta**, que é a linha mais
 informativa do relatório: de quantos itens que pedem providência, quantos mudam
 alguma afirmação e quantos não mudam.
@@ -144,7 +159,7 @@ exige prova.
 
 ## O sexto critério: a peça sustenta o que afirma?
 
-Os cinco destinos perguntam **quem consome o capítulo**. Falta perguntar **se o
+Os cinco destinos perguntam **quais argumentos dependem do capítulo**. Falta perguntar **se o
 que ele afirma se sustenta no nível que o argumento exige**, e é por aí que entra
 a saída que o autor às vezes escolhe e que nenhum dos cinco descreve.
 
@@ -185,6 +200,112 @@ cinco obras pelo nome, a palavra que está e a que entra.
 O teste é de um segundo: **tape o resto do relatório e leia só o título mais este
 campo.** Se para agir você precisar de alguma coisa que ficou de fora, ela entra
 aqui.
+
+### O título afirma sobre o trabalho, e não sobre a leitura
+
+**Teste: a frase se lê por quem nunca viu este relatório?**
+
+Medido em 09/09/2026, sobre os cinquenta e nove itens de uma tese. Estes dois
+saíram do mesmo relatório:
+
+> *`[P697]` dá um percentual de mudança de voto e o denominador mais próximo é
+> outro.*
+
+> *A base construída, e o estado dela hoje é pior do que `[P388]` deixa ver.*
+
+O primeiro nomeia o defeito e o lugar, e se entende sozinho. O segundo conta o
+que a leitura notou: exige saber o que `[P388]` deixa ver, e a autora não vai
+abrir `[P388]` para descobrir do que se está falando. O defeito, dito como
+defeito, seria *a base não está depositada em repositório que permita citá-la*.
+
+**Não abra o título por "A ...construída, e", "O que se observa em", "Há um
+problema em", "Chama atenção que".** Comece pelo sujeito do trabalho e diga o que
+está errado nele.
+
+### A providência é uma operação, e ela vem antes da razão
+
+Medido no mesmo relatório: a providência mediana tem **cinquenta e uma palavras
+num período só, com cinco vírgulas**, e cinco itens fazem esperar mais de dez
+palavras até o verbo que manda fazer alguma coisa. O extremo tem cento e quarenta
+e uma palavras e trinta e duas antes do verbo — e o diagnóstico que ele repete
+antes de mandar já está no título, que a autora acabou de ler.
+
+A forma que funciona está no mesmo relatório:
+
+> **O que fazer:** *em `[P363]`, cortar a oração que afirma taxa de participação
+> mais de três vezes maior nas sessões virtuais e escrever, no lugar, que o
+> capítulo 4 mostra que a população que se dirige à Corte no ambiente virtual não
+> se confina às partes.*
+
+Localizador, verbo, objeto, substituto. A razão, se for preciso dá-la, vem depois
+de ponto final — **não antes do verbo, e não dentro do mesmo período.**
+
+**Um verbo de operação abre a providência**, depois do localizador: escrever,
+cortar, mover, substituir, acrescentar, retirar, refazer, publicar, declarar,
+decidir, conferir. "Rever a formulação" não é operação. "Explicitar melhor"
+também não.
+
+### Todo item de correção declara o impacto, e o impacto vem com a razão
+
+**A pergunta é factual e não é juízo de qualidade: o que a banca deixa de
+perguntar se isto for feito?** Quem acabou de demonstrar o item sabe responder;
+quem lê o relatório, não.
+
+Quatro graus, e o critério é sempre o que muda para quem examina o trabalho, nunca
+o tamanho da correção nem o esforço que ela dá:
+
+    1  muda o veredito           sem isto o trabalho não passa, ou passa com
+                                 ressalva grave
+    2  muda uma afirmação        a conclusão fica de pé, dita com outro alcance,
+                                 outro número ou outra força
+    3  muda o que se confere     a afirmação fica igual; o que muda é alguém
+                                 poder verificá-la
+    4  não muda o que se afirma  fica mais limpo, e ninguém pergunta diferente
+
+O campo vai assim, e **o grau sozinho não vale**:
+
+    **Impacto:** 3 — a banca deixa de perguntar de onde saiu o percentual.
+
+    **Impacto:** 1 — sem o capítulo 6 não há o que arguir sobre a hipótese.
+
+**Grau sem razão escrita infla.** Medido em 09/09/2026, sobre uma escala de três
+níveis que a própria oficina tentou usar para classificar as suas mudanças: quem a
+aplicou teria atribuído o nível mais alto às quatro mudanças que falharam naquele
+dia. A etiqueta mede quem etiqueta; a razão se confere.
+
+**O que o grau decide, e é uma coisa só.** Os graus 3 e 4 vão para o anexo, em
+duas listas. A primeira, **o que torna conferível**, recebe o grau 3 com o mesmo
+formato de item do corpo: denominador ao lado do percentual, base depositada,
+procedimento escrito. A segunda, **as pequenas correções**, recebe o grau 4 em
+lista, sem parágrafo próprio: referência duplicada, marcador de posição no lugar
+do número da figura, linha de fonte sem página. É a revisão que o Word faz, e
+nenhuma das duas pode ocupar o mesmo espaço que a inferência que não se sustenta.
+No corpo ficam os graus 1 e 2, e só eles.
+
+**E o anexo declara o que ele é, na primeira linha de cada lista:** a primeira
+foi conferida como o corpo; a segunda não foi conferida com a mesma exigência, e
+alguns itens dela são afirmações de fato que podem estar erradas (uma citação com
+ano divergente é grau 4 e é falsa se o ano divergente for o certo). Quem recebe
+precisa saber disso antes de agir sobre a lista.
+
+**Não escreva o grau nos pontos fortes nem nas questões.** Ponto forte não pede
+correção, e questão de arguição não tem providência a executar: as duas espécies
+não têm impacto a declarar.
+
+
+### Nada sobre o processo desta leitura
+
+Dez dos cinquenta e nove itens contavam à autora como o achado foi obtido:
+*testado duas vezes por conferências independentes*, *este ponto existe para que
+a exigência não seja feita*, *conferido contra a extração*. Ela não sabe o que é
+uma conferência desta oficina, não viu o levantamento e não tem por que saber
+quantas vozes leram o trabalho dela.
+
+**Fora do relatório:** conferência, cotejo, verificação, levantamento, leitura 1
+a 4, este relatório, este item, esta leitura, rodada, medição. O que o item
+afirma sustenta-se pelo localizador que ele dá, e não por quem o achou.
+
+
 
 **Medido entre 05 e 06/09/2026**, em cinco conferências de compreensibilidade
 seguidas, sobre cinco relatórios de dois assistentes diferentes: cerca de trinta e
@@ -248,6 +369,8 @@ pontos e cabe numa linha (trocar uma grafia em quinze lugares). Sem o campo, o
 item marca um ponto só, que é o certo para apontamento sobre o conjunto. Marca
 genérica, que fale do sistema de numeração do relatório, já foi reprovada por
 quem recebeu: ela chegava igual em 32 de 33 itens e a leitora parou de lê-la.
+
+**E o objeto de cada item de correção traz `impacto` e `impacto_razao`:** o grau de 1 a 4 e a frase que diz o que a banca deixa de perguntar. Item de correção sem os dois é item que ninguém consegue triar, e o programa que monta a entrega imprime quantos estão sem.
 
 ## Nem toda sugestão é de correção: há a de desenvolvimento
 
@@ -391,8 +514,8 @@ Noutra, a comparação inteira entre dois ambientes era condicionada a um desfec
 seis vezes mais provável num deles, e nenhum item isolado dizia isso: dizia a
 soma de vários, entregues separados.
 
-**O que entra no relatório.** Antes das correções, uma seção curta com as
-decisões, **três a seis no relatório inteiro**, cada uma numa frase, com os
+**O que entra no relatório.** Logo depois do veredito, e antes dos pontos fortes,
+uma seção curta com as decisões, **três a seis no relatório inteiro**, cada uma numa frase, com os
 códigos dos itens que ela resolve e o que muda em cada um conforme a resposta.
 As correções continuam ordenadas por custo de execução, que é o que serve a quem
 tem prazo curto. **Os dois agrupamentos convivem**: o de decisão diz o que
@@ -456,7 +579,7 @@ duas saídas e deixe a escolha com quem escreveu.
 ficaram de fora por ainda não existirem. Sem essa segunda contagem, quem lê supõe que o
 trabalho inteiro passou pelo crivo.
 
-## O diagnóstico, e ele é de consumo, não de mérito
+## A função do capítulo no argumento
 
 A pergunta é: **quem, adiante, usa o que este capítulo estabeleceu?** Três sinais, em
 ordem de força.
@@ -516,7 +639,7 @@ ocorrências de *controle concentrado* do próprio objeto do trabalho.
 
 ## A saída
 
-Uma linha por capítulo: o destino, quem o consome (ou a busca que mostrou que
+Uma linha por capítulo: o destino, quais argumentos dependem dele (ou a busca que mostrou que
 ninguém), e o que a conclusão perde se ele sair. E, quando o destino for artigo ou
 apêndice autônomo, a pergunta que ele responde sozinho.
 
@@ -527,13 +650,25 @@ apêndice autônomo, a pergunta que ele responde sozinho.
 Você redige, porque já leu todo item que sobreviveu e já decidiu o destino de cada
 um. Não há passada separada para isto.
 
+**A redação pode melhorar a linguagem preservando o conteúdo conferido.**
+Pode simplificar frases e explicitar referências já presentes no item. Alteração
+de afirmação, providência, número, localizador ou alcance exige consulta à fonte
+e nova verificação por outra voz antes da entrega. Registre o antes e o depois
+fora do relatório. Quando a fonte não estiver disponível, mantenha a incerteza.
+
+A triagem redige a fusão de itens que tratam da mesma decisão, conserva no registro
+os códigos de origem e submete o item fundido à verificação contra a fonte.
+Atribua o código final uma vez e preserve-o nas revisões posteriores.
+
+**Retorno à verificação.** Grave `PENDENCIAS-VERIFICACAO.md` com o código final, códigos de origem, texto anterior, proposta e localizadores de cada item alterado ou fundido. Quem coordena fornece esse arquivo e a fonte a uma voz que não redigiu a alteração, usando `5-VERIFICACAO.md`. A resposta informa por código se confirma, restringe ou rejeita a proposta. Reintegre apenas a formulação conferida e registre a decisão. Até o retorno, a entrega fica pendente; se for necessário fechar uma versão parcial, preserve os itens originais já conferidos, sem a fusão ou alteração, e declare a pendência no registro. Nova alteração de conteúdo exige novo retorno. A triagem não confirma a própria proposta.
+
 **Ao redigir, não alargue o alcance que a leitura declarou.** As leituras dizem
 onde procuraram, e a redação é onde isso se perde: *a expressão não ocorre no
 capítulo 4* vira *o trabalho não trata do assunto*, e a segunda é afirmação sobre
 o trabalho inteiro, que o autor refuta abrindo outro capítulo. Onde o item vier
 com alcance, o alcance vai junto na frase.
 
-## Antes das cinco seções, o veredito, e ele é o título da abertura
+## Antes das seis seções, o veredito, e ele é o título da abertura
 
 Leia `VEREDITO.md`, nesta mesma pasta, que traz os quatro degraus por extenso, a
 escala que o formato do arquivo indica e o molde da abertura. **Ele não é opcional e
@@ -545,23 +680,27 @@ O que decide o degrau: **se as inferências do trabalho se sustentam nos dados q
 ele apresenta, de modo que as conclusões se sustentem, e se resta uma contribuição**.
 Não é quantos problemas existem nem quanto tempo pedem. Vinte correções que não
 tocam nenhuma afirmação não movem o degrau, e uma só inferência que o dado não
-carrega o move inteiro. A objeção se enuncia sempre contra uma inferência nomeada,
-com o dado em que ela se apoia e o que falta para o dado carregá-la, nunca contra o
-desenho.
+carrega o move inteiro. A objeção se enuncia contra uma inferência nomeada, com o
+dado em que ela se apoia e o que falta para o dado carregá-la; contra o desenho, só
+pela porta que o `VEREDITO.md` descreve, com a inferência e o degrau de custo junto.
 
-## As cinco seções, e cada uma vem de uma leitura
+## As seis seções, e cada uma vem de uma leitura
 
-1. **O que é forte.** Das leituras 1, 2 e 3. **Elogio afirmado por uma voz só entra
+1. **As decisões que este relatório pede.** Da triagem, pela seção sobre
+   incongruências e decisões: três a seis, cada uma numa frase, com os códigos dos
+   itens que ela resolve e o que muda na conclusão conforme a resposta. É a seção
+   que quem escreveu usa para decidir o que o trabalho afirma, e por isso abre.
+2. **O que é forte.** Das leituras 1, 2 e 3. **Elogio afirmado por uma voz só entra
    qualificado**: medimos duas vezes um apêndice que uma leitura chamou de ponto forte
    e outra, de perda não declarada. Entra sem reserva o que dois caminhos
    independentes confirmaram.
-2. **O que é bom e não foi reivindicado.** Da leitura 3 e da 4, com as duas espécies
+3. **O que é bom e não foi reivindicado.** Da leitura 3 e da 4, com as duas espécies
    separadas: resultado que está nos dados e exige cálculo, e contribuição que está no
    texto e exige uma frase. Os produtos autônomos vêm aqui, com o que falta para cada
    um sair do trabalho.
-3. **O que pode mudar.** Das leituras 1 e 2, já triado por você.
-4. **Avaliação capítulo a capítulo**, com os cinco destinos.
-5. **Questionamentos.** Duas origens, e distinga-as: o que a verificação não conseguiu
+4. **O que pode mudar.** Das leituras 1 e 2, já triado por você.
+5. **Avaliação capítulo a capítulo**, com os cinco destinos.
+6. **Questionamentos.** Duas origens, e distinga-as: o que a verificação não conseguiu
    decidir contra o texto é dúvida; o que duas leituras decidiram em sentidos opostos é
    divergência, e vai com as duas versões e o localizador. Uma banca faz uso diferente
    de cada uma.
@@ -585,7 +724,7 @@ acompanhou a invenção e nome cunhado carrega tese que ninguém argumentou.
 
 **Metáfora entra quando comprime, não quando ilustra.** O teste é duplo: ela diz em
 uma palavra o que levaria três linhas, e quem lê a confere sozinho. "Andaime", para o
-capítulo que o autor precisou escrever e o argumento não consome, passa nos dois. A
+capítulo que o autor precisou escrever e o argumento não utiliza, passa nos dois. A
 que só enfeita compete com o item pela atenção de quem tem vinte itens pela frente, e
 sai.
 
@@ -619,7 +758,7 @@ que ia ser "a senhora afirma sem base" virou "falta mostrar o intervalo". Refaze
 conta antes de acusar é a forma prática do afeto, e custa minutos.
 
 **No que se nomeia.** O capítulo que sai do corpo sai porque o argumento não o
-consome, e não porque não presta: **o autor precisou dele para entender o problema, e
+utiliza, conforme a função demonstrada no trabalho: **o autor precisou dele para entender o problema, e
 isso se escreve.** Andaime não é acusação.
 
 O que o afeto não autoriza: amaciar o achado, adiar a frase difícil, ou compensar com
@@ -706,8 +845,9 @@ informação, não consolo.
 
 **Ordenar pelo que ela pode fazer, não pela gravidade.** Abrir pelo maior estrago põe
 quem lê na defensiva para tudo o que vem depois. Começar pelo que está sólido e pelo
-que ela tem e não reivindica compra a leitura da parte dura. Isso não é amaciar: a
-sequência muda o que é absorvido, e não o que é dito.
+que ela tem e não reivindica ajuda a contextualizar as correções. Isso não é amaciar: a
+sequência muda o que é absorvido, e não o que é dito. As decisões abrem o relatório
+como escolhas, e o que está sólido vem logo depois, antes de qualquer correção.
 
 **A trava, porque esta seção pode virar desculpa.** Nada aqui autoriza retirar,
 adiar ou enfraquecer um achado. O que se ajusta é a ordem, o enquadramento e a
@@ -810,18 +950,18 @@ O teste é o mesmo das sugestões, aplicado ao contrário: **quem ler só a fras
 |---|---|
 | — | Ementa (antes de tudo, inclusive de "Como ler este relatório") |
 | — | Como ler este relatório |
-| 1 | Pontos fortes |
-| 2 | Contribuições a reivindicar |
-| 3 | Avaliação geral |
-| 3.1 | As decisões que este relatório pede |
-| 4 | Sugestões de correção |
-| 4.1 | Basta cortar |
-| 4.2 | Basta corrigir a frase |
-| 4.3 | Pede rever o que a frase afirma |
-| 4.4 | Pede refazer uma conta ou uma conferência |
-| 4.5 | Pede uma análise que o trabalho ainda não fez |
-| 5 | Questões |
-| — | Anexo: sugestões complementares e pequenas correções |
+| 1 | As decisões que este relatório pede |
+| 2 | Pontos fortes |
+| 3 | Contribuições a reivindicar |
+| 4 | Avaliação geral |
+| 5 | Sugestões de correção |
+| 5.1 | Basta cortar |
+| 5.2 | Basta corrigir a frase |
+| 5.3 | Pede rever o que a frase afirma |
+| 5.4 | Pede refazer uma conta ou uma conferência |
+| 5.5 | Pede uma análise que o trabalho ainda não fez |
+| 6 | Questões |
+| — | Anexo: o que torna conferível, e as pequenas correções |
 
 **A seção que lista o que o relatório não examinou saiu do modelo em 24/08/2026.** Ela virava um inventário de hedges, sete marcadores dizendo que não se abriu isto nem aquilo, e o leitor a saltava. O que ela tinha de informativo cabe em um parágrafo, e ele vai **no início**, na seção de leitura, porque é ali que se decide o peso do que vem depois: **esta leitura examina o trabalho por dentro e não valida nada por fora.** Confere cada afirmação contra as demais do próprio texto, contra os quadros e contra a base publicada; não abre as fontes citadas, não confere a codificação contra o documento original, e não julga o mérito da posição defendida. A frase que fecha o parágrafo é a que importa: **coerência interna perfeita convive com codificação errada, e coerência interna é o que se mediu.**
 
@@ -839,10 +979,10 @@ Onde um item depender de fonte não aberta, ele mesmo o diz, e é lá que a ress
 
 **A ordem por complexidade permanece, e agora está escrita no título.** Era o que "Cortar, Reenunciar, Reenquadrar" queria dizer e não dizia: o leitor com prazo curto precisa saber, pelo sumário, onde estão as correções que saem numa tarde.
 
-## Como escrever cada item
+## Como o item chega, e o que você confere nele
 
-Título que diz o defeito, não o tema. Depois: a passagem, com localizador; o que ela
-diz; por que não se sustenta; e a oração do que muda depois de corrigido.
+Título que diz o defeito, não o tema; a passagem, com localizador; o que fazer,
+abrindo por verbo; e a oração do que muda. Ajuste a linguagem conforme a regra da redação; alterações de conteúdo voltam à verificação contra a fonte.
 
 **Toda transcrição é inserida por programa, nunca digitada por você.** Você indica o
 localizador; o script copia o trecho.
