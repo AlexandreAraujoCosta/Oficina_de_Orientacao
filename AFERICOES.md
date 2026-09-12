@@ -29,6 +29,8 @@ Quem afere escreve a linha. `scripts/afericao.py` só lê.
 | conferir_transcricao.py | dois relatórios entregues | 09/09/2026 | zero sequências acusadas nos dois; sem acerto real aberto ainda |
 | montar_material.py | 41 chamadas e 16,1 min contra 18 e 13,7 na mesma leitura | 08/09/2026 | confere: zero buscas de passagem na execução nova |
 | relevancia.py | a classificação de 10/09 do relatório Alberto v4 da dissertação de 08/09 contra o cotejo cego do mesmo dia (50 de superfície em 91) | 10/09/2026 | concorda em ordem de grandeza: 56 NADA em 91, régua mais estrita que a do cotejo; 10 de 75 itens de providência mudam conclusão ou alcance |
+| conferir_bloco.py, `da_prosa` depois do conserto | contagem por grep, linha a linha, dos códigos de dois relatórios de 06/09, refeita também por voz fria sem a função | 12/09/2026 | 49 de 49 num; 46 de 48 no outro, e os dois perdidos são decisões com pergunta acima de 120 caracteres; saída idêntica ao commit anterior em 14 relatórios com bloco |
+| relevancia.py com `--decisoes` e P | as mesmas duas classificações recontadas por grep sobre o arquivo | 12/09/2026 | confere: 9 ALCANCE e 17 NADA num, 4, 15 e 4 no outro; o resumo que a voz escreveu errava por um, e o arquivo não |
 | afericao.py | — | — | nunca aferido; este arquivo é o registro dele |
 
 ## O que "sem acerto real aberto ainda" quer dizer

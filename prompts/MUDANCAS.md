@@ -1503,3 +1503,100 @@ alternativas nomeadas pelo orientador (capacidade do sistema de precedentes de
 interferir; ampliação das teses) entram pela regra do passo 0 só por vizinhança:
 uma é leitura do conceito, a outra é mecanismo do crescimento. A regra cobre o
 conceito; o mecanismo continua coberto pela lista do que mudou na janela.
+
+---
+
+## 12/09/2026 (noite) — o contador de relevância lia menos itens do que o relatório tem
+
+**Espécie:** defeito medido, com caso plantado, antes de a rodada de medição das
+mudanças de 10 e 12/09 contar qualquer coisa. Mexe em dois programas e em nenhum
+prompt.
+
+**O que se viu.** A rodada compara a fração de itens relevantes dos relatórios
+novos com a dos relatórios de 06/09 sobre a mesma dissertação. `relevancia.py`
+casa a classificação com os códigos que `conferir_bloco.da_prosa` lê, e ela lia
+17 códigos no relatório do Luis de 06/09, onde a contagem por grep dá 48, e 45 no
+do Alberto, onde dá 49. Um relatório sintético com as escritas dos dois formatos
+isolou quatro causas:
+
+1. **Código com título vazio sumia.** `## S1` sozinho na linha só era guardado se o
+   título fosse mais longo que o já guardado, e `""` não é mais longo que `""`. O
+   relatório do Luis perdia os 23 itens S e os 6 Q.
+2. **Parêntese depois do código não casava.** `**C1 (pede uma conta).**` abre os
+   quatro itens de uma seção do Alberto.
+3. **P não pedia providência.** É o prefixo da leitura 2 desde 10/09 tarde.
+4. **D é decisão no relatório do Luis até 06/09** ("Resolve S14, S15...") **e item
+   da leitura 3 desde 10/09.** Contar as decisões conta duas vezes os itens que
+   elas agrupam.
+
+**O que muda.** Em `conferir_bloco.da_prosa`, o código entra mesmo sem título, e o
+parêntese passa a separar código de título; o autoteste ganhou os dois casos. Em
+`relevancia.py`, o conjunto de providência passa a ser dele (S, SC, D, A, P), a
+opção `--decisoes D` tira da conta o prefixo declarado decisão e imprime quantos
+saíram, e a contribuição AC, PC ou DC classificada por engano volta a FORCA em
+vez de PERGUNTA; o autoteste ganhou três casos, um deles o controle de que, sem
+declarar, D volta à conta.
+
+**O que não muda, e fica registrado como defeito.** `EXECUTAVEIS` de
+`conferir_bloco.py` e de `lista_corretor.py` diz o que chega à margem, e **nenhum
+dos dois tem P**: os itens da leitura 2 ficam fora da lista do corretor desde
+10/09. Não é consertado aqui porque a rodada não produz margem e as duas listas
+são espelho uma da outra; mexer nelas pede ficha própria e o teste do corretor.
+
+**Aferição, contra a contagem por grep.** Depois do conserto: Alberto de 06/09, 49
+de 49. Luis de 06/09, 46 de 48; os dois que faltam são decisões cuja pergunta passa
+de 120 caracteres, o limite de título de `RE_NEGRITO_JUNTO`, e com `--decisoes D`
+elas saem da conta de todo modo. Regressão de `conferir_bloco.py` sobre seis
+relatórios com bloco do acervo: saída idêntica antes e depois.
+
+**O que se espera, em número.** Itens que pedem providência, lidos: no Luis de
+06/09, de 4 para 23 (com `--decisoes D`); no Alberto de 06/09, 35 e 35.
+
+**O que mostraria que o conserto não bastou:** na rodada, `relevancia.py` acusar
+mais de dois códigos por relatório entre os só da prosa e os só da classificação,
+fora os dois D longos declarados. Aí o leitor de prosa ainda perde item, e a
+fração daquele relatório não se lê.
+
+**Confundidor:** `OPERADOR-ALBERTO.md` manda rodar `conferir_bloco.py`, e o braço
+do Alberto da rodada já estava em curso quando o arquivo mudou. A mudança só
+acrescenta códigos lidos.
+
+### O que a crítica fria devolveu, e o que se fez
+
+Rodou sobre o diff, os dois programas inteiros e os dois relatórios do caso, e
+refez a contagem sem as funções alteradas: 48 e 49 códigos, D2 e D5 perdidos por
+133 e 124 caracteres, providência de 4 para 23 e de 35 para 35. Confere com a
+aferição acima. A regressão dela cobriu 19 relatórios com bloco, com saída
+idêntica.
+
+**O que ela derrubou, e o destino:**
+
+- **O parêntese na classe geral de separadores lia negrito que não é item**:
+  `**F2 (1.274) contra F6 ...**` e `**S5 (quanto a [P439]) CONFERE.**`, que
+  estão no acervo. *Corrigido:* o parêntese saiu da classe geral e entrou numa
+  forma estrita, no começo da linha e com nada entre o parêntese e o fim do
+  negrito; o autoteste ganhou os dois casos como controle negativo.
+- **Com `--decisoes D`, a saída ainda acusava D2 e D5** como invenção do
+  classificador, contra o comentário que dizia "sem queixa". *Corrigido:* a
+  decisão declarada sai também das acusações.
+- **`--decisoes d` em minúscula não tirava nada e não avisava.** *Corrigido.*
+- **O parâmetro `decisoes` de `executavel` nunca era passado, e a função tinha o
+  nome da de `conferir_bloco.py` com outro conjunto.** *Corrigido:* sem parâmetro,
+  e o nome é `pede_providencia`.
+- **O autoteste anunciava 7 casos e verificava 9; o comentário de `da_prosa`
+  supunha remissão de título vazio.** *Corrigido.*
+- **"AC, PC e DC voltam a FORCA" dizia menos do que o código faz:** todo prefixo
+  sem providência que não seja Q volta a FORCA. A fração não muda.
+
+**O que fica, com o custo dito:** código citado só numa remissão em negrito passa
+a contar como item, e `**P730, ...**`, se aparecer como localizador em negrito,
+passa a pedir providência. Os dois saem como acusação visível na saída de
+`relevancia.py` e de `conferir_bloco.py`, e não como perda silenciosa.
+
+**Depois da correção:** os dois autotestes passam; X1 e X4 da rodada dão os mesmos
+números (9 de 35 e 19 de 23) e o X4 deixa de acusar D2 e D5; regressão de
+`conferir_bloco.py` contra o commit anterior em 14 relatórios com bloco, saída
+idêntica em todos.
+
+**Espécie, dita pela crítica:** título vazio e parêntese vêm de defeito medido; P
+e `--decisoes` vêm da convenção de nomes, sem medida própria.

@@ -18,8 +18,13 @@ da prosa do relatorio, e imprime a tabela por classe e duas fracoes:
     relevantes   (CONCLUSAO + ALCANCE) / itens que pedem providencia
     superficie   NADA / itens que pedem providencia
 
-Itens que pedem providencia sao os de prefixo S, SC, D e A. F e C nao entram na
-conta, e Q entra numa linha propria.
+Itens que pedem providencia sao os de prefixo S, SC, D, A e P. F, C e as
+contribuicoes das leituras (AC, PC, DC) nao entram na conta, e Q entra numa
+linha propria.
+
+Onde um prefixo for decisao e nao item, declara-se com `--decisoes D`: o relatorio
+do Luis ate 06/09/2026 chamava de D as decisoes que agrupam itens S, e contar as
+duas coisas conta o mesmo item duas vezes. A partir de 10/09 D e item da leitura 3.
 
 O QUE ELE DECIDE
 
@@ -45,7 +50,21 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent
 sys.path.insert(0, str(RAIZ))
-from conferir_bloco import da_prosa, executavel  # noqa: E402
+from conferir_bloco import da_prosa  # noqa: E402
+
+# O conjunto e desta medida, e nao o da margem (`conferir_bloco.EXECUTAVEIS`,
+# espelho de `lista_corretor.py`), que nao tem P. P e o prefixo da leitura 2
+# desde 10/09/2026, e o item pede providencia chegue ele a margem ou nao.
+PROVIDENCIA = ("S", "SC", "D", "A", "P")
+
+
+def prefixo(codigo):
+    m = re.match(r"[A-Z]+", codigo)
+    return m.group(0) if m else ""
+
+
+def pede_providencia(codigo):
+    return prefixo(codigo) in PROVIDENCIA
 
 for fluxo in (sys.stdout, sys.stderr):
     try:
@@ -88,29 +107,36 @@ def contar(codigos_prosa, classes):
             continue
         classe = classes[cod]
         tabela[classe] += 1
-        if executavel(cod):
+        if pede_providencia(cod):
             n += 1
     rel = sum(tabela[c] for c in RELEVANTES)
     sup = tabela["NADA"]
     return tabela, rel, sup, n
 
 
-def relatorio(caminho_md, caminho_cls):
+def relatorio(caminho_md, caminho_cls, decisoes=()):
     prosa = da_prosa(caminho_md)
     classes, queixas = ler_classificacao(caminho_cls)
-    so_prosa = sorted(set(prosa) - set(classes), key=chave)
-    so_cls = sorted(set(classes) - set(prosa), key=chave)
-    # A execucao e o que separa relevante de forca: um F classificado como
+    # A decisao agrupa itens que ja estao na conta; sai dela, e sai tambem das
+    # acusacoes: a pergunta longa de uma decisao passa do limite de titulo de
+    # `da_prosa`, e acusar como invencao o que se declarou fora da conta e ruido.
+    decis = sorted((c for c in set(classes) | set(prosa) if prefixo(c) in decisoes),
+                   key=chave)
+    so_prosa = sorted((set(prosa) - set(classes)) - set(decis), key=chave)
+    so_cls = sorted((set(classes) - set(prosa)) - set(decis), key=chave)
+    for cod in decis:
+        classes.pop(cod, None)
+    # A providencia e o que separa relevante de forca: um F classificado como
     # CONCLUSAO por engano nao pode inflar a fracao.
     for cod, classe in list(classes.items()):
-        if not executavel(cod) and classe in RELEVANTES + ("CONFERE", "NADA"):
+        if not pede_providencia(cod) and classe in RELEVANTES + ("CONFERE", "NADA"):
             queixas.append("%s nao pede providencia e recebeu %s; nao entra na conta"
                            % (cod, classe))
-            classes[cod] = "FORCA" if cod[0] in "FC" else "PERGUNTA"
+            classes[cod] = "PERGUNTA" if prefixo(cod) == "Q" else "FORCA"
     tabela, rel, sup, n = contar(prosa, classes)
     return {"tabela": tabela, "relevantes": rel, "superficie": sup, "n": n,
             "so_prosa": so_prosa, "so_cls": so_cls, "queixas": queixas,
-            "total_prosa": len(prosa)}
+            "total_prosa": len(prosa), "decisoes": decis}
 
 
 def chave(cod):
@@ -121,6 +147,9 @@ def chave(cod):
 def imprimir(r):
     print("  itens na prosa: %d; classificados: %d que pedem providencia"
           % (r["total_prosa"], r["n"]))
+    if r["decisoes"]:
+        print("  fora da conta, declaradas decisao: %d (%s)"
+              % (len(r["decisoes"]), ", ".join(r["decisoes"])))
     for c in CLASSES:
         if r["tabela"][c]:
             print("    %-9s %3d" % (c, r["tabela"][c]))
@@ -151,6 +180,15 @@ CLS_FALTA = CLS_BOA.replace(u"SC1 | NADA | - | gralha\n", u"")
 CLS_SOBRA = CLS_BOA + u"S9 | NADA | - | nao existe\n"
 CLS_CARIDADE = CLS_BOA.replace(u"F1 | FORCA", u"F1 | CONCLUSAO")
 
+# O formato de 10/09 (P da leitura 2, contribuicao AC) e o de ate 06/09 (D como
+# decisao, item com titulo vazio na linha do codigo), no mesmo arquivo.
+PROSA_NOVA = (u"## S1\n\nO titulo veio embaixo.\n\n### P1. Um item da leitura 2\n\n"
+              u"**D1. Qual criterio conta?** Resolve S1 e P1.\n\n**AC1.** Uma contribuicao.\n")
+CLS_NOVA = (u"S1 | NADA | - | gralha\n"
+            u"P1 | ALCANCE | o percentual vale para a amostra | diz o conjunto\n"
+            u"D1 | CONCLUSAO | a tese muda | decisao\n"
+            u"AC1 | CONCLUSAO | - | contribuicao classificada por engano\n")
+
 
 def _escreve(nome, texto):
     p = Path(tempfile.gettempdir()) / nome
@@ -175,6 +213,22 @@ def autoteste():
     rc = relatorio(md, _escreve("_relev_carid.txt", CLS_CARIDADE))
     if rc["relevantes"] != 1 or not rc["queixas"]:
         falhas.append("ponto forte classificado como CONCLUSAO inflou a fracao")
+    mn = _escreve("_relev_nova.md", PROSA_NOVA)
+    cn = _escreve("_relev_nova.txt", CLS_NOVA)
+    rd = relatorio(mn, cn, decisoes=("D",))
+    if (rd["n"], rd["relevantes"], rd["superficie"]) != (2, 1, 1) or rd["decisoes"] != ["D1"]:
+        falhas.append("com D declarada decisao: n=%d rel=%d sup=%d decisoes=%r"
+                      % (rd["n"], rd["relevantes"], rd["superficie"], rd["decisoes"]))
+    if rd["so_prosa"] or rd["so_cls"]:
+        falhas.append("item de titulo vazio ou P sem casar: %r %r"
+                      % (rd["so_prosa"], rd["so_cls"]))
+    if not any("AC1" in q for q in rd["queixas"]):
+        falhas.append("contribuicao AC classificada CONCLUSAO nao foi acusada")
+    # CONTROLE: sem declarar, D volta a ser item e a conta sobe.
+    ri = relatorio(mn, cn)
+    if (ri["n"], ri["relevantes"]) != (3, 2):
+        falhas.append("sem --decisoes D devia contar D1: n=%d rel=%d"
+                      % (ri["n"], ri["relevantes"]))
     return falhas
 
 
@@ -183,6 +237,8 @@ def main():
     ap.add_argument("relatorio", nargs="?")
     ap.add_argument("classificacao", nargs="?")
     ap.add_argument("--autoteste", action="store_true")
+    ap.add_argument("--decisoes", default="",
+                    help="prefixos que neste relatorio sao decisao, separados por virgula")
     a = ap.parse_args()
 
     f = autoteste()
@@ -191,10 +247,12 @@ def main():
         for x in f:
             print("    %s" % x)
         return 2
-    print("  autoteste: 5 casos, todos passaram (conta, falta, sobra, caridade)")
+    print("  autoteste: passou (conta, falta, sobra, caridade, decisao declarada, "
+          "P e titulo vazio, contribuicao acusada, controle sem declarar)")
     if a.autoteste or not (a.relatorio and a.classificacao):
         return 0
-    imprimir(relatorio(a.relatorio, a.classificacao))
+    decisoes = tuple(x.strip().upper() for x in a.decisoes.split(",") if x.strip())
+    imprimir(relatorio(a.relatorio, a.classificacao, decisoes))
     try:
         from afericao import selo
         selo(__file__)

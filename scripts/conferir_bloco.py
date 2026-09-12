@@ -60,6 +60,14 @@ RE_NEGRITO_JUNTO = re.compile(
     r"(?:^[ \t]*|(?<=[.!?])[ \t]+)\*\*([A-Z]{1,2}\d+)[ \t]*[.,:\u2014\u2013\u00b7|\-]+[ \t]*"
     r"([^*\n]{3,120}(?:\n[^*\n]{1,120})?)\*\*", re.M)
 
+# E o parentese que fecha o negrito: `**C1 (pede uma conta).**` e como um
+# relatorio de 06/09/2026 abre os quatro itens de uma secao, e os quatro sumiam.
+# So nesta forma estrita, no comeco da linha e com nada entre o parentese e o fim
+# do negrito: na classe geral de separadores ele lia `**F2 (1.274) contra F6**`
+# e `**S5 (quanto a [P439]) CONFERE.**`, que sao remissao e veredito.
+RE_NEGRITO_PARENTESE = re.compile(
+    r"^[ \t]*\*\*([A-Z]{1,2}\d+)[ \t]+\(([^()\n]{1,80})\)[.:]?\*\*", re.M)
+
 
 # Os prefixos que viram comentario de margem, e sao os mesmos de lista_corretor.py.
 # A distincao importa porque o item de contribuicao, o de forca e a questao em
@@ -82,12 +90,17 @@ def normal(s):
 def da_prosa(caminho):
     t = io.open(caminho, encoding="utf-8", errors="replace").read()
     fora = {}
-    for rx in (RE_TITULO, RE_NEGRITO, RE_NEGRITO_JUNTO):
+    for rx in (RE_TITULO, RE_NEGRITO, RE_NEGRITO_JUNTO, RE_NEGRITO_PARENTESE):
         for m in rx.finditer(t):
             cod, tit = m.group(1), " ".join(m.group(2).split())
             # o titulo mais longo ganha: o mesmo codigo pode aparecer numa lista
-            # de remissoes, com titulo vazio, e no item de verdade
-            if len(tit) > len(fora.get(cod, "")):
+            # de remissoes, com titulo curto ou vazio, e no item de verdade. Mas o
+            # codigo entra mesmo sem titulo: `## S1` sozinho na linha e item, e em
+            # 12/09/2026 a comparacao `"" > ""` fazia sumir 23 itens S de um
+            # relatorio, que saia com 17 codigos em 48. O preco: codigo que so
+            # aparece numa remissao em negrito entra como item, e o conferidor o
+            # acusa como falta no bloco, o que se ve.
+            if cod not in fora or len(tit) > len(fora[cod]):
                 fora[cod] = tit
     return fora
 
@@ -125,14 +138,22 @@ def autoteste():
                u"**C1 - Os dados contradizem uma fonte no ponto que motivou a parte.**\n\n"
                u"**D4. Uma conta que esta nos numeros de [P440]\n"
                u"e nunca foi feita.**\n\n"
-               u"**SC7.** Uma gralha em [P485].\n")
+               u"**SC7.** Uma gralha em [P485].\n\n"
+               u"## S9\n\nO titulo deste veio na linha de baixo.\n\n"
+               u"**C5 (pede uma conta).** A tabela traz os dois fluxos.\n\n"
+               u"**F8 (1.274) contra F9 no mesmo ponto.**\n\n"
+               u"**S8 (quanto a [P439]) CONFERE.**\n")
     p = Path(tempfile.gettempdir()) / "_bloco_autoteste.md"
     p.write_text(exemplo, encoding="utf-8")
     try:
         achados = da_prosa(str(p))
-        for c in ("S1", "C1", "D4", "SC7"):
+        for c in ("S1", "C1", "D4", "SC7", "S9", "C5"):
             if c not in achados:
                 falhas.append("nao reconhece a escrita de %s: %r" % (c, sorted(achados)))
+        # CONTROLE NEGATIVO: remissao e veredito com parentese nao sao item
+        for c in ("F8", "S8"):
+            if c in achados:
+                falhas.append("toma por item o negrito com parentese de %s" % c)
         if not achados.get("C1", "").startswith("Os dados"):
             falhas.append("nao le o titulo de dentro do negrito: %r" % achados.get("C1"))
         if "nunca foi feita" not in achados.get("D4", ""):
