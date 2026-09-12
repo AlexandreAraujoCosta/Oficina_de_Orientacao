@@ -6,11 +6,26 @@ escolha, o que foi derrubado, o que não está medido, e onde parou cada trabalh
 
 ---
 
+## 0a. O que mudou em 10/09/2026
+
+**O critério de relevância passou a porta de entrada das leituras**, e não só da
+triagem: todo item nasce dizendo o que muda (a afirmação muda; fica igual e passa a
+ser conferível; nada muda), e o corpo do relatório fica com os graus 1 e 2. **O
+item nasce na forma final na primeira voz** (título, aponta, o que fazer, o que
+muda), com prefixos fixos (`A`, `P`, `D`), e a redação deixa de reescrever. **Cada
+leitura grava dois arquivos:** `LEITURA-<x>.md` com os itens e `REGISTRO-<x>.md`
+com o percurso; a tabela de figuras mora no registro. **As decisões abrem o
+relatório**, que passou a nove partes no Alberto e seis seções no Luis. O Alberto
+ficou separado em `ALBERTO.md` (análise) e `OPERADOR-ALBERTO.md` (operação). A
+régua de relevância está em `prompts/CLASSIFICAR-RELEVANCIA.md` e
+`scripts/relevancia.py`; a linha de base, 10 itens relevantes em 75, está em
+`MUDANCAS.md`. **Nada disto rodou ainda.**
+
 ## 0. O que mudou em 03/09/2026
 
 **São duas ferramentas, e não uma.** O pipeline daqui é a leitura completa. Ao lado dele
 existe agora `prompts/ALBERTO.md`, o relatório rápido: uma leitura, o mesmo formato de
-oito partes e uma revisão quando roda no agente. O "um a três minutos" que este
+nove partes (desde 10/09/2026; eram oito) e uma revisão quando roda no agente. O "um a três minutos" que este
 arquivo trazia era da ferramenta anterior de mesmo nome, a conferência de
 consistência, e não se transfere: medido em 04/09/2026, o Alberto no chat levou
 15 minutos e 52 segundos numa tese de 109 páginas. O nome era da

@@ -31,6 +31,7 @@ Uso:
 """
 import argparse
 import io
+import json
 import re
 import sys
 from pathlib import Path
@@ -210,11 +211,154 @@ def provar():
           "quarto nivel e recusa o cabecalho de secao")
 
 
+CONTROLE_JSON = [
+    {"codigo": "C1", "titulo": "Um titulo qualquer",
+     "o_que_fazer": "consertar [P10] e conferir [P20]", "abrir": ["P10", "P20"]},
+    {"codigo": "S2", "titulo": "Outro titulo, ja com ponto.",
+     "o_que_fazer": "", "abrir": []},
+    {"codigo": "Q3", "titulo": "Uma pergunta sem localizador?",
+     "o_que_fazer": "responder na defesa", "abrir": []},
+]
+
+
+def do_json(caminho):
+    """Le a forma de maquina que as duas leituras ja produzem.
+
+    O relatorio do Luis escreve o item em negrito na linha (`**C1. Titulo.**`),
+    e nao em cabecalho (`### C1.`), de modo que o extrator de prosa devolvia
+    zero itens sobre um relatorio de cinquenta e cinco. O `.itens.json` que sai
+    ao lado do relatorio ja traz codigo, titulo, providencia e localizadores, e
+    e a mesma forma nas duas leituras: entrar por ele resolve as duas escritas
+    de uma vez, e nada aqui digita texto do relatorio.
+    """
+    dados = json.loads(io.open(caminho, encoding="utf-8").read())
+    itens = []
+    for d in dados:
+        cod = (d.get("codigo") or "").strip()
+        titulo = (d.get("titulo") or "").strip()
+        fazer = (d.get("o_que_fazer") or "").strip()
+        if not cod or not titulo:
+            continue
+        cabeca = titulo if titulo.endswith((".", "?", "!")) else titulo + "."
+        # O RÓTULO DO CAMPO VOLTA, PORQUE SEM ELE O BALAO SE LE COMO FRASE
+        # PARTIDA. Juntando titulo e providencia com um espaco, o autor le
+        # "A distribuicao das 36 unidades pelas tres dimensoes: 15, 14 e 7.
+        # escrever a distribuicao (...)" — diagnostico e ordem colados, o
+        # segundo comecando em minuscula. Uma conferencia de margem de
+        # 09/09/2026 reprovou os cinquenta e tres itens por isso, e a causa
+        # nao e de redacao: e o par de campos virar uma frase so.
+        texto = cabeca if not fazer else cabeca + " **O que fazer:** " + fazer
+        # O IMPACTO VAI À MARGEM, E VAI COM A RAZÃO.
+        #
+        # O grau sozinho é etiqueta e infla; a razão se confere. Quem recebe o
+        # comentário decide por onde começar lendo o que deixa de ser perguntado,
+        # e não um número de 1 a 4 cujo critério ela não viu.
+        grau, razao = d.get("impacto"), (d.get("impacto_razao") or "").strip()
+        if grau and razao:
+            texto += " **Impacto:** %s — %s" % (grau, razao.rstrip("."))
+
+        # A ANCORA VAI ONDE A CORRECAO VAI, E NAO ONDE A PROVA ESTA.
+        #
+        # O `anotar_docx.py` ancora o comentario no PRIMEIRO endereco da lista,
+        # e a lista vinha em ordem crescente de paragrafo. Como a prova costuma
+        # estar antes do ponto a corrigir, o balao caia na prova. Medido em
+        # 09/09/2026, na conferencia de margem do relatorio do trabalho K: catorze
+        # de cinquenta e cinco itens ancorados fora do alvo, e o extremo mandava
+        # exportar a planilha aparecendo trezentos e cinquenta paragrafos antes
+        # dela.
+        #
+        # O `o_que_fazer` nomeia os enderecos do alvo. Eles vao na frente; os
+        # demais seguem, na ordem original, porque continuam sendo a prova e o
+        # item os cita.
+        todos = [str(x).strip("[]") for x in (d.get("abrir") or [])]
+        alvos = set(re.findall(r"\[?P?(\d+)\]?", fazer)) if fazer else set()
+        na_frente = [x for x in todos if x.lstrip("P") in alvos]
+        atras = [x for x in todos if x.lstrip("P") not in alvos]
+        locs = ["[%s]" % x for x in (na_frente + atras)]
+        itens.append((cod, um_paragrafo(texto), locs))
+    return itens
+
+
+def provar_json():
+    import tempfile
+    p = Path(tempfile.gettempdir()) / "_ctrl_itens.json"
+    p.write_text(json.dumps(CONTROLE_JSON, ensure_ascii=False), encoding="utf-8")
+    try:
+        itens = do_json(str(p))
+        esperado = [
+            ("C1", "Um titulo qualquer. **O que fazer:** consertar [P10] e "
+                   "conferir [P20]", ["[P10]", "[P20]"]),
+            ("S2", "Outro titulo, ja com ponto.", []),
+            ("Q3", "Uma pergunta sem localizador? **O que fazer:** responder "
+                   "na defesa", []),
+        ]
+        if itens != esperado:
+            sys.exit("o leitor de JSON nao le o controle:\n%r" % (itens,))
+        # A REORDENACAO: a prova vem antes na lista, o alvo e citado so na
+        # providencia, e mesmo assim o alvo tem de sair na frente.
+        prova = [{"codigo": "S9", "titulo": "Um defeito",
+                  "o_que_fazer": "reescrever [P211]",
+                  "abrir": ["P35", "P106", "P211"]}]
+        p.write_text(json.dumps(prova, ensure_ascii=False), encoding="utf-8")
+        r = do_json(str(p))
+        if r[0][2][0] != "[P211]":
+            sys.exit("a ancora nao foi para o alvo da providencia: %r" % (r[0][2],))
+        if sorted(r[0][2]) != ["[P106]", "[P211]", "[P35]"]:
+            sys.exit("a reordenacao perdeu endereco: %r" % (r[0][2],))
+
+        # O IMPACTO: com razao entra na margem, sem razao NAO entra.
+        # Grau sozinho e etiqueta e infla; a razao se confere.
+        imp = [{"codigo": "S7", "titulo": "Um defeito",
+                "o_que_fazer": "cortar [P10]", "abrir": ["P10"],
+                "impacto": 3, "impacto_razao": "a banca deixa de perguntar de onde saiu o numero."},
+               {"codigo": "S8", "titulo": "Outro", "o_que_fazer": "cortar [P20]",
+                "abrir": ["P20"], "impacto": 2}]
+        p.write_text(json.dumps(imp, ensure_ascii=False), encoding="utf-8")
+        r = do_json(str(p))
+        if "**Impacto:** 3" not in r[0][1]:
+            sys.exit("o impacto com razao nao chegou a margem: %r" % (r[0][1],))
+        if "Impacto" in r[1][1]:
+            sys.exit("o grau sem razao entrou na margem, e ele nao vale sozinho")
+
+        # adulterado: item sem codigo tem de sumir, e nao virar item vazio
+        ruim = json.loads(json.dumps(CONTROLE_JSON))
+        ruim[0]["codigo"] = ""
+        p.write_text(json.dumps(ruim, ensure_ascii=False), encoding="utf-8")
+        if any(c == "C1" for c, _, _ in do_json(str(p))):
+            sys.exit("o leitor de JSON aceita item sem codigo; nao confie nele")
+    finally:
+        try:
+            p.unlink()
+        except Exception:
+            pass
+    print("controle do JSON: le codigo, titulo, providencia e localizadores, "
+          "poe na frente o endereco que a providencia nomeia, nao duplica o "
+          "ponto final do titulo e recusa item sem codigo")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("relatorio")
+    ap.add_argument("relatorio", help="o RELATORIO.md, ou o .itens.json com --json")
+    ap.add_argument("--json", action="store_true",
+                    help="entra pelo <relatorio>.itens.json em vez da prosa; "
+                         "é o caminho para o relatório cujos itens vêm em "
+                         "negrito na linha, e não em cabeçalho")
     ap.add_argument("--saida")
     a = ap.parse_args()
+    if a.json:
+        provar_json()
+        itens = do_json(a.relatorio)
+        if not itens:
+            sys.exit("nenhum item no JSON: confira se ele é a lista de itens")
+        saida = a.saida or str(Path(a.relatorio).with_name(
+            "ITENS-" + Path(a.relatorio).name.replace(".itens.json", ".md")))
+        escrever(a.relatorio, itens, saida)
+        sem = [c for c, _, l in itens if not l]
+        print("%s: %d itens" % (saida, len(itens)))
+        if sem:
+            print("  sem localizador, e por isso sem âncora no .docx: %s"
+                  % ", ".join(sem))
+        return
     provar()
     txt = io.open(a.relatorio, encoding="utf-8").read()
     itens = extrair(txt)

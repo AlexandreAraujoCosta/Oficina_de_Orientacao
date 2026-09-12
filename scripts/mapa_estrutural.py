@@ -127,12 +127,35 @@ def fronteiras(P):
     # havia conclusao nem referencias, e teria cegado as leituras que partem
     # dessas duas pecas. O numero de secao tambem entra, porque o trabalho
     # numera os titulos no corpo.
-    NUM = r"(?:\d{1,2}[.)]?\s+)?"
+    # O NUMERO DE SECAO TEM MAIS DE UM NIVEL, E O TITULO PODE VIR SUJO.
+    # Medido em 09/09/2026 sobre sete extracoes: "5.6 Sintese conclusiva" nao
+    # casava porque o padrao so admitia um nivel, e o titulo do trabalho K chega
+    # como ";;;;;;;;;;;;;;;2.5 CONCLUSOES E RECOMENDACOES", com quinze pontos
+    # e virgulas que a celula de tabela deixou colados na frente. Nos dois
+    # casos o `^` do padrao batia na sujeira e a secao sumia do mapa.
+    NUM = r"[^\w\sÀ-ÿ]{0,20}\s*(?:\d{1,2}(?:\.\d{1,2}){0,3}[.)]?\s+)?"
     resumo = (peca(NUM + r"RESUMO\b") or [None])[0]
     abstract = (peca(NUM + r"ABSTRACT\b") or [None])[0]
     refer = ultima(NUM + r"(REFER[EÊ]NCIAS?|REFERENCES|BIBLIOGRAPHY)\b")
-    concl = ultima(NUM + r"(CONCLUS[AÃ]O|CONSIDERA[CÇ][OÕ]ES FINAIS|CONCLUSIONS?"
-                   r"|FINAL REMARKS|CONCLUDING REMARKS)\b")
+
+    # O FECHO TEM TRES NOMES, E O MAPA CONHECIA DOIS.
+    #
+    # Discussao, conclusao e consideracoes finais fazem o mesmo trabalho.
+    # Podem aparecer juntas, e o mais comum e haver so uma. "Discussao" nao
+    # estava na lista, e na dissertacao T, que fecha com
+    # "DISCUSSAO: a necessidade de se diferenciar...", o mapa acusou conclusao
+    # ausente num trabalho que conclui. Medido em 09/09/2026.
+    #
+    # Onde houver mais de um, o bloco comeca no primeiro: quem escreve
+    # Discussao e depois Consideracoes finais quer as duas no mapa, e parar na
+    # ultima perderia a primeira inteira. Mas "primeiro" so vale perto do fim,
+    # porque "Discussao dos resultados" e titulo comum no meio de capitulo
+    # empirico, e comecar ali engoliria metade do trabalho.
+    FECHO = (NUM + r"(CONCLUS[AÃ]O|CONCLUS[OÕ]ES|CONSIDERA[CÇ][OÕ]ES FINAIS"
+             r"|DISCUSS[AÃ]O|CONCLUSIONS?|DISCUSSION|FINAL REMARKS"
+             r"|CONCLUDING REMARKS)\b")
+    fechos = acha(P, FECHO)
+
     intro = ultima(NUM + r"(INTRODU[CÇ][AÃ]O|INTRODUCTION)\b")
     if intro is None or (refer and intro > refer):
         # o corpo comeca depois do sumario e das listas, e a ultima linha
@@ -145,10 +168,18 @@ def fronteiras(P):
         cand = [k for k in sorted(P) if k > base and not P[k][1]
                 and len(P[k][2]) > 220 and not SUMARIO.search(P[k][2])]
         intro = cand[0] if cand else None
-    # a conclusao tem de vir antes das referencias
-    if concl and refer and concl > refer:
-        c = [n for n in acha(P, r"^(CONCLUS[AÃ]O|CONSIDERA[CÇ][OÕ]ES FINAIS)\b") if n < refer]
-        concl = c[-1] if c else None
+    # O fecho fica entre a introducao e as referencias. Fora dessa faixa e
+    # linha de sumario ou secao homonima, e nao abre o bloco.
+    dentro = [n for n in fechos
+              if (intro is None or n > intro) and (refer is None or n < refer)]
+    if dentro:
+        fim_corpo = refer or N
+        base = intro or 0
+        limiar = base + 0.75 * (fim_corpo - base)
+        tarde = [n for n in dentro if n >= limiar]
+        concl = tarde[0] if tarde else dentro[-1]
+    else:
+        concl = None
     return dict(resumo=resumo, abstract=abstract, intro=intro,
                 conclusao=concl, referencias=refer, fim=N)
 
@@ -323,10 +354,38 @@ def autoteste():
             sys.exit("!! no controle em ingles, %s deu %r e o esperado e %r"
                      % (k, fr4[k], v))
 
+    # OS TRES NOMES DO FECHO. O trabalho que fecha em "Discussao" concluia
+    # sem que o mapa achasse a conclusao; o que fecha nos dois nomes tem de
+    # abrir o bloco no primeiro; e "Discussao dos resultados" no meio de um
+    # capitulo nao pode abrir bloco nenhum.
+    alvo.write_text(CONTROLE.replace("## [P10] CONCLUSÃO",
+                                     "## [P10] DISCUSSÃO"), encoding="utf-8")
+    if fronteiras(ler(str(alvo)))["conclusao"] != 10:
+        sys.exit("!! o trabalho que fecha em 'Discussao' aparece sem conclusao")
+
+    dois = CONTROLE.replace(
+        "## [P10] CONCLUSÃO\n\n[P11] O trabalho conclui o que prometeu.",
+        "## [P10] DISCUSSÃO\n\n[P11] O trabalho discute o que achou.\n\n"
+        "## [P11b] CONSIDERAÇÕES FINAIS\n\n[P11c] E entao encerra.")
+    alvo.write_text(dois.replace("[P11b]", "[P14]").replace("[P11c]", "[P15]"),
+                    encoding="utf-8")
+    if fronteiras(ler(str(alvo)))["conclusao"] != 10:
+        sys.exit("!! com Discussao e Consideracoes finais, o bloco tem de "
+                 "comecar na Discussao, e a primeira ficaria de fora")
+
+    meio = CONTROLE.replace("### [P7] Metodologia",
+                            "### [P7] Discussão dos resultados")
+    alvo.write_text(meio, encoding="utf-8")
+    if fronteiras(ler(str(alvo)))["conclusao"] != 10:
+        sys.exit("!! 'Discussao dos resultados' no meio do corpo abriu o bloco "
+                 "de fecho, e o mapa engoliria metade do trabalho")
+
     print("  autoteste: as cinco fronteiras do controle sao achadas, o mapa "
           "traz as sete pecas esperadas, as duas adulteradas se perdem e o "
-          "titulo 'Resumo dos achados' nao passa por resumo; e o controle "
-          "em ingles acha introduction, conclusion e references")
+          "titulo 'Resumo dos achados' nao passa por resumo; o controle "
+          "em ingles acha introduction, conclusion e references; e os tres "
+          "nomes do fecho sao achados sem que 'Discussao dos resultados' "
+          "no meio do corpo abra bloco")
 
 
 def main():

@@ -76,8 +76,22 @@ def paragrafos(caminho):
     # de seção da extração vêm assim. Medido em 08/09/2026: três parágrafos foram
     # dados como localizador morto por isso, que é acusação falsa do próprio
     # conferidor. É o defeito de ambiente que os prompts já registram.
-    for m in re.finditer(r"(?m)^[^\[\n]{0,10}\[P(\d+)\]\s*(.*)$", t):
-        fora[int(m.group(1))] = " ".join(m.group(2).split())
+    # PARAGRAFO DE MAIS DE UMA LINHA VINHA CORTADO NA PRIMEIRA.
+    #
+    # `(?m)` faz `$` casar fim de LINHA, e `.` nao casa quebra de linha: o
+    # `(.*)$` pegava so a primeira. Numa celula de quadro com quebra manual, o
+    # segundo dispositivo sumia. Medido em 09/09/2026 sobre um TCC: [P118] traz
+    # "Art. 2o, II, Portaria 3.844/2023" e "Art. 3o, I, Portaria 3.485/2026", e
+    # o lote entregava so o primeiro; o mesmo em [P123], [P128], [P158] e em dez
+    # celulas de matriz. A verificacao e a conferencia leem este arquivo, de
+    # modo que as duas conferiram meio paragrafo sem saber, e uma delas
+    # confirmou por isso um item falso.
+    #
+    # O defeito ja esta no `_REGRAS.md` com outra roupa: **divida pelo marcador
+    # em qualquer posicao**, em vez de casar linha a linha.
+    pedacos = re.split(r"\[P(\d+)\]", t)
+    for k in range(1, len(pedacos) - 1, 2):
+        fora[int(pedacos[k])] = " ".join(pedacos[k + 1].split())
     if not fora:
         for m in re.finditer(
                 r"(?m)^\[[^\]]+\]\s*P(\d+)\s*(?:\[[A-Z]+\])?\s*(?:\(p\.[^)]*\))?\s*(.*)$", t):

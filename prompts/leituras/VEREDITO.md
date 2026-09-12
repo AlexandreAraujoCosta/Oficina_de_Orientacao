@@ -54,7 +54,8 @@ contribuição**. Não é quantos problemas existem nem quanto tempo pedem: vint
 correções que não tocam nenhuma afirmação não movem o degrau, e uma só inferência
 que o dado não carrega o move inteiro.
 
-**A objeção se enuncia contra uma inferência, e nunca contra o desenho.** As duas
+**A objeção se enuncia contra uma inferência; contra o desenho, só pela porta do
+parágrafo seguinte.** As duas
 costumam ser a mesma coisa dita de dois modos, e o segundo modo abre uma discussão
 que não fecha: quem lê que o desenho está errado discute se aquele era o desenho
 certo, o que é argumento sobre método em abstrato. Quem lê que a afirmação de
@@ -63,16 +64,26 @@ carregaria está nas duas bases, abre o trabalho e confere. **Traduza sempre par
 segunda forma:** nomeie a afirmação, o dado em que ela se apoia, e o que falta para
 o dado carregá-la.
 
+**A objeção ao desenho entra por uma porta só, e ela tem duas condições.** Quando o
+defeito for anterior à inferência (a comparação condicionada, a categoria que
+contém a conclusão, a unidade que mistura espécies), ele se enuncia assim mesmo,
+com duas coisas junto: a inferência que ele derruba, com o localizador, e a
+decisão que o resolve, num dos quatro degraus de custo da leitura de dados
+(reduzir a afirmação, refazer a conta, integrar variável que a base tem, coletar).
+Onde o texto não disser o que a base registra, e por isso não se souber entre
+integrar e coletar, escrevem-se os dois degraus e o que decide entre eles. O item
+fica nas correções, com o seu código; a decisão que ele pede entra na seção das
+decisões, que abre o relatório.
+
 **A contribuição negativa é contribuição.** Mostrar que a hipótese não pode ser
 confirmada com os dados disponíveis é resultado, e um trabalho que faça isso bem
 não perde degrau por isso. O que faz perder é afirmar a hipótese sem que os dados
 a carreguem.
 
 **Trabalho descritivo tem poucas inferências, ou nenhuma**, e ali a régua muda de
-apoio sem afrouxar. O que se confere é se **cada descrição corresponde ao dado**: se
-o número escrito na prosa é o da tabela, se a frase que lê a figura diz o que a
-figura mostra, se a categoria contada é a que a definição delimita, se o total fecha
-com as parcelas. Descrição que não confere com o dado é o mesmo defeito da
+apoio sem afrouxar. O que se confere é se a descrição que o trabalho apresenta como
+resultado corresponde ao dado, e se a categoria contada é a que a definição
+delimita; número trocado que não muda a descrição é anexo. Descrição que não confere com o dado é o mesmo defeito da
 inferência que o dado não carrega, um degrau antes dela, e move o veredito do mesmo
 modo. Depois dessa, a pergunta que resta é se a descrição é ela própria a
 contribuição, e o que a mede é o que o trabalho passa a permitir dizer e antes não
@@ -101,8 +112,7 @@ o prazo do conserto.** Quem lê *apto desde que* e encontra em seguida uma frase
 sobre semanas entende que falta acabamento. Neste degrau falta uma afirmação
 passar a se sustentar, e é isso que a abertura tem de dizer.
 
-**4. Não é apto ainda, porque há problema que a correção não alcança, ou eles são
-muitos, ou pedem tempo que não cabe.** Desenho que não produz a conclusão, categoria que contém na definição o
+**4. Não é apto ainda, porque há problema que a correção não alcança.** Desenho que não produz a conclusão, categoria que contém na definição o
 que a conclusão anuncia, fato afirmado por inferência sem apoio em fato. **Exiba:**
 a definição e a conclusão lado a lado, o elo que deixa o solo. Sem exibição é
 acusação e não achado, e num relatório que chega a um examinador isso é o pior que
@@ -122,6 +132,8 @@ uma afirmação central que o dado não carregava. O prazo era verdadeiro e não
 que decidia. A primeira versão desta correção falava em *objeção ao desenho*, e ela
 saiu no mesmo dia: enunciar a objeção contra o desenho abria discussão sobre método
 em abstrato, e a mesma objeção enunciada contra a inferência se confere no texto.
+Em 10/09/2026 ela voltou pela porta descrita acima, que exige a inferência e o
+degrau de custo junto, e por isso não reabre a discussão em abstrato.
 
 ## O molde, e ele tem um encaixe obrigatório para um fato concreto
 
@@ -131,7 +143,8 @@ enchimento.
 
 > ## [A resposta, numa frase, com a condição nomeada quando houver]
 >
-> [Uma frase com o que já está estabelecido, com o número que o sustenta.]
+> [Uma frase com o que já está estabelecido: a afirmação, e o que a sustenta.
+> Conta que fecha não é o que sustenta.]
 >
 > [Quando houver condição: qual é, o que passaria a estar escrito, e quanto tempo
 > pede. Quando não houver: que nada aqui pede trabalho novo.]
@@ -166,7 +179,9 @@ parágrafos seguintes o provam com número.
 
 **Não antecipar ressalva na abertura.** As correções estão nos itens, e listá-las
 antes só faz o leitor começar em posição defensiva. A abertura afirma o veredito
-e mostra o que o sustenta.
+e mostra o que o sustenta. As decisões da primeira seção não são ressalva: são as
+escolhas que os itens pedem, e vêm depois do veredito, a que mais muda primeiro: a
+da medida central, quando houver.
 
 **Não repetir na abertura o que os pontos fortes vão dizer.** Se a frase de
 veredito já enumera o achado, o parágrafo seguinte o repete palavra por palavra.

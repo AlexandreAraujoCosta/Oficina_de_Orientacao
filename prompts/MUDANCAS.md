@@ -1192,3 +1192,314 @@ os consertos de hoje no `montar_levantamento.py` e no `enderecos_em_lote.py`.
 ferramenta no meio de duas rodadas em curso. O terceiro é o que vale mais: fixar a
 convenção nos prompts torna desnecessária metade da tolerância que os programas
 ganharam hoje.
+
+
+---
+
+## 10/09/2026 — Seis mudanças para a relevância, e a régua que as confere
+
+**O caso que motivou.** Pedido do orientador: os relatórios devem otimizar a
+relevância dos achados para o aluno (o que muda abordagem, conclusão ou
+alcance), e não o número deles. Tentativas anteriores com o Opus não tinham
+surtido efeito. Diagnóstico de uma crítica fria dos prompts, no mesmo dia: o
+critério de relevância existe na triagem e não manda, porque entra no último
+passo, depois de leituras instruídas a produzir volume; o aparato de medição
+mede precisão, cobertura e custo, e nenhuma ficha deste arquivo tinha fração de
+relevância como falsificador.
+
+**A régua, escrita antes de qualquer mudança.** `prompts/CLASSIFICAR-RELEVANCIA.md`
+e `scripts/relevancia.py` (autoteste com controle positivo: falta, sobra e
+caridade). **Linha de base, medida em 10/09/2026** sobre o relatório Alberto v4 da
+dissertação de 08/09, com a origem apagada, por voz que não o escreveu:
+
+| | itens |
+|---|---|
+| pedem providência | 75 |
+| mudam conclusão | 6 |
+| mudam alcance | 4 |
+| só tornam conferível | 9 |
+| não mudam nada | 56 |
+
+**Relevantes: 10 de 75 (13%). Superfície: 56 de 75 (75%).** O cotejo cego de
+08/09 dera 50 de superfície em 91 com outra régua; concorda em ordem de
+grandeza, e está em `AFERICOES.md`.
+
+**Origem de todas as seis: raciocínio, autorizado pelo orientador.** Nenhuma
+rodou ainda. Cada uma tem o falsificador escrito aqui, antes de rodar.
+
+| passo | arquivos | o que se espera | o que mostraria que foi inútil | rodou? |
+|---|---|---|---|---|
+| 1. porta de entrada: todo item nasce com a afirmação que muda, ou marcado ACABAMENTO | leituras 1, 2 e 3; `6-TRIAGEM` (teste com magnitude; graus 3 e 4 ao anexo); `ALBERTO` | a fração de superfície no corpo cai abaixo de um terço, sem perder item de conclusão | sobre a mesma dissertação, superfície no corpo continua acima de um terço, ou os itens de conclusão caem de 6 | não |
+| 2. as decisões abrem o relatório | `6-TRIAGEM` (tabela de seções, seis seções, parágrafo da ordem); `ALBERTO` (nove partes, parte 2) | 3 a 6 decisões, e o pareamento com os comentários do orientador sobe de 2 (capítulo 6 da dissertação de 07/09) | decisões em número maior que seis, ou pareamento continua em 2 | não |
+| 3. exceção ao desenho, com inferência e decisão junto | `VEREDITO`, leitura 3 (4c), `ALBERTO` | item de desenho aparece com a inferência nomeada e o degrau de custo | nenhum item de desenho aparece, ou aparece sem inferência nomeada | não |
+| 4. o Alberto perde a operação | `ALBERTO` (7.391 palavras, de 10.822); `OPERADOR-ALBERTO.md` novo (4.340); `gerar_agente.py` concatena os dois; `gerar_warat.py` acompanha o corte; `analisador.html` recebe o prompt novo | previsão escrita antes: abaixo de 4.000 palavras. **Não se cumpriu**: ficou em 7.391, porque o que sobrou é análise e os casos de calibragem ficaram por decisão | a rodada perde o achado principal que a versão longa dava (o denominador do Gráfico 25 na dissertação de 07/09) | não |
+| 5. Selma: condições e frente a cortar abrem; dimensão 5 e composição da lista vão ao bloco final, sem nota | `prompt_selma.md` (seis blocos); página regenerada; `conferir_molde.py` aceita | a lista de condições não muda de conteúdo entre as duas versões sobre o mesmo projeto | a lista de condições muda, o que indicaria que a forma decidia o mérito | não |
+| 6. Miro, projeto colado: as quatro perguntas na ordem do que mudaria mais; a segunda consistência devolve primeiro o que muda mais | `contextos/modulo_2_planejamento.py`; portátil e página regenerados por `atualizar_portatil.py` | a conversa simulada começa pela pergunta que mais mexe nos outros elementos, e pula a que o texto já responde | as quatro saem na ordem fixa, ou abre turno sobre elemento que já se sustentava | não |
+
+**Três coisas que este dia deixa pendentes, e não são executadas aqui.** A
+pergunta da unidade contada tem três rodadas prometidas na ficha de 08/09 e
+nenhuma rodou; fica suspensa até que a porta de entrada seja medida, porque as
+duas mudam o mesmo prompt. O anexo passou a ter duas listas, e
+`anexo_do_alberto.py` e `montar_entrega.py` ainda leem uma: quem montar a
+próxima entrega confere se os itens de grau 3 chegam à margem. E o falsificador
+do plano inteiro, escrito antes do primeiro passo: se depois dos passos 1 e 2 a
+fração de superfície cair e o pareamento com o orientador não subir, o
+instrumento passou a esconder o irrelevante sem achar o relevante, e a fila
+seguinte é o índice do acervo do grupo.
+
+**Sem commit.** Tudo isto está na árvore de trabalho, junto com as alterações de
+09/09 que também não tinham commit. A crítica fria de `CRITICA-DE-MUDANCA.md`
+rodou sobre o diff isolado das mudanças de hoje, e o que ela devolveu está
+registrado abaixo desta ficha.
+
+### O que a crítica fria de 10/09 devolveu, e o que se fez
+
+Rodou sobre o diff isolado das seis mudanças, com os prompts inteiros e o
+relatório X classificado como caso concreto. O que ela derrubou, e o destino de
+cada coisa:
+
+- **A porta de entrada era binária e mandava ao acabamento o que só torna
+  conferível** (o denominador ausente, a base não depositada) **e a promessa não
+  cumprida** (o produto anunciado e ausente, que o próprio prompt chama de achado
+  mais consequente). *Corrigido:* a porta passou a ter três saídas (a afirmação
+  muda; fica igual e passa a ser conferível, marca CONFERE; nada muda, marca
+  ACABAMENTO), com a promessa não cumprida nomeada como afirmação que cai e com a
+  regra do denominador escrita. No Alberto, a primeira linha é o título do item.
+- **O grau 3 ia ao anexo e ao corpo ao mesmo tempo** (ano divergente na obra que
+  sustenta premissa). *Corrigido* no Alberto e no operador: vai para a primeira
+  lista do anexo.
+- **A definição de ANEXO na triagem excluía o que a triagem manda ao anexo.**
+  *Corrigido:* o destino descreve as duas listas, e a saída diz em qual.
+- **"Nunca contra o desenho" e a porta ficaram lado a lado**, em três arquivos, e
+  a triagem manteve o "nunca" sem exceção. *Corrigido* nos quatro lugares, e o
+  registro histórico do `VEREDITO.md` diz que a formulação voltou e por que porta.
+- **A exceção mandava o item "às decisões", que não recebem item e têm teto de
+  seis.** *Corrigido:* o item fica nas correções com o código; a decisão que ele
+  pede entra na seção das decisões.
+- **A exceção derrubava o item de desenho em que a leitura não sabe se a base
+  registra a variável** (S14 do caso). *Corrigido:* onde não souber entre
+  integrar e coletar, escreve os dois degraus e o que decide.
+- **O código do item que migra ao anexo tinha três regras.** *Corrigido:* na
+  primeira lista o item conserva o código `S`; na segunda abre com `SC`.
+- **"Cinco seções" a dezesseis linhas de "seis".** *Corrigido.*
+- **Miro: a pergunta que o texto já responde contradizia a regra de que seção
+  cheia não é elemento resolvido.** *Corrigido:* só não se repete a pergunta cuja
+  resposta se sustenta diante dos outros três elementos.
+- **Selma: o bloco final dizia "não muda o projeto" e a dimensão 5 diz que as
+  marcas o enfraquecem.** *Corrigido:* o bloco diz o que não muda (o que o
+  projeto pergunta e como responde) e mantém o custo diante da banca. E o
+  tamanho anunciado ("uma ou duas páginas") passou a duas ou três.
+- **Legibilidade do Alberto sozinho:** "daí uma consequência" sem antecedente,
+  "segundo tipo de defeito" sem tipologia, "não remete a arquivo nenhum" seguido
+  de dois arquivos. *Corrigido* nos três pontos.
+- **`montar_entrega.py` descrevia o anexo como só acabamento.** *Corrigido* na
+  frase impressa; o programa continua lendo uma lista, e separar as duas na
+  margem fica pendente.
+- **Repetições:** a porta em quatro cópias, o filtro da leitura 2 dito duas
+  vezes, a justificação da ordem em dois arquivos. *Corrigido em parte:* o filtro
+  da leitura 2 virou um bloco só, a defesa da ordem saiu do Alberto e da triagem
+  e a glosa "isto não é teto" ficou numa frase. A porta continua em quatro
+  arquivos por decisão: cada prompt de leitura roda sozinho e não pode remeter a
+  outro.
+
+**O que a crítica derrubou e fica, com a divergência registrada.** O falsificador
+do passo 1 mede o que a regra manda escrever: a leitura passa a nomear a
+afirmação, e o classificador decide pelo que o item nomeia. *Feito em parte:* o
+classificador ganhou a regra de conferir que a providência muda a afirmação, e não
+só a nomeia. O que resolve de vez é a segunda perna, que já estava na ficha: o
+pareamento com os comentários do orientador, que não depende da redação do item.
+Nenhuma medição de relevância se reporta sem as duas.
+
+**O que a crítica não pôde rodar:** as decisões (o relatório X não tem a seção),
+a Selma e o Miro (sem caso concreto no material). Ficam com os falsificadores da
+ficha, e sem rodada.
+
+**Tamanho, medido por ela:** o Alberto que o chat recebe caiu de 10.816 para
+7.389 palavras; Alberto mais operador somam 11.729, ou 913 a mais que o arquivo
+único. A previsão de 4.000 errou por 3.389, e o que ficou é análise por escolha.
+
+
+---
+
+## 10/09/2026 (tarde) — O item nasce na forma final, e o percurso sai do produto
+
+**O caso.** O orientador apontou que muitos apontamentos, no Alberto e na Selma,
+não se entendem: são reflexão da voz de leitura sobre os próprios critérios, e
+não comentário operacional ao estudante. Medido no mesmo dia, no levantamento cru
+de uma tese (25.793 palavras, antes de qualquer verificação): zero linhas abrem
+por verbo de operação, e a voz fala do próprio prompt ("o passo 1 do prompt
+manda..."). No relatório entregue da mesma família, depois da revisão cara, 3
+itens em 91 têm essa voz. A diferença é a redação, que é a passada medida com
+oito e nove afirmações falsas.
+
+**Diagnóstico.** O desenho manda as primeiras vozes escrever em linguagem de
+análise (términos, estados, hipóteses caídas) e delega a escrita para o aluno a
+uma voz que não viu o material. As regras de honestidade (hipótese caída, alcance,
+controle) estão escritas como coisas a dizer, e a voz as diz no produto.
+
+**Origem: raciocínio, autorizado pelo orientador.** Ele recusou o teste prévio
+que eu propus (uma leitura 2 em dois braços, 45 minutos) e mandou implementar.
+Nenhuma rodada ainda.
+
+| movimento | arquivos | o que se espera | o que mostraria que foi inútil | rodou? |
+|---|---|---|---|---|
+| o item nasce na forma final (título, aponta, o que fazer, o que muda) na primeira voz; prefixos fixos `A`, `P`, `D`; a redação ordena e nunca reescreve; item com defeito volta à leitura | leituras 1, 2 e 3 (seção de saída); `6-TRIAGEM` (redação) | `COMPREENSIBILIDADE.md` sobre os itens crus passa de dois terços, e a redação deixa de introduzir afirmação falsa | itens crus abaixo de dois terços, ou afirmação falsa nova na redação sem que ela tenha reescrito | não |
+| dois arquivos por leitura: `LEITURA-<x>.md` com os itens, `REGISTRO-<x>.md` com o percurso; a tabela de figuras vai ao registro e é ele que `base_das_figuras.py` recebe; o Alberto ganha registro à parte (agente) ou bloco final (chat) | leituras 1, 2 e 3; `5-VERIFICACAO`; `ALBERTO` | nenhum item cita término, estado, hipótese caída ou controle | a voz da leitura reaparece nos itens crus | não |
+| Selma: a conta sai da prosa para o bloco de dados, e a fronteira entre 6 e 7 vai a um bloco curto antes dos dados | `prompt_selma.md` | a avaliação analítica sem parágrafo sobre a régua | a régua reaparece na avaliação, ou o lote recusa o bloco novo | não |
+
+**Confundidor declarado:** entra na mesma rodada que a porta de entrada da manhã,
+que toca as mesmas seções. Os dois efeitos não se separam nessa rodada.
+
+**Falsificador comum, escrito antes:** rodar `COMPREENSIBILIDADE.md` sobre os
+itens crus da leitura, e não só sobre o texto da margem. Linha de base: hoje, zero
+linhas do levantamento abrem por verbo de operação.
+
+**Pendências que isto cria:** `montar_levantamento.py` continua lendo os
+`LEITURA-*.md` e renumerando colisões, e agora os prefixos são fixos; a
+convenção pendente de 08/09 fica resolvida nos prompts e o programa pode
+simplificar. A leitura 4 lê contribuição não reivindicada nos mesmos arquivos,
+com os prefixos `AC`, `PC`, `DC`. O operador passa a `base_das_figuras.py` o
+`REGISTRO-DADOS.md`, e não o `LEITURA-DADOS.md`.
+
+
+## 10/09/2026: revisão Codex, implementação autorizada
+
+Antes das alterações: corrigir a interpolação de percentuais, completar o contrato da leitura 4 e permitir revisão de linguagem com reconferência das alterações de conteúdo. Priorizar as inferências antes das contas; separar compreensão, veracidade e utilidade. Hipóteses pedagógicas ainda não medidas. Meta técnica: zero falhas nos controles de percentuais e zero divergências dos derivados. Meta experimental: em comparação cega sobre o mesmo trabalho, aumentar a proporção de itens compreendidos sem aumentar afirmações falsas nem perder decisões úteis confirmadas na fonte. Se isso não ocorrer, a alteração não demonstrou benefício. Comentários do orientador são comparação complementar, não catálogo completo de achados. Miro fora do escopo.
+
+
+---
+
+## 12/09/2026 — A varredura: sai o viés de contar divergências, entra a medida central
+
+**O caso, e ele está no acervo.** Na dissertação sobre desobediência judicial, o
+orientador leu o trabalho inteiro e diz que a questão que mais importa é se contar
+decisões de procedência em reclamação mede desobediência, ou outra coisa (a
+capacidade do sistema de precedentes de interferir; a ampliação das teses pela
+própria Corte). O relatório do Luis chegou a essa pergunta (a decisão D5 pergunta
+se o crescimento das procedentes mede a desobediência ou a disposição do STF em
+acolher) e a enterrou como quinta decisão, atrás de um veredito sobre resumo e
+anexo e de cinco pontos fortes que dizem que as somas das tabelas fecham. O do
+Alberto abre dizendo que refez as onze colunas célula a célula. A ferramenta viu e
+o formato escondeu.
+
+**Diagnóstico.** Os prompts cristalizam a contagem de divergências como o trabalho
+principal: recontar bases por dois caminhos, refazer somas e porcentagens, comparar
+dígito a dígito, contar percentuais sem denominador, cinco estados por figura, seis
+modos de a prosa falhar contra a tabela, a ementa como tabela de términos, e o
+ponto forte como conta que fecha. Nada disso pergunta o que a contagem conta.
+
+**Origem: pedido do orientador, sem teste prévio por decisão dele.** Nenhuma rodada.
+
+**O que saiu:**
+
+- Leitura 1: o passo que media o alcance do resumo em três números; a lista de
+  alvos como produto (vai ao registro); o superlativo da divergência de alcance.
+- Leitura 2: o passo das referências por amostra (é programa e é anexo).
+- Leitura 3: os cinco estados por figura (ficam duas perguntas: o que o texto
+  extrai além do que a figura permite, e o que ela permite e o texto não afirma);
+  os seis modos de a prosa falhar (fica a divergência que muda o que a seção
+  conclui); a repetição dígito a dígito; a célula que ninguém comentou; a tabela
+  de figura obrigatória para todas (fica para as de que a conclusão depende);
+  três parágrafos de medição com chamadas e minutos.
+- Alberto: três padrões da lista (número só na figura, citação sem entrada, duas
+  contagens que não fecham); o superlativo do passo 2; a narrativa de medição das
+  três perguntas.
+- Triagem e redação: a ementa como tabela de términos (passa a dizer o que o
+  trabalho mede, o que conclui, o que não se sustenta e as decisões); "a linha mais
+  informativa"; a conclusão julgada pela tabela de términos.
+- Veredito e Alberto: no trabalho descritivo, confere-se a descrição apresentada
+  como resultado, e número trocado que não a muda é anexo.
+- Metáforas: "fóssil" vira "versão velha" nas três leituras; "irrigando" vira
+  "alimentando"; na Selma e no Miro, "consome e entrega" vira "parte de e
+  entrega" (no Miro só a palavra, porque ele está fora do foco).
+
+**O que entrou:**
+
+- **A medida central como primeira pergunta**: o que a contagem conta, que
+  conceito o trabalho diz que ela mede, que outras coisas o mesmo número pode
+  medir. Na leitura 3 é o passo 0; no Alberto abre o exame da inferência; na Selma
+  entra na validade do indicador. As leituras alternativas entram como pergunta
+  ainda que o trabalho não as mencione, e isso é exceção declarada à regra de não
+  inventar explicação.
+- **Um quinto modo de a inferência extrair demais**: o conceito diz mais do que a
+  contagem conta. Nas leituras 1 e 3 e no Alberto.
+- **Ponto forte não é conta que fecha**: na triagem e no Alberto.
+
+| o que se espera | o que mostraria que foi inútil | rodou? |
+|---|---|---|
+| sobre a dissertação da desobediência, a medida central aparece como primeira decisão, com as leituras alternativas e o que as separaria | a pergunta continua atrás de itens de contagem, ou não aparece | não |
+| os pontos fortes deixam de ser somas que fecham | metade ou mais dos pontos fortes continua sendo conta que fecha | não |
+| o corpo do relatório perde os itens de divergência que não mudam conclusão | a fração NADA do classificador não cai | não |
+
+**O que não saiu, e por decisão:** o desconto dos dois lados de uma subclasse, a
+composição da unidade contada e o nome da série, porque nos casos medidos mudaram a
+afirmação central; as três guardas sobre teste de significância; a régua de notas
+da Selma, que conta achados e não divergências, e tem razão medida (duas leituras do
+mesmo projeto divergiam em dois pontos sem ela).
+
+**Confundidor:** entra na mesma rodada que a porta de entrada e a forma final, que
+tocam as mesmas seções.
+
+### O que a crítica fria de 12/09 devolveu, e o que se fez
+
+Rodou sobre os diffs de 10/09 (tarde) e 12/09, com os prompts inteiros e o
+relatório do Luis sobre a dissertação da desobediência como caso. Ela cobriu as
+duas levas porque a de 10/09 (tarde) caiu por limite de uso.
+
+**O que ela derrubou, e o destino de cada coisa:**
+
+- **A regra passava no caso porque o caso estava transcrito nela.** O exemplo da
+  medida central nomeava reclamações procedentes e desobediência, em três prompts
+  e na Selma, contra a regra de 05/09 (exemplo do domínio volta como citação).
+  *Corrigido:* exemplo genérico (o evento que uma instituição registra pode medir
+  o fenômeno, a disposição de registrá-lo, ou a mudança do critério).
+- **O item da medida central tinha dois destinos incompatíveis** (pergunta, e ao
+  mesmo tempo primeira decisão), e a verificação o derrubaria como não
+  conferível. *Corrigido:* é item de corpo com a pergunta dentro; a verificação
+  ganhou a trava de que ele não cai por o trabalho não mencionar a alternativa.
+- **Nenhuma regra ordenava as decisões**, e foi por isso que a pergunta ficou em
+  quinto. *Corrigido:* a ordem é a do que mais muda, e a da medida central vem
+  primeiro (triagem, Alberto, veredito).
+- **O molde do veredito pedia "o número que sustenta"**, que é a soma refeita.
+  *Corrigido.*
+- **"A contagem central" era ambígua com duas contagens.** *Corrigido:* é a que a
+  afirmação principal usa; com duas, faz-se para as duas.
+- **Na leitura 1 o quinto modo não alcançava a passagem**, porque a leitura do
+  dado como fenômeno caía em RETOMADA. *Corrigido:* retomada que já lê o dado
+  como o conceito é TESE.
+- **"Quatro modos" com cinco itens, carimbados como medidos.** *Corrigido* nos
+  três arquivos: cinco, e o quinto entrou por pedido, sem medição. A
+  justificação repetida seis vezes saiu dos itens de lista.
+- **Duas contagens do mesmo conjunto que não fecham** produziu a condição 3 do
+  veredito no caso, e tinha saído. *Voltou, condicionada* a uma afirmação usar
+  uma das contagens como universo.
+- **Figura que repete outra** era o caso medido de REDUNDANTE. *Voltou,
+  condicionada* ao texto tratar a repetição como confirmação.
+- **O passo das referências da leitura 2 saiu inteiro**, e o pipeline não nomeia
+  quem roda o programa. *Voltou reduzido* à referência de que uma premissa
+  depende.
+- **"A linha mais informativa"** sobrevivia na saída da triagem; **"a contagem por
+  estado do passo 2"** sobrevivia no registro da leitura 3 depois de os estados
+  saírem; **dois inventários de figura** com alcances diferentes; **o passo 0
+  mandava ler o trabalho antes das figuras e o 2b mandava não ler**; **frase
+  quebrada** sem ponto em dois arquivos; **o exemplo de mérito** da redação era
+  exatamente o que a regra nova desqualifica; **o degrau 4 do veredito** ainda
+  admitia "muitos" ou "tempo que não cabe". *Todos corrigidos.*
+- **A página das figuras não dizia que a cobertura encolheu.** *Corrigido* no
+  aviso e no rodapé de `base_das_figuras.py`.
+
+**O que fica, com a divergência registrada:** a pergunta da unidade contada em
+três lugares da leitura 3 (passo 0, guarda do passo 3, pergunta 2 do 4b). São
+três operações vizinhas e não uma; fundir pede medir qual delas produz o item, e
+isso não foi feito. E a redundância entre leituras, que a varredura reduziu (a
+leitura 3 deixa de comparar figura que a conclusão não usa; a leitura 1 continua
+comparando resumo contra tabela): a rede ficou com menos fios por decisão do
+orientador, e o que mostraria o custo é um achado de resumo contra tabela que a
+leitura 1 não pegue.
+
+**Alcance da crítica:** os prompts inteiros e os dois diffs; a dissertação não foi
+lida, e onde a resposta dependia dela a crítica disse que não decidiu. As duas
+alternativas nomeadas pelo orientador (capacidade do sistema de precedentes de
+interferir; ampliação das teses) entram pela regra do passo 0 só por vizinhança:
+uma é leitura do conceito, a outra é mecanismo do crescimento. A regra cobre o
+conceito; o mecanismo continua coberto pela lista do que mudou na janela.

@@ -135,6 +135,36 @@ def autoteste():
     return falhas
 
 
+# --------------------------------------------------------- as tres medidas
+#
+# Contagem pura: palavras ate o verbo, palavras do maior periodo, e termo de
+# lista fechada. Nenhuma tem limiar a calibrar, e por isso nenhuma pode sair
+# falsa. Medido em 09/09/2026 sobre 59 itens de uma tese.
+
+VERBOS = (r"escrever|cortar|mover|substituir|trocar|acrescentar|retirar|publicar|"
+          r"conferir|decidir|refazer|reescrever|exportar|declarar|apontar|separar|"
+          r"uniformizar|corrigir|numerar|dividir|estender|restringir|dar|marcar|"
+          r"remeter|enunciar|calcular|somar|nomear|preparar|responder|reivindicar|"
+          r"descer|manter|abrir|fixar|inserir|apagar|depositar|integrar|fundir")
+RE_VERBO = re.compile(r"(%s)" % VERBOS, re.I)
+RE_PROCESSO = re.compile(
+    r"(confer[êe]ncia|confer[íi]do|cotejo|verifica[çc][ãa]o|"
+    r"levantamento|esta leitura|este relat[óo]rio|este item|este ponto|"
+    r"rodada|medi[çc][ãa]o|leitura [1-4])", re.I)
+
+
+def medir(its):
+    """(codigo, palavras ate o verbo, maior periodo, fala do processo)."""
+    fora = []
+    for cod, texto in its:
+        m = RE_VERBO.search(texto)
+        antes = len(texto[:m.start()].split()) if m else None
+        per = [len(s.split()) for s in re.split(r"[.!?](?:\s|$)", texto) if s.strip()]
+        fora.append((cod, antes, max(per) if per else 0,
+                     bool(RE_PROCESSO.search(texto))))
+    return fora
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("itens", nargs="+")
@@ -150,6 +180,26 @@ def main():
     print("  autoteste: acusa a remissão de posição, a remissão a outro item e a "
           "contagem sem nome,\n  e cala quando o nome está escrito ao lado")
 
+    # ZERO ITEM E RECUSA, E NAO APROVACAO.
+    #
+    # Este programa le a forma `## COD` com `**Aponta:**`, que e a que
+    # `anexo_do_alberto.py` grava. Apontado para o `.itens.json` cru, ou para um
+    # relatorio, ele lia zero itens e imprimia "0 remissoes que a margem nao
+    # resolve", que se le como aprovado. Medido em 09/09/2026 duas vezes no
+    # mesmo dia: o silencio de um conferidor que nao leu o arquivo nao informa
+    # nada, e e a forma de defeito mais cara que ele pode ter.
+    vazios = [cam for cam in a.itens if not campos(cam)]
+    if vazios:
+        print("\n  NAO LI ITEM NENHUM em: %s"
+              % ", ".join(Path(c).name for c in vazios))
+        print("  Este programa le a saida de `anexo_do_alberto.py`, na forma")
+        print("  `## CODIGO` seguida de `**Aponta:**` e `**Abrir:**`.")
+        print("  Gere-a antes:")
+        print("    python scripts/anexo_do_alberto.py <relatorio>.itens.json --json \\")
+        print("           --saida ITENS-<trabalho>.md")
+        print("\n  Nao digo que esta limpo: eu nao li nada.")
+        return 2
+
     total_e = total_a = 0
     for cam in a.itens:
         its = campos(cam)
@@ -164,6 +214,34 @@ def main():
               % (Path(cam).name, len(its), len(linhas)))
         for cod, e, av in linhas:
             print("     %-5s %s" % (cod, "; ".join(e + (av if not a.so_erros else []))))
+    # AS TRÊS MEDIDAS. Contam e imprimem; não acusam.
+    #
+    # Em 09/09/2026 cinco detectores desta oficina produziram acusação falsa no
+    # primeiro uso real. Este bloco existe para não ser o sexto: não há limiar a
+    # calibrar nem classe nova de acusação. Ele devolve número, e quem lê decide.
+    todos = [x for cam in a.itens for x in campos(cam)]
+    if todos:
+        med = medir(todos)
+        sem_v = [c for c, v, _, _ in med if v is None]
+        tarde = [(c, v) for c, v, _, _ in med if v is not None and v > 10]
+        longos = [(c, n) for c, _, n, _ in med if n > 60]
+        proc = [c for c, _, _, p in med if p]
+        vs = sorted(n for _, _, n, _ in med)
+        junta = lambda xs: ("  " + ", ".join("%s(%d)" % x for x in xs[:6])) if xs else ""
+        print("\n  AS TRÊS MEDIDAS (contagem, não acusação)")
+        print("    maior período: mediana %d palavras, máximo %d"
+              % (vs[len(vs) // 2], vs[-1]))
+        print("    períodos acima de 60 palavras: %d de %d%s"
+              % (len(longos), len(med), junta(longos)))
+        print("    mais de 10 palavras antes do verbo: %d%s"
+              % (len(tarde), junta(tarde)))
+        print("    sem verbo de operação: %d%s"
+              % (len(sem_v), ("  " + ", ".join(sem_v[:6])) if sem_v else ""))
+        print("    falam do processo desta oficina: %d%s"
+              % (len(proc), ("  " + ", ".join(proc[:8])) if proc else ""))
+        print("    Referência de 09/09/2026, numa tese de 59 itens: mediana 51,")
+        print("    5 com mais de 10 antes do verbo, 10 falando do processo.")
+
     print("\n  %d remissão(ões) que a margem não resolve, %d aviso(s) de contagem sem nome"
           % (total_e, total_a))
     if total_e:

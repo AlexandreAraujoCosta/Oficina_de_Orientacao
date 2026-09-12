@@ -93,9 +93,8 @@ produto: quem lê não acompanhou a invenção.
 
 Grave em `TRIAGEM.md`. Para cada item: o destino (e, no anexo, qual das duas
 listas), a oração do que muda, e a frase do
-trabalho que deixa de valer, quando houver. **E a conta**, que é a linha mais
-informativa do relatório: de quantos itens que pedem providência, quantos mudam
-alguma afirmação e quantos não mudam.
+trabalho que deixa de valer, quando houver. **E a conta**, numa linha: de quantos
+itens que pedem providência, quantos mudam alguma afirmação e quantos não mudam.
 
 ---
 
@@ -129,8 +128,9 @@ depois. É onde os cinco destinos abaixo mais se aplicam, e onde mora o andaime.
 **Capítulo empírico.** Função: expor o material e o que dele se extrai. Falha típica:
 as bases não são enunciadas no texto, e ficam só nas figuras.
 
-**Conclusão.** Função: afirmar o que o trabalho sustenta. A tabela de términos da
-leitura 1 é o julgamento dela, e não precisa de outro.
+**Conclusão.** Função: afirmar o que o trabalho sustenta. O julgamento dela é o das
+cadeias da leitura 1: quais asserções descem a dado que as carrega, e quais não,
+ditas pelo conteúdo, sem imprimir a contagem.
 
 **Apêndice.** Função: tornar auditável ou reutilizável. Falha quando existe e a
 conclusão não o nomeia, ou quando promete reprodução que ele não permite.
@@ -517,6 +517,8 @@ soma de vários, entregues separados.
 **O que entra no relatório.** Logo depois do veredito, e antes dos pontos fortes,
 uma seção curta com as decisões, **três a seis no relatório inteiro**, cada uma numa frase, com os
 códigos dos itens que ela resolve e o que muda em cada um conforme a resposta.
+**A ordem das decisões é a do que mais muda:** a da medida central, quando houver,
+vem primeiro; depois as que mudam uma conclusão; por último as de alcance.
 As correções continuam ordenadas por custo de execução, que é o que serve a quem
 tem prazo curto. **Os dois agrupamentos convivem**: o de decisão diz o que
 pensar, o de custo diz por onde começar.
@@ -593,7 +595,7 @@ ordem de força.
 
 Caso medido: um capítulo de trinta páginas resenhava quatro abordagens de análise
 retórica e entregava **uma** categoria ao capítulo empírico. O grafo de termos o
-mostrou irrigando o resto a 9% da taxa do capítulo anterior, de tamanho igual.
+mostrou alimentando o resto com 9% da taxa do capítulo anterior, de tamanho igual.
 Andaime, e não capítulo malfeito.
 
 ## A trava, e ela é obrigatória
@@ -690,7 +692,11 @@ pela porta que o `VEREDITO.md` descreve, com a inferência e o degrau de custo j
    incongruências e decisões: três a seis, cada uma numa frase, com os códigos dos
    itens que ela resolve e o que muda na conclusão conforme a resposta. É a seção
    que quem escreveu usa para decidir o que o trabalho afirma, e por isso abre.
-2. **O que é forte.** Das leituras 1, 2 e 3. **Elogio afirmado por uma voz só entra
+2. **O que é forte.** Das leituras 1, 2 e 3. Conta que fecha e tabela que se reconta
+   não são pontos fortes: são o esperado, e cabem numa linha. Ponto forte é a
+   escolha de desenho que afasta um risco, dita com o risco; o apêndice entra por
+   essa porta quando a escolha do que publicar afasta um risco nomeado.
+   **Elogio afirmado por uma voz só entra
    qualificado**: medimos duas vezes um apêndice que uma leitura chamou de ponto forte
    e outra, de perda não declarada. Entra sem reserva o que dois caminhos
    independentes confirmaram.
@@ -707,14 +713,14 @@ pela porta que o `VEREDITO.md` descreve, com a inferência e o degrau de custo j
 
 ## A ementa
 
-**Não escreva apreciação.** A ementa é a tabela de términos da leitura 1 posta em
-palavras, mais a conta da triagem. "Conclusão com 22 asserções fortes, das quais seis
-descem a dado limpo, cinco terminam em dado que as contradiz e duas não têm
-sustentação no trabalho" caracteriza melhor do que qualquer parágrafo de impressão, e
-se confere.
+**Não escreva apreciação.** A ementa diz, em cinco linhas: o que o trabalho mede e
+com que conta, o que ele conclui disso, qual afirmação ainda não se sustenta, e
+quais são as decisões. Nada de términos, cadeias ou contagem de asserções: quem lê
+a ementa não sabe o que é término, e o número de asserções não diz o que o
+trabalho afirma.
 
-Depois dela, a conta: de quantos itens que pedem providência, quantos mudam alguma
-afirmação e quantos não mudam. É a linha mais informativa do relatório.
+Depois dela, uma linha: de quantos itens que pedem providência, quantos mudam
+alguma afirmação e quantos não mudam.
 
 ## Quem escreve
 
@@ -940,7 +946,7 @@ projeção.
 
 **E a frase de mérito tem uma segunda obrigação, que a de defeito não tem: dizer por que aquilo é mérito.** Um defeito se explica sozinho, porque errado é ruim. Uma escolha metodológica bem feita, não: quem lê que "duas categorias do trabalho andam sempre juntas e o autor aponta isso" não sabe qual era o risco, e sem o risco a frase não credita nada. Nomeie o risco evitado, ou o que a escolha permite fazer. `Duas categorias que nunca se separam podem ser uma só, contada duas vezes` é a metade que faltava, e cabe na mesma frase.
 
-O teste é o mesmo das sugestões, aplicado ao contrário: **quem ler só a frase sabe dizer de que coisa do trabalho ela fala e o que se fez com ela.** `O aparato que permite recontar está publicado inteiro, e o núcleo quantitativo do capítulo 3 se reconstrói sem pedir nada ao autor` reprova, porque nenhum dos dois substantivos nomeia coisa alguma. `A base de dados, a expressão de busca, o comando de extração e o protocolo de leitura estão publicados por inteiro, e com eles todas as contas do capítulo 3 foram refeitas e conferiram` passa. Medido em 23/08/2026: em dois relatórios, as quarenta e cinco frases de sugestão nomeavam o objeto e **onze das doze frases de mérito não nomeavam**.
+O teste é o mesmo das sugestões, aplicado ao contrário: **quem ler só a frase sabe dizer de que coisa do trabalho ela fala e o que se fez com ela.** `O aparato que permite recontar está publicado inteiro, e o núcleo quantitativo do capítulo 3 se reconstrói sem pedir nada ao autor` reprova, porque nenhum dos dois substantivos nomeia coisa alguma. `A base de dados, a expressão de busca e o protocolo de leitura estão publicados por inteiro, e com isso a exclusão de cada caso pode ser contestada por quem discordar do critério` passa. Medido em 23/08/2026: em dois relatórios, as quarenta e cinco frases de sugestão nomeavam o objeto e **onze das doze frases de mérito não nomeavam**.
 
 **Encurtar não é a virtude aqui.** Título curto e cifrado dá ao leitor mais trabalho do que título longo e claro, porque o curto ele lê duas vezes e ainda pergunta. Se a escolha for entre precisão e brevidade no título, fica a precisão; a brevidade tem onde caber, que é o corpo do item, onde o leitor já sabe do que se trata.
 

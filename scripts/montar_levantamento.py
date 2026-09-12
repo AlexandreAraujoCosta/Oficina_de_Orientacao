@@ -46,13 +46,40 @@ for fluxo in (sys.stdout, sys.stderr):
 # e a 3 `### C-1`, com hifen. Um padrao sem hifen e sem celula achou 40 codigos
 # onde havia 169, e a contagem saiu certa com o conteudo faltando, que e a forma
 # de erro que nenhuma conferencia posterior apanha.
+# E A REMISSAO EM NEGRITO NAO E DEFINICAO DE ITEM.
+#
+# Uma leitura escreve, no meio da prosa, `**A1, A2 e A3 terminam em FONTE onde
+# precisariam de DADO**`. Isso comeca por `**` seguido de codigo e casava o
+# padrao, de modo que o programa acusava A1, A3, A4 e A5 como repetidos dentro
+# da mesma leitura e se recusava a montar. Medido em 09/09/2026: os quatro
+# estavam definidos uma vez so, numa tabela, e as outras ocorrencias eram
+# remissoes. Contagem certa com conteudo errado, outra vez.
+#
+# O que separa, e vale nas tres escritas: **depois do codigo, a definicao traz um
+# SEPARADOR** (ponto, travessao, dois-pontos, ponto medio, celula de tabela, fim
+# do negrito ou fim da linha); a remissao emenda uma PALAVRA — `**A3 contem, alem
+# disso, ...**`. Exigir o separador resolve os dois casos sem alargar mais nada.
+# E a exigencia do separador vale SO na escrita em negrito. Cabecalho e celula de
+# tabela podem trazer `## PR-2 dois`, com o titulo emendado por espaco, e ali nao
+# ha ambiguidade: prosa nao comeca com `## `. Em `**`, ha, porque frase em negrito
+# no meio do texto comeca do mesmo jeito.
 RE_ITEM = re.compile(
-    r"(?m)^(?:\|[ \t]*|#{2,5}[ \t]*\**[ \t]*|\*\*)([A-Z]{1,2})-?(\d+)\b")
+    r"(?m)^(?:"
+    r"(?:\|[ \t]*|#{2,5}[ \t]*\**[ \t]*)([A-Z]{1,2})-?(\d+)\b"
+    r"|"
+    r"\*\*([A-Z]{1,2})-?(\d+)\b[ \t]*(?=[.:|—–·*]|$)"
+    r")")
 
 
 def cod(m):
-    """O codigo canonico, sem o hifen com que algumas leituras o escrevem."""
-    return m.group(1) + m.group(2)
+    """O codigo canonico, sem o hifen com que algumas leituras o escrevem.
+
+    O padrao tem dois ramos (cabecalho/tabela e negrito), e so um casa por vez:
+    os grupos do outro vem `None`.
+    """
+    letra = m.group(1) or m.group(3)
+    numero = m.group(2) or m.group(4)
+    return letra + numero
 
 LETRAS = [chr(c) for c in range(ord("A"), ord("Z") + 1)]
 

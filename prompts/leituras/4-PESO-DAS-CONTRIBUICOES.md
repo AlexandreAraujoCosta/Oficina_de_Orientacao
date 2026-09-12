@@ -20,9 +20,7 @@ valem**.
   cada uma marcou como contribuição não reivindicada ou resultado inexplorado.
 - `MATERIAL.md`, montado por `scripts/montar_material.py`: o trabalho inteiro na
   ordem, parágrafo por parágrafo, mais o sumário, a tabela de figuras e as notas.
-  **Não vá buscar passagem com `Grep`: ela está aí.** Medido em 08/09/2026, sobre
-  outra leitura: 41 chamadas e 16,1 minutos buscando, contra 18 e 13,7 com tudo num
-  arquivo, e zero buscas.
+  **Não vá buscar passagem com `Grep`: ela está aí.**
 - `extracao/trabalho.txt` e `trabalho.pdf`, onde o `MATERIAL.md` não tiver chegado.
 - **A web.** Use busca para responder à pergunta que o trabalho não responde.
 

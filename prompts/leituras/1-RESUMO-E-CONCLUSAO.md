@@ -32,12 +32,6 @@ extraídas do `.docx` com o parágrafo da legenda de cada uma, o mapa estrutural
 parágrafo sem texto não recebe marcador, e afirmar que um localizador está morto sem
 conferir no arquivo é erro.
 
-**Medido em 08/09/2026**, sobre a mesma leitura e o mesmo trabalho: buscando passagem
-por passagem, 41 chamadas e 16,1 minutos; com tudo num arquivo, 18 chamadas e 13,7
-minutos, **e zero buscas de passagem**. É a mesma economia que a verificação já tinha,
-e ela é da relação e não da busca: o arquivo não repete o parágrafo uma vez por item
-que o cita.
-
 **As imagens vêm à parte, e vêm numa mensagem só.** O `MATERIAL.md` traz o endereço e
 o arquivo de cada figura, e não a figura.
 
@@ -55,15 +49,17 @@ Onde o `MATERIAL.md` não tiver chegado, o material antigo serve e custa mais:
 
 Uma conclusão não é feita só de conclusões. Percorra-a e classifique cada asserção:
 
-- **RETOMADA** — repete problema, objeto ou método, sem afirmar nada de novo.
+- **RETOMADA** — repete problema, objeto ou método, sem afirmar nada de novo. A
+  retomada que já lê o dado como o conceito (o crescimento de uma contagem dito
+  como crescimento do fenômeno) não é retomada: é TESE, e conta.
 - **ACHADO** — afirma o que a pesquisa encontrou no material empírico.
 - **TESE** — afirmação interpretativa ou normativa construída sobre os achados.
 - **ARGUMENTO** — passo que sustenta um achado ou uma tese e não se sustenta sozinho.
 - **DISCUSSÃO** — implicação, impacto possível, agenda.
 - **LIMITAÇÃO** — alcance declarado.
 
-Só **ACHADO** e **TESE** contam. Devolva a lista numerada, cada um com localizador e
-redigido em uma frase. **É a lista de alvos do passo 3.**
+Só **ACHADO** e **TESE** contam. A lista deles, com localizador e uma frase cada,
+vai para o registro, e é a lista de alvos do passo 3.
 
 ## Passo 2 — contra o resumo
 
@@ -78,23 +74,13 @@ Registre, e saiba que esses itens costumam ser inertes para uma banca e úteis p
 autor: marque-os como tal.
 
 **C. Divergência de alcance na mesma afirmação.** Uma generaliza e a outra restringe,
-uma quantifica e a outra não, uma dá um número e a tabela dá outro. **É o achado mais
-valioso**, e exige conferir contra a tabela de onde o número saiu, e não só contra a
-outra peça de texto.
+uma quantifica e a outra não, uma dá um número e a tabela dá outro. Confira contra a
+tabela de onde o número saiu, e só escreva a divergência que muda o que se conclui.
 
 **E o abstract**: não pergunte se ele traduz o resumo, pergunte se o que ele afirma se
 sustenta. Caso medido: um resumo dizia que 68 decisões resultaram de sorteio e o
 abstract dizia `68 judicial decisions were randomly selected`, o que é falso, e não só
 incompleto, porque se sortearam 125 e se excluíram 57 depois.
-
-## Passo 2b — medir o alcance do resumo
-
-Não julgue o resumo aqui: a avaliação por seção o faz. Meça, e entregue três números.
-
-- Quantas asserções fortes da conclusão **não têm contrapartida no resumo**.
-- Quais dos quatro elementos o resumo traz: problema ou objetivo; método, com recorte
-  e tamanho do material; resultados com os números; conclusão.
-- Quantos percentuais o resumo anuncia **sem o denominador**.
 
 ## Passo 3 — caminhar de cada asserção forte até o dado
 
@@ -132,8 +118,9 @@ pergunta, **o que sustenta basta para o que se afirma?**, e é nela que está a
 qualidade da inferência, que é o objeto principal de quem examina.
 
 Para toda cadeia que terminar em DADO, pergunte: **o dado carrega a força da
-asserção?** Quatro modos de não carregar, e os quatro já apareceram nesta bancada
-com o término marcado como bom:
+asserção?** Cinco modos de não carregar; os quatro primeiros apareceram nesta
+bancada com o término marcado como bom, e o quinto entrou por pedido em
+12/09/2026, sem medição:
 
 - **a comparação está condicionada.** Os dois conjuntos comparados foram
   selecionados por um processo que os afeta de modo diferente, e a diferença
@@ -144,6 +131,10 @@ com o término marcado como bom:
   que uma produz a outra.
 - **o desfecho vira intenção.** O dado mede o que o texto faz, e a asserção diz o
   que quem o escreveu quis.
+- **o conceito diz mais do que a contagem conta.** A asserção usa o nome do
+  conceito que o trabalho diz medir, e o dado conta um substituto dele (o evento
+  registrado, o prazo, a citação). O mesmo número admite outra leitura, e a
+  asserção escolhe uma sem dizer o que no desenho a separa das outras.
 
 Onde o dado não carregar, o item **não manda retirar a asserção**: manda descer o
 alcance dela até onde o dado chega, e diz até onde. Caso medido em 05/09/2026: numa
@@ -172,12 +163,12 @@ nenhuma leitura anterior tinha ido além do capítulo e da conclusão.
 **Vá pelas notas que remetem.** Elas dizem qual peça sustenta qual afirmação, e são o
 caminho que o próprio texto abre.
 
-**E cuidado, porque o apêndice pode ser fóssil.** Ele costuma ser a versão anterior do
+**E cuidado, porque o apêndice pode ser a versão velha.** Ele costuma ser a versão anterior do
 procedimento, congelada quando o autor parou de olhar. Contradição entre apêndice e
 corpo tem três leituras, e escolher a errada é acusar o inocente:
 
 - o corpo está errado, e o apêndice mostra o que foi feito;
-- o apêndice é fóssil, e o corpo mostra o que passou a ser feito;
+- o apêndice é a versão velha, e o corpo mostra o que passou a ser feito;
 - o procedimento mudou e nenhum dos dois diz que mudou.
 
 **O discriminador é aritmético: o procedimento do apêndice produz os números que o
@@ -196,7 +187,7 @@ Procure-as, em vez de esperar tropeçar:
 - **Data**: data de consulta, corte temporal ou versão de base anteriores às do corpo.
 - **Aritmética**: rodar o procedimento do apêndice daria outro número.
 
-Quando o apêndice for fóssil, **isso é item, e de outra espécie**: não é erro de conta,
+Quando o apêndice for a versão velha, **isso é item, e de outra espécie**: não é erro de conta,
 é defeito de reprodutibilidade, e vai para a seção dos produtos, porque o que se
 publicou não permite refazer o que se fez.
 

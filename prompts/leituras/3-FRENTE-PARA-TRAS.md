@@ -33,12 +33,6 @@ extraídas do `.docx` com o parágrafo da legenda de cada uma, o mapa estrutural
 parágrafo sem texto não recebe marcador, e afirmar que um localizador está morto sem
 conferir no arquivo é erro.
 
-**Medido em 08/09/2026**, sobre a mesma leitura e o mesmo trabalho: buscando passagem
-por passagem, 41 chamadas e 16,1 minutos; com tudo num arquivo, 18 chamadas e 13,7
-minutos, **e zero buscas de passagem**. É a mesma economia que a verificação já tinha,
-e ela é da relação e não da busca: o arquivo não repete o parágrafo uma vez por item
-que o cita.
-
 **As imagens vêm à parte, e vêm numa mensagem só.** O `MATERIAL.md` traz o endereço e
 o arquivo de cada figura, e não a figura.
 
@@ -53,7 +47,28 @@ Onde o `MATERIAL.md` não tiver chegado, o material antigo serve e custa mais:
 - `extracao/trabalho.txt` — para achar, com `Grep`, o parágrafo em que cada figura é
   discutida.
 
-## Passo 1 — reconstituir as bases, e é o controle de tudo o que vem depois
+## Passo 0 — a medida central, antes de qualquer conta
+
+Antes de abrir figura, e a partir do que o mapa já traz (resumo, introdução,
+conclusão), escreva em três linhas: **o que a contagem central conta** (a unidade e
+o critério de entrada), **que conceito o trabalho diz que ela mede**, e **que outras
+coisas o mesmo número pode estar medindo**. Contar os eventos que uma instituição
+registra pode medir o fenômeno, a disposição da instituição em registrá-lo, ou a
+mudança do critério de registro; contar citações pode medir influência ou hábito
+de citar. Liste as leituras alternativas ainda que o trabalho não as mencione, e
+diga de cada uma o que no desenho a separaria das outras.
+
+**A contagem central é a que a afirmação principal da conclusão usa.** Quando a
+conclusão usa duas, faça o passo para as duas.
+
+**Quando a conclusão depende do conceito, isto é um item de corpo**, e não uma
+pergunta solta: o título nomeia a afirmação que muda, o que fazer pede que o
+trabalho diga o que separa as leituras (ou reduza a afirmação até a que a contagem
+carrega), e a pergunta fica dentro do item. A decisão que ele pede é a primeira do
+relatório. As contas podem fechar todas com o conceito errado, e nenhuma soma acusa
+isso.
+
+## Passo 1 — as bases das comparações que a conclusão usa
 
 Primeiro identifique as inferências centrais e confira se as categorias e a seleção dos casos permitem sustentá-las. Para as comparações que dependem de totais, pergunte: **quantos casos há em cada grupo comparado?** Reconstitua
 os totais a partir das figuras, **por dois caminhos independentes** (por exemplo, a
@@ -108,9 +123,8 @@ poucas mensagens, várias por mensagem.
 endereço.
 
 De cada figura, **sem abrir ainda a prosa que a comenta**: o que ela mostra; o que
-ela **permite afirmar**, incluindo a conta que ela permite e não rotula (soma das
-barras, razão entre categorias, complemento de um percentual, normalização de
-faixas de largura diferente); o que ela **não** permite (o denominador, a unidade
+ela **permite afirmar**, incluindo a conta que ela permite e o texto não faz, quando
+uma afirmação depende dela; o que ela **não** permite (o denominador, a unidade
 contada, o critério de inclusão); e o que só o texto poderia dizer.
 
 **E diga, de cada figura, quando ela não permite item nenhum.** Tela de portal,
@@ -118,22 +132,18 @@ diagrama conceitual e tabela de definições não sustentam afirmação empíric
 todas as figuras renderem achado, o passo está fabricando, e é isso que esta guarda
 existe para pegar.
 
-Medido em 06/09/2026, sobre treze figuras de uma tese, tendo como controle a leitura
-das mesmas figuras feita com a prosa ao lado: o passo cego devolveu cinco achados
-que ela não tinha, entre eles duas faixas de largura diferente tratadas como iguais
-no eixo e uma comparação de contagens brutas entre relatores com tempos de exercício
-muito diferentes. Recusou três das treze. Custou cinco minutos.
-
 ### E a descrição sai em forma de tabela, porque um programa a lê
 
-O que você escrever aqui é a única versão dos números da figura que existirá
-depois. Escrito em prosa, morre neste relatório: a leitura seguinte reabre a
+O que você escrever aqui é a única versão dos números das figuras de que a
+conclusão depende que existirá depois; as demais não têm números na base, e a
+página entregue diz isso. Escrito em prosa, morre neste relatório: a leitura seguinte reabre a
 imagem, a conferência não confere nada e o autor não recebe nada. Escrito na forma
 abaixo, `scripts/base_das_figuras.py` o converte em base de dados, e daí saem
 a conferência da figura contra a prosa e a entrega ao orientando.
 
-Cada figura vira uma seção assim, no `REGISTRO-DADOS.md`, e a forma é obrigatória,
-não é sugestão de estilo:
+Cada figura de que uma afirmação da conclusão depende vira uma seção assim, no
+`REGISTRO-DADOS.md`, e a forma é obrigatória; as demais recebem uma linha, dizendo o
+que mostram e que nada da conclusão depende delas:
 
 ```
 ## Gráfico 7 — a legenda como o trabalho a escreve
@@ -184,34 +194,17 @@ soma 100? Diga o que conferiu.
 **Não faça a aritmética entre figuras aqui.** Some, divida e compare **dentro** de
 cada figura, para o controle da sua própria leitura. As relações entre figuras
 distantes saem de uma passada sobre a base montada, depois, e ali elas saem uma vez.
-Medido em 09/09/2026: quatro leituras que dividiram as figuras de uma dissertação
-entre si deduziram, **três delas separadamente**, o mesmo deslocamento de painéis.
 
 ## Passo 2 — cada figura, contra o que o texto extrai dela
 
-Agora sim com a prosa ao lado, e **o que você anotou no passo 2a não se apaga**: a
-diferença entre o que a figura permite e o que o texto extrai dela é a matéria deste
-passo. Para cada figura, quadro e tabela: o que ela contém, o que o texto tira dela,
-e qual destes cinco estados descreve a relação.
-
-- **BEM USADA** — o texto extrai o que ela sustenta.
-- **SUBEXPLORADA** — o texto extrai menos do que ela permite: afirma sem o
-  denominador, compara sem o intervalo, enuncia ausência sem o teste.
-- **INEXPLORADA** — a figura permite uma afirmação que o texto nunca faz. **É o
-  achado que esta leitura existe para produzir.**
-- **REDUNDANTE** — é transformação aritmética de outra figura. Confira dígito a
-  dígito antes de afirmar. Caso medido: um gráfico era, dígito por dígito, a terceira
-  série de um gráfico anterior, e as duas seções que os comentavam analisavam a mesma
-  variável.
-- **CONTRADIZ** — a figura sustenta o contrário do que o texto afirma dela, ou do que
-  o trabalho afirma noutro ponto.
-
-**O inventário tem uma coluna que vale mais que as outras:** o que esta figura permite
-afirmar que ninguém afirmou. É dela que sai a seção do relatório sobre o que o
-trabalho tem e não reivindica, e ela mora em três lugares que só o conjunto revela.
-
-**A célula que ninguém comentou.** A tabela tem mais células do que a prosa usa.
-Percorra as que sobraram.
+Agora sim com a prosa ao lado, e **o que você anotou no passo 2a não se apaga**. Para
+cada figura, quadro e tabela de que uma afirmação depende, duas perguntas: **o que o
+texto extrai dela além do que ela permite**, e **o que ela permite que o texto nunca
+afirma**. A primeira vira correção; a segunda é o que esta leitura existe para
+produzir, e vai para os itens de contribuição. Figura que só repete outra, ou que o
+texto usa dentro do que ela permite, recebe uma linha no registro e nenhum item,
+salvo quando o texto trata a repetição como confirmação: aí é item, porque a
+conclusão da seção se apoia no dado confirmando a si mesmo.
 
 **O cruzamento que não foi feito.** Não está em figura alguma: aparece como buraco no
 conjunto. Monte a matriz do que foi cruzado com o quê e olhe as células vazias. Só
@@ -226,42 +219,25 @@ item vira sugestão vaga e não serve.**
 
 ## Passo 2b — a narrativa da tabela contra a tabela
 
-É onde os defeitos de maior impacto se concentraram nas medições, e onde a tabela
-costuma estar certa e a prosa errada.
-
 **A ordem é regra, e não é figura por figura.** Leia **todas** as figuras e tabelas
-primeiro, sem ler um parágrafo do trabalho, e monte um inventário seu: por figura, o
-que mede, as categorias, as colunas, a base de cada percentual e os valores, com as
-suas palavras.
+primeiro, sem ler a prosa que as comenta, e monte um inventário seu: por figura, o
+que mede e de que afirmação da conclusão ela é base; os valores, só das que
+sustentam afirmação, na forma do passo 2a.
 
 Três coisas dependem dessa ordem.
 
 **A prosa lida antes faz ler a figura pelos olhos dela**, e a alternância contamina
 cada figura com o parágrafo da anterior.
 
-**Repetição entre figuras distantes só aparece com as duas à vista.** Uma figura que é,
-dígito a dígito, série de outra fica a dezenas de páginas dela, e alternando a
-coincidência passa. Compare o inventário consigo mesmo antes de abrir o texto.
-
 **A estrutura do aparato só se vê com tudo na mesa**: quantas variáveis foram
 coletadas, o que foi cruzado com o quê, e sobretudo o que nunca foi cruzado. É daí que
 sai o passo 4.
 
-Depois compare, frase a frase. Seis modos de falhar, todos medidos:
-
-- **Coluna trocada.** A contagem lida como percentual: onde a tabela dá 19 ocorrências
-  e 27,9%, o texto escreve "19% do corpus", e com o valor certo a ordenação que a
-  própria frase afirma se inverte.
-- **Categorias fundidas.** A tabela separa três e o texto conta duas, e a metade
-  redonda que sobe ao resumo depende dessa fusão.
-- **Linha agregada no lugar da condicional.** O texto afirma que o padrão vale "em
-  ambos os casos", e na linha do subgrupo a ordem das estratégias se inverte.
-- **Nível lido como tendência**, ou o contrário: o gráfico mostra a inclinação e o
-  texto extrai o patamar.
-- **Repetição.** Uma figura é, dígito a dígito, uma série de outra. Confira antes de
-  afirmar, e diga em que arenas ou recortes a coincidência vale.
-- **O que interessa e não foi lido.** A tabela permite o cruzamento que decidiria a
-  questão do capítulo, e o texto não o faz.
+Depois compare, frase a frase, só onde a conclusão usa a figura, e escreva só a
+divergência que muda o que a seção conclui: a contagem lida como percentual que
+inverte uma ordem, a categoria fundida de que uma metade depende, a linha agregada
+que esconde a inversão no subgrupo, o nível lido como tendência. Divergência que não
+muda conclusão nenhuma vai ao registro, e não vira item.
 
 Para cada divergência: o que a tabela dá, o que o texto diz, e **o que muda na
 conclusão da seção com o valor certo.**
@@ -313,12 +289,12 @@ nenhuma leitura anterior tinha ido além do capítulo e da conclusão.
 **Vá pelas notas que remetem.** Elas dizem qual peça sustenta qual afirmação, e são o
 caminho que o próprio texto abre.
 
-**E cuidado, porque o apêndice pode ser fóssil.** Ele costuma ser a versão anterior do
+**E cuidado, porque o apêndice pode ser a versão velha.** Ele costuma ser a versão anterior do
 procedimento, congelada quando o autor parou de olhar. Contradição entre apêndice e
 corpo tem três leituras, e escolher a errada é acusar o inocente:
 
 - o corpo está errado, e o apêndice mostra o que foi feito;
-- o apêndice é fóssil, e o corpo mostra o que passou a ser feito;
+- o apêndice é a versão velha, e o corpo mostra o que passou a ser feito;
 - o procedimento mudou e nenhum dos dois diz que mudou.
 
 **O discriminador é aritmético: o procedimento do apêndice produz os números que o
@@ -337,7 +313,7 @@ Procure-as, em vez de esperar tropeçar:
 - **Data**: data de consulta, corte temporal ou versão de base anteriores às do corpo.
 - **Aritmética**: rodar o procedimento do apêndice daria outro número.
 
-Quando o apêndice for fóssil, **isso é item, e de outra espécie**: não é erro de conta,
+Quando o apêndice for a versão velha, **isso é item, e de outra espécie**: não é erro de conta,
 é defeito de reprodutibilidade, e vai para a seção dos produtos, porque o que se
 publicou não permite refazer o que se fez.
 
@@ -352,12 +328,7 @@ muda** no que o trabalho conclui ou no que ele poderia publicar.
 
 ## Passo 4b — três perguntas que mandam calcular
 
-Elas vêm de uma medição de 05/09/2026 contra os comentários de margem de quem
-orienta, sobre a mesma dissertação. Das doze observações dele que a leitura não
-produziu, **três pediam exatamente a aritmética que ela já executava dezenas de
-vezes noutros pontos do mesmo trabalho**. O que faltava era a pergunta, e não a
-capacidade de fazer a conta. Faça as três em toda série e em toda comparação
-temporal:
+Faça as três em toda série e em toda comparação temporal:
 
 1. **O que mais mudou na mesma janela?** O trabalho credita uma mudança a uma
    causa. Percorra o período e liste o que mais mudou nele, dentro dos próprios
@@ -393,8 +364,9 @@ o localizador antes de julgar qualquer uma, como no passo 1 da leitura do resumo
 
 **A pergunta que abre cada exame é uma só: o dado carrega isto?** E ela tem uma
 forma negativa que é a que mais rende, porque a extração excessiva não parece
-erro: **esta interpretação extrai mais do que o desenho permite?** Quatro modos de
-extrair demais, todos vistos nesta bancada:
+erro: **esta interpretação extrai mais do que o desenho permite?** Cinco modos de
+extrair demais; os quatro primeiros vistos nesta bancada, o quinto entrou por
+pedido em 12/09/2026 e não foi medido:
 
 - **do agregado para o caso**, quando a taxa média vira afirmação sobre cada
   unidade;
@@ -403,7 +375,11 @@ extrair demais, todos vistos nesta bancada:
 - **do subconjunto para o universo**, quando o que se mediu num recorte é dito do
   todo, e às vezes o próprio trabalho declarou o recorte;
 - **do desfecho para a intenção**, quando o que o texto faz vira o que o autor
-  dele quis.
+  dele quis;
+- **do substituto para o conceito**, quando a contagem conta uma coisa (o
+  evento registrado, o prazo, a citação) e a asserção nomeia outra (o conceito
+  que o trabalho diz medir) sem dizer o que no desenho separa as leituras que o
+  mesmo número admite.
 
 Onde a interpretação extrair demais, o item não pede que se retire a
 interpretação: pede que **o alcance dela desça até onde o dado chega**, e diz até
@@ -524,7 +500,9 @@ cabia no prazo.
 **Não invente a explicação alternativa.** O candidato concorrente tem de estar no
 material: nos dados, na narrativa do trabalho, ou na literatura que ele mesmo
 cita. Explicação alternativa trazida de fora sem fonte é onde esta leitura passa a
-inventar, e ela não entra.
+inventar, e ela não entra. **A exceção é a leitura alternativa da medida central**,
+do passo 0: o que mais o mesmo número pode medir entra como pergunta, com o que no
+desenho separaria uma leitura da outra, ainda que o trabalho não a mencione.
 
 ## Três regras
 
@@ -591,7 +569,7 @@ percurso entra no item: nem término, nem estado, nem hipótese caída, nem cont
 de busca, nem o nome do passo que o produziu. O teste: tape o resto do arquivo e
 leia só o item; quem escreveu o trabalho sabe o que abrir e o que fazer.
 
-**`REGISTRO-DADOS.md` traz o percurso, e não vai ao aluno.** Ali ficam as bases reconstituídas, a contagem por estado do passo 2, as tabelas de figura do passo 2a (é este arquivo que `base_das_figuras.py` recebe) e as figuras abertas, as hipóteses que
+**`REGISTRO-DADOS.md` traz o percurso, e não vai ao aluno.** Ali ficam as bases reconstituídas, as duas perguntas do passo 2 para cada figura de que a conclusão depende, as tabelas de figura do passo 2a (é este arquivo que `base_das_figuras.py` recebe) e as figuras abertas, as hipóteses que
 caíram e onde estava o que as salvou, o alcance, e os controles de busca. As listas
 de trabalho dos passos vão ali, e não no arquivo dos itens. É o que a verificação
 e a triagem consultam quando um item pede prova.

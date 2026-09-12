@@ -29,12 +29,6 @@ extraídas do `.docx` com o parágrafo da legenda de cada uma, o mapa estrutural
 parágrafo sem texto não recebe marcador, e afirmar que um localizador está morto sem
 conferir no arquivo é erro.
 
-**Medido em 08/09/2026**, sobre a mesma leitura e o mesmo trabalho: buscando passagem
-por passagem, 41 chamadas e 16,1 minutos; com tudo num arquivo, 18 chamadas e 13,7
-minutos, **e zero buscas de passagem**. É a mesma economia que a verificação já tinha,
-e ela é da relação e não da busca: o arquivo não repete o parágrafo uma vez por item
-que o cita.
-
 **As imagens vêm à parte, e vêm numa mensagem só.** O `MATERIAL.md` traz o endereço e
 o arquivo de cada figura, e não a figura.
 
@@ -116,11 +110,12 @@ Caso medido, para calibrar: uma dissertação analisava a retórica de tribunais
 descumprem o Supremo, e a única retórica que ela não submetia ao mesmo tratamento era
 a do próprio Supremo, cujas decisões estavam no corpus.
 
-## Passo 4 — as referências
+## A referência de que uma premissa depende
 
-O mapa traz a lista. Confira por amostra as citações do corpo contra ela: obra citada
-e ausente da lista, ano divergente entre a citação e a entrada, autoria trocada.
-**Só interessa a que toca peça de que o argumento depende.**
+O aparato bibliográfico inteiro é do programa que o operador roda, e vai ao anexo.
+O que é seu é uma coisa só: quando uma premissa de que o argumento depende se apoia
+numa obra, confira essa obra contra a lista (ano, autoria, e se a entrada é a obra
+que sustenta aquilo). Só essa, e só ela vira item.
 
 ## Siga as notas até o apêndice e o anexo
 
@@ -132,12 +127,12 @@ nenhuma leitura anterior tinha ido além do capítulo e da conclusão.
 **Vá pelas notas que remetem.** Elas dizem qual peça sustenta qual afirmação, e são o
 caminho que o próprio texto abre.
 
-**E cuidado, porque o apêndice pode ser fóssil.** Ele costuma ser a versão anterior do
+**E cuidado, porque o apêndice pode ser a versão velha.** Ele costuma ser a versão anterior do
 procedimento, congelada quando o autor parou de olhar. Contradição entre apêndice e
 corpo tem três leituras, e escolher a errada é acusar o inocente:
 
 - o corpo está errado, e o apêndice mostra o que foi feito;
-- o apêndice é fóssil, e o corpo mostra o que passou a ser feito;
+- o apêndice é a versão velha, e o corpo mostra o que passou a ser feito;
 - o procedimento mudou e nenhum dos dois diz que mudou.
 
 **O discriminador é aritmético: o procedimento do apêndice produz os números que o
@@ -156,7 +151,7 @@ Procure-as, em vez de esperar tropeçar:
 - **Data**: data de consulta, corte temporal ou versão de base anteriores às do corpo.
 - **Aritmética**: rodar o procedimento do apêndice daria outro número.
 
-Quando o apêndice for fóssil, **isso é item, e de outra espécie**: não é erro de conta,
+Quando o apêndice for a versão velha, **isso é item, e de outra espécie**: não é erro de conta,
 é defeito de reprodutibilidade, e vai para a seção dos produtos, porque o que se
 publicou não permite refazer o que se fez.
 

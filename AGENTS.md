@@ -360,8 +360,10 @@ diferentes, a verificação, a triagem e a redação, mais `VEREDITO.md` para a 
 `ESTADO.md` traz o desenho congelado, a medição que sustenta cada escolha e onde parou
 cada trabalho.
 
-**`prompts/ALBERTO.md` é o relatório rápido:** uma leitura, o mesmo formato de oito
-partes, e uma revisão quando roda no agente. Cola numa conversa de chat.
+**`prompts/ALBERTO.md` é o relatório rápido:** uma leitura, o mesmo formato de nove
+partes, e uma revisão quando roda no agente. Cola numa conversa de chat. **O que é
+operação (programas, revisão, modelo, custo) está em `prompts/OPERADOR-ALBERTO.md`**
+desde 10/09/2026, e no agente os dois vão juntos: `scripts/gerar_agente.py` os concatena.
 
 **`prompts/LUIS.md` foi aposentado em 03/09/2026** e não roda sobre trabalho
 executado: devolveu dois itens e nenhum de conteúdo numa dissertação inteira, porque

@@ -286,8 +286,9 @@ def main():
             "# Correções que não mudam nenhuma afirmação"
         anx = "\n".join(
             [cabecalho, "",
-             "São %d, e nenhuma delas altera o que o trabalho afirma: são acabamento, "
-             "grafia, remissão e numeração. **Todas estão marcadas na margem do "
+             "São %d, e nenhuma delas altera o que o trabalho afirma: parte só torna "
+             "conferível o que já se afirma, e o resto é acabamento, grafia, remissão e "
+             "numeração. **Todas estão marcadas na margem do "
              "arquivo `.docx` comentado**, no parágrafo exato, com a providência "
              "escrita no balão. A lista abaixo serve de índice do que você vai "
              "encontrar lá, e não pede leitura." % len(titulos), ""]

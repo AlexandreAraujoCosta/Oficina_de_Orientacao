@@ -284,7 +284,7 @@ verdadeiro junto. Continua no lugar por causa da leitura de projeto de pesquisa,
 que ainda depende dele.
 
 **E parar no Alberto é uso legítimo, não meia análise.** O Alberto lê uma vez e
-escreve o relatório inteiro, no mesmo formato de oito partes, em um a três
+escreve o relatório inteiro, no mesmo formato de nove partes, em um a três
 minutos. O que ele entrega é menos, com justificação mais rala, e sem inventar.
 Para ficar por aí:
 

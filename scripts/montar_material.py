@@ -93,8 +93,60 @@ def figuras(docx, extracao):
     return r.stdout, None
 
 
+# QUALQUER titulo de nivel dois fecha a secao anterior, e nao so outro titulo de
+# figura. Sem isso, a secao "Quadro 2", que nao tem endereco, engolia a secao
+# seguinte inteira e se apropriava do endereco dela: no controle, o Quadro sem
+# endereco saiu endereçado em [P999], que era da lista do fim.
+RE_SECAO_QUALQUER = re.compile(r"^##\s+(.*?)\s*$", re.M)
+RE_EH_FIGURA = re.compile(r"^(Gr[áa]fico|Figura|Tabela|Quadro|Imagem)\b", re.I)
+RE_FIG_END = re.compile(r"\*\*Endere[cç]o\.?\*\*\s*[^\n]*?\[?P(\d+)\]?")
+RE_CAMPO_LEGENDA = re.compile(r"^\*\*Legenda e fonte declarada\.?\*\*.*?(?=\n\*\*|\Z)",
+                              re.M | re.S)
+
+
+def blocos_pa(caminho):
+    """Le o relatorio da leitura de figuras e devolve {P da legenda: texto PA}.
+
+    O PA e prosa escrita por quem leu a imagem, e nao pelo autor do trabalho.
+    Por isso ele **nao entra na extracao** e nao ganha numero proprio: ele mora
+    num arquivo companheiro e so e fundido aqui, sob pedido, com o numero da
+    legenda a que pertence. Assim nenhum dos programas que leem a extracao o ve,
+    e nada precisa ser retirado no fim. Retirada que precisa acontecer e
+    retirada que um dia nao acontece.
+
+    O campo da legenda sai do bloco: ele repete o que ja esta no paragrafo
+    imediatamente acima, no proprio texto do trabalho.
+    """
+    txt = io.open(caminho, encoding="utf-8", errors="replace").read()
+    cortes = [(m.start(), m.end(), m.group(1)) for m in RE_SECAO_QUALQUER.finditer(txt)]
+    fora, sem_endereco = {}, []
+    for k, (ini, fim_cab, titulo) in enumerate(cortes):
+        if not RE_EH_FIGURA.match(titulo):
+            continue
+        fim = cortes[k + 1][0] if k + 1 < len(cortes) else len(txt)
+        corpo = txt[fim_cab:fim].strip()
+        m = RE_FIG_END.search(corpo)
+        if not m:
+            sem_endereco.append(titulo)
+            continue
+        n = int(m.group(1))
+        corpo = RE_CAMPO_LEGENDA.sub("", corpo).strip()
+        fora.setdefault(n, []).append((titulo, corpo))
+    return fora, sem_endereco
+
+
+def texto_pa(titulo, corpo, numero):
+    return ("[PA%s] LEITURA DA IMAGEM — não é texto do trabalho. Escrita por quem "
+            "abriu a figura, antes de ler a prosa que a comenta. Não cite como "
+            "sendo do autor.\n\n%s\n\n%s\n" % (numero, titulo, corpo))
+
+
 def autoteste():
     falhas = []
+    for corpo in ("40% dos casos", "40%% literal", "%s e %d", "sem percentual"):
+        resultado = texto_pa("Figura 1", corpo, 12)
+        if not resultado.startswith("[PA12]") or not resultado.endswith(corpo + "\n"):
+            falhas.append("a inserção PA alterou o conteúdo da figura")
     import tempfile
     ext = ("#### [P1] 1. Introducao\n\n[P2] Texto do primeiro paragrafo.\n\n"
            "[P3] 2.1 Uma subsecao\n\n[P4] Outro paragrafo.\n\n"
@@ -118,6 +170,35 @@ def autoteste():
         # CONTROLE POSITIVO: paragrafo comum nao pode virar titulo
         if 2 in ts or 4 in ts:
             falhas.append("toma paragrafo de texto por titulo")
+
+        # OS BLOCOS PA: le a secao de figura, casa pelo endereco da legenda,
+        # tira o campo que repete a legenda, e RECUSA a secao sem endereco.
+        rel = Path(tempfile.gettempdir()) / "_mat_figs.md"
+        rel.write_text(
+            "# cabecalho que nao e figura\n\n"
+            "## Gráfico 7 — um título\n\n"
+            "**Endereço.** [P812], parágrafo da legenda.\n\n"
+            "**Legenda e fonte declarada.** Isto repete o parágrafo do trabalho.\n\n"
+            "**O que é.** Série temporal.\n\n"
+            "## Quadro 2 — sem endereço nenhum\n\n"
+            "**O que é.** Um quadro.\n\n"
+            "## Lista 2 — o que ninguém afirmou\n\n"
+            "**Endereço.** [P999].\n", encoding="utf-8")
+        try:
+            pa, sem = blocos_pa(str(rel))
+            if list(pa) != [812]:
+                falhas.append("os blocos PA saíram em %r, e o controle diz [812]" % list(pa))
+            if 812 in pa and "Série temporal" not in pa[812][0][1]:
+                falhas.append("o bloco PA perdeu o corpo da seção")
+            if 812 in pa and "repete o parágrafo" in pa[812][0][1]:
+                falhas.append("o bloco PA manteve o campo da legenda, que duplica o texto")
+            if sem != ["Quadro 2 — sem endereço nenhum"]:
+                falhas.append("não acusou a figura sem endereço: %r" % sem)
+        finally:
+            try:
+                rel.unlink()
+            except Exception:
+                pass
     finally:
         try:
             p.unlink()
@@ -132,6 +213,12 @@ def main():
     ap.add_argument("extracao")
     ap.add_argument("-o", "--saida", required=True)
     ap.add_argument("--mapa", help="o MAPA.md, se já existir, para entrar no cabeçalho")
+    ap.add_argument("--com-figuras", dest="com_figuras", action="append", default=[],
+                    metavar="FIGURAS.md",
+                    help="funde a leitura das imagens no corpo, como blocos [PA###] "
+                         "logo depois da legenda. Repetível. DESLIGADO por padrão: "
+                         "o PA é prosa de quem leu a imagem, não do autor, e não "
+                         "pode entrar sem que se peça.")
     a = ap.parse_args()
 
     f = autoteste()
@@ -192,11 +279,34 @@ def main():
         out.append(io.open(a.mapa, encoding="utf-8", errors="replace").read())
         out.append("")
 
+    pa, pa_sem, pa_orfaos = {}, [], []
+    for caminho in a.com_figuras:
+        if not Path(caminho).exists():
+            print("  !! --com-figuras: %s nao existe" % caminho)
+            return 2
+        d, sem = blocos_pa(caminho)
+        for n, blocos in d.items():
+            pa.setdefault(n, []).extend(blocos)
+        pa_sem.extend(sem)
+    pa_orfaos = sorted(n for n in pa if n not in ps)
+
+    if pa:
+        out.append("## A leitura das imagens está fundida no corpo\n")
+        out.append("Os blocos marcados `[PA###]` **não são texto do trabalho**: são a "
+                   "descrição de quem abriu a figura, antes de ler a prosa que a "
+                   "comenta. Cada um vem logo depois do parágrafo da legenda a que "
+                   "pertence, e leva o número dela. Não cite um `[PA###]` como sendo "
+                   "do autor, e não o conte em nenhuma contagem sobre o trabalho.\n")
+        out.append("São %d figuras descritas, em %d arquivo(s) de leitura.\n"
+                   % (len(pa), len(a.com_figuras)))
+
     out.append("=" * 78)
     out.append("O TRABALHO, NA ORDEM")
     out.append("=" * 78 + "\n")
     for n in sorted(ps):
         out.append("[P%d] %s\n" % (n, ps[n]))
+        for titulo, corpo in pa.get(n, []):
+            out.append(texto_pa(titulo, corpo, n))
     if notas:
         out.append("-" * 78)
         out.append("AS NOTAS DE RODAPÉ\n")
@@ -209,6 +319,18 @@ def main():
     print("  %d parágrafos, %d nota(s), %d título(s)%s"
           % (len(ps), len(notas), len(ts),
              ", tabela de figuras incluída" if figs else ", SEM tabela de figuras"))
+    if a.com_figuras:
+        n_blocos = sum(len(v) for v in pa.values())
+        print("  %d bloco(s) [PA###] fundidos em %d parágrafo(s) de legenda."
+              % (n_blocos, len(pa)))
+        if pa_sem:
+            print("  %d seção(ões) de figura SEM endereço, e por isso fora do corpo:"
+                  % len(pa_sem))
+            for t in pa_sem[:8]:
+                print("     %s" % t[:78])
+        if pa_orfaos:
+            print("  %d endereço(s) de figura que não existem na extração: %s"
+                  % (len(pa_orfaos), ", ".join("P%d" % n for n in pa_orfaos[:12])))
     return 0
 
 

@@ -38,9 +38,20 @@ item, e escreva no item a conta que refez. É o passo que a leitura rápida mais
 é o único lugar em que pular custa o achado inteiro e não só o endereço.
 
 **O passo 2 da ordem de leitura abre pelo aparato empírico lido de trás para
-diante** porque é ali que mora o que a leitura rápida mais deixa passar: a conta em
-tabela que a prosa não repete, e a pergunta anterior a ela, o que exatamente está
-sendo contado.
+diante** porque é ali que estão a conta em tabela que a prosa não repete e a
+pergunta anterior a ela, o que exatamente está sendo contado.
+
+**A medida central, antes de abrir a primeira figura.** Escreva em três linhas o
+que a contagem central conta (a unidade e o critério de entrada), que conceito o
+trabalho diz que ela mede, e que outras coisas o mesmo número pode estar medindo.
+Contar os eventos que uma instituição registra pode medir o fenômeno, a disposição
+da instituição em registrá-lo, ou a mudança do critério de registro. Liste as
+leituras alternativas ainda que o trabalho não as mencione, e diga de cada uma o
+que no desenho a separaria das outras. A contagem central é a que a afirmação
+principal da conclusão usa; quando são duas, faça para as duas. Quando a conclusão
+depende do conceito, isto é um item de corpo, com a pergunta dentro dele, e a
+decisão que ele pede é a primeira da parte 2. As contas podem fechar todas com o
+conceito errado, e nenhuma soma acusa isso.
 
 ## A ordem de leitura, e ela decide o que você vai achar
 
@@ -58,12 +69,9 @@ apêndice e a seção de resultados **antes** do texto que os comenta. Anote o q
 dados mostram, com endereço, sem olhar o que o autor diz que eles mostram. Depois
 leia o comentário.
 
-Este é o passo que mais rende, e é o que se perde na ordem normal.
-
 De cada figura, antes de saber o que o texto diz que ela mostra: o que ela
-mostra, o que ela **permite afirmar** (inclusive a conta que ela permite e não
-rotula: soma das barras, razão entre categorias, complemento de um percentual), o
-que ela **não** permite (o denominador, a unidade contada, o critério de inclusão)
+mostra, o que ela **permite afirmar** (inclusive a conta que ela permite e o texto
+não faz, quando uma afirmação depende dela), o que ela **não** permite (o denominador, a unidade contada, o critério de inclusão)
 e o que só o texto poderia dizer. **E diga, de cada uma, quando ela não permite
 item nenhum:** figura que ilustra a interface de um sítio não sustenta afirmação
 empírica, e preencher todas é sinal de que se está fabricando.
@@ -97,22 +105,11 @@ frase corresponde à figura, se a categoria contada é a definida. **Este confer
 que ele infere.** O trabalho de quem examina não é avaliar o que se diz, e sim a
 qualidade da inferência: a pergunta é se as conclusões se inferem dos dados.
 
-**Separe o que se diz do que se infere.** O que o trabalho afirma sobre o campo,
-sobre o instituto, sobre o estado da discussão, se prova na literatura. O que ele
-infere do material que reuniu se prova na análise dos dados ou das fontes que ele
-próprio apresenta. **Asserção de inferência apoiada só em fonte está apoiada no
-lugar errado**, ainda que a fonte exista e seja boa: quer dizer que o trabalho foi
-buscar fora a sustentação do que ele mesmo se propôs a medir.
-
-**Enumere as interpretações antes de julgar qualquer uma**, com o localizador de
-cada. Interpretação é toda passagem em que o trabalho vai além de descrever o que
-mediu: *aumentou porque*, *isso indica*, *o dado mostra que*, *revela uma
-tendência*, *sugere que*.
-
 **A pergunta que abre cada exame é se o dado carrega aquilo, e a forma que mais
 rende é a negativa: esta interpretação extrai mais do que o desenho permite?**
-Quatro modos de extrair demais, os quatro medidos nesta bancada em cadeias que
-terminavam em dado e passavam por boas:
+Cinco modos de extrair demais; os quatro primeiros medidos nesta bancada em
+cadeias que terminavam em dado e passavam por boas, e o quinto entrado por pedido
+em 12/09/2026, sem medição:
 
 - **a comparação está condicionada.** Os dois conjuntos comparados foram
   selecionados por um processo que os afeta de modo diferente, e a diferença
@@ -123,6 +120,10 @@ terminavam em dado e passavam por boas:
   que uma produz a outra.
 - **o desfecho vira intenção.** O dado mede o que o texto faz, e a asserção diz o
   que quem o escreveu quis.
+- **o conceito diz mais do que a contagem conta.** O dado conta um substituto (o
+  evento registrado, o prazo, a citação) e a asserção nomeia o conceito que o
+  trabalho diz medir, sem dizer o que no desenho separa as leituras que o mesmo
+  número admite.
 
 ### Ao descontar uma subclasse, desconte dos dois lados
 
@@ -182,7 +183,10 @@ precisa**, e o trabalho as tem?
 
 **Não invente a explicação alternativa.** O candidato concorrente tem de estar no
 material: nos dados, na narrativa do trabalho, ou na literatura que ele mesmo
-cita. Explicação trazida de fora sem fonte é onde esta leitura passa a inventar.
+cita. Explicação trazida de fora sem fonte é onde esta leitura passa a inventar. A
+exceção é a leitura alternativa da medida central: o que mais o mesmo número pode
+medir entra como pergunta, com o que no desenho separaria uma leitura da outra,
+ainda que o trabalho não a mencione.
 
 ### Diga o que custa sustentar cada inferência
 
@@ -360,23 +364,18 @@ tirou dela.
 buscou, em que período, e que regra decidiu a entrada e a saída. Saturação e bola de
 neve também são regra e se declaram.
 
-**Número que só existe na figura.** O valor está impresso dentro de um gráfico e
-nunca aparece em prosa, de modo que o leitor não pode citá-lo nem conferi-lo.
-
 **Percentual sem o denominador.** 12,5% que são um caso em oito, e a frase os trata
 como tendência.
 
 **Denominador errado.** A taxa é calculada sobre o conjunto inteiro quando o próprio
 trabalho declara que o fenômeno só podia ocorrer num subconjunto.
 
+**Duas contagens do mesmo conjunto que não fecham, quando uma afirmação usa uma
+delas como universo.** O total declarado num parágrafo e a distribuição por
+categoria noutro; some a distribuição contra o total só nesse caso.
+
 **Ano atípico lido como regra.** A série tem um ano fora da curva, e a generalização
 é feita sobre ele.
-
-**Citação no corpo sem entrada na lista, e entrada sem uso no corpo.** As duas
-direções, e as duas contam.
-
-**Duas contagens do mesmo conjunto que não fecham.** O total declarado num parágrafo
-e a distribuição por categoria noutro.
 
 **Ressalva declarada e não honrada.** O trabalho promete não emitir juízo de
 regularidade, ou não inferir causa, ou não representar o universo, e depois faz
@@ -394,7 +393,7 @@ uma amostra dele, teste de significância responde pergunta que ninguém fez.
 **Vocabulário de significância sem teste.** *Significativamente maior* num trabalho
 que não roda teste nenhum.
 
-**Três perguntas que mandam calcular, e a leitura não as faz sozinha.** Medido em 05/09/2026 contra os comentários de margem de quem orienta: das doze observações dele que a leitura não produziu, três pediam a aritmética que ela já executava dezenas de vezes noutros pontos do mesmo trabalho. Falta a pergunta, e não a capacidade de fazer a conta. *O que mais mudou na mesma janela*, além do que se está creditando pela mudança? *O que exatamente entra na categoria contada*, e a afirmação sobrevive a outro corte dela? *O que a explicação oferecida pelo próprio texto prediz que se veria nos dados?* A terceira é diferente de apontar que dado e explicação estão misturados: é testar a explicação com o material já publicado.
+**Três perguntas que a leitura não faz sozinha.** *O que mais mudou na mesma janela*, além do que se está creditando pela mudança? *O que exatamente entra na categoria contada*, e a afirmação sobrevive a outro corte dela? *O que a explicação oferecida pelo próprio texto prediz que se veria nos dados?* A terceira é testar a explicação com o material já publicado.
 
 **Recortes temporais que não coincidem.** A base vai de um período, a análise A de
 outro e a análise B de um terceiro, sem que o texto os distinga.
@@ -456,10 +455,9 @@ confirmada com os dados disponíveis é resultado, e não faz perder degrau. O q
 perder é afirmar a hipótese sem que os dados a carreguem.
 
 **Trabalho descritivo tem poucas inferências, ou nenhuma**, e ali a régua muda de
-apoio sem afrouxar: confira se **cada descrição corresponde ao dado**, se o número
-escrito na prosa é o da tabela, se a frase que lê a figura diz o que a figura
-mostra, se a categoria contada é a que a definição delimita, se o total fecha com
-as parcelas. Descrição que não confere com o dado move o veredito do mesmo modo que
+apoio sem afrouxar: confira se a descrição que o trabalho apresenta como resultado
+corresponde ao dado, e se a categoria contada é a que a definição delimita; número
+trocado que não muda a descrição é anexo. Descrição que não confere com o dado move o veredito do mesmo modo que
 a inferência que o dado não carrega. Depois dessa, a pergunta que resta é se a
 descrição é ela própria a contribuição, e o que a mede é o que o trabalho passa a
 permitir dizer e antes não se dizia.
@@ -510,7 +508,9 @@ resolve e o que muda na conclusão conforme a resposta. Monte-a depois de escrev
 os itens, agrupando pela pergunta e não pela seção; item que não pertence a
 decisão nenhuma fica fora daqui, e isso é o esperado. É a parte que o autor usa
 para decidir o que o trabalho afirma. Os itens que uma decisão resolve continuam
-nas correções, com os seus códigos.
+nas correções, com os seus códigos. **A ordem é a do que mais muda:** a decisão da
+medida central, quando houver, vem primeiro; depois as que mudam uma conclusão;
+por último as de alcance.
 
 **3. O que está sólido.** Os pontos demonstrados que ajudam o autor a preservar o que funciona, sem quantidade obrigatória.
 **Cada um abre com um código, `F1`, `F2`**, e as contribuições da parte 4 com `C1`,
@@ -520,7 +520,10 @@ escolha é o ato relevante da seção: o autor precisa saber onde este trabalho 
 forte, e uma lista de dezoito virtudes não discrimina nada. Cada ponto traz o
 endereço, e o elogio nomeia a operação e a consequência dela, sem adjetivo. *Publicou
 a classificação caso a caso, e por isso um terceiro reconta sem pedir nada ao autor*
-diz mais do que *trabalho notável*.
+diz mais do que *trabalho notável*. Conta que fecha e tabela que se reconta não
+são pontos fortes: são o esperado, e cabem numa linha. Ponto forte é a escolha de
+desenho que afasta um risco, dita com o risco; o apêndice entra por essa porta
+quando a escolha do que publicar afasta um risco nomeado.
 
 **Não escreva que uma prática é rara ou incomum no campo.** É afirmação empírica
 sobre a produção da área, e você leu um trabalho.

@@ -208,7 +208,14 @@ def abertura(pars, n, limite=46):
     if not (1 <= n <= len(pars)):
         return None
     s = " ".join(pars[n - 1].text.split())
-    if len(s) < 12:
+    # PARAGRAFO CURTO TEM DE ENTRAR INTEIRO, E NAO SUMIR.
+    #
+    # O teto de doze caracteres existia para nao endereçar por uma palavra
+    # solta, mas devolver None deixava o `[P216]` cru chegar a margem: um
+    # codigo de uma numeracao que o autor nao tem. Medido em 09/09/2026, e o
+    # paragrafo era "A ser feito", que e justamente o que o item aponta.
+    # Paragrafo curto e endereço melhor que os longos, porque cabe inteiro.
+    if not s:
         return None
     if len(s) <= limite:
         return s
@@ -222,6 +229,26 @@ def abertura(pars, n, limite=46):
     return s[:corte if corte > 20 else limite]
 
 
+def corta_em_palavra(s, teto):
+    """Corta na palavra, e nunca no meio dela.
+
+    Cortar por caractere produzia "APENDICE B - PLANILHA DE REGISTRO E CODI",
+    que quem recebe procura no sumario e nao acha. E deixava o rotulo terminando
+    em preposicao ou artigo, o que ja tinha sido corrigido uma vez para os
+    titulos sem numero e voltou pelos com numero.
+    """
+    s = s.strip(" .;,-–—·")
+    if len(s) <= teto:
+        return s
+    corte = s[:teto].rsplit(" ", 1)[0]
+    while corte and len(corte.rsplit(" ", 1)[-1]) <= 3 and " " in corte:
+        corte = corte.rsplit(" ", 1)[0]
+    return (corte or s[:teto]).rstrip(" .;,-–—·")
+
+
+RE_APENDICE = re.compile(r"^(AP[ÊE]NDICE|ANEXO)\s+[A-Z0-9IVX]", re.I)
+
+
 def mapa_secoes(pars):
     """Para cada paragrafo, a secao em que ele esta.
 
@@ -230,15 +257,35 @@ def mapa_secoes(pars):
     encontra."""
     mapa, atual = {}, None
     for p in pars:
-        if p.level is not None and p.text.strip():
-            s = " ".join(p.text.split())
+        s = " ".join(p.text.split()) if p.text else ""
+        # APENDICE E ANEXO ENTRAM MESMO SEM ESTILO DE TITULO.
+        #
+        # Num trabalho medido em 09/09/2026, "APENDICE B" e "APENDICE C" vinham
+        # sem estilo, e por isso nao contavam como titulo: todo paragrafo das
+        # duas pecas herdava o ultimo titulo real antes delas, que era "4.
+        # Diretrizes Operacionais para os Codificadores", do Apendice A.
+        # Sessenta e dois localizadores de vinte e seis itens saiam com "em 4",
+        # e quem procurasse "4" ia parar na secao errada.
+        if RE_APENDICE.match(s):
+            atual = corta_em_palavra(s, 40)
+            mapa[p.idx] = atual
+            continue
+        if p.level is not None and s:
             m = re.match(r"^(\d+(?:\.\d+)*)", s)
             # Cortar em 24 caracteres deixava o nome terminando em preposicao
             # ou conjuncao ("em Perfil decisorio por", "em Comparando criticas
             # e"), e quem recebeu procurou no sumario uma secao com esse nome,
             # que nao existe. Corta-se antes da ultima palava curta.
             if m:
-                atual = m.group(1)
+                # O NUMERO SOZINHO NAO LOCALIZA NADA. "em 4" manda o autor
+                # procurar um "4" no sumario; "em 4. Diretrizes Operacionais"
+                # se confere sozinho, e delata o rotulo errado quando ele
+                # aparece debaixo de um paragrafo que nao e daquela secao.
+                resto = s[len(m.group(1)):].lstrip(" .-–—·")
+                if resto:
+                    atual = "%s. %s" % (m.group(1), corta_em_palavra(resto, 28))
+                else:
+                    atual = m.group(1)
             elif len(s) > 24:
                 corte = s[:24].rsplit(" ", 1)[0]
                 while corte and len(corte.rsplit(" ", 1)[-1]) <= 3:

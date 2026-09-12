@@ -102,6 +102,11 @@ Um item pode ainda **ENCOLHER**: sustenta-se em parte, e a parte que cai vai dit
 
 - Antes de dizer que o trabalho não faz alguma coisa, **procure a passagem em que ele
   faz**, e registre que procurou e onde.
+- O item da medida central (o que a contagem conta contra o conceito que o
+  trabalho diz medir) **não cai por o trabalho não mencionar a leitura
+  alternativa**. O que se confere é se a contagem conta o que o item diz e se o
+  conceito é o que o trabalho nomeia; a alternativa é pergunta dentro do item, e
+  sobrevive como tal.
 - Antes de apontar deriva de sentido de uma categoria, procure a passagem em que o
   trabalho declara que mudou o sentido.
 - Não exija do trabalho precisão acima da que ele mesmo publica.
