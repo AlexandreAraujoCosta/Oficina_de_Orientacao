@@ -57,6 +57,17 @@ TIPOS = {
         "pedido for uma leitura do Alberto, uma analise geral, ou um parecer sobre "
         "dissertacao, tese ou monografia ja escrita.",
     ),
+    # Braco de medicao, desde 13/09/2026: o Alberto com a ordem de leitura trocada
+    # (o que foi feito antes do que foi prometido). Mesmo operador, mesmo modelo.
+    # Nao substitui o Alberto; existe para ser rodado contra ele no mesmo trabalho.
+    "warat-realizado": (
+        ("prompts/WARAT-REALIZADO.md", "prompts/OPERADOR-ALBERTO.md"),
+        "opus",
+        "Braco de medicao da oficina: a analise geral do Alberto com a ordem de "
+        "leitura trocada (descreve o que a pesquisa realizou antes de ler resumo, "
+        "introducao e conclusao, e le as duas pontas contra essa descricao). Use "
+        "so quando o pedido nomear o Warat realizado ou a rodada de medicao.",
+    ),
 }
 
 FERRAMENTAS = "Read, Write, Edit, Glob, Grep, Bash, PowerShell, WebSearch, WebFetch"

@@ -1717,3 +1717,57 @@ fila, sem ordem de executar: a ficha do leitor de códigos para lista e título 
 P na margem; a contradição entre o anexo de 10/09 e o falsificador NADA de 12/09;
 qual contagem a regra da medida central põe no topo; e a repetição dos braços Warat e
 Sonnet com pedido de duas linhas, contaminados em 10/09.
+
+---
+
+## 13/09/2026 (noite) — o Warat realizado: as pontas lidas contra o que foi feito
+
+**Espécie:** pedido do orientador, sem medição. Nenhum prompt publicado muda: entra
+um segundo braço de medição, gerado por programa a partir do `ALBERTO.md`.
+
+**O caso que motivou.** Num TCC de mestrado profissional, documental, com 36
+unidades codificadas em apêndice, o relatório do Luis de 09/09 tinha cada pedaço da
+incongruência entre introdução, método e resultados como item ou decisão, e não a
+frase que os junta; e a avaliação capítulo a capítulo chamou de núcleo a seção que o
+autor intitulou resultados, quando o que foi feito está no Apêndice B. Diagnóstico:
+o que falta não é ordem, é uma descrição do que a pesquisa realizou, produzida antes
+de julgar e usada como referência pelas duas pontas. Proposta inteira em
+`PROPOSTA-20260913-pontas-contra-o-realizado.md`.
+
+**O que muda.** `scripts/gerar_warat.py` ganha `--variante realizado`, que grava
+`prompts/WARAT-REALIZADO.md`: o `ALBERTO.md` com a seção "A ordem de leitura"
+trocada (artefatos; depois a descrição do que foi feito, em sete campos, com o
+capítulo de método lido por último; depois resumo, introdução e conclusão lidos
+contra a descrição; cruzamento; caminho inverso; inferência) e uma seção nova no
+relatório, "O que o trabalho fez", com teto de doze linhas. A seção nova tem 1.190
+palavras contra 438 da antiga (+752, cerca de 10% do prompt). Uma substituição
+declarada fora da seção: a remissão ao "passo 2" do aparato empírico passa a
+"passo 1". `scripts/gerar_agente.py` ganha o tipo `warat-realizado` (Opus, mesmo
+operador). `scripts/faixas_localizadores.py` conta localizadores por faixa, com
+autoteste, para o falsificador da paráfrase. A variante antiga (`WARAT.md`) sai
+idêntica ao que era, conferido pelo próprio gerador.
+
+**O que se espera, em número, e o que mostraria que foi inútil:** a tabela da
+seção 8 da proposta, sobre o TCC de 09/09, contra o Luis daquele dia e o Alberto
+rodado na mesma rodada, por voz cega. Em uma linha: a frase de síntese aparece como
+decisão ou item de corpo, a peça dos resultados na seção 5 é o apêndice, dois terços
+dos localizadores da descrição estão em resultados e apêndices, e a relevância no
+corpo não cai mais do que a variação medida em 13/09 (quatro itens). Inútil se a
+lista de itens sair igual à do Alberto em outra ordem, ou se a descrição citar o
+capítulo de método em vez dos artefatos.
+
+**As três perguntas.** (1) A regra produziria o caso: percorrido no papel, sim; o
+papel não vale. (2) O que deixa de passar: a busca no corpo por promessa, que a
+descrição pode omitir; guarda mantida (não executada exige busca com controle). (3)
+Onde repete: o Alberto já lia o aparato antes da prosa; o que a variante acrescenta
+é a descrição como referência e a leitura das pontas contra ela.
+
+**Um acidente de árvore, registrado porque a causa não foi achada.** Às 17h19 de
+13/09, depois do commit `fd29229` das 15h40, este arquivo e `leituras/ESTADO.md`
+apareceram na árvore de trabalho com a versão anterior ao commit (a ficha de 13/09
+sumira; só remoções no diff). Os programas de 10/09 em `D:\Claude\Oficinas`
+(`recuperar_orientacao_20260910.py`) não rodaram nesse horário. Restaurados por
+`git restore` em 13/09 à noite. Quem retomar e vir a ficha de 13/09 faltando de novo
+sabe que não é a primeira vez.
+
+**Rodou?** Não. Protocolo em `RODADA-20260914-warat-realizado.md`.
