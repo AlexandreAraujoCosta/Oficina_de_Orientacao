@@ -562,16 +562,8 @@
   .shell h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
   .shell h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
-  /* a medida vale para todo texto corrido, .shell p, .shell li, .shell dd { max-width: var(--measure); }
-  /* ---- os cartoes {
-    border: 1px solid var(--rule-firm);
-    border-left: 3px solid var(--cor);
-    background: var(--surface);
-    border-radius: 0 3px 3px 0;
-    padding: 1.3rem 1.4rem 1.2rem;
-    margin: 0 0 1.1rem;
-    max-width: var(--measure);
-  }
+  /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
+  .shell p, .shell li, .shell dd { max-width: var(--measure); }
     /* Os dois paragrafos da ficha sao o mesmo comentario, e vao na mesma fonte,
      no mesmo corpo e na mesma cor. */
   .byline p, .byline .author, .byline .affil, .byline .assist, .byline .fina {

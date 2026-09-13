@@ -165,6 +165,23 @@ def confere(caminho):
         if k not in escuro_t:
             faltas.append("--%s existe no tema claro e nao no escuro" % k)
 
+    # 5d. comentario que engole regra. Um /* que nao fecha antes da regra seguinte
+    # apaga essa regra sem erro nenhum no navegador. Em 06/09/2026 isso tirava a
+    # medida de linha de oficina.html e oficina-anexo.html, as duas conformes aqui.
+    i = 0
+    while True:
+        a = css.find("/*", i)
+        if a < 0:
+            break
+        b = css.find("*/", a + 2)
+        if b < 0:
+            faltas.append("comentario aberto que nunca fecha: %s" % " ".join(css[a:a + 60].split()))
+            break
+        dentro = css[a + 2:b]
+        if "/*" in dentro or "{" in dentro:
+            faltas.append("comentario engole regra: %s" % " ".join(css[a:a + 70].split()))
+        i = b + 2
+
     # 6. restos do sistema antigo, que passam despercebidos por serem parecidos
     for velho in ("#eef0ef", "#e4e7e5", "#141c24", "#3e6b7a", "#93969D",
                   "Constantia,"):
@@ -192,6 +209,20 @@ def main():
         sys.exit("RECUSADO: o controle positivo passou, e a conferencia nao esta enxergando.")
     os.remove(tmp)
     print("  controle positivo: passou")
+
+    # Segundo controle, o do comentario: abrir um comentario sem fecha-lo, logo
+    # antes da primeira regra de corpo, tem de ser acusado por essa regra.
+    sujo2 = exemplo.replace("  body {", "  /* comentario sem fecho\n  body {", 1)
+    if sujo2 == exemplo:
+        sys.exit("RECUSADO: nao consegui montar o controle do comentario.")
+    fd, tmp = tempfile.mkstemp(suffix=".html")
+    os.close(fd)
+    io.open(tmp, "w", encoding="utf-8").write(sujo2)
+    acusou = [f for f in confere(tmp) if f.startswith("comentario")]
+    os.remove(tmp)
+    if not acusou:
+        sys.exit("RECUSADO: o comentario sem fecho passou, e a conferencia nao o enxerga.")
+    print("  controle do comentario: passou")
 
     ruim = 0
     for caminho in sys.argv[1:]:

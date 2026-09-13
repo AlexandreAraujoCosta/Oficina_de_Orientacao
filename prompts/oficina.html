@@ -317,7 +317,8 @@
   .shell h2 { font-family: var(--serif); font-size: var(--t-h2); font-weight: 700; line-height: 1.2; }
   .shell h3 { font-family: var(--serif); font-size: var(--t-h3); font-weight: 700; line-height: 1.2;
     letter-spacing: normal; text-transform: none; color: var(--ink); }
-  /* a medida vale para todo texto corrido, .shell p, .shell li, .shell dd { max-width: var(--measure); }
+  /* a medida vale para todo texto corrido, e nao so para o que esta em secao */
+  .shell p, .shell li, .shell dd { max-width: var(--measure); }
 
   /* ---- os cartoes, na forma da pagina das Oficinas Academicas ---- */
   .cartao {
