@@ -19,7 +19,16 @@ relatório**, que passou a nove partes no Alberto e seis seções no Luis. O Alb
 ficou separado em `ALBERTO.md` (análise) e `OPERADOR-ALBERTO.md` (operação). A
 régua de relevância está em `prompts/CLASSIFICAR-RELEVANCIA.md` e
 `scripts/relevancia.py`; a linha de base, 10 itens relevantes em 75, está em
-`MUDANCAS.md`. **Nada disto rodou ainda.**
+`MUDANCAS.md`.
+
+**Rodou em 12 e 13/09/2026**, uma execução de cada ferramenta, sobre a dissertação
+que motivou a mudança de 12/09; o resultado inteiro está em `MUDANCAS.md`, ficha de
+13/09. Em uma linha por mudança: a porta de entrada subiu a relevância do corpo no
+Alberto (53% para 91%) e baixou no Luis (83% para 71%); o item na forma final zerou
+a voz de processo nos itens crus e não mudou a compreensibilidade, que já estava
+acima de 90%; a pergunta da medida central subiu nos dois e não chegou à primeira
+decisão, que ficou com a outra contagem do trabalho. Dispararam três falsificadores,
+e um deles contradiz o anexo criado em 10/09.
 
 ## 0. O que mudou em 03/09/2026
 

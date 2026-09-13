@@ -1600,3 +1600,120 @@ idêntica em todos.
 
 **Espécie, dita pela crítica:** título vazio e parêntese vêm de defeito medido; P
 e `--decisoes` vêm da convenção de nomes, sem medida própria.
+
+---
+
+## 13/09/2026 — o que a rodada de medição das mudanças de 10 e 12/09 mostrou
+
+**O que rodou.** Os prompts de `71a1207`, sem alteração durante a rodada, sobre a
+dissertação de mestrado em direito, empírica (68 decisões codificadas, cerca de 146
+páginas), que motivou a mudança de 12/09. Os dois braços, uma execução de cada: o
+Alberto (`ALBERTO.md` + `OPERADOR-ALBERTO.md`) e o Luis (leituras 1 a 6, levantamento,
+retorno à verificação e reintegração). A comparação é com os relatórios das duas
+ferramentas de 06/09 sobre o mesmo trabalho. Três medidas, todas por voz cega que
+não recebeu o trabalho, com o relatório sem nome e com código sorteado; plano,
+régua e falsificadores escritos antes, fora do git.
+
+### Medida 1: relevância (`CLASSIFICAR-RELEVANCIA.md`, contador de `8151a25`)
+
+| | Alberto 06/09 | Alberto novo | Luis 06/09 | Luis novo |
+|---|---|---|---|---|
+| relevantes, relatório inteiro | 9/35 (26%) | 10/29 (34%) | 19/23 (83%) | 10/24 (42%) |
+| superfície, relatório inteiro | 17/35 (49%) | 14/29 (48%) | 0/23 (0%) | 7/24 (29%) |
+| relevantes no corpo | 9/17 (53%) | 10/11 (91%) | 19/23 (83%) | 10/14 (71%) |
+| mudam conclusão | 0 | 3 | 4 | 5 |
+
+- **Falsificador de 10/09 manhã** (superfície no corpo acima de um terço, ou itens de
+  conclusão caem): **não dispara em nenhum braço.** Nenhum corpo tem item de
+  superfície, e os de conclusão sobem.
+- **Falsificador de 12/09** (a fração NADA não cai): **dispara nos dois.** No Alberto,
+  49% para 48%; no Luis, 0% para 29%. Os itens NADA estão todos nas listas de
+  acabamento do anexo que a mudança de 10/09 criou, e o falsificador foi escrito
+  sobre o relatório inteiro. **As duas fichas se contradizem**: uma manda o
+  acabamento para o anexo do mesmo relatório, a outra mede o relatório inteiro.
+  Fica disparado; reescrevê-lo para o corpo depois do resultado seria ajustar a
+  régua.
+- **No corpo, os braços andaram em direções opostas:** o Alberto sobe de 53% para
+  91%, com 11 itens em vez de 17; o Luis cai de 83% para 71%, com 14 em vez de 23.
+  Uma execução de cada, e a queda do Luis é de quatro itens CONFERE no corpo.
+
+### Medida 2: compreensibilidade dos itens crus (`COMPREENSIBILIDADE.md`)
+
+| leitura | 05/09: passa, relida, língua | nova: passa, relida, língua |
+|---|---|---|
+| 1 | 92%, 26%, 34% | 95%, 26%, 32% |
+| 2 | 93%, 50%, 79% | 100%, 42%, 29% |
+| 3 | 92%, 38%, 50% | 100%, 44%, 50% |
+
+- **Falsificador de 10/09 tarde** (itens crus abaixo de dois terços): **não dispara, e
+  não disparava na linha de base.** A linha de base que a ficha declarava ("zero
+  linhas do levantamento abrem por verbo") media outra coisa. Nesta dissertação a
+  medida estava no teto antes da mudança.
+- **Voz de processo nos itens crus:** 0 de 61 nas três leituras novas. Passa. O
+  detector marcou quatro itens, e os quatro eram vocabulário do trabalho ("Passo
+  2", "instância de controle").
+- **O ganho é de língua, e numa leitura só:** na leitura 2, de 79% para 29%.
+- Os leitores das leituras novas avisam que toda ação depende de `[Pn]`; sem
+  conversão em página na entrega, todos os itens falham por endereço, nos dois
+  formatos.
+
+### Medida 3: posição da pergunta sobre o que a contagem de procedências mede
+
+| | 06/09 | novo |
+|---|---|---|
+| Luis | D5 de 6, com alternativa | Decisão 3 de 5, com alternativa |
+| Alberto | não aparece | S7, 7º de 11 no corpo, com alternativa, fora das decisões |
+
+- **Falsificador de 12/09** (a pergunta não é a primeira decisão, com alternativas):
+  **dispara nos dois.** A pergunta sobe nos dois e não chega ao topo.
+- **Nos dois, a primeira decisão é outra pergunta de medida central:** o que a
+  contagem de estratégias mede ("marcas presentes no texto das decisões cassadas,
+  ou o modo como os tribunais conduzem a desobediência?"). É a família que em 10/09
+  o benchmark registrava como fora de todo prompt. Fica fora da conta, porque a
+  régua foi fixada sobre as procedências; a pergunta para a regra é qual contagem
+  vai ao topo quando a tese se apoia em duas.
+
+### Pontos fortes (voz cega sobre os quatro)
+
+Conta que fecha: Alberto 1 de 6 e 1 de 5; Luis 2 de 6 e 0 de 4. **O falsificador de
+12/09 ("no máximo metade") passa nos novos, e já passava nos antigos.**
+
+### O que a rodada não mede, e o que a contaminou
+
+- **Uma execução de cada braço, sobre o trabalho que motivou as mudanças.** Duas
+  execuções da mesma leitura se sobrepuseram em 42% em 09/09. Só diferença grande se
+  lê, e passar aqui não mostra que a regra generaliza.
+- **As três levas entram juntas**, e os efeitos não se separam.
+- **O primeiro Alberto leu o plano da rodada**, que estava na pasta de trabalho, com a
+  régua da medida 3. Foi descartado e rodou de novo em pasta isolada. As leituras 1
+  e 4 rodaram com o plano na pasta e não declaram se o abriram; a 2 declara que não.
+  O leitor de compreensibilidade da leitura 2 viu, no meio do trabalho, que as outras
+  conferências existiam.
+- **Limite de sessão** interrompeu a leitura 5 e o Alberto isolado; os dois foram
+  retomados pela mesma voz, e o tempo deles não se mede.
+- **Tempos medidos:** leituras 1, 2, 3 e 4 em 12, 16, 17,6 e 7,2 min; leitura 6 em
+  23,9 min mais 2,4 de reintegração; retorno à verificação em 9,0 min.
+
+### Defeitos de instrumento achados, e o destino
+
+- **`da_prosa` falha de novo no relatório do Luis novo:** lê 25 de 44 códigos, porque
+  as pequenas correções vêm em lista (`- **S19.**`) e quatro contribuições têm título
+  em negrito acima de 120 caracteres. É o falsificador do conserto de 12/09
+  disparando. A regra de contagem sobre o bloco `.itens.json` foi fixada antes da
+  classificação; `relevancia.py` sozinho teria dado 59% e 0% nesse relatório. **Pede
+  ficha própria.**
+- **`lista_corretor.py` e `conferir_bloco.EXECUTAVEIS` não têm P:** os itens da leitura
+  2 não chegam à margem. Registrado em 12/09, não consertado.
+- **`contagem.py` não reconhece o formato da extração** usada (`[rótulo] Pn`), igual
+  em 05/09.
+- **A leitura 6 declarou duas conferências próprias sem controle válido:** a medida
+  "sem verbo de operação" acusou o item de controle, e a busca de decalques rodou sem
+  controle.
+
+### O que a rodada libera
+
+A pergunta da unidade contada, suspensa até esta rodada sair, pode voltar à mesa. Na
+fila, sem ordem de executar: a ficha do leitor de códigos para lista e título longo;
+P na margem; a contradição entre o anexo de 10/09 e o falsificador NADA de 12/09;
+qual contagem a regra da medida central põe no topo; e a repetição dos braços Warat e
+Sonnet com pedido de duas linhas, contaminados em 10/09.
