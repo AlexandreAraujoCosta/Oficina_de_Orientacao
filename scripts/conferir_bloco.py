@@ -46,8 +46,14 @@ for fluxo in (sys.stdout, sys.stderr):
 # titulo (`### S12. ...`), negrito abrindo linha (`**SC7.** ...`) e negrito depois
 # de ponto final, que e como um dos assistentes agrupa itens de acabamento.
 RE_TITULO = re.compile(r"^#{2,5}[ \t]*\**[ \t]*([A-Z]{1,2}\d+)\b[.,:—–·|\-]?[ \t]*(.*)$", re.M)
+# O item pode abrir uma linha de lista (`- **S19.** ...`), que e como a lista de
+# pequenas correcoes do Luis sai desde 10/09/2026. Em 13/09 o leitor perdia todos
+# os itens dessa lista e o relatorio saia com 25 codigos em 44. O marcador de lista
+# (traco, mais, ou numero com ponto) entra como prefixo opcional; o asterisco de
+# lista fica de fora, porque colide com o negrito.
 RE_NEGRITO = re.compile(
-    r"(?:^[ \t]*|(?<=[.!?])[ \t]+)\*\*([A-Z]{1,2}\d+)[.,:]?\*\*[ \t]*([^\n]{0,90})", re.M)
+    r"(?:^[ \t]*(?:[-+]|\d+[.)])?[ \t]*|(?<=[.!?])[ \t]+)"
+    r"\*\*([A-Z]{1,2}\d+)[.,:]?\*\*[ \t]*([^\n]{0,90})", re.M)
 
 # E a forma em que o codigo e o titulo estao DENTRO do mesmo negrito:
 #     **C1 - Os dados contradizem Godoy e Araujo (2022).**
@@ -56,9 +62,14 @@ RE_NEGRITO = re.compile(
 # O titulo atravessa a quebra de linha em tres relatorios do acervo, porque o
 # editor quebra em 88 colunas. Sem admitir UMA quebra, quatro itens de
 # contribuicao apareciam como "so no bloco", que e acusacao falsa.
+# O titulo dentro do negrito passava de 120 caracteres em quatro contribuicoes
+# de um relatorio de 13/09/2026, e as quatro sumiam. O teto sobe a 240 por linha
+# e o titulo pode atravessar ate duas quebras, que e o que um titulo de tres
+# linhas a 88 colunas pede. O marcador de lista entra como no RE_NEGRITO.
 RE_NEGRITO_JUNTO = re.compile(
-    r"(?:^[ \t]*|(?<=[.!?])[ \t]+)\*\*([A-Z]{1,2}\d+)[ \t]*[.,:\u2014\u2013\u00b7|\-]+[ \t]*"
-    r"([^*\n]{3,120}(?:\n[^*\n]{1,120})?)\*\*", re.M)
+    r"(?:^[ \t]*(?:[-+]|\d+[.)])?[ \t]*|(?<=[.!?])[ \t]+)"
+    r"\*\*([A-Z]{1,2}\d+)[ \t]*[.,:\u2014\u2013\u00b7|\-]+[ \t]*"
+    r"([^*\n]{3,240}(?:\n[^*\n]{1,240}){0,2})\*\*", re.M)
 
 # E o parentese que fecha o negrito: `**C1 (pede uma conta).**` e como um
 # relatorio de 06/09/2026 abre os quatro itens de uma secao, e os quatro sumiam.
@@ -73,7 +84,12 @@ RE_NEGRITO_PARENTESE = re.compile(
 # A distincao importa porque o item de contribuicao, o de forca e a questao em
 # aberto nunca vao a margem: quando eles faltam no bloco, o relatorio entregue
 # nao perde nada, e dizer "nao chega a margem" seria falso.
-EXECUTAVEIS = ("S", "D", "SC", "A")
+# `P` e o prefixo da leitura 2 do Luis desde 10/09/2026, e faltava aqui e em
+# lista_corretor.py: item P que chegasse ao relatorio final nao iria a margem.
+# Ate 14/09/2026 nenhum relatorio entregue trazia P (a redacao renumera em S), de
+# modo que o defeito nunca se materializou; a entrada e preventiva e vale para o
+# dia em que a redacao conservar o prefixo, como a ficha de 10/09 manda.
+EXECUTAVEIS = ("S", "D", "SC", "A", "P")
 
 
 def executavel(codigo):
@@ -134,6 +150,8 @@ def autoteste():
     # as tres escritas de codigo tem de ser reconhecidas, e a terceira foi a que
     # produziu vinte e seis acusacoes falsas em tres relatorios do acervo
     import tempfile
+    longo = ("Um titulo de contribuicao que atravessa tres linhas porque o editor "
+             "quebra em oitenta e oito colunas e o texto passa de cento e vinte")
     exemplo = (u"### S1 - Um titulo de correcao\n\n"
                u"**C1 - Os dados contradizem uma fonte no ponto que motivou a parte.**\n\n"
                u"**D4. Uma conta que esta nos numeros de [P440]\n"
@@ -142,14 +160,20 @@ def autoteste():
                u"## S9\n\nO titulo deste veio na linha de baixo.\n\n"
                u"**C5 (pede uma conta).** A tabela traz os dois fluxos.\n\n"
                u"**F8 (1.274) contra F9 no mesmo ponto.**\n\n"
-               u"**S8 (quanto a [P439]) CONFERE.**\n")
+               u"**S8 (quanto a [P439]) CONFERE.**\n\n"
+               # os dois casos de 13/09/2026: item em linha de lista, e titulo longo
+               u"- **S19.** Uma gralha em [P12], em lista.\n"
+               u"- **S20.** Outra, em [P13].\n\n"
+               u"**C9 - " + longo[:88] + "\n" + longo[88:] + " caracteres.**\n")
     p = Path(tempfile.gettempdir()) / "_bloco_autoteste.md"
     p.write_text(exemplo, encoding="utf-8")
     try:
         achados = da_prosa(str(p))
-        for c in ("S1", "C1", "D4", "SC7", "S9", "C5"):
+        for c in ("S1", "C1", "D4", "SC7", "S9", "C5", "S19", "S20", "C9"):
             if c not in achados:
                 falhas.append("nao reconhece a escrita de %s: %r" % (c, sorted(achados)))
+        if "caracteres" not in achados.get("C9", ""):
+            falhas.append("perde o titulo longo em negrito: %r" % achados.get("C9"))
         # CONTROLE NEGATIVO: remissao e veredito com parentese nao sao item
         for c in ("F8", "S8"):
             if c in achados:

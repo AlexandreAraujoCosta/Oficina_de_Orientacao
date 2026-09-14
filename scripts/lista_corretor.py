@@ -108,7 +108,11 @@ def localizadores(texto):
 # usam `SC`. As duas convivem: renumerar item para caber no programa e o que a
 # regra de estabilidade de codigo proibe. Medido em 06/09/2026: sete itens de
 # anexo de um relatorio ficavam fora da lista, e a saida so dizia "28 itens".
-EXECUTAVEIS = ("S", "D", "SC", "A")
+# `P` e o prefixo da leitura 2 do Luis desde 10/09/2026 (espelho de
+# conferir_bloco.EXECUTAVEIS, e os dois mudam juntos). Ate 14/09/2026 nenhum
+# relatorio entregue trazia P, porque a redacao renumera em S; a entrada e
+# preventiva.
+EXECUTAVEIS = ("S", "D", "SC", "A", "P")
 
 
 def fronteiras(texto):

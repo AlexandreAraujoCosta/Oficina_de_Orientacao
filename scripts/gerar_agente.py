@@ -68,6 +68,16 @@ TIPOS = {
         "introducao e conclusao, e le as duas pontas contra essa descricao). Use "
         "so quando o pedido nomear o Warat realizado ou a rodada de medicao.",
     ),
+    # Braco de controle, desde 14/09/2026 como tipo de agente: o Alberto na ordem
+    # do proprio trabalho (prompts/WARAT.md), que existe para medir se a ordem de
+    # leitura muda o que se acha. Item 5 da FILA-20260914.md.
+    "warat": (
+        ("prompts/WARAT.md", "prompts/OPERADOR-ALBERTO.md"),
+        "opus",
+        "Braco de controle da oficina: a analise geral do Alberto lida na ordem do "
+        "proprio trabalho, do comeco ao fim, com a analise identica. Use so quando "
+        "o pedido nomear o Warat ou a rodada de medicao.",
+    ),
     # Braco de medicao, desde 14/09/2026: o Alberto com o material repartido por
     # passo (pontas, artefatos, apoio), para nao reler o material inteiro a cada
     # passo. Analise identica. Item 9 da FILA-20260914.md.

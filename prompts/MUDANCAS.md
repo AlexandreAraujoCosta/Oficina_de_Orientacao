@@ -2049,3 +2049,123 @@ descrição do par entregue, que é o defeito que ela existe para corrigir.
 
 **Rodou?** Não se aplica aos dois primeiros (controle plantado passa). O terceiro
 não muda o que se mede.
+
+---
+
+## 14/09/2026 (tarde) — itens 1 e 2 da fila: o leitor de códigos e o prefixo P
+
+**Espécie:** defeito medido (item 1, segunda falha do leitor depois do conserto
+de 12/09) e defeito registrado que nunca se materializou (item 2). Pedido do
+orientador: fazer o que não depende dele.
+
+**Item 1, o leitor de códigos.** `conferir_bloco.da_prosa` perdia o item que abre
+linha de lista (`- **S19.** ...`) e o título em negrito acima de 120 caracteres;
+em 13/09 leu 25 dos 44 códigos do relatório novo do Luis. Mudam duas expressões:
+`RE_NEGRITO` e `RE_NEGRITO_JUNTO` aceitam marcador de lista (traço, mais, número
+com ponto; o asterisco fica de fora porque colide com o negrito), e o título em
+negrito sobe a 240 caracteres por linha com até duas quebras. Os dois casos
+entraram plantados no autoteste (dois itens em lista e um título de três linhas),
+e o autoteste passa. **Regressão sobre os 28 relatórios com bloco do acervo,
+leitor antigo contra novo:** nenhum código perdido em nenhum; ganhos em dois
+relatórios. No Luis de 13/09, onze códigos a mais (C1, C2, C3 e C5, os títulos
+longos; S19 a S25, a lista de pequenas correções). Num Warat realizado de 14/09,
+dois (`F1` e `SA3`, conferidos abaixo). Os outros 26 saem idênticos.
+
+**O que muda nas frações de 13/09:** a ficha daquele dia diz que a regra de
+contagem já tinha sido fixada sobre o bloco `.itens.json`, e não sobre a prosa;
+as frações publicadas não mudam. O que muda é que `relevancia.py` deixa de acusar
+os onze como "só na classificação".
+
+**Item 2, o prefixo P.** `EXECUTAVEIS` em `conferir_bloco.py` e em
+`lista_corretor.py` ganha `P`, o prefixo da leitura 2 desde 10/09. Conferido
+antes de mudar: nenhum relatório entregue traz item `P` (o de 13/09 tem S, Q, C e
+F; a redação renumera em S), de modo que o defeito registrado em 12 e 13/09
+nunca chegou a uma margem. A entrada é preventiva e vale para o dia em que a
+redação conservar o prefixo, como a ficha de 10/09 manda; o teste do corretor
+com item `P` fica para esse dia, porque não há relatório com que fazê-lo.
+
+**Falsificador do item 1:** `relevancia.py` acusar mais de dois códigos por
+relatório entre os só da prosa e os só da classificação, na próxima rodada.
+
+**Um resto que o item 1 expôs e não conserta:** o bloco `.itens.json` do Luis de
+13/09 escreve as questões como `Questão 1` a `Questão 8`, e o leitor de prosa não
+as casa com código nenhum, de modo que `conferir_bloco.py` as acusa como "só no
+bloco". É convenção do passo 6 do Luis, e pede ficha própria.
+
+---
+
+## 14/09/2026 (tarde) — item 8 da fila: as páginas do Alberto e do Miro
+
+**Espécie:** manutenção de programa (a página do Alberto ficava sem conferidor) e
+republicação. Pedido do orientador.
+
+**A página do Alberto.** `prompts/analisador.html` carrega o `ALBERTO.md` numa
+constante de JavaScript, e depois da mudança da ressalva (ficha anterior) ficou
+com a versão velha, sem que nada acusasse; até aqui a página era atualizada à mão
+ou por programa de ocasião. Entra `scripts/atualizar_pagina_alberto.py`, que troca
+a constante pelo `ALBERTO.md` atual e diz se havia diferença (`--conferir` só diz),
+com controle plantado ao carregar (a troca põe o texto novo, tira o velho, e o que
+entra volta igual ao passar por JSON). Conferido antes: a página diferia do prompt
+a partir do caractere 44.370 (7.859 palavras contra 7.875); depois, igual.
+`publicar.py` regerou o conjunto estático e `paginas/alberto.html` traz a ressalva
+nova. **O Artifact da página do Alberto continua com a versão velha:** republicar
+pede ler o Artifact inteiro na sessão, e o de 176 KB fica para a sessão seguinte.
+
+**A página do Miro.** As três expressões retiradas em 12/09 já não estão na página
+em disco, no prompt gerado, no código nem no Artifact publicado (zero ocorrências
+nos quatro; sem controle positivo possível, porque não sobrou versão com elas). O
+que o Artifact não tinha era o reparo de 13/09 nas seis variáveis de cor do modo
+claro, que estava só no disco. Republicado a partir de
+`pagina_prompt_portatil.html`, depois de ler o Artifact inteiro (1.699 linhas).
+**O que fica com o orientador:** mover o pin da versão compartilhada, porque quem
+tem o link continua vendo a versão fixada até isso ser feito.
+
+---
+
+## 14/09/2026 (tarde) — item 7 da fila: o piloto da leitura 2, por cotejo cego
+
+**Espécie:** medição, pendente desde `REVISAO-20260910.md`. Uma execução de cada
+lado, e não é experimento limpo: as duas leituras são da mesma dissertação (a de
+13/09, mestrado em direito, empírica, 68 decisões), feitas em 01/09 com o prompt
+de então e em 12/09 com o prompt das levas de 10 e 12/09, de modo que a
+comparação mede as duas levas juntas e mais o que mudou de máquina entre as
+datas. A rodada de 13/09 já cobria a leitura 2 por compreensibilidade (100%,
+relida 42%, língua 29%); faltava o cotejo item a item, que é este.
+
+**O protocolo.** As duas leituras copiadas para `rodadas/m-leitura2-cego/`
+com código sorteado (`L-QM4R`, a de 01/09; `L-7HXZ`, a de 12/09), o nome da
+estudante e do mapa apagados por programa (conferido: zero ocorrências), mais o
+`MATERIAL.md`. Uma voz Opus que não escreveu nenhuma pareou por achado (não por
+código nem por termo), classificou os exclusivos pela régua de relevância, abriu
+no material os CONCLUSAO e ALCANCE, e contou a providência executável. Ela testou
+os próprios buscadores antes de reportar e registrou quatro hipóteses caídas,
+uma delas decisiva: a leitura de 01/09 escreve localizador sem colchete, e a
+busca com colchete teria acusado três ausências falsas.
+
+| | leitura de 01/09 | leitura de 12/09 |
+|---|---:|---:|
+| itens | 18 (em 16 títulos) | 24 |
+| pares com a outra | 8 | 8 |
+| exclusivos | 10 | 16 |
+| exclusivos CONCLUSAO + ALCANCE | 6 | 6 |
+| desses, sustentados no material | 4 inteiros, 2 em parte | 3 inteiros, 3 em parte |
+| desses, não sustentados | 0 | 0 |
+| itens com providência executável | 10 | 24 |
+
+**O que se lê.** A leitura nova não perdeu achado relevante (seis exclusivos que
+mudam conclusão ou alcance de cada lado, nenhum derrubado) e mudou o formato: o
+campo obrigatório de providência saiu em 24 de 24, e os oito itens da antiga sem
+providência executável são os blocos descritivos do que ficou de fora. É o
+efeito que a ficha de 10/09 (tarde) esperava do item na forma final, agora
+medido item a item sobre o mesmo trabalho. O "sustentado em parte" é, nos cinco
+casos, excesso do item sobre o que o parágrafo diz, dos dois lados. Duas
+divergências de fato entre as leituras (o grau de estruturação; a recusa de
+avaliar a correção das decisões), com a conferência dando razão parcial à de
+12/09 na segunda.
+
+**Alcance da voz cega:** as duas leituras inteiras e cerca de setenta parágrafos
+do material; não abriu as decisões, as planilhas, o PDF nem o corpo da Tabela 6.
+Registro em `COTEJO-LEITURAS.md`, na mesma pasta, fora do git.
+
+**Fecha a pendência** "piloto da leitura 2 com material já analisado" da revisão
+de 10/09. Não fecha a pergunta de qual leva produziu o quê.
