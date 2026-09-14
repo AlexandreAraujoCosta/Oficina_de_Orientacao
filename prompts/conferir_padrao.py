@@ -165,6 +165,22 @@ def confere(caminho):
         if k not in escuro_t:
             faltas.append("--%s existe no tema claro e nao no escuro" % k)
 
+    # 5e. fontes em toda a pagina, e nao so no primeiro bloco. Ate 13/09/2026
+    # este programa lia so o CSS antes do primeiro </style>, e a pagina do Miro
+    # passava "conforme" com seis Georgia escritas a mao e quinze tamanhos fora
+    # da regua no segundo bloco e em atributos style=.
+    todo_css = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", s, re.S | re.I))
+    todo_css += "\n" + "\n".join(re.findall(r'\sstyle="([^"]*)"', s))
+    todo_css = re.sub(r"/\*.*?\*/", "", todo_css, flags=re.S)
+    for fam in re.findall(r"font-family:\s*([^;}\"]+)", todo_css):
+        f = fam.strip()
+        if not (f.startswith("var(--") or f == "inherit"):
+            faltas.append("fonte escrita a mao: %s" % " ".join(f.split())[:50])
+    for tam in re.findall(r"font-size:\s*([^;}\"]+)", todo_css):
+        f = tam.strip()
+        if not (f.startswith("var(--t-") or f.startswith("clamp(") or f == "inherit"):
+            faltas.append("tamanho fora da regua (em qualquer bloco): %s" % f)
+
     # 5d. comentario que engole regra. Um /* que nao fecha antes da regra seguinte
     # apaga essa regra sem erro nenhum no navegador. Em 06/09/2026 isso tirava a
     # medida de linha de oficina.html e oficina-anexo.html, as duas conformes aqui.
@@ -223,6 +239,18 @@ def main():
     if not acusou:
         sys.exit("RECUSADO: o comentario sem fecho passou, e a conferencia nao o enxerga.")
     print("  controle do comentario: passou")
+
+    # Terceiro controle: fonte e tamanho escritos a mao fora do primeiro bloco
+    # tem de ser acusados.
+    sujo3 = exemplo + '<p style="font-size: .95rem; font-family: Georgia">x</p>'
+    fd, tmp = tempfile.mkstemp(suffix=".html")
+    os.close(fd)
+    io.open(tmp, "w", encoding="utf-8").write(sujo3)
+    acusou3 = [f for f in confere(tmp) if "escrita a mao" in f or "em qualquer bloco" in f]
+    os.remove(tmp)
+    if len(acusou3) < 2:
+        sys.exit("RECUSADO: fonte e tamanho escritos a mao fora do primeiro bloco passaram.")
+    print("  controle das fontes em toda a pagina: passou")
 
     ruim = 0
     for caminho in sys.argv[1:]:
