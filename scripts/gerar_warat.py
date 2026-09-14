@@ -255,31 +255,86 @@ SUBSTITUICOES_REALIZADO = (
      "diante**"),
 )
 
+# ---------------------------------------------------------------- partes
+
+CABECA_PARTES = """<!-- GERADO por scripts/gerar_warat.py --variante partes, a partir de
+     prompts/ALBERTO.md. NAO EDITE ESTE ARQUIVO. Ele existe para medir uma coisa
+     so, e a medida depende de ele ser identico ao ALBERTO em tudo menos em tres
+     frases da secao de ordem, que dizem em que arquivo cada passo le.
+     Para mudar qualquer outra regra, mude no ALBERTO e gere de novo. -->
+
+# Warat: a mesma leitura, com o material repartido por passo
+
+Este prompt é o do Alberto com **três frases acrescentadas** à seção da ordem de
+leitura, e nada mais: cada passo lê o arquivo da parte que lhe cabe
+(`MATERIAL-pontas.md`, `MATERIAL-artefatos.md`, `MATERIAL-apoio.md`), em vez de
+reler o material inteiro a cada passo. A análise é a mesma, palavra por palavra.
+
+Ele existe para responder a uma pergunta de 14/09/2026: **ler o material inteiro
+quatro vezes, uma por passo, compra alguma coisa?** Medido naquele dia, era mais da
+metade dos tokens de uma execução.
+
+"""
+
+# (texto no ALBERTO, dentro da secao da ordem; texto na variante)
+DENTRO_PARTES = (
+    ("**1. O que o trabalho promete.** Só o resumo, a introdução e a conclusão.",
+     "**1. O que o trabalho promete.** Só o resumo, a introdução e a conclusão, que "
+     "estão em `MATERIAL-pontas.md`: leia esse arquivo, e só ele, neste passo."),
+    ("**2. O que ele entrega, lido de trás para diante.** Abra as tabelas, as figuras, o\n"
+     "apêndice e a seção de resultados **antes** do texto que os comenta.",
+     "**2. O que ele entrega, lido de trás para diante.** Está em "
+     "`MATERIAL-artefatos.md`, que traz o corpo depois da introdução, os apêndices, o "
+     "sumário e a tabela de figuras, sem as pontas. Abra as tabelas, as figuras, o\n"
+     "apêndice e a seção de resultados **antes** do texto que os comenta."),
+    ("**3. O material de apoio.** A lista de referências contra o corpo e o corpo contra a\n"
+     "lista.",
+     "**3. O material de apoio.** Está em `MATERIAL-apoio.md`: a lista de referências "
+     "e as notas de rodapé. A lista de referências contra o corpo e o corpo contra a\n"
+     "lista."),
+)
+
 VARIANTES = {
-    "trabalho": (RAIZ / "prompts" / "WARAT.md", CABECA_TRABALHO, ORDEM_TRABALHO, ()),
+    # nome: (destino, cabeca, ordem nova ou None para manter a do ALBERTO,
+    #        substituicoes dentro da secao, substituicoes fora dela)
+    "trabalho": (RAIZ / "prompts" / "WARAT.md", CABECA_TRABALHO, ORDEM_TRABALHO, (), ()),
     "realizado": (RAIZ / "prompts" / "WARAT-REALIZADO.md", CABECA_REALIZADO,
-                  ORDEM_REALIZADO, SUBSTITUICOES_REALIZADO),
+                  ORDEM_REALIZADO, (), SUBSTITUICOES_REALIZADO),
+    "partes": (RAIZ / "prompts" / "WARAT-PARTES.md", CABECA_PARTES, None,
+               DENTRO_PARTES, ()),
 }
 
 
+def _substituir(texto, pares, onde):
+    feitas = []
+    for velho, novo in pares:
+        n = texto.count(velho)
+        if n != 1:
+            raise SystemExit("o trecho a substituir %s ocorre %d vezes no ALBERTO, "
+                             "e o gerador so sabe lidar com um: %r" % (onde, n, velho[:60]))
+        texto = texto.replace(velho, novo)
+        feitas.append((velho, novo))
+    return texto, feitas
+
+
 def gerar(variante):
-    destino, cabeca, ordem, substituicoes = VARIANTES[variante]
+    destino, cabeca, ordem, dentro, fora_pares = VARIANTES[variante]
     a = io.open(str(ORIGEM), encoding="utf-8").read()
     i, j = a.find(ABRE), a.find(FECHA)
     if i < 0 or j < 0 or j <= i:
         raise SystemExit("nao achei a secao da ordem no ALBERTO.md; "
                          "o titulo mudou e este programa precisa saber disso")
+    secao = a[i:j]
+    if ordem is None:
+        ordem, feitas_dentro = _substituir(secao, dentro, "dentro da secao")
+    else:
+        feitas_dentro = []
     fora = a[:i] + "\0" + a[j:]
-    feitas = []
-    for velho, novo in substituicoes:
-        n = fora.count(velho)
-        if n != 1:
-            raise SystemExit("a remissao a substituir ocorre %d vezes no ALBERTO, "
-                             "e o gerador so sabe lidar com uma: %r" % (n, velho[:60]))
-        fora = fora.replace(velho, novo)
-        feitas.append((velho, novo))
+    fora, feitas = _substituir(fora, fora_pares, "fora da secao")
     texto = cabeca + fora.replace("\0", ordem)
-    return destino, texto, len(a[i:j].split()), len(ordem.split()), feitas
+    feitas = [(v, n, "fora da seção") for v, n in feitas] + \
+             [(v, n, "dentro da seção") for v, n in feitas_dentro]
+    return destino, texto, len(secao.split()), len(ordem.split()), feitas
 
 
 def main():
@@ -308,9 +363,9 @@ def main():
         print("  %d palavras, contra %d do ALBERTO." % (len(novo.split()),
               len(io.open(str(ORIGEM), encoding="utf-8").read().split())))
         print("  Saíram %d palavras da ordem antiga; entraram %d da nova." % (tirado, posto))
-        for velho, nv in feitas:
-            print("  Substituição fora da seção: %r -> %r"
-                  % (velho.replace("\n", " ")[:70], nv.replace("\n", " ")[:70]))
+        for velho, nv, onde in feitas:
+            print("  Substituição %s: %r -> %r"
+                  % (onde, velho.replace("\n", " ")[:70], nv.replace("\n", " ")[:70]))
     if a.conferir:
         return 1 if problemas else 0
     print("\n  Só a seção da ordem difere (mais a remissão declarada, na variante")
