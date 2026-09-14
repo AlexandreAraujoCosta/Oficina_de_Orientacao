@@ -1771,3 +1771,281 @@ sumira; só remoções no diff). Os programas de 10/09 em `D:\Claude\Oficinas`
 sabe que não é a primeira vez.
 
 **Rodou?** Não. Protocolo em `RODADA-20260914-warat-realizado.md`.
+
+---
+
+## 14/09/2026 — o Warat realizado contra o Alberto, sobre o TCC de 09/09
+
+**Rodou.** Protocolo em `RODADA-20260914-warat-realizado.md`. Dois braços em pastas
+isoladas (`D:\Claude\TCC\rodadas\k-20260914\alberto\` e `\warat-realizado\`),
+cada uma só com `MATERIAL.md`, o `.docx`, a extração e o mapa do trabalho. Pedido de
+duas linhas para os dois, sem repetir exigência do prompt.
+
+**Defeito de instrumento achado antes de rodar, e corrigido.**
+`scripts/gerar_agente.py` escrevia `description: %s` sem aspas no frontmatter YAML.
+As descrições de `alberto` e de `warat-realizado` têm dois-pontos seguidos de espaço
+no meio do texto ("completo: le", "oficina: a"), o que quebra YAML sem aspas: o
+Claude Code descartava os dois arquivos em silêncio, e nenhuma sessão os listava,
+nem sessão nova aberta direto na pasta certa. `--conferir` não pegava, porque só
+confere se o arquivo bate com o que o gerador produz, não se o YAML é válido.
+Corrigido com aspas duplas e escape de barra invertida e de aspas internas; os dois
+arquivos foram regenerados nos dois projetos (`Oficina_de_Orientacao` e `TCC`) e
+conferidos com `--conferir`.
+
+**Relógio e tokens de cada braço.**
+
+| braço | relógio | tokens | usos de ferramenta |
+|---|---|---|---|
+| alberto | 31 min | 321.152 | 52 |
+| warat-realizado | 21,6 min | 249.769 | 62 |
+
+**A tabela da seção 8 da proposta.**
+
+| medida | espera | achado | dispara? |
+|---|---|---|---|
+| frase de síntese | decisão ou item de corpo | aparece nos dois braços, na abertura do relatório e numa decisão (D2 no Warat, D1 no Alberto); não fica confinada à seção nova | dispara o critério, mas não isola a variável: o Alberto, na ordem antiga, já a produz sozinho |
+| peça dos resultados na seção 5 | Apêndice B | o Warat não cita "2.4" em nenhum ponto do relatório e nomeia o núcleo empírico como as trinta e seis unidades dos apêndices; o Alberto ainda chama 2.4 de "o corpo do trabalho", apoiado no Apêndice B | dispara no Warat; não dispara no Alberto |
+| localizadores da descrição em resultados + apêndices | dois terços ou mais | 62% na seção "O que o trabalho fez" (29 de 47); 53% no registro (39 de 73); método é 6% e 11%, nunca maioria | nem o espera nem o inútil: abaixo de dois terços, sem maioria em método |
+| relevantes no corpo (voz cega) | não abaixo da linha de base | linha de base (Luis) 19/30 = 63%; Alberto 19/51 = 37%; Warat 16/48 = 33%. Em contagem absoluta, o Warat cai 3 itens ante o Alberto e ante a linha de base | não dispara o inútil (dentro dos quatro itens de tolerância medidos em 13/09), mas também não fica acima da linha de base |
+| itens de grau 1 e 2 do relatório de 09/09 perdidos | menos de 40% | o cotejo cego do passo 6 comparou Alberto × Warat, não Luis contra os dois novos | não medido nesta rodada |
+| relógio do passo 0 | 8 a 12 min | esta rodada implementa só a seção 6 da proposta (o Warat como variante de leitura única), sem um passo 0 isolado que produza `REALIZADO.md` | não aplicável |
+| itens sem endereço nos apêndices quando o realizado aponta | zero | mesmo motivo acima | não aplicável |
+
+**As quatro perguntas do passo 7.**
+
+A frase de síntese aparece no Warat na abertura do relatório (título e primeiro
+parágrafo) e nas decisões D1 e D2, não só na seção nova; no Alberto aparece do mesmo
+jeito, na abertura e na decisão D1, produzida pela ordem antiga.
+
+A seção "O que o trabalho fez" existe, mas não respeita o teto: o prompt manda no
+máximo doze linhas copiando quatro campos (material, análise, resultados, onde cada
+coisa está), e a seção saiu com 42 linhas não em branco e oito campos (acrescentou
+material por documento, tratamento, o desenho e o método declarado). A conta de duas
+linhas está presente, em prosa, não em tabela.
+
+A peça que cada relatório trata como a dos resultados: o Warat aponta os apêndices A,
+B e C; o Alberto aponta a seção 2.4, apoiada no Apêndice B.
+
+Códigos pela voz cega: Alberto 64 no total, 51 pedem providência (12 CONCLUSAO, 7
+ALCANCE, 13 CONFERE, 19 NADA); Warat 55 no total, 48 pedem providência (9 CONCLUSAO,
+7 ALCANCE, 12 CONFERE, 20 NADA).
+
+**O cotejo cego entre os dois braços (passo 6).** 35 pares casados; 19 achados
+exclusivos do Alberto, 7 do Warat. Mudam conclusão ou abordagem: Alberto S10/C2
+(vinculante contra orientativo) e S18 (documental contra estudo de caso único, [P95]
+ocorre uma única vez) e Warat S5 (a assimetria do ColaboraGov entra só por nota do
+pesquisador, nunca por trecho normativo). Mudam alcance: Alberto S8 e S9; Warat S9.
+Um achado em que os dois se contradizem sobre [P353] (o exemplo do código BA2): a
+planilha sustenta o Alberto (S15), não o Warat (S10).
+
+**O que a rodada não mede.** Uma execução por braço lê direção, não decide, como a
+própria proposta registra. O falsificador de localizadores caiu numa faixa que a
+proposta não previu (nem dois terços, nem maioria em método); um limiar novo pede
+mais execuções para se calibrar. As medidas de itens perdidos do Luis, relógio do
+passo 0 e endereçamento via `REALIZADO.md` pressupõem o passo 0 isolado que esta
+rodada não implementa, só a seção 6 (o Warat como leitura única).
+
+**O que a contaminou.** Nada identificado: as pastas ficaram isoladas, a
+anonimização por programa não deixou vestígio (`grep -c` zerado nos três relatórios
+para Alberto, Warat, Luis e "realizado"), e os quatro agentes de voz cega não
+receberam a proposta nem souberam qual braço é qual.
+
+**Defeitos de instrumento achados durante a rodada.**
+
+1. YAML do `gerar_agente.py` sem aspas (acima), corrigido.
+2. O registro de tipos de agente desta sessão ficou defasado depois da correção (não
+   notou a edição feita por fora, via `python`/`Bash`), até se atualizar sozinho mais
+   tarde sem ação nova. Não investigado a fundo; registrado para quem repetir.
+3. Um `--tambem D:\Claude\TCC` executado pelo Bash (Git Bash/MSYS) mutilou o caminho
+   para `D:ClaudeTCC` e escreveu no lugar errado, deixando a cópia de `TCC`
+   desatualizada; refeito pelo PowerShell, que não sofre essa tradução de caminho.
+4. O cotejo cego do passo 6 testou os próprios buscadores antes de reportar e achou
+   dois bugs: `grep -o` com `-i` e `-F` juntos devolvendo zero para tudo, inclusive
+   termos que o agente sabia estarem no material; e busca de localizador sem o
+   colchete de fechamento casando `P49` dentro de `P497`. Os dois foram refeitos e
+   confirmados por controle positivo antes do relatório final. Não é defeito da
+   rodada: é o método funcionando, conferir o conferidor antes de reportar.
+
+**Rodou?** Sim.
+
+---
+
+## 14/09/2026 (tarde) — segunda execução e cotejo entre execuções: fica o Alberto
+
+**Espécie:** continuação da rodada acima, pedida pelo orientador depois de ler a
+ficha. Mede reprodutibilidade (uma execução por braço não decide) e fecha a
+pergunta de qual versão rápida usar.
+
+**O que rodou.** Uma segunda execução de cada braço, em pastas isoladas
+(`D:\Claude\TCC\rodadas\k-20260914\execucao2\`). Depois, dois cotejos cegos
+entre execuções da mesma leitura (não entre braços): Alberto execução 1 × execução
+2, e Warat realizado execução 1 × execução 2, cada um recebendo os dois relatórios
+anonimizados (`R-<código>.md`, pasta `cego-execucoes\`) e o `MATERIAL-k.md`,
+sem saber que comparava execuções e não braços.
+
+**Relógio e tokens da segunda execução.**
+
+| braço | relógio | tokens | usos de ferramenta |
+|---|---|---|---|
+| alberto (execução 2) | 23 min | 252.307 | 35 |
+| warat-realizado (execução 2) | 20,4 min | 221.133 | 32 |
+
+**O achado que motivou o cotejo: um ângulo inteiro ausente numa execução.** A
+execução 2 do Alberto levantou uma decisão (o número de trechos por categoria mede
+atenção regulatória do MGI ou mede o que o pesquisador escolheu extrair) que **não
+aparece em nenhuma palavra** nas duas leituras da execução 1 (busca por "quantos
+trechos", "viés de extração", "o pesquisador extraiu": zero nos dois). Mesmo
+trabalho, mesmo prompt, um ângulo inteiro que uma leitura simplesmente não viu.
+
+**Reprodutibilidade entre execuções, por braço.**
+
+| | Alberto 1×2 | Warat 1×2 |
+|---|---|---|
+| itens comuns / distintos | 39 / 69 | 39 / 66 |
+| sobreposição geral | 57% | 59% |
+| sobreposição só no corpo (onde mora o veredito) | não isolada | 48% |
+| exclusivos que mudam conclusão ou alcance, sustentados no material | 14 (10 da execução 2) | 10 (7 da execução 2) |
+
+Os dois braços têm reprodutibilidade parecida; nenhum se destaca. Nas duas
+ferramentas, a execução 2 achou bem mais achados exclusivos validados que a
+execução 1 — padrão de rodar duas vezes, não de qual ferramenta.
+
+**O achado mais forte da ficha da manhã não se repete.** Na execução 1, o Warat
+realizado nunca cita "2.4" no relatório inteiro; o núcleo empírico é sempre os
+apêndices. Na execução 2, o Warat cita "2.4" seis vezes, chamando-a de "a peça mais
+sólida do trabalho" — o mesmo gesto do defeito original ("2.4 é o núcleo") — ao
+lado de chamar o Apêndice B de "o núcleo". A diferença que sustentava "dispara no
+Warat, não dispara no Alberto" não é uma propriedade fixa da ordem de leitura.
+
+**Juntando com a classificação por voz cega da execução 1** (ficha da manhã): o
+Alberto teve fração de relevantes maior (37% contra 33%), menos superfície (37%
+contra 42%), quase três vezes mais achados exclusivos no cotejo entre braços (19
+contra 7), e é mais curto (7.861 contra 8.768 palavras). Em nenhuma medida que se
+repetiu nas duas execuções o Warat superou o Alberto.
+
+**Decisão: fica o Alberto.** O Warat realizado carrega mais prompt e uma ordem de
+leitura mais rígida sem entregar, de modo reprodutível, nada que o Alberto não
+entregue. A rodada de 13/09 já havia posto essa condição: "o Luis novo só se o
+Warat novo produzir a síntese e não perder relevância." Ele perdeu relevância nas
+duas execuções e a vantagem que tinha não se repetiu. **As seções 1 a 5 da
+proposta (o Luis) não devem ser executadas com base nesta variante.**
+
+**Defeitos de instrumento achados pelos cotejos.**
+
+1. **Localizador errado na execução 1 do Alberto.** O item S13 (`R-KEDX`) cita
+   `[P781]` como um dos quatro endereços do EU AI Act; `[P781]` traz só "CGI.br /
+   OCDE: Transparência de algoritmos", sem o conteúdo que o item afirma. As outras
+   três remissões do item conferem. Vale corrigir se esse relatório for usado como
+   entrega.
+2. **A ressalva final dos relatórios pode ser lida como se descrevesse o par
+   comparado, e não é.** `ALBERTO.md`/`WARAT.md`/`WARAT-REALIZADO.md` mandam copiar
+   verbatim ao fim do relatório um exemplo fixo de calibração de 03/09/2026
+   ("dezessete itens numa vez e doze na outra, com seis em comum"), sobre outra
+   dissertação. Os dois cotejos de hoje mediram esse mesmo tipo de sobreposição
+   para o par real (57% e 59%) e notaram, por conta própria, que o rodapé fixo
+   contradiz o número real do par. Não é bug (o prompt manda copiar o exemplo de
+   propósito, para ilustrar que a cobertura é parcial), mas o texto não deixa claro
+   que o número é de outra dissertação; considerar deixar isso explícito na
+   ressalva.
+3. **A execução 2 do Warat quebrou a própria ordem de leitura no trabalho M** (achado
+   de uma rodada paralela, não do trabalho K): registrado no `REGISTRO` daquela leitura,
+   por completude, já que é o mesmo defeito de disciplina que a variante existe
+   para evitar.
+4. **O diretório de rascunho da execução 2 do Alberto foi compartilhado com outra
+   sessão**, que sobrescreveu um programa do agente com um apontado para outro
+   trabalho; o agente percebeu pela saída, refez com nome próprio, e nenhum número
+   do relatório final vem da rodada contaminada. Registrado, não investigado a
+   fundo.
+
+**O que isto não resolve.** Por que uma execução acha um ângulo que a outra não viu
+continua sem explicação causal — só o fato de que acontece, nas duas ferramentas.
+Enquanto isso não mudar, um relatório de uma execução só não é "a leitura completa
+do trabalho", é uma amostra.
+
+**Rodou?** Sim.
+
+---
+
+## 14/09/2026 (noite) — o Warat partes: o material repartido por passo, para o item 9
+
+**Espécie:** pedido do orientador (reduzir as leituras do Alberto sem perda),
+sem medição. Nenhum prompt publicado muda: entra um terceiro braço de medição
+gerado a partir do `ALBERTO.md`, e um programa.
+
+**O caso que motivou.** O registro da execução 1 do Alberto de 14/09 diz que o
+`MATERIAL.md` inteiro (26,5 mil palavras) foi lido quatro vezes em sequência, uma
+por passo, mais da metade dos 321 mil tokens da execução. O único corte já medido
+(07/09, tirar programas e revisão) comprou tempo com afirmação falsa (4 em 31
+contra 0 em 37). Reduzir o que cada passo lê, sem mudar o que ele analisa, é o
+corte com menor chance de perda.
+
+**O que muda.** `scripts/partir_material.py` reparte o material em três arquivos
+pelas fronteiras do `mapa_estrutural.py` e pelos títulos numerados: `pontas`
+(resumo, abstract, introdução até o próximo título de nível igual ou superior,
+conclusão até as referências ou o primeiro apêndice), `apoio` (referências e
+notas) e `artefatos` (o resto, mais o sumário e a tabela de figuras); recusa-se a
+gravar se a partição não fechar, e o autoteste planta as cinco peças. No TCC de
+09/09: 1.854, 23.633 e 1.421 palavras contra 26.509 do inteiro; fronteiras em
+[P22), [P209], [P219] e [P265]. `scripts/gerar_warat.py` ganha `--variante
+partes`, que grava `prompts/WARAT-PARTES.md`: o `ALBERTO.md` com **três frases a
+mais** na seção da ordem, dizendo em que arquivo cada passo lê (484 palavras
+contra 438), e nada mais; o gerador imprime as três substituições.
+`gerar_agente.py` ganha o tipo `warat-partes`. Um achado prévio, medido por busca
+de termo com controle: nenhuma das duas execuções de 14/09 escreveu no registro
+a medida central que o prompt manda escrever antes da primeira figura; a
+execução 2 a toca uma vez no relatório. O ângulo exclusivo dela (o que a contagem
+de trechos mede) é o que essa instrução pede.
+
+**O que se espera, em número, e o que mostraria que foi inútil:** a tabela do
+passo 9 de `RODADA-20260915-item9.md`. Em uma linha: um terço a menos de tokens
+sem leitura inteira repetida, itens de corpo dentro de quatro do controle, e
+afirmações caídas na revisão iguais ou menores. Inútil se os tokens não caírem,
+ou se o cotejo achar item de corpo do controle que a variante não tem e o
+material sustenta.
+
+**As três perguntas.** (1) A regra produziria o caso: a variante só muda onde se
+lê; o que se lê é o mesmo. (2) O que deixa de passar: o passo 4 (cruzamento) e o
+5 (caminho inverso) leem anotações, não o material; se uma execução usava a
+releitura inteira para achar o que as anotações perderam, isso some, e é o que o
+cotejo cego mede. (3) Onde repete: em nada; as três frases só acrescentam o
+nome do arquivo.
+
+**Rodou?** Não. Protocolo em `RODADA-20260915-item9.md`, com os braços B (fusão
+das duas execuções de 14/09) e C (passos pulados) junto.
+
+---
+
+## 14/09/2026 (noite) — três reparos do que a rodada deixou, e um deles muda prompt
+
+**Espécie:** dois de defeito medido (o YAML e o traceback no material), um de
+medição (a ressalva). Pedido do orientador: manter o que a sessão de 14/09 sugeriu,
+com o reparo que faltava a cada um.
+
+**1. O gerador de agentes passa a conferir o próprio cabeçalho.** A correção de
+14/09 (descrição entre aspas) estava certa, e o `--conferir` não podia pegar o
+defeito porque compara o arquivo com o que o gerador produz, e os dois estavam
+igualmente errados. Entra `cabecalho_valido()`: analisa o frontmatter com PyYAML
+onde houver, e sem ele exige a forma que o erro medido pedia; o gerador se recusa
+a gravar cabeçalho inválido, e um controle plantado (o cabeçalho que quebrava
+reprova, o corrigido passa) roda ao carregar. Conferido sobre o commit anterior:
+o cabeçalho de `a08dcd9` reprova no analisador ("mapping values are not allowed
+here"); o atual passa.
+
+**2. O traceback do casador de figuras ganha caso plantado.** A guarda que a
+sessão de 14/09 pôs em `montar_material.py` (traceback no stderr não vira tabela
+de figuras) entrou sem ficha e sem controle. Fica, fatorada em `_quebrou()`, com
+dois casos plantados ao carregar: um traceback tem de ser acusado com a última
+linha dele, e um aviso comum não.
+
+**3. A ressalva do Alberto diz o número medido aqui, e não o exemplo de 03/09.**
+O rodapé fixo trazia "dezessete itens numa vez e doze na outra, com seis em
+comum", de outra dissertação, e os dois cotejos entre execuções de 14/09 notaram
+que ele contradiz o número real do par. Passa a dizer o que se mediu em 14/09:
+57% a 59% de achados repetidos entre duas execuções, e que o relatório é amostra
+do que existe. Mudança de prompt publicado, e por isso a variante gerada e os
+tipos de agente foram regenerados. O que se espera: nada no que a leitura acha;
+a frase é da ressalva, não da análise. Inútil se algum leitor a tomar por
+descrição do par entregue, que é o defeito que ela existe para corrigir.
+
+**Rodou?** Não se aplica aos dois primeiros (controle plantado passa). O terceiro
+não muda o que se mede.

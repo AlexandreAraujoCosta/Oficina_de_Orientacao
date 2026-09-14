@@ -68,13 +68,24 @@ TIPOS = {
         "introducao e conclusao, e le as duas pontas contra essa descricao). Use "
         "so quando o pedido nomear o Warat realizado ou a rodada de medicao.",
     ),
+    # Braco de medicao, desde 14/09/2026: o Alberto com o material repartido por
+    # passo (pontas, artefatos, apoio), para nao reler o material inteiro a cada
+    # passo. Analise identica. Item 9 da FILA-20260914.md.
+    "warat-partes": (
+        ("prompts/WARAT-PARTES.md", "prompts/OPERADOR-ALBERTO.md"),
+        "opus",
+        "Braco de medicao da oficina: a analise geral do Alberto lendo o material "
+        "repartido por passo (MATERIAL-pontas, MATERIAL-artefatos, MATERIAL-apoio), "
+        "com a analise identica. Use so quando o pedido nomear o Warat partes ou a "
+        "rodada de medicao.",
+    ),
 }
 
 FERRAMENTAS = "Read, Write, Edit, Glob, Grep, Bash, PowerShell, WebSearch, WebFetch"
 
 CABECA = """---
 name: %s
-description: %s
+description: "%s"
 tools: %s
 model: %s
 ---
@@ -86,6 +97,34 @@ model: %s
 """
 
 
+def cabecalho_valido(texto):
+    """O frontmatter tem de ser YAML valido, e ate 14/09/2026 nao era: a descricao
+    sem aspas trazia dois-pontos seguidos de espaco ("completo: le"), o analisador
+    lia uma chave nova e o Claude Code descartava o tipo em silencio. Com PyYAML,
+    analisa de verdade; sem ele, exige o que o erro medido pedia: a descricao
+    entre aspas duplas, numa linha so, sem aspas internas por escapar."""
+    fm = texto.split("---")[1]
+    try:
+        import yaml  # noqa: F401
+        d = yaml.safe_load(fm)
+        return isinstance(d, dict) and set(d) >= {"name", "description", "tools", "model"}
+    except ImportError:
+        linhas = [l for l in fm.strip().splitlines() if l.startswith("description:")]
+        if len(linhas) != 1:
+            return False
+        v = linhas[0][len("description:"):].strip()
+        return len(v) >= 2 and v[0] == v[-1] == '"' and '"' not in v[1:-1].replace('\\"', "")
+    except Exception:
+        return False
+
+
+# Controle positivo, plantado: o cabecalho que quebrava tem de reprovar, e o
+# corrigido tem de passar. O gerador se recusa a rodar se isto falhar.
+_QUEBRADO = "---\nname: x\ndescription: A analise completo: le o trabalho\ntools: Read\nmodel: opus\n---\n"
+_CERTO = '---\nname: x\ndescription: "A analise completo: le o trabalho"\ntools: Read\nmodel: opus\n---\n'
+assert not cabecalho_valido(_QUEBRADO) and cabecalho_valido(_CERTO)
+
+
 def gerar(nome, origem, modelo, descricao):
     # A origem pode ser mais de um arquivo: desde 10/09/2026 a analise (ALBERTO.md)
     # e a operacao (OPERADOR-ALBERTO.md) moram separadas, e o agente recebe as duas.
@@ -94,7 +133,13 @@ def gerar(nome, origem, modelo, descricao):
               for o in arquivos]
     texto = (chr(10) * 2).join(partes) + chr(10)
     rotulo = " + ".join(arquivos)
-    return (CABECA % (nome, descricao, FERRAMENTAS, modelo, rotulo)) + texto
+    # Aspas duplas em YAML: escapar barra invertida antes de aspas, para o
+    # valor sobreviver dois-pontos e aspas internas sem quebrar o frontmatter.
+    descricao_yaml = descricao.replace("\\", "\\\\").replace('"', '\\"')
+    conteudo = (CABECA % (nome, descricao_yaml, FERRAMENTAS, modelo, rotulo)) + texto
+    if not cabecalho_valido(conteudo):
+        raise SystemExit("o cabecalho gerado para %r nao e YAML valido; nao gravo" % nome)
+    return conteudo
 
 
 def destinos(extra):

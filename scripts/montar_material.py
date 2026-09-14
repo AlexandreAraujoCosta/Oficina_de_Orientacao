@@ -88,9 +88,31 @@ def figuras(docx, extracao):
                            errors="replace", timeout=300)
     except Exception as e:
         return None, "o casador de figuras falhou: %s" % e
+    quebra = _quebrou(r.stderr)
+    if quebra:
+        return None, quebra
     if r.returncode not in (0, 1):
         return None, "o casador de figuras saiu com codigo %d" % r.returncode
     return r.stdout, None
+
+
+def _quebrou(stderr):
+    """Excecao nao tratada no casador (ex.: BadZipFile ao apontar um .pdf em vez
+    de um .docx real): o stdout ate ali e lixo (autoteste, mensagens parciais), e
+    nunca uma tabela de figuras. Achado em 14/09/2026: esse texto estava entrando
+    no MATERIAL.md como se fosse extracao real. Devolve o motivo, ou None."""
+    if "Traceback (most recent call last):" in (stderr or ""):
+        return "o casador de figuras quebrou: %s" % stderr.strip().splitlines()[-1]
+    return None
+
+
+# Controle positivo do detector, plantado: um traceback tem de ser acusado com a
+# ultima linha dele, e um aviso comum nao. Sem isso, a guarda acima e so uma
+# esperanca, e o modulo se recusa a carregar se ela falhar.
+assert _quebrou("autoteste: ok\nTraceback (most recent call last):\n  File x\n"
+                "zipfile.BadZipFile: File is not a zip file") \
+    == "o casador de figuras quebrou: zipfile.BadZipFile: File is not a zip file"
+assert _quebrou("aviso: 3 figuras sem legenda\n") is None and _quebrou("") is None
 
 
 # QUALQUER titulo de nivel dois fecha a secao anterior, e nao so outro titulo de

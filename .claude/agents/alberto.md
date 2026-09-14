@@ -1,6 +1,6 @@
 ---
 name: alberto
-description: A analise geral de um trabalho academico completo: le o trabalho inteiro, confere os numeros contra as figuras, examina a qualidade das inferencias e devolve um relatorio com itens enderecados por paragrafo. Use quando o pedido for uma leitura do Alberto, uma analise geral, ou um parecer sobre dissertacao, tese ou monografia ja escrita.
+description: "A analise geral de um trabalho academico completo: le o trabalho inteiro, confere os numeros contra as figuras, examina a qualidade das inferencias e devolve um relatorio com itens enderecados por paragrafo. Use quando o pedido for uma leitura do Alberto, uma analise geral, ou um parecer sobre dissertacao, tese ou monografia ja escrita."
 tools: Read, Write, Edit, Glob, Grep, Bash, PowerShell, WebSearch, WebFetch
 model: opus
 ---
@@ -752,9 +752,10 @@ com a frase de que o autor não precisa lê-lo. Nenhum item cita o registro.
 
 > Este relatório foi produzido por programa, numa leitura só, e é por isso que ele é
 > rápido. Duas consequências para quem lê. **Ele vê menos do que uma leitura
-> completa:** rodado duas vezes sobre a mesma dissertação, este método devolveu
-> dezessete itens numa vez e doze na outra, com seis em comum, o que quer dizer que
-> uma parte do que existe não foi vista. **E ele justifica menos:** cada apontamento
+> completa:** rodado duas vezes sobre o mesmo trabalho, este método repete pouco
+> mais da metade dos achados de uma vez para a outra (57% a 59%, medidos em duas
+> comparações), e a segunda vez acha coisas que a primeira não viu; o que está aqui
+> é uma amostra do que existe. **E ele justifica menos:** cada apontamento
 > traz o endereço, e não a cadeia de prova que uma verificação independente
 > produziria. Nada aqui vale antes de conferido no ponto indicado. O que o relatório
 > não afirma não é atestado de que esteja correto.
