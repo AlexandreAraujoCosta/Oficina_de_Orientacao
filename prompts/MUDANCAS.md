@@ -2169,3 +2169,108 @@ Registro em `COTEJO-LEITURAS.md`, na mesma pasta, fora do git.
 
 **Fecha a pendência** "piloto da leitura 2 com material já analisado" da revisão
 de 10/09. Não fecha a pergunta de qual leva produziu o quê.
+
+---
+
+## 14/09/2026 (noite) — item 3 da fila: a fração NADA deixa de ser régua de relevância
+
+**Espécie:** decisão de régua, do orientador, sobre proposta desta sessão. Não
+muda prompt nem programa.
+
+**A contradição.** A ficha de 10/09 (manhã) manda o acabamento para as listas do
+anexo do mesmo relatório e diz que isso não é teto de itens; a de 12/09 escreveu
+como falsificador "a fração NADA não cai", medida sobre o relatório inteiro. Em
+13/09 ele disparou nos dois braços (Alberto 49% para 48%; Luis 0% para 29%) sem
+que nenhum relatório tivesse feito outra coisa que o que 10/09 manda: os NADA
+estavam no anexo. Medir só o corpo também não serviria, porque ali a fração é
+zero por construção e mede obediência à triagem, e não relevância.
+
+**A decisão, com data.** Daqui em diante são duas contas, e não se somam:
+
+- **Superfície no corpo**, medida de obediência ao desenho, com o falsificador
+  que 10/09 já tem (acima de um terço dispara).
+- **NADA no relatório inteiro**, medida de custo para quem lê (cada item de
+  superfície custa uma leitura), reportada sem meta e sem valer como falsificador
+  de relevância.
+
+O alvo de relevância continua o que já se mede: relevantes no corpo e itens que
+mudam conclusão. **O falsificador de 12/09 sai como escrito**, e a linha de 13/09
+fica como está, com esta nota: disparou por régua, e não por relatório.
+`relevancia.py` já imprime as duas frações; nada a mudar nele.
+
+**O que mostraria que a decisão foi má:** um relatório com superfície no corpo
+abaixo de um terço e NADA no inteiro crescendo rodada a rodada sem que ninguém
+o note, porque a segunda conta deixou de disparar nada. Por isso ela vai
+reportada em toda ficha de medição, e não só calculada.
+
+---
+
+## 14/09/2026 (noite) — item 4 da fila: o desempate entre duas contagens centrais
+
+**Espécie:** pedido do orientador, com a medição já existente (os dois
+relatórios de 13/09). Muda dois prompts publicados numa frase cada.
+
+**O caso.** A régua da medida 3 de 13/09 fixou a pergunta das procedências como a
+primeira decisão esperada, porque foi o caso que a motivou (o proxy, D5 de
+06/09). Nos relatórios, a primeira decisão dos dois braços foi a pergunta sobre o
+que a contagem das Tabelas 7 e 8 mede (marcas no texto das decisões cassadas, ou
+o modo como os tribunais conduzem a desobediência): no Luis ela resolve cinco
+itens e é a condição do próprio veredito; no Alberto resolve quatro e decide o
+degrau. A das procedências resolve um item e uma contribuição, e toca uma
+questão. Pelo critério que os prompts já têm ("a ordem das decisões é a do que
+mais muda"), os dois braços acertaram e a régua errou. **A medida 3 de 13/09 fica
+reclassificada: régua errada, prompts certos.** A pergunta do proxy continua
+valendo como decisão; só não como a primeira daquele trabalho.
+
+**O que se tentou, e caiu na crítica fria antes de ficar.** Uma frase de
+desempate, com as mesmas palavras, no passo 0 da leitura 3 e na "medida
+central" do Alberto: entre duas contagens iria ao topo a cuja leitura
+alternativa mais muda a afirmação principal, medida pelo que a decisão resolve,
+com a que muda um indicador de contexto por último. Aprovada pelo orientador,
+escrita, e mandada à crítica fria (`CRITICA-DE-MUDANCA.md`) com o diff, os dois
+prompts e os dois relatórios de 13/09. A crítica (registro em
+`D:\Claude\TCC\rodada-20260912-desobediencia\CRITICA-FRIA-DESEMPATE.md`, fora do
+git) a derrubou em quatro pontos, e os quatro se conferem no texto:
+
+1. **A condição de entrada e o desempate não se cruzam.** A frase só se abre
+   quando as duas contagens são centrais, e central é a que a afirmação
+   principal usa; uma contagem cujo desmentido só move um indicador de contexto
+   não é central por essa definição. Onde o desempate teria o que decidir, a
+   entrada já excluiu o candidato. Defeito de redação.
+2. **O instrumento não existe na hora em que a frase manda usá-lo.** Ela está no
+   passo 0, antes de qualquer conta, e manda medir pelo que a decisão resolve;
+   decisões e códigos só existem no fim, na triagem. Ou a ordem fica suspensa
+   até lá (e então a regra está no lugar errado, onde já há regra de ordem), ou
+   o leitor a estima de antemão, que é o palpite que a régua existia para
+   substituir.
+3. **O caso do Alberto não roda.** Ali a segunda contagem nunca virou decisão:
+   é o item S7, recolhido por uma decisão sobre conjunto (D3). Contando códigos,
+   D1 e D3 resolvem quatro cada: empate, e a frase não tem segundo critério.
+4. **Contradiz a regra de ordem da parte 2 sem a apagar**, e a contradição
+   aparece no próprio Luis de 13/09: com duas centrais, a regra antiga manda as
+   duas antes das que mudam uma conclusão, e a Decisão 2 (muda a hipótese de
+   metade para um terço) está acima da Decisão 3. E a promessa "a decisão que
+   ele pede é a primeira da parte 2", no singular, sobreviveu três linhas abaixo.
+
+Mais dois avisos que ficam: o rótulo "indicador de contexto" foi lido do
+resultado (o S4 do Luis chama a série de "premissa de contexto"), e não testado
+contra ele; e, aplicado no passo 0, ele rebaixa a segunda contagem antes do
+exame, com um exemplo construído em que o denominador rotulado de contexto é
+justamente o que derrubaria a tese.
+
+**As duas frases foram retiradas** antes de qualquer commit; variantes, tipos de
+agente e página regenerados a partir dos prompts sem elas. Os prompts publicados
+ficam como estavam.
+
+**O que fica desta ficha:** a reclassificação da medida 3 de 13/09 (régua errada,
+prompts certos), que não depende da frase: pela condição de entrada que os
+prompts já têm, a contagem das procedências não é a central daquela
+dissertação, e a régua a esperava no topo. E uma pergunta aberta, que a crítica
+apontou e que é anterior a qualquer desempate: **por que no Alberto a segunda
+contagem não virou decisão**, quando o passo manda fazer a medida central para
+as duas. Isso se mede com rodadas posteriores, e entra na fila sem ordem.
+
+**Custo:** uma hora de sessão e uma crítica fria (145 mil tokens), gastos em
+descobrir que a frase aprovada não se conferia. Registrado porque é o caso que
+a regra "mudança de prompt passa pela crítica fria antes de ficar" existe para
+produzir.
