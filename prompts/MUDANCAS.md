@@ -2274,3 +2274,118 @@ as duas. Isso se mede com rodadas posteriores, e entra na fila sem ordem.
 descobrir que a frase aprovada não se conferia. Registrado porque é o caso que
 a regra "mudança de prompt passa pela crítica fria antes de ficar" existe para
 produzir.
+
+---
+
+## 18/09/2026 — O Warat conversacional
+
+**Espécie:** desenho com um teste. Uma execução, sobre uma tese de doutorado em
+curso (824 parágrafos, em inglês, sem resumo e sem conclusão), com o orientador no
+papel da autora. **Não é medida de rendimento**: quem respondia conhecia os
+problemas, porque tinha escrito 42 comentários no mesmo texto, e respondia
+concedendo. O teste que decide é com um autor real.
+
+**O que entra.** Um terceiro assistente, que conversa com quem escreveu o trabalho,
+e completa o nome: Alberto, Luis e Warat. Os nomes técnicos `warat`,
+`warat-partes` e `warat-realizado`, braços de medição do Alberto até esta data,
+ficam como estão; o novo se chama `warat-conversacional`.
+
+- `prompts/WARAT-CONVERSACIONAL.md`, o coordenador e a conversa;
+  `.claude/skills/warat-conversacional/SKILL.md`, que só manda cumpri-lo.
+- `prompts/leituras/0-LEITURA-ZERO.md`: perguntas de abertura sobre o mapa, em um
+  ou dois minutos.
+- Sete programas: `docx_revisoes.py` (comum), `rejeitar_alteracoes.py`,
+  `preparar_trabalho.py`, `trechos_citados.py`, `comparar_proposta.py`,
+  `aplicar_propostas.py`, `preparar_verificacao.py`. Todos com autoteste e controle
+  positivo. Aferidos contra o que o teste produziu à mão: `rejeitar_alteracoes`,
+  `preparar_trabalho`, `trechos_citados`, `comparar_proposta` e `aplicar_propostas`;
+  `docx_revisoes` só pelo autoteste, e `preparar_verificacao` pelo autoteste e por
+  um controle sobre a leitura 3 do teste (ver `AFERICOES.md`).
+- `COMO-USAR-O-WARAT.md`, o guia para o autor, com o texto a colar no Claude Code;
+  e o README, que passa a apresentar os três.
+
+**O que o teste mostrou, e virou regra:**
+
+- A leitura zero sobre o mapa levou 49 segundos e abriu pela pergunta que o primeiro
+  comentário do orientador fazia no mesmo parágrafo (dizer o que se terminou
+  fazendo, e não o que se queria fazer); alcançou também o da hipótese sem teste.
+  Mas fez perguntas de fato que o método já respondia, e uma voz cega achou nela
+  quatro frases de veredito. **A leitura zero passa a perguntar só intenção, e
+  nenhuma frase avalia o texto.**
+- Localizador sem texto não serve a quem tem o `.docx`: quem fazia a autora parou a
+  conversa na terceira pergunta. **Toda mensagem passa por `trechos_citados.py`.**
+- O agente anunciou em duas propostas seguidas que só uma frase mudava e reescreveu
+  as outras. **Toda proposta passa por `comparar_proposta.py`**, que mostra tudo o
+  que muda e dá alerta sobre citação, número e referência.
+- A reescrita era proibida no rascunho, e a autora pediu sugestões. O desenho de
+  18/08 previa dar o texto, com confirmação. **Proposta de redação é permitida depois
+  de o autor decidir o conteúdo, uma por vez.**
+- As respostas da autora deixaram **0 dos 76 itens das leituras sem objeto** (11
+  mudaram, 65 intactos). A razão de rodar conversa e leituras juntas é cobertura,
+  e não economia de itens: a conversa decidiu o que o trabalho é e reescreveu seis
+  parágrafos da introdução; as leituras acharam afirmações sem dado nos capítulos de
+  resultado, que a conversa não tocou.
+- A conversa ficou parada esperando a verificação, que só começou depois das três
+  leituras. **Verificação por leitura, à medida que cada uma termina**
+  (`preparar_verificacao.py`).
+- Na parte dos dados, a conversa trouxe três perguntas de coerência interna da
+  teoria (o conceito prometido que o capítulo final não enuncia; um compromisso
+  tratado como forma histórica num capítulo e como exigência noutro; o alcance da
+  teoria contra a restrição do corpus). É a família que nenhuma via alcançava.
+  **Não foi conferido se vieram dos itens verificados ou da consulta do agente ao
+  material, nem se foi acaso deste texto.**
+- A verificação deixou 70 dos 76 itens em CONFIRMA ou ENCOLHE, e a conversa, que
+  parou a pedido, trouxe três perguntas da parte dos dados. **O arquivo final leva os
+  não discutidos como comentário na margem**, senão a conversa entrega menos que o
+  relatório.
+
+**O que continua sem resposta:** nenhuma das vias (leitura zero, conversa, leituras)
+alcançou os comentários do orientador sobre a construção teórica do capítulo final
+nem os pedidos de definição de conceito. O guia e o prompt dizem isso ao autor.
+
+**O que mostraria que o Warat não serve:** com um autor real, a conversa não levar a
+nenhuma decisão sobre o que o trabalho é; ou os itens dados por resolvidos serem
+recusados pelo autor no fechamento em mais de um em cinco; ou a conversa ficar sem
+pergunta à espera dos dados por mais de dez minutos, mesmo com a verificação por
+leitura.
+
+**Não testado ainda:** a sessão de outra pessoa conduzindo tudo sozinha, sem
+coordenação humana. No teste, o coordenador era a sessão de quem desenhou.
+
+### O que a crítica fria devolveu, e o que se fez
+
+Rodou os sete autotestes e a cadeia inteira sobre um `.docx` sintético, e percorreu
+o caminho de uma sessão nova que só recebe o texto a colar e o arquivo. Nomes de
+arquivo, argumentos e caminhos batiam com os programas. O que ela derrubou:
+
+- **`trechos_citados.py` lia o código de item da leitura 2 (`P13`) como parágrafo.**
+  *Corrigido:* só conta o que está entre colchetes; o autoteste cobre o caso.
+- **O comparador tratava o acréscimo como parágrafo inteiro** e dava alerta falso.
+  *Corrigido:* `--acrescenta` monta o parágrafo como ficaria.
+- **A substituição tirava o destaque sem acusar.** Conferido no teste: em dois
+  parágrafos o rótulo inicial era negrito e **o texto novo saiu todo em negrito**
+  no `.docx` de teste já entregue; noutro, um itálico se perdeu. *Corrigido em
+  parte:* o texto novo leva a formatação predominante do parágrafo, e o programa
+  avisa quando havia destaque em parte dele. Preservar o destaque trecho a trecho
+  pede diferença palavra a palavra dentro dos runs, e fica por fazer.
+- **Linha de comentário fora do formato sumia sem aviso.** *Corrigido:* é acusada.
+- **A verificação supunha o lote pronto, e ninguém o rodava.** *Corrigido:*
+  `preparar_verificacao.py` grava `LOTE.txt`.
+- **A verificação por leitura perde as divergências entre leituras** (no teste, a de
+  um denominador corrigido em sentidos opostos). *Corrigido no prompt:* antes de
+  levar um item, procurar item de outra leitura sobre o mesmo parágrafo.
+- **A leitura zero ainda mandava escrever duas das frases de veredito** que a
+  motivaram. *Corrigido:* as três versões lado a lado, e o autor diz se coincidem.
+- **O `.docx` final sai sem os comentários e alterações do orientador.** *Declarado*
+  no prompt e no guia: o original não é tocado, e convém guardar os dois.
+- **Contradições e lacunas do prompt:** a raiz mal descrita (e "dois níveis" na skill,
+  quando são três); o modelo das leituras não fixado; os nomes dos arquivos de
+  leitura; o que é acabamento; a retomada prometida no guia e ausente no prompt;
+  arquivos da conversa ao alcance das leituras; o guia dizendo que o texto "não vai a
+  lugar nenhum", quando vai ao modelo. *Todos corrigidos;* a conversa passou para a
+  subpasta `conversa/`, que as leituras não abrem.
+- **Três afirmações desta ficha que o registro do teste não sustentava.** *Corrigidas.*
+
+**O que fica, com a divergência dita:** a crítica leu "de `[P2]` a `[P10]`" como
+possível lista de dois parágrafos, e o programa o lê como intervalo, que é o uso do
+português. A crítica não passou por cotejo de outra voz.

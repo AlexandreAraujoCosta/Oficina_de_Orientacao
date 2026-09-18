@@ -4,10 +4,11 @@ Ferramentas de leitura automática de trabalhos acadêmicos, para quem orienta.
 Desenvolvidas por Alexandre Araújo Costa, Faculdade de Direito da UnB, com
 assistência do Claude Opus em Claude Code.
 
-Os dois assistentes se chamam **Alberto** e **Luis**, que juntos são o nome de
-Luis Alberto Warat. Durante quase uma década ele desconstruía os rascunhos do
-autor e apontava o rumo de construções mais robustas, que é o que estas
-ferramentas tentam fazer.
+Os três assistentes se chamam **Alberto**, **Luis** e **Warat**, que juntos são o
+nome de Luis Alberto Warat. Durante quase uma década ele desconstruía os rascunhos
+do autor e apontava o rumo de construções mais robustas, que é o que estas
+ferramentas tentam fazer. O Alberto e o Luis escrevem relatórios para quem orienta;
+o Warat conversa com quem escreveu o trabalho.
 
 Este repositório traz **a maquinaria, e nunca o material**. Não há aqui trabalho
 de estudante, relatório sobre pessoa nomeada nem extração de texto de terceiro.
@@ -149,6 +150,22 @@ está em `prompts/CONSISTENCIA.md`.
 **Banca simulada.** Uma sessão de arguição com dois examinadores e o orientador
 presidindo. Parte do relatório e da apresentação do candidato, e devolve, além da
 experiência de ser interpelado, o que a apresentação causou na banca.
+
+## O Warat, que conversa com o autor
+
+**Warat, a conversa.** Desde 18/09/2026. Conversa com quem escreveu o trabalho, uma
+pergunta por vez, enquanto as leituras do Luis conferem o texto em segundo plano;
+os achados delas entram na conversa depois de verificados. Termina no `.docx` do
+autor, com as propostas aceitas em controle de alterações e, na margem, o que foi
+verificado e não chegou a ser discutido. **Roda só no Claude Code**, e depende do
+Luis: sem as leituras e a verificação, vira conversa sem conferência. O prompt está
+em `prompts/WARAT-CONVERSACIONAL.md` e a skill em
+`.claude/skills/warat-conversacional/`; o guia para o autor, com o texto a colar,
+está em `COMO-USAR-O-WARAT.md`.
+
+Os nomes técnicos `warat`, `warat-partes` e `warat-realizado`, que aparecem entre os
+agentes e nos registros até 18/09/2026, são braços de medição do Alberto, e não este
+assistente.
 
 ## Duas vias de uso
 
